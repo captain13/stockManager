@@ -1057,7 +1057,7 @@ public class MainSystem extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
+        System.out.println("DICK");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new MainSystem().setVisible(true);
