@@ -1057,7 +1057,11 @@ public class MainSystem extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+<<<<<<< Updated upstream
         System.out.println("DICK");
+=======
+        System.out.println("hello");
+>>>>>>> Stashed changes
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new MainSystem().setVisible(true);
