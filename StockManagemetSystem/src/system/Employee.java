@@ -35,7 +35,6 @@ public class Employee extends javax.swing.JFrame {
         jButton28 = new javax.swing.JButton();
         jButton29 = new javax.swing.JButton();
         jButton30 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -77,8 +76,6 @@ public class Employee extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("jLabel1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,9 +89,7 @@ public class Employee extends javax.swing.JFrame {
                         .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(81, 81, 81)
-                .addComponent(jLabel1)
-                .addContainerGap(353, Short.MAX_VALUE))
+                .addContainerGap(468, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,9 +99,7 @@ public class Employee extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton27)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton28)
-                    .addComponent(jLabel1))
+                .addComponent(jButton28)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton30)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
@@ -207,10 +200,8 @@ public class Employee extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-        
-        //Employee tent = new Employee();
-        //tent.setVisible(true);
-        /* Set the Nimbus look and feel */
+    
+        /*Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -232,13 +223,9 @@ public class Employee extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Employee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-<<<<<<< Updated upstream
-        System.out.println("true");
-=======
-        //alert("hello");
->>>>>>> Stashed changes
-        /* Create and display the form */
-        /*java.awt.EventQueue.invokeLater(new Runnable() {
+
+         
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Employee().setVisible(true);
             }
@@ -257,7 +244,7 @@ public class Employee extends javax.swing.JFrame {
             }
         } catch(ClassNotFoundException | SQLException c) {
             c.printStackTrace();
-        }*/
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton26;
@@ -265,6 +252,5 @@ public class Employee extends javax.swing.JFrame {
     private javax.swing.JButton jButton28;
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton30;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

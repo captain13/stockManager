@@ -29,17 +29,17 @@ public class AddEmployee extends javax.swing.JFrame {
     private void initComponents() {
 
         lblPassword = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        textfieildPassowrd = new javax.swing.JTextField();
+        buttonAccept = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         lblFname = new javax.swing.JLabel();
         lblSname = new javax.swing.JLabel();
         lblContact = new javax.swing.JLabel();
         textfieildFname = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        textfieildContact = new javax.swing.JTextField();
         textfieildSname = new javax.swing.JTextField();
         lblPasswordC = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        textfieildPassowrdC = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -47,10 +47,10 @@ public class AddEmployee extends javax.swing.JFrame {
 
         lblPassword.setText("Password");
 
-        jButton1.setText("Accept");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonAccept.setText("Accept");
+        buttonAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonAcceptActionPerformed(evt);
             }
         });
 
@@ -90,17 +90,17 @@ public class AddEmployee extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(textfieildFname)
                                     .addComponent(textfieildSname)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField7)))))
+                                    .addComponent(textfieildContact)
+                                    .addComponent(textfieildPassowrd)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(65, 65, 65)
-                        .addComponent(jButton1)
+                        .addComponent(buttonAccept)
                         .addGap(0, 87, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblPasswordC)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField8)))
+                        .addComponent(textfieildPassowrdC)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -121,18 +121,18 @@ public class AddEmployee extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPasswordC)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(textfieildPassowrdC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(textfieildFname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textfieildSname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textfieildContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(textfieildPassowrd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(buttonAccept)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -140,9 +140,9 @@ public class AddEmployee extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAcceptActionPerformed
         super.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonAcceptActionPerformed
 
     private void textfieildFnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieildFnameActionPerformed
         // TODO add your handling code here:
@@ -186,17 +186,17 @@ public class AddEmployee extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JButton buttonAccept;
     private javax.swing.JLabel lblContact;
     private javax.swing.JLabel lblFname;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblPasswordC;
     private javax.swing.JLabel lblSname;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JTextField textfieildContact;
     private javax.swing.JTextField textfieildFname;
+    private javax.swing.JTextField textfieildPassowrd;
+    private javax.swing.JTextField textfieildPassowrdC;
     private javax.swing.JTextField textfieildSname;
     // End of variables declaration//GEN-END:variables
 }
