@@ -904,6 +904,7 @@ public class MainSystem extends javax.swing.JFrame {
 
     private void buttonEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmployeeActionPerformed
         Employee s = new Employee();
+        s.tester();
         s.setVisible(true);
     }//GEN-LAST:event_buttonEmployeeActionPerformed
 

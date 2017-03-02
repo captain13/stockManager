@@ -5,6 +5,7 @@
  */
 package system;
 
+import java.sql.*;
 /**
  *
  * @author Andrew
@@ -180,6 +181,8 @@ public class AddEmployee extends javax.swing.JFrame {
                 new AddEmployee().setVisible(true);
             }
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

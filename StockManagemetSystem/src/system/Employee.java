@@ -5,6 +5,12 @@
  */
 package system;
 
+import java.sql.*;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Andrew
@@ -14,9 +20,6 @@ public class Employee extends javax.swing.JFrame {
     /**
      * Creates new form Employee
      */
-    public Employee() {
-        initComponents();
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,9 +34,8 @@ public class Employee extends javax.swing.JFrame {
         jButton27 = new javax.swing.JButton();
         jButton28 = new javax.swing.JButton();
         jButton29 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jButton30 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -68,36 +70,14 @@ public class Employee extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "First Name", "Last Name", "Password", "Contact No."
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
         jButton30.setText("Currently Logged in");
         jButton30.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton30ActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,28 +92,25 @@ public class Employee extends javax.swing.JFrame {
                         .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(81, 81, 81)
+                .addComponent(jLabel1)
+                .addContainerGap(353, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
+                .addComponent(jButton26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton27)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton28)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton30)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton29)))
+                    .addComponent(jButton28)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addComponent(jButton29)
                 .addContainerGap())
         );
 
@@ -168,7 +145,71 @@ public class Employee extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    public void tester(){
+        System.out.println("test");
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Employee().setVisible(true);
+            }
+        });
+        
+        try {
+            Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+            Connection conn = DriverManager.getConnection("jdbc;odbc;DBSauce");
+            Statement st = conn.createStatement();
+            ResultSet rest = st.executeQuery("SELECT fName FROM Employees");
+            while(rest.next()){
+                int ID = Integer.parseInt(rest.getString(1));
+                String fName =  rest.getString(2);
+                System.out.println(fName);
+                //jTable1.addColumn(null);
+            }
+        } catch(ClassNotFoundException | SQLException c) {
+            c.printStackTrace();
+        }
+    }
+    public Employee()
+    {
+        initComponents();
+        
+        //headers for the table
+        String[] columns = {"Column 1","Column 2","C3"};
+        //actual data for the table in a 2d array
+        Object[][] data = {
+            {"Kathy", "Smith", "Snowboarding"},
+            {"John", "Doe", "Rowing"}
+        };
+        //create table model with data
+        DefaultTableModel model = new DefaultTableModel(data, columns) {
+
+            @Override
+            public boolean isCellEditable(int row, int column)
+            {
+                return false;
+            }
+
+            //@Override
+            /*public Class<?> getColumnClass(int columnIndex)
+            {
+                //return columnClass[columnIndex];
+            }*/
+        };
+        JTable table = new JTable(model);
+        
+        //add the table to the frame
+        this.add(new JScrollPane(table));
+        
+        this.setTitle("Table Example");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        
+        this.pack();
+        this.setVisible(true);
+    }
+
     public static void main(String args[]) {
+        
+        //Employee tent = new Employee();
+        //tent.setVisible(true);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -191,22 +232,39 @@ public class Employee extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Employee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+<<<<<<< Updated upstream
         System.out.println("true");
+=======
+        //alert("hello");
+>>>>>>> Stashed changes
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Employee().setVisible(true);
             }
         });
+        
+        try {
+            Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+            Connection conn = DriverManager.getConnection("jdbc;odbc;DBSauce");
+            Statement st = conn.createStatement();
+            ResultSet rest = st.executeQuery("SELECT fName FROM Employees");
+            while(rest.next()){
+                int ID = Integer.parseInt(rest.getString(1));
+                String fName =  rest.getString(2);
+                System.out.println(fName);
+                //jTable1.addColumn(null);
+            }
+        } catch(ClassNotFoundException | SQLException c) {
+            c.printStackTrace();
+        }*/
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton28;
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton30;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
