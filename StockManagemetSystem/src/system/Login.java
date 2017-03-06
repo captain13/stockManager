@@ -122,13 +122,16 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_lblLoginActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void textfieldUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldUserMousePressed
-        Keyboard s=new Keyboard();
-        s.setLocation(350, 530);
-        s.setVisible(true);
+        try {
+            Keyboard s = new Keyboard();
+            s.setLocation(350, 530);
+            s.setVisible(true);
+        } catch (RuntimeException ignore) {
+        }
     }//GEN-LAST:event_textfieldUserMousePressed
 
     /**

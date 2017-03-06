@@ -13,13 +13,22 @@ package system;
  */
 public class Calendar extends javax.swing.JFrame {
    
-    static int realYear, realMonth, realDay, currentYear, currentMonth;
-
-    /**
-     * Creates new form Calendar
-     */
+    private static boolean IS_RUNNING = false;
+    
     public Calendar() {
+       if (IS_RUNNING) {
+            throw new RuntimeException();
+        } else {
+            IS_RUNNING = true;
+        }
         initComponents();
+        super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+    
+     @Override
+    public void dispose() {
+        Calendar.IS_RUNNING = false;
+        super.dispose();
     }
     
     @SuppressWarnings("unchecked")
@@ -81,7 +90,7 @@ public class Calendar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     /**

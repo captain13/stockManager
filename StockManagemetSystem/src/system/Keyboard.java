@@ -11,11 +11,22 @@ package system;
  */
 public class Keyboard extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Keyboard
-     */
+    private static boolean IS_RUNNING = false;
+    
     public Keyboard() {
+       if (IS_RUNNING) {
+            throw new RuntimeException();
+        } else {
+            IS_RUNNING = true;
+        }
         initComponents();
+        super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+    
+      @Override
+    public void dispose() {
+        Keyboard.IS_RUNNING = false;
+        super.dispose();
     }
 
     /**
@@ -461,7 +472,7 @@ public class Keyboard extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
     private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_jButton31ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed

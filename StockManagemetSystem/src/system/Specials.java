@@ -10,12 +10,22 @@ package system;
  * @author Andrew
  */
 public class Specials extends javax.swing.JFrame {
+    private static boolean IS_RUNNING = false;
 
-    /**
-     * Creates new form Specials
-     */
     public Specials() {
+        if (IS_RUNNING) {
+            throw new RuntimeException();
+        } else {
+            IS_RUNNING = true;
+        }
         initComponents();
+        super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+    
+      @Override
+    public void dispose() {
+        Specials.IS_RUNNING = false;
+        super.dispose();
     }
 
     /**
@@ -128,7 +138,7 @@ public class Specials extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     /**

@@ -24,7 +24,6 @@ public class MainSystem extends javax.swing.JFrame {
      */
     public MainSystem() {
         initComponents();
-
         //Not yet Ready-Fullscreen
         /* Toolkit tk = Toolkit.getDefaultToolkit();            
         int xSize = ((int) tk.getScreenSize().getWidth());
@@ -125,7 +124,7 @@ public class MainSystem extends javax.swing.JFrame {
         lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo_White.png"))); // NOI18N
         lblImage.setToolTipText("");
 
-        lblVersion.setText("Version 2.5.17");
+        lblVersion.setText("Version 2.5.19");
 
         buttonClose.setText("Close");
         buttonClose.setAlignmentY(0.0F);
@@ -837,11 +836,6 @@ public class MainSystem extends javax.swing.JFrame {
                 comboBoxLogoItemStateChanged(evt);
             }
         });
-        comboBoxLogo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxLogoActionPerformed(evt);
-            }
-        });
 
         lblScreen.setText("Resolution");
 
@@ -902,9 +896,10 @@ public class MainSystem extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void buttonEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmployeeActionPerformed
-        Employee s = new Employee();
-        s.tester();
-        s.setVisible(true);
+        try {
+            new Employee().setVisible(true);
+        } catch (RuntimeException ignore) {
+        }
     }//GEN-LAST:event_buttonEmployeeActionPerformed
 
     private void textboxSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textboxSearchActionPerformed
@@ -912,18 +907,24 @@ public class MainSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_textboxSearchActionPerformed
 
     private void buttonPromotionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPromotionsActionPerformed
-        Calendar s = new Calendar();
-        s.setVisible(true);
+          try {
+            new Calendar().setVisible(true);
+        } catch (RuntimeException ignore) {
+        }
     }//GEN-LAST:event_buttonPromotionsActionPerformed
 
     private void buttonSpecialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSpecialsActionPerformed
-        Specials s = new Specials();
-        s.setVisible(true);
+            try {
+            new Specials().setVisible(true);
+        } catch (RuntimeException ignore) {
+        }
     }//GEN-LAST:event_buttonSpecialsActionPerformed
 
     private void buttonBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookingsActionPerformed
-        Booking s = new Booking();
-        s.setVisible(true);
+               try {
+            new Booking().setVisible(true);
+        } catch (RuntimeException ignore) {
+        }
     }//GEN-LAST:event_buttonBookingsActionPerformed
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
@@ -1050,7 +1051,7 @@ public class MainSystem extends javax.swing.JFrame {
                     break;
 
                 case "Bistro":
-                  ImageIcon icon1 = new ImageIcon("./src/images/Logo_Bistro.png");
+                    ImageIcon icon1 = new ImageIcon("./src/images/Logo_Bistro.png");
                     lblImage.setIcon(icon1);
                     break;
 
@@ -1062,10 +1063,6 @@ public class MainSystem extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comboBoxLogoItemStateChanged
 
-    private void comboBoxLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxLogoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxLogoActionPerformed
-
     private void radioIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioIDActionPerformed
@@ -1074,11 +1071,6 @@ public class MainSystem extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /*Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -1095,12 +1087,10 @@ public class MainSystem extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
-           
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new MainSystem().setVisible(true);
-
         });
     }
 

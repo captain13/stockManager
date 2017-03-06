@@ -11,11 +11,22 @@ package system;
  */
 public class Booking extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Booking
-     */
+    private static boolean IS_RUNNING = false;
+
     public Booking() {
+        if (IS_RUNNING) {
+            throw new RuntimeException();
+        } else {
+            IS_RUNNING = true;
+        }
         initComponents();
+        super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+    
+     @Override
+    public void dispose() {
+        Booking.IS_RUNNING = false;
+        super.dispose();
     }
 
     /**
@@ -42,6 +53,7 @@ public class Booking extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
+        setMaximumSize(null);
         setUndecorated(true);
 
         lblTitle.setText("Bookings");
@@ -229,7 +241,7 @@ public class Booking extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAcceptActionPerformed
-        super.dispose();
+     dispose();
     }//GEN-LAST:event_buttonAcceptActionPerformed
 
     private void table1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_table1ActionPerformed
