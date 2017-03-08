@@ -19,6 +19,9 @@ import javax.swing.*;
  */
 public class MainSystem extends javax.swing.JFrame {
 
+    Booking booking = new Booking();
+    Calendar calendar = new Calendar();
+    Specials specials = new Specials();
     /**
      * Creates new form NewJFrame
      */
@@ -117,6 +120,17 @@ public class MainSystem extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
         setUndecorated(true);
+
+        TabbedPanel.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                TabbedPanelStateChanged(evt);
+            }
+        });
+        TabbedPanel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                TabbedPanelFocusGained(evt);
+            }
+        });
 
         Dashboard.setBackground(new java.awt.Color(242, 241, 241));
 
@@ -646,7 +660,7 @@ public class MainSystem extends javax.swing.JFrame {
                     .addComponent(buttonRecipeAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonRecipeSort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonRecipeEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                    .addComponent(buttonRecipeDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 69, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -907,22 +921,28 @@ public class MainSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_textboxSearchActionPerformed
 
     private void buttonPromotionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPromotionsActionPerformed
-          try {
-            new Calendar().setVisible(true);
+        try {
+            calendar.setVisible(true);
+            booking.setVisible(false);
+            specials.setVisible(false);
         } catch (RuntimeException ignore) {
         }
     }//GEN-LAST:event_buttonPromotionsActionPerformed
 
     private void buttonSpecialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSpecialsActionPerformed
-            try {
-            new Specials().setVisible(true);
+        try {
+            calendar.setVisible(false);
+            booking.setVisible(false);
+            specials.setVisible(true);
         } catch (RuntimeException ignore) {
         }
     }//GEN-LAST:event_buttonSpecialsActionPerformed
 
     private void buttonBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookingsActionPerformed
-               try {
-            new Booking().setVisible(true);
+        try {
+            specials.setVisible(false);
+            calendar.setVisible(false);
+            booking.setVisible(true);
         } catch (RuntimeException ignore) {
         }
     }//GEN-LAST:event_buttonBookingsActionPerformed
@@ -1038,6 +1058,7 @@ public class MainSystem extends javax.swing.JFrame {
 
     private void comboBoxSceenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSceenActionPerformed
         // TODO add your handling code here:
+       
     }//GEN-LAST:event_comboBoxSceenActionPerformed
 
     private void comboBoxLogoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxLogoItemStateChanged
@@ -1066,6 +1087,16 @@ public class MainSystem extends javax.swing.JFrame {
     private void radioIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioIDActionPerformed
+
+    private void TabbedPanelStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_TabbedPanelStateChanged
+        // TODO add your handling code here:
+         booking.setVisible(false);
+    }//GEN-LAST:event_TabbedPanelStateChanged
+
+    private void TabbedPanelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TabbedPanelFocusGained
+        // TODO add your handling code here:
+         booking.setVisible(false);
+    }//GEN-LAST:event_TabbedPanelFocusGained
 
     /**
      * @param args the command line arguments
