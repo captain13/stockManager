@@ -12,9 +12,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -28,10 +31,10 @@ public class MainSystem extends javax.swing.JFrame {
     Booking booking = new Booking();
     Calendar calendar = new Calendar();
     Specials specials = new Specials();
-    static String url = "jdbc:mysql://localhost:3306/testdb";
-    static String username = "root";
-    static String password = "";
-    static String driver = "com.mysql.jdbc.Driver";
+//    static String url = "jdbc:mysql://localhost:3306/testdb";
+//    static String username = "root";
+//    static String password = "";
+//    static String driver = "com.mysql.jdbc.Driver";
 
     public MainSystem() {
         initComponents();
@@ -40,7 +43,7 @@ public class MainSystem extends javax.swing.JFrame {
         int xSize = ((int) tk.getScreenSize().getWidth());
         int ySize = ((int) tk.getScreenSize().getHeight());
         this.setSize(xSize, ySize);*/
-        dbConnection();
+//        dbConnection();
         new Thread(() -> {
             while (true) {
                 lblClock.setText(new SimpleDateFormat("hh:mm:ss").format(new Date()));
@@ -49,37 +52,37 @@ public class MainSystem extends javax.swing.JFrame {
         }).start();
     }
 
-    public void dbConnection() {
-         try {
-            Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String query = "SELECT * FROM ingredients";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            DefaultTableModel tableModelReserve = new DefaultTableModel();
-            tblInventory.setModel(tableModelReserve);
-
-            for (int i = 1; i <= columnCount; i++) {
-                tableModelReserve.addColumn(metaData.getColumnLabel(i));
-            }
-            Object[] row = new Object[columnCount];
-
-            while (rs.next()) {
-                for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
-                }
-                tableModelReserve.addRow(row);
-            }
-            rs.close();
-            s.close();
-            conn.close();
-        } catch (Exception exc) {
-            exc.printStackTrace();
-        }
-    }
- 
+//    public void dbConnection() {
+//         try {
+//            Class.forName(driver).newInstance();
+//            Connection conn = DriverManager.getConnection(url, username, password);
+//            Statement s = conn.createStatement();
+//            String query = "SELECT * FROM ingredients";
+//            ResultSet rs = s.executeQuery(query);
+//            ResultSetMetaData metaData = rs.getMetaData();
+//            int columnCount = metaData.getColumnCount();
+//            DefaultTableModel tableModelReserve = new DefaultTableModel();
+//            tblInventory.setModel(tableModelReserve);
+//
+//            for (int i = 1; i <= columnCount; i++) {
+//                tableModelReserve.addColumn(metaData.getColumnLabel(i));
+//            }
+//            Object[] row = new Object[columnCount];
+//
+//            while (rs.next()) {
+//                for (int i = 0; i < columnCount; i++) {
+//                    row[i] = rs.getObject(i + 1);
+//                }
+//                tableModelReserve.addRow(row);
+//            }
+//            rs.close();
+//            s.close();
+//            conn.close();
+//        } catch (Exception exc) {
+//            exc.printStackTrace();
+//        }
+//    }
+// 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -155,6 +158,7 @@ public class MainSystem extends javax.swing.JFrame {
         comboBoxLogo = new javax.swing.JComboBox<>();
         lblScreen = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -691,7 +695,7 @@ public class MainSystem extends javax.swing.JFrame {
                 .addGroup(pnlRecipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonRecipeAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonRecipeEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                    .addComponent(buttonRecipeDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 69, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -762,7 +766,7 @@ public class MainSystem extends javax.swing.JFrame {
                 .addGroup(pnlRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonRecipeAdd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonRecipeEdit1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeDelete1, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                    .addComponent(buttonRecipeDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -960,6 +964,13 @@ public class MainSystem extends javax.swing.JFrame {
 
         lblLogo.setText("Set Logo");
 
+        jButton1.setText("Refresh the database");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
         Settings.setLayout(SettingsLayout);
         SettingsLayout.setHorizontalGroup(
@@ -977,7 +988,10 @@ public class MainSystem extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(comboBoxSceen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboBoxLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(comboBoxLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(SettingsLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton1)))
                 .addContainerGap(568, Short.MAX_VALUE))
         );
         SettingsLayout.setVerticalGroup(
@@ -993,7 +1007,9 @@ public class MainSystem extends javax.swing.JFrame {
                 .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBoxLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogo))
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(277, Short.MAX_VALUE))
         );
 
         TabbedPanel.addTab("Settings", Settings);
@@ -1211,6 +1227,16 @@ public class MainSystem extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonSaleActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            new DatabaseEdits.refresh();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1282,6 +1308,7 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JButton buttonWeeklyOrder;
     private javax.swing.JComboBox<String> comboBoxLogo;
     private javax.swing.JComboBox<String> comboBoxSceen;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
