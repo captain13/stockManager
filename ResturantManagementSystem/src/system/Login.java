@@ -132,7 +132,7 @@ public class Login extends javax.swing.JFrame {
 
     private void lblLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblLoginActionPerformed
         if (textfieldUser.getText().equals("Guest") && passwordFieldBox.getText().equals("12345")) {
-            NewOrder s = new NewOrder();
+            NewOrder s = new NewOrder(textfieldUser.getText());
             s.setVisible(true);
             super.dispose();
             System.out.println("Correct");
@@ -183,10 +183,8 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
     }
 

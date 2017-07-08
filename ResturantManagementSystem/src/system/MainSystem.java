@@ -1129,7 +1129,7 @@ public class MainSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonTable1ActionPerformed
 
     private void buttonTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeAwayActionPerformed
-        NewOrder s = new NewOrder();
+        NewOrder s = new NewOrder("User");
         s.setVisible(true);
     }//GEN-LAST:event_buttonTakeAwayActionPerformed
 
