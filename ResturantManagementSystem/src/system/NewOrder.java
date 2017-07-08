@@ -17,8 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public final class NewOrder extends javax.swing.JFrame {
 
     String columnNames[] = {"Item", "Qty", "Price"};
-    String[] colNames = {"QTY", "Item Code", "Amount"};
-    DefaultTableModel model = new DefaultTableModel(colNames, 0);
+    DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
     public NewOrder() {
         initComponents();
