@@ -126,7 +126,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblVersion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Version 2.5.19"/>
+                <Property name="text" type="java.lang.String" value="Version 2.5.21"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="buttonClose">
