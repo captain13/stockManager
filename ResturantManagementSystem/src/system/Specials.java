@@ -53,6 +53,7 @@ public class Specials extends javax.swing.JFrame {
         setResizable(false);
 
         pnlSpecial.setBackground(new java.awt.Color(255, 255, 255));
+        pnlSpecial.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblSpecials1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_f_steak.jpg"))); // NOI18N
         lblSpecials1.setText("l");
@@ -82,7 +83,7 @@ public class Specials extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlSpecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSpecialLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 10, Short.MAX_VALUE)
                         .addComponent(lblSpecials6)
                         .addGap(18, 18, 18)
                         .addComponent(lblSpecials2))
@@ -124,9 +125,7 @@ public class Specials extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(pnlSpecial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

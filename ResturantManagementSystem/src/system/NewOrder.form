@@ -33,23 +33,25 @@
                   <Component id="jToggleButton8" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="buttonEdit" alignment="0" pref="169" max="32767" attributes="0"/>
+                          <Component id="buttonEdit" alignment="0" pref="166" max="32767" attributes="0"/>
                           <Component id="buttonClose" alignment="1" max="32767" attributes="0"/>
-                          <Component id="buttonPay" alignment="1" pref="169" max="32767" attributes="0"/>
-                          <Component id="textfieldTotal" alignment="0" pref="169" max="32767" attributes="0"/>
+                          <Component id="buttonPay" alignment="1" pref="166" max="32767" attributes="0"/>
+                          <Component id="textfieldTotal" alignment="0" pref="166" max="32767" attributes="0"/>
                           <Component id="jScrollPane2" alignment="1" pref="0" max="32767" attributes="0"/>
-                          <Component id="jButton15" alignment="0" max="32767" attributes="0"/>
-                          <Component id="buttonExtra" alignment="1" pref="169" max="32767" attributes="0"/>
                           <Component id="buttonOverride" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblTitle" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblNum" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblClock1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblWaiter" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="nameTF" min="-2" pref="78" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblNum" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="customerNo" min="-2" pref="34" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -71,7 +73,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="textfieldTotal" min="-2" pref="57" max="-2" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
@@ -81,21 +83,21 @@
                           <Component id="nameTF" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="lblNum" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="customerNo" max="32767" attributes="0"/>
+                          <Component id="lblNum" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="lblClock1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton15" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="buttonPay" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="buttonOverride" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="buttonExtra" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonEdit" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonClose" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jTabbedPane1" max="32767" attributes="0"/>
               </Group>
@@ -138,6 +140,9 @@
           <Font name="DialogInput" size="24" style="0"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="buttonPay">
       <Properties>
@@ -189,6 +194,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -214,14 +222,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Clock"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton15">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Debug-Fullscreen"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton15ActionPerformed"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
 
@@ -385,7 +385,7 @@
                       <Component id="jButton10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton9" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="480" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="483" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -436,7 +436,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="652" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="655" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -468,7 +468,7 @@
                       <Component id="jButton6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButton7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="209" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="212" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -543,19 +543,32 @@
             </Component>
           </SubComponents>
         </Container>
+        <Container class="javax.swing.JTabbedPane" name="jTabbedPane2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Extra">
+                <Property name="tabTitle" type="java.lang.String" value="Extra"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+        </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="buttonExtra">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Extras"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="buttonOverride">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pay Override"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="nameTF">
+    </Component>
+    <Component class="javax.swing.JLabel" name="customerNo">
     </Component>
   </SubComponents>
 </Form>

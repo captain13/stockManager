@@ -8,6 +8,7 @@ package system;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,11 +23,11 @@ public final class NewOrder extends javax.swing.JFrame {
         
     public NewOrder(String waiter) {
         initComponents();
-        /* Toolkit tk = Toolkit.getDefaultToolkit();
+        Toolkit tk = Toolkit.getDefaultToolkit();
         int xSize = ((int) tk.getScreenSize().getWidth());
         int ySize = ((int) tk.getScreenSize().getHeight());
         this.setSize(xSize, ySize);
-        this.setLocation(0,0);*/
+        this.setLocation(0,0);
         this.waiter=waiter;
         nameTF.setText(waiter);
         tblItems.setModel(model);
@@ -34,6 +35,7 @@ public final class NewOrder extends javax.swing.JFrame {
         tblItems.getColumnModel().getColumn(1).setPreferredWidth(25);
         tblItems.getColumnModel().getColumn(2).setPreferredWidth(45);
         internalClock();
+        customerNo.setText(JOptionPane.showInputDialog(null, "Enter number of customers"));
     }
 
     public void internalClock() {
@@ -51,7 +53,6 @@ public final class NewOrder extends javax.swing.JFrame {
             total = total + amount;
         }
         textfieldTotal.setText(Double.toString(total));
-        System.out.println(total);
     }
 
     @SuppressWarnings("unchecked")
@@ -69,7 +70,6 @@ public final class NewOrder extends javax.swing.JFrame {
         lblWaiter = new javax.swing.JLabel();
         lblNum = new javax.swing.JLabel();
         lblClock1 = new javax.swing.JLabel();
-        jButton15 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
         jButton12 = new javax.swing.JButton();
@@ -89,9 +89,10 @@ public final class NewOrder extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        buttonExtra = new javax.swing.JButton();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         buttonOverride = new javax.swing.JButton();
         nameTF = new javax.swing.JLabel();
+        customerNo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -148,13 +149,6 @@ public final class NewOrder extends javax.swing.JFrame {
         lblNum.setText("No. of Customers:");
 
         lblClock1.setText("Clock");
-
-        jButton15.setText("Debug-Fullscreen");
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
-            }
-        });
 
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_f_porkRibs.jpg"))); // NOI18N
         jButton12.setBorder(null);
@@ -263,7 +257,7 @@ public final class NewOrder extends javax.swing.JFrame {
                 .addComponent(jButton10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton9)
-                .addGap(0, 480, Short.MAX_VALUE))
+                .addGap(0, 483, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,7 +274,7 @@ public final class NewOrder extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 652, Short.MAX_VALUE)
+            .addGap(0, 655, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,7 +317,7 @@ public final class NewOrder extends javax.swing.JFrame {
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton7)
-                .addGap(0, 209, Short.MAX_VALUE))
+                .addGap(0, 212, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,7 +333,8 @@ public final class NewOrder extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Drinks", jPanel3);
 
-        buttonExtra.setText("Extras");
+        jTabbedPane2.setBackground(new java.awt.Color(204, 204, 204));
+        jTabbedPane1.addTab("Extra", jTabbedPane2);
 
         buttonOverride.setText("Pay Override");
 
@@ -353,23 +348,24 @@ public final class NewOrder extends javax.swing.JFrame {
                     .addComponent(jToggleButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buttonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(buttonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                             .addComponent(buttonClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buttonPay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                            .addComponent(textfieldTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(buttonPay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                            .addComponent(textfieldTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buttonExtra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                             .addComponent(buttonOverride, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblTitle)
-                                    .addComponent(lblNum)
                                     .addComponent(lblClock1)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(lblWaiter)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(nameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblNum)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(customerNo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(12, 12, 12)
                         .addComponent(jTabbedPane1)
@@ -392,21 +388,20 @@ public final class NewOrder extends javax.swing.JFrame {
                             .addComponent(lblWaiter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(nameTF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNum)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(customerNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblClock1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(47, 47, 47)
                         .addComponent(buttonPay)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonOverride)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonExtra)
-                        .addGap(4, 4, 4)
                         .addComponent(buttonEdit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonClose))
+                        .addComponent(buttonClose)
+                        .addGap(27, 27, 27))
                     .addComponent(jTabbedPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleButton8)
@@ -425,38 +420,39 @@ public final class NewOrder extends javax.swing.JFrame {
         super.dispose();
     }//GEN-LAST:event_buttonCloseActionPerformed
 
+    private void buttonPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayActionPerformed
+        NumberPad s = new NumberPad();
+        s.setVisible(true);
+    }//GEN-LAST:event_buttonPayActionPerformed
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        int xSize = ((int) tk.getScreenSize().getWidth());
-        int ySize = ((int) tk.getScreenSize().getHeight());
-        this.setSize(xSize, ySize);
-        this.setLocation(0, 0);
-    }//GEN-LAST:event_jButton15ActionPerformed
-
-    private void buttonPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayActionPerformed
-        NumberPad s = new NumberPad();
-        s.setLocation(1100, 400);
-        s.setVisible(true);
-    }//GEN-LAST:event_buttonPayActionPerformed
-
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        model.addRow(new Object[]{"Beef Burger", "1", "30.00"});
+    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
+        model.addRow(new Object[]{"Califoronia Pizza", "1", "55.00"});
         totalAmount();
-    }//GEN-LAST:event_jButton16ActionPerformed
+    }//GEN-LAST:event_jButton41ActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        model.addRow(new Object[]{"Steak", "1", "60.00"});
+        totalAmount();
+    }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        model.addRow(new Object[]{"Salami Pizza", "1", "55.00"});
+        totalAmount();
+    }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         model.addRow(new Object[]{"Chicken Burger", "1", "35.00"});
         totalAmount();
     }//GEN-LAST:event_jButton19ActionPerformed
 
-    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        model.addRow(new Object[]{"Steak", "1", "60.00"});
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        model.addRow(new Object[]{"Beef Burger", "1", "30.00"});
         totalAmount();
-    }//GEN-LAST:event_jButton21ActionPerformed
+    }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         model.addRow(new Object[]{"Chicken Wings", "1", "35.00"});
@@ -467,16 +463,6 @@ public final class NewOrder extends javax.swing.JFrame {
         model.addRow(new Object[]{"Ribs", "1", "70.00"});
         totalAmount();
     }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        model.addRow(new Object[]{"Salami Pizza", "1", "55.00"});
-        totalAmount();
-    }//GEN-LAST:event_jButton20ActionPerformed
-
-    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
-        model.addRow(new Object[]{"Califoronia Pizza", "1", "55.00"});
-        totalAmount();
-    }//GEN-LAST:event_jButton41ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -515,14 +501,13 @@ public final class NewOrder extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonClose;
     private javax.swing.JButton buttonEdit;
-    private javax.swing.JButton buttonExtra;
     private javax.swing.JButton buttonOverride;
     private javax.swing.JButton buttonPay;
+    private javax.swing.JLabel customerNo;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton20;
@@ -539,13 +524,14 @@ public final class NewOrder extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JToggleButton jToggleButton8;
     private javax.swing.JLabel lblClock1;
     private javax.swing.JLabel lblNum;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblWaiter;
     private javax.swing.JLabel nameTF;
-    private javax.swing.JTable tblItems;
-    private javax.swing.JFormattedTextField textfieldTotal;
+    public static javax.swing.JTable tblItems;
+    public static javax.swing.JFormattedTextField textfieldTotal;
     // End of variables declaration//GEN-END:variables
 }

@@ -38,7 +38,6 @@ public class Login extends javax.swing.JFrame {
         lblPassword = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setLocation(new java.awt.Point(250, 250));
         setUndecorated(true);
         setResizable(false);
@@ -134,9 +133,8 @@ public class Login extends javax.swing.JFrame {
         if (textfieldUser.getText().equals("Guest") && passwordFieldBox.getText().equals("12345")) {
             NewOrder s = new NewOrder(textfieldUser.getText());
             s.setVisible(true);
-            super.dispose();
-            System.out.println("Correct");
-            
+            super.dispose(
+            );
         } else {
             JOptionPane.showMessageDialog(this, "Incorrect Username/Passord");
         }
