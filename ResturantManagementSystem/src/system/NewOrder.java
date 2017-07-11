@@ -16,26 +16,26 @@ import javax.swing.table.DefaultTableModel;
  * @author GGPQ9ZJ42
  */
 public final class NewOrder extends javax.swing.JFrame {
+
     String waiter;
     String columnNames[] = {"Item", "Qty", "Price"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-      
-        
+
     public NewOrder(String waiter) {
         initComponents();
         Toolkit tk = Toolkit.getDefaultToolkit();
         int xSize = ((int) tk.getScreenSize().getWidth());
         int ySize = ((int) tk.getScreenSize().getHeight());
         this.setSize(xSize, ySize);
-        this.setLocation(0,0);
-        this.waiter=waiter;
+        this.setLocation(0, 0);
+        this.waiter = waiter;
         nameTF.setText(waiter);
         tblItems.setModel(model);
         tblItems.getColumnModel().getColumn(0).setPreferredWidth(90);
         tblItems.getColumnModel().getColumn(1).setPreferredWidth(25);
         tblItems.getColumnModel().getColumn(2).setPreferredWidth(45);
         internalClock();
-        customerNo.setText(JOptionPane.showInputDialog(null, "Enter number of customers"));
+//        customerNo.setText(JOptionPane.showInputDialog(null, "Enter number of customers"));
     }
 
     public void internalClock() {
@@ -47,12 +47,20 @@ public final class NewOrder extends javax.swing.JFrame {
     }
 
     public void totalAmount() {
-         double total = 0;
+        double total = 0;
         for (int i = 0; i < tblItems.getRowCount(); i++) {
             double amount = Double.parseDouble(String.valueOf(tblItems.getModel().getValueAt(i, 2)));
             total = total + amount;
         }
-        textfieldTotal.setText(Double.toString(total));
+        textfieldTotal.setText(String.format("R%.2f", total));
+    }
+
+    public void voidItem() {
+        String confirm = JOptionPane.showInputDialog(null, "Are you sure?");
+        if (confirm.equalsIgnoreCase("yes")) {
+            model.removeRow(tblItems.getSelectedRow());
+            totalAmount();
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -101,6 +109,11 @@ public final class NewOrder extends javax.swing.JFrame {
         lblTitle.setText("Order");
 
         buttonEdit.setText("Edit Order");
+        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditActionPerformed(evt);
+            }
+        });
 
         buttonClose.setText("Close");
         buttonClose.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +270,7 @@ public final class NewOrder extends javax.swing.JFrame {
                 .addComponent(jButton10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton9)
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addGap(0, 494, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,7 +287,7 @@ public final class NewOrder extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 655, Short.MAX_VALUE)
+            .addGap(0, 666, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,7 +330,7 @@ public final class NewOrder extends javax.swing.JFrame {
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton7)
-                .addGap(0, 212, Short.MAX_VALUE))
+                .addGap(0, 223, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,6 +350,11 @@ public final class NewOrder extends javax.swing.JFrame {
         jTabbedPane1.addTab("Extra", jTabbedPane2);
 
         buttonOverride.setText("Pay Override");
+        buttonOverride.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOverrideActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -417,11 +435,11 @@ public final class NewOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton8ActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
-        super.dispose();
+        super.setVisible(false);
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayActionPerformed
-        NumberPad s = new NumberPad();
+        Checkout s = new Checkout();
         s.setVisible(true);
     }//GEN-LAST:event_buttonPayActionPerformed
 
@@ -463,6 +481,14 @@ public final class NewOrder extends javax.swing.JFrame {
         model.addRow(new Object[]{"Ribs", "1", "70.00"});
         totalAmount();
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void buttonOverrideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOverrideActionPerformed
+
+    }//GEN-LAST:event_buttonOverrideActionPerformed
+
+    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
+        voidItem();
+    }//GEN-LAST:event_buttonEditActionPerformed
 
     /**
      * @param args the command line arguments

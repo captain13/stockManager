@@ -106,7 +106,7 @@ public class BookingPrompt extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        NumberPad s = new NumberPad();
+        Checkout s = new Checkout();
         s.setLocation(350, 530);
         s.setVisible(true);
     }//GEN-LAST:event_jTextField1ActionPerformed

@@ -7,20 +7,14 @@ package system;
 
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
-import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,10 +25,7 @@ public class MainSystem extends javax.swing.JFrame {
     Booking booking = new Booking();
     Calendar calendar = new Calendar();
     Specials specials = new Specials();
-//    static String url = "jdbc:mysql://localhost:3306/testdb";
-//    static String username = "root";
-//    static String password = "";
-//    static String driver = "com.mysql.jdbc.Driver";
+    HashMap<String, NewOrder> tables = new HashMap<>();
 
     public MainSystem() {
         initComponents();
@@ -45,6 +36,7 @@ public class MainSystem extends javax.swing.JFrame {
         this.setSize(xSize, ySize);*/
 //        dbConnection();
         internalClock();
+
     }
 
     public void internalClock() {
@@ -56,37 +48,6 @@ public class MainSystem extends javax.swing.JFrame {
         }).start();
     }
 
-//    public void dbConnection() {
-//         try {
-//            Class.forName(driver).newInstance();
-//            Connection conn = DriverManager.getConnection(url, username, password);
-//            Statement s = conn.createStatement();
-//            String query = "SELECT * FROM ingredients";
-//            ResultSet rs = s.executeQuery(query);
-//            ResultSetMetaData metaData = rs.getMetaData();
-//            int columnCount = metaData.getColumnCount();
-//            DefaultTableModel tableModelReserve = new DefaultTableModel();
-//            tblInventory.setModel(tableModelReserve);
-//
-//            for (int i = 1; i <= columnCount; i++) {
-//                tableModelReserve.addColumn(metaData.getColumnLabel(i));
-//            }
-//            Object[] row = new Object[columnCount];
-//
-//            while (rs.next()) {
-//                for (int i = 0; i < columnCount; i++) {
-//                    row[i] = rs.getObject(i + 1);
-//                }
-//                tableModelReserve.addRow(row);
-//            }
-//            rs.close();
-//            s.close();
-//            conn.close();
-//        } catch (Exception exc) {
-//            exc.printStackTrace();
-//        }
-//    }
-// 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -114,14 +75,14 @@ public class MainSystem extends javax.swing.JFrame {
         buttonLayout = new javax.swing.JButton();
         buttonTakeAway = new javax.swing.JButton();
         pnlLayout = new javax.swing.JPanel();
+        buttonTable3 = new javax.swing.JButton();
         buttonTable1 = new javax.swing.JButton();
         buttonTable2 = new javax.swing.JButton();
-        buttonTable3 = new javax.swing.JButton();
         buttonTable4 = new javax.swing.JButton();
-        buttonTable5 = new javax.swing.JButton();
         buttonTable6 = new javax.swing.JButton();
         buttonTable7 = new javax.swing.JButton();
         buttonTable8 = new javax.swing.JButton();
+        buttonTable5 = new javax.swing.JButton();
         Inventory = new javax.swing.JPanel();
         textboxSearch = new javax.swing.JTextField();
         lblSearch = new javax.swing.JLabel();
@@ -402,7 +363,15 @@ public class MainSystem extends javax.swing.JFrame {
 
         pnlLayout.setBackground(new java.awt.Color(255, 255, 255));
 
-        buttonTable1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableS.jpg"))); // NOI18N
+        buttonTable3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableS.jpg"))); // NOI18N
+        buttonTable3.setContentAreaFilled(false);
+        buttonTable3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTable3ActionPerformed(evt);
+            }
+        });
+
+        buttonTable1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableB.jpg"))); // NOI18N
         buttonTable1.setContentAreaFilled(false);
         buttonTable1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -418,27 +387,11 @@ public class MainSystem extends javax.swing.JFrame {
             }
         });
 
-        buttonTable3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableB.jpg"))); // NOI18N
-        buttonTable3.setContentAreaFilled(false);
-        buttonTable3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTable3ActionPerformed(evt);
-            }
-        });
-
         buttonTable4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableS.jpg"))); // NOI18N
         buttonTable4.setContentAreaFilled(false);
         buttonTable4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonTable4ActionPerformed(evt);
-            }
-        });
-
-        buttonTable5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableS.jpg"))); // NOI18N
-        buttonTable5.setContentAreaFilled(false);
-        buttonTable5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTable5ActionPerformed(evt);
             }
         });
 
@@ -450,7 +403,7 @@ public class MainSystem extends javax.swing.JFrame {
             }
         });
 
-        buttonTable7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableBar.png"))); // NOI18N
+        buttonTable7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableS.jpg"))); // NOI18N
         buttonTable7.setContentAreaFilled(false);
         buttonTable7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -458,11 +411,19 @@ public class MainSystem extends javax.swing.JFrame {
             }
         });
 
-        buttonTable8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableB.jpg"))); // NOI18N
+        buttonTable8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableBar.png"))); // NOI18N
         buttonTable8.setContentAreaFilled(false);
         buttonTable8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonTable8ActionPerformed(evt);
+            }
+        });
+
+        buttonTable5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableB.jpg"))); // NOI18N
+        buttonTable5.setContentAreaFilled(false);
+        buttonTable5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTable5ActionPerformed(evt);
             }
         });
 
@@ -472,7 +433,7 @@ public class MainSystem extends javax.swing.JFrame {
             pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLayoutLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buttonTable8)
+                .addComponent(buttonTable5)
                 .addContainerGap(297, Short.MAX_VALUE))
             .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlLayoutLayout.createSequentialGroup()
@@ -480,24 +441,24 @@ public class MainSystem extends javax.swing.JFrame {
                     .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pnlLayoutLayout.createSequentialGroup()
                             .addGap(10, 10, Short.MAX_VALUE)
-                            .addComponent(buttonTable5)
+                            .addComponent(buttonTable6)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                         .addGroup(pnlLayoutLayout.createSequentialGroup()
                             .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(buttonTable2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(buttonTable1, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
-                                    .addComponent(buttonTable1)
+                                    .addComponent(buttonTable3)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                             .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(buttonTable3)
+                                .addComponent(buttonTable2)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(buttonTable4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
                     .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(buttonTable7)
+                        .addComponent(buttonTable8)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
-                            .addComponent(buttonTable6)
+                            .addComponent(buttonTable7)
                             .addGap(12, 12, 12)))
                     .addContainerGap()))
         );
@@ -505,7 +466,7 @@ public class MainSystem extends javax.swing.JFrame {
             pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
                 .addContainerGap(245, Short.MAX_VALUE)
-                .addComponent(buttonTable8)
+                .addComponent(buttonTable5)
                 .addGap(47, 47, 47))
             .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlLayoutLayout.createSequentialGroup()
@@ -515,18 +476,18 @@ public class MainSystem extends javax.swing.JFrame {
                             .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(pnlLayoutLayout.createSequentialGroup()
                                     .addGap(107, 107, 107)
-                                    .addComponent(buttonTable1))
-                                .addComponent(buttonTable2)
+                                    .addComponent(buttonTable3))
+                                .addComponent(buttonTable1)
                                 .addGroup(pnlLayoutLayout.createSequentialGroup()
-                                    .addComponent(buttonTable3)
+                                    .addComponent(buttonTable2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(buttonTable4)))
                             .addGap(6, 6, 6)
-                            .addComponent(buttonTable5))
+                            .addComponent(buttonTable6))
                         .addGroup(pnlLayoutLayout.createSequentialGroup()
-                            .addComponent(buttonTable7)
+                            .addComponent(buttonTable8)
                             .addGap(35, 35, 35)
-                            .addComponent(buttonTable6)))
+                            .addComponent(buttonTable7)))
                     .addContainerGap(19, Short.MAX_VALUE)))
         );
 
@@ -1073,8 +1034,8 @@ public class MainSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonBookingsActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        Login s = new Login();
-        s.setVisible(true);
+      Login user=new Login();
+      user.setVisible(true);
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void buttonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogOutActionPerformed
@@ -1089,44 +1050,86 @@ public class MainSystem extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_buttonCloseActionPerformed
 
+    private void buttonTable5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable5ActionPerformed
+    if (tables.get("table5") == null) {
+            tables.put("table5", new NewOrder("user"));
+
+           // Login user = new Login(tables.get("table5"));
+          //  user.setVisible(true);
+        } else {
+            tables.get("table5").setVisible(true);
+        }
+    }//GEN-LAST:event_buttonTable5ActionPerformed
+
     private void buttonTable8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable8ActionPerformed
-        Login s = new Login();
-        s.setVisible(true);
+        // TODO add your handling code here:
     }//GEN-LAST:event_buttonTable8ActionPerformed
 
     private void buttonTable7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable7ActionPerformed
-        // TODO add your handling code here:
+        if (tables.get("table7") == null) {
+            tables.put("table7", new NewOrder("user"));
+
+           // Login user = new Login(tables.get("table7"));
+          //  user.setVisible(true);
+        } else {
+            tables.get("table7").setVisible(true);
+        }
     }//GEN-LAST:event_buttonTable7ActionPerformed
 
     private void buttonTable6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable6ActionPerformed
-        Login s = new Login();
-        s.setVisible(true);
+         if (tables.get("table6") == null) {
+            tables.put("table6", new NewOrder("user"));
+
+          //  Login user = new Login(tables.get("table6"));
+          //  user.setVisible(true);
+        } else {
+            tables.get("table6").setVisible(true);
+        }
     }//GEN-LAST:event_buttonTable6ActionPerformed
 
-    private void buttonTable5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable5ActionPerformed
-        Login s = new Login();
-        s.setVisible(true);
-    }//GEN-LAST:event_buttonTable5ActionPerformed
-
     private void buttonTable4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable4ActionPerformed
-        Login s = new Login();
-        s.setVisible(true);
+  if (tables.get("table4") == null) {
+            tables.put("table4", new NewOrder("user"));
+
+          //  Login user = new Login(tables.get("table4"));
+          //  user.setVisible(true);
+        } else {
+            tables.get("table4").setVisible(true);
+        }
     }//GEN-LAST:event_buttonTable4ActionPerformed
 
-    private void buttonTable3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable3ActionPerformed
-        Login s = new Login();
-        s.setVisible(true);
-    }//GEN-LAST:event_buttonTable3ActionPerformed
-
     private void buttonTable2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable2ActionPerformed
-        Login s = new Login();
-        s.setVisible(true);
+         if (tables.get("table2") == null) {
+            tables.put("table2", new NewOrder("user"));
+
+           // Login user = new Login(tables.get("table2"));
+          //  user.setVisible(true);
+        } else {
+            tables.get("table2").setVisible(true);
+        }
     }//GEN-LAST:event_buttonTable2ActionPerformed
 
     private void buttonTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable1ActionPerformed
-        Login s = new Login();
-        s.setVisible(true);
+        if (tables.get("table1") == null) {
+            tables.put("table1", new NewOrder("user"));
+
+          //  Login user = new Login(tables.get("table1"));
+           // user.setVisible(true);
+        } else {
+            tables.get("table1").setVisible(true);
+        }
     }//GEN-LAST:event_buttonTable1ActionPerformed
+
+    private void buttonTable3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable3ActionPerformed
+          if (tables.get("table3") == null) {
+            tables.put("table3", new NewOrder("user"));
+
+            //Login user = new Login(tables.get("table3"));
+            //user.setVisible(true);
+        } else {
+            tables.get("table3").setVisible(true);
+        }
+    }//GEN-LAST:event_buttonTable3ActionPerformed
 
     private void buttonTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeAwayActionPerformed
         NewOrder s = new NewOrder("User");
