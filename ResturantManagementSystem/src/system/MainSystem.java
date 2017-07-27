@@ -9,7 +9,6 @@ import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -26,6 +25,7 @@ public class MainSystem extends javax.swing.JFrame {
     Calendar calendar = new Calendar();
     Specials specials = new Specials();
     HashMap<String, NewOrder> tables = new HashMap<>();
+    static DefaultListModel listModel = new DefaultListModel();
 
     public MainSystem() {
         initComponents();
@@ -34,9 +34,9 @@ public class MainSystem extends javax.swing.JFrame {
         int xSize = ((int) tk.getScreenSize().getWidth());
         int ySize = ((int) tk.getScreenSize().getHeight());
         this.setSize(xSize, ySize);*/
-//        dbConnection();
         internalClock();
-
+        dbManager.populateTables();
+        listLogin.setModel(listModel);
     }
 
     public void internalClock() {
@@ -46,6 +46,14 @@ public class MainSystem extends javax.swing.JFrame {
                 lblDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
             }
         }).start();
+    }
+    
+    public static void updateList(String Username){
+        listModel.addElement(Username);
+    }
+    
+    public void logout(){
+        listModel.remove(listLogin.getSelectedIndex());
     }
 
     @SuppressWarnings("unchecked")
@@ -67,6 +75,8 @@ public class MainSystem extends javax.swing.JFrame {
         buttonLogin = new javax.swing.JButton();
         lblClock = new javax.swing.JLabel();
         buttonLogOut = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        listLogin = new javax.swing.JList<>();
         Orders = new javax.swing.JPanel();
         pnlOrderLeft = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -105,7 +115,7 @@ public class MainSystem extends javax.swing.JFrame {
         buttonRecipeDelete1 = new javax.swing.JButton();
         buttonRecipeEdit1 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        tableRecipe1 = new javax.swing.JTable();
+        tableSupplier = new javax.swing.JTable();
         radioID = new javax.swing.JRadioButton();
         radioItem = new javax.swing.JRadioButton();
         Management = new javax.swing.JPanel();
@@ -228,17 +238,23 @@ public class MainSystem extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane6.setViewportView(listLogin);
+
         javax.swing.GroupLayout pnlPanelLayout = new javax.swing.GroupLayout(pnlPanel);
         pnlPanel.setLayout(pnlPanelLayout);
         pnlPanelLayout.setHorizontalGroup(
             pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblClock)
-                    .addComponent(lblDate)
-                    .addComponent(buttonLogOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(buttonLogOut, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonLogin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlPanelLayout.createSequentialGroup()
+                        .addGroup(pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblClock, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDate, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlPanelLayout.setVerticalGroup(
@@ -250,6 +266,8 @@ public class MainSystem extends javax.swing.JFrame {
                 .addComponent(buttonLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonLogOut)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -284,7 +302,7 @@ public class MainSystem extends javax.swing.JFrame {
                         .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(DashboardLayout.createSequentialGroup()
                                 .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 80, Short.MAX_VALUE))
+                                .addGap(0, 84, Short.MAX_VALUE))
                             .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,7 +515,7 @@ public class MainSystem extends javax.swing.JFrame {
             OrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OrdersLayout.createSequentialGroup()
                 .addComponent(pnlLayout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
                 .addComponent(pnlOrderLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -550,6 +568,7 @@ public class MainSystem extends javax.swing.JFrame {
                 "ID no.", "Item", "Quantity", "Cost per Unit", "Distrubutor ID ", "Distrubutor Name"
             }
         ));
+        tblInventory.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane3.setViewportView(tblInventory);
         if (tblInventory.getColumnModel().getColumnCount() > 0) {
             tblInventory.getColumnModel().getColumn(2).setResizable(false);
@@ -583,12 +602,12 @@ public class MainSystem extends javax.swing.JFrame {
             .addGroup(pnlInventoryLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(buttonPrint, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonAdd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                    .addComponent(buttonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buttonEdit)
+                    .addComponent(buttonAdd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonPrint, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE))
         );
         pnlInventoryLayout.setVerticalGroup(
             pnlInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -602,7 +621,7 @@ public class MainSystem extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonEdit)
                 .addContainerGap())
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Inventory", pnlInventory);
@@ -646,6 +665,7 @@ public class MainSystem extends javax.swing.JFrame {
                 "ID no.", "Item", "Ingredients"
             }
         ));
+        tableRecipe.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane4.setViewportView(tableRecipe);
         if (tableRecipe.getColumnModel().getColumnCount() > 0) {
             tableRecipe.getColumnModel().getColumn(2).setResizable(false);
@@ -658,11 +678,11 @@ public class MainSystem extends javax.swing.JFrame {
             .addGroup(pnlRecipeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlRecipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonRecipeAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                    .addComponent(buttonRecipeAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonRecipeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonRecipeDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
         );
         pnlRecipeLayout.setVerticalGroup(
             pnlRecipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -689,7 +709,7 @@ public class MainSystem extends javax.swing.JFrame {
 
         buttonRecipeEdit1.setText("Edit");
 
-        tableRecipe1.setModel(new javax.swing.table.DefaultTableModel(
+        tableSupplier.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -717,9 +737,10 @@ public class MainSystem extends javax.swing.JFrame {
                 "ID no.", "Item", "Ingredients"
             }
         ));
-        jScrollPane5.setViewportView(tableRecipe1);
-        if (tableRecipe1.getColumnModel().getColumnCount() > 0) {
-            tableRecipe1.getColumnModel().getColumn(2).setResizable(false);
+        tableSupplier.setGridColor(new java.awt.Color(204, 204, 204));
+        jScrollPane5.setViewportView(tableSupplier);
+        if (tableSupplier.getColumnModel().getColumnCount() > 0) {
+            tableSupplier.getColumnModel().getColumn(2).setResizable(false);
         }
 
         javax.swing.GroupLayout pnlRecipe1Layout = new javax.swing.GroupLayout(pnlRecipe1);
@@ -729,11 +750,11 @@ public class MainSystem extends javax.swing.JFrame {
             .addGroup(pnlRecipe1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonRecipeAdd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeEdit1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeDelete1, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                    .addComponent(buttonRecipeAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonRecipeEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonRecipeDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
         );
         pnlRecipe1Layout.setVerticalGroup(
             pnlRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -996,10 +1017,8 @@ public class MainSystem extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void buttonEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmployeeActionPerformed
-        try {
-            new Employee().setVisible(true);
-        } catch (RuntimeException ignore) {
-        }
+       Employee emp=new Employee();
+       emp.setVisible(true);
     }//GEN-LAST:event_buttonEmployeeActionPerformed
 
     private void textboxSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textboxSearchActionPerformed
@@ -1039,7 +1058,7 @@ public class MainSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void buttonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogOutActionPerformed
-        System.exit(0);
+        logout();
     }//GEN-LAST:event_buttonLogOutActionPerformed
 
     private void buttonOrderHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOrderHistoryActionPerformed
@@ -1315,6 +1334,7 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable4;
     private javax.swing.JLabel lblClock;
@@ -1325,6 +1345,7 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblSettings;
     private javax.swing.JLabel lblVersion;
+    private javax.swing.JList<String> listLogin;
     private javax.swing.JPanel pnlInventory;
     private javax.swing.JPanel pnlLayout;
     private javax.swing.JPanel pnlLeft;
@@ -1334,9 +1355,9 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JPanel pnlRecipe1;
     private javax.swing.JRadioButton radioID;
     private javax.swing.JRadioButton radioItem;
-    private javax.swing.JTable tableRecipe;
-    private javax.swing.JTable tableRecipe1;
-    private javax.swing.JTable tblInventory;
+    public static javax.swing.JTable tableRecipe;
+    public static javax.swing.JTable tableSupplier;
+    public static javax.swing.JTable tblInventory;
     private javax.swing.JTable tblOrderHistory;
     private javax.swing.JTextField textboxSearch;
     // End of variables declaration//GEN-END:variables
