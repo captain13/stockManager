@@ -7,13 +7,12 @@ package system;
 
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
-import java.sql.SQLException;
+import java.awt.event.MouseAdapter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -29,11 +28,6 @@ public class MainSystem extends javax.swing.JFrame {
 
     public MainSystem() {
         initComponents();
-        //Not yet Ready-Fullscreen
-        /* Toolkit tk = Toolkit.getDefaultToolkit();            
-        int xSize = ((int) tk.getScreenSize().getWidth());
-        int ySize = ((int) tk.getScreenSize().getHeight());
-        this.setSize(xSize, ySize);*/
         internalClock();
         dbManager.populateTables();
         listLogin.setModel(listModel);
@@ -47,13 +41,27 @@ public class MainSystem extends javax.swing.JFrame {
             }
         }).start();
     }
-    
-    public static void updateList(String Username){
+
+    public static void updateList(String Username) {
         listModel.addElement(Username);
     }
-    
-    public void logout(){
+
+    public void logout() {
         listModel.remove(listLogin.getSelectedIndex());
+    }
+
+    public void moveButton() {
+
+        buttonTable1.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent evt) {
+                {
+                    int X = buttonTable1.getX() + evt.getX();
+                    int Y = buttonTable1.getY() + evt.getY();
+                    buttonTable1.setBounds(X, Y, 60, 60);
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -84,6 +92,7 @@ public class MainSystem extends javax.swing.JFrame {
         buttonReprint = new javax.swing.JButton();
         buttonLayout = new javax.swing.JButton();
         buttonTakeAway = new javax.swing.JButton();
+        buttonReprint2 = new javax.swing.JButton();
         pnlLayout = new javax.swing.JPanel();
         buttonTable3 = new javax.swing.JButton();
         buttonTable1 = new javax.swing.JButton();
@@ -93,6 +102,7 @@ public class MainSystem extends javax.swing.JFrame {
         buttonTable7 = new javax.swing.JButton();
         buttonTable8 = new javax.swing.JButton();
         buttonTable5 = new javax.swing.JButton();
+        buttonReprint1 = new javax.swing.JButton();
         Inventory = new javax.swing.JPanel();
         textboxSearch = new javax.swing.JTextField();
         lblSearch = new javax.swing.JLabel();
@@ -302,8 +312,8 @@ public class MainSystem extends javax.swing.JFrame {
                         .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(DashboardLayout.createSequentialGroup()
                                 .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 84, Short.MAX_VALUE))
-                            .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE))
+                                .addGap(0, 89, Short.MAX_VALUE))
+                            .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblVersion, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -348,22 +358,25 @@ public class MainSystem extends javax.swing.JFrame {
             }
         });
 
+        buttonReprint2.setText("Add Button");
+        buttonReprint2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonReprint2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlOrderLeftLayout = new javax.swing.GroupLayout(pnlOrderLeft);
         pnlOrderLeft.setLayout(pnlOrderLeftLayout);
         pnlOrderLeftLayout.setHorizontalGroup(
             pnlOrderLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlOrderLeftLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
                 .addGroup(pnlOrderLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlOrderLeftLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnlOrderLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buttonReprint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buttonLayout, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                            .addComponent(buttonTakeAway, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(pnlOrderLeftLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(buttonReprint2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonReprint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonTakeAway, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         pnlOrderLeftLayout.setVerticalGroup(
             pnlOrderLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,12 +387,15 @@ public class MainSystem extends javax.swing.JFrame {
                 .addComponent(buttonLayout, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonReprint, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(1, 1, 1)
+                .addComponent(buttonReprint2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pnlLayout.setBackground(new java.awt.Color(255, 255, 255));
+        pnlLayout.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         buttonTable3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableS.jpg"))); // NOI18N
         buttonTable3.setContentAreaFilled(false);
@@ -451,28 +467,28 @@ public class MainSystem extends javax.swing.JFrame {
             pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLayoutLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buttonTable5)
-                .addContainerGap(297, Short.MAX_VALUE))
+                .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlLayoutLayout.createSequentialGroup()
+                        .addComponent(buttonTable5)
+                        .addGap(83, 83, 83)
+                        .addComponent(buttonTable6)
+                        .addContainerGap(196, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
+                                .addComponent(buttonTable4)
+                                .addGap(180, 180, 180))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
+                                .addComponent(buttonTable2)
+                                .addGap(200, 200, 200))))))
             .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlLayoutLayout.createSequentialGroup()
-                    .addContainerGap()
+                    .addGap(10, 10, 10)
                     .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlLayoutLayout.createSequentialGroup()
-                            .addGap(10, 10, Short.MAX_VALUE)
-                            .addComponent(buttonTable6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                        .addGroup(pnlLayoutLayout.createSequentialGroup()
-                            .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(buttonTable1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
-                                    .addComponent(buttonTable3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                            .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(buttonTable2)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(buttonTable4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
+                        .addComponent(buttonTable1, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(buttonTable3, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
                     .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(buttonTable8)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
@@ -483,25 +499,26 @@ public class MainSystem extends javax.swing.JFrame {
         pnlLayoutLayout.setVerticalGroup(
             pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
-                .addContainerGap(245, Short.MAX_VALUE)
-                .addComponent(buttonTable5)
-                .addGap(47, 47, 47))
+                .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlLayoutLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonTable5))
+                    .addGroup(pnlLayoutLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(buttonTable2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addComponent(buttonTable4)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonTable6)))
+                .addGap(37, 37, 37))
             .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlLayoutLayout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pnlLayoutLayout.createSequentialGroup()
-                            .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pnlLayoutLayout.createSequentialGroup()
-                                    .addGap(107, 107, 107)
-                                    .addComponent(buttonTable3))
-                                .addComponent(buttonTable1)
-                                .addGroup(pnlLayoutLayout.createSequentialGroup()
-                                    .addComponent(buttonTable2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(buttonTable4)))
-                            .addGap(6, 6, 6)
-                            .addComponent(buttonTable6))
+                            .addGap(107, 107, 107)
+                            .addComponent(buttonTable3))
+                        .addComponent(buttonTable1)
                         .addGroup(pnlLayoutLayout.createSequentialGroup()
                             .addComponent(buttonTable8)
                             .addGap(35, 35, 35)
@@ -509,25 +526,35 @@ public class MainSystem extends javax.swing.JFrame {
                     .addContainerGap(19, Short.MAX_VALUE)))
         );
 
+        buttonReprint1.setText("Edit");
+        buttonReprint1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonReprint1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout OrdersLayout = new javax.swing.GroupLayout(Orders);
         Orders.setLayout(OrdersLayout);
         OrdersLayout.setHorizontalGroup(
             OrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OrdersLayout.createSequentialGroup()
-                .addComponent(pnlLayout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                .addGroup(OrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonReprint1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(93, 93, 93)
                 .addComponent(pnlOrderLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         OrdersLayout.setVerticalGroup(
             OrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(OrdersLayout.createSequentialGroup()
+                .addComponent(pnlLayout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonReprint1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(OrdersLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlOrderLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(OrdersLayout.createSequentialGroup()
-                .addComponent(pnlLayout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         TabbedPanel.addTab("Orders", Orders);
@@ -621,7 +648,7 @@ public class MainSystem extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonEdit)
                 .addContainerGap())
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Inventory", pnlInventory);
@@ -693,7 +720,7 @@ public class MainSystem extends javax.swing.JFrame {
                 .addComponent(buttonRecipeDelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonRecipeEdit))
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Recipe", pnlRecipe);
@@ -765,7 +792,7 @@ public class MainSystem extends javax.swing.JFrame {
                 .addComponent(buttonRecipeDelete1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonRecipeEdit1))
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Supplier", pnlRecipe1);
@@ -906,7 +933,7 @@ public class MainSystem extends javax.swing.JFrame {
             .addGroup(ManagementLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
                     .addGroup(ManagementLayout.createSequentialGroup()
                         .addComponent(buttonOrderHistory)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -995,7 +1022,7 @@ public class MainSystem extends javax.swing.JFrame {
                     .addComponent(lblLogo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addContainerGap(282, Short.MAX_VALUE))
         );
 
         TabbedPanel.addTab("Settings", Settings);
@@ -1010,15 +1037,15 @@ public class MainSystem extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabbedPanel)
+            .addComponent(TabbedPanel, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void buttonEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmployeeActionPerformed
-       Employee emp=new Employee();
-       emp.setVisible(true);
+        Employee emp = new Employee();
+        emp.setVisible(true);
     }//GEN-LAST:event_buttonEmployeeActionPerformed
 
     private void textboxSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textboxSearchActionPerformed
@@ -1053,8 +1080,8 @@ public class MainSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonBookingsActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-      Login user=new Login();
-      user.setVisible(true);
+        Login user = new Login();
+        user.setVisible(true);
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void buttonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogOutActionPerformed
@@ -1068,87 +1095,6 @@ public class MainSystem extends javax.swing.JFrame {
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
         System.exit(0);
     }//GEN-LAST:event_buttonCloseActionPerformed
-
-    private void buttonTable5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable5ActionPerformed
-    if (tables.get("table5") == null) {
-            tables.put("table5", new NewOrder("user"));
-
-           // Login user = new Login(tables.get("table5"));
-          //  user.setVisible(true);
-        } else {
-            tables.get("table5").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable5ActionPerformed
-
-    private void buttonTable8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonTable8ActionPerformed
-
-    private void buttonTable7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable7ActionPerformed
-        if (tables.get("table7") == null) {
-            tables.put("table7", new NewOrder("user"));
-
-           // Login user = new Login(tables.get("table7"));
-          //  user.setVisible(true);
-        } else {
-            tables.get("table7").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable7ActionPerformed
-
-    private void buttonTable6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable6ActionPerformed
-         if (tables.get("table6") == null) {
-            tables.put("table6", new NewOrder("user"));
-
-          //  Login user = new Login(tables.get("table6"));
-          //  user.setVisible(true);
-        } else {
-            tables.get("table6").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable6ActionPerformed
-
-    private void buttonTable4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable4ActionPerformed
-  if (tables.get("table4") == null) {
-            tables.put("table4", new NewOrder("user"));
-
-          //  Login user = new Login(tables.get("table4"));
-          //  user.setVisible(true);
-        } else {
-            tables.get("table4").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable4ActionPerformed
-
-    private void buttonTable2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable2ActionPerformed
-         if (tables.get("table2") == null) {
-            tables.put("table2", new NewOrder("user"));
-
-           // Login user = new Login(tables.get("table2"));
-          //  user.setVisible(true);
-        } else {
-            tables.get("table2").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable2ActionPerformed
-
-    private void buttonTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable1ActionPerformed
-        if (tables.get("table1") == null) {
-            tables.put("table1", new NewOrder("user"));
-
-          //  Login user = new Login(tables.get("table1"));
-           // user.setVisible(true);
-        } else {
-            tables.get("table1").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable1ActionPerformed
-
-    private void buttonTable3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable3ActionPerformed
-          if (tables.get("table3") == null) {
-            tables.put("table3", new NewOrder("user"));
-
-            //Login user = new Login(tables.get("table3"));
-            //user.setVisible(true);
-        } else {
-            tables.get("table3").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable3ActionPerformed
 
     private void buttonTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeAwayActionPerformed
         NewOrder s = new NewOrder("User");
@@ -1240,13 +1186,14 @@ public class MainSystem extends javax.swing.JFrame {
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         AddDatabase s = new AddDatabase();
         s.setVisible(true);
-        Keyboard k = new Keyboard();
-        k.setLocation(350, 530);
-        k.setVisible(true);
+//        Keyboard k = new Keyboard();
+//        k.setLocation(350, 530);
+//        k.setVisible(true);
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonRecipeAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAdd1ActionPerformed
-        // TODO add your handling code here:
+        AddDatabase s = new AddDatabase();
+        s.setVisible(true);
     }//GEN-LAST:event_buttonRecipeAdd1ActionPerformed
 
     private void buttonSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaleActionPerformed
@@ -1254,14 +1201,103 @@ public class MainSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonSaleActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            // TODO add your handling code here:
-            new DatabaseEdits.refresh();
-        } catch (SQLException ex) {
-            Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            // TODO add your handling code here:
+//            new DatabaseEdits.refresh();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void buttonReprint1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprint1ActionPerformed
+        moveButton();
+    }//GEN-LAST:event_buttonReprint1ActionPerformed
+
+    private void buttonTable2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable2ActionPerformed
+        if (tables.get("table2") == null) {
+            tables.put("table2", new NewOrder("user"));
+
+            // Login user = new Login(tables.get("table2"));
+            //  user.setVisible(true);
+        } else {
+            tables.get("table2").setVisible(true);
+        }
+    }//GEN-LAST:event_buttonTable2ActionPerformed
+
+    private void buttonTable4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable4ActionPerformed
+        if (tables.get("table4") == null) {
+            tables.put("table4", new NewOrder("user"));
+
+            //  Login user = new Login(tables.get("table4"));
+            //  user.setVisible(true);
+        } else {
+            tables.get("table4").setVisible(true);
+        }
+    }//GEN-LAST:event_buttonTable4ActionPerformed
+
+    private void buttonTable8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonTable8ActionPerformed
+
+    private void buttonTable7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable7ActionPerformed
+        if (tables.get("table7") == null) {
+            tables.put("table7", new NewOrder("user"));
+
+            // Login user = new Login(tables.get("table7"));
+            //  user.setVisible(true);
+        } else {
+            tables.get("table7").setVisible(true);
+        }
+    }//GEN-LAST:event_buttonTable7ActionPerformed
+
+    private void buttonTable6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable6ActionPerformed
+        if (tables.get("table6") == null) {
+            tables.put("table6", new NewOrder("user"));
+
+            //  Login user = new Login(tables.get("table6"));
+            //  user.setVisible(true);
+        } else {
+            tables.get("table6").setVisible(true);
+        }
+    }//GEN-LAST:event_buttonTable6ActionPerformed
+
+    private void buttonTable5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable5ActionPerformed
+        if (tables.get("table5") == null) {
+            tables.put("table5", new NewOrder("user"));
+
+            // Login user = new Login(tables.get("table5"));
+            //  user.setVisible(true);
+        } else {
+            tables.get("table5").setVisible(true);
+        }
+    }//GEN-LAST:event_buttonTable5ActionPerformed
+
+    private void buttonTable3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable3ActionPerformed
+        if (tables.get("table3") == null) {
+            tables.put("table3", new NewOrder("user"));
+
+            //Login user = new Login(tables.get("table3"));
+            //user.setVisible(true);
+        } else {
+            tables.get("table3").setVisible(true);
+        }
+    }//GEN-LAST:event_buttonTable3ActionPerformed
+
+    private void buttonReprint2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprint2ActionPerformed
+        layoutManager.newButton();
+    }//GEN-LAST:event_buttonReprint2ActionPerformed
+
+    private void buttonTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable1ActionPerformed
+        if (tables.get("table1") == null) {
+            tables.put("table1", new NewOrder("user"));
+
+            //Login user = new Login(tables.get("table3"));
+            //user.setVisible(true);
+        } else {
+            tables.get("table1").setVisible(true);
+        }
+    }//GEN-LAST:event_buttonTable1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1314,6 +1350,8 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JButton buttonRecipeEdit1;
     private javax.swing.JButton buttonReports;
     private javax.swing.JButton buttonReprint;
+    private javax.swing.JButton buttonReprint1;
+    private javax.swing.JButton buttonReprint2;
     private javax.swing.JButton buttonSale;
     private javax.swing.JButton buttonSpecials;
     private javax.swing.JButton buttonTable1;
@@ -1345,9 +1383,9 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblSettings;
     private javax.swing.JLabel lblVersion;
-    private javax.swing.JList<String> listLogin;
+    public static javax.swing.JList<String> listLogin;
     private javax.swing.JPanel pnlInventory;
-    private javax.swing.JPanel pnlLayout;
+    public static javax.swing.JPanel pnlLayout;
     private javax.swing.JPanel pnlLeft;
     private javax.swing.JPanel pnlOrderLeft;
     private javax.swing.JPanel pnlPanel;

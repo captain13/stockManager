@@ -180,7 +180,7 @@ public class AddEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_textfieildFnameActionPerformed
 
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
-        dbManager.insert();
+        dbManager.insertEmployee();
         this.dispose();
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
