@@ -205,9 +205,8 @@ public class dbManager {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuery = "INSERT INTO inventory (stockID,item, qty)"
-                    + "VALUES ('" + AddDatabase.textfieldStockID.getText() + "','"
-                    + AddDatabase.textfieldItem.getText() + "', '"
+            String insertQuery = "INSERT INTO inventory (item, qty)"
+                    + "VALUES ('"+ AddDatabase.textfieldItem.getText() + "', '"
                     + AddDatabase.textfieldQty.getText() + "')";
             s.execute(insertQuery);
             populateTables();
@@ -245,13 +244,14 @@ public class dbManager {
                     + Booking.textTable.getText() + "', '"
                     + Booking.textCustomers.getText() + "')";
             s.execute(insertQuerySup);
+            JOptionPane.showMessageDialog(null, "Reservation Added");
             populateReservation();
             s.close();
             conn.close();
         } catch (SQLException exp) {
             System.out.println(exp);
-           
         }
+        
     }
     
      public static void insertRecipe() {
