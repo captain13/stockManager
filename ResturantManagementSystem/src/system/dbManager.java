@@ -31,7 +31,7 @@ public class dbManager {
 
     public static void populateTables() {
         String columnNamesInventory[] = {"ID", "Item Name", "Quantity(g)"};
-        String columnNamesRecipe[] = {"ID", "Item", "Price", "VAT"};
+        String columnNamesRecipe[] = {"ID", "Description", "Price", "VAT"};
         String columnNamesSuppler[] = {"ID", "Name", "Email", "Contact Number", "Address"};
         try {
             Class.forName(driver).newInstance();
@@ -149,8 +149,8 @@ public class dbManager {
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
     }
-    
-     public static void populateReservation() {
+
+    public static void populateReservation() {
         String columnNamesEmp[] = {"Employee", "Date", "Table No.", "No. Customer"};
         try {
             Class.forName(driver).newInstance();
@@ -175,7 +175,7 @@ public class dbManager {
                 tableModelRes.addRow(row);
             }
             Booking.tableRes.getColumnModel().getColumn(0).setPreferredWidth(45);
-             Booking.tableRes.getColumnModel().getColumn(2).setPreferredWidth(45);
+            Booking.tableRes.getColumnModel().getColumn(2).setPreferredWidth(45);
             rs.close();
             s.close();
             conn.close();
@@ -206,7 +206,7 @@ public class dbManager {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String insertQuery = "INSERT INTO inventory (item, qty)"
-                    + "VALUES ('"+ AddDatabase.textfieldItem.getText() + "', '"
+                    + "VALUES ('" + AddDatabase.textfieldItem.getText() + "', '"
                     + AddDatabase.textfieldQty.getText() + "')";
             s.execute(insertQuery);
             populateTables();
@@ -233,7 +233,7 @@ public class dbManager {
         } catch (SQLException exp) {
         }
     }
-    
+
     public static void insertReservations() {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -251,24 +251,65 @@ public class dbManager {
         } catch (SQLException exp) {
             System.out.println(exp);
         }
-        
+
+    }
+
+    public static void insertRecipe() {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String insertQuerySup = "INSERT INTO recipe(recipeName, recipePrice,recipeVAT)"
+                    + "VALUES ('" + AddDatabase.textRecipe.getText() + "','"
+                    + AddDatabase.textPrice.getText() + "', '"
+                    + AddDatabase.textVAT.getText() + "')";
+            s.execute(insertQuerySup);
+            populateTables();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
+    }
+
+    public static void removeInventory(int index) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "DELETE FROM inventory WHERE inventoryID='" + index + "'";
+            s.execute(query);
+            populateTables();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+    }
+
+    public static void removeRecipe(int index) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "DELETE FROM recipe WHERE recipeID='" + index + "'";
+            s.execute(query);
+            populateTables();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
     }
     
-     public static void insertRecipe() {
-//        try {
-//            Connection conn = DriverManager.getConnection(url, username, password);
-//            Statement s = conn.createStatement();
-//            String insertQuerySup = "INSERT INTO supplier(supplierName, supplierEmail,supplierNumber, supplierAddress)"
-//                    + "VALUES ('" + AddDatabase.textfieldDisName.getText() + "','"
-//                    + AddDatabase.textfieldDisEmail.getText() + "', '"
-//                    + AddDatabase.textfieldDisContact.getText() + "', '"
-//                    + AddDatabase.textfieldDisAddress.getText() + "')";
-//            s.execute(insertQuerySup);
-//            populateTables();
-//            s.close();
-//            conn.close();
-//        } catch (SQLException exp) {
-//        }
+     public static void removeSupplier(int index) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "DELETE FROM supplier WHERE supplierID='" + index + "'";
+            s.execute(query);
+            populateTables();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
     }
 
     public static void update() {

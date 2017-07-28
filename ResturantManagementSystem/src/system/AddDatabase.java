@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system;
 
 /**
@@ -11,24 +6,28 @@ package system;
  */
 public class AddDatabase extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddDatabase
-     */
     public AddDatabase() {
         initComponents();
     }
 
     public void insert() {
-        if (!"".equals(textfieldStockID.getText()) || !"".equals(textfieldItem.getText()) || !"".equals(textfieldQty.getText())) {
+        if (!"".equals(textfieldItem.getText()) || !"".equals(textfieldQty.getText())) {
             dbManager.insertInventory();
         } else {
-            System.out.println("didnt run");
         }
         if (!"".equals(textfieldDisName.getText()) || !"".equals(textfieldDisEmail.getText()) || !"".equals(textfieldDisContact.getText())) {
             dbManager.insertSupplier();
         } else {
-            System.out.println("didnt run");
         }
+          if (!"".equals(textRecipe.getText()) || !"".equals(textPrice.getText())) {
+            dbManager.insertRecipe();
+        } else {
+        }
+    }
+
+    public void calculateVAT() {
+        double numVAT = (Double.parseDouble(textPrice.getText())) * 0.14;
+        textVAT.setText(String.format("%.2f", numVAT));
     }
 
     /**
@@ -43,14 +42,19 @@ public class AddDatabase extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        lblCostPerItem = new javax.swing.JLabel();
         lblQty = new javax.swing.JLabel();
         lblItem = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         textfieldQty = new javax.swing.JTextField();
         textfieldItem = new javax.swing.JTextField();
-        textfieldStockID = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        lblCostPerItem1 = new javax.swing.JLabel();
+        textRecipe = new javax.swing.JTextField();
+        textVAT = new javax.swing.JTextField();
+        textPrice = new javax.swing.JTextField();
+        lblItem1 = new javax.swing.JLabel();
+        lblQty1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblDistInfo = new javax.swing.JLabel();
         lblDisName = new javax.swing.JLabel();
@@ -70,31 +74,11 @@ public class AddDatabase extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblCostPerItem.setText("Stock ID");
-
         lblQty.setText("Quanity");
 
         lblItem.setText("Item");
 
         lblTitle.setText("Inventory Details");
-
-        textfieldQty.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfieldQtyActionPerformed(evt);
-            }
-        });
-
-        textfieldItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfieldItemActionPerformed(evt);
-            }
-        });
-
-        textfieldStockID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfieldStockIDActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -106,11 +90,9 @@ public class AddDatabase extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblItem)
-                            .addComponent(lblQty)
-                            .addComponent(lblCostPerItem))
-                        .addGap(44, 44, 44)
+                            .addComponent(lblQty))
+                        .addGap(46, 46, 46)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textfieldStockID)
                             .addComponent(textfieldQty, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                             .addComponent(textfieldItem)))
                     .addComponent(lblTitle))
@@ -121,34 +103,72 @@ public class AddDatabase extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitle)
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblCostPerItem)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblItem))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(textfieldStockID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textfieldItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblItem)
+                    .addComponent(textfieldItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQty)
                     .addComponent(textfieldQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Inventory", jPanel1);
+
+        lblCostPerItem1.setText("Recipe Name");
+
+        lblItem1.setText("Price");
+
+        lblQty1.setText("VAT");
+
+        jButton1.setText("Calculate VAT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblItem1)
+                            .addComponent(lblQty1)
+                            .addComponent(lblCostPerItem1))
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textRecipe)
+                            .addComponent(textVAT)
+                            .addComponent(textPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 184, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblCostPerItem1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblItem1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(textRecipe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblQty1)
+                    .addComponent(textVAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Reciep", jPanel2);
@@ -156,30 +176,6 @@ public class AddDatabase extends javax.swing.JFrame {
         lblDistInfo.setText("Distrubutor Informantion");
 
         lblDisName.setText("Distrubutor Name");
-
-        textfieldDisName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfieldDisNameActionPerformed(evt);
-            }
-        });
-
-        textfieldDisEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfieldDisEmailActionPerformed(evt);
-            }
-        });
-
-        textfieldDisContact.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfieldDisContactActionPerformed(evt);
-            }
-        });
-
-        textfieldDisAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfieldDisAddressActionPerformed(evt);
-            }
-        });
 
         lblDisContact2.setText("Distrubutor Address ");
 
@@ -220,7 +216,7 @@ public class AddDatabase extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblDistInfo)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textfieldDisName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDisName))
@@ -236,7 +232,7 @@ public class AddDatabase extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDisContact2)
                     .addComponent(textfieldDisAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Supplier", jPanel3);
@@ -293,26 +289,6 @@ public class AddDatabase extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textfieldItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfieldItemActionPerformed
-
-    private void textfieldStockIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldStockIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfieldStockIDActionPerformed
-
-    private void textfieldDisNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldDisNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfieldDisNameActionPerformed
-
-    private void textfieldDisEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldDisEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfieldDisEmailActionPerformed
-
-    private void textfieldQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldQtyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfieldQtyActionPerformed
-
     private void buttonAccpetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccpetActionPerformed
         insert();
         this.dispose();
@@ -322,38 +298,39 @@ public class AddDatabase extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
 
-    private void textfieldDisContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldDisContactActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfieldDisContactActionPerformed
-
-    private void textfieldDisAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldDisAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfieldDisAddressActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        calculateVAT();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAccpet;
     private javax.swing.JButton buttonCancel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel lblCostPerItem;
+    private javax.swing.JLabel lblCostPerItem1;
     private javax.swing.JLabel lblDisContact;
     private javax.swing.JLabel lblDisContact1;
     private javax.swing.JLabel lblDisContact2;
     private javax.swing.JLabel lblDisName;
     private javax.swing.JLabel lblDistInfo;
     private javax.swing.JLabel lblItem;
+    private javax.swing.JLabel lblItem1;
     private javax.swing.JLabel lblQty;
+    private javax.swing.JLabel lblQty1;
     private javax.swing.JLabel lblTitle;
+    public static javax.swing.JTextField textPrice;
+    public static javax.swing.JTextField textRecipe;
+    public static javax.swing.JTextField textVAT;
     public static javax.swing.JTextField textfieldDisAddress;
     public static javax.swing.JTextField textfieldDisContact;
     public static javax.swing.JTextField textfieldDisEmail;
     public static javax.swing.JTextField textfieldDisName;
     public static javax.swing.JTextField textfieldItem;
     public static javax.swing.JTextField textfieldQty;
-    public static javax.swing.JTextField textfieldStockID;
     // End of variables declaration//GEN-END:variables
 }

@@ -50,6 +50,21 @@ public class MainSystem extends javax.swing.JFrame {
         listModel.remove(listLogin.getSelectedIndex());
     }
 
+    public int getID() {
+        int id = (int) tblInventory.getValueAt(tblInventory.getSelectedRow(), 0);
+        return id;
+    }
+
+    public int getIDrecipe() {
+        int id = (int) tableRecipe.getValueAt(tableRecipe.getSelectedRow(), 0);
+        return id;
+    }
+
+    public int getIDsupplier() {
+        int id = (int) tableSupplier.getValueAt(tableSupplier.getSelectedRow(), 0);
+        return id;
+    }
+
     public void moveButton() {
 
         buttonTable1.addMouseMotionListener(new MouseAdapter() {
@@ -293,7 +308,7 @@ public class MainSystem extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(lblVersion)
                         .addGap(186, 186, 186)
-                        .addComponent(buttonClose, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                        .addComponent(buttonClose, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                         .addGap(217, 217, 217))
                     .addGroup(DashboardLayout.createSequentialGroup()
                         .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -619,6 +634,11 @@ public class MainSystem extends javax.swing.JFrame {
         });
 
         buttonDelete.setText("Delete");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
 
         buttonPrint.setText("Print");
 
@@ -628,13 +648,14 @@ public class MainSystem extends javax.swing.JFrame {
             pnlInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInventoryLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(buttonDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonEdit)
-                    .addComponent(buttonAdd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonPrint, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE))
+                .addGroup(pnlInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                    .addComponent(buttonAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8))
         );
         pnlInventoryLayout.setVerticalGroup(
             pnlInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -646,8 +667,7 @@ public class MainSystem extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonPrint)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonEdit)
-                .addContainerGap())
+                .addComponent(buttonEdit))
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
         );
 
@@ -661,6 +681,11 @@ public class MainSystem extends javax.swing.JFrame {
         });
 
         buttonRecipeDelete.setText("Delete");
+        buttonRecipeDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRecipeDeleteActionPerformed(evt);
+            }
+        });
 
         buttonRecipeEdit.setText("Edit");
 
@@ -704,12 +729,12 @@ public class MainSystem extends javax.swing.JFrame {
             pnlRecipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRecipeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlRecipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonRecipeAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonRecipeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonRecipeDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlRecipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonRecipeEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                    .addComponent(buttonRecipeAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonRecipeDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnlRecipeLayout.setVerticalGroup(
             pnlRecipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -733,6 +758,11 @@ public class MainSystem extends javax.swing.JFrame {
         });
 
         buttonRecipeDelete1.setText("Delete");
+        buttonRecipeDelete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRecipeDelete1ActionPerformed(evt);
+            }
+        });
 
         buttonRecipeEdit1.setText("Edit");
 
@@ -1159,23 +1189,23 @@ public class MainSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxLogoItemStateChanged
 
     private void radioIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioIDActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_radioIDActionPerformed
 
     private void TabbedPanelStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_TabbedPanelStateChanged
-        // TODO add your handling code here:
         booking.setVisible(false);
     }//GEN-LAST:event_TabbedPanelStateChanged
 
     private void TabbedPanelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TabbedPanelFocusGained
-        // TODO add your handling code here:
         booking.setVisible(false);
     }//GEN-LAST:event_TabbedPanelFocusGained
 
     private void buttonRecipeAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAddActionPerformed
-        Keyboard s = new Keyboard();
-        s.setLocation(350, 530);
+        AddDatabase s = new AddDatabase();
         s.setVisible(true);
+//        Keyboard k = new Keyboard();
+//        k.setLocation(350, 530);
+//        k.setVisible(true);
     }//GEN-LAST:event_buttonRecipeAddActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
@@ -1298,6 +1328,27 @@ public class MainSystem extends javax.swing.JFrame {
             tables.get("table1").setVisible(true);
         }
     }//GEN-LAST:event_buttonTable1ActionPerformed
+
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        String confirm = JOptionPane.showInputDialog(null, "Are you sure?");
+        if (null != confirm && confirm.equalsIgnoreCase("yes")) {
+            dbManager.removeInventory(getID());
+        }
+    }//GEN-LAST:event_buttonDeleteActionPerformed
+
+    private void buttonRecipeDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDeleteActionPerformed
+        String confirm = JOptionPane.showInputDialog(null, "Are you sure?");
+        if (null != confirm && confirm.equalsIgnoreCase("yes")) {
+            dbManager.removeRecipe(getIDrecipe());
+        }
+    }//GEN-LAST:event_buttonRecipeDeleteActionPerformed
+
+    private void buttonRecipeDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete1ActionPerformed
+        String confirm = JOptionPane.showInputDialog(null, "Are you sure?");
+        if (null != confirm && confirm.equalsIgnoreCase("yes")) {
+            dbManager.removeSupplier(getIDsupplier());
+        }
+    }//GEN-LAST:event_buttonRecipeDelete1ActionPerformed
 
     /**
      * @param args the command line arguments
