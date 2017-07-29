@@ -19,7 +19,7 @@ public class AddDatabase extends javax.swing.JFrame {
             dbManager.insertSupplier();
         } else {
         }
-          if (!"".equals(textRecipe.getText()) || !"".equals(textPrice.getText())) {
+        if (!"".equals(textRecipe.getText()) || !"".equals(textPrice.getText())) {
             dbManager.insertRecipe();
         } else {
         }
@@ -29,6 +29,39 @@ public class AddDatabase extends javax.swing.JFrame {
         double numVAT = (Double.parseDouble(textPrice.getText())) * 0.14;
         textVAT.setText(String.format("%.2f", numVAT));
     }
+
+    public static String getItem() {
+        return textfieldItem.getText();
+    }
+
+    public static String getQuantity() {
+        return textfieldQty.getText();
+    }
+    
+    public static String getRecipe() {
+        return textRecipe.getText();
+    }
+    public static String getPrice() {
+        return textPrice.getText();
+    }
+    public static String getVAT() {
+        return textVAT.getText();
+    }
+    
+    public static String getSupName() {
+        return textfieldDisName.getText();
+    }
+    public static String getSupEmail() {
+        return textfieldDisEmail.getText();
+    }
+    
+    public static String getSupContact() {
+        return textfieldDisContact.getText();
+    }
+    public static String getSupAddress() {
+        return textfieldDisAddress.getText();
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

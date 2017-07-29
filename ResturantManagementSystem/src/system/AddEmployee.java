@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Andrew
@@ -15,6 +13,27 @@ public class AddEmployee extends javax.swing.JFrame {
      */
     public AddEmployee() {
         initComponents();
+    }
+
+    public static String getEmpFirstName() {
+        return textfieildFname.getText();
+    }
+
+    public static String getEmpLastName() {
+        return textfieildLname.getText();
+    }
+
+    public static String getEmpPassword() {
+        if (textfieildPassowrd.getText().equals(textfieildPassowrdC.getText())) {
+            return textfieildPassowrd.getText();
+        } else {
+            JOptionPane.showMessageDialog(null, "Password does not Match");
+            return null;
+        }
+    }
+
+    public static String getEmpContact() {
+        return textfieildContact.getText();
     }
 
     /**
@@ -35,14 +54,13 @@ public class AddEmployee extends javax.swing.JFrame {
         textfieildContact = new javax.swing.JTextField();
         lblContact = new javax.swing.JLabel();
         lblSname = new javax.swing.JLabel();
-        textfieildSname = new javax.swing.JTextField();
+        textfieildLname = new javax.swing.JTextField();
         textfieildFname = new javax.swing.JTextField();
         lblFname = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         buttonAccept1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setUndecorated(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -58,21 +76,9 @@ public class AddEmployee extends javax.swing.JFrame {
 
         lblPassword.setText("Password");
 
-        textfieildPassowrd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfieildPassowrdActionPerformed(evt);
-            }
-        });
-
         lblContact.setText("Contact no.");
 
         lblSname.setText("Last Name");
-
-        textfieildFname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfieildFnameActionPerformed(evt);
-            }
-        });
 
         lblFname.setText("First Name");
 
@@ -108,7 +114,7 @@ public class AddEmployee extends javax.swing.JFrame {
                         .addGap(47, 47, 47)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textfieildFname)
-                            .addComponent(textfieildSname)
+                            .addComponent(textfieildLname)
                             .addComponent(textfieildContact)
                             .addComponent(textfieildPassowrd))))
                 .addContainerGap())
@@ -136,7 +142,7 @@ public class AddEmployee extends javax.swing.JFrame {
                             .addComponent(textfieildFname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblFname))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textfieildSname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textfieildLname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
                         .addComponent(textfieildContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -175,55 +181,9 @@ public class AddEmployee extends javax.swing.JFrame {
         super.dispose();
     }//GEN-LAST:event_buttonAcceptActionPerformed
 
-    private void textfieildFnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieildFnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfieildFnameActionPerformed
-
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
         dbManager.insertEmployee();
-        this.dispose();
     }//GEN-LAST:event_buttonAccept1ActionPerformed
-
-    private void textfieildPassowrdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieildPassowrdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfieildPassowrdActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddEmployee().setVisible(true);
-            }
-        });
-        
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAccept;
@@ -237,8 +197,8 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle;
     public static javax.swing.JTextField textfieildContact;
     public static javax.swing.JTextField textfieildFname;
+    public static javax.swing.JTextField textfieildLname;
     public static javax.swing.JTextField textfieildPassowrd;
-    private javax.swing.JTextField textfieildPassowrdC;
-    public static javax.swing.JTextField textfieildSname;
+    private static javax.swing.JTextField textfieildPassowrdC;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,4 +1,7 @@
 package system;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Andrew
@@ -8,6 +11,11 @@ public class Employee extends javax.swing.JFrame {
     public Employee() {
         initComponents();
         dbManager.populateEmpTable();
+    }
+
+    public int getID() {
+        int id = (int) tableEmp.getValueAt(tableEmp.getSelectedRow(), 0);
+        return id;
     }
 
     @SuppressWarnings("unchecked")
@@ -24,7 +32,6 @@ public class Employee extends javax.swing.JFrame {
         buttonDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setUndecorated(true);
         setResizable(false);
 
@@ -147,7 +154,10 @@ public class Employee extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        // TODO add your handling code here:
+        String confirm = JOptionPane.showInputDialog(null, "Are you sure?");
+        if (null != confirm && confirm.equalsIgnoreCase("yes")) {
+            dbManager.removeEmployee(getID());
+        }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPasswordActionPerformed
@@ -159,35 +169,9 @@ public class Employee extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-
+        dbManager.showActiveEmp();
     }//GEN-LAST:event_buttonLoginActionPerformed
 
-    public static void main(String args[]) {
-
-        /*Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Employee.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        }
-        //</editor-fold>
-
-        //</editor-fold>
-        java.awt.EventQueue.invokeLater(() -> {
-            new Employee().setVisible(true);
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;

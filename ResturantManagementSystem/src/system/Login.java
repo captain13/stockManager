@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
  * @author Andrew
  */
 public class Login extends javax.swing.JFrame {
+
     public Login() {
         initComponents();
 
@@ -121,8 +122,10 @@ public class Login extends javax.swing.JFrame {
         String password = passwordFieldBox.getText();
         boolean login = dbManager.login(username, password);
         if (login == true) {
-             MainSystem.updateList(username);
-             this.dispose();
+            MainSystem.updateList(username);
+            internalClock.setLoginTimeStamp();
+            dbManager.updateEmployeeStatusIn(username);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
         }

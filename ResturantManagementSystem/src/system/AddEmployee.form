@@ -3,7 +3,6 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="alwaysOnTop" type="boolean" value="true"/>
     <Property name="undecorated" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
@@ -72,7 +71,7 @@
                           <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="textfieildFname" alignment="0" max="32767" attributes="0"/>
-                              <Component id="textfieildSname" alignment="0" max="32767" attributes="0"/>
+                              <Component id="textfieildLname" alignment="0" max="32767" attributes="0"/>
                               <Component id="textfieildContact" max="32767" attributes="0"/>
                               <Component id="textfieildPassowrd" alignment="0" max="32767" attributes="0"/>
                           </Group>
@@ -108,7 +107,7 @@
                               <Component id="lblFname" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="textfieildSname" min="-2" max="-2" attributes="0"/>
+                          <Component id="textfieildLname" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                           <Component id="textfieildContact" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -143,6 +142,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="textfieildPassowrdC">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPasswordC">
           <Properties>
@@ -155,9 +157,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textfieildPassowrd">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfieildPassowrdActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
@@ -177,15 +176,12 @@
             <Property name="text" type="java.lang.String" value="Last Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textfieildSname">
+        <Component class="javax.swing.JTextField" name="textfieildLname">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="textfieildFname">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfieildFnameActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>

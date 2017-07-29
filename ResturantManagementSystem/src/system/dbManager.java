@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system;
 
 import java.sql.Connection;
@@ -30,7 +25,7 @@ public class dbManager {
     static String driver = "com.mysql.jdbc.Driver";
 
     public static void populateTables() {
-        String columnNamesInventory[] = {"ID", "Item Name", "Quantity(g)"};
+        String columnNamesInventory[] = {"ID", "Item Name", "Quantity(kg)"};
         String columnNamesRecipe[] = {"ID", "Description", "Price", "VAT"};
         String columnNamesSuppler[] = {"ID", "Name", "Email", "Contact Number", "Address"};
         try {
@@ -120,12 +115,43 @@ public class dbManager {
     }
 
     public static void populateEmpTable() {
-        String columnNamesEmp[] = {"ID", "First Name", "Last Name", "Number"};
+        String columnNamesEmp[] = {"ID", "First Name", "Last Name", "Number", "Hours Worked"};
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber FROM employee";
+            String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber,employeeHoursWorked FROM employee";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            DefaultTableModel tableModel3 = new DefaultTableModel();
+            Employee.tableEmp.setModel(tableModel3);
+
+            for (int i = 0; i < columnCount; i++) {
+                tableModel3.addColumn(columnNamesEmp[i]);
+            }
+            Object[] row = new Object[columnCount];
+
+            while (rs.next()) {
+                for (int i = 0; i < columnCount; i++) {
+                    row[i] = rs.getObject(i + 1);
+                }
+                tableModel3.addRow(row);
+            }
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+        }
+    }
+
+    public static void showActiveEmp() {
+        String columnNamesEmp[] = {"First Name", "Last Name", "Active"};
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT employeeFName,employeeLName,employeeStatus FROM employee WHERE employeeStatus= 'Active' ";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -151,7 +177,7 @@ public class dbManager {
     }
 
     public static void populateReservation() {
-        String columnNamesEmp[] = {"Employee", "Date","Time","Customer", "Table No.", "No. Customer"};
+        String columnNamesEmp[] = {"Employee", "Date", "Time", "Customer", "Table No.", "No. Customer"};
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -189,10 +215,10 @@ public class dbManager {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String insertQuery = "INSERT INTO employee (employeeFName, employeeLName, employeePassword,employeeContactNumber)"
-                    + "VALUES ('" + AddEmployee.textfieildFname.getText() + "', '"
-                    + AddEmployee.textfieildSname.getText() + "', '"
-                    + AddEmployee.textfieildPassowrd.getText() + "', '"
-                    + AddEmployee.textfieildContact.getText() + "')";
+                    + "VALUES ('" + AddEmployee.getEmpFirstName() + "', '"
+                    + AddEmployee.getEmpLastName() + "', '"
+                    + AddEmployee.getEmpPassword() + "', '"
+                    + AddEmployee.getEmpContact() + "')";
             s.execute(insertQuery);
             populateEmpTable();
             s.close();
@@ -206,8 +232,8 @@ public class dbManager {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String insertQuery = "INSERT INTO inventory (item, qty)"
-                    + "VALUES ('" + AddDatabase.textfieldItem.getText() + "', '"
-                    + AddDatabase.textfieldQty.getText() + "')";
+                    + "VALUES ('" + AddDatabase.getItem() + "', '"
+                    + AddDatabase.getQuantity() + "')";
             s.execute(insertQuery);
             populateTables();
             s.close();
@@ -217,15 +243,31 @@ public class dbManager {
         }
     }
 
+    public static void insertRecipe() {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String insertQuerySup = "INSERT INTO recipe(recipeName, recipePrice,recipeVAT)"
+                    + "VALUES ('" + AddDatabase.getRecipe() + "','"
+                    + AddDatabase.getPrice() + "', '"
+                    + AddDatabase.getVAT() + "')";
+            s.execute(insertQuerySup);
+            populateTables();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
+    }
+
     public static void insertSupplier() {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String insertQuerySup = "INSERT INTO supplier(supplierName, supplierEmail,supplierNumber, supplierAddress)"
-                    + "VALUES ('" + AddDatabase.textfieldDisName.getText() + "','"
-                    + AddDatabase.textfieldDisEmail.getText() + "', '"
-                    + AddDatabase.textfieldDisContact.getText() + "', '"
-                    + AddDatabase.textfieldDisAddress.getText() + "')";
+                    + "VALUES ('" + AddDatabase.getSupName() + "','"
+                    + AddDatabase.getSupEmail() + "', '"
+                    + AddDatabase.getSupContact() + "', '"
+                    + AddDatabase.getSupAddress() + "')";
             s.execute(insertQuerySup);
             populateTables();
             s.close();
@@ -256,22 +298,6 @@ public class dbManager {
 
     }
 
-    public static void insertRecipe() {
-        try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO recipe(recipeName, recipePrice,recipeVAT)"
-                    + "VALUES ('" + AddDatabase.textRecipe.getText() + "','"
-                    + AddDatabase.textPrice.getText() + "', '"
-                    + AddDatabase.textVAT.getText() + "')";
-            s.execute(insertQuerySup);
-            populateTables();
-            s.close();
-            conn.close();
-        } catch (SQLException exp) {
-        }
-    }
-
     public static void removeInventory(int index) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -299,14 +325,71 @@ public class dbManager {
             exp.printStackTrace();
         }
     }
-    
-     public static void removeSupplier(int index) {
+
+    public static void removeSupplier(int index) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String query = "DELETE FROM supplier WHERE supplierID='" + index + "'";
             s.execute(query);
             populateTables();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+    }
+
+    public static void removeEmployee(int index) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "DELETE FROM employee WHERE employeeID='" + index + "'";
+            s.execute(query);
+            populateEmpTable();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+    }
+
+    public static void updateHours(String Username) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "UPDATE employee set employeeHoursWorked='" + internalClock.calculateHours()
+                    + "' WHERE employeeFName='" + Username + "'";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.executeUpdate();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+    }
+
+    public static void updateEmployeeStatusIn(String Username) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "UPDATE employee set employeeStatus= 'Active' WHERE employeeFName='" + Username + "'";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.executeUpdate();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+    }
+    
+     public static void updateEmployeeStatusOut(String Username) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "UPDATE employee set employeeStatus= 'Deactive' WHERE employeeFName='" + Username + "'";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.executeUpdate();
             s.close();
             conn.close();
         } catch (SQLException exp) {

@@ -28,18 +28,9 @@ public class MainSystem extends javax.swing.JFrame {
 
     public MainSystem() {
         initComponents();
-        internalClock();
+        internalClock.internalClock();
         dbManager.populateTables();
         listLogin.setModel(listModel);
-    }
-
-    public void internalClock() {
-        new Thread(() -> {
-            while (true) {
-                lblClock.setText(new SimpleDateFormat("hh:mm:ss").format(new Date()));
-                lblDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
-            }
-        }).start();
     }
 
     public static void updateList(String Username) {
@@ -47,7 +38,11 @@ public class MainSystem extends javax.swing.JFrame {
     }
 
     public void logout() {
+        internalClock.setLogoutTimeStamp();
+        dbManager.updateHours(listLogin.getSelectedValue());
+        dbManager.updateEmployeeStatusOut(listLogin.getSelectedValue());
         listModel.remove(listLogin.getSelectedIndex());
+
     }
 
     public int getID() {
@@ -63,6 +58,14 @@ public class MainSystem extends javax.swing.JFrame {
     public int getIDsupplier() {
         int id = (int) tableSupplier.getValueAt(tableSupplier.getSelectedRow(), 0);
         return id;
+    }
+
+    public static JLabel getDate() {
+        return lblDate;
+    }
+
+    public static JLabel getTime() {
+        return lblClock;
     }
 
     public void moveButton() {
@@ -1426,8 +1429,8 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable4;
-    private javax.swing.JLabel lblClock;
-    private javax.swing.JLabel lblDate;
+    private static javax.swing.JLabel lblClock;
+    private static javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblScreen;
