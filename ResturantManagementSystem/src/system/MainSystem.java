@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system;
 
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -30,19 +23,6 @@ public class MainSystem extends javax.swing.JFrame {
         initComponents();
         internalClock.internalClock();
         dbManager.populateTables();
-        listLogin.setModel(listModel);
-    }
-
-    public static void updateList(String Username) {
-        listModel.addElement(Username);
-    }
-
-    public void logout() {
-        internalClock.setLogoutTimeStamp();
-        dbManager.updateHours(listLogin.getSelectedValue());
-        dbManager.updateEmployeeStatusOut(listLogin.getSelectedValue());
-        listModel.remove(listLogin.getSelectedIndex());
-
     }
 
     public int getID() {
@@ -101,8 +81,6 @@ public class MainSystem extends javax.swing.JFrame {
         buttonLogin = new javax.swing.JButton();
         lblClock = new javax.swing.JLabel();
         buttonLogOut = new javax.swing.JButton();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        listLogin = new javax.swing.JList<>();
         Orders = new javax.swing.JPanel();
         pnlOrderLeft = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -266,8 +244,6 @@ public class MainSystem extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane6.setViewportView(listLogin);
-
         javax.swing.GroupLayout pnlPanelLayout = new javax.swing.GroupLayout(pnlPanel);
         pnlPanel.setLayout(pnlPanelLayout);
         pnlPanelLayout.setHorizontalGroup(
@@ -275,7 +251,6 @@ public class MainSystem extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(buttonLogOut, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonLogin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlPanelLayout.createSequentialGroup()
@@ -294,9 +269,7 @@ public class MainSystem extends javax.swing.JFrame {
                 .addComponent(buttonLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonLogOut)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                .addGap(70, 70, 70)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1112,15 +1085,6 @@ public class MainSystem extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonBookingsActionPerformed
 
-    private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        Login user = new Login();
-        user.setVisible(true);
-    }//GEN-LAST:event_buttonLoginActionPerformed
-
-    private void buttonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogOutActionPerformed
-        logout();
-    }//GEN-LAST:event_buttonLogOutActionPerformed
-
     private void buttonOrderHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOrderHistoryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonOrderHistoryActionPerformed
@@ -1353,6 +1317,17 @@ public class MainSystem extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonRecipeDelete1ActionPerformed
 
+    private void buttonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogOutActionPerformed
+        //logout();
+        Logout logout = new Logout();
+        logout.setVisible(true);
+    }//GEN-LAST:event_buttonLogOutActionPerformed
+
+    private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
+        Login user = new Login();
+        user.setVisible(true);
+    }//GEN-LAST:event_buttonLoginActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1362,10 +1337,12 @@ public class MainSystem extends javax.swing.JFrame {
                 if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainSystem.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         /* Create and display the form */
@@ -1426,7 +1403,6 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable4;
     private static javax.swing.JLabel lblClock;
@@ -1437,7 +1413,6 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblSettings;
     private javax.swing.JLabel lblVersion;
-    public static javax.swing.JList<String> listLogin;
     private javax.swing.JPanel pnlInventory;
     public static javax.swing.JPanel pnlLayout;
     private javax.swing.JPanel pnlLeft;

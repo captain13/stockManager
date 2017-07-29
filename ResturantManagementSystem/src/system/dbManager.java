@@ -145,37 +145,6 @@ public class dbManager {
         }
     }
 
-    public static void showActiveEmp() {
-        String columnNamesEmp[] = {"First Name", "Last Name", "Active"};
-        try {
-            Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String query = "SELECT employeeFName,employeeLName,employeeStatus FROM employee WHERE employeeStatus= 'Active' ";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            DefaultTableModel tableModel3 = new DefaultTableModel();
-            Employee.tableEmp.setModel(tableModel3);
-
-            for (int i = 0; i < columnCount; i++) {
-                tableModel3.addColumn(columnNamesEmp[i]);
-            }
-            Object[] row = new Object[columnCount];
-
-            while (rs.next()) {
-                for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
-                }
-                tableModel3.addRow(row);
-            }
-            rs.close();
-            s.close();
-            conn.close();
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-        }
-    }
-
     public static void populateReservation() {
         String columnNamesEmp[] = {"Employee", "Date", "Time", "Customer", "Table No.", "No. Customer"};
         try {
@@ -208,6 +177,57 @@ public class dbManager {
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
+    }
+
+    public static void showActiveEmp() {
+        String columnNamesEmp[] = {"First Name", "Last Name", "Active"};
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT employeeFName,employeeLName,employeeStatus FROM employee WHERE employeeStatus= 'Active' ";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            DefaultTableModel tableModel3 = new DefaultTableModel();
+            Employee.tableEmp.setModel(tableModel3);
+
+            for (int i = 0; i < columnCount; i++) {
+                tableModel3.addColumn(columnNamesEmp[i]);
+            }
+            Object[] row = new Object[columnCount];
+
+            while (rs.next()) {
+                for (int i = 0; i < columnCount; i++) {
+                    row[i] = rs.getObject(i + 1);
+                }
+                tableModel3.addRow(row);
+            }
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+        }
+    }
+
+    public static String getHoursWorked(String Username) {
+        String time = "00:00:00";
+        
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String querySelect = "SELECT employeeHoursWorked FROM employee WHERE employeeFName='" + Username + "'";
+            ResultSet rs = s.executeQuery(querySelect);
+            while (rs.next()) {
+                time = rs.getString("employeeHoursWorked");
+            }
+
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+        return time;
     }
 
     public static void insertEmployee() {
@@ -354,13 +374,13 @@ public class dbManager {
         }
     }
 
-    public static void updateHours(String Username) {
+    public static void updateHours(String Username, int i) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "UPDATE employee set employeeHoursWorked='" + internalClock.calculateHours()
+            String queryUpdate = "UPDATE employee set employeeHoursWorked='" + internalClock.calculateHours(i, getHoursWorked(Username))
                     + "' WHERE employeeFName='" + Username + "'";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            PreparedStatement preparedStmt = conn.prepareStatement(queryUpdate);
             preparedStmt.executeUpdate();
             s.close();
             conn.close();
@@ -382,8 +402,8 @@ public class dbManager {
             exp.printStackTrace();
         }
     }
-    
-     public static void updateEmployeeStatusOut(String Username) {
+
+    public static void updateEmployeeStatusOut(String Username) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -396,6 +416,7 @@ public class dbManager {
             exp.printStackTrace();
         }
     }
+    
 
     public static void update() {
 //        try {

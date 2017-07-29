@@ -1,6 +1,7 @@
 package system;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  */
 public class internalClock extends Thread {
 
-    static String loginTime;
+    static ArrayList<String> loginTime = new ArrayList();
     static String logoutTime;
 
     public static void internalClock() {
@@ -22,24 +23,32 @@ public class internalClock extends Thread {
     }
 
     public static void setLoginTimeStamp() {
-        loginTime = new SimpleDateFormat("hh:mm:ss").format(new Date());
+        loginTime.add(new SimpleDateFormat("hh:mm:ss").format(new Date()));
+    }
+    
+    public static ArrayList getLoginTimeStamp() {
+        return loginTime;
     }
 
     public static void setLogoutTimeStamp() {
         logoutTime = new SimpleDateFormat("hh:mm:ss").format(new Date());
     }
 
-    public static String calculateHours() {
+    public static String calculateHours(int i, String previousHours) {
         String time;
-        String inArray[] = loginTime.split(":");
+        String previousHoursArray[] = previousHours.split(":");
+        String inArray[] = loginTime.get(i).split(":");
         String outArray[] = logoutTime.split(":");
+        int prevHours = Integer.parseInt(previousHoursArray[0]);
+        int prevMins = Integer.parseInt(previousHoursArray[1]);
         int inhours = Integer.parseInt(inArray[0]);
         int inminutes = Integer.parseInt(inArray[1]);
         int outhours = Integer.parseInt(outArray[0]);
         int outminutes = Integer.parseInt(outArray[1]);
-        int hours = outhours - inhours;
-        int minutes = outminutes - inminutes;
-        return time = hours + "hrs" + minutes + "mins";
+        int hours = (outhours - inhours) + prevHours;
+        int minutes = (outminutes - inminutes) + prevMins;
+        loginTime.remove(i);
+        return time = hours + ":" + minutes+":00";
     }
 
 }

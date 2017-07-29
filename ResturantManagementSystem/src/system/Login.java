@@ -122,9 +122,10 @@ public class Login extends javax.swing.JFrame {
         String password = passwordFieldBox.getText();
         boolean login = dbManager.login(username, password);
         if (login == true) {
-            MainSystem.updateList(username);
+            Logout.updateList(username);
             internalClock.setLoginTimeStamp();
             dbManager.updateEmployeeStatusIn(username);
+           
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
