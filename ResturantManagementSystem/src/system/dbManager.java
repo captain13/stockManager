@@ -151,12 +151,12 @@ public class dbManager {
     }
 
     public static void populateReservation() {
-        String columnNamesEmp[] = {"Employee", "Date", "Table No.", "No. Customer"};
+        String columnNamesEmp[] = {"Employee", "Date","Time","Customer", "Table No.", "No. Customer"};
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT employeeID, reservationDate,reservationTableNumber,reservationNumberPeople FROM reservation";
+            String query = "SELECT employeeID,reservationDate,reservationTime,reservationCustomer,reservationTableNumber,reservationNumberPeople FROM reservation";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -238,11 +238,13 @@ public class dbManager {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO reservation(employeeID, reservationDate,reservationTableNumber,reservationNumberPeople)"
-                    + "VALUES ('" + Booking.textEmp.getText() + "','"
-                    + Booking.textDate.getText() + "', '"
-                    + Booking.textTable.getText() + "', '"
-                    + Booking.textCustomers.getText() + "')";
+            String insertQuerySup = "INSERT INTO reservation(employeeID, reservationDate, reservationTime, reservationCustomer,reservationTableNumber,reservationNumberPeople)"
+                    + "VALUES ('" + Booking.getEmployee() + "','"
+                    + Booking.getDate() + "','"
+                    + Booking.getTime() + "','"
+                    + Booking.getCustomerName() + "', '"
+                    + Booking.getTableNum() + "', '"
+                    + Booking.getCustomerNum() + "')";
             s.execute(insertQuerySup);
             JOptionPane.showMessageDialog(null, "Reservation Added");
             populateReservation();
