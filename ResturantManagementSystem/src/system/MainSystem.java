@@ -20,6 +20,7 @@ public class MainSystem extends javax.swing.JFrame {
     Booking booking = new Booking();
     Calendar calendar = new Calendar();
     Specials specials = new Specials();
+    userManager userman = new userManager();
     HashMap<String, NewOrder> tables = new HashMap<>();
 
     public MainSystem() {
@@ -28,8 +29,8 @@ public class MainSystem extends javax.swing.JFrame {
         dbManager.populateTables();
         dbManager.populateOrder();
     }
-        
-public int getID() {
+
+    public int getID() {
         int id = (int) tblInventory.getValueAt(tblInventory.getSelectedRow(), 0);
         return id;
     }
@@ -55,7 +56,6 @@ public int getID() {
     public static JTable getOrderTable() {
         return tblOrderHistory;
     }
-
 
     public static void searchTable() {
         try {
@@ -1372,14 +1372,11 @@ public int getID() {
     }//GEN-LAST:event_buttonRecipeDelete1ActionPerformed
 
     private void buttonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogOutActionPerformed
-        //logout();
-        Logout logout = new Logout();
-        logout.setVisible(true);
+        userManager.createLogout();
     }//GEN-LAST:event_buttonLogOutActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        Login user = new Login();
-        user.setVisible(true);
+        userManager.createLogin();
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void buttonMakeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMakeOrderActionPerformed

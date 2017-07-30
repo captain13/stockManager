@@ -42,13 +42,16 @@ public class internalClock extends Thread {
 
     public static String calculateHours(int i, String previousHours) {
         String time;
+    
         int hours;
         int minutes;
         String previousHoursArray[] = previousHours.split(":");
         String inArray[] = loginTime.get(i).split(":");
         String outArray[] = logoutTime.split(":");
+        
         int prevHours = Integer.parseInt(previousHoursArray[0]);
         int prevMins = Integer.parseInt(previousHoursArray[1]);
+        System.out.println(prevMins);
         int inhours = Integer.parseInt(inArray[0]);
         int inminutes = Integer.parseInt(inArray[1]);
         int outhours = Integer.parseInt(outArray[0]);

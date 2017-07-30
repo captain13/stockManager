@@ -11,45 +11,32 @@ public class Logout extends javax.swing.JFrame {
 
     static ArrayList usernames = new ArrayList();
 
-    public Logout() {
+    public Logout(ArrayList usernames) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.usernames = usernames;
         populateTable();
     }
 
-    public static void updateList(String username) {
-        usernames.add(username);
-    }
-    
-    public static String getUser() {
-        String username = tableLoginedUsers.getValueAt(tableLoginedUsers.getSelectedRow(), 0).toString();
-        return username;
-    }
-
-    
     public static void populateTable() {
-
         String columnNames[] = {"Name", "Login Time"};
-
         Object row[][] = new Object[usernames.size()][2];
-
         for (int i = 0; i < usernames.size(); i++) {
             row[i][0] = usernames.get(i);
             row[i][1] = internalClock.getLoginTimeStamp().get(i);
         }
-
         DefaultTableModel tableModel = new DefaultTableModel(row, columnNames);
         tableLoginedUsers.setModel(tableModel);
     }
 
-    public void logout() {
+    public static String getUsername() {
         String username = tableLoginedUsers.getValueAt(tableLoginedUsers.getSelectedRow(), 0).toString();
+        return username;
+    }
+    
+     public static int getRowIndex() {
         int rowIndex = tableLoginedUsers.getSelectedRow();
-        internalClock.setLogoutTimeStamp();
-        dbManager.updateHours(username, rowIndex);
-        dbManager.updateEmployeeStatusOut(username);
-        usernames.remove(rowIndex);
-        populateTable();
+        return rowIndex;
     }
 
     @SuppressWarnings("unchecked")
@@ -156,7 +143,7 @@ public class Logout extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        logout();
+        userManager.logout();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

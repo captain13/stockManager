@@ -1,16 +1,17 @@
 package system;
-
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Andrew
  */
 public class Login extends javax.swing.JFrame {
-
+    
     public Login() {
         initComponents();
 
+    }
+    
+    public void disposeLogin(){
+        this.dispose();
     }
 
     @SuppressWarnings("unchecked")
@@ -43,12 +44,6 @@ public class Login extends javax.swing.JFrame {
         lblLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lblLoginActionPerformed(evt);
-            }
-        });
-
-        textfieldUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                textfieldUserMousePressed(evt);
             }
         });
 
@@ -120,31 +115,12 @@ public class Login extends javax.swing.JFrame {
     private void lblLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblLoginActionPerformed
         String username = textfieldUser.getText();
         String password = passwordFieldBox.getText();
-        boolean login = dbManager.login(username, password);
-        if (login == true) {
-            Logout.updateList(username);
-            internalClock.setLoginTimeStamp();
-            dbManager.updateEmployeeStatusIn(username);
-           
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
-        }
-
+        userManager.loginAuthentication(username, password);
     }//GEN-LAST:event_lblLoginActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
-
-    private void textfieldUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldUserMousePressed
-        try {
-//            Keyboard s = new Keyboard();
-//            s.setLocation(350, 530);
-//            s.setVisible(true);
-        } catch (RuntimeException ignore) {
-        }
-    }//GEN-LAST:event_textfieldUserMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancel;

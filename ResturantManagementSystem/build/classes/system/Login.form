@@ -127,9 +127,6 @@
         <Component class="javax.swing.JPasswordField" name="passwordFieldBox">
         </Component>
         <Component class="javax.swing.JTextField" name="textfieldUser">
-          <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="textfieldUserMousePressed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblUsername">
           <Properties>

@@ -68,7 +68,7 @@ public final class NewOrder extends javax.swing.JFrame {
     }
     
     public void setUser(){
-        lblWaiter.setText(Logout.getUser()); 
+        
     }
 
     @SuppressWarnings("unchecked")
