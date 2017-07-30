@@ -25,7 +25,7 @@ public class internalClock extends Thread {
     public static void setLoginTimeStamp() {
         loginTime.add(new SimpleDateFormat("hh:mm:ss").format(new Date()));
     }
-    
+
     public static ArrayList getLoginTimeStamp() {
         return loginTime;
     }
@@ -36,6 +36,8 @@ public class internalClock extends Thread {
 
     public static String calculateHours(int i, String previousHours) {
         String time;
+        int hours;
+        int minutes;
         String previousHoursArray[] = previousHours.split(":");
         String inArray[] = loginTime.get(i).split(":");
         String outArray[] = logoutTime.split(":");
@@ -45,10 +47,16 @@ public class internalClock extends Thread {
         int inminutes = Integer.parseInt(inArray[1]);
         int outhours = Integer.parseInt(outArray[0]);
         int outminutes = Integer.parseInt(outArray[1]);
-        int hours = (outhours - inhours) + prevHours;
-        int minutes = (outminutes - inminutes) + prevMins;
-        loginTime.remove(i);
-        return time = hours + ":" + minutes+":00";
+        if (inminutes > outminutes) {
+            hours = ((outhours - inhours) - 1) + prevHours;
+            minutes = (60 - (outminutes - inminutes)) + prevMins;
+        } else {
+            hours = (outhours - inhours) + prevHours;
+            minutes = (outminutes - inminutes) + prevMins;
+            loginTime.remove(i);
+        }
+
+        return time = hours + ":" + minutes + ":00";
     }
 
 }

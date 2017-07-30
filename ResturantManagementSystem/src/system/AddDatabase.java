@@ -5,7 +5,7 @@ package system;
  * @author GGPQ9ZJ42
  */
 public class AddDatabase extends javax.swing.JFrame {
-
+    
     public AddDatabase() {
         initComponents();
     }
@@ -37,31 +37,34 @@ public class AddDatabase extends javax.swing.JFrame {
     public static String getQuantity() {
         return textfieldQty.getText();
     }
-    
+
     public static String getRecipe() {
         return textRecipe.getText();
     }
+
     public static String getPrice() {
         return textPrice.getText();
     }
+
     public static String getVAT() {
         return textVAT.getText();
     }
-    
+
     public static String getSupName() {
         return textfieldDisName.getText();
     }
+
     public static String getSupEmail() {
         return textfieldDisEmail.getText();
     }
-    
+
     public static String getSupContact() {
         return textfieldDisContact.getText();
     }
+
     public static String getSupAddress() {
         return textfieldDisAddress.getText();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -363,7 +366,7 @@ public class AddDatabase extends javax.swing.JFrame {
     public static javax.swing.JTextField textfieldDisContact;
     public static javax.swing.JTextField textfieldDisEmail;
     public static javax.swing.JTextField textfieldDisName;
-    public static javax.swing.JTextField textfieldItem;
-    public static javax.swing.JTextField textfieldQty;
+    private static javax.swing.JTextField textfieldItem;
+    private static javax.swing.JTextField textfieldQty;
     // End of variables declaration//GEN-END:variables
 }

@@ -55,11 +55,15 @@ public final class NewOrder extends javax.swing.JFrame {
         textfieldTotal.setText(String.format("R%.2f", total));
     }
 
-    public void voidItem() {
-        String confirm = JOptionPane.showInputDialog(null, "Are you sure?");
-        if (confirm.equalsIgnoreCase("yes")) {
+    public void voidItem()  {
+           int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?",null, JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try{
             model.removeRow(tblItems.getSelectedRow());
             totalAmount();
+            }
+            catch(ArrayIndexOutOfBoundsException exp){
+            }
         }
     }
 
