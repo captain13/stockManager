@@ -6,6 +6,10 @@ import java.awt.event.MouseAdapter;
 import java.util.HashMap;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -17,13 +21,13 @@ public class MainSystem extends javax.swing.JFrame {
     Calendar calendar = new Calendar();
     Specials specials = new Specials();
     HashMap<String, NewOrder> tables = new HashMap<>();
- 
 
     public MainSystem() {
         initComponents();
         internalClock.internalClock();
         dbManager.populateTables();
         dbManager.populateOrder();
+
     }
 
     public int getID() {
@@ -48,11 +52,61 @@ public class MainSystem extends javax.swing.JFrame {
     public static JLabel getTime() {
         return lblClock;
     }
-    
-    public static JTable getOrderTable(){
+
+    public static JTable getOrderTable() {
         return tblOrderHistory;
     }
-    
+
+    public static void searchTable() {
+        try {
+            TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tblInventory.getModel());
+            TableRowSorter<TableModel> rowSorterRecipe = new TableRowSorter<>(tableRecipe.getModel());
+            TableRowSorter<TableModel> rowSorterSup = new TableRowSorter<>(tableSupplier.getModel());
+            tblInventory.setRowSorter(rowSorter);
+            tableRecipe.setRowSorter(rowSorterRecipe);
+            tableSupplier.setRowSorter(rowSorterSup);
+            textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
+
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    String text = textboxSearch.getText();
+
+                    if (text.trim().length() == 0) {
+                        rowSorter.setRowFilter(null);
+                        rowSorterRecipe.setRowFilter(null);
+                        rowSorterSup.setRowFilter(null);
+                    } else {
+                        rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    String text = textboxSearch.getText();
+
+                    if (text.trim().length() == 0) {
+                        rowSorter.setRowFilter(null);
+                        rowSorterRecipe.setRowFilter(null);
+                        rowSorterSup.setRowFilter(null);
+                    } else {
+                        rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+            });
+        } catch (Exception ex) {
+
+        }
+    }
 
     public void moveButton() {
 
@@ -1345,7 +1399,7 @@ public class MainSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void buttonWeeklyOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWeeklyOrderActionPerformed
-        OrderForm newOrder =new OrderForm();
+        OrderForm newOrder = new OrderForm();
         newOrder.setVisible(true);
     }//GEN-LAST:event_buttonWeeklyOrderActionPerformed
 
@@ -1447,6 +1501,6 @@ public class MainSystem extends javax.swing.JFrame {
     public static javax.swing.JTable tableSupplier;
     public static javax.swing.JTable tblInventory;
     private static javax.swing.JTable tblOrderHistory;
-    private javax.swing.JTextField textboxSearch;
+    private static javax.swing.JTextField textboxSearch;
     // End of variables declaration//GEN-END:variables
 }

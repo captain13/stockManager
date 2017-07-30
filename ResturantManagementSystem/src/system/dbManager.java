@@ -29,6 +29,7 @@ public class dbManager {
         String columnNamesRecipe[] = {"Recipe ID", "Description", "Price", "VAT"};
         String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
         try {
+
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -48,6 +49,7 @@ public class dbManager {
                 for (int i = 0; i < columnCount; i++) {
                     row[i] = rs.getObject(i + 1);
                 }
+                MainSystem.searchTable();
                 tableModel.addRow(row);
             }
 
@@ -77,6 +79,7 @@ public class dbManager {
                 for (int i = 0; i < columnCount; i++) {
                     row[i] = rs.getObject(i + 1);
                 }
+                MainSystem.searchTable();
                 tableModel1.addRow(row);
             }
             rs.close();
@@ -105,6 +108,7 @@ public class dbManager {
                 for (int i = 0; i < columnCount; i++) {
                     row[i] = rs.getObject(i + 1);
                 }
+                MainSystem.searchTable();
                 tableModel2.addRow(row);
             }
             rs.close();
@@ -178,9 +182,9 @@ public class dbManager {
             System.out.println(exc);
         }
     }
-    
+
     public static void populateOrder() {
-        String columnNamesEmp[] = {"ID","Inventory ID", "Supplier ID", "Date Ordered", "Quantity(kg)", "Status"};
+        String columnNamesEmp[] = {"ID", "Inventory ID", "Supplier ID", "Date Ordered", "Quantity(kg)", "Status"};
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -246,7 +250,7 @@ public class dbManager {
 
     public static String getHoursWorked(String Username) {
         String time = "00:00:00";
-        
+
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -351,14 +355,14 @@ public class dbManager {
         }
 
     }
-    
-      public static void insertOrder() {
+
+    public static void insertOrder() {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String insertQuerySup = "INSERT INTO stockorder(inventoryID, supplierID,dateOrdered,quantity,status)"
                     + "VALUES ('" + OrderForm.getInventoryID() + "','"
-                    + OrderForm.getSupplierID()+ "', '"
+                    + OrderForm.getSupplierID() + "', '"
                     + internalClock.getOrderTimeStamp() + "', '"
                     + OrderForm.getQuantity() + "', 'Not Delievered')";
             s.execute(insertQuerySup);
@@ -468,7 +472,6 @@ public class dbManager {
             exp.printStackTrace();
         }
     }
-    
 
     public static void update() {
 //        try {
