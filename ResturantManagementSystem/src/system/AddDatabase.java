@@ -1,5 +1,7 @@
 package system;
 
+import javax.swing.JTabbedPane;
+
 /**
  *
  * @author GGPQ9ZJ42
@@ -43,7 +45,7 @@ public class AddDatabase extends javax.swing.JFrame {
     }
 
     public static String getPrice() {
-        return textPrice.getText();
+        return textPrice.getText()+".00";
     }
 
     public static String getVAT() {
@@ -65,6 +67,10 @@ public class AddDatabase extends javax.swing.JFrame {
     public static String getSupAddress() {
         return textfieldDisAddress.getText();
     }
+    
+       public static JTabbedPane getTabbedPanel() {
+        return tabbedPanel;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,7 +82,7 @@ public class AddDatabase extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel4 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabbedPanel = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         lblQty = new javax.swing.JLabel();
         lblItem = new javax.swing.JLabel();
@@ -150,7 +156,7 @@ public class AddDatabase extends javax.swing.JFrame {
                 .addContainerGap(107, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Inventory", jPanel1);
+        tabbedPanel.addTab("Inventory", jPanel1);
 
         lblCostPerItem1.setText("Recipe Name");
 
@@ -207,7 +213,7 @@ public class AddDatabase extends javax.swing.JFrame {
                 .addContainerGap(62, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Reciep", jPanel2);
+        tabbedPanel.addTab("Reciep", jPanel2);
 
         lblDistInfo.setText("Distrubutor Informantion");
 
@@ -271,7 +277,7 @@ public class AddDatabase extends javax.swing.JFrame {
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Supplier", jPanel3);
+        tabbedPanel.addTab("Supplier", jPanel3);
 
         buttonAccpet.setText("Accept");
         buttonAccpet.addActionListener(new java.awt.event.ActionListener() {
@@ -297,12 +303,12 @@ public class AddDatabase extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonCancel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jTabbedPane1)
+            .addComponent(tabbedPanel)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabbedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonCancel)
@@ -347,7 +353,6 @@ public class AddDatabase extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblCostPerItem1;
     private javax.swing.JLabel lblDisContact;
     private javax.swing.JLabel lblDisContact1;
@@ -359,6 +364,7 @@ public class AddDatabase extends javax.swing.JFrame {
     private javax.swing.JLabel lblQty;
     private javax.swing.JLabel lblQty1;
     private javax.swing.JLabel lblTitle;
+    private static javax.swing.JTabbedPane tabbedPanel;
     public static javax.swing.JTextField textPrice;
     public static javax.swing.JTextField textRecipe;
     public static javax.swing.JTextField textVAT;

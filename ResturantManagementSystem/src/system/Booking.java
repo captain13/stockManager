@@ -1,4 +1,5 @@
 package system;
+
 /**
  *
  * @author Andrew
@@ -16,6 +17,7 @@ public class Booking extends javax.swing.JFrame {
         }
         initComponents();
         dbManager.populateReservation();
+        setCurrentDate();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
@@ -34,9 +36,9 @@ public class Booking extends javax.swing.JFrame {
     }
 
     public static String getDate() {
-        String date=comboboxDay.getSelectedItem().toString()+"/"
-                +comboboxMonth.getSelectedItem().toString()+"/"
-                +comboboxYear.getSelectedItem().toString();
+        String date = comboboxDay.getSelectedItem().toString() + "/"
+                + comboboxMonth.getSelectedItem().toString() + "/"
+                + comboboxYear.getSelectedItem().toString();
         return date;
     }
 
@@ -47,14 +49,21 @@ public class Booking extends javax.swing.JFrame {
     public static String getCustomerNum() {
         return textCustomerNum.getText();
     }
-    
+
     public static String getTime() {
-        String time=comboboxHour.getSelectedItem().toString()
-                +":"+comboboxMinute.getSelectedItem().toString();
+        String time = comboboxHour.getSelectedItem().toString()
+                + ":" + comboboxMinute.getSelectedItem().toString();
         return time;
     }
 
-  
+    public void setCurrentDate() {
+        String currentDate = internalClock.getCurrentDate();
+        String date[] = currentDate.split("/");
+        String day = date[0];
+        String month = date[1];
+        comboboxDay.setSelectedItem(day);
+        comboboxMonth.setSelectedItem(month);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -150,9 +159,9 @@ public class Booking extends javax.swing.JFrame {
             }
         });
 
-        comboboxMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        comboboxMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
-        comboboxDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        comboboxDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         comboboxYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
 

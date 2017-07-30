@@ -35,6 +35,7 @@ public final class NewOrder extends javax.swing.JFrame {
         tblItems.getColumnModel().getColumn(1).setPreferredWidth(25);
         tblItems.getColumnModel().getColumn(2).setPreferredWidth(45);
         internalClock();
+        
 //        customerNo.setText(JOptionPane.showInputDialog(null, "Enter number of customers"));
     }
 
@@ -55,16 +56,19 @@ public final class NewOrder extends javax.swing.JFrame {
         textfieldTotal.setText(String.format("R%.2f", total));
     }
 
-    public void voidItem()  {
-           int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?",null, JOptionPane.YES_NO_OPTION);
+    public void voidItem() {
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            try{
-            model.removeRow(tblItems.getSelectedRow());
-            totalAmount();
-            }
-            catch(ArrayIndexOutOfBoundsException exp){
+            try {
+                model.removeRow(tblItems.getSelectedRow());
+                totalAmount();
+            } catch (ArrayIndexOutOfBoundsException exp) {
             }
         }
+    }
+    
+    public void setUser(){
+        lblWaiter.setText(Logout.getUser()); 
     }
 
     @SuppressWarnings("unchecked")

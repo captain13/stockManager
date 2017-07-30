@@ -20,7 +20,13 @@ public class Logout extends javax.swing.JFrame {
     public static void updateList(String username) {
         usernames.add(username);
     }
+    
+    public static String getUser() {
+        String username = tableLoginedUsers.getValueAt(tableLoginedUsers.getSelectedRow(), 0).toString();
+        return username;
+    }
 
+    
     public static void populateTable() {
 
         String columnNames[] = {"Name", "Login Time"};
@@ -46,10 +52,6 @@ public class Logout extends javax.swing.JFrame {
         populateTable();
     }
 
-    public static void getUser() {
-
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -69,10 +71,19 @@ public class Logout extends javax.swing.JFrame {
 
         tableLoginedUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Name", "Loggin Time"
             }
         ));
         tableLoginedUsers.setGridColor(new java.awt.Color(204, 204, 204));

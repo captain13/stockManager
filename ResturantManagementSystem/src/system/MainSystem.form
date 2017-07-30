@@ -1108,8 +1108,8 @@
                                   <Component id="buttonAlert" min="-2" pref="167" max="-2" attributes="0"/>
                                   <Component id="buttonOrderHistory" alignment="1" min="-2" pref="167" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="buttonWeeklyOrder" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                              <Component id="buttonSale" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                              <Component id="buttonMakeOrder" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                              <Component id="buttonEmail" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                               <Component id="buttonReports" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                           </Group>
                           <Component id="buttonEmployee" min="-2" pref="167" max="-2" attributes="0"/>
@@ -1129,11 +1129,11 @@
                           <Group type="102" attributes="0">
                               <Component id="buttonOrderHistory" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="buttonWeeklyOrder" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonMakeOrder" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonAlert" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="buttonSale" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonEmail" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonReports" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1151,29 +1151,23 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Order History"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOrderHistoryActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="buttonAlert">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Alerts"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="buttonSale">
+            <Component class="javax.swing.JButton" name="buttonEmail">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Email"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSaleActionPerformed"/>
-              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="buttonWeeklyOrder">
+            <Component class="javax.swing.JButton" name="buttonMakeOrder">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Make Order"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonWeeklyOrderActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonMakeOrderActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="buttonReports">

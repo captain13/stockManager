@@ -52,7 +52,9 @@ public class dbManager {
                 MainSystem.searchTable();
                 tableModel.addRow(row);
             }
-
+            MainSystem.tblInventory.getColumnModel().getColumn(0).setPreferredWidth(10);
+            MainSystem.tblInventory.getColumnModel().getColumn(1).setPreferredWidth(400);
+            MainSystem.tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
             rs.close();
             s.close();
             conn.close();
@@ -82,6 +84,10 @@ public class dbManager {
                 MainSystem.searchTable();
                 tableModel1.addRow(row);
             }
+            MainSystem.tableRecipe.getColumnModel().getColumn(0).setPreferredWidth(100);
+            MainSystem.tableRecipe.getColumnModel().getColumn(1).setPreferredWidth(300);
+            MainSystem.tableRecipe.getColumnModel().getColumn(2).setPreferredWidth(100);
+            MainSystem.tableRecipe.getColumnModel().getColumn(3).setPreferredWidth(100);
             rs.close();
             s.close();
             conn.close();
@@ -111,6 +117,11 @@ public class dbManager {
                 MainSystem.searchTable();
                 tableModel2.addRow(row);
             }
+            MainSystem.tableSupplier.getColumnModel().getColumn(0).setPreferredWidth(100);
+            MainSystem.tableSupplier.getColumnModel().getColumn(1).setPreferredWidth(300);
+            MainSystem.tableSupplier.getColumnModel().getColumn(2).setPreferredWidth(300);
+            MainSystem.tableSupplier.getColumnModel().getColumn(3).setPreferredWidth(200);
+            MainSystem.tableSupplier.getColumnModel().getColumn(4).setPreferredWidth(250);
             rs.close();
             s.close();
             conn.close();
@@ -363,7 +374,7 @@ public class dbManager {
             String insertQuerySup = "INSERT INTO stockorder(inventoryID, supplierID,dateOrdered,quantity,status)"
                     + "VALUES ('" + OrderForm.getInventoryID() + "','"
                     + OrderForm.getSupplierID() + "', '"
-                    + internalClock.getOrderTimeStamp() + "', '"
+                    + internalClock.getCurrentDate() + "', '"
                     + OrderForm.getQuantity() + "', 'Not Delievered')";
             s.execute(insertQuerySup);
             populateOrder();

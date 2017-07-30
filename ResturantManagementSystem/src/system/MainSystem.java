@@ -27,10 +27,9 @@ public class MainSystem extends javax.swing.JFrame {
         internalClock.internalClock();
         dbManager.populateTables();
         dbManager.populateOrder();
-
     }
-
-    public int getID() {
+        
+public int getID() {
         int id = (int) tblInventory.getValueAt(tblInventory.getSelectedRow(), 0);
         return id;
     }
@@ -56,6 +55,7 @@ public class MainSystem extends javax.swing.JFrame {
     public static JTable getOrderTable() {
         return tblOrderHistory;
     }
+
 
     public static void searchTable() {
         try {
@@ -187,8 +187,8 @@ public class MainSystem extends javax.swing.JFrame {
         Management = new javax.swing.JPanel();
         buttonOrderHistory = new javax.swing.JButton();
         buttonAlert = new javax.swing.JButton();
-        buttonSale = new javax.swing.JButton();
-        buttonWeeklyOrder = new javax.swing.JButton();
+        buttonEmail = new javax.swing.JButton();
+        buttonMakeOrder = new javax.swing.JButton();
         buttonReports = new javax.swing.JButton();
         buttonEmployee = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -913,25 +913,15 @@ public class MainSystem extends javax.swing.JFrame {
         TabbedPanel.addTab("Inventory", Inventory);
 
         buttonOrderHistory.setText("Order History");
-        buttonOrderHistory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOrderHistoryActionPerformed(evt);
-            }
-        });
 
         buttonAlert.setText("Alerts");
 
-        buttonSale.setText("Email");
-        buttonSale.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSaleActionPerformed(evt);
-            }
-        });
+        buttonEmail.setText("Email");
 
-        buttonWeeklyOrder.setText("Make Order");
-        buttonWeeklyOrder.addActionListener(new java.awt.event.ActionListener() {
+        buttonMakeOrder.setText("Make Order");
+        buttonMakeOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonWeeklyOrderActionPerformed(evt);
+                buttonMakeOrderActionPerformed(evt);
             }
         });
 
@@ -996,8 +986,8 @@ public class MainSystem extends javax.swing.JFrame {
                         .addGroup(ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buttonAlert, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(buttonOrderHistory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(buttonWeeklyOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buttonSale, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonMakeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(buttonReports, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(buttonEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1013,11 +1003,11 @@ public class MainSystem extends javax.swing.JFrame {
                     .addGroup(ManagementLayout.createSequentialGroup()
                         .addComponent(buttonOrderHistory)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonWeeklyOrder)
+                        .addComponent(buttonMakeOrder)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonAlert)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonSale)
+                        .addComponent(buttonEmail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonReports)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1155,10 +1145,6 @@ public class MainSystem extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonBookingsActionPerformed
 
-    private void buttonOrderHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOrderHistoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonOrderHistoryActionPerformed
-
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
         System.exit(0);
     }//GEN-LAST:event_buttonCloseActionPerformed
@@ -1240,6 +1226,7 @@ public class MainSystem extends javax.swing.JFrame {
     private void buttonRecipeAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAddActionPerformed
         AddDatabase s = new AddDatabase();
         s.setVisible(true);
+        AddDatabase.getTabbedPanel().setSelectedIndex(1);
 //        Keyboard k = new Keyboard();
 //        k.setLocation(350, 530);
 //        k.setVisible(true);
@@ -1261,11 +1248,8 @@ public class MainSystem extends javax.swing.JFrame {
     private void buttonRecipeAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAdd1ActionPerformed
         AddDatabase s = new AddDatabase();
         s.setVisible(true);
+        AddDatabase.getTabbedPanel().setSelectedIndex(2);
     }//GEN-LAST:event_buttonRecipeAdd1ActionPerformed
-
-    private void buttonSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonSaleActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 //        try {
@@ -1398,10 +1382,10 @@ public class MainSystem extends javax.swing.JFrame {
         user.setVisible(true);
     }//GEN-LAST:event_buttonLoginActionPerformed
 
-    private void buttonWeeklyOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWeeklyOrderActionPerformed
+    private void buttonMakeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMakeOrderActionPerformed
         OrderForm newOrder = new OrderForm();
         newOrder.setVisible(true);
-    }//GEN-LAST:event_buttonWeeklyOrderActionPerformed
+    }//GEN-LAST:event_buttonMakeOrderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1440,11 +1424,13 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JButton buttonClose;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonEdit;
+    private javax.swing.JButton buttonEmail;
     private javax.swing.JButton buttonEmployee;
     private javax.swing.JButton buttonEvents;
     private javax.swing.JButton buttonLayout;
     private javax.swing.JButton buttonLogOut;
     private javax.swing.JButton buttonLogin;
+    private javax.swing.JButton buttonMakeOrder;
     private javax.swing.JButton buttonOrderHistory;
     private javax.swing.JButton buttonPrint;
     private javax.swing.JButton buttonPromotions;
@@ -1458,7 +1444,6 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JButton buttonReprint;
     private javax.swing.JButton buttonReprint1;
     private javax.swing.JButton buttonReprint2;
-    private javax.swing.JButton buttonSale;
     private javax.swing.JButton buttonSpecials;
     private javax.swing.JButton buttonTable1;
     private javax.swing.JButton buttonTable2;
@@ -1469,7 +1454,6 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JButton buttonTable7;
     private javax.swing.JButton buttonTable8;
     private javax.swing.JButton buttonTakeAway;
-    private javax.swing.JButton buttonWeeklyOrder;
     private javax.swing.JComboBox<String> comboBoxLogo;
     private javax.swing.JComboBox<String> comboBoxSceen;
     private javax.swing.JButton jButton1;

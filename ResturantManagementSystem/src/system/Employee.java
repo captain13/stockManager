@@ -154,8 +154,8 @@ public class Employee extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        String confirm = JOptionPane.showInputDialog(null, "Are you sure?");
-        if (null != confirm && confirm.equalsIgnoreCase("yes")) {
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION){
             dbManager.removeEmployee(getID());
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
