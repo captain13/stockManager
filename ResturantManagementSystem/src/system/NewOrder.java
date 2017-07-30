@@ -21,22 +21,28 @@ public final class NewOrder extends javax.swing.JFrame {
     String columnNames[] = {"Item", "Qty", "Price"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
-    public NewOrder(String waiter) {
+    public NewOrder() {
         initComponents();
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        int xSize = ((int) tk.getScreenSize().getWidth());
-        int ySize = ((int) tk.getScreenSize().getHeight());
-        this.setSize(xSize, ySize);
+        getScreenResolution();
         this.setLocation(0, 0);
-        this.waiter = waiter;
-        nameTF.setText(waiter);
         tblItems.setModel(model);
         tblItems.getColumnModel().getColumn(0).setPreferredWidth(90);
         tblItems.getColumnModel().getColumn(1).setPreferredWidth(25);
         tblItems.getColumnModel().getColumn(2).setPreferredWidth(45);
         internalClock();
-        
+        //  userManager.createUserLog();
 //        customerNo.setText(JOptionPane.showInputDialog(null, "Enter number of customers"));
+    }
+
+    public void getScreenResolution() {
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().getWidth());
+        int ySize = ((int) tk.getScreenSize().getHeight());
+        this.setSize(xSize, ySize);
+    }
+
+    public static void setUsername() {
+        nameTF.setText(UserForm.getUsername());
     }
 
     public void internalClock() {
@@ -66,9 +72,9 @@ public final class NewOrder extends javax.swing.JFrame {
             }
         }
     }
-    
-    public void setUser(){
-        
+
+    public void setUser() {
+
     }
 
     @SuppressWarnings("unchecked")
@@ -498,39 +504,6 @@ public final class NewOrder extends javax.swing.JFrame {
         voidItem();
     }//GEN-LAST:event_buttonEditActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new NewOrder("User").setVisible(true);
-        });
-
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonClose;
@@ -564,7 +537,7 @@ public final class NewOrder extends javax.swing.JFrame {
     private javax.swing.JLabel lblNum;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblWaiter;
-    private javax.swing.JLabel nameTF;
+    private static javax.swing.JLabel nameTF;
     public static javax.swing.JTable tblItems;
     public static javax.swing.JFormattedTextField textfieldTotal;
     // End of variables declaration//GEN-END:variables

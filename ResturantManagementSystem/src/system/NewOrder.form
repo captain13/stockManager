@@ -573,6 +573,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="nameTF">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="customerNo">
     </Component>

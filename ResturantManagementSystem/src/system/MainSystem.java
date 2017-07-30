@@ -1150,7 +1150,7 @@ public class MainSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeAwayActionPerformed
-        NewOrder s = new NewOrder("User");
+        NewOrder s = new NewOrder();
         s.setVisible(true);
     }//GEN-LAST:event_buttonTakeAwayActionPerformed
 
@@ -1267,7 +1267,7 @@ public class MainSystem extends javax.swing.JFrame {
 
     private void buttonTable2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable2ActionPerformed
         if (tables.get("table2") == null) {
-            tables.put("table2", new NewOrder("user"));
+            tables.put("table2", new NewOrder());
 
             // Login user = new Login(tables.get("table2"));
             //  user.setVisible(true);
@@ -1278,7 +1278,7 @@ public class MainSystem extends javax.swing.JFrame {
 
     private void buttonTable4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable4ActionPerformed
         if (tables.get("table4") == null) {
-            tables.put("table4", new NewOrder("user"));
+            tables.put("table4", new NewOrder());
 
             //  Login user = new Login(tables.get("table4"));
             //  user.setVisible(true);
@@ -1293,7 +1293,7 @@ public class MainSystem extends javax.swing.JFrame {
 
     private void buttonTable7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable7ActionPerformed
         if (tables.get("table7") == null) {
-            tables.put("table7", new NewOrder("user"));
+            tables.put("table7", new NewOrder());
 
             // Login user = new Login(tables.get("table7"));
             //  user.setVisible(true);
@@ -1304,7 +1304,7 @@ public class MainSystem extends javax.swing.JFrame {
 
     private void buttonTable6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable6ActionPerformed
         if (tables.get("table6") == null) {
-            tables.put("table6", new NewOrder("user"));
+            tables.put("table6", new NewOrder());
 
             //  Login user = new Login(tables.get("table6"));
             //  user.setVisible(true);
@@ -1315,7 +1315,7 @@ public class MainSystem extends javax.swing.JFrame {
 
     private void buttonTable5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable5ActionPerformed
         if (tables.get("table5") == null) {
-            tables.put("table5", new NewOrder("user"));
+            tables.put("table5", new NewOrder());
 
             // Login user = new Login(tables.get("table5"));
             //  user.setVisible(true);
@@ -1326,7 +1326,7 @@ public class MainSystem extends javax.swing.JFrame {
 
     private void buttonTable3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable3ActionPerformed
         if (tables.get("table3") == null) {
-            tables.put("table3", new NewOrder("user"));
+            tables.put("table3", new NewOrder());
 
             //Login user = new Login(tables.get("table3"));
             //user.setVisible(true);
@@ -1341,7 +1341,7 @@ public class MainSystem extends javax.swing.JFrame {
 
     private void buttonTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable1ActionPerformed
         if (tables.get("table1") == null) {
-            tables.put("table1", new NewOrder("user"));
+            tables.put("table1", new NewOrder());
 
             //Login user = new Login(tables.get("table3"));
             //user.setVisible(true);
