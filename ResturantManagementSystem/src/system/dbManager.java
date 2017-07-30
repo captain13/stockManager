@@ -25,9 +25,9 @@ public class dbManager {
     static String driver = "com.mysql.jdbc.Driver";
 
     public static void populateTables() {
-        String columnNamesInventory[] = {"ID", "Item Name", "Quantity(kg)"};
-        String columnNamesRecipe[] = {"ID", "Description", "Price", "VAT"};
-        String columnNamesSuppler[] = {"ID", "Name", "Email", "Contact Number", "Address"};
+        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(kg)"};
+        String columnNamesRecipe[] = {"Recipe ID", "Description", "Price", "VAT"};
+        String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -178,6 +178,40 @@ public class dbManager {
             System.out.println(exc);
         }
     }
+    
+    public static void populateOrder() {
+        String columnNamesEmp[] = {"ID","Inventory ID", "Supplier ID", "Date Ordered", "Quantity(kg)", "Status"};
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT* FROM stockOrder";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            DefaultTableModel tableModel = new DefaultTableModel();
+            MainSystem.getOrderTable().setModel(tableModel);
+
+            for (int i = 0; i < columnCount; i++) {
+                tableModel.addColumn(columnNamesEmp[i]);
+            }
+            Object[] row = new Object[columnCount];
+
+            while (rs.next()) {
+                for (int i = 0; i < columnCount; i++) {
+                    row[i] = rs.getObject(i + 1);
+                }
+                tableModel.addRow(row);
+            }
+            Booking.tableRes.getColumnModel().getColumn(0).setPreferredWidth(45);
+            Booking.tableRes.getColumnModel().getColumn(2).setPreferredWidth(45);
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+    }
 
     public static void showActiveEmp() {
         String columnNamesEmp[] = {"First Name", "Last Name", "Active"};
@@ -316,6 +350,24 @@ public class dbManager {
             System.out.println(exp);
         }
 
+    }
+    
+      public static void insertOrder() {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String insertQuerySup = "INSERT INTO stockorder(inventoryID, supplierID,dateOrdered,quantity,status)"
+                    + "VALUES ('" + OrderForm.getInventoryID() + "','"
+                    + OrderForm.getSupplierID()+ "', '"
+                    + internalClock.getOrderTimeStamp() + "', '"
+                    + OrderForm.getQuantity() + "', 'Not Delievered')";
+            s.execute(insertQuerySup);
+            populateOrder();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
     }
 
     public static void removeInventory(int index) {

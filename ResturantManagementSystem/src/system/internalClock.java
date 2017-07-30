@@ -12,6 +12,7 @@ public class internalClock extends Thread {
 
     static ArrayList<String> loginTime = new ArrayList();
     static String logoutTime;
+    static String orderTime;
 
     public static void internalClock() {
         new Thread(() -> {
@@ -28,6 +29,11 @@ public class internalClock extends Thread {
 
     public static ArrayList getLoginTimeStamp() {
         return loginTime;
+    }
+
+    public static String getOrderTimeStamp() {
+        orderTime=new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        return orderTime;
     }
 
     public static void setLogoutTimeStamp() {
