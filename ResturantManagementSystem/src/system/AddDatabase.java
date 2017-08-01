@@ -1,13 +1,20 @@
 package system;
 
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JTabbedPane;
+import javax.swing.filechooser.FileFilter;
 
 /**
  *
  * @author GGPQ9ZJ42
  */
 public class AddDatabase extends javax.swing.JFrame {
-    
+
+    String imagePath;
+    static String newImagePath;
+
     public AddDatabase() {
         initComponents();
     }
@@ -25,6 +32,42 @@ public class AddDatabase extends javax.swing.JFrame {
             dbManager.insertRecipe();
         } else {
         }
+    }
+
+    public void openImage() {
+        JFileChooser fileChooser;
+        if (imagePath != null && !imagePath.equals("")) {
+            fileChooser = new JFileChooser(imagePath);
+        } else {
+            fileChooser = new JFileChooser();
+        }
+
+        FileFilter imageFilter = new FileFilter() {
+            @Override
+            public String getDescription() {
+                return "image file (*.JPG)";
+            }
+
+            @Override
+            public boolean accept(File file) {
+                if (file.isDirectory()) {
+                    return true;
+                } else {
+                    return file.getName().toLowerCase().endsWith(".jpg");
+                }
+            }
+        };
+
+        fileChooser.setFileFilter(imageFilter);
+        fileChooser.setDialogTitle("Open Image File");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+
+        int userChoice = fileChooser.showOpenDialog(this);
+        if (userChoice == JFileChooser.APPROVE_OPTION) {
+            newImagePath = fileChooser.getSelectedFile().getAbsolutePath();
+        }
+        ImageIcon icon = new ImageIcon(newImagePath);
+        recipeImage.setIcon(icon);
     }
 
     public void calculateVAT() {
@@ -45,11 +88,15 @@ public class AddDatabase extends javax.swing.JFrame {
     }
 
     public static String getPrice() {
-        return textPrice.getText()+".00";
+        return textPrice.getText() + ".00";
     }
 
     public static String getVAT() {
         return textVAT.getText();
+    }
+
+    public static String getImageDirectory() {
+        return newImagePath.replace("\\", "/");
     }
 
     public static String getSupName() {
@@ -67,8 +114,8 @@ public class AddDatabase extends javax.swing.JFrame {
     public static String getSupAddress() {
         return textfieldDisAddress.getText();
     }
-    
-       public static JTabbedPane getTabbedPanel() {
+
+    public static JTabbedPane getTabbedPanel() {
         return tabbedPanel;
     }
 
@@ -97,6 +144,8 @@ public class AddDatabase extends javax.swing.JFrame {
         lblItem1 = new javax.swing.JLabel();
         lblQty1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        recipeImage = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblDistInfo = new javax.swing.JLabel();
         lblDisName = new javax.swing.JLabel();
@@ -171,14 +220,26 @@ public class AddDatabase extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Add Image");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(recipeImage, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblItem1)
@@ -209,8 +270,13 @@ public class AddDatabase extends javax.swing.JFrame {
                     .addComponent(lblQty1)
                     .addComponent(textVAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2))
+                    .addComponent(recipeImage, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         tabbedPanel.addTab("Reciep", jPanel2);
@@ -344,11 +410,16 @@ public class AddDatabase extends javax.swing.JFrame {
         calculateVAT();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        openImage();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAccpet;
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -364,6 +435,7 @@ public class AddDatabase extends javax.swing.JFrame {
     private javax.swing.JLabel lblQty;
     private javax.swing.JLabel lblQty1;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel recipeImage;
     private static javax.swing.JTabbedPane tabbedPanel;
     public static javax.swing.JTextField textPrice;
     public static javax.swing.JTextField textRecipe;

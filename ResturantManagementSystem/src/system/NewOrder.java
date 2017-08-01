@@ -5,18 +5,33 @@
  */
 package system;
 
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author GGPQ9ZJ42
  */
-public final class NewOrder extends javax.swing.JFrame {
+public final class NewOrder extends javax.swing.JFrame implements ActionListener {
 
+    String recipeName;
+    String recipeIndex;
+    String recipeImage;
+    ArrayList<JButton> buttonArray = new ArrayList();
+
+    JButton button;
     String waiter;
     String columnNames[] = {"Item", "Qty", "Price"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
@@ -30,8 +45,46 @@ public final class NewOrder extends javax.swing.JFrame {
         tblItems.getColumnModel().getColumn(1).setPreferredWidth(25);
         tblItems.getColumnModel().getColumn(2).setPreferredWidth(45);
         internalClock();
+        menuLayout();
         //  userManager.createUserLog();
 //        customerNo.setText(JOptionPane.showInputDialog(null, "Enter number of customers"));
+    }
+
+    public void menuLayout() {
+        dbManager.getRecipe();
+        GridLayout menuLayout = new GridLayout(0, 10);
+        jPanel6.setLayout(menuLayout);
+        int count = dbManager.getRecipesCount();
+        int emptySpace = 50 - count;
+        for (int i = 0; i < count; i++) {
+            recipeImage = dbManager.getRecipeImage().get(i).toString();
+            ImageIcon icon = (new ImageIcon(recipeImage));
+            button = new JButton("Button " + (i + 1));
+            button.setIcon(new ImageIcon(recipeImage));
+            button.setVerticalTextPosition(SwingConstants.BOTTOM);
+            button.setHorizontalTextPosition(SwingConstants.CENTER);
+            button.setMargin(new Insets(0, 0, 0, 0));
+            button.setContentAreaFilled(false);
+            button.setFocusPainted(false);
+            button.setBorder(new EmptyBorder(0, 0, 0, 0));
+            button.addActionListener(this);
+            jPanel6.add(button);
+        }
+        for (int i = 1; i < emptySpace; i++) {
+            JButton emptyButton = new JButton();
+            jPanel6.add(emptyButton);
+            emptyButton.setVisible(false);
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        String buttonId = ae.getActionCommand().replace("Button ", "");
+        int index = (Integer.parseInt(buttonId) - 1);
+        recipeName = dbManager.getRecipeName().get(index).toString();
+        recipeIndex = dbManager.getRecipeIndex().get(index).toString();
+        model.addRow(new Object[]{recipeName, "1", recipeIndex});
+        totalAmount();
     }
 
     public void getScreenResolution() {
@@ -94,13 +147,6 @@ public final class NewOrder extends javax.swing.JFrame {
         lblClock1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
-        jButton20 = new javax.swing.JButton();
-        jButton21 = new javax.swing.JButton();
-        jButton41 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -177,95 +223,15 @@ public final class NewOrder extends javax.swing.JFrame {
 
         lblClock1.setText("Clock");
 
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_f_porkRibs.jpg"))); // NOI18N
-        jButton12.setBorder(null);
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
-
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_f_chickenWings.jpg"))); // NOI18N
-        jButton13.setBorder(null);
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
-
-        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_f_beefBurger.jpg"))); // NOI18N
-        jButton16.setBorder(null);
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
-            }
-        });
-
-        jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_f_chickenBurger.jpg"))); // NOI18N
-        jButton19.setBorder(null);
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
-            }
-        });
-
-        jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_f_pizza.jpg"))); // NOI18N
-        jButton20.setBorder(null);
-        jButton20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton20ActionPerformed(evt);
-            }
-        });
-
-        jButton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_f_steak.jpg"))); // NOI18N
-        jButton21.setBorder(null);
-        jButton21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton21ActionPerformed(evt);
-            }
-        });
-
-        jButton41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_f_pizza1.jpg"))); // NOI18N
-        jButton41.setBorder(null);
-        jButton41.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton41ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(jButton16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton19)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton21)
-                .addGap(9, 9, 9)
-                .addComponent(jButton13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton12)
-                .addGap(9, 9, 9)
-                .addComponent(jButton20)
-                .addGap(9, 9, 9)
-                .addComponent(jButton41)
-                .addGap(13, 13, 13))
+            .addGap(0, 666, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton13)
-                    .addComponent(jButton12)
-                    .addComponent(jButton19)
-                    .addComponent(jButton20)
-                    .addComponent(jButton21)
-                    .addComponent(jButton16)
-                    .addComponent(jButton41))
-                .addContainerGap(354, Short.MAX_VALUE))
+            .addGap(0, 440, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Main Meals", jPanel6);
@@ -434,8 +400,9 @@ public final class NewOrder extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonClose)
                         .addGap(27, 27, 27))
-                    .addComponent(jTabbedPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTabbedPane1)
+                        .addGap(6, 6, 6)))
                 .addComponent(jToggleButton8)
                 .addContainerGap())
         );
@@ -461,41 +428,6 @@ public final class NewOrder extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
-        model.addRow(new Object[]{"Califoronia Pizza", "1", "55.00"});
-        totalAmount();
-    }//GEN-LAST:event_jButton41ActionPerformed
-
-    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        model.addRow(new Object[]{"Steak", "1", "60.00"});
-        totalAmount();
-    }//GEN-LAST:event_jButton21ActionPerformed
-
-    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        model.addRow(new Object[]{"Salami Pizza", "1", "55.00"});
-        totalAmount();
-    }//GEN-LAST:event_jButton20ActionPerformed
-
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        model.addRow(new Object[]{"Chicken Burger", "1", "35.00"});
-        totalAmount();
-    }//GEN-LAST:event_jButton19ActionPerformed
-
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        model.addRow(new Object[]{"Beef Burger", "1", "30.00"});
-        totalAmount();
-    }//GEN-LAST:event_jButton16ActionPerformed
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        model.addRow(new Object[]{"Chicken Wings", "1", "35.00"});
-        totalAmount();
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        model.addRow(new Object[]{"Ribs", "1", "70.00"});
-        totalAmount();
-    }//GEN-LAST:event_jButton12ActionPerformed
-
     private void buttonOverrideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOverrideActionPerformed
 
     }//GEN-LAST:event_buttonOverrideActionPerformed
@@ -512,15 +444,8 @@ public final class NewOrder extends javax.swing.JFrame {
     private javax.swing.JButton buttonPay;
     private javax.swing.JLabel customerNo;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;

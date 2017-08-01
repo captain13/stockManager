@@ -23,6 +23,21 @@ public class dbManager {
     static String username = "root";
     static String password = "root";
     static String driver = "com.mysql.jdbc.Driver";
+    static ArrayList recipeName = new ArrayList();
+    static ArrayList recipeIndex = new ArrayList();
+    static ArrayList recipeImage = new ArrayList();
+
+    public static ArrayList getRecipeName() {
+        return recipeName;
+    }
+
+    public static ArrayList getRecipeIndex() {
+        return recipeIndex;
+    }
+
+    public static ArrayList getRecipeImage() {
+        return recipeImage;
+    }
 
     public static void populateTables() {
         String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(kg)"};
@@ -64,7 +79,7 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT * FROM recipe";
+            String query = "SELECT recipeID, recipeName, recipePrice, recipeVAT FROM recipe";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             DefaultTableModel tableModel1 = new DefaultTableModel();
@@ -228,6 +243,48 @@ public class dbManager {
         }
     }
 
+    public static void getRecipe() {
+
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT recipeName,recipePrice,recipeImageDirectory FROM recipe";
+            ResultSet rs = s.executeQuery(query);
+            while (rs.next()) {
+                recipeName.add(rs.getString(1));
+                recipeIndex.add(rs.getString(2));
+                recipeImage.add(rs.getString(3));
+            }
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+
+    }
+
+    public static int getRecipesCount() {
+        int count = 0;
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT COUNT(recipeID) FROM recipe";
+            ResultSet rs = s.executeQuery(query);
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+        return count;
+    }
+
     public static void showActiveEmp() {
         String columnNamesEmp[] = {"First Name", "Last Name", "Active"};
         try {
@@ -316,10 +373,11 @@ public class dbManager {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO recipe(recipeName, recipePrice,recipeVAT)"
+            String insertQuerySup = "INSERT INTO recipe(recipeName, recipePrice,recipeVAT,recipeImageDirectory)"
                     + "VALUES ('" + AddDatabase.getRecipe() + "','"
                     + AddDatabase.getPrice() + "', '"
-                    + AddDatabase.getVAT() + "')";
+                    + AddDatabase.getVAT() + "', '"
+                    + AddDatabase.getImageDirectory() + "')";
             s.execute(insertQuerySup);
             populateTables();
             s.close();
