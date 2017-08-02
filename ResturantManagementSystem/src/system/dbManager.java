@@ -21,7 +21,7 @@ public class dbManager {
 
     static String url = "jdbc:mysql://localhost:3306/resturantdb";
     static String username = "root";
-    static String password = "root";
+    static String password = "";
     static String driver = "com.mysql.jdbc.Driver";
     static ArrayList recipeName = new ArrayList();
     static ArrayList recipeIndex = new ArrayList();
