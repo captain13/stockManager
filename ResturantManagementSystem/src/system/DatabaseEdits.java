@@ -236,34 +236,46 @@ ENGINE = InnoDB;
                 myStmt.executeUpdate("drop table if exists sale;");
                 myStmt.executeUpdate("drop table if exists sales_recipe;");
                 myStmt.executeUpdate("drop table if exists sales_employee;");
-                String myTableName = "CREATE TABLE books ("
-                        + "id INT(64) NOT NULL AUTO_INCREMENT,"
-                        + "title VARCHAR(75),"
-                        + "isbn VARCHAR(64),"
-                        + "author VARCHAR(75),"
-                        + "year INT(4),"
-                        + "edition INT(4),"
-                        + "catagory VARCHAR(75),"
-                        + "publisher VARCHAR(75),"
-                        + "stock INT(64),PRIMARY KEY (id))";
+                
+                
+                String myTableName = "CREATE TABLE inventory ("
+                        + "inventoryID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "item VARCHAR(75),"
+                        + "qty VARCHAR(64),"
+                        + "stock INT(64),PRIMARY KEY (inventoryID))";
+                
+                
                 myStmt.executeUpdate(myTableName);
-                myTableName = "CREATE TABLE student ("
-                        + "id INT(64) NOT NULL AUTO_INCREMENT,"
-                        + "title VARCHAR(75),"
-                        + "snumber INT(10),"
-                        + "name VARCHAR(75),"
-                        + "surname VARCHAR(75),"
-                        + "cell INT(20),"
-                        + "address VARCHAR(75),PRIMARY KEY (id))";
+                myTableName = "CREATE TABLE supplier ("
+                        + "supplierID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "supplierName VARCHAR(45),"
+                        + "supplierEmail VARCHAR(45),"
+                        + "supplierNumber VARCHAR(45),"
+                        + "supplierAddress VARCHAR(45),"
+                        + "PRIMARY KEY (supplierID))";
+                
+                
                 myStmt.executeUpdate(myTableName);
-                myTableName = "CREATE TABLE bookings ("
-                        + "id INT(64) NOT NULL AUTO_INCREMENT,"
-                        + "bdate Date,"
-                        + "isbn VARCHAR(64),"
-                        + "btitle VARCHAR(75),"
-                        + "name VARCHAR(75),"
-                        + "surname VARCHAR(75),"
-                        + "returndate DATE,PRIMARY KEY (id))";
+                myTableName = "CREATE TABLE employee ("
+                        + "employeeID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "employeeFName VARCHAR(64),"
+                        + "employeeLName VARCHAR(64),"
+                        + "employeePassword VARCHAR(75),"
+                        + "employeeContactNumber VARCHAR(75),"
+                        + "PRIMARY KEY (employeeID))";
+                
+                myStmt.executeUpdate(myTableName);
+                myTableName = "CREATE TABLE employee ("
+                        + "employeeID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "employeeFName VARCHAR(64),"
+                        + "employeeLName VARCHAR(64),"
+                        + "employeePassword VARCHAR(75),"
+                        + "employeeContactNumber VARCHAR(75),"
+                        + "PRIMARY KEY (employeeID))";
+                
+                
+                
+                
                 myStmt.executeUpdate(myTableName);
             } catch (Exception exc) {
                 exc.printStackTrace();
