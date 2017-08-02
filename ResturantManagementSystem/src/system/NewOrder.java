@@ -35,6 +35,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     String waiter;
     String columnNames[] = {"Item", "Qty", "Price"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+    Object[][] recipeInfo;
 
     public NewOrder() {
         initComponents();
@@ -45,22 +46,37 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         tblItems.getColumnModel().getColumn(1).setPreferredWidth(25);
         tblItems.getColumnModel().getColumn(2).setPreferredWidth(45);
         internalClock();
+        // dbManager.getRecipe();
         menuLayout();
         //  userManager.createUserLog();
 //        customerNo.setText(JOptionPane.showInputDialog(null, "Enter number of customers"));
     }
 
     public void menuLayout() {
-        dbManager.getRecipe();
-        GridLayout menuLayout = new GridLayout(0, 10);
+        
+        int n = dbManager.getRecipesCount();
+        recipeInfo = new Object[n][4];
+
+        for (int i = 0; i <n; i++) {
+            for (int j = 0; j < 4; j++) {
+                recipeInfo[i][j] = dbManager.getRecipe()[i][j];
+            }
+        }
+       
+//        for (int i = 0; i < n; i++) {
+//            System.out.println(recipeInfo[i][0]);
+//            System.out.println(recipeInfo[i][1]);
+//            System.out.println(recipeInfo[i][2]);
+//            System.out.println(recipeInfo[i][3]);
+//        }
+        
+        GridLayout menuLayout = new GridLayout(0, 8);
         jPanel6.setLayout(menuLayout);
-        int count = dbManager.getRecipesCount();
-        int emptySpace = 50 - count;
-        for (int i = 0; i < count; i++) {
-            recipeImage = dbManager.getRecipeImage().get(i).toString();
-            ImageIcon icon = (new ImageIcon(recipeImage));
-            button = new JButton("Button " + (i + 1));
-            button.setIcon(new ImageIcon(recipeImage));
+        int emptySpace = 48 - n;
+        for (int i = 0; i < n; i++) {
+            ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
+            button = new JButton(recipeInfo[i][1].toString(),icon);
+            button.setIcon(new ImageIcon(recipeInfo[i][3].toString()));
             button.setVerticalTextPosition(SwingConstants.BOTTOM);
             button.setHorizontalTextPosition(SwingConstants.CENTER);
             button.setMargin(new Insets(0, 0, 0, 0));
@@ -79,11 +95,13 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        String buttonId = ae.getActionCommand().replace("Button ", "");
-        int index = (Integer.parseInt(buttonId) - 1);
-        recipeName = dbManager.getRecipeName().get(index).toString();
-        recipeIndex = dbManager.getRecipeIndex().get(index).toString();
-        model.addRow(new Object[]{recipeName, "1", recipeIndex});
+        String buttonId = ae.getActionCommand();
+        for(int i=0;i<recipeInfo.length;i++){
+            if(buttonId==recipeInfo[i][1].toString()){
+                model.addRow(new Object[]{recipeInfo[i][1], "1", recipeInfo[i][2]});
+            }
+        
+        }
         totalAmount();
     }
 

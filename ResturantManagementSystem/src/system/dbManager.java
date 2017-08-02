@@ -21,7 +21,7 @@ public class dbManager {
 
     static String url = "jdbc:mysql://localhost:3306/resturantdb";
     static String username = "root";
-    static String password = "";
+    static String password = "root";
     static String driver = "com.mysql.jdbc.Driver";
     static ArrayList recipeName = new ArrayList();
     static ArrayList recipeIndex = new ArrayList();
@@ -120,7 +120,7 @@ public class dbManager {
             DefaultTableModel tableModel2 = new DefaultTableModel();
             MainSystem.tableSupplier.setModel(tableModel2);
 
-            for (int i = 0; i < columnCount; i++) {
+            for (int i = 0; i < columnNamesSuppler.length; i++) {
                 tableModel2.addColumn(columnNamesSuppler[i]);
             }
             Object[] row = new Object[columnCount];
@@ -141,6 +141,7 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+
         }
     }
 
@@ -243,26 +244,44 @@ public class dbManager {
         }
     }
 
-    public static void getRecipe() {
-
+    public static Object[][] getRecipe() {
+        int count = getRecipesCount();
+        Object recipe[][] = new Object[count][4];
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String query = "SELECT recipeName,recipePrice,recipeImageDirectory FROM recipe";
             ResultSet rs = s.executeQuery(query);
+
+//            for (int i = 0; i < 4; i++) {
+            int i = 0;
             while (rs.next()) {
-                recipeName.add(rs.getString(1));
-                recipeIndex.add(rs.getString(2));
-                recipeImage.add(rs.getString(3));
+                recipe[i][0] = i;
+                recipe[i][1] = rs.getString(1);
+                recipe[i][2] = rs.getString(2);
+                recipe[i][3] = rs.getString(3);
+                i++;
             }
+//            }
+
+//            for (int j = 0; j < i; j++) {
+//                System.out.println(recipe[j][0]);
+//                System.out.println(recipe[j][1]);
+//                System.out.println(recipe[j][2]);
+//                System.out.println(recipe[j][3]);
+//            }
+
+//                recipeName.add(rs.getString(1));
+//                recipeIndex.add(rs.getString(2));
+//                recipeImage.add(rs.getString(3));
             rs.close();
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
-
+        return recipe;
     }
 
     public static int getRecipesCount() {

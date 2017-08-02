@@ -22,39 +22,13 @@ public class MainSystem extends javax.swing.JFrame {
     Specials specials = new Specials();
     userManager userman = new userManager();
     HashMap<String, NewOrder> tables = new HashMap<>();
+    boolean enableKeypad = false;
 
     public MainSystem() {
         initComponents();
         internalClock.internalClock();
         dbManager.populateTables();
         dbManager.populateOrder();
-    }
-
-    public int getID() {
-        int id = (int) tblInventory.getValueAt(tblInventory.getSelectedRow(), 0);
-        return id;
-    }
-
-    public int getIDrecipe() {
-        int id = (int) tableRecipe.getValueAt(tableRecipe.getSelectedRow(), 0);
-        return id;
-    }
-
-    public int getIDsupplier() {
-        int id = (int) tableSupplier.getValueAt(tableSupplier.getSelectedRow(), 0);
-        return id;
-    }
-
-    public static JLabel getDate() {
-        return lblDate;
-    }
-
-    public static JLabel getTime() {
-        return lblClock;
-    }
-
-    public static JTable getOrderTable() {
-        return tblOrderHistory;
     }
 
     public static void searchTable() {
@@ -106,6 +80,42 @@ public class MainSystem extends javax.swing.JFrame {
         } catch (Exception ex) {
 
         }
+    }
+
+    public boolean keypadCheck() {
+        if (jCheckBox1.isSelected()) {
+            return enableKeypad = true;
+        } else {
+            return enableKeypad = false;
+        }
+
+    }
+
+    public int getID() {
+        int id = (int) tblInventory.getValueAt(tblInventory.getSelectedRow(), 0);
+        return id;
+    }
+
+    public int getIDrecipe() {
+        int id = (int) tableRecipe.getValueAt(tableRecipe.getSelectedRow(), 0);
+        return id;
+    }
+
+    public int getIDsupplier() {
+        int id = (int) tableSupplier.getValueAt(tableSupplier.getSelectedRow(), 0);
+        return id;
+    }
+
+    public static JLabel getDate() {
+        return lblDate;
+    }
+
+    public static JLabel getTime() {
+        return lblClock;
+    }
+
+    public static JTable getOrderTable() {
+        return tblOrderHistory;
     }
 
     public void moveButton() {
@@ -176,7 +186,7 @@ public class MainSystem extends javax.swing.JFrame {
         buttonRecipeEdit = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tableRecipe = new javax.swing.JTable();
-        pnlRecipe1 = new javax.swing.JPanel();
+        pnlSupplier = new javax.swing.JPanel();
         buttonRecipeAdd1 = new javax.swing.JButton();
         buttonRecipeDelete1 = new javax.swing.JButton();
         buttonRecipeEdit1 = new javax.swing.JButton();
@@ -200,6 +210,7 @@ public class MainSystem extends javax.swing.JFrame {
         lblScreen = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -837,22 +848,22 @@ public class MainSystem extends javax.swing.JFrame {
             tableSupplier.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        javax.swing.GroupLayout pnlRecipe1Layout = new javax.swing.GroupLayout(pnlRecipe1);
-        pnlRecipe1.setLayout(pnlRecipe1Layout);
-        pnlRecipe1Layout.setHorizontalGroup(
-            pnlRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlRecipe1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlSupplierLayout = new javax.swing.GroupLayout(pnlSupplier);
+        pnlSupplier.setLayout(pnlSupplierLayout);
+        pnlSupplierLayout.setHorizontalGroup(
+            pnlSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSupplierLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonRecipeAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonRecipeEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonRecipeDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
         );
-        pnlRecipe1Layout.setVerticalGroup(
-            pnlRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlRecipe1Layout.createSequentialGroup()
+        pnlSupplierLayout.setVerticalGroup(
+            pnlSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSupplierLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(buttonRecipeAdd1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -863,7 +874,7 @@ public class MainSystem extends javax.swing.JFrame {
             .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Supplier", pnlRecipe1);
+        jTabbedPane2.addTab("Supplier", pnlSupplier);
 
         radioID.setText("ID no.");
         radioID.addActionListener(new java.awt.event.ActionListener() {
@@ -912,11 +923,16 @@ public class MainSystem extends javax.swing.JFrame {
 
         TabbedPanel.addTab("Inventory", Inventory);
 
-        buttonOrderHistory.setText("Order History");
+        buttonOrderHistory.setText("Confirm Order");
 
         buttonAlert.setText("Alerts");
 
         buttonEmail.setText("Email");
+        buttonEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEmailActionPerformed(evt);
+            }
+        });
 
         buttonMakeOrder.setText("Make Order");
         buttonMakeOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -1050,6 +1066,8 @@ public class MainSystem extends javax.swing.JFrame {
             }
         });
 
+        jCheckBox1.setText("Enable KeyPad");
+
         javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
         Settings.setLayout(SettingsLayout);
         SettingsLayout.setHorizontalGroup(
@@ -1062,15 +1080,16 @@ public class MainSystem extends javax.swing.JFrame {
                     .addGroup(SettingsLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblScreen)
-                            .addComponent(lblLogo))
-                        .addGap(32, 32, 32)
-                        .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(comboBoxSceen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboBoxLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(SettingsLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton1)))
+                            .addGroup(SettingsLayout.createSequentialGroup()
+                                .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblScreen)
+                                    .addComponent(lblLogo))
+                                .addGap(32, 32, 32)
+                                .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(comboBoxSceen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboBoxLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButton1)
+                            .addComponent(jCheckBox1))))
                 .addContainerGap(568, Short.MAX_VALUE))
         );
         SettingsLayout.setVerticalGroup(
@@ -1086,9 +1105,11 @@ public class MainSystem extends javax.swing.JFrame {
                 .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBoxLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
+                .addComponent(jCheckBox1)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
 
         TabbedPanel.addTab("Settings", Settings);
@@ -1227,9 +1248,11 @@ public class MainSystem extends javax.swing.JFrame {
         AddDatabase s = new AddDatabase();
         s.setVisible(true);
         AddDatabase.getTabbedPanel().setSelectedIndex(1);
-//        Keyboard k = new Keyboard();
-//        k.setLocation(350, 530);
-//        k.setVisible(true);
+        if (keypadCheck() == true) {
+        Keyboard k = new Keyboard();
+        k.setLocation(350, 530);
+        k.setVisible(true);
+        }
     }//GEN-LAST:event_buttonRecipeAddActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
@@ -1240,20 +1263,24 @@ public class MainSystem extends javax.swing.JFrame {
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         AddDatabase s = new AddDatabase();
         s.setVisible(true);
-//        Keyboard k = new Keyboard();
-//        k.setLocation(350, 530);
-//        k.setVisible(true);
+        Keyboard k = new Keyboard();
+        k.setLocation(350, 530);
+        k.setVisible(true);
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonRecipeAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAdd1ActionPerformed
         AddDatabase s = new AddDatabase();
         s.setVisible(true);
         AddDatabase.getTabbedPanel().setSelectedIndex(2);
+   if (keypadCheck() == true) {
+        Keyboard k = new Keyboard();
+        k.setLocation(350, 530);
+        k.setVisible(true);
+        }        
     }//GEN-LAST:event_buttonRecipeAdd1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 //        try {
-//            // TODO add your handling code here:
 //            new DatabaseEdits.refresh();
 //        } catch (SQLException ex) {
 //            Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
@@ -1268,7 +1295,6 @@ public class MainSystem extends javax.swing.JFrame {
     private void buttonTable2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable2ActionPerformed
         if (tables.get("table2") == null) {
             tables.put("table2", new NewOrder());
-
             // Login user = new Login(tables.get("table2"));
             //  user.setVisible(true);
         } else {
@@ -1279,7 +1305,6 @@ public class MainSystem extends javax.swing.JFrame {
     private void buttonTable4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable4ActionPerformed
         if (tables.get("table4") == null) {
             tables.put("table4", new NewOrder());
-
             //  Login user = new Login(tables.get("table4"));
             //  user.setVisible(true);
         } else {
@@ -1294,7 +1319,6 @@ public class MainSystem extends javax.swing.JFrame {
     private void buttonTable7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable7ActionPerformed
         if (tables.get("table7") == null) {
             tables.put("table7", new NewOrder());
-
             // Login user = new Login(tables.get("table7"));
             //  user.setVisible(true);
         } else {
@@ -1305,7 +1329,6 @@ public class MainSystem extends javax.swing.JFrame {
     private void buttonTable6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable6ActionPerformed
         if (tables.get("table6") == null) {
             tables.put("table6", new NewOrder());
-
             //  Login user = new Login(tables.get("table6"));
             //  user.setVisible(true);
         } else {
@@ -1316,7 +1339,6 @@ public class MainSystem extends javax.swing.JFrame {
     private void buttonTable5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable5ActionPerformed
         if (tables.get("table5") == null) {
             tables.put("table5", new NewOrder());
-
             // Login user = new Login(tables.get("table5"));
             //  user.setVisible(true);
         } else {
@@ -1327,7 +1349,6 @@ public class MainSystem extends javax.swing.JFrame {
     private void buttonTable3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable3ActionPerformed
         if (tables.get("table3") == null) {
             tables.put("table3", new NewOrder());
-
             //Login user = new Login(tables.get("table3"));
             //user.setVisible(true);
         } else {
@@ -1342,7 +1363,6 @@ public class MainSystem extends javax.swing.JFrame {
     private void buttonTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable1ActionPerformed
         if (tables.get("table1") == null) {
             tables.put("table1", new NewOrder());
-
             //Login user = new Login(tables.get("table3"));
             //user.setVisible(true);
         } else {
@@ -1383,6 +1403,11 @@ public class MainSystem extends javax.swing.JFrame {
         OrderForm newOrder = new OrderForm();
         newOrder.setVisible(true);
     }//GEN-LAST:event_buttonMakeOrderActionPerformed
+
+    private void buttonEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmailActionPerformed
+        EmailForm newEmail = new EmailForm();
+        newEmail.setVisible(true);
+    }//GEN-LAST:event_buttonEmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1454,6 +1479,7 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboBoxLogo;
     private javax.swing.JComboBox<String> comboBoxSceen;
     private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1475,7 +1501,7 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JPanel pnlOrderLeft;
     private javax.swing.JPanel pnlPanel;
     private javax.swing.JPanel pnlRecipe;
-    private javax.swing.JPanel pnlRecipe1;
+    private javax.swing.JPanel pnlSupplier;
     private javax.swing.JRadioButton radioID;
     private javax.swing.JRadioButton radioItem;
     public static javax.swing.JTable tableRecipe;

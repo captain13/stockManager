@@ -960,7 +960,7 @@
                     </Container>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="pnlRecipe1">
+                <Container class="javax.swing.JPanel" name="pnlSupplier">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Supplier">
@@ -1149,7 +1149,7 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="buttonOrderHistory">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Order History"/>
+                <Property name="text" type="java.lang.String" value="Confirm Order"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="buttonAlert">
@@ -1161,6 +1161,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Email"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEmailActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="buttonMakeOrder">
               <Properties>
@@ -1261,18 +1264,20 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblScreen" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblLogo" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblScreen" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblLogo" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="comboBoxSceen" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="comboBoxLogo" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBox1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="comboBoxSceen" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="comboBoxLogo" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="568" max="32767" attributes="0"/>
@@ -1294,9 +1299,11 @@
                           <Component id="comboBoxLogo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblLogo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="282" max="32767" attributes="0"/>
+                      <EmptySpace pref="235" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1358,6 +1365,11 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Enable KeyPad"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
