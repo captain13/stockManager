@@ -30,11 +30,12 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     String recipeIndex;
     String recipeImage;
     ArrayList<JButton> buttonArray = new ArrayList();
-
+    Thread time;
     JButton button;
     String waiter;
     String columnNames[] = {"Item", "Qty", "Price"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+    boolean isRunning = false;
     Object[][] recipeInfo;
 
     public NewOrder() {
@@ -48,34 +49,34 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         internalClock();
         // dbManager.getRecipe();
         menuLayout();
+        startTime();
         //  userManager.createUserLog();
 //        customerNo.setText(JOptionPane.showInputDialog(null, "Enter number of customers"));
     }
 
     public void menuLayout() {
-        
+
         int n = dbManager.getRecipesCount();
         recipeInfo = new Object[n][4];
 
-        for (int i = 0; i <n; i++) {
+        for (int i = 0; i < n; i++) {
             for (int j = 0; j < 4; j++) {
                 recipeInfo[i][j] = dbManager.getRecipe()[i][j];
             }
         }
-       
+
 //        for (int i = 0; i < n; i++) {
 //            System.out.println(recipeInfo[i][0]);
 //            System.out.println(recipeInfo[i][1]);
 //            System.out.println(recipeInfo[i][2]);
 //            System.out.println(recipeInfo[i][3]);
 //        }
-        
         GridLayout menuLayout = new GridLayout(0, 8);
         jPanel6.setLayout(menuLayout);
         int emptySpace = 48 - n;
         for (int i = 0; i < n; i++) {
             ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
-            button = new JButton(recipeInfo[i][1].toString(),icon);
+            button = new JButton(recipeInfo[i][1].toString(), icon);
             button.setIcon(new ImageIcon(recipeInfo[i][3].toString()));
             button.setVerticalTextPosition(SwingConstants.BOTTOM);
             button.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -96,11 +97,11 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) {
         String buttonId = ae.getActionCommand();
-        for(int i=0;i<recipeInfo.length;i++){
-            if(buttonId==recipeInfo[i][1].toString()){
+        for (int i = 0; i < recipeInfo.length; i++) {
+            if (buttonId == recipeInfo[i][1].toString()) {
                 model.addRow(new Object[]{recipeInfo[i][1], "1", recipeInfo[i][2]});
             }
-        
+
         }
         totalAmount();
     }
@@ -117,11 +118,24 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     }
 
     public void internalClock() {
-        new Thread(() -> {
-            while (true) {
-                lblClock1.setText(new SimpleDateFormat("hh:mm:ss").format(new Date()));
+        time = new Thread(() -> {
+            try {
+                while (isRunning == true) {
+                    lblClock1.setText(new SimpleDateFormat("hh:mm:ss").format(new Date()));
+                }
+            } catch (Exception e) {
             }
-        }).start();
+        });
+    }
+
+    public void startTime() {
+        isRunning = true;
+        time.start();
+    }
+
+    public void interrupTime() {
+        time.interrupt();
+        isRunning = false;
     }
 
     public void totalAmount() {
@@ -142,10 +156,6 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             } catch (ArrayIndexOutOfBoundsException exp) {
             }
         }
-    }
-
-    public void setUser() {
-
     }
 
     @SuppressWarnings("unchecked")
@@ -434,6 +444,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_jToggleButton8ActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
+        interrupTime();
         super.setVisible(false);
     }//GEN-LAST:event_buttonCloseActionPerformed
 
@@ -447,7 +458,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void buttonOverrideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOverrideActionPerformed
-
+        interrupTime();
     }//GEN-LAST:event_buttonOverrideActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed

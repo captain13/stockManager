@@ -23,7 +23,7 @@ public class DatabaseEdits {
             Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false", "root", "");
             Statement myStmt = myConn.createStatement();
             ResultSet myRs = null;
-            -- -----------------------------------------------------
+         
 
 
 //-- -----------------------------------------------------
@@ -394,9 +394,6 @@ public class DatabaseEdits {
                         +"REFERENCES `resturantDB`.`Sale` (`saleID` , `inventory_inventoryID`)"
                         +"ON DELETE NO ACTION"
                         +"ON UPDATE NO ACTION)";
-        
-
-                
                 
                 myStmt.executeUpdate(myTableName);
             } catch (Exception exc) {

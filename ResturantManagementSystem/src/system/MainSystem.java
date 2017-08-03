@@ -621,12 +621,6 @@ public class MainSystem extends javax.swing.JFrame {
 
         TabbedPanel.addTab("Orders", Orders);
 
-        textboxSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textboxSearchActionPerformed(evt);
-            }
-        });
-
         lblSearch.setText("Search ");
 
         tblInventory.setModel(new javax.swing.table.DefaultTableModel(
@@ -1135,10 +1129,6 @@ public class MainSystem extends javax.swing.JFrame {
         emp.setVisible(true);
     }//GEN-LAST:event_buttonEmployeeActionPerformed
 
-    private void textboxSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textboxSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textboxSearchActionPerformed
-
     private void buttonPromotionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPromotionsActionPerformed
         try {
             calendar.setVisible(true);
@@ -1171,8 +1161,13 @@ public class MainSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeAwayActionPerformed
-        NewOrder s = new NewOrder();
-        s.setVisible(true);
+        if (tables.get("takeAway") == null) {
+            tables.put("takeAway", new NewOrder());
+            //Login user = new Login(tables.get("table3"));
+            //user.setVisible(true);
+        } else {
+            tables.get("takeAway").setVisible(true);
+        }
     }//GEN-LAST:event_buttonTakeAwayActionPerformed
 
     private void buttonLayoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLayoutActionPerformed
@@ -1206,7 +1201,6 @@ public class MainSystem extends javax.swing.JFrame {
 
     private void comboBoxSceenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSceenActionPerformed
         // TODO add your handling code here:
-
     }//GEN-LAST:event_comboBoxSceenActionPerformed
 
     private void comboBoxLogoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxLogoItemStateChanged
@@ -1249,9 +1243,9 @@ public class MainSystem extends javax.swing.JFrame {
         s.setVisible(true);
         AddDatabase.getTabbedPanel().setSelectedIndex(1);
         if (keypadCheck() == true) {
-        Keyboard k = new Keyboard();
-        k.setLocation(350, 530);
-        k.setVisible(true);
+            Keyboard k = new Keyboard();
+            k.setLocation(350, 530);
+            k.setVisible(true);
         }
     }//GEN-LAST:event_buttonRecipeAddActionPerformed
 
@@ -1272,11 +1266,11 @@ public class MainSystem extends javax.swing.JFrame {
         AddDatabase s = new AddDatabase();
         s.setVisible(true);
         AddDatabase.getTabbedPanel().setSelectedIndex(2);
-   if (keypadCheck() == true) {
-        Keyboard k = new Keyboard();
-        k.setLocation(350, 530);
-        k.setVisible(true);
-        }        
+        if (keypadCheck() == true) {
+            Keyboard k = new Keyboard();
+            k.setLocation(350, 530);
+            k.setVisible(true);
+        }
     }//GEN-LAST:event_buttonRecipeAdd1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
