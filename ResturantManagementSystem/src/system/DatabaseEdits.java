@@ -1,31 +1,31 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package system;
-//
-//import java.sql.Connection;
-//import java.sql.DriverManager;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import java.sql.Statement;
-//
-///**
-// *
-// * @author zanesmith
-// */
-//public class DatabaseEdits {
-//
-//    static class refresh {
-//
-//        public refresh() throws SQLException {
-//            Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false", "root", "");
-//            Statement myStmt = myConn.createStatement();
-//            ResultSet myRs = null;
-//            -- -----------------------------------------------------
-//
-//
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package system;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+/**
+ *
+ * @author zanesmith
+ */
+public class DatabaseEdits {
+
+    static class refresh {
+
+        public refresh() throws SQLException {
+            Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false", "root", "");
+            Statement myStmt = myConn.createStatement();
+            ResultSet myRs = null;
+            -- -----------------------------------------------------
+
+
 //-- -----------------------------------------------------
 //-- Table `resturantDB`.`inventory`
 //-- -----------------------------------------------------
@@ -220,76 +220,198 @@
 //    ON DELETE NO ACTION
 //    ON UPDATE NO ACTION)
 //ENGINE = InnoDB;
-//
-//            try {
-//
-//                // 3. Execute SQL query
-//                myStmt.executeUpdate("CREATE DATABASE if not exists resturantdb");
-//                myStmt.executeUpdate("use restaurant");
-//                 myStmt.executeUpdate("drop table if exists inventory;");
-//                myStmt.executeUpdate("drop table if exists supplier;");
-//                myStmt.executeUpdate("drop table if exists employee;");
-//                myStmt.executeUpdate("drop table if exists reservation;");
-//                myStmt.executeUpdate("drop table if exists recipe;");
-//                myStmt.executeUpdate("drop table if exists inventory_recipe;");
-//                myStmt.executeUpdate("drop table if exists stockOrder;");
-//                myStmt.executeUpdate("drop table if exists sale;");
-//                myStmt.executeUpdate("drop table if exists sales_recipe;");
-//                myStmt.executeUpdate("drop table if exists sales_employee;");
-//                
-//                
-//                String myTableName = "CREATE TABLE inventory ("
-//                        + "inventoryID INT(64) NOT NULL AUTO_INCREMENT,"
-//                        + "item VARCHAR(75),"
-//                        + "qty VARCHAR(64),"
-//                        + "stock INT(64),PRIMARY KEY (inventoryID))";
-//                
-//                
-//                myStmt.executeUpdate(myTableName);
-//                myTableName = "CREATE TABLE supplier ("
-//                        + "supplierID INT(64) NOT NULL AUTO_INCREMENT,"
-//                        + "supplierName VARCHAR(45),"
-//                        + "supplierEmail VARCHAR(45),"
-//                        + "supplierNumber VARCHAR(45),"
-//                        + "supplierAddress VARCHAR(45),"
-//                        + "PRIMARY KEY (supplierID))";
-//                
-//                
-//                myStmt.executeUpdate(myTableName);
-//                myTableName = "CREATE TABLE employee ("
-//                        + "employeeID INT(64) NOT NULL AUTO_INCREMENT,"
-//                        + "employeeFName VARCHAR(64),"
-//                        + "employeeLName VARCHAR(64),"
-//                        + "employeePassword VARCHAR(75),"
-//                        + "employeeContactNumber VARCHAR(75),"
-//                        + "PRIMARY KEY (employeeID))";
-//                
-//                myStmt.executeUpdate(myTableName);
-//                myTableName = "CREATE TABLE employee ("
-//                        + "employeeID INT(64) NOT NULL AUTO_INCREMENT,"
-//                        + "employeeFName VARCHAR(64),"
-//                        + "employeeLName VARCHAR(64),"
-//                        + "employeePassword VARCHAR(75),"
-//                        + "employeeContactNumber VARCHAR(75),"
-//                        + "PRIMARY KEY (employeeID))";
-//                
-//                
-//                
-//                
-//                myStmt.executeUpdate(myTableName);
-//            } catch (Exception exc) {
-//                exc.printStackTrace();
-//            } finally {
-//
-//                if (myStmt != null) {
-//                    myStmt.close();
-//                }
-//
-//                if (myConn != null) {
-//                    myConn.close();
-//                }
-//            }
-//        }
-//    }
-//    
-//}
+
+            try {
+
+                // 3. Execute SQL query
+                myStmt.executeUpdate("CREATE DATABASE if not exists resturantdb");
+                myStmt.executeUpdate("use restaurant");
+                 myStmt.executeUpdate("drop table if exists inventory;");
+                myStmt.executeUpdate("drop table if exists supplier;");
+                myStmt.executeUpdate("drop table if exists employee;");
+                myStmt.executeUpdate("drop table if exists reservation;");
+                myStmt.executeUpdate("drop table if exists recipe;");
+                myStmt.executeUpdate("drop table if exists inventory_recipe;");
+                myStmt.executeUpdate("drop table if exists stockOrder;");
+                myStmt.executeUpdate("drop table if exists sale;");
+                myStmt.executeUpdate("drop table if exists sales_recipe;");
+                myStmt.executeUpdate("drop table if exists sales_employee;");
+                
+                
+                String myTableName = "CREATE TABLE inventory ("
+                        + "inventoryID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "item VARCHAR(75),"
+                        + "qty VARCHAR(64),"
+                        + "stock INT(64),PRIMARY KEY (inventoryID))";
+                
+                
+                myStmt.executeUpdate(myTableName);
+                myTableName = "CREATE TABLE supplier ("
+                        + "supplierID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "supplierName VARCHAR(45),"
+                        + "supplierEmail VARCHAR(45),"
+                        + "supplierNumber VARCHAR(45),"
+                        + "supplierAddress VARCHAR(45),"
+                        + "PRIMARY KEY (supplierID))";
+                
+                
+                myStmt.executeUpdate(myTableName);
+                myTableName = "CREATE TABLE employee ("
+                        + "employeeID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "employeeFName VARCHAR(64),"
+                        + "employeeLName VARCHAR(64),"
+                        + "employeePassword VARCHAR(75),"
+                        + "employeeContactNumber VARCHAR(75),"
+                        + "PRIMARY KEY (employeeID))";
+                
+                myStmt.executeUpdate(myTableName);
+                myTableName = "CREATE TABLE reservation ("
+                        + "reservationID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "employeeID VARCHAR(64),"
+                        + "reservationDate VARCHAR(64),"
+                        + "reservationTime VARCHAR(75),"
+                        + "reservationCustomer VARCHAR(75),"
+                        + "reservationTableNumber VARCHAR(75),"
+                        + "reservationNumberPeople VARCHAR(75),"
+                        + "PRIMARY KEY (reservationID,employeeID ))"
+                        +"CONSTRAINT `fk_reservation_employee1`"
+                        +"FOREIGN KEY (employeeID)"
+                        +"REFERENCES `resturantDB`.`employee` (`employeeID`)"
+                        +"ON DELETE NO ACTION"
+                        +"ON UPDATE NO ACTION)";
+                
+                myStmt.executeUpdate(myTableName);
+                myTableName = "CREATE TABLE recipe ("
+                        + "recipeID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "recipeName VARCHAR(64),"
+                        + "recipePrice VARCHAR(64),"
+                        + "recipeVAT VARCHAR(75),"
+                        + "PRIMARY KEY (recipeID))";
+
+                
+                myStmt.executeUpdate(myTableName);
+                myTableName = "CREATE TABLE inventory_recipe ("
+                        + "inventory_recipeID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "inventoryID VARCHAR(64),"
+                        + "recipeID VARCHAR(64),"
+                        + "PRIMARY KEY (inventory_recipeID, inventoryID, recipeID))"
+                        +"CONSTRAINT `fk_inventory_recipt_inventory`"
+                        +"FOREIGN KEY (inventoryID)"
+                        +"REFERENCES `resturantDB`.`inventory` (`inventoryID`)"
+                        +"ON DELETE NO ACTION"
+                        +"ON UPDATE NO ACTION)"
+                        + "CONSTRAINT `fk_inventory_recipt_reciept1`"
+                        + "FOREIGN KEY (`recipeID`)"
+                        + "REFERENCES `resturantDB`.`recipe` (`recipeID`)"
+                           + "ON DELETE NO ACTION,"
+                           + "ON UPDATE NO ACTION)";
+                
+                myStmt.executeUpdate(myTableName);
+                myTableName = "CREATE TABLE stockOrder ("
+                        + "stockOrderID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "inventoryID INT(64),"
+                        + "supplierID INT(64),"
+                        + "dateOrdered VARCHAR(64),"
+                        + "quantity VARCHAR(64),"
+                        + "status VARCHAR(64),"
+                        + "PRIMARY KEY (stockOrderID, inventoryID, supplierID))"
+                        +"CONSTRAINT `fk_stockOrder_inventory1`"
+                        +"FOREIGN KEY (inventoryID)"
+                        +"REFERENCES `resturantDB`.`inventory` (`inventoryID`)"
+                        +"ON DELETE NO ACTION"
+                        +"ON UPDATE NO ACTION)"
+                        + "CONSTRAINT `fk_stockOrder_supplier1`"
+                        + "FOREIGN KEY (`supplierID`)"
+                        + "REFERENCES `resturantDB`.`supplier` (`supplierID`)"
+                           + "ON DELETE NO ACTION,"
+                           + "ON UPDATE NO ACTION)";
+                
+                 myStmt.executeUpdate(myTableName);
+                myTableName = "CREATE TABLE Sale ("
+                        + "saleID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "inventory_inventoryID VARCHAR(64),"
+                        + "saleDate VARCHAR(64),"
+                        + "SaleTotalCost VARCHAR(64),"
+                        + "SaleTotalVAT INT(64),"
+                        + "PRIMARY KEY (`saleID`, `inventory_inventoryID`))"
+                        +"CONSTRAINT `fk_Sale_inventory1`"
+                        +"FOREIGN KEY (inventory_inventoryID)"
+                        +"REFERENCES `resturantDB`.`inventory` (`inventoryID`)"
+                        +"ON DELETE NO ACTION"
+                        +"ON UPDATE NO ACTION)";
+                
+                
+                myStmt.executeUpdate(myTableName);
+                myTableName = "CREATE TABLE sales_recipe ("
+                        + "sales_recipeID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "recipeID INT(64),"
+                        + "saleID INT(64),"
+                        + "inventoryID INT(64),"
+                        + "PRIMARY KEY (`sales_recipeID`, `recipeID`, `saleID`, `inventoryID`))"
+                        +"CONSTRAINT `fk_sales_recipt_reciept1`"
+                        +"FOREIGN KEY (recipeID)"
+                        +"REFERENCES `resturantDB`.`recipe` (`recipeID`)"
+                        +"ON DELETE NO ACTION"
+                        +"ON UPDATE NO ACTION)"
+                        +"CONSTRAINT `fk_sales_recipe_Sale1`"
+                        +"FOREIGN KEY (`saleID` , `inventoryID`)"
+                        +"REFERENCES `resturantDB`.`Sale` (`saleID` , `inventory_inventoryID`)"
+                        +"ON DELETE NO ACTION"
+                        +"ON UPDATE NO ACTION)";
+       
+                myStmt.executeUpdate(myTableName);
+                myTableName = "CREATE TABLE sales_employeeID ("
+                        + "sales_employeeID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "employeeID INT(64),"
+                        + "saleID INT(64),"
+                        + "inventoryID INT(64),"
+                        + "PRIMARY KEY (`sales_employeeID`, `employeeID`, `saleID`, `inventoryID`))"
+                        +"CONSTRAINT `fk_sales_employee_employee1`"
+                        +"FOREIGN KEY (employeeID)"
+                        +"REFERENCES `resturantDB`.`recipe` (`recipeID`)"
+                        +"ON DELETE NO ACTION"
+                        +"ON UPDATE NO ACTION)"
+                        +"CONSTRAINT `fk_sales_recipe_Sale1`"
+                        +"FOREIGN KEY (`saleID` , `inventoryID`)"
+                        +"REFERENCES `resturantDB`.`Sale` (`saleID` , `inventory_inventoryID`)"
+                        +"ON DELETE NO ACTION"
+                        +"ON UPDATE NO ACTION)";
+            
+                myStmt.executeUpdate(myTableName);
+                myTableName = "CREATE TABLE sales_employee ("
+                        + "sales_employeeID INT(64) NOT NULL AUTO_INCREMENT,"
+                        + "employeeID INT(64),"
+                        + "saleID INT(64),"
+                        + "inventoryID INT(64),"
+                        + "PRIMARY KEY (`sales_employeeID`, `employeeID`, `saleID`, `inventoryID`))"
+                        +"CONSTRAINT `fk_sales_employee_employee1`"
+                        +"FOREIGN KEY (employeeID)"
+                        +"REFERENCES `resturantDB`.`employee` (`employeeID`)"
+                        +"ON DELETE NO ACTION"
+                        +"ON UPDATE NO ACTION)"
+                        +"CONSTRAINT `fk_sales_recipe_Sale1`"
+                        +"FOREIGN KEY (`saleID` , `inventoryID`)"
+                        +"REFERENCES `resturantDB`.`Sale` (`saleID` , `inventory_inventoryID`)"
+                        +"ON DELETE NO ACTION"
+                        +"ON UPDATE NO ACTION)";
+        
+
+                
+                
+                myStmt.executeUpdate(myTableName);
+            } catch (Exception exc) {
+                exc.printStackTrace();
+            } finally {
+
+                if (myStmt != null) {
+                    myStmt.close();
+                }
+
+                if (myConn != null) {
+                    myConn.close();
+                }
+            }
+        }
+    }
+    
+}
