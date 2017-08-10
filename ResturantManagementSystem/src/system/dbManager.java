@@ -211,7 +211,7 @@ public class dbManager {
     }
 
     public static void populateOrder() {
-        String columnNamesEmp[] = {"ID", "Inventory ID", "Supplier ID", "Date Ordered", "Quantity(kg)", "Status"};
+        String columnNamesEmp[] = {"ID", "Inventory ID", "Supplier ID", "Date Ordered","ETA", "Quantity(kg)", "Status"};
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -337,7 +337,6 @@ public class dbManager {
 
     public static String getHoursWorked(String Username) {
         String time = "00:00:00";
-
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -444,7 +443,7 @@ public class dbManager {
 
     }
 
-    public static void insertOrder() {
+    public static void insertStockOrder() {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -460,6 +459,24 @@ public class dbManager {
         } catch (SQLException exp) {
             System.out.println(exp);
         }
+    }
+    
+    public static void insertReceipt() {
+//        try {
+//            Connection conn = DriverManager.getConnection(url, username, password);
+//            Statement s = conn.createStatement();
+//            String insertQuerySup = "INSERT INTO receipt(recipeID, salessID,orderQuantity)"
+//                    + "VALUES ('" + OrderForm.getInventoryID() + "','"
+//                    + OrderForm.getSupplierID() + "', '"
+//                    + internalClock.getCurrentDate() + "', '"
+//                    + OrderForm.getQuantity() + "', 'Not Delievered')";
+//            s.execute(insertQuerySup);
+//            populateOrder();
+//            s.close();
+//            conn.close();
+//        } catch (SQLException exp) {
+//            System.out.println(exp);
+//        }
     }
 
     public static void removeInventory(int index) {

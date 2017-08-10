@@ -192,6 +192,7 @@ public class AddEmployee extends javax.swing.JFrame {
 
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
         dbManager.insertEmployee();
+        this.dispose();
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -148,14 +148,11 @@ public class Employee extends javax.swing.JFrame {
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         AddEmployee s = new AddEmployee();
         s.setVisible(true);
-        Keyboard k = new Keyboard();
-        k.setLocation(350, 530);
-        k.setVisible(true);
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION){
+        if (confirm == JOptionPane.YES_OPTION) {
             dbManager.removeEmployee(getID());
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed

@@ -1257,9 +1257,11 @@ public class MainSystem extends javax.swing.JFrame {
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         AddDatabase s = new AddDatabase();
         s.setVisible(true);
-        Keyboard k = new Keyboard();
-        k.setLocation(350, 530);
-        k.setVisible(true);
+        if (keypadCheck() == true) {
+            Keyboard k = new Keyboard();
+            k.setLocation(350, 530);
+            k.setVisible(true);
+        }
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonRecipeAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAdd1ActionPerformed
