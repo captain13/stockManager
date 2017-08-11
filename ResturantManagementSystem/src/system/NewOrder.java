@@ -128,6 +128,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         });
     }
 
+    public static String getTotal() {
+        return textfieldTotal.getText().replaceAll("R", "");
+    }
+
     public void startTime() {
         isRunning = true;
         time.start();

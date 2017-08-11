@@ -10,21 +10,24 @@ package system;
  * @author user1
  */
 public class Checkout extends javax.swing.JFrame {
+
     static String number;
+    static double currentTotal;
+
     public Checkout() {
         initComponents();
         super.setLocationRelativeTo(null);
     }
-    
-    public static void calculateBill(){
+
+    public static void calculateBill() {
         double total;
-        total=Double.parseDouble(number)-Double.parseDouble(NewOrder.textfieldTotal.getText().replaceAll("R", ""));
-        
-        if (total>0){
-            totalField.setText("Change: R"+Double.toString(total));
-        }
-        else if(total<0){
-             totalField.setText("Outstanding: R"+Double.toString(total));
+        currentTotal = Double.parseDouble(NewOrder.getTotal());
+        total = Double.parseDouble(number) - currentTotal;
+
+        if (total >= 0) {
+            totalField.setText("Change: R" + Double.toString(total));
+        } else if (total < 0) {
+            totalField.setText("Outstanding: R" + Double.toString(total));
         }
     }
 
@@ -253,12 +256,13 @@ public class Checkout extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-       number=totalField.getText()+"1";
+        number = totalField.getText() + "1";
         totalField.setText(number);
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         calculateBill();
+        dbManager.insertSales(currentTotal);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -266,57 +270,57 @@ public class Checkout extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-          number=totalField.getText()+"2";
+        number = totalField.getText() + "2";
         totalField.setText(number);
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-         number=totalField.getText()+"3";
+        number = totalField.getText() + "3";
         totalField.setText(number);
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-         number=totalField.getText()+"4";
+        number = totalField.getText() + "4";
         totalField.setText(number);
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        number=totalField.getText()+"5";
+        number = totalField.getText() + "5";
         totalField.setText(number);
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-      number=totalField.getText()+"6";
+        number = totalField.getText() + "6";
         totalField.setText(number);
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-       number=totalField.getText()+"7";
+        number = totalField.getText() + "7";
         totalField.setText(number);
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-       number=totalField.getText()+"8";
+        number = totalField.getText() + "8";
         totalField.setText(number);
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-    number=totalField.getText()+"9";
+        number = totalField.getText() + "9";
         totalField.setText(number);
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-         number=totalField.getText()+"0";
+        number = totalField.getText() + "0";
         totalField.setText(number);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-         number=totalField.getText()+".";
+        number = totalField.getText() + ".";
         totalField.setText(number);
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

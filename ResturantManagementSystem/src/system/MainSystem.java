@@ -936,6 +936,11 @@ public class MainSystem extends javax.swing.JFrame {
         });
 
         buttonReports.setText("Report");
+        buttonReports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonReportsActionPerformed(evt);
+            }
+        });
 
         buttonEmployee.setText("Employees");
         buttonEmployee.addActionListener(new java.awt.event.ActionListener() {
@@ -1404,6 +1409,11 @@ public class MainSystem extends javax.swing.JFrame {
         EmailForm newEmail = new EmailForm();
         newEmail.setVisible(true);
     }//GEN-LAST:event_buttonEmailActionPerformed
+
+    private void buttonReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReportsActionPerformed
+      Reports newReport=new Reports();
+      newReport.setVisible(true);
+    }//GEN-LAST:event_buttonReportsActionPerformed
 
     /**
      * @param args the command line arguments

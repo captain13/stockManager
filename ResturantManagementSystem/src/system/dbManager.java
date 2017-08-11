@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -211,7 +212,7 @@ public class dbManager {
     }
 
     public static void populateOrder() {
-        String columnNamesEmp[] = {"ID", "Inventory ID", "Supplier ID", "Date Ordered","ETA", "Quantity(kg)", "Status"};
+        String columnNamesEmp[] = {"ID", "Inventory ID", "Supplier ID", "Date Ordered", "ETA", "Quantity(kg)", "Status"};
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -236,6 +237,38 @@ public class dbManager {
             }
             Booking.tableRes.getColumnModel().getColumn(0).setPreferredWidth(45);
             Booking.tableRes.getColumnModel().getColumn(2).setPreferredWidth(45);
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+    }
+
+    public static void populateSales(JTable sales) {
+        String columnNames[] = {"ID", "Sales Date", "Total Sale"};
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT* FROM sales";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            DefaultTableModel tableModel = new DefaultTableModel();
+            sales.setModel(tableModel);
+
+            for (int i = 0; i < columnCount; i++) {
+                tableModel.addColumn(columnNames[i]);
+            }
+            Object[] row = new Object[columnCount];
+
+            while (rs.next()) {
+                for (int i = 0; i < columnCount; i++) {
+                    row[i] = rs.getObject(i + 1);
+                }
+                tableModel.addRow(row);
+            }
             rs.close();
             s.close();
             conn.close();
@@ -271,7 +304,6 @@ public class dbManager {
 //                System.out.println(recipe[j][2]);
 //                System.out.println(recipe[j][3]);
 //            }
-
 //                recipeName.add(rs.getString(1));
 //                recipeIndex.add(rs.getString(2));
 //                recipeImage.add(rs.getString(3));
@@ -460,7 +492,23 @@ public class dbManager {
             System.out.println(exp);
         }
     }
-    
+
+    public static void insertSales(double currentTotal) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String insertQuerySup = "INSERT INTO sales(salesDate,totalCost)"
+                    + "VALUES ('" + internalClock.getCurrentDate() + "','"
+                    + currentTotal + "')";
+            s.execute(insertQuerySup);
+            populateOrder();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
     public static void insertReceipt() {
 //        try {
 //            Connection conn = DriverManager.getConnection(url, username, password);
