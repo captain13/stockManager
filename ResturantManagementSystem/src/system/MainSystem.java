@@ -1,11 +1,16 @@
 package system;
 
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.util.HashMap;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.TableModel;
@@ -15,7 +20,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author GGPQ9ZJ42
  */
-public class MainSystem extends javax.swing.JFrame {
+public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     Booking booking = new Booking();
     Calendar calendar = new Calendar();
@@ -29,6 +34,39 @@ public class MainSystem extends javax.swing.JFrame {
         internalClock.internalClock();
         dbManager.populateTables();
         dbManager.populateOrder();
+        menuLayout();
+    }
+
+    public void menuLayout() {
+        JButton button;
+        int n = 15;
+        GridLayout tableLayout = new GridLayout(0, 4);
+        pnlLayout.setLayout(tableLayout);
+        int emptySpace = 20 - n;
+        for (int i = 1; i <= n; i++) {
+            button = new JButton("Table " + i);
+            button.setMargin(new Insets(0, 0, 0, 0));
+            button.setBorder(new EmptyBorder(0, 0, 0, 0));
+            button.addActionListener(this);
+            pnlLayout.add(button);
+        }
+//        for (int i = 1; i < emptySpace; i++) {
+//            JButton emptyButton = new JButton();
+//            pnlLayout.add(emptyButton);
+//            emptyButton.setVisible(false);
+//        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        String buttonId = ae.getActionCommand();
+        if (tables.get(buttonId) == null) {
+            tables.put(buttonId, new NewOrder());
+            tables.get(buttonId).setVisible(true);
+        } else {
+            tables.get(buttonId).setVisible(true);
+        }
+        System.out.println(buttonId);
     }
 
     public static void searchTable() {
@@ -118,20 +156,6 @@ public class MainSystem extends javax.swing.JFrame {
         return tblOrderHistory;
     }
 
-    public void moveButton() {
-
-        buttonTable1.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent evt) {
-                {
-                    int X = buttonTable1.getX() + evt.getX();
-                    int Y = buttonTable1.getY() + evt.getY();
-                    buttonTable1.setBounds(X, Y, 60, 60);
-                }
-            }
-        });
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -158,16 +182,7 @@ public class MainSystem extends javax.swing.JFrame {
         buttonReprint = new javax.swing.JButton();
         buttonLayout = new javax.swing.JButton();
         buttonTakeAway = new javax.swing.JButton();
-        buttonReprint2 = new javax.swing.JButton();
         pnlLayout = new javax.swing.JPanel();
-        buttonTable3 = new javax.swing.JButton();
-        buttonTable1 = new javax.swing.JButton();
-        buttonTable2 = new javax.swing.JButton();
-        buttonTable4 = new javax.swing.JButton();
-        buttonTable6 = new javax.swing.JButton();
-        buttonTable7 = new javax.swing.JButton();
-        buttonTable8 = new javax.swing.JButton();
-        buttonTable5 = new javax.swing.JButton();
         buttonReprint1 = new javax.swing.JButton();
         Inventory = new javax.swing.JPanel();
         textboxSearch = new javax.swing.JTextField();
@@ -420,13 +435,6 @@ public class MainSystem extends javax.swing.JFrame {
             }
         });
 
-        buttonReprint2.setText("Add Button");
-        buttonReprint2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonReprint2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlOrderLeftLayout = new javax.swing.GroupLayout(pnlOrderLeft);
         pnlOrderLeft.setLayout(pnlOrderLeftLayout);
         pnlOrderLeftLayout.setHorizontalGroup(
@@ -434,7 +442,6 @@ public class MainSystem extends javax.swing.JFrame {
             .addGroup(pnlOrderLeftLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addGroup(pnlOrderLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonReprint2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonReprint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonTakeAway, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -449,143 +456,23 @@ public class MainSystem extends javax.swing.JFrame {
                 .addComponent(buttonLayout, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonReprint, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(buttonReprint2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(67, 67, 67)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
-        pnlLayout.setBackground(new java.awt.Color(255, 255, 255));
+        pnlLayout.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlLayout.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        buttonTable3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableS.jpg"))); // NOI18N
-        buttonTable3.setContentAreaFilled(false);
-        buttonTable3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTable3ActionPerformed(evt);
-            }
-        });
-
-        buttonTable1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableB.jpg"))); // NOI18N
-        buttonTable1.setContentAreaFilled(false);
-        buttonTable1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTable1ActionPerformed(evt);
-            }
-        });
-
-        buttonTable2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableB.jpg"))); // NOI18N
-        buttonTable2.setContentAreaFilled(false);
-        buttonTable2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTable2ActionPerformed(evt);
-            }
-        });
-
-        buttonTable4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableS.jpg"))); // NOI18N
-        buttonTable4.setContentAreaFilled(false);
-        buttonTable4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTable4ActionPerformed(evt);
-            }
-        });
-
-        buttonTable6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableS.jpg"))); // NOI18N
-        buttonTable6.setContentAreaFilled(false);
-        buttonTable6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTable6ActionPerformed(evt);
-            }
-        });
-
-        buttonTable7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableS.jpg"))); // NOI18N
-        buttonTable7.setContentAreaFilled(false);
-        buttonTable7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTable7ActionPerformed(evt);
-            }
-        });
-
-        buttonTable8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableBar.png"))); // NOI18N
-        buttonTable8.setContentAreaFilled(false);
-        buttonTable8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTable8ActionPerformed(evt);
-            }
-        });
-
-        buttonTable5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_o_tableB.jpg"))); // NOI18N
-        buttonTable5.setContentAreaFilled(false);
-        buttonTable5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTable5ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlLayoutLayout = new javax.swing.GroupLayout(pnlLayout);
         pnlLayout.setLayout(pnlLayoutLayout);
         pnlLayoutLayout.setHorizontalGroup(
             pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLayoutLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlLayoutLayout.createSequentialGroup()
-                        .addComponent(buttonTable5)
-                        .addGap(83, 83, 83)
-                        .addComponent(buttonTable6)
-                        .addContainerGap(196, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
-                                .addComponent(buttonTable4)
-                                .addGap(180, 180, 180))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
-                                .addComponent(buttonTable2)
-                                .addGap(200, 200, 200))))))
-            .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlLayoutLayout.createSequentialGroup()
-                    .addGap(10, 10, 10)
-                    .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(buttonTable1, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(buttonTable3, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
-                    .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(buttonTable8)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
-                            .addComponent(buttonTable7)
-                            .addGap(12, 12, 12)))
-                    .addContainerGap()))
+            .addGap(0, 531, Short.MAX_VALUE)
         );
         pnlLayoutLayout.setVerticalGroup(
             pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayoutLayout.createSequentialGroup()
-                .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlLayoutLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonTable5))
-                    .addGroup(pnlLayoutLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(buttonTable2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                        .addComponent(buttonTable4)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonTable6)))
-                .addGap(37, 37, 37))
-            .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlLayoutLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlLayoutLayout.createSequentialGroup()
-                            .addGap(107, 107, 107)
-                            .addComponent(buttonTable3))
-                        .addComponent(buttonTable1)
-                        .addGroup(pnlLayoutLayout.createSequentialGroup()
-                            .addComponent(buttonTable8)
-                            .addGap(35, 35, 35)
-                            .addComponent(buttonTable7)))
-                    .addContainerGap(19, Short.MAX_VALUE)))
+            .addGap(0, 359, Short.MAX_VALUE)
         );
 
         buttonReprint1.setText("Edit");
@@ -610,8 +497,8 @@ public class MainSystem extends javax.swing.JFrame {
         OrdersLayout.setVerticalGroup(
             OrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(OrdersLayout.createSequentialGroup()
-                .addComponent(pnlLayout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonReprint1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(OrdersLayout.createSequentialGroup()
                 .addContainerGap()
@@ -1290,86 +1177,8 @@ public class MainSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void buttonReprint1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprint1ActionPerformed
-        moveButton();
+
     }//GEN-LAST:event_buttonReprint1ActionPerformed
-
-    private void buttonTable2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable2ActionPerformed
-        if (tables.get("table2") == null) {
-            tables.put("table2", new NewOrder());
-            // Login user = new Login(tables.get("table2"));
-            //  user.setVisible(true);
-        } else {
-            tables.get("table2").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable2ActionPerformed
-
-    private void buttonTable4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable4ActionPerformed
-        if (tables.get("table4") == null) {
-            tables.put("table4", new NewOrder());
-            //  Login user = new Login(tables.get("table4"));
-            //  user.setVisible(true);
-        } else {
-            tables.get("table4").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable4ActionPerformed
-
-    private void buttonTable8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonTable8ActionPerformed
-
-    private void buttonTable7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable7ActionPerformed
-        if (tables.get("table7") == null) {
-            tables.put("table7", new NewOrder());
-            // Login user = new Login(tables.get("table7"));
-            //  user.setVisible(true);
-        } else {
-            tables.get("table7").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable7ActionPerformed
-
-    private void buttonTable6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable6ActionPerformed
-        if (tables.get("table6") == null) {
-            tables.put("table6", new NewOrder());
-            //  Login user = new Login(tables.get("table6"));
-            //  user.setVisible(true);
-        } else {
-            tables.get("table6").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable6ActionPerformed
-
-    private void buttonTable5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable5ActionPerformed
-        if (tables.get("table5") == null) {
-            tables.put("table5", new NewOrder());
-            // Login user = new Login(tables.get("table5"));
-            //  user.setVisible(true);
-        } else {
-            tables.get("table5").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable5ActionPerformed
-
-    private void buttonTable3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable3ActionPerformed
-        if (tables.get("table3") == null) {
-            tables.put("table3", new NewOrder());
-            //Login user = new Login(tables.get("table3"));
-            //user.setVisible(true);
-        } else {
-            tables.get("table3").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable3ActionPerformed
-
-    private void buttonReprint2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprint2ActionPerformed
-        layoutManager.newButton();
-    }//GEN-LAST:event_buttonReprint2ActionPerformed
-
-    private void buttonTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTable1ActionPerformed
-        if (tables.get("table1") == null) {
-            tables.put("table1", new NewOrder());
-            //Login user = new Login(tables.get("table3"));
-            //user.setVisible(true);
-        } else {
-            tables.get("table1").setVisible(true);
-        }
-    }//GEN-LAST:event_buttonTable1ActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
@@ -1411,8 +1220,8 @@ public class MainSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonEmailActionPerformed
 
     private void buttonReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReportsActionPerformed
-      Reports newReport=new Reports();
-      newReport.setVisible(true);
+        Reports newReport = new Reports();
+        newReport.setVisible(true);
     }//GEN-LAST:event_buttonReportsActionPerformed
 
     /**
@@ -1471,16 +1280,7 @@ public class MainSystem extends javax.swing.JFrame {
     private javax.swing.JButton buttonReports;
     private javax.swing.JButton buttonReprint;
     private javax.swing.JButton buttonReprint1;
-    private javax.swing.JButton buttonReprint2;
     private javax.swing.JButton buttonSpecials;
-    private javax.swing.JButton buttonTable1;
-    private javax.swing.JButton buttonTable2;
-    private javax.swing.JButton buttonTable3;
-    private javax.swing.JButton buttonTable4;
-    private javax.swing.JButton buttonTable5;
-    private javax.swing.JButton buttonTable6;
-    private javax.swing.JButton buttonTable7;
-    private javax.swing.JButton buttonTable8;
     private javax.swing.JButton buttonTakeAway;
     private javax.swing.JComboBox<String> comboBoxLogo;
     private javax.swing.JComboBox<String> comboBoxSceen;
