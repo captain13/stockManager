@@ -6,10 +6,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.MouseAdapter;
 import java.util.HashMap;
 import javax.swing.*;
-import java.awt.event.MouseEvent;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -34,10 +32,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         internalClock.internalClock();
         dbManager.populateTables();
         dbManager.populateOrder();
-        menuLayout();
+        tableLayout();
     }
 
-    public void menuLayout() {
+    public final void tableLayout() {
         JButton button;
         int n = 15;
         GridLayout tableLayout = new GridLayout(0, 4);
@@ -69,55 +67,98 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         System.out.println(buttonId);
     }
 
-    public static void searchTable() {
+    public static void searchITable() {
         try {
             TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tblInventory.getModel());
-            TableRowSorter<TableModel> rowSorterRecipe = new TableRowSorter<>(tableRecipe.getModel());
-            TableRowSorter<TableModel> rowSorterSup = new TableRowSorter<>(tableSupplier.getModel());
             tblInventory.setRowSorter(rowSorter);
-            tableRecipe.setRowSorter(rowSorterRecipe);
-            tableSupplier.setRowSorter(rowSorterSup);
             textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
-
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     String text = textboxSearch.getText();
-
                     if (text.trim().length() == 0) {
                         rowSorter.setRowFilter(null);
-                        rowSorterRecipe.setRowFilter(null);
-                        rowSorterSup.setRowFilter(null);
                     } else {
                         rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
+                }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    String text = textboxSearch.getText();
+                    if (text.trim().length() == 0) {
+                        rowSorter.setRowFilter(null);
+                    } else {
+                        rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
+                }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+        } catch (Exception ex) {}
+    }
+
+    public static void searchRTable() {
+        try {
+            TableRowSorter<TableModel> rowSorterRecipe = new TableRowSorter<>(tableRecipe.getModel());
+            tableRecipe.setRowSorter(rowSorterRecipe);
+            textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    String text = textboxSearch.getText();
+                    if (text.trim().length() == 0) {
+                        rowSorterRecipe.setRowFilter(null);
+                    } else {
                         rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
+                }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    String text = textboxSearch.getText();
+                    if (text.trim().length() == 0) {
+                        rowSorterRecipe.setRowFilter(null);
+                    } else {
+                        rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
+                }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+        } catch (Exception ex) {}
+    }
+
+    public static void searchSTable() {
+        try {
+            TableRowSorter<TableModel> rowSorterSup = new TableRowSorter<>(tableSupplier.getModel());
+            tableSupplier.setRowSorter(rowSorterSup);
+            textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    String text = textboxSearch.getText();
+                    if (text.trim().length() == 0) {
+                        rowSorterSup.setRowFilter(null);
+                    } else {
                         rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
                 }
-
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     String text = textboxSearch.getText();
 
                     if (text.trim().length() == 0) {
-                        rowSorter.setRowFilter(null);
-                        rowSorterRecipe.setRowFilter(null);
                         rowSorterSup.setRowFilter(null);
                     } else {
-                        rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                        rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                         rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
                 }
-
                 @Override
                 public void changedUpdate(DocumentEvent e) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    throw new UnsupportedOperationException("Not supported yet.");
                 }
-
             });
-        } catch (Exception ex) {
-
-        }
+        } catch (Exception ex) {}
     }
 
     public boolean keypadCheck() {
@@ -248,7 +289,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo_White.png"))); // NOI18N
         lblImage.setToolTipText("");
 
-        lblVersion.setText("Version 2.5.21");
+        lblVersion.setText("Version 1.0.0");
 
         buttonClose.setText("Close");
         buttonClose.setAlignmentY(0.0F);
@@ -370,7 +411,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         .addContainerGap()
                         .addComponent(lblVersion)
                         .addGap(186, 186, 186)
-                        .addComponent(buttonClose, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                        .addComponent(buttonClose, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
                         .addGap(217, 217, 217))
                     .addGroup(DashboardLayout.createSequentialGroup()
                         .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -124,6 +124,6 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JButton buttonClose1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable tableSales;
+    private javax.swing.JTable tableSales;
     // End of variables declaration//GEN-END:variables
 }

@@ -65,7 +65,7 @@ public class dbManager {
                 for (int i = 0; i < columnCount; i++) {
                     row[i] = rs.getObject(i + 1);
                 }
-                MainSystem.searchTable();
+                MainSystem.searchITable();
                 tableModel.addRow(row);
             }
             MainSystem.tblInventory.getColumnModel().getColumn(0).setPreferredWidth(10);
@@ -97,7 +97,7 @@ public class dbManager {
                 for (int i = 0; i < columnCount; i++) {
                     row[i] = rs.getObject(i + 1);
                 }
-                MainSystem.searchTable();
+                MainSystem.searchRTable();
                 tableModel1.addRow(row);
             }
             MainSystem.tableRecipe.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -130,7 +130,7 @@ public class dbManager {
                 for (int i = 0; i < columnCount; i++) {
                     row[i] = rs.getObject(i + 1);
                 }
-                MainSystem.searchTable();
+                MainSystem.searchSTable();
                 tableModel2.addRow(row);
             }
             MainSystem.tableSupplier.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -403,13 +403,13 @@ public class dbManager {
         }
     }
 
-    public static void insertInventory() {
+    public static void insertInventory(String item, String quantity) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String insertQuery = "INSERT INTO inventory (item, qty)"
-                    + "VALUES ('" + AddDatabase.getItem() + "', '"
-                    + AddDatabase.getQuantity() + "')";
+                    + "VALUES ('" + item + "', '"
+                    + quantity + "')";
             s.execute(insertQuery);
             populateTables();
             s.close();
@@ -419,15 +419,15 @@ public class dbManager {
         }
     }
 
-    public static void insertRecipe() {
+    public static void insertRecipe(String name,String price,String vat,String directory) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String insertQuerySup = "INSERT INTO recipe(recipeName, recipePrice,recipeVAT,recipeImageDirectory)"
-                    + "VALUES ('" + AddDatabase.getRecipe() + "','"
-                    + AddDatabase.getPrice() + "', '"
-                    + AddDatabase.getVAT() + "', '"
-                    + AddDatabase.getImageDirectory() + "')";
+                    + "VALUES ('" +name + "','"
+                    + price + "', '"
+                    + vat + "', '"
+                    + directory + "')";
             s.execute(insertQuerySup);
             populateTables();
             s.close();
@@ -436,15 +436,15 @@ public class dbManager {
         }
     }
 
-    public static void insertSupplier() {
+    public static void insertSupplier(String name,String email,String number,String address) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String insertQuerySup = "INSERT INTO supplier(supplierName, supplierEmail,supplierNumber, supplierAddress)"
-                    + "VALUES ('" + AddDatabase.getSupName() + "','"
-                    + AddDatabase.getSupEmail() + "', '"
-                    + AddDatabase.getSupContact() + "', '"
-                    + AddDatabase.getSupAddress() + "')";
+                    + "VALUES ('" + name+ "','"
+                    + email + "', '"
+                    + number + "', '"
+                    + address + "')";
             s.execute(insertQuerySup);
             populateTables();
             s.close();
