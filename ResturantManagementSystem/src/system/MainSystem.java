@@ -24,6 +24,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     Calendar calendar = new Calendar();
     Specials specials = new Specials();
     userManager userman = new userManager();
+    xmlManager manager = new xmlManager();
     HashMap<String, NewOrder> tables = new HashMap<>();
     boolean enableKeypad = false;
 
@@ -33,6 +34,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         dbManager.populateTables();
         dbManager.populateOrder();
         tableLayout();
+        getResolution();
     }
 
     public final void tableLayout() {
@@ -81,6 +83,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
                 }
+
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     String text = textboxSearch.getText();
@@ -90,12 +93,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
                 }
+
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             });
-        } catch (Exception ex) {}
+        } catch (Exception ex) {
+        }
     }
 
     public static void searchRTable() {
@@ -112,6 +117,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
                 }
+
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     String text = textboxSearch.getText();
@@ -121,12 +127,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
                 }
+
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             });
-        } catch (Exception ex) {}
+        } catch (Exception ex) {
+        }
     }
 
     public static void searchSTable() {
@@ -143,6 +151,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
                 }
+
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     String text = textboxSearch.getText();
@@ -153,12 +162,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
                 }
+
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     throw new UnsupportedOperationException("Not supported yet.");
                 }
             });
-        } catch (Exception ex) {}
+        } catch (Exception ex) {
+        }
     }
 
     public boolean keypadCheck() {
@@ -196,6 +207,48 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public static JTable getOrderTable() {
         return tblOrderHistory;
     }
+
+    public final void getResolution() {
+        String resolution = manager.getResolution();
+        switch (resolution) {
+            case "Windowed Screen":
+                comboBoxSceen.setSelectedItem("Windowed Screen");
+                break;
+
+            case "Fullscreen":
+                comboBoxSceen.setSelectedItem("Fullscreen");
+                break;
+        }
+    }
+
+    public void setResolution() {
+        switch (getSelectedItem()) {
+            case "Windowed Screen":
+                windows();
+                break;
+
+            case "Fullscreen":
+                fullscreen();
+                break;
+        }
+    }
+
+    public void fullscreen() {
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().getWidth());
+        int ySize = ((int) tk.getScreenSize().getHeight());
+        this.setSize(xSize, ySize);
+        this.setLocation(0, 0);
+    }
+
+    public void windows() {
+        this.setSize(800, 600);
+        this.setLocationRelativeTo(null);
+    }
+    
+    public String getSelectedItem(){
+        return comboBoxSceen.getSelectedItem().toString();
+    } 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -267,6 +320,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         lblLogo = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -967,11 +1021,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 comboBoxSceenItemStateChanged(evt);
             }
         });
-        comboBoxSceen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxSceenActionPerformed(evt);
-            }
-        });
 
         lblSettings.setText("Settings");
 
@@ -995,6 +1044,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         jCheckBox1.setText("Enable KeyPad");
 
+        jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
         Settings.setLayout(SettingsLayout);
         SettingsLayout.setHorizontalGroup(
@@ -1016,7 +1072,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                                     .addComponent(comboBoxSceen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(comboBoxLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jButton1)
-                            .addComponent(jCheckBox1))))
+                            .addComponent(jCheckBox1)))
+                    .addGroup(SettingsLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(568, Short.MAX_VALUE))
         );
         SettingsLayout.setVerticalGroup(
@@ -1036,7 +1095,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jCheckBox1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
 
         TabbedPanel.addTab("Settings", Settings);
@@ -1113,28 +1174,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void comboBoxSceenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxSceenItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
-            String selected_item = comboBoxSceen.getSelectedItem().toString();
-            switch (selected_item) {
-                case "Windowed Screen":
-                    this.setSize(800, 600);
-                    this.setLocationRelativeTo(null);
-
-                    break;
-
-                case "Fullscreen":
-                    Toolkit tk = Toolkit.getDefaultToolkit();
-                    int xSize = ((int) tk.getScreenSize().getWidth());
-                    int ySize = ((int) tk.getScreenSize().getHeight());
-                    this.setSize(xSize, ySize);
-                    this.setLocation(0, 0);
-                    break;
-            }
+            setResolution();
         }
     }//GEN-LAST:event_comboBoxSceenItemStateChanged
-
-    private void comboBoxSceenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSceenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxSceenActionPerformed
 
     private void comboBoxLogoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxLogoItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
@@ -1265,6 +1307,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         newReport.setVisible(true);
     }//GEN-LAST:event_buttonReportsActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      manager.updateSettings(getSelectedItem());
+      JOptionPane.showMessageDialog(null, "Settings Saved");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1326,6 +1373,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JComboBox<String> comboBoxLogo;
     private javax.swing.JComboBox<String> comboBoxSceen;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

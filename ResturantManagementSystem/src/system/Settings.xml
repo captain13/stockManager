@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Settings>   
-    <generalSettings>
-        <resolution>Window Screen</resolution> 
-        <logo>default</logo> 
-    </generalSettings>
-</Settings>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><settings>
+    
+<generalsettings>
+        <resolution>Fullscreen</resolution>
+        <logo>default</logo>
+    </generalsettings></settings>
