@@ -21,15 +21,15 @@ public class AddDatabase extends javax.swing.JFrame {
 
     public void insert() {
         if (!"".equals(textfieldItem.getText()) || !"".equals(textfieldQty.getText())) {
-            dbManager.insertInventory(getItem(),getQuantity());
+            dbManager.insertInventory(getItem(), getQuantity(), getLimit(), getThreshold());
         } else {
         }
         if (!"".equals(textfieldDisName.getText()) || !"".equals(textfieldDisEmail.getText()) || !"".equals(textfieldDisContact.getText())) {
-            dbManager.insertSupplier(getSupName(),getSupEmail(),getSupContact(),getSupAddress());
+            dbManager.insertSupplier(getSupName(), getSupEmail(), getSupContact(), getSupAddress());
         } else {
         }
         if (!"".equals(textRecipe.getText()) || !"".equals(textPrice.getText())) {
-            dbManager.insertRecipe(getRecipe(),getPrice(),getVAT(),getImageDirectory());
+            dbManager.insertRecipe(getRecipe(), getPrice(), getVAT(), getImageDirectory(),getCategory());
         } else {
         }
     }
@@ -83,31 +83,43 @@ public class AddDatabase extends javax.swing.JFrame {
         return textfieldQty.getText();
     }
 
-    public  String getRecipe() {
+    public Double getLimit() {
+        return Double.parseDouble(textfieldLimit.getText());
+    }
+
+    public Double getThreshold() {
+        return Double.parseDouble(comboxThreshold.getSelectedItem().toString().replace("%", ""));
+    }
+
+    public String getRecipe() {
         return textRecipe.getText();
     }
 
-    public  String getPrice() {
+    public String getPrice() {
         return textPrice.getText() + ".00";
     }
 
-    public  String getVAT() {
+    public String getVAT() {
         return textVAT.getText();
     }
 
-    public  String getImageDirectory() {
+    public String getCategory() {
+        return comboxCat.getSelectedItem().toString();
+    }
+
+    public String getImageDirectory() {
         return newImagePath.replace("\\", "/");
     }
 
-    public  String getSupName() {
+    public String getSupName() {
         return textfieldDisName.getText();
     }
 
-    public  String getSupEmail() {
+    public String getSupEmail() {
         return textfieldDisEmail.getText();
     }
 
-    public  String getSupContact() {
+    public String getSupContact() {
         return textfieldDisContact.getText();
     }
 
@@ -136,10 +148,10 @@ public class AddDatabase extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         textfieldQty = new javax.swing.JTextField();
         textfieldItem = new javax.swing.JTextField();
-        textfieldQty1 = new javax.swing.JTextField();
+        textfieldLimit = new javax.swing.JTextField();
         lblQty3 = new javax.swing.JLabel();
         lblQty4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboxThreshold = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         lblCostPerItem1 = new javax.swing.JLabel();
         textRecipe = new javax.swing.JTextField();
@@ -151,7 +163,7 @@ public class AddDatabase extends javax.swing.JFrame {
         recipeImage = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         lblQty2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboxCat = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         lblDistInfo = new javax.swing.JLabel();
         lblDisName = new javax.swing.JLabel();
@@ -181,7 +193,7 @@ public class AddDatabase extends javax.swing.JFrame {
 
         lblQty4.setText("Item Limit");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "20%", "25%", "30%", "40%", "50%", "60%", "70%", "75%", "80%" }));
+        comboxThreshold.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "20%", "25%", "30%", "40%", "50%", "60%", "70%", "75%", "80%" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -194,11 +206,11 @@ public class AddDatabase extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblQty3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox2, 0, 164, Short.MAX_VALUE))
+                        .addComponent(comboxThreshold, 0, 164, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblQty4)
                         .addGap(38, 38, 38)
-                        .addComponent(textfieldQty1))
+                        .addComponent(textfieldLimit))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblItem)
@@ -224,12 +236,12 @@ public class AddDatabase extends javax.swing.JFrame {
                     .addComponent(textfieldQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textfieldQty1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textfieldLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblQty4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQty3)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboxThreshold, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
 
@@ -257,7 +269,7 @@ public class AddDatabase extends javax.swing.JFrame {
 
         lblQty2.setText("Category");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Main Meal", "Light Meal", "Dessert", "Drinks", " " }));
+        comboxCat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Main Meal", "Light Meal", "Dessert", "Drinks", " " }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -278,7 +290,7 @@ public class AddDatabase extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboxCat, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(textRecipe)
                         .addComponent(textVAT)
@@ -302,7 +314,7 @@ public class AddDatabase extends javax.swing.JFrame {
                     .addComponent(lblQty1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboxCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblQty2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -453,10 +465,10 @@ public class AddDatabase extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAccpet;
     private javax.swing.JButton buttonCancel;
+    private javax.swing.JComboBox<String> comboxCat;
+    private javax.swing.JComboBox<String> comboxThreshold;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -485,7 +497,7 @@ public class AddDatabase extends javax.swing.JFrame {
     public static javax.swing.JTextField textfieldDisEmail;
     public static javax.swing.JTextField textfieldDisName;
     private static javax.swing.JTextField textfieldItem;
+    private static javax.swing.JTextField textfieldLimit;
     private static javax.swing.JTextField textfieldQty;
-    private static javax.swing.JTextField textfieldQty1;
     // End of variables declaration//GEN-END:variables
 }

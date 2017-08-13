@@ -32,7 +32,7 @@ public class internalClock extends Thread {
     }
 
     public static String getCurrentDate() {
-        currentDate=new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        currentDate=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         return currentDate;
     }
 

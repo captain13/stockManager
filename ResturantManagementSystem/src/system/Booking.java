@@ -58,7 +58,7 @@ public class Booking extends javax.swing.JFrame {
 
     public void setCurrentDate() {
         String currentDate = internalClock.getCurrentDate();
-        String date[] = currentDate.split("/");
+        String date[] = currentDate.split("-");
         String day = date[0];
         String month = date[1];
         comboboxDay.setSelectedItem(day);

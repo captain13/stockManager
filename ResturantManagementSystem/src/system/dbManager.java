@@ -41,7 +41,7 @@ public class dbManager {
     }
 
     public static void populateTables() {
-        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(kg)"};
+        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(kg)", "Item Threshold", "Item Limit"};
         String columnNamesRecipe[] = {"Recipe ID", "Description", "Price", "VAT"};
         String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
         try {
@@ -49,7 +49,7 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT inventoryid,item,qty FROM inventory ";
+            String query = "SELECT * FROM inventory ";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -68,9 +68,11 @@ public class dbManager {
                 MainSystem.searchITable();
                 tableModel.addRow(row);
             }
-            MainSystem.tblInventory.getColumnModel().getColumn(0).setPreferredWidth(10);
-            MainSystem.tblInventory.getColumnModel().getColumn(1).setPreferredWidth(400);
+            MainSystem.tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
+            MainSystem.tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
             MainSystem.tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
+            MainSystem.tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
+            MainSystem.tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
             rs.close();
             s.close();
             conn.close();
@@ -386,30 +388,34 @@ public class dbManager {
         return time;
     }
 
-    public static void insertEmployee() {
+    public static void insertEmployee(String firstName,String lastName,String empPassword,String contact,int adminRights) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuery = "INSERT INTO employee (employeeFName, employeeLName, employeePassword,employeeContactNumber)"
-                    + "VALUES ('" + AddEmployee.getEmpFirstName() + "', '"
-                    + AddEmployee.getEmpLastName() + "', '"
-                    + AddEmployee.getEmpPassword() + "', '"
-                    + AddEmployee.getEmpContact() + "')";
+            String insertQuery = "INSERT INTO employee (employeeFName, employeeLName, employeePassword,employeeContactNumber,admin )"
+                    + "VALUES ('" + firstName + "', '"
+                    + lastName + "', '"
+                    + empPassword + "', '"
+                    + contact + "', '"
+                    + adminRights + "')";
             s.execute(insertQuery);
             populateEmpTable();
             s.close();
             conn.close();
         } catch (SQLException exp) {
+            System.out.println(exp);
         }
     }
 
-    public static void insertInventory(String item, String quantity) {
+    public static void insertInventory(String item, String quantity, Double limit, Double threshold) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuery = "INSERT INTO inventory (item, qty)"
-                    + "VALUES ('" + item + "', '"
-                    + quantity + "')";
+            String insertQuery = "INSERT INTO inventory (item, qty,itemThreshold,itemLimit)"
+                    + "VALUES ('" + item + "',"
+                    + "'" + quantity + "',"
+                    + "'" + threshold + "', '"
+                    + limit + "')";
             s.execute(insertQuery);
             populateTables();
             s.close();
@@ -419,14 +425,15 @@ public class dbManager {
         }
     }
 
-    public static void insertRecipe(String name,String price,String vat,String directory) {
+    public static void insertRecipe(String name, String price, String vat, String directory, String category) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO recipe(recipeName, recipePrice,recipeVAT,recipeImageDirectory)"
-                    + "VALUES ('" +name + "','"
+            String insertQuerySup = "INSERT INTO recipe(recipeName, recipePrice,recipeVAT,recipeType,recipeImageDirectory)"
+                    + "VALUES ('" + name + "','"
                     + price + "', '"
                     + vat + "', '"
+                    + category + "', '"
                     + directory + "')";
             s.execute(insertQuerySup);
             populateTables();
@@ -436,12 +443,12 @@ public class dbManager {
         }
     }
 
-    public static void insertSupplier(String name,String email,String number,String address) {
+    public static void insertSupplier(String name, String email, String number, String address) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String insertQuerySup = "INSERT INTO supplier(supplierName, supplierEmail,supplierNumber, supplierAddress)"
-                    + "VALUES ('" + name+ "','"
+                    + "VALUES ('" + name + "','"
                     + email + "', '"
                     + number + "', '"
                     + address + "')";
@@ -475,15 +482,16 @@ public class dbManager {
 
     }
 
-    public static void insertStockOrder() {
+    public static void insertStockOrder(String inventoryID,String supplierID,String quantity,String date) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO stockorder(inventoryID, supplierID,dateOrdered,quantity,status)"
-                    + "VALUES ('" + OrderForm.getInventoryID() + "','"
-                    + OrderForm.getSupplierID() + "', '"
+            String insertQuerySup = "INSERT INTO stockorder(inventoryID, supplierID,dateOrdered,dateETA,quantity,status)"
+                    + "VALUES ('" + inventoryID + "','"
+                    + supplierID + "', '"
                     + internalClock.getCurrentDate() + "', '"
-                    + OrderForm.getQuantity() + "', 'Not Delievered')";
+                    + date + "', '"
+                    + quantity + "', 'Not Delievered')";
             s.execute(insertQuerySup);
             populateOrder();
             s.close();

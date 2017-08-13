@@ -15,15 +15,15 @@ public class AddEmployee extends javax.swing.JFrame {
         initComponents();
     }
 
-    public static String getEmpFirstName() {
+    public String getEmpFirstName() {
         return textfieildFname.getText();
     }
 
-    public static String getEmpLastName() {
+    public String getEmpLastName() {
         return textfieildLname.getText();
     }
 
-    public static String getEmpPassword() {
+    public String getEmpPassword() {
         if (textfieildPassowrd.getText().equals(textfieildPassowrdC.getText())) {
             return textfieildPassowrd.getText();
         } else {
@@ -32,8 +32,16 @@ public class AddEmployee extends javax.swing.JFrame {
         }
     }
 
-    public static String getEmpContact() {
+    public String getEmpContact() {
         return textfieildContact.getText();
+    }
+
+    public int getAdminRights() {
+        if (checkAdmin.isSelected()) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -59,7 +67,7 @@ public class AddEmployee extends javax.swing.JFrame {
         lblFname = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         buttonAccept1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        checkAdmin = new javax.swing.JCheckBox();
         lblQty3 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
 
@@ -94,7 +102,7 @@ public class AddEmployee extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("Admin");
+        checkAdmin.setText("Admin");
 
         lblQty3.setText("Postion");
 
@@ -142,7 +150,7 @@ public class AddEmployee extends javax.swing.JFrame {
                     .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
+                            .addComponent(checkAdmin)
                             .addComponent(buttonAccept))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -180,7 +188,7 @@ public class AddEmployee extends javax.swing.JFrame {
                     .addComponent(lblQty3)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(jCheckBox1)
+                .addComponent(checkAdmin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAccept1)
@@ -210,14 +218,14 @@ public class AddEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAcceptActionPerformed
 
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
-        dbManager.insertEmployee();
+        dbManager.insertEmployee(getEmpFirstName(), getEmpLastName(), getEmpPassword(), getEmpContact(), getAdminRights());
         this.dispose();
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAccept;
     private javax.swing.JButton buttonAccept1;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox checkAdmin;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblContact;
