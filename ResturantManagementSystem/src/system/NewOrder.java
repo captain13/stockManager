@@ -37,6 +37,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     boolean isRunning = false;
     Object[][] recipeInfo;
+    dbManager newManager=new dbManager();
 
     public NewOrder() {
         initComponents();
@@ -56,12 +57,12 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
     public void menuLayout() {
 
-        int n = dbManager.getRecipesCount();
+        int n = newManager.getRecipesCount();
         recipeInfo = new Object[n][4];
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < 4; j++) {
-                recipeInfo[i][j] = dbManager.getRecipe()[i][j];
+                recipeInfo[i][j] = newManager.getRecipe()[i][j];
             }
         }
 

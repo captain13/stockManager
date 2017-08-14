@@ -10,7 +10,8 @@ import javax.swing.table.DefaultTableModel;
 public class Logout extends javax.swing.JFrame {
 
     static ArrayList usernames = new ArrayList();
-
+    userManager newManager = new userManager();
+    
     public Logout(ArrayList usernames) {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -143,7 +144,7 @@ public class Logout extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        userManager.logout();
+        newManager.logout();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

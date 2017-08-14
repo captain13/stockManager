@@ -14,6 +14,7 @@ public class AddDatabase extends javax.swing.JFrame {
 
     String imagePath;
     static String newImagePath;
+    dbManager database = new dbManager();
 
     public AddDatabase() {
         initComponents();
@@ -21,15 +22,15 @@ public class AddDatabase extends javax.swing.JFrame {
 
     public void insert() {
         if (!"".equals(textfieldItem.getText()) || !"".equals(textfieldQty.getText())) {
-            dbManager.insertInventory(getItem(), getQuantity(), getLimit(), getThreshold());
+            database.insertInventory(getItem(), getQuantity(), getLimit(), getThreshold());
         } else {
         }
         if (!"".equals(textfieldDisName.getText()) || !"".equals(textfieldDisEmail.getText()) || !"".equals(textfieldDisContact.getText())) {
-            dbManager.insertSupplier(getSupName(), getSupEmail(), getSupContact(), getSupAddress());
+            database.insertSupplier(getSupName(), getSupEmail(), getSupContact(), getSupAddress());
         } else {
         }
         if (!"".equals(textRecipe.getText()) || !"".equals(textPrice.getText())) {
-            dbManager.insertRecipe(getRecipe(), getPrice(), getVAT(), getImageDirectory(),getCategory());
+            database.insertRecipe(getRecipe(), getPrice(), getVAT(), getImageDirectory(), getCategory());
         } else {
         }
     }

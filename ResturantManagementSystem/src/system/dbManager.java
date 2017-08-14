@@ -20,27 +20,27 @@ import javax.swing.table.DefaultTableModel;
  */
 public class dbManager {
 
-    static String url = "jdbc:mysql://localhost:3306/resturantdb";
-    static String username = "root";
-    static String password = "root";
-    static String driver = "com.mysql.jdbc.Driver";
-    static ArrayList recipeName = new ArrayList();
-    static ArrayList recipeIndex = new ArrayList();
-    static ArrayList recipeImage = new ArrayList();
+     String url = "jdbc:mysql://localhost:3306/resturantdb";
+     String username = "root";
+     String password = "root";
+     String driver = "com.mysql.jdbc.Driver";
+     ArrayList recipeName = new ArrayList();
+     ArrayList recipeIndex = new ArrayList();
+     ArrayList recipeImage = new ArrayList();
 
-    public static ArrayList getRecipeName() {
+    public ArrayList getRecipeName() {
         return recipeName;
     }
 
-    public static ArrayList getRecipeIndex() {
+    public ArrayList getRecipeIndex() {
         return recipeIndex;
     }
 
-    public static ArrayList getRecipeImage() {
+    public ArrayList getRecipeImage() {
         return recipeImage;
     }
 
-    public static void populateTables() {
+    public void populateTables() {
         String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(kg)", "Item Threshold", "Item Limit"};
         String columnNamesRecipe[] = {"Recipe ID", "Description", "Price", "VAT"};
         String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
@@ -148,7 +148,7 @@ public class dbManager {
         }
     }
 
-    public static void populateEmpTable() {
+    public void populateEmpTable() {
         String columnNamesEmp[] = {"ID", "First Name", "Last Name", "Number", "Hours Worked"};
         try {
             Class.forName(driver).newInstance();
@@ -179,7 +179,7 @@ public class dbManager {
         }
     }
 
-    public static void populateReservation() {
+    public void populateReservation() {
         String columnNamesEmp[] = {"Employee", "Date", "Time", "Customer", "Table No.", "No. Customer"};
         try {
             Class.forName(driver).newInstance();
@@ -213,7 +213,7 @@ public class dbManager {
         }
     }
 
-    public static void populateOrder() {
+    public void populateOrder() {
         String columnNamesEmp[] = {"ID", "Inventory ID", "Supplier ID", "Date Ordered", "ETA", "Quantity(kg)", "Status"};
         try {
             Class.forName(driver).newInstance();
@@ -247,7 +247,7 @@ public class dbManager {
         }
     }
 
-    public static void populateSales(JTable sales) {
+    public void populateSales(JTable sales) {
         String columnNames[] = {"ID", "Sales Date", "Total Sale"};
         try {
             Class.forName(driver).newInstance();
@@ -279,7 +279,7 @@ public class dbManager {
         }
     }
 
-    public static Object[][] getRecipe() {
+    public Object[][] getRecipe() {
         int count = getRecipesCount();
         Object recipe[][] = new Object[count][4];
         try {
@@ -318,7 +318,7 @@ public class dbManager {
         return recipe;
     }
 
-    public static int getRecipesCount() {
+    public int getRecipesCount() {
         int count = 0;
         try {
             Class.forName(driver).newInstance();
@@ -338,7 +338,7 @@ public class dbManager {
         return count;
     }
 
-    public static void showActiveEmp() {
+    public void showActiveEmp() {
         String columnNamesEmp[] = {"First Name", "Last Name", "Active"};
         try {
             Class.forName(driver).newInstance();
@@ -369,7 +369,7 @@ public class dbManager {
         }
     }
 
-    public static String getHoursWorked(String Username) {
+    public String getHoursWorked(String Username) {
         String time = "00:00:00";
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -388,15 +388,16 @@ public class dbManager {
         return time;
     }
 
-    public static void insertEmployee(String firstName,String lastName,String empPassword,String contact,int adminRights) {
+    public void insertEmployee(String firstName, String lastName, String empPassword, String contact, int adminRights) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuery = "INSERT INTO employee (employeeFName, employeeLName, employeePassword,employeeContactNumber,admin )"
+            String insertQuery = "INSERT INTO employee (employeeFName, employeeLName, employeePassword,employeeContactNumber,employeeHoursWorked,admin )"
                     + "VALUES ('" + firstName + "', '"
                     + lastName + "', '"
                     + empPassword + "', '"
                     + contact + "', '"
+                    + "00:00" + "','"
                     + adminRights + "')";
             s.execute(insertQuery);
             populateEmpTable();
@@ -407,7 +408,7 @@ public class dbManager {
         }
     }
 
-    public static void insertInventory(String item, String quantity, Double limit, Double threshold) {
+    public void insertInventory(String item, String quantity, Double limit, Double threshold) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -425,7 +426,7 @@ public class dbManager {
         }
     }
 
-    public static void insertRecipe(String name, String price, String vat, String directory, String category) {
+    public void insertRecipe(String name, String price, String vat, String directory, String category) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -443,7 +444,7 @@ public class dbManager {
         }
     }
 
-    public static void insertSupplier(String name, String email, String number, String address) {
+    public void insertSupplier(String name, String email, String number, String address) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -460,17 +461,17 @@ public class dbManager {
         }
     }
 
-    public static void insertReservations() {
+    public void insertReservations(String employee,String date,String time,String customerName,String tableNum,String customerNum) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String insertQuerySup = "INSERT INTO reservation(employeeID, reservationDate, reservationTime, reservationCustomer,reservationTableNumber,reservationNumberPeople)"
-                    + "VALUES ('" + Booking.getEmployee() + "','"
-                    + Booking.getDate() + "','"
-                    + Booking.getTime() + "','"
-                    + Booking.getCustomerName() + "', '"
-                    + Booking.getTableNum() + "', '"
-                    + Booking.getCustomerNum() + "')";
+                    + "VALUES ('" + employee + "','"
+                    + date + "','"
+                    + time + "','"
+                    + customerName + "', '"
+                    + tableNum + "', '"
+                    + customerNum + "')";
             s.execute(insertQuerySup);
             JOptionPane.showMessageDialog(null, "Reservation Added");
             populateReservation();
@@ -482,7 +483,7 @@ public class dbManager {
 
     }
 
-    public static void insertStockOrder(String inventoryID,String supplierID,String quantity,String date) {
+    public void insertStockOrder(String inventoryID, String supplierID, String quantity, String date) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -501,7 +502,7 @@ public class dbManager {
         }
     }
 
-    public static void insertSales(double currentTotal) {
+    public void insertSales(double currentTotal) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -517,7 +518,7 @@ public class dbManager {
         }
     }
 
-    public static void insertReceipt() {
+    public void insertReceipt() {
 //        try {
 //            Connection conn = DriverManager.getConnection(url, username, password);
 //            Statement s = conn.createStatement();
@@ -535,7 +536,7 @@ public class dbManager {
 //        }
     }
 
-    public static void removeInventory(int index) {
+    public void removeInventory(int index) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -549,7 +550,7 @@ public class dbManager {
         }
     }
 
-    public static void removeRecipe(int index) {
+    public void removeRecipe(int index) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -559,11 +560,10 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (SQLException exp) {
-            exp.printStackTrace();
         }
     }
 
-    public static void removeSupplier(int index) {
+    public void removeSupplier(int index) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -573,11 +573,10 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (SQLException exp) {
-            exp.printStackTrace();
         }
     }
 
-    public static void removeEmployee(int index) {
+    public void removeEmployee(int index) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -587,11 +586,10 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (SQLException exp) {
-            exp.printStackTrace();
         }
     }
 
-    public static void updateHours(String Username, int i) {
+    public void updateHours(String Username, int i) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -602,11 +600,10 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (SQLException exp) {
-            exp.printStackTrace();
         }
     }
 
-    public static void updateEmployeeStatusIn(String Username) {
+    public void updateEmployeeStatusIn(String Username) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -616,11 +613,10 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (SQLException exp) {
-            exp.printStackTrace();
         }
     }
 
-    public static void updateEmployeeStatusOut(String Username) {
+    public void updateEmployeeStatusOut(String Username) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -630,7 +626,6 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (SQLException exp) {
-            exp.printStackTrace();
         }
     }
 
@@ -655,7 +650,7 @@ public class dbManager {
 //        }
     }
 
-    public static boolean login(String userName, String passWord) {
+    public boolean login(String userName, String passWord) {
         ArrayList userPasswordAL = new ArrayList();
         ArrayList<String> userNameAL = new ArrayList();
         boolean login = false;

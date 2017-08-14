@@ -6,6 +6,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -23,16 +25,17 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     Booking booking = new Booking();
     Calendar calendar = new Calendar();
     Specials specials = new Specials();
-    userManager userman = new userManager();
-    xmlManager manager = new xmlManager();
+    userManager user = new userManager();
+    xmlManager settings = new xmlManager();
+    dbManager system = new dbManager();
     HashMap<String, NewOrder> tables = new HashMap<>();
     boolean enableKeypad = false;
 
     public MainSystem() {
         initComponents();
         internalClock.internalClock();
-        dbManager.populateTables();
-        dbManager.populateOrder();
+        system.populateTables();
+        system.populateOrder();
         tableLayout();
         getResolution();
     }
@@ -209,7 +212,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public final void getResolution() {
-        String resolution = manager.getResolution();
+        String resolution = settings.getResolution();
         switch (resolution) {
             case "Windowed Screen":
                 comboBoxSceen.setSelectedItem("Windowed Screen");
@@ -245,10 +248,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         this.setSize(800, 600);
         this.setLocationRelativeTo(null);
     }
-    
-    public String getSelectedItem(){
+
+    public String getSelectedItem() {
         return comboBoxSceen.getSelectedItem().toString();
-    } 
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -269,6 +272,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonLogin = new javax.swing.JButton();
         lblClock = new javax.swing.JLabel();
         buttonLogOut = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         Orders = new javax.swing.JPanel();
         pnlOrderLeft = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -303,6 +307,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         tableSupplier = new javax.swing.JTable();
         radioID = new javax.swing.JRadioButton();
         radioItem = new javax.swing.JRadioButton();
+        jButton5 = new javax.swing.JButton();
         Management = new javax.swing.JPanel();
         buttonOrderHistory = new javax.swing.JButton();
         buttonAlert = new javax.swing.JButton();
@@ -429,12 +434,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         pnlPanel.setLayout(pnlPanelLayout);
         pnlPanelLayout.setHorizontalGroup(
             pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPanelLayout.createSequentialGroup()
+            .addGroup(pnlPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buttonLogOut, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonLogin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlPanelLayout.createSequentialGroup()
+                .addGroup(pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonLogOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlPanelLayout.createSequentialGroup()
                         .addGroup(pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblClock, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblDate, javax.swing.GroupLayout.Alignment.LEADING))
@@ -455,6 +460,16 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap())
         );
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo_help.png"))); // NOI18N
+        jButton3.setBorder(null);
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout DashboardLayout = new javax.swing.GroupLayout(Dashboard);
         Dashboard.setLayout(DashboardLayout);
         DashboardLayout.setHorizontalGroup(
@@ -465,13 +480,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         .addContainerGap()
                         .addComponent(lblVersion)
                         .addGap(186, 186, 186)
-                        .addComponent(buttonClose, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                        .addComponent(buttonClose, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
                         .addGap(217, 217, 217))
                     .addGroup(DashboardLayout.createSequentialGroup()
                         .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
-                        .addGap(63, 63, 63)))
+                        .addGap(89, 89, 89)
+                        .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+                        .addGap(132, 132, 132)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(pnlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -483,10 +500,16 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addGroup(DashboardLayout.createSequentialGroup()
                         .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(DashboardLayout.createSequentialGroup()
-                                .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 89, Short.MAX_VALUE))
-                            .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(DashboardLayout.createSequentialGroup()
+                                .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(DashboardLayout.createSequentialGroup()
+                                        .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 84, Short.MAX_VALUE))
+                                    .addComponent(lblImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblVersion, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DashboardLayout.createSequentialGroup()
@@ -563,7 +586,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         pnlLayout.setLayout(pnlLayoutLayout);
         pnlLayoutLayout.setHorizontalGroup(
             pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 531, Short.MAX_VALUE)
+            .addGap(0, 598, Short.MAX_VALUE)
         );
         pnlLayoutLayout.setVerticalGroup(
             pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -677,7 +700,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(buttonEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
                     .addComponent(buttonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE))
         );
         pnlInventoryLayout.setVerticalGroup(
             pnlInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -757,7 +780,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(buttonRecipeAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonRecipeDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE))
         );
         pnlRecipeLayout.setVerticalGroup(
             pnlRecipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -835,7 +858,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(buttonRecipeEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonRecipeDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE))
         );
         pnlSupplierLayout.setVerticalGroup(
             pnlSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -861,6 +884,16 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         radioItem.setText("Item");
 
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo_help.png"))); // NOI18N
+        jButton5.setBorder(null);
+        jButton5.setBorderPainted(false);
+        jButton5.setContentAreaFilled(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout InventoryLayout = new javax.swing.GroupLayout(Inventory);
         Inventory.setLayout(InventoryLayout);
         InventoryLayout.setHorizontalGroup(
@@ -872,6 +905,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(InventoryLayout.createSequentialGroup()
+                                .addComponent(jButton5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblSearch)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(textboxSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -886,9 +921,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InventoryLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textboxSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSearch))
+                .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(textboxSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblSearch))
+                    .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radioID)
@@ -988,7 +1025,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         .addComponent(buttonReports, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(buttonEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
                 .addGap(6, 6, 6))
         );
         ManagementLayout.setVerticalGroup(
@@ -1076,7 +1113,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addGroup(SettingsLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(568, Short.MAX_VALUE))
+                .addContainerGap(635, Short.MAX_VALUE))
         );
         SettingsLayout.setVerticalGroup(
             SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1214,8 +1251,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_TabbedPanelFocusGained
 
     private void buttonRecipeAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAddActionPerformed
-        AddDatabase s = new AddDatabase();
-        s.setVisible(true);
+        AddDatabase database = new AddDatabase();
+        database.setVisible(true);
         AddDatabase.getTabbedPanel().setSelectedIndex(1);
         if (keypadCheck() == true) {
             Keyboard k = new Keyboard();
@@ -1230,8 +1267,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonEditActionPerformed
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        AddDatabase s = new AddDatabase();
-        s.setVisible(true);
+        AddDatabase database = new AddDatabase();
+        database.setVisible(true);
         if (keypadCheck() == true) {
             Keyboard k = new Keyboard();
             k.setLocation(350, 530);
@@ -1240,8 +1277,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonRecipeAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAdd1ActionPerformed
-        AddDatabase s = new AddDatabase();
-        s.setVisible(true);
+        AddDatabase database = new AddDatabase();
+        database.setVisible(true);
         AddDatabase.getTabbedPanel().setSelectedIndex(2);
         if (keypadCheck() == true) {
             Keyboard k = new Keyboard();
@@ -1266,30 +1303,30 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            dbManager.removeInventory(getID());
+            system.removeInventory(getID());
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonRecipeDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDeleteActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            dbManager.removeRecipe(getIDrecipe());
+            system.removeRecipe(getIDrecipe());
         }
     }//GEN-LAST:event_buttonRecipeDeleteActionPerformed
 
     private void buttonRecipeDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete1ActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            dbManager.removeSupplier(getIDsupplier());
+            system.removeSupplier(getIDsupplier());
         }
     }//GEN-LAST:event_buttonRecipeDelete1ActionPerformed
 
     private void buttonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogOutActionPerformed
-        userManager.createLogout();
+        user.createLogout();
     }//GEN-LAST:event_buttonLogOutActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        userManager.createLogin();
+        user.createLogin();
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void buttonMakeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMakeOrderActionPerformed
@@ -1308,9 +1345,27 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReportsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      manager.updateSettings(getSelectedItem());
-      JOptionPane.showMessageDialog(null, "Settings Saved");
+        settings.updateSettings(getSelectedItem());
+        JOptionPane.showMessageDialog(null, "Settings Saved");
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String file = System.getProperty("user.home") + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\docs\\Help.txt";
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process p = runtime.exec("notepad " + file);
+        } catch (IOException ex) {
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String file = System.getProperty("user.home") + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\docs\\HelpDB.txt";
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process p = runtime.exec("notepad " + file);
+        } catch (IOException ex) {
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1374,6 +1429,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JComboBox<String> comboBoxSceen;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

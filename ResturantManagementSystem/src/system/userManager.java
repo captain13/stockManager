@@ -13,46 +13,47 @@ public class userManager {
     static Login loginSystem;
     static Logout logoutSystem;
     static UserForm userLog;
+    dbManager newManager = new dbManager();
 
-    public static void addUser(String username) {
+    public void addUser(String username) {
         usernames.add(username);
     }
 
-    public static void createLogin() {
+    public void createLogin() {
         loginSystem = new Login();
         loginSystem.setVisible(true);
     }
 
-    public static void createUserLog() {
+    public void createUserLog() {
         userLog = new UserForm(usernames);
         userLog.setVisible(true);
     }
 
-    public static void createLogout() {
+    public void createLogout() {
         logoutSystem = new Logout(usernames);
         logoutSystem.setVisible(true);
     }
 
-    public static void loginAuthentication(String username, String password) {
-        boolean login = dbManager.login(username, password);
+    public void loginAuthentication(String username, String password) {
+        boolean login = newManager.login(username, password);
         if (login == true) {
             addUser(username);
             internalClock.setLoginTimeStamp();
-            dbManager.updateEmployeeStatusIn(username);
+            newManager.updateEmployeeStatusIn(username);
             loginSystem.disposeLogin();
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
         }
     }
 
-    public static void logout() {
+    public void logout() {
         String username = Logout.getUsername();
         System.out.println(username);
         int rowIndex = Logout.getRowIndex();
         System.out.println(rowIndex);
         internalClock.setLogoutTimeStamp();
-        dbManager.updateHours(username, rowIndex);
-        dbManager.updateEmployeeStatusOut(username);
+        newManager.updateHours(username, rowIndex);
+        newManager.updateEmployeeStatusOut(username);
         usernames.remove(rowIndex);
         Logout.populateTable();
     }

@@ -1,16 +1,19 @@
 package system;
+
 /**
  *
  * @author Andrew
  */
 public class Login extends javax.swing.JFrame {
-    
+
+    userManager newManager = new userManager();
+
     public Login() {
         initComponents();
 
     }
-    
-    public void disposeLogin(){
+
+    public void disposeLogin() {
         this.dispose();
     }
 
@@ -115,7 +118,7 @@ public class Login extends javax.swing.JFrame {
     private void lblLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblLoginActionPerformed
         String username = textfieldUser.getText();
         String password = passwordFieldBox.getText();
-        userManager.loginAuthentication(username, password);
+        newManager.loginAuthentication(username, password);
     }//GEN-LAST:event_lblLoginActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed

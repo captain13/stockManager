@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system;
 
 /**
@@ -11,15 +6,16 @@ package system;
  */
 public class Checkout extends javax.swing.JFrame {
 
-    static String number;
-    static double currentTotal;
+    String number;
+    double currentTotal;
+    dbManager newManager = new dbManager();
 
     public Checkout() {
         initComponents();
         super.setLocationRelativeTo(null);
     }
 
-    public static void calculateBill() {
+    public void calculateBill() {
         double total;
         currentTotal = Double.parseDouble(NewOrder.getTotal());
         total = Double.parseDouble(number) - currentTotal;
@@ -262,7 +258,7 @@ public class Checkout extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         calculateBill();
-        dbManager.insertSales(currentTotal);
+        newManager.insertSales(currentTotal);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

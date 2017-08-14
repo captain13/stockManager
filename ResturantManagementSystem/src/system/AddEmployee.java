@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
  * @author Andrew
  */
 public class AddEmployee extends javax.swing.JFrame {
-
+    dbManager newManger=new dbManager();
     /**
      * Creates new form AddEmployee
      */
@@ -218,7 +218,7 @@ public class AddEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAcceptActionPerformed
 
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
-        dbManager.insertEmployee(getEmpFirstName(), getEmpLastName(), getEmpPassword(), getEmpContact(), getAdminRights());
+        newManger.insertEmployee(getEmpFirstName(), getEmpLastName(), getEmpPassword(), getEmpContact(), getAdminRights());
         this.dispose();
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 

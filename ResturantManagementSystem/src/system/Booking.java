@@ -6,51 +6,52 @@ package system;
  */
 public class Booking extends javax.swing.JFrame {
 
-    private static boolean IS_RUNNING = false;
+    private boolean IS_RUNNING = false;
+    dbManager newManager=new dbManager();
+    
 
     public Booking() {
-
         if (IS_RUNNING) {
             throw new RuntimeException();
         } else {
             IS_RUNNING = true;
         }
         initComponents();
-        dbManager.populateReservation();
+        newManager.populateReservation();
         setCurrentDate();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     @Override
     public void dispose() {
-        Booking.IS_RUNNING = false;
+        IS_RUNNING = false;
         super.dispose();
     }
 
-    public static String getCustomerName() {
+    public String getCustomerName() {
         return textCustomerName.getText();
     }
 
-    public static String getEmployee() {
+    public String getEmployee() {
         return textEmp.getText();
     }
 
-    public static String getDate() {
+    public String getDate() {
         String date = comboboxDay.getSelectedItem().toString() + "/"
                 + comboboxMonth.getSelectedItem().toString() + "/"
                 + comboboxYear.getSelectedItem().toString();
         return date;
     }
 
-    public static String getTableNum() {
+    public String getTableNum() {
         return textTable.getText();
     }
 
-    public static String getCustomerNum() {
+    public String getCustomerNum() {
         return textCustomerNum.getText();
     }
 
-    public static String getTime() {
+    public String getTime() {
         String time = comboboxHour.getSelectedItem().toString()
                 + ":" + comboboxMinute.getSelectedItem().toString();
         return time;
@@ -311,7 +312,7 @@ public class Booking extends javax.swing.JFrame {
     }//GEN-LAST:event_textEmpActionPerformed
 
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
-        dbManager.insertReservations();
+        newManager.insertReservations(getEmployee(),getDate(),getTime(),getCustomerName(),getTableNum(),getCustomerNum());
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
     private void textCustomerNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCustomerNumActionPerformed

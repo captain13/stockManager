@@ -5,10 +5,10 @@ package system;
  * @author Andrew
  */
 public class Reports extends javax.swing.JFrame {
-
+    dbManager newManager=new dbManager();
     public Reports() {
         initComponents();
-        dbManager.populateSales(tableSales);
+        newManager.populateSales(tableSales);
     }
 
     public int getID() {

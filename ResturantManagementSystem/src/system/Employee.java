@@ -1,16 +1,16 @@
 package system;
 
 import javax.swing.JOptionPane;
-
+    
 /**
  *
  * @author Andrew
  */
 public class Employee extends javax.swing.JFrame {
-
+    dbManager newManager=new dbManager();
     public Employee() {
         initComponents();
-        dbManager.populateEmpTable();
+        newManager.populateEmpTable();
     }
 
     public int getID() {
@@ -153,7 +153,7 @@ public class Employee extends javax.swing.JFrame {
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            dbManager.removeEmployee(getID());
+            newManager.removeEmployee(getID());
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
@@ -166,7 +166,7 @@ public class Employee extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        dbManager.showActiveEmp();
+        newManager.showActiveEmp();
     }//GEN-LAST:event_buttonLoginActionPerformed
 
 
