@@ -42,7 +42,7 @@ public class dbManager {
 
     public void populateTables() {
         String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(kg)", "Item Threshold", "Item Limit"};
-        String columnNamesRecipe[] = {"Recipe ID", "Description", "Price", "VAT"};
+        String columnNamesRecipe[] = {"Recipe ID", "Description","Type", "Price", "VAT"};
         String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
         try {
 
@@ -68,11 +68,6 @@ public class dbManager {
                 MainSystem.searchITable();
                 tableModel.addRow(row);
             }
-            MainSystem.tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
-            MainSystem.tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
-            MainSystem.tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
-            MainSystem.tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
-            MainSystem.tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
             rs.close();
             s.close();
             conn.close();
@@ -82,7 +77,7 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT recipeID, recipeName, recipePrice, recipeVAT FROM recipe";
+            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT FROM recipe";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             DefaultTableModel tableModel1 = new DefaultTableModel();
@@ -102,10 +97,6 @@ public class dbManager {
                 MainSystem.searchRTable();
                 tableModel1.addRow(row);
             }
-            MainSystem.tableRecipe.getColumnModel().getColumn(0).setPreferredWidth(100);
-            MainSystem.tableRecipe.getColumnModel().getColumn(1).setPreferredWidth(300);
-            MainSystem.tableRecipe.getColumnModel().getColumn(2).setPreferredWidth(100);
-            MainSystem.tableRecipe.getColumnModel().getColumn(3).setPreferredWidth(100);
             rs.close();
             s.close();
             conn.close();
@@ -135,11 +126,6 @@ public class dbManager {
                 MainSystem.searchSTable();
                 tableModel2.addRow(row);
             }
-            MainSystem.tableSupplier.getColumnModel().getColumn(0).setPreferredWidth(100);
-            MainSystem.tableSupplier.getColumnModel().getColumn(1).setPreferredWidth(300);
-            MainSystem.tableSupplier.getColumnModel().getColumn(2).setPreferredWidth(300);
-            MainSystem.tableSupplier.getColumnModel().getColumn(3).setPreferredWidth(200);
-            MainSystem.tableSupplier.getColumnModel().getColumn(4).setPreferredWidth(250);
             rs.close();
             s.close();
             conn.close();
@@ -313,24 +299,23 @@ public class dbManager {
 
     public Object[][] getRecipe() {
         int count = getRecipesCount();
-        Object recipe[][] = new Object[count][4];
+        Object recipe[][] = new Object[count][5];
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT recipeName,recipePrice,recipeImageDirectory FROM recipe";
+            String query = "SELECT recipeName,recipePrice,recipeImageDirectory,recipeType FROM recipe ";
             ResultSet rs = s.executeQuery(query);
 
-//            for (int i = 0; i < 4; i++) {
             int i = 0;
             while (rs.next()) {
                 recipe[i][0] = i;
                 recipe[i][1] = rs.getString(1);
                 recipe[i][2] = rs.getString(2);
                 recipe[i][3] = rs.getString(3);
+                recipe[i][4] = rs.getString(4);
                 i++;
             }
-//            }
 
 //            for (int j = 0; j < i; j++) {
 //                System.out.println(recipe[j][0]);

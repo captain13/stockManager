@@ -37,9 +37,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     boolean isRunning = false;
     Object[][] recipeInfo;
-    dbManager newManager=new dbManager();
+    Object[][] drinksInfo;
+    dbManager newManager = new dbManager();
 
-    public NewOrder(String waiterID,String customerNum) {
+    public NewOrder(String waiterID, String customerNum) {
         initComponents();
         getScreenResolution();
         this.setLocation(0, 0);
@@ -57,10 +58,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     public void menuLayout() {
 
         int n = newManager.getRecipesCount();
-        recipeInfo = new Object[n][4];
-
+        recipeInfo = new Object[n][5];
+        int index = 0;
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 5; j++) {
                 recipeInfo[i][j] = newManager.getRecipe()[i][j];
             }
         }
@@ -70,26 +71,81 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 //            System.out.println(recipeInfo[i][1]);
 //            System.out.println(recipeInfo[i][2]);
 //            System.out.println(recipeInfo[i][3]);
+//            System.out.println(recipeInfo[i][4]);
 //        }
         GridLayout menuLayout = new GridLayout(0, 8);
-        jPanel6.setLayout(menuLayout);
-        int emptySpace = 48 - n;
+        mainMealTab.setLayout(menuLayout);
+        drinksTab.setLayout(menuLayout);
+        lightMealTab.setLayout(menuLayout);
+        int emptySpaceTab1 = 0;
+        int emptySpaceTab2 = 0;
+        int emptySpaceTab3 = 0;
+
         for (int i = 0; i < n; i++) {
-            ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
-            button = new JButton(recipeInfo[i][1].toString(), icon);
-            button.setIcon(new ImageIcon(recipeInfo[i][3].toString()));
-            button.setVerticalTextPosition(SwingConstants.BOTTOM);
-            button.setHorizontalTextPosition(SwingConstants.CENTER);
-            button.setMargin(new Insets(0, 0, 0, 0));
-            button.setContentAreaFilled(false);
-            button.setFocusPainted(false);
-            button.setBorder(new EmptyBorder(0, 0, 0, 0));
-            button.addActionListener(this);
-            jPanel6.add(button);
+            if (recipeInfo[i][4].equals("Main Meal")) {
+                ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
+                button = new JButton(recipeInfo[i][1].toString(), icon);
+                button.setVerticalTextPosition(SwingConstants.BOTTOM);
+                button.setHorizontalTextPosition(SwingConstants.CENTER);
+                button.setMargin(new Insets(0, 0, 0, 0));
+                button.setContentAreaFilled(false);
+                button.setFocusPainted(false);
+                button.setBorder(new EmptyBorder(0, 0, 0, 0));
+                button.addActionListener(this);
+                mainMealTab.add(button);
+                index++;
+            }
+           
+            emptySpaceTab1 = 48 - index;
+            index = 0;
+            
+            if (recipeInfo[i][4].equals("Light Meal")) {
+                ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
+                button = new JButton(recipeInfo[i][1].toString(), icon);
+                button.setVerticalTextPosition(SwingConstants.BOTTOM);
+                button.setHorizontalTextPosition(SwingConstants.CENTER);
+                button.setMargin(new Insets(0, 0, 0, 0));
+                button.setContentAreaFilled(false);
+                button.setFocusPainted(false);
+                button.setBorder(new EmptyBorder(0, 0, 0, 0));
+                button.addActionListener(this);
+                lightMealTab.add(button);
+                index++;
+            }
+            emptySpaceTab2 = 48 - index;
+            index = 0;
+
+            if (recipeInfo[i][4].equals("Drinks")) {
+                ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
+                button = new JButton(recipeInfo[i][1].toString(), icon);
+                button.setVerticalTextPosition(SwingConstants.BOTTOM);
+                button.setHorizontalTextPosition(SwingConstants.CENTER);
+                button.setMargin(new Insets(0, 0, 0, 0));
+                button.setContentAreaFilled(false);
+                button.setFocusPainted(false);
+                button.setBorder(new EmptyBorder(0, 0, 0, 0));
+                button.addActionListener(this);
+                drinksTab.add(button);
+                index++;
+            }
+            emptySpaceTab3 = 48 - index;
+            index = 0;
         }
-        for (int i = 1; i < emptySpace; i++) {
+        for (int i = 1; i < emptySpaceTab1; i++) {
             JButton emptyButton = new JButton();
-            jPanel6.add(emptyButton);
+            mainMealTab.add(emptyButton);
+            emptyButton.setVisible(false);
+        }
+
+        for (int i = 1; i < emptySpaceTab3; i++) {
+            JButton emptyButton = new JButton();
+            drinksTab.add(emptyButton);
+            emptyButton.setVisible(false);
+        }
+        
+        for (int i = 1; i < emptySpaceTab2; i++) {
+            JButton emptyButton = new JButton();
+            lightMealTab.add(emptyButton);
             emptyButton.setVisible(false);
         }
     }
@@ -131,8 +187,8 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     public static String getTotal() {
         return textfieldTotal.getText().replaceAll("R", "");
     }
-    
-        public String getWaiter() {
+
+    public String getWaiter() {
         return nameTF.getText();
     }
 
@@ -181,18 +237,11 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         lblWaiter = new javax.swing.JLabel();
         lblNum = new javax.swing.JLabel();
         lblClock1 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jButton10 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        dessertTab = new javax.swing.JTabbedPane();
+        mainMealTab = new javax.swing.JPanel();
+        lightMealTab = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        drinksTab = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         buttonOverride = new javax.swing.JButton();
         nameTF = new javax.swing.JLabel();
@@ -259,45 +308,31 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
         lblClock1.setText("Clock");
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout mainMealTabLayout = new javax.swing.GroupLayout(mainMealTab);
+        mainMealTab.setLayout(mainMealTabLayout);
+        mainMealTabLayout.setHorizontalGroup(
+            mainMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 666, Short.MAX_VALUE)
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        mainMealTabLayout.setVerticalGroup(
+            mainMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Main Meals", jPanel6);
+        dessertTab.addTab("Main Meals", mainMealTab);
 
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_f_sandwhich.jpg"))); // NOI18N
-        jButton10.setBorder(null);
-
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_f_salad.jpg"))); // NOI18N
-        jButton9.setBorder(null);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9)
-                .addGap(0, 494, Short.MAX_VALUE))
+        javax.swing.GroupLayout lightMealTabLayout = new javax.swing.GroupLayout(lightMealTab);
+        lightMealTab.setLayout(lightMealTabLayout);
+        lightMealTabLayout.setHorizontalGroup(
+            lightMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 666, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton9)
-                    .addComponent(jButton10))
-                .addGap(0, 357, Short.MAX_VALUE))
+        lightMealTabLayout.setVerticalGroup(
+            lightMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Light Meals", jPanel1);
+        dessertTab.addTab("Light Meals", lightMealTab);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -310,60 +345,23 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Desserts", jPanel2);
+        dessertTab.addTab("Desserts", jPanel2);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_d_cokeLogo.png"))); // NOI18N
-        jButton4.setBorder(null);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_d_cokeLightLogo.png"))); // NOI18N
-        jButton14.setBorder(null);
-
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_d_fantaLogo.png"))); // NOI18N
-        jButton5.setBorder(null);
-
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_d_spriteLogo.png"))); // NOI18N
-        jButton6.setBorder(null);
-
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/_d_liptonLogo.png"))); // NOI18N
-        jButton7.setBorder(null);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton7)
-                .addGap(0, 223, Short.MAX_VALUE))
+        javax.swing.GroupLayout drinksTabLayout = new javax.swing.GroupLayout(drinksTab);
+        drinksTab.setLayout(drinksTabLayout);
+        drinksTabLayout.setHorizontalGroup(
+            drinksTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 666, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(0, 357, Short.MAX_VALUE))
+        drinksTabLayout.setVerticalGroup(
+            drinksTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Drinks", jPanel3);
+        dessertTab.addTab("Drinks", drinksTab);
 
         jTabbedPane2.setBackground(new java.awt.Color(204, 204, 204));
-        jTabbedPane1.addTab("Extra", jTabbedPane2);
+        dessertTab.addTab("Extra", jTabbedPane2);
 
         buttonOverride.setText("Pay Override");
         buttonOverride.addActionListener(new java.awt.event.ActionListener() {
@@ -402,7 +400,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                                         .addComponent(customerNo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(12, 12, 12)
-                        .addComponent(jTabbedPane1)
+                        .addComponent(dessertTab)
                         .addGap(22, 22, 22)))
                 .addContainerGap())
         );
@@ -437,7 +435,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                         .addComponent(buttonClose)
                         .addGap(27, 27, 27))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1)
+                        .addComponent(dessertTab)
                         .addGap(6, 6, 6)))
                 .addComponent(jToggleButton8)
                 .addContainerGap())
@@ -461,10 +459,6 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         s.setVisible(true);
     }//GEN-LAST:event_buttonPayActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void buttonOverrideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOverrideActionPerformed
         interrupTime();
     }//GEN-LAST:event_buttonOverrideActionPerformed
@@ -480,25 +474,18 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     private javax.swing.JButton buttonOverride;
     private javax.swing.JButton buttonPay;
     private javax.swing.JLabel customerNo;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTabbedPane dessertTab;
+    private javax.swing.JPanel drinksTab;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JToggleButton jToggleButton8;
     private javax.swing.JLabel lblClock1;
     private javax.swing.JLabel lblNum;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblWaiter;
+    private javax.swing.JPanel lightMealTab;
+    private javax.swing.JPanel mainMealTab;
     private static javax.swing.JLabel nameTF;
     public static javax.swing.JTable tblItems;
     public static javax.swing.JFormattedTextField textfieldTotal;

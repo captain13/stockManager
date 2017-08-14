@@ -2,12 +2,14 @@ package system;
 
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.List;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -38,6 +40,27 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         system.populateOrder();
         tableLayout();
         getResolution();
+        setTableDesign();
+    }
+
+    public final void setTableDesign() {
+        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
+        tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
+
+        tableRecipe.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tableRecipe.getColumnModel().getColumn(1).setPreferredWidth(300);
+        tableRecipe.getColumnModel().getColumn(2).setPreferredWidth(150);
+        tableRecipe.getColumnModel().getColumn(3).setPreferredWidth(50);
+        tableRecipe.getColumnModel().getColumn(3).setPreferredWidth(50);
+
+        tableSupplier.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tableSupplier.getColumnModel().getColumn(1).setPreferredWidth(300);
+        tableSupplier.getColumnModel().getColumn(2).setPreferredWidth(300);
+        tableSupplier.getColumnModel().getColumn(3).setPreferredWidth(200);
+        tableSupplier.getColumnModel().getColumn(4).setPreferredWidth(250);
     }
 
     public final void tableLayout() {
@@ -53,11 +76,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             button.addActionListener(this);
             pnlLayout.add(button);
         }
-//        for (int i = 1; i < emptySpace; i++) {
-//            JButton emptyButton = new JButton();
-//            pnlLayout.add(emptyButton);
-//            emptyButton.setVisible(false);
-//        }
     }
 
     @Override
@@ -110,6 +128,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         try {
             TableRowSorter<TableModel> rowSorterRecipe = new TableRowSorter<>(tableRecipe.getModel());
             tableRecipe.setRowSorter(rowSorterRecipe);
+
+            ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+            sortKeys.add(new RowSorter.SortKey(2, SortOrder.DESCENDING));
+            sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
+            rowSorterRecipe.setSortKeys(sortKeys);
+
             textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
@@ -117,7 +141,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     if (text.trim().length() == 0) {
                         rowSorterRecipe.setRowFilter(null);
                     } else {
-                        rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        rowSorterRecipe.setRowFilter(RowFilter.regexFilter(text));
                     }
                 }
 
@@ -1193,7 +1217,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeAwayActionPerformed
         if (tables.get("takeAway") == null) {
-            tables.put("takeAway", new NewOrder(null,null));
+            tables.put("takeAway", new NewOrder(null, null));
         } else {
             tables.get("takeAway").setVisible(true);
         }
