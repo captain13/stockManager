@@ -127,11 +127,11 @@ public class Reports extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose1ActionPerformed
-        // TODO add your handling code here:
+        newManager.populateSales(tableSales);
     }//GEN-LAST:event_buttonClose1ActionPerformed
 
     private void buttonClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose2ActionPerformed
-        // TODO add your handling code here:
+       newManager.populateEmployeeSales(tableSales);
     }//GEN-LAST:event_buttonClose2ActionPerformed
 
 

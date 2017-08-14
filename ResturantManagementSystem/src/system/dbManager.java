@@ -20,13 +20,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class dbManager {
 
-     String url = "jdbc:mysql://localhost:3306/resturantdb";
-     String username = "root";
-     String password = "root";
-     String driver = "com.mysql.jdbc.Driver";
-     ArrayList recipeName = new ArrayList();
-     ArrayList recipeIndex = new ArrayList();
-     ArrayList recipeImage = new ArrayList();
+    String url = "jdbc:mysql://localhost:3306/resturantdb";
+    String username = "root";
+    String password = "root";
+    String driver = "com.mysql.jdbc.Driver";
+    ArrayList recipeName = new ArrayList();
+    ArrayList recipeIndex = new ArrayList();
+    ArrayList recipeImage = new ArrayList();
 
     public ArrayList getRecipeName() {
         return recipeName;
@@ -278,6 +278,38 @@ public class dbManager {
             System.out.println(exc);
         }
     }
+    
+    public void populateEmployeeSales(JTable sales) {
+        String columnNames[] = {"ID", "Employee ID", "Sale ID","User"};
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT sales_employee.*, employee.employeeFName FROM sales_employee,employee WHERE employee.employeeID=sales_employee.employeeID ";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            DefaultTableModel tableModel = new DefaultTableModel();
+            sales.setModel(tableModel);
+
+            for (int i = 0; i < columnCount; i++) {
+                tableModel.addColumn(columnNames[i]);
+            }
+            Object[] row = new Object[columnCount];
+
+            while (rs.next()) {
+                for (int i = 0; i < columnCount; i++) {
+                    row[i] = rs.getObject(i + 1);
+                }
+                tableModel.addRow(row);
+            }
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+    }
 
     public Object[][] getRecipe() {
         int count = getRecipesCount();
@@ -461,7 +493,7 @@ public class dbManager {
         }
     }
 
-    public void insertReservations(String employee,String date,String time,String customerName,String tableNum,String customerNum) {
+    public void insertReservations(String employee, String date, String time, String customerName, String tableNum, String customerNum) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -502,7 +534,7 @@ public class dbManager {
         }
     }
 
-    public void insertSales(double currentTotal) {
+    public void insertSales(double currentTotal, String user) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -510,7 +542,36 @@ public class dbManager {
                     + "VALUES ('" + internalClock.getCurrentDate() + "','"
                     + currentTotal + "')";
             s.execute(insertQuerySup);
+            String selectQuery = "SELECT * FROM sales ORDER BY salesID DESC LIMIT 1";
+            ResultSet rs = s.executeQuery(selectQuery);
+            String ID = "";
+            while (rs.next()) {
+                ID = rs.getString("salesID");
+            }
+            insertEmployeeSales(ID, user);
             populateOrder();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
+    public void insertEmployeeSales(String ID, String user) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String selectQuery = "SELECT employeeID FROM employee WHERE employeeFName='" + user + "'";
+            ResultSet rs = s.executeQuery(selectQuery);
+            String employeeID = "";
+            while (rs.next()) {
+                employeeID = rs.getString("employeeID");
+            }
+
+            String insertQuerySup = "INSERT INTO sales_employee(employeeID,salesID)"
+                    + "VALUES ('" + employeeID + "','"
+                    + ID + "')";
+            s.execute(insertQuerySup);
             s.close();
             conn.close();
         } catch (SQLException exp) {

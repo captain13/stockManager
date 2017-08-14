@@ -39,7 +39,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     Object[][] recipeInfo;
     dbManager newManager=new dbManager();
 
-    public NewOrder() {
+    public NewOrder(String waiterID,String customerNum) {
         initComponents();
         getScreenResolution();
         this.setLocation(0, 0);
@@ -48,11 +48,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         tblItems.getColumnModel().getColumn(1).setPreferredWidth(25);
         tblItems.getColumnModel().getColumn(2).setPreferredWidth(45);
         internalClock();
-        // dbManager.getRecipe();
+        nameTF.setText(waiterID);
+        customerNo.setText(customerNum);
         menuLayout();
         startTime();
-        //  userManager.createUserLog();
-//        customerNo.setText(JOptionPane.showInputDialog(null, "Enter number of customers"));
     }
 
     public void menuLayout() {
@@ -131,6 +130,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
     public static String getTotal() {
         return textfieldTotal.getText().replaceAll("R", "");
+    }
+    
+        public String getWaiter() {
+        return nameTF.getText();
     }
 
     public void startTime() {
@@ -454,7 +457,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayActionPerformed
-        Checkout s = new Checkout();
+        Checkout s = new Checkout(getWaiter());
         s.setVisible(true);
     }//GEN-LAST:event_buttonPayActionPerformed
 

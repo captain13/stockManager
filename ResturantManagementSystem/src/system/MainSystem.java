@@ -64,7 +64,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String buttonId = ae.getActionCommand();
         if (tables.get(buttonId) == null) {
-            tables.put(buttonId, new NewOrder());
+            tables.put(buttonId, new NewOrder(JOptionPane.showInputDialog(null, "Enter Waiter ID"), JOptionPane.showInputDialog(null, "Enter Number of Customers")));
             tables.get(buttonId).setVisible(true);
         } else {
             tables.get(buttonId).setVisible(true);
@@ -1193,9 +1193,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeAwayActionPerformed
         if (tables.get("takeAway") == null) {
-            tables.put("takeAway", new NewOrder());
-            //Login user = new Login(tables.get("table3"));
-            //user.setVisible(true);
+            tables.put("takeAway", new NewOrder(null,null));
         } else {
             tables.get("takeAway").setVisible(true);
         }

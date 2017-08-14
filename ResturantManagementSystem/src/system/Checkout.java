@@ -7,12 +7,14 @@ package system;
 public class Checkout extends javax.swing.JFrame {
 
     String number;
+    String user;
     double currentTotal;
     dbManager newManager = new dbManager();
 
-    public Checkout() {
+    public Checkout(String user) {
         initComponents();
         super.setLocationRelativeTo(null);
+        this.user=user;
     }
 
     public void calculateBill() {
@@ -22,6 +24,8 @@ public class Checkout extends javax.swing.JFrame {
 
         if (total >= 0) {
             totalField.setText("Change: R" + Double.toString(total));
+            newManager.insertSales(currentTotal,user);
+            
         } else if (total < 0) {
             totalField.setText("Outstanding: R" + Double.toString(total));
         }
@@ -258,7 +262,6 @@ public class Checkout extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         calculateBill();
-        newManager.insertSales(currentTotal);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
