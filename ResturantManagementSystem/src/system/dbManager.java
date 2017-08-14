@@ -280,12 +280,12 @@ public class dbManager {
     }
     
     public void populateEmployeeSales(JTable sales) {
-        String columnNames[] = {"ID", "Employee ID", "Sale ID","User"};
+        String columnNames[] = {"Sale ID","User","Employee ID"};
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT sales_employee.*, employee.employeeFName FROM sales_employee,employee WHERE employee.employeeID=sales_employee.employeeID ";
+            String query = "SELECT sales_employee.salesID, employee.employeeFName, sales_employee.employeeID FROM sales_employee,employee WHERE employee.employeeID=sales_employee.employeeID ";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();

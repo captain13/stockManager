@@ -53,18 +53,19 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="645" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jToggleButton1" min="-2" pref="168" max="-2" attributes="0"/>
+                  <EmptySpace pref="467" max="32767" attributes="0"/>
+              </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Component id="buttonAdd" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                              <Component id="buttonDelete" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                              <Component id="buttonPassword" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                              <Component id="buttonClose" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="buttonLogin" min="-2" pref="167" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="buttonAdd" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                          <Component id="buttonDelete" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                          <Component id="buttonPassword" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                          <Component id="buttonClose" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="452" max="-2" attributes="0"/>
@@ -75,7 +76,11 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="286" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                  <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="167" max="32767" attributes="0"/>
+              </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -87,9 +92,7 @@
                               <Component id="buttonDelete" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonPassword" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="buttonLogin" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="131" pref="131" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
                               <Component id="buttonClose" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -143,14 +146,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="buttonLogin">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Currently Logged in"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonLoginActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="buttonPassword">
           <Properties>
             <Property name="text" type="java.lang.String" value="Change Employee Password"/>
@@ -165,6 +160,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDeleteActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Currently Logged in"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
