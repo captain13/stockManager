@@ -31,6 +31,8 @@ public class AddDatabase extends javax.swing.JFrame {
         }
         if (!"".equals(textRecipe.getText()) || !"".equals(textPrice.getText())) {
             database.insertRecipe(getRecipe(), getPrice(), getVAT(), getImageDirectory(), getCategory());
+            RecipeForm newForm = new RecipeForm(getRecipe());
+            newForm.setVisible(true);
         } else {
         }
     }

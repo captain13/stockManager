@@ -141,7 +141,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     if (text.trim().length() == 0) {
                         rowSorterRecipe.setRowFilter(null);
                     } else {
-                        rowSorterRecipe.setRowFilter(RowFilter.regexFilter(text));
+                        rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
                 }
 
@@ -524,16 +524,16 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addGroup(DashboardLayout.createSequentialGroup()
                         .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(DashboardLayout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(jButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(DashboardLayout.createSequentialGroup()
                                 .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(DashboardLayout.createSequentialGroup()
                                         .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 84, Short.MAX_VALUE))
                                     .addComponent(lblImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(DashboardLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblVersion, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DashboardLayout.createSequentialGroup()
@@ -1243,10 +1243,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             switch (selected_item) {
 
                 case "Default":
-                    ImageIcon icon = new ImageIcon("./src/images/Logo_White.png");
+                    ImageIcon icon = new ImageIcon("./src/images/Logo_Red.png");
                     lblImage.setIcon(icon);
                     break;
-
+                    
                 case "Bistro":
                     ImageIcon icon1 = new ImageIcon("./src/images/Logo_Bistro.png");
                     lblImage.setIcon(icon1);

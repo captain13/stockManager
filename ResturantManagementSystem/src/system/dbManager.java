@@ -42,7 +42,7 @@ public class dbManager {
 
     public void populateTables() {
         String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(kg)", "Item Threshold", "Item Limit"};
-        String columnNamesRecipe[] = {"Recipe ID", "Description","Type", "Price", "VAT"};
+        String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
         String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
         try {
 
@@ -264,9 +264,9 @@ public class dbManager {
             System.out.println(exc);
         }
     }
-    
+
     public void populateEmployeeSales(JTable sales) {
-        String columnNames[] = {"Sale ID","User","Employee ID"};
+        String columnNames[] = {"Sale ID", "User", "Employee ID"};
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -295,6 +295,31 @@ public class dbManager {
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
+    }
+
+    public String[] getIngredients() {
+        String ingredients[] = new String[100];
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT item FROM inventory ";
+            ResultSet rs = s.executeQuery(query);
+
+            int i = 0;
+            while (rs.next()) {
+
+                ingredients[i] = rs.getString("item");
+                i++;
+            }
+
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+        return ingredients;
     }
 
     public Object[][] getRecipe() {
@@ -444,6 +469,7 @@ public class dbManager {
     }
 
     public void insertRecipe(String name, String price, String vat, String directory, String category) {
+        String ID = "";
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -454,10 +480,71 @@ public class dbManager {
                     + category + "', '"
                     + directory + "')";
             s.execute(insertQuerySup);
+            String selectQuery = "SELECT * FROM recipe ORDER BY recipeID DESC LIMIT 1";
+            ResultSet rs = s.executeQuery(selectQuery);
+
+            while (rs.next()) {
+                ID = rs.getString("recipeID");
+            }
             populateTables();
             s.close();
             conn.close();
         } catch (SQLException exp) {
+        }
+    }
+
+    public int getRecipeID() {
+        int ID =0;
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String selectQuery = "SELECT * FROM recipe ORDER BY recipeID DESC LIMIT 1";
+            ResultSet rs = s.executeQuery(selectQuery);
+
+            while (rs.next()) {
+                ID = Integer.parseInt(rs.getString("recipeID"));
+            }
+            populateTables();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
+        return ID;
+    }
+
+    public int getInvetoryID(String item) {
+        int ID = 0;
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String selectQuery = "SELECT inventoryID FROM inventory WHERE item='" + item + "'";
+            ResultSet rs = s.executeQuery(selectQuery);
+
+            while (rs.next()) {
+                ID = Integer.parseInt(rs.getString("inventoryID"));
+            }
+            populateTables();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
+        return ID;
+    }
+
+    public void insertRecipeList(String item, String qty) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String insertQuerySup = "INSERT INTO inventory_recipe(inventoryID, recipeID,qty)"
+                    + "VALUES ('" + getInvetoryID(item) + "','"
+                    + getRecipeID() + "', '"
+                    + qty + "')";
+            s.execute(insertQuerySup);
+            populateTables();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
         }
     }
 
