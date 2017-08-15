@@ -95,16 +95,6 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lblTitle" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblQty3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="comboxThreshold" pref="164" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblQty4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                  <Component id="textfieldLimit" max="32767" attributes="0"/>
-                              </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblItem" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -114,6 +104,17 @@
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="textfieldQty" alignment="0" pref="162" max="32767" attributes="0"/>
                                       <Component id="textfieldItem" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblQty4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblQty3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="comboxThreshold" max="32767" attributes="0"/>
+                                      <Component id="textfieldLimit" pref="162" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -184,7 +185,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblQty3">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Item Threshold"/>
+                    <Property name="text" type="java.lang.String" value="Reorder Level"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblQty4">

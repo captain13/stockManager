@@ -22,7 +22,7 @@ public class AddDatabase extends javax.swing.JFrame {
 
     public void insert() {
         if (!"".equals(textfieldItem.getText()) || !"".equals(textfieldQty.getText())) {
-            database.insertInventory(getItem(), getQuantity(), getLimit(), getThreshold());
+            database.insertInventory(getItem(), getQuantity(), getLimit(), getReorderLevel());
         } else {
         }
         if (!"".equals(textfieldDisName.getText()) || !"".equals(textfieldDisEmail.getText()) || !"".equals(textfieldDisContact.getText())) {
@@ -90,8 +90,8 @@ public class AddDatabase extends javax.swing.JFrame {
         return Double.parseDouble(textfieldLimit.getText());
     }
 
-    public Double getThreshold() {
-        return Double.parseDouble(comboxThreshold.getSelectedItem().toString().replace("%", ""));
+    public Double getReorderLevel() {
+        return (Double.parseDouble(comboxThreshold.getSelectedItem().toString().replace("%", ""))/100);
     }
 
     public String getRecipe() {
@@ -192,7 +192,7 @@ public class AddDatabase extends javax.swing.JFrame {
 
         lblTitle.setText("Inventory Details");
 
-        lblQty3.setText("Item Threshold");
+        lblQty3.setText("Reorder Level");
 
         lblQty4.setText("Item Limit");
 
@@ -206,14 +206,6 @@ public class AddDatabase extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblTitle)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblQty3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(comboxThreshold, 0, 164, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblQty4)
-                        .addGap(38, 38, 38)
-                        .addComponent(textfieldLimit))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblItem)
@@ -221,7 +213,15 @@ public class AddDatabase extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(textfieldQty, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                            .addComponent(textfieldItem))))
+                            .addComponent(textfieldItem)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblQty4)
+                            .addComponent(lblQty3))
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboxThreshold, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textfieldLimit, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(

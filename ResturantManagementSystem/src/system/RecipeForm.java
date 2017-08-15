@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -27,8 +26,8 @@ public class RecipeForm extends javax.swing.JFrame implements ActionListener {
     JButton button;
     int n = 8;
     int m = 1;
-    private ArrayList<JTextField> textFields = new ArrayList<JTextField>();
-    private ArrayList<JComboBox> comboBox = new ArrayList<JComboBox>();
+    private final ArrayList<JTextField> textFields = new ArrayList<>();
+    private final ArrayList<JComboBox> comboBox = new ArrayList<>();
 
     /**
      * Creates new form recipe
@@ -78,7 +77,7 @@ public class RecipeForm extends javax.swing.JFrame implements ActionListener {
         Layout();
     }
 
-    public void getFieldText() {
+    public void addRecipeList() {
         for (int i = 0; i < textFields.size(); i++) {
             String qty = (textFields.get(i).getText());
             String item = (String) comboBox.get(i).getSelectedItem();
@@ -169,47 +168,10 @@ public class RecipeForm extends javax.swing.JFrame implements ActionListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        getFieldText();
+        addRecipeList();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RecipeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RecipeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RecipeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RecipeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RecipeForm("Test").setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

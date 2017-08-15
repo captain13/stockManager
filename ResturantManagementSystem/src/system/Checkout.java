@@ -14,20 +14,22 @@ public class Checkout extends javax.swing.JFrame {
     public Checkout(String user) {
         initComponents();
         super.setLocationRelativeTo(null);
-        this.user=user;
+        this.user = user;
     }
 
     public void calculateBill() {
         double total;
         currentTotal = Double.parseDouble(NewOrder.getTotal());
-        total = Double.parseDouble(number) - currentTotal;
+        if (number != null) {
+            total = Double.parseDouble(number) - currentTotal;
 
-        if (total >= 0) {
-            totalField.setText("Change: R" + Double.toString(total));
-            newManager.insertSales(currentTotal,user);
-            
-        } else if (total < 0) {
-            totalField.setText("Outstanding: R" + Double.toString(total));
+            if (total >= 0) {
+                totalField.setText("Change: R" + Double.toString(total));
+                newManager.insertSales(currentTotal, user);
+
+            } else if (total < 0) {
+                totalField.setText("Outstanding: R" + Double.toString(total));
+            }
         }
     }
 
