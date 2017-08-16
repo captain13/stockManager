@@ -1142,7 +1142,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="comboBoxChange" min="-2" pref="111" max="-2" attributes="0"/>
+                                  <Component id="comboBoxTableCount" min="-2" pref="111" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="comboBoxSceen" alignment="0" max="32767" attributes="0"/>
                                       <Component id="comboBoxLogo" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
@@ -1182,7 +1182,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="comboBoxChange" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comboBoxTableCount" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblLogo1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
@@ -1271,7 +1271,7 @@
                 <Property name="text" type="java.lang.String" value="Number of Tabels"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="comboBoxChange">
+            <Component class="javax.swing.JComboBox" name="comboBoxTableCount">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="16">
@@ -1295,7 +1295,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboBoxChangeItemStateChanged"/>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboBoxTableCountItemStateChanged"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

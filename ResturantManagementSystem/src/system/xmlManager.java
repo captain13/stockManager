@@ -33,7 +33,7 @@ public class xmlManager {
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\system\\Settings.xml";
     File xmlSettings = new File(location);
     String resoultion;
-    String table;
+    String tableCount;
 
     public xmlManager() {
         xmlValidition();
@@ -88,7 +88,7 @@ public class xmlManager {
             Document document = documentBuilder.parse(xmlSettings);
             NodeList nList = document.getElementsByTagName("generalsettings");
             resoultion = document.getElementsByTagName("resolution").item(0).getTextContent();
-            table = document.getElementsByTagName("tableNum").item(0).getTextContent();
+            tableCount = document.getElementsByTagName("tableNum").item(0).getTextContent();
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             Logger.getLogger(xmlManager.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -108,16 +108,17 @@ public class xmlManager {
 
             rootElement.appendChild(director);
             NodeList list = director.getChildNodes();
-            Node node = list.item(1);
+            for (int i = 0; i < list.getLength(); i++) {
+                Node node = list.item(i);
 
-            if ("resolution".equals(node.getNodeName())) {
-                node.setTextContent(selectedItem);
+                if ("resolution".equals(node.getNodeName())) {
+                    node.setTextContent(selectedItem);
+                }
+
+                if ("tableNum".equals(node.getNodeName())) {
+                    node.setTextContent(selectedTable);
+                }
             }
-
-            if ("tableNum".equals(node.getNodeName())) {
-                node.setTextContent(selectedTable);
-            }
-
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(document);
@@ -132,15 +133,15 @@ public class xmlManager {
 
     public void getSetting() {
         getResolution();
-        getTable();
+        getTableCount();
     }
 
     public String getResolution() {
         return resoultion;
     }
 
-    public String getTable() {
-        return table;
+    public String getTableCount() {
+        return tableCount;
     }
 
 }
