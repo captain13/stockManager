@@ -1224,8 +1224,8 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
                     <StringItem index="0" value="Default"/>
-                    <StringItem index="1" value="Bistro"/>
-                    <StringItem index="2" value="Cattle Baron"/>
+                    <StringItem index="1" value="Demo 1"/>
+                    <StringItem index="2" value="Demo 2"/>
                   </StringArray>
                 </Property>
               </Properties>

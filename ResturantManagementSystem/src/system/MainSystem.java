@@ -82,12 +82,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String buttonId = ae.getActionCommand();
         if (tables.get(buttonId) == null) {
-            tables.put(buttonId, new NewOrder(JOptionPane.showInputDialog(null, "Enter Waiter ID"), JOptionPane.showInputDialog(null, "Enter Number of Customers")));
-            tables.get(buttonId).setVisible(true);
+            String waiter = JOptionPane.showInputDialog(null, "Enter Waiter ID");
+            String customer = JOptionPane.showInputDialog(null, "Enter Number of Customers");
+            if (!"".equals(waiter)&&!"".equals(customer)) {
+                tables.put(buttonId, new NewOrder(waiter, customer, buttonId, tables));
+                tables.get(buttonId).setVisible(true);
+            }
         } else {
             tables.get(buttonId).setVisible(true);
         }
-        System.out.println(buttonId);
     }
 
     public static void searchITable() {
@@ -205,7 +208,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         } else {
             return enableKeypad = false;
         }
-
     }
 
     public int getID() {
@@ -246,7 +248,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public final void setSelectedTable() {
-        n = Integer.parseInt(comboBoxTableCount.getSelectedItem().toString());
+        n = Integer.parseInt(getSelectedTable());
         tableLayout();
     }
 
@@ -1095,7 +1097,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         lblSettings.setText("Settings");
 
-        comboBoxLogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "Bistro", "Cattle Baron" }));
+        comboBoxLogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "Demo 1", "Demo 2" }));
         comboBoxLogo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxLogoItemStateChanged(evt);
@@ -1261,7 +1263,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeAwayActionPerformed
         if (tables.get("takeAway") == null) {
-            tables.put("takeAway", new NewOrder(null, null));
+            tables.put("takeAway", new NewOrder("Guest", null, "takeAway", tables));
         } else {
             tables.get("takeAway").setVisible(true);
         }
@@ -1272,7 +1274,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonLayoutActionPerformed
 
     private void buttonReprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprintActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_buttonReprintActionPerformed
 
     private void comboBoxSceenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxSceenItemStateChanged
@@ -1282,7 +1284,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_comboBoxSceenItemStateChanged
 
     private void comboBoxLogoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxLogoItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
             String selected_item = comboBoxLogo.getSelectedItem().toString();
             switch (selected_item) {
 
@@ -1291,17 +1292,16 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     lblImage.setIcon(icon);
                     break;
 
-                case "Bistro":
+                case "Demo 1":
                     ImageIcon icon1 = new ImageIcon("./src/images/Logo_Bistro.png");
                     lblImage.setIcon(icon1);
                     break;
 
-                case "Cattle Baron":
+                case "Demo 2":
                     ImageIcon icon2 = new ImageIcon("./src/images/Logo_Cattle_Baron.png");
                     lblImage.setIcon(icon2);
                     break;
             }
-        }
     }//GEN-LAST:event_comboBoxLogoItemStateChanged
 
     private void radioIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioIDActionPerformed
@@ -1429,18 +1429,18 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_comboBoxTableCountItemStateChanged
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to backup?", null, JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to backup?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             system.backup();
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-  
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to retore?", null, JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to retore?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             system.restore();
         }

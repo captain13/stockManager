@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -39,11 +40,14 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     Object[][] recipeInfo;
     Object[][] drinksInfo;
     dbManager newManager = new dbManager();
+    String key;
+    HashMap tables;
 
-    public NewOrder(String waiterID, String customerNum) {
+    public NewOrder(String waiterID, String customerNum, String key, HashMap tables) {
         initComponents();
         getScreenResolution();
         this.setLocation(0, 0);
+        this.key = key;
         tblItems.setModel(model);
         tblItems.getColumnModel().getColumn(0).setPreferredWidth(90);
         tblItems.getColumnModel().getColumn(1).setPreferredWidth(25);
@@ -53,6 +57,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         customerNo.setText(customerNum);
         menuLayout();
         startTime();
+        this.tables = tables;
     }
 
     public void menuLayout() {
@@ -95,10 +100,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 mainMealTab.add(button);
                 index++;
             }
-           
+
             emptySpaceTab1 = 48 - index;
             index = 0;
-            
+
             if (recipeInfo[i][4].equals("Light Meal")) {
                 ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
                 button = new JButton(recipeInfo[i][1].toString(), icon);
@@ -142,7 +147,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             drinksTab.add(emptyButton);
             emptyButton.setVisible(false);
         }
-        
+
         for (int i = 1; i < emptySpaceTab2; i++) {
             JButton emptyButton = new JButton();
             lightMealTab.add(emptyButton);
@@ -184,8 +189,8 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         });
     }
 
-    public static String getTotal() {
-        return textfieldTotal.getText().replaceAll("R", "");
+    public static Double getTotal() {
+        return Double.parseDouble(textfieldTotal.getText().replaceAll("R", ""));
     }
 
     public String getWaiter() {
@@ -208,6 +213,11 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             double amount = Double.parseDouble(String.valueOf(tblItems.getModel().getValueAt(i, 2)));
             total = total + amount;
         }
+        if (customerNo.getText() != null) {
+            if (Integer.parseInt(customerNo.getText()) >= 10) {
+                total = total * 1.1;
+            }
+        }
         textfieldTotal.setText(String.format("R%.2f", total));
     }
 
@@ -220,6 +230,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             } catch (ArrayIndexOutOfBoundsException exp) {
             }
         }
+    }
+
+    public void closeTable() {
+        tables.remove(key);
     }
 
     @SuppressWarnings("unchecked")
@@ -295,7 +309,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         tblItems.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(tblItems);
 
-        jToggleButton8.setText("Print Order");
+        jToggleButton8.setText("Close Table");
         jToggleButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton8ActionPerformed(evt);
@@ -363,7 +377,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         jTabbedPane2.setBackground(new java.awt.Color(204, 204, 204));
         dessertTab.addTab("Extra", jTabbedPane2);
 
-        buttonOverride.setText("Pay Override");
+        buttonOverride.setText("Print Order");
         buttonOverride.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOverrideActionPerformed(evt);
@@ -446,7 +460,8 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton8ActionPerformed
-        // TODO add your handling code here:
+        closeTable();
+        this.dispose();
     }//GEN-LAST:event_jToggleButton8ActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed

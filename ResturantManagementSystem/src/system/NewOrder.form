@@ -207,7 +207,7 @@
     </Container>
     <Component class="javax.swing.JToggleButton" name="jToggleButton8">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Print Order"/>
+        <Property name="text" type="java.lang.String" value="Close Table"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton8ActionPerformed"/>
@@ -340,7 +340,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="buttonOverride">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pay Override"/>
+        <Property name="text" type="java.lang.String" value="Print Order"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOverrideActionPerformed"/>

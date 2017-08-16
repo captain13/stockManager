@@ -90,7 +90,7 @@ CREATE TABLE `inventory_recipe` (
   KEY `fk_inventory_recipt_reciept1` (`recipeID`),
   CONSTRAINT `fk_inventory_recipt_inventory` FOREIGN KEY (`inventoryID`) REFERENCES `inventory` (`inventoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_inventory_recipt_reciept1` FOREIGN KEY (`recipeID`) REFERENCES `recipe` (`recipeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +99,7 @@ CREATE TABLE `inventory_recipe` (
 
 LOCK TABLES `inventory_recipe` WRITE;
 /*!40000 ALTER TABLE `inventory_recipe` DISABLE KEYS */;
-INSERT INTO `inventory_recipe` VALUES (1,1,1,200),(2,3,1,100),(3,4,1,50),(4,5,1,50),(5,8,1,100),(6,2,2,200),(7,3,2,100),(8,4,2,50),(9,5,2,50),(10,8,2,100);
+INSERT INTO `inventory_recipe` VALUES (1,1,1,200),(2,3,1,100),(3,4,1,50),(4,5,1,50),(5,8,1,100),(6,2,2,200),(7,3,2,100),(8,4,2,50),(9,5,2,50),(10,8,2,100),(11,6,3,300),(12,8,3,100),(13,7,4,300),(14,8,4,100);
 /*!40000 ALTER TABLE `inventory_recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +148,7 @@ CREATE TABLE `recipe` (
   `recipeImageDirectory` varchar(150) DEFAULT NULL,
   `recipeCount` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`recipeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +157,7 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
-INSERT INTO `recipe` VALUES (1,'Chicken Burger & Chips','65.00','9.10','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_chickenBurger.jpg',NULL),(2,'Beef Burger & Chips','65.00','9.10','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_beefBurger.jpg',NULL);
+INSERT INTO `recipe` VALUES (1,'Chicken Burger & Chips','65.00','9.10','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_chickenBurger.jpg',NULL),(2,'Beef Burger & Chips','65.00','9.10','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_beefBurger.jpg',NULL),(3,'Chicken Wings & Chips','55.00','7.70','Light Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_chickenWings.jpg',NULL),(4,'Pork Ribs & Chips','90.00','12.60','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_porkRibs.jpg',NULL);
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,4 +311,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-16 22:08:55
+-- Dump completed on 2017-08-16 23:22:43

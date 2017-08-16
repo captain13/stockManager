@@ -19,7 +19,7 @@ public class Checkout extends javax.swing.JFrame {
 
     public void calculateBill() {
         double total;
-        currentTotal = Double.parseDouble(NewOrder.getTotal());
+        currentTotal = NewOrder.getTotal();
         if (number != null) {
             total = Double.parseDouble(number) - currentTotal;
 

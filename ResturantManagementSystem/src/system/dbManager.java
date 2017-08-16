@@ -827,7 +827,7 @@ public class dbManager {
             if (processComplete == 0) {
                 JOptionPane.showMessageDialog(null, "Backup Complete");
             } else {
-                JOptionPane.showMessageDialog(null, "Failed backuping up Database");
+                JOptionPane.showMessageDialog(null, "Backup Failed");
             }
 
         } catch (IOException | InterruptedException ex) {
@@ -846,10 +846,10 @@ public class dbManager {
             int processComplete = runtimeProcess.waitFor();
 
             if (processComplete == 0) {
-                JOptionPane.showMessageDialog(null, "Database successfully restored");
+                JOptionPane.showMessageDialog(null, "Database Successfully Restored");
                 populateTables();
             } else {
-                JOptionPane.showMessageDialog(null, "Error restoring database");
+                JOptionPane.showMessageDialog(null, "Restore Failed");
             }
 
         } catch (IOException | InterruptedException | HeadlessException ex) {
