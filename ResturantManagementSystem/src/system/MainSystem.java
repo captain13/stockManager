@@ -2,7 +2,6 @@ package system;
 
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.List;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +31,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     dbManager system = new dbManager();
     HashMap<String, NewOrder> tables = new HashMap<>();
     boolean enableKeypad = false;
+       int n;
 
     public MainSystem() {
         initComponents();
@@ -40,7 +40,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         system.populateOrder();
         tableLayout();
         getResolution();
-        setTableDesign();
+        setSelectedTable();
+       // setTableDesign();
     }
 
     public final void setTableDesign() {
@@ -64,8 +65,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public final void tableLayout() {
+        pnlLayout.removeAll();
         JButton button;
-        int n = 15;
         GridLayout tableLayout = new GridLayout(0, 4);
         pnlLayout.setLayout(tableLayout);
         int emptySpace = 20 - n;
@@ -276,6 +277,16 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public String getSelectedItem() {
         return comboBoxSceen.getSelectedItem().toString();
     }
+    
+      public String getSelectedTable() {
+        return comboBoxChange.getSelectedItem().toString();
+    }
+    
+    
+    public void setSelectedTable() {
+       n=Integer.parseInt(comboBoxChange.getSelectedItem().toString());
+       tableLayout();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -350,6 +361,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jButton1 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
+        lblLogo1 = new javax.swing.JLabel();
+        comboBoxChange = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -1112,6 +1125,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        lblLogo1.setText("Number of Tabels");
+
+        comboBoxChange.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
+        comboBoxChange.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBoxChangeItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
         Settings.setLayout(SettingsLayout);
         SettingsLayout.setHorizontalGroup(
@@ -1124,20 +1146,24 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addGroup(SettingsLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(SettingsLayout.createSequentialGroup()
-                                .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblScreen)
-                                    .addComponent(lblLogo))
-                                .addGap(32, 32, 32)
-                                .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(comboBoxSceen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(comboBoxLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jButton1)
-                            .addComponent(jCheckBox1)))
+                            .addComponent(lblScreen)
+                            .addComponent(lblLogo)
+                            .addComponent(lblLogo1))
+                        .addGap(32, 32, 32)
+                        .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboBoxChange, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(comboBoxSceen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(comboBoxLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(SettingsLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(635, Short.MAX_VALUE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(SettingsLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jCheckBox1))))
+                .addContainerGap(601, Short.MAX_VALUE))
         );
         SettingsLayout.setVerticalGroup(
             SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1152,11 +1178,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBoxLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogo))
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBoxChange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLogo1))
+                .addGap(41, 41, 41)
                 .addComponent(jCheckBox1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -1367,7 +1397,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReportsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        settings.updateSettings(getSelectedItem());
+        settings.updateSettings(getSelectedItem(),getSelectedTable());
         JOptionPane.showMessageDialog(null, "Settings Saved");
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -1388,6 +1418,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         } catch (IOException ex) {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void comboBoxChangeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxChangeItemStateChanged
+        setSelectedTable();
+    }//GEN-LAST:event_comboBoxChangeItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -1447,6 +1481,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonReprint1;
     private javax.swing.JButton buttonSpecials;
     private javax.swing.JButton buttonTakeAway;
+    private javax.swing.JComboBox<String> comboBoxChange;
     private javax.swing.JComboBox<String> comboBoxLogo;
     private javax.swing.JComboBox<String> comboBoxSceen;
     private javax.swing.JButton jButton1;
@@ -1465,6 +1500,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private static javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblLogo1;
     private javax.swing.JLabel lblScreen;
     private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblSettings;

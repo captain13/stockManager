@@ -33,6 +33,7 @@ public class xmlManager {
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\system\\Settings.xml";
     File xmlSettings = new File(location);
     String resoultion;
+    String table;
 
     public xmlManager() {
         xmlValidition();
@@ -62,6 +63,10 @@ public class xmlManager {
                 logo.appendChild(document.createTextNode("default"));
                 generalSettings.appendChild(logo);
 
+                Element tableNumber = document.createElement("tableNum");
+                tableNumber.appendChild(document.createTextNode("15"));
+                generalSettings.appendChild(tableNumber);
+
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 Transformer transformer = transformerFactory.newTransformer();
                 DOMSource source = new DOMSource(document);
@@ -83,14 +88,15 @@ public class xmlManager {
             Document document = documentBuilder.parse(xmlSettings);
             NodeList nList = document.getElementsByTagName("generalsettings");
             resoultion = document.getElementsByTagName("resolution").item(0).getTextContent();
+            table = document.getElementsByTagName("tableNum").item(0).getTextContent();
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             Logger.getLogger(xmlManager.class
                     .getName()).log(Level.SEVERE, null, ex);
 
         }
     }
-    
-       public void updateSettings(String selectedItem) {
+
+    public void updateSettings(String selectedItem, String selectedTable) {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder;
         try {
@@ -108,6 +114,10 @@ public class xmlManager {
                 node.setTextContent(selectedItem);
             }
 
+            if ("tableNum".equals(node.getNodeName())) {
+                node.setTextContent(selectedTable);
+            }
+
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(document);
@@ -120,7 +130,17 @@ public class xmlManager {
         }
     }
 
+    public void getSetting() {
+        getResolution();
+        getTable();
+    }
+
     public String getResolution() {
         return resoultion;
     }
+
+    public String getTable() {
+        return table;
+    }
+
 }
