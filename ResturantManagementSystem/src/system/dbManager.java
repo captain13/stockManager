@@ -1,6 +1,7 @@
 package system;
 
 import java.awt.HeadlessException;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,21 +27,8 @@ public class dbManager {
     String username = "root";
     String password = "root";
     String driver = "com.mysql.jdbc.Driver";
-    ArrayList recipeName = new ArrayList();
-    ArrayList recipeIndex = new ArrayList();
-    ArrayList recipeImage = new ArrayList();
-
-    public ArrayList getRecipeName() {
-        return recipeName;
-    }
-
-    public ArrayList getRecipeIndex() {
-        return recipeIndex;
-    }
-
-    public ArrayList getRecipeImage() {
-        return recipeImage;
-    }
+    String currentUsersHomeDir = System.getProperty("user.home");
+    String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";
 
     public void populateTables() {
         String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(kg)", "Item Threshold", "Item Limit"};
@@ -692,6 +680,20 @@ public class dbManager {
             String query = "DELETE FROM recipe WHERE recipeID='" + index + "'";
             s.execute(query);
             populateTables();
+            removeRecipeList(index);
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
+    }
+
+    public void removeRecipeList(int index) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
+            s.execute(query);
+            populateTables();
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -816,17 +818,16 @@ public class dbManager {
 
     public void backup() {
         try {
-         
-            String savePath = "C:\\Users\\Andrew\\Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\dbbackup.sql";
-            String executeCmd = "C:\\Program Files (x86)\\MySQL\\MySQL Workbench 6.3 CE\\mysqldump.exe -u " + username + " -p" + password + "  "+url+" -r " + savePath;
-
+            String savePath = "C:\\Users\\Andrew\\Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\ResturantDB_bk.sql";
+            String executeCmd = "C:\\Program Files (x86)\\MySQL\\MySQL Workbench 6.3 CE\\mysqldump.exe"
+                    + " -u " + username + " -p" + password + " resturantdb  -r " + location;
             Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
             int processComplete = runtimeProcess.waitFor();
-
+            System.out.println(processComplete);
             if (processComplete == 0) {
                 JOptionPane.showMessageDialog(null, "Backup Complete");
             } else {
-                System.out.println("Backup Failure");
+                JOptionPane.showMessageDialog(null, "Failed backuping up Database");
             }
 
         } catch (IOException | InterruptedException ex) {
@@ -836,15 +837,19 @@ public class dbManager {
 
     public void restore() {
         try {
-            String restorePath = "C:\\Users\\Andrew\\Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\sqlDump.sql";
-            Process runtimeProcess =Runtime.getRuntime().exec("C:\\Program Files (x86)\\MySQL\\MySQL Workbench 6.3 CE\\mysql.exe -u "+username+" -p"+password+" < "+restorePath);
-      
+            String restorePath = "C:\\Users\\Andrew\\Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\ResturantDB_bk.sql";
+            String[] executeCmd = new String[]{"C:\\Program Files (x86)\\MySQL\\MySQL Workbench 6.3 CE\\mysql.exe",
+                "--user=" + username,"--password=" + password, "resturantdb",
+                "-e", "source " + location};
+       
+            Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
             int processComplete = runtimeProcess.waitFor();
 
             if (processComplete == 0) {
-                JOptionPane.showMessageDialog(null, "Successfully restored from SQL");
+                JOptionPane.showMessageDialog(null, "Database successfully restored");
+                populateTables();
             } else {
-                JOptionPane.showMessageDialog(null, "Error at restoring");
+                JOptionPane.showMessageDialog(null, "Error restoring database");
             }
 
         } catch (IOException | InterruptedException | HeadlessException ex) {

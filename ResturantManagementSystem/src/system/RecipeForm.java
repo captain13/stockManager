@@ -43,7 +43,7 @@ public class RecipeForm extends javax.swing.JFrame implements ActionListener {
         jPanel2.removeAll();
         textFields.removeAll(textFields);
         comboBox.removeAll(comboBox);
-        
+
         GridLayout tableLayout = new GridLayout(0, 2);
         jPanel2.setLayout(tableLayout);
         for (int i = 1; i <= m; i++) {
@@ -81,7 +81,11 @@ public class RecipeForm extends javax.swing.JFrame implements ActionListener {
         for (int i = 0; i < textFields.size(); i++) {
             String qty = (textFields.get(i).getText());
             String item = (String) comboBox.get(i).getSelectedItem();
-            newManager.insertRecipeList(item, qty);
+            if (!"".equals(textFields.get(i).getText())) {
+                newManager.insertRecipeList(item, qty);
+                this.dispose();
+                System.out.println("ran");
+            }
         }
     }
 
@@ -169,7 +173,6 @@ public class RecipeForm extends javax.swing.JFrame implements ActionListener {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         addRecipeList();
-        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
