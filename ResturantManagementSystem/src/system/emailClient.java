@@ -18,7 +18,7 @@ import javax.mail.internet.MimeMessage;
  *
  * @author zanesmith
  */
-public class EmailBackend
+public class emailClient
 {
      static class fireEmail
     {

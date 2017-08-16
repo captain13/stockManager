@@ -1,5 +1,7 @@
 package system;
 
+import java.awt.HeadlessException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -494,7 +496,7 @@ public class dbManager {
     }
 
     public int getRecipeID() {
-        int ID =0;
+        int ID = 0;
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -810,5 +812,44 @@ public class dbManager {
             Logger.getLogger(dbManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return login;
+    }
+
+    public void backup() {
+        try {
+         
+            String savePath = "C:\\Users\\Andrew\\Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\dbbackup.sql";
+            String executeCmd = "C:\\Program Files (x86)\\MySQL\\MySQL Workbench 6.3 CE\\mysqldump.exe -u " + username + " -p" + password + "  "+url+" -r " + savePath;
+
+            Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+            int processComplete = runtimeProcess.waitFor();
+
+            if (processComplete == 0) {
+                JOptionPane.showMessageDialog(null, "Backup Complete");
+            } else {
+                System.out.println("Backup Failure");
+            }
+
+        } catch (IOException | InterruptedException ex) {
+            JOptionPane.showMessageDialog(null, "Error at Backuprestore" + ex.getMessage());
+        }
+    }
+
+    public void restore() {
+        try {
+            String restorePath = "C:\\Users\\Andrew\\Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\sqlDump.sql";
+            Process runtimeProcess =Runtime.getRuntime().exec("C:\\Program Files (x86)\\MySQL\\MySQL Workbench 6.3 CE\\mysql.exe -u "+username+" -p"+password+" < "+restorePath);
+      
+            int processComplete = runtimeProcess.waitFor();
+
+            if (processComplete == 0) {
+                JOptionPane.showMessageDialog(null, "Successfully restored from SQL");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error at restoring");
+            }
+
+        } catch (IOException | InterruptedException | HeadlessException ex) {
+            JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
+        }
+
     }
 }
