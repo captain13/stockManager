@@ -31,17 +31,16 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     dbManager system = new dbManager();
     HashMap<String, NewOrder> tables = new HashMap<>();
     boolean enableKeypad = false;
-       int n;
+    int n;
 
     public MainSystem() {
         initComponents();
         internalClock.internalClock();
         system.populateTables();
         system.populateOrder();
-        tableLayout();
+        setTableCount();
         getResolution();
-        setSelectedTable();
-       // setTableDesign();
+
     }
 
     public final void setTableDesign() {
@@ -238,19 +237,21 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public final void getResolution() {
         String resolution = settings.getResolution();
-        switch (resolution) {
-            case "Windowed Screen":
-                comboBoxSceen.setSelectedItem("Windowed Screen");
-                break;
+        comboBoxSceen.setSelectedItem(resolution);
+    }
 
-            case "Fullscreen":
-                comboBoxSceen.setSelectedItem("Fullscreen");
-                break;
-        }
+    public final void setTableCount() {
+        String table = settings.getTableCount();
+        comboBoxTableCount.setSelectedItem(table);
+    }
+
+    public final void setSelectedTable() {
+        n = Integer.parseInt(comboBoxTableCount.getSelectedItem().toString());
+        tableLayout();
     }
 
     public void setResolution() {
-        switch (getSelectedItem()) {
+        switch (getSelectedResolution()) {
             case "Windowed Screen":
                 windows();
                 break;
@@ -274,18 +275,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
     }
 
-    public String getSelectedItem() {
+    public String getSelectedResolution() {
         return comboBoxSceen.getSelectedItem().toString();
     }
-    
-      public String getSelectedTable() {
-        return comboBoxChange.getSelectedItem().toString();
-    }
-    
-    
-    public void setSelectedTable() {
-       n=Integer.parseInt(comboBoxChange.getSelectedItem().toString());
-       tableLayout();
+
+    public String getSelectedTable() {
+        return comboBoxTableCount.getSelectedItem().toString();
     }
 
     @SuppressWarnings("unchecked")
@@ -362,7 +357,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
         lblLogo1 = new javax.swing.JLabel();
-        comboBoxChange = new javax.swing.JComboBox<>();
+        comboBoxTableCount = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -1127,10 +1122,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         lblLogo1.setText("Number of Tabels");
 
-        comboBoxChange.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
-        comboBoxChange.addItemListener(new java.awt.event.ItemListener() {
+        comboBoxTableCount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
+        comboBoxTableCount.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboBoxChangeItemStateChanged(evt);
+                comboBoxTableCountItemStateChanged(evt);
             }
         });
 
@@ -1151,7 +1146,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                             .addComponent(lblLogo1))
                         .addGap(32, 32, 32)
                         .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboBoxChange, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBoxTableCount, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(comboBoxSceen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(comboBoxLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -1180,7 +1175,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(lblLogo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBoxChange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxTableCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogo1))
                 .addGap(41, 41, 41)
                 .addComponent(jCheckBox1)
@@ -1276,7 +1271,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     ImageIcon icon = new ImageIcon("./src/images/Logo_Red.png");
                     lblImage.setIcon(icon);
                     break;
-                    
+
                 case "Bistro":
                     ImageIcon icon1 = new ImageIcon("./src/images/Logo_Bistro.png");
                     lblImage.setIcon(icon1);
@@ -1397,7 +1392,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReportsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        settings.updateSettings(getSelectedItem(),getSelectedTable());
+        settings.updateSettings(getSelectedResolution(), getSelectedTable());
         JOptionPane.showMessageDialog(null, "Settings Saved");
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -1419,9 +1414,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void comboBoxChangeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxChangeItemStateChanged
+    private void comboBoxTableCountItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxTableCountItemStateChanged
         setSelectedTable();
-    }//GEN-LAST:event_comboBoxChangeItemStateChanged
+    }//GEN-LAST:event_comboBoxTableCountItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -1481,9 +1476,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonReprint1;
     private javax.swing.JButton buttonSpecials;
     private javax.swing.JButton buttonTakeAway;
-    private javax.swing.JComboBox<String> comboBoxChange;
     private javax.swing.JComboBox<String> comboBoxLogo;
     private javax.swing.JComboBox<String> comboBoxSceen;
+    private javax.swing.JComboBox<String> comboBoxTableCount;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
