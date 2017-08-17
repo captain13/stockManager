@@ -30,7 +30,8 @@ import org.xml.sax.SAXException;
 public class xmlManager {
 
     String currentUsersHomeDir = System.getProperty("user.home");
-    String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\system\\Settings.xml";
+    //String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\system\\Settings.xml";
+    String location = ".\\src\\system\\Settings.xml";
     File xmlSettings = new File(location);
     String resoultion;
     String tableCount;

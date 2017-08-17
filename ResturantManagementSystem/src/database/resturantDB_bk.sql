@@ -60,7 +60,7 @@ CREATE TABLE `inventory` (
   `itemThreshold` double DEFAULT '0.25',
   `itemLimit` double DEFAULT NULL,
   PRIMARY KEY (`inventoryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (1,'Chicken Fillet ',1000,0.25,1000),(2,'Beef Burger Patty',1000,0.25,1000),(3,'Burger rolls',1000,0.25,1000),(4,'Lettuce',100,0.5,1000),(5,'Tomatoe',100,0.5,100),(6,'Chicken Wings',1000,0.2,1000),(7,'Pork Ribs',1000,0.2,1000),(8,'Chips',1000,0.2,1000);
+INSERT INTO `inventory` VALUES (1,'Chicken Fillet ',1000,0.25,1000),(2,'Beef Burger Patty',1000,0.25,1000),(3,'Burger rolls',1000,0.25,1000),(4,'Lettuce',100,0.5,1000),(5,'Tomatoe',100,0.5,100),(6,'Chicken Wings',1000,0.2,1000),(7,'Pork Ribs',1000,0.2,1000),(8,'Chips',1000,0.2,1000),(9,'Pizza Base ',3000,0.2,6000),(10,'Cheese',6000,0.2,7000),(11,'Neapolitan sauce',5000,0.2,5000),(12,'Salami',2000,0.2,2000),(13,'Feta',2000,0.2,2000),(14,'Avocado',2000,0.2,2000),(15,'Bacon Pieces',2000,0.2,2000),(16,'Coke',6600,0.2,13200),(17,'Fanta',6600,0.2,6600),(18,'Diet Coke',6600,0.2,6600),(19,'Lipton Peach Ice Tea',6600,0.2,6600),(20,'Chips',6600,0.5,6600);
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ CREATE TABLE `inventory_recipe` (
   KEY `fk_inventory_recipt_reciept1` (`recipeID`),
   CONSTRAINT `fk_inventory_recipt_inventory` FOREIGN KEY (`inventoryID`) REFERENCES `inventory` (`inventoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_inventory_recipt_reciept1` FOREIGN KEY (`recipeID`) REFERENCES `recipe` (`recipeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +99,7 @@ CREATE TABLE `inventory_recipe` (
 
 LOCK TABLES `inventory_recipe` WRITE;
 /*!40000 ALTER TABLE `inventory_recipe` DISABLE KEYS */;
-INSERT INTO `inventory_recipe` VALUES (1,1,1,200),(2,3,1,100),(3,4,1,50),(4,5,1,50),(5,8,1,100),(6,2,2,200),(7,3,2,100),(8,4,2,50),(9,5,2,50),(10,8,2,100),(11,6,3,300),(12,8,3,100),(13,7,4,300),(14,8,4,100);
+INSERT INTO `inventory_recipe` VALUES (1,1,1,200),(2,3,1,100),(3,4,1,50),(4,5,1,50),(5,8,1,100),(6,2,2,200),(7,3,2,100),(8,4,2,50),(9,5,2,50),(10,8,2,100),(11,6,3,300),(12,8,3,100),(13,7,4,300),(14,8,4,100),(15,9,5,400),(16,10,5,300),(17,11,5,100),(18,13,5,50),(19,14,5,25),(20,15,5,25),(21,9,6,400),(22,10,6,300),(23,11,6,100),(24,12,6,50),(25,20,7,200),(26,16,8,330),(27,18,9,330),(28,17,10,330),(29,19,11,330);
 /*!40000 ALTER TABLE `inventory_recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +148,7 @@ CREATE TABLE `recipe` (
   `recipeImageDirectory` varchar(150) DEFAULT NULL,
   `recipeCount` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`recipeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +157,7 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
-INSERT INTO `recipe` VALUES (1,'Chicken Burger & Chips','65.00','9.10','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_chickenBurger.jpg',NULL),(2,'Beef Burger & Chips','65.00','9.10','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_beefBurger.jpg',NULL),(3,'Chicken Wings & Chips','55.00','7.70','Light Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_chickenWings.jpg',NULL),(4,'Pork Ribs & Chips','90.00','12.60','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_porkRibs.jpg',NULL);
+INSERT INTO `recipe` VALUES (1,'Chicken Burger & Chips','65.00','9.10','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_chickenBurger.jpg',NULL),(2,'Beef Burger & Chips','65.00','9.10','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_beefBurger.jpg',NULL),(3,'Chicken Wings & Chips','55.00','7.70','Light Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_chickenWings.jpg',NULL),(4,'Pork Ribs & Chips','90.00','12.60','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_porkRibs.jpg',NULL),(5,'California Pizza','90.00','12.60','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_pizza1.jpg',NULL),(6,'Salami Pizza','85.00','11.90','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_pizza.jpg',NULL),(7,'Chips','20.00','2.80','Extra','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_e_chips.jpg',NULL),(8,'Coke','15.00','2.10','Drinks','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_d_cokeLogo.jpg',NULL),(9,'Coke Zero','15.00','2.10','Drinks','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_d_cokeLightLogo.jpg',NULL),(10,'Fanta','15.00','2.10','Drinks','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_d_fantaLogo.jpg',NULL),(11,'Lipton Peach Ice-Tea','20.00','2.80','Drinks','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_d_liptonLogo.jpg',NULL);
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,4 +311,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-16 23:22:43
+-- Dump completed on 2017-08-17 23:24:05

@@ -24,15 +24,18 @@ public class userManager {
         loginSystem.setVisible(true);
     }
 
-    public void createUserLog() {
+    public String createUserLog() {
         userLog = new UserForm(usernames);
         userLog.setVisible(true);
+        String waiter=userLog.getUsername();
+        return waiter;
     }
 
     public void createLogout() {
         logoutSystem = new Logout(usernames);
         logoutSystem.setVisible(true);
     }
+
 
     public void loginAuthentication(String username, String password) {
         boolean login = newManager.login(username, password);

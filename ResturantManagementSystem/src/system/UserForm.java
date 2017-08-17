@@ -157,7 +157,7 @@ public class UserForm extends javax.swing.JFrame {
 
     private void tableLoginedUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableLoginedUsersMouseClicked
         setUsername();
-        NewOrder.setUsername();
+       // NewOrder.setUsername();
         this.dispose();
     }//GEN-LAST:event_tableLoginedUsersMouseClicked
 

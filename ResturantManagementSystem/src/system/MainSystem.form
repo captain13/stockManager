@@ -971,17 +971,20 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="buttonAlert" min="-2" pref="167" max="-2" attributes="0"/>
-                                  <Component id="buttonOrderHistory" alignment="1" min="-2" pref="167" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="buttonAlert" min="-2" pref="167" max="-2" attributes="0"/>
+                                      <Component id="buttonOrderHistory" alignment="1" min="-2" pref="167" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="buttonMakeOrder" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                                  <Component id="buttonEmail" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                                  <Component id="buttonReports" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="buttonMakeOrder" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                              <Component id="buttonEmail" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                              <Component id="buttonReports" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                              <Component id="buttonEmployee" min="-2" pref="167" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="buttonEmployee" min="-2" pref="167" max="-2" attributes="0"/>
+                          <Component id="buttonEmployee1" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" pref="674" max="32767" attributes="0"/>
@@ -1007,7 +1010,8 @@
                               <Component id="buttonReports" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonEmployee" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="buttonEmployee1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1113,6 +1117,14 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="buttonEmployee1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Specials"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEmployee1ActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="Settings">

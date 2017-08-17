@@ -818,8 +818,7 @@ public class dbManager {
 
     public void backup() {
         try {
-            String savePath = "C:\\Users\\Andrew\\Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\ResturantDB_bk.sql";
-            String executeCmd = "C:\\Program Files (x86)\\MySQL\\MySQL Workbench 6.3 CE\\mysqldump.exe"
+            String executeCmd = ".\\src\\database\\mysqldump.exe"
                     + " -u " + username + " -p" + password + " resturantdb  -r " + location;
             Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
             int processComplete = runtimeProcess.waitFor();
@@ -837,8 +836,7 @@ public class dbManager {
 
     public void restore() {
         try {
-            String restorePath = "C:\\Users\\Andrew\\Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\ResturantDB_bk.sql";
-            String[] executeCmd = new String[]{"C:\\Program Files (x86)\\MySQL\\MySQL Workbench 6.3 CE\\mysql.exe",
+            String[] executeCmd = new String[]{".\\src\\database\\mysql.exe",
                 "--user=" + username,"--password=" + password, "resturantdb",
                 "-e", "source " + location};
        

@@ -82,9 +82,13 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         mainMealTab.setLayout(menuLayout);
         drinksTab.setLayout(menuLayout);
         lightMealTab.setLayout(menuLayout);
+        dessertTab.setLayout(menuLayout);
+        extraTab.setLayout(menuLayout);
         int emptySpaceTab1 = 0;
         int emptySpaceTab2 = 0;
         int emptySpaceTab3 = 0;
+        int emptySpaceTab4 = 0;
+        int emptySpaceTab5 = 0;
 
         for (int i = 0; i < n; i++) {
             if (recipeInfo[i][4].equals("Main Meal")) {
@@ -120,6 +124,22 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             emptySpaceTab2 = 48 - index;
             index = 0;
 
+            if (recipeInfo[i][4].equals("Dessert")) {
+                ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
+                button = new JButton(recipeInfo[i][1].toString(), icon);
+                button.setVerticalTextPosition(SwingConstants.BOTTOM);
+                button.setHorizontalTextPosition(SwingConstants.CENTER);
+                button.setMargin(new Insets(0, 0, 0, 0));
+                button.setContentAreaFilled(false);
+                button.setFocusPainted(false);
+                button.setBorder(new EmptyBorder(0, 0, 0, 0));
+                button.addActionListener(this);
+                dessertTab.add(button);
+                index++;
+            }
+            emptySpaceTab3 = 48 - index;
+            index = 0;
+
             if (recipeInfo[i][4].equals("Drinks")) {
                 ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
                 button = new JButton(recipeInfo[i][1].toString(), icon);
@@ -133,24 +153,51 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 drinksTab.add(button);
                 index++;
             }
-            emptySpaceTab3 = 48 - index;
+            emptySpaceTab4 = 48 - index;
+            index = 0;
+
+            if (recipeInfo[i][4].equals("Extra")) {
+                ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
+                button = new JButton(recipeInfo[i][1].toString(), icon);
+                button.setVerticalTextPosition(SwingConstants.BOTTOM);
+                button.setHorizontalTextPosition(SwingConstants.CENTER);
+                button.setMargin(new Insets(0, 0, 0, 0));
+                button.setContentAreaFilled(false);
+                button.setFocusPainted(false);
+                button.setBorder(new EmptyBorder(0, 0, 0, 0));
+                button.addActionListener(this);
+                extraTab.add(button);
+                index++;
+            }
+            emptySpaceTab5 = 48 - index;
             index = 0;
         }
+
         for (int i = 1; i < emptySpaceTab1; i++) {
             JButton emptyButton = new JButton();
             mainMealTab.add(emptyButton);
             emptyButton.setVisible(false);
         }
-
+        for (int i = 1; i < emptySpaceTab2; i++) {
+            JButton emptyButton = new JButton();
+            lightMealTab.add(emptyButton);
+            emptyButton.setVisible(false);
+        }
         for (int i = 1; i < emptySpaceTab3; i++) {
+            JButton emptyButton = new JButton();
+            dessertTab.add(emptyButton);
+            emptyButton.setVisible(false);
+        }
+
+        for (int i = 1; i < emptySpaceTab4; i++) {
             JButton emptyButton = new JButton();
             drinksTab.add(emptyButton);
             emptyButton.setVisible(false);
         }
 
-        for (int i = 1; i < emptySpaceTab2; i++) {
+        for (int i = 1; i < emptySpaceTab5; i++) {
             JButton emptyButton = new JButton();
-            lightMealTab.add(emptyButton);
+            extraTab.add(emptyButton);
             emptyButton.setVisible(false);
         }
     }
@@ -174,10 +221,9 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         this.setSize(xSize, ySize);
     }
 
-    public static void setUsername() {
-        nameTF.setText(UserForm.getUsername());
-    }
-
+//    public static void setUsername() {
+//        nameTF.setText(UserForm.getUsername());
+//    }
     public void internalClock() {
         time = new Thread(() -> {
             try {
@@ -251,12 +297,12 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         lblWaiter = new javax.swing.JLabel();
         lblNum = new javax.swing.JLabel();
         lblClock1 = new javax.swing.JLabel();
-        dessertTab = new javax.swing.JTabbedPane();
+        menuPane = new javax.swing.JTabbedPane();
         mainMealTab = new javax.swing.JPanel();
         lightMealTab = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        dessertTab = new javax.swing.JPanel();
         drinksTab = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        extraTab = new javax.swing.JPanel();
         buttonOverride = new javax.swing.JButton();
         nameTF = new javax.swing.JLabel();
         customerNo = new javax.swing.JLabel();
@@ -333,7 +379,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        dessertTab.addTab("Main Meals", mainMealTab);
+        menuPane.addTab("Main Meals", mainMealTab);
 
         javax.swing.GroupLayout lightMealTabLayout = new javax.swing.GroupLayout(lightMealTab);
         lightMealTab.setLayout(lightMealTabLayout);
@@ -346,20 +392,20 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        dessertTab.addTab("Light Meals", lightMealTab);
+        menuPane.addTab("Light Meals", lightMealTab);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout dessertTabLayout = new javax.swing.GroupLayout(dessertTab);
+        dessertTab.setLayout(dessertTabLayout);
+        dessertTabLayout.setHorizontalGroup(
+            dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 666, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        dessertTabLayout.setVerticalGroup(
+            dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        dessertTab.addTab("Desserts", jPanel2);
+        menuPane.addTab("Desserts", dessertTab);
 
         javax.swing.GroupLayout drinksTabLayout = new javax.swing.GroupLayout(drinksTab);
         drinksTab.setLayout(drinksTabLayout);
@@ -372,10 +418,20 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        dessertTab.addTab("Drinks", drinksTab);
+        menuPane.addTab("Drinks", drinksTab);
 
-        jTabbedPane2.setBackground(new java.awt.Color(204, 204, 204));
-        dessertTab.addTab("Extra", jTabbedPane2);
+        javax.swing.GroupLayout extraTabLayout = new javax.swing.GroupLayout(extraTab);
+        extraTab.setLayout(extraTabLayout);
+        extraTabLayout.setHorizontalGroup(
+            extraTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 666, Short.MAX_VALUE)
+        );
+        extraTabLayout.setVerticalGroup(
+            extraTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 440, Short.MAX_VALUE)
+        );
+
+        menuPane.addTab("Extras", extraTab);
 
         buttonOverride.setText("Print Order");
         buttonOverride.addActionListener(new java.awt.event.ActionListener() {
@@ -414,7 +470,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                                         .addComponent(customerNo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(12, 12, 12)
-                        .addComponent(dessertTab)
+                        .addComponent(menuPane)
                         .addGap(22, 22, 22)))
                 .addContainerGap())
         );
@@ -449,7 +505,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                         .addComponent(buttonClose)
                         .addGap(27, 27, 27))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(dessertTab)
+                        .addComponent(menuPane)
                         .addGap(6, 6, 6)))
                 .addComponent(jToggleButton8)
                 .addContainerGap())
@@ -489,11 +545,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     private javax.swing.JButton buttonOverride;
     private javax.swing.JButton buttonPay;
     private javax.swing.JLabel customerNo;
-    private javax.swing.JTabbedPane dessertTab;
+    private javax.swing.JPanel dessertTab;
     private javax.swing.JPanel drinksTab;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel extraTab;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JToggleButton jToggleButton8;
     private javax.swing.JLabel lblClock1;
     private javax.swing.JLabel lblNum;
@@ -501,6 +556,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     private javax.swing.JLabel lblWaiter;
     private javax.swing.JPanel lightMealTab;
     private javax.swing.JPanel mainMealTab;
+    private javax.swing.JTabbedPane menuPane;
     private static javax.swing.JLabel nameTF;
     public static javax.swing.JTable tblItems;
     public static javax.swing.JFormattedTextField textfieldTotal;

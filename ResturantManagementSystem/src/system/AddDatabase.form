@@ -356,7 +356,7 @@
                         <StringItem index="1" value="Light Meal"/>
                         <StringItem index="2" value="Dessert"/>
                         <StringItem index="3" value="Drinks"/>
-                        <StringItem index="4" value=" "/>
+                        <StringItem index="4" value="Extra"/>
                       </StringArray>
                     </Property>
                   </Properties>
