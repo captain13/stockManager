@@ -14,7 +14,7 @@ public class internalClock extends Thread {
     static String logoutTime;
     static String currentDate;
 
-    public static void internalClock() {
+    public void internalClock() {
         new Thread(() -> {
             while (true) {
                 MainSystem.getTime().setText(new SimpleDateFormat("hh:mm:ss").format(new Date()));
@@ -23,32 +23,32 @@ public class internalClock extends Thread {
         }).start();
     }
 
-    public static void setLoginTimeStamp() {
+    public void setLoginTimeStamp() {
         loginTime.add(new SimpleDateFormat("hh:mm:ss").format(new Date()));
     }
 
-    public static ArrayList getLoginTimeStamp() {
+    public ArrayList getLoginTimeStamp() {
         return loginTime;
     }
 
-    public static String getCurrentDate() {
-        currentDate=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    public String getCurrentDate() {
+        currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         return currentDate;
     }
 
-    public static void setLogoutTimeStamp() {
+    public void setLogoutTimeStamp() {
         logoutTime = new SimpleDateFormat("hh:mm:ss").format(new Date());
     }
 
-    public static String calculateHours(int i, String previousHours) {
+    public String calculateHours(int i, String previousHours) {
         String time;
-    
+
         int hours;
         int minutes;
         String previousHoursArray[] = previousHours.split(":");
         String inArray[] = loginTime.get(i).split(":");
         String outArray[] = logoutTime.split(":");
-        
+
         int prevHours = Integer.parseInt(previousHoursArray[0]);
         int prevMins = Integer.parseInt(previousHoursArray[1]);
         System.out.println(prevMins);

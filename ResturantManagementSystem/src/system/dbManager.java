@@ -23,12 +23,27 @@ import javax.swing.table.DefaultTableModel;
  */
 public class dbManager {
 
+    internalClock clock = new internalClock();
     String url = "jdbc:mysql://localhost:3306/resturantdb";
     String username = "root";
     String password = "root";
     String driver = "com.mysql.jdbc.Driver";
     String currentUsersHomeDir = System.getProperty("user.home");
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";
+
+    public void dbValidation() {
+        String url = "jdbc:mysql://localhost:3306";
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            s.executeUpdate("CREATE SCHEMA IF NOT EXISTS `resturantDB`");
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+           
+        }
+    }
 
     public void populateTables() {
         String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(kg)", "Item Threshold", "Item Limit"};
@@ -285,6 +300,34 @@ public class dbManager {
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
+    }
+
+    public Object[][] getSpecialDetails() {
+        Object[][] row = new Object[getRecipesCount()][6];
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT FROM recipe";
+            ResultSet rs = s.executeQuery(query);
+
+            int i = 0;
+            while (rs.next()) {
+                row[i][0] = rs.getObject(1);
+                row[i][1] = rs.getObject(2);
+                row[i][2] = rs.getObject(3);
+                row[i][3] = rs.getObject(4);
+                row[i][4] = rs.getObject(5);
+                row[i][5] = new Boolean(false);
+                i++;
+            }
+
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+        }
+        return row;
     }
 
     public String[] getIngredients() {
@@ -584,7 +627,7 @@ public class dbManager {
             String insertQuerySup = "INSERT INTO stockorder(inventoryID, supplierID,dateOrdered,dateETA,quantity,status)"
                     + "VALUES ('" + inventoryID + "','"
                     + supplierID + "', '"
-                    + internalClock.getCurrentDate() + "', '"
+                    + clock.getCurrentDate() + "', '"
                     + date + "', '"
                     + quantity + "', 'Not Delievered')";
             s.execute(insertQuerySup);
@@ -601,7 +644,7 @@ public class dbManager {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String insertQuerySup = "INSERT INTO sales(salesDate,totalCost)"
-                    + "VALUES ('" + internalClock.getCurrentDate() + "','"
+                    + "VALUES ('" + clock.getCurrentDate() + "','"
                     + currentTotal + "')";
             s.execute(insertQuerySup);
             String selectQuery = "SELECT * FROM sales ORDER BY salesID DESC LIMIT 1";
@@ -730,7 +773,7 @@ public class dbManager {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String queryUpdate = "UPDATE employee set employeeHoursWorked='" + internalClock.calculateHours(i, getHoursWorked(Username))
+            String queryUpdate = "UPDATE employee set employeeHoursWorked='" + clock.calculateHours(i, getHoursWorked(Username))
                     + "' WHERE employeeFName='" + Username + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(queryUpdate);
             preparedStmt.executeUpdate();
@@ -837,9 +880,9 @@ public class dbManager {
     public void restore() {
         try {
             String[] executeCmd = new String[]{".\\src\\database\\mysql.exe",
-                "--user=" + username,"--password=" + password, "resturantdb",
+                "--user=" + username, "--password=" + password, "resturantdb",
                 "-e", "source " + location};
-       
+
             Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
             int processComplete = runtimeProcess.waitFor();
 
@@ -853,6 +896,5 @@ public class dbManager {
         } catch (IOException | InterruptedException | HeadlessException ex) {
             JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
         }
-
     }
 }

@@ -29,14 +29,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     userManager user = new userManager();
     xmlManager settings = new xmlManager();
     dbManager system = new dbManager();
-    internalClock clock=new internalClock();
+    internalClock clock = new internalClock();
     HashMap<String, NewOrder> tables = new HashMap<>();
     boolean enableKeypad = false;
     int n;
 
     public MainSystem() {
         initComponents();
-        internalClock.internalClock();
+        system.dbValidation();
+        clock.internalClock();
         system.populateTables();
         system.populateOrder();
         setTableCount();
@@ -83,10 +84,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String buttonId = ae.getActionCommand();
         if (tables.get(buttonId) == null) {
-           // String waiter =user.createUserLog();
+            // String waiter =user.createUserLog();
             String waiter = JOptionPane.showInputDialog(null, "Enter Waiter ID");
             String customer = JOptionPane.showInputDialog(null, "Enter Number of Customers");
-            if (!"".equals(waiter)&&!"".equals(customer)) {
+            if (!"".equals(waiter) && !"".equals(customer)) {
                 tables.put(buttonId, new NewOrder(waiter, customer, buttonId, tables));
                 tables.get(buttonId).setVisible(true);
             }
@@ -351,7 +352,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonEmployee = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrderHistory = new javax.swing.JTable();
-        buttonEmployee1 = new javax.swing.JButton();
+        buttonManageSpecials = new javax.swing.JButton();
         Settings = new javax.swing.JPanel();
         comboBoxSceen = new javax.swing.JComboBox<>();
         lblSettings = new javax.swing.JLabel();
@@ -549,11 +550,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                                 .addGap(17, 17, 17)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblVersion, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DashboardLayout.createSequentialGroup()
-                                .addComponent(buttonClose)
-                                .addContainerGap())))
+                        .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonClose)
+                            .addComponent(lblVersion))
+                        .addContainerGap())
                     .addComponent(pnlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -1048,10 +1048,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         tblOrderHistory.setOpaque(false);
         jScrollPane1.setViewportView(tblOrderHistory);
 
-        buttonEmployee1.setText("Specials");
-        buttonEmployee1.addActionListener(new java.awt.event.ActionListener() {
+        buttonManageSpecials.setText("Manage Specials");
+        buttonManageSpecials.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEmployee1ActionPerformed(evt);
+                buttonManageSpecialsActionPerformed(evt);
             }
         });
 
@@ -1071,7 +1071,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                             .addComponent(buttonEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(buttonReports, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(buttonEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(buttonEmployee1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonManageSpecials, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
                 .addGap(6, 6, 6))
@@ -1095,7 +1095,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonEmployee)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonEmployee1)))
+                        .addComponent(buttonManageSpecials)))
                 .addContainerGap())
         );
 
@@ -1297,24 +1297,24 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_comboBoxSceenItemStateChanged
 
     private void comboBoxLogoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxLogoItemStateChanged
-            String selected_item = comboBoxLogo.getSelectedItem().toString();
-            switch (selected_item) {
+        String selected_item = comboBoxLogo.getSelectedItem().toString();
+        switch (selected_item) {
 
-                case "Default":
-                    ImageIcon icon = new ImageIcon("./src/images/Logo_Red.png");
-                    lblImage.setIcon(icon);
-                    break;
+            case "Default":
+                ImageIcon icon = new ImageIcon("./src/images/Logo_Red.png");
+                lblImage.setIcon(icon);
+                break;
 
-                case "Demo 1":
-                    ImageIcon icon1 = new ImageIcon("./src/images/Logo_Bistro.png");
-                    lblImage.setIcon(icon1);
-                    break;
+            case "Demo 1":
+                ImageIcon icon1 = new ImageIcon("./src/images/Logo_Bistro.png");
+                lblImage.setIcon(icon1);
+                break;
 
-                case "Demo 2":
-                    ImageIcon icon2 = new ImageIcon("./src/images/Logo_Cattle_Baron.png");
-                    lblImage.setIcon(icon2);
-                    break;
-            }
+            case "Demo 2":
+                ImageIcon icon2 = new ImageIcon("./src/images/Logo_Cattle_Baron.png");
+                lblImage.setIcon(icon2);
+                break;
+        }
     }//GEN-LAST:event_comboBoxLogoItemStateChanged
 
     private void radioIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioIDActionPerformed
@@ -1463,9 +1463,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void buttonEmployee1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmployee1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonEmployee1ActionPerformed
+    private void buttonManageSpecialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonManageSpecialsActionPerformed
+        SpecialsForm newForm = new SpecialsForm();
+        newForm.setVisible(true);
+    }//GEN-LAST:event_buttonManageSpecialsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1506,12 +1507,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonEdit;
     private javax.swing.JButton buttonEmail;
     private javax.swing.JButton buttonEmployee;
-    private javax.swing.JButton buttonEmployee1;
     private javax.swing.JButton buttonEvents;
     private javax.swing.JButton buttonLayout;
     private javax.swing.JButton buttonLogOut;
     private javax.swing.JButton buttonLogin;
     private javax.swing.JButton buttonMakeOrder;
+    private javax.swing.JButton buttonManageSpecials;
     private javax.swing.JButton buttonOrderHistory;
     private javax.swing.JButton buttonPrint;
     private javax.swing.JButton buttonPromotions;

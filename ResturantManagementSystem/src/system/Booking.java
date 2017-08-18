@@ -7,8 +7,8 @@ package system;
 public class Booking extends javax.swing.JFrame {
 
     private boolean IS_RUNNING = false;
-    dbManager newManager=new dbManager();
-    
+    dbManager newManager = new dbManager();
+    internalClock clock = new internalClock();
 
     public Booking() {
         if (IS_RUNNING) {
@@ -57,13 +57,46 @@ public class Booking extends javax.swing.JFrame {
         return time;
     }
 
-    public void setCurrentDate() {
-        String currentDate = internalClock.getCurrentDate();
+    public final void setCurrentDate() {
+        String currentDate = clock.getCurrentDate();
         String date[] = currentDate.split("-");
         String day = date[0];
         String month = date[1];
         comboboxDay.setSelectedItem(day);
         comboboxMonth.setSelectedItem(month);
+    }
+
+    public void checkMonth() {
+        if (comboboxMonth.getSelectedItem() == "02") {
+            comboboxDay.removeItem("31");
+            comboboxDay.removeItem("30");
+            comboboxDay.removeItem("29");
+        }
+        if (comboboxMonth.getSelectedItem() == "01" || comboboxMonth.getSelectedItem() == "03"
+                || comboboxMonth.getSelectedItem() == "05" || comboboxMonth.getSelectedItem() == "07"
+                || comboboxMonth.getSelectedItem() == "08" || comboboxMonth.getSelectedItem() == "10"
+                || comboboxMonth.getSelectedItem() == "12") {
+            comboboxDay.removeItem("31");
+            comboboxDay.removeItem("30");
+            comboboxDay.removeItem("29");
+            comboboxDay.addItem("29");
+            comboboxDay.addItem("30");
+            comboboxDay.addItem("31");
+            if (comboboxDay.getSelectedItem() == "28" || comboboxDay.getSelectedItem() == "30") {
+                comboboxDay.setSelectedItem("31");
+            }
+        }
+        if (comboboxMonth.getSelectedItem() == "04" || comboboxMonth.getSelectedItem() == "06"
+                || comboboxMonth.getSelectedItem() == "09" || comboboxMonth.getSelectedItem() == "11") {
+            comboboxDay.removeItem("31");
+            comboboxDay.removeItem("30");
+            comboboxDay.removeItem("29");
+            comboboxDay.addItem("29");
+            comboboxDay.addItem("30");
+            if (comboboxDay.getSelectedItem() == "28" || comboboxDay.getSelectedItem() == "31") {
+                comboboxDay.setSelectedItem("30");
+            }
+        }
     }
 
     /**
@@ -174,39 +207,43 @@ public class Booking extends javax.swing.JFrame {
                 .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(buttonAccept1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buttonCancel))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblNumber4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNumber1)
-                                    .addComponent(lblTime)
-                                    .addComponent(lblNumber2)
-                                    .addComponent(lblNumber)
-                                    .addComponent(lblNumber3))
-                                .addGap(33, 33, 33)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textTable, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(comboboxHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(comboboxMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(textCustomerNum, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(comboboxDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(comboboxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNumber1)
+                            .addComponent(lblTime)
+                            .addComponent(lblNumber2))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(comboboxHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboboxMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textCustomerNum, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(comboboxDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboboxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboboxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(comboboxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblNumber4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblNumber)
+                                .addComponent(lblNumber3))
+                            .addGap(55, 55, 55)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(textTable, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(17, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonAccept1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonCancel)
+                .addGap(88, 88, 88))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(21, 21, 21)
@@ -228,7 +265,7 @@ public class Booking extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNumber4)
                     .addComponent(textCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textCustomerNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNumber1))
@@ -247,7 +284,7 @@ public class Booking extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAccept1)
                     .addComponent(buttonCancel))
-                .addGap(28, 28, 28))
+                .addContainerGap(34, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -312,24 +349,24 @@ public class Booking extends javax.swing.JFrame {
     }//GEN-LAST:event_textEmpActionPerformed
 
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
-        newManager.insertReservations(getEmployee(),getDate(),getTime(),getCustomerName(),getTableNum(),getCustomerNum());
+        newManager.insertReservations(getEmployee(), getDate(), getTime(), getCustomerName(), getTableNum(), getCustomerNum());
     }//GEN-LAST:event_buttonAccept1ActionPerformed
-
-    private void textCustomerNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCustomerNumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textCustomerNumActionPerformed
-
-    private void textTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTableActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textTableActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
 
+    private void textCustomerNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCustomerNumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textCustomerNumActionPerformed
+
     private void textCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCustomerNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textCustomerNameActionPerformed
+
+    private void textTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTableActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textTableActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAccept1;

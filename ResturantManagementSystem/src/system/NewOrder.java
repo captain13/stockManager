@@ -66,9 +66,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         recipeInfo = new Object[n][5];
         int index = 0;
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < 5; j++) {
-                recipeInfo[i][j] = newManager.getRecipe()[i][j];
-            }
+            System.arraycopy(newManager.getRecipe()[i], 0, recipeInfo[i], 0, 5);
         }
 
 //        for (int i = 0; i < n; i++) {
@@ -105,7 +103,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 index++;
             }
 
-            emptySpaceTab1 = 48 - index;
+            emptySpaceTab1 = 40 - index;
             index = 0;
 
             if (recipeInfo[i][4].equals("Light Meal")) {
@@ -121,7 +119,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 lightMealTab.add(button);
                 index++;
             }
-            emptySpaceTab2 = 48 - index;
+            emptySpaceTab2 = 40 - index;
             index = 0;
 
             if (recipeInfo[i][4].equals("Dessert")) {
@@ -137,7 +135,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 dessertTab.add(button);
                 index++;
             }
-            emptySpaceTab3 = 48 - index;
+            emptySpaceTab3 = 40 - index;
             index = 0;
 
             if (recipeInfo[i][4].equals("Drinks")) {
@@ -153,7 +151,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 drinksTab.add(button);
                 index++;
             }
-            emptySpaceTab4 = 48 - index;
+            emptySpaceTab4 = 40 - index;
             index = 0;
 
             if (recipeInfo[i][4].equals("Extra")) {
@@ -169,7 +167,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 extraTab.add(button);
                 index++;
             }
-            emptySpaceTab5 = 48 - index;
+            emptySpaceTab5 = 40 - index;
             index = 0;
         }
 
@@ -205,11 +203,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) {
         String buttonId = ae.getActionCommand();
-        for (int i = 0; i < recipeInfo.length; i++) {
-            if (buttonId == recipeInfo[i][1].toString()) {
-                model.addRow(new Object[]{recipeInfo[i][1], "1", recipeInfo[i][2]});
+        for (Object[] recipeInfo1 : recipeInfo) {
+            if (buttonId.equals(recipeInfo1[1].toString())) {
+                model.addRow(new Object[]{recipeInfo1[1], "1", recipeInfo1[2]});
             }
-
         }
         totalAmount();
     }

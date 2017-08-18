@@ -11,9 +11,10 @@ public class userManager {
 
     static ArrayList usernames = new ArrayList();
     static Login loginSystem;
-    static Logout logoutSystem;
+    Logout logoutSystem;
     static UserForm userLog;
     dbManager newManager = new dbManager();
+    internalClock clock = new internalClock();
 
     public void addUser(String username) {
         usernames.add(username);
@@ -27,7 +28,7 @@ public class userManager {
     public String createUserLog() {
         userLog = new UserForm(usernames);
         userLog.setVisible(true);
-        String waiter=userLog.getUsername();
+        String waiter = userLog.getUsername();
         return waiter;
     }
 
@@ -36,12 +37,11 @@ public class userManager {
         logoutSystem.setVisible(true);
     }
 
-
     public void loginAuthentication(String username, String password) {
         boolean login = newManager.login(username, password);
         if (login == true) {
             addUser(username);
-            internalClock.setLoginTimeStamp();
+            clock.setLoginTimeStamp();
             newManager.updateEmployeeStatusIn(username);
             loginSystem.disposeLogin();
         } else {
@@ -54,10 +54,10 @@ public class userManager {
         System.out.println(username);
         int rowIndex = Logout.getRowIndex();
         System.out.println(rowIndex);
-        internalClock.setLogoutTimeStamp();
+        clock.setLogoutTimeStamp();
         newManager.updateHours(username, rowIndex);
         newManager.updateEmployeeStatusOut(username);
         usernames.remove(rowIndex);
-        Logout.populateTable();
+        logoutSystem.populateTable();
     }
 }
