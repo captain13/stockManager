@@ -26,6 +26,8 @@ public class Reports extends javax.swing.JFrame {
         tableSales = new javax.swing.JTable();
         buttonClose1 = new javax.swing.JButton();
         buttonClose2 = new javax.swing.JButton();
+        buttonClose3 = new javax.swing.JButton();
+        buttonClose4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -68,6 +70,20 @@ public class Reports extends javax.swing.JFrame {
             }
         });
 
+        buttonClose3.setText("Monthly Sales");
+        buttonClose3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonClose3ActionPerformed(evt);
+            }
+        });
+
+        buttonClose4.setText("Daily Sales");
+        buttonClose4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonClose4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -76,7 +92,9 @@ public class Reports extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonClose3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonClose4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(341, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -93,7 +111,11 @@ public class Reports extends javax.swing.JFrame {
                 .addComponent(buttonClose1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonClose2)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonClose4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonClose3)
+                .addContainerGap(171, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -115,7 +137,7 @@ public class Reports extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,11 +156,21 @@ public class Reports extends javax.swing.JFrame {
        newManager.populateEmployeeSales(tableSales);
     }//GEN-LAST:event_buttonClose2ActionPerformed
 
+    private void buttonClose3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonClose3ActionPerformed
+
+    private void buttonClose4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonClose4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonClose;
     private javax.swing.JButton buttonClose1;
     private javax.swing.JButton buttonClose2;
+    private javax.swing.JButton buttonClose3;
+    private javax.swing.JButton buttonClose4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableSales;

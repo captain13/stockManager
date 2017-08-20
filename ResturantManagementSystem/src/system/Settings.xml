@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><settings>
     
 <generalsettings>
-        <resolution>Windowed Screen</resolution>
+        <resolution>Fullscreen</resolution>
         <logo>default</logo>
         <tableNum>20</tableNum>
     </generalsettings></settings>

@@ -569,6 +569,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 "", "Table #"
             }
         ));
+        jTable4.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane2.setViewportView(jTable4);
 
         buttonReprint.setText("Reprint");
@@ -578,7 +579,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        buttonLayout.setText("Change Layout");
+        buttonLayout.setText("Open Draw");
         buttonLayout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonLayoutActionPerformed(evt);
@@ -625,7 +626,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         pnlLayout.setLayout(pnlLayoutLayout);
         pnlLayoutLayout.setHorizontalGroup(
             pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 598, Short.MAX_VALUE)
+            .addGap(0, 616, Short.MAX_VALUE)
         );
         pnlLayoutLayout.setVerticalGroup(
             pnlLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1283,7 +1284,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonTakeAwayActionPerformed
 
     private void buttonLayoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLayoutActionPerformed
-        // TODO add your handling code here:
+     JOptionPane.showMessageDialog(null, "Draw Opened");
     }//GEN-LAST:event_buttonLayoutActionPerformed
 
     private void buttonReprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprintActionPerformed

@@ -46,7 +46,7 @@ public class dbManager {
     }
 
     public void populateTables() {
-        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(kg)", "Item Threshold", "Item Limit"};
+        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(g)", "Item Threshold", "Item Limit"};
         String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
         String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
         try {
