@@ -49,6 +49,7 @@ public class dbManager {
     public void populateTables() {
         String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(g)", "Item Threshold", "Item Limit"};
         String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
+        String columnNamesRecipeList[] = {"Recipe ID", "Recipe Name", "Inventory ID","Item Name", "Quantity"};
         String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
         try {
 
@@ -107,6 +108,40 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+        }
+        
+            try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT inventory_recipe.recipeID, recipe.recipeName, inventory_recipe.inventoryID, "
+                    + "inventory.item,inventory_recipe.qty "
+                    + "FROM inventory_recipe, recipe,inventory "
+                    + "WHERE recipe.recipeID=inventory_recipe.recipeID "
+                    + "AND inventory.inventoryID=inventory_recipe.inventoryID ";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            DefaultTableModel tableModel1 = new DefaultTableModel();
+            MainSystem.tableRecipeList.setModel(tableModel1);
+
+            int columnCount = 5;
+            for (int i = 0; i < columnCount; i++) {
+                tableModel1.addColumn(columnNamesRecipeList[i]);
+            }
+
+            Object[] row = new Object[columnCount];
+
+            while (rs.next()) {
+                for (int i = 0; i < columnCount; i++) {
+                    row[i] = rs.getObject(i + 1);
+                }
+                tableModel1.addRow(row);
+            }
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+                System.out.println(exc);
         }
 
         try {

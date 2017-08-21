@@ -38,6 +38,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public MainSystem() {
         initComponents();
         system.dbValidation();
+        settings.xmlValidition();
         logs.logValidation();
         clock.internalClock();
         system.populateTables();
@@ -255,7 +256,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         String table = settings.getTableCount();
         comboBoxTableCount.setSelectedItem(table);
     }
-    
+
     public void setEmail() {
         jLabel1.setText(settings.getEmail());
     }
@@ -301,7 +302,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public String getEmail() {
         return jLabel1.getText();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -349,6 +349,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonRecipeEdit = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tableRecipe = new javax.swing.JTable();
+        pnlRecipeList = new javax.swing.JPanel();
+        buttonRecipeAdd2 = new javax.swing.JButton();
+        buttonRecipeDelete2 = new javax.swing.JButton();
+        buttonRecipeEdit2 = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tableRecipeList = new javax.swing.JTable();
         pnlSupplier = new javax.swing.JPanel();
         buttonRecipeAdd1 = new javax.swing.JButton();
         buttonRecipeDelete1 = new javax.swing.JButton();
@@ -384,6 +390,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -855,6 +862,84 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         jTabbedPane2.addTab("Recipe", pnlRecipe);
 
+        buttonRecipeAdd2.setText("Add");
+        buttonRecipeAdd2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRecipeAdd2ActionPerformed(evt);
+            }
+        });
+
+        buttonRecipeDelete2.setText("Delete");
+        buttonRecipeDelete2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRecipeDelete2ActionPerformed(evt);
+            }
+        });
+
+        buttonRecipeEdit2.setText("Edit");
+
+        tableRecipeList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID no.", "Item", "Ingredients"
+            }
+        ));
+        tableRecipeList.setGridColor(new java.awt.Color(204, 204, 204));
+        jScrollPane6.setViewportView(tableRecipeList);
+        if (tableRecipeList.getColumnModel().getColumnCount() > 0) {
+            tableRecipeList.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        javax.swing.GroupLayout pnlRecipeListLayout = new javax.swing.GroupLayout(pnlRecipeList);
+        pnlRecipeList.setLayout(pnlRecipeListLayout);
+        pnlRecipeListLayout.setHorizontalGroup(
+            pnlRecipeListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRecipeListLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlRecipeListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonRecipeEdit2, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                    .addComponent(buttonRecipeAdd2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonRecipeDelete2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE))
+        );
+        pnlRecipeListLayout.setVerticalGroup(
+            pnlRecipeListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRecipeListLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(buttonRecipeAdd2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonRecipeDelete2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonRecipeEdit2)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("Recipe List", pnlRecipeList);
+
         buttonRecipeAdd1.setText("Add");
         buttonRecipeAdd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -992,7 +1077,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jTabbedPane2))
         );
 
-        TabbedPanel.addTab("Inventory", Inventory);
+        TabbedPanel.addTab("Database", Inventory);
 
         buttonOrderHistory.setText("Confirm Order");
 
@@ -1199,6 +1284,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         jLabel1.setText("Email");
 
+        jButton10.setText("Change Email Password");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
         Settings.setLayout(SettingsLayout);
         SettingsLayout.setHorizontalGroup(
@@ -1232,8 +1324,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                             .addComponent(comboBoxTableCount, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboBoxLogo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboBoxSceen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(593, Short.MAX_VALUE))
+                            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(567, Short.MAX_VALUE))
         );
         SettingsLayout.setVerticalGroup(
             SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1259,12 +1352,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(jButton8)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -1530,6 +1625,18 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         logs.refreshLogs();
     }//GEN-LAST:event_jButton9ActionPerformed
 
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void buttonRecipeAdd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAdd2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonRecipeAdd2ActionPerformed
+
+    private void buttonRecipeDelete2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonRecipeDelete2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1581,10 +1688,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonPromotions;
     private javax.swing.JButton buttonRecipeAdd;
     private javax.swing.JButton buttonRecipeAdd1;
+    private javax.swing.JButton buttonRecipeAdd2;
     private javax.swing.JButton buttonRecipeDelete;
     private javax.swing.JButton buttonRecipeDelete1;
+    private javax.swing.JButton buttonRecipeDelete2;
     private javax.swing.JButton buttonRecipeEdit;
     private javax.swing.JButton buttonRecipeEdit1;
+    private javax.swing.JButton buttonRecipeEdit2;
     private javax.swing.JButton buttonReports;
     private javax.swing.JButton buttonReprint;
     private javax.swing.JButton buttonReprint1;
@@ -1593,6 +1703,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JComboBox<String> comboBoxLogo;
     private javax.swing.JComboBox<String> comboBoxSceen;
     private javax.swing.JComboBox<String> comboBoxTableCount;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1607,6 +1718,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable4;
     private static javax.swing.JLabel lblClock;
@@ -1624,10 +1736,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel pnlOrderLeft;
     private javax.swing.JPanel pnlPanel;
     private javax.swing.JPanel pnlRecipe;
+    private javax.swing.JPanel pnlRecipeList;
     private javax.swing.JPanel pnlSupplier;
     private javax.swing.JRadioButton radioID;
     private javax.swing.JRadioButton radioItem;
     public static javax.swing.JTable tableRecipe;
+    public static javax.swing.JTable tableRecipeList;
     public static javax.swing.JTable tableSupplier;
     public static javax.swing.JTable tblInventory;
     private static javax.swing.JTable tblOrderHistory;

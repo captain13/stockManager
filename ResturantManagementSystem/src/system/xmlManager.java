@@ -37,10 +37,6 @@ public class xmlManager {
     String tableCount;
     String email;
 
-    public xmlManager() {
-        xmlValidition();
-    }
-
     public final void xmlValidition() {
         if (xmlSettings.exists()) {
             getSettings();
