@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class dbManager {
 
+    logSystem logs = new logSystem();
     internalClock clock = new internalClock();
     String url = "jdbc:mysql://localhost:3306/resturantdb";
     String username = "root";
@@ -41,7 +42,7 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-           
+
         }
     }
 
@@ -476,6 +477,7 @@ public class dbManager {
                     + adminRights + "')";
             s.execute(insertQuery);
             populateEmpTable();
+            logs.writeLogs("ADDED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -494,6 +496,7 @@ public class dbManager {
                     + limit + "')";
             s.execute(insertQuery);
             populateTables();
+            logs.writeLogs("ADDED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -520,6 +523,7 @@ public class dbManager {
                 ID = rs.getString("recipeID");
             }
             populateTables();
+            logs.writeLogs("ADDED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -574,6 +578,7 @@ public class dbManager {
                     + qty + "')";
             s.execute(insertQuerySup);
             populateTables();
+            logs.writeLogs("ADDED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -592,6 +597,7 @@ public class dbManager {
                     + address + "')";
             s.execute(insertQuerySup);
             populateTables();
+            logs.writeLogs("ADDED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -612,6 +618,7 @@ public class dbManager {
             s.execute(insertQuerySup);
             JOptionPane.showMessageDialog(null, "Reservation Added");
             populateReservation();
+            logs.writeLogs("ADDED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -632,6 +639,7 @@ public class dbManager {
                     + quantity + "', 'Not Delievered')";
             s.execute(insertQuerySup);
             populateOrder();
+            logs.writeLogs("ADDED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -655,6 +663,7 @@ public class dbManager {
             }
             insertEmployeeSales(ID, user);
             populateOrder();
+            logs.writeLogs("ADDED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -677,6 +686,7 @@ public class dbManager {
                     + "VALUES ('" + employeeID + "','"
                     + ID + "')";
             s.execute(insertQuerySup);
+            logs.writeLogs("ADDED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -709,6 +719,7 @@ public class dbManager {
             String query = "DELETE FROM inventory WHERE inventoryID='" + index + "'";
             s.execute(query);
             populateTables();
+              logs.writeLogs("DELETED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -724,6 +735,7 @@ public class dbManager {
             s.execute(query);
             populateTables();
             removeRecipeList(index);
+            logs.writeLogs("DELETED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -737,6 +749,7 @@ public class dbManager {
             String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
             s.execute(query);
             populateTables();
+            logs.writeLogs("DELETED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -750,6 +763,7 @@ public class dbManager {
             String query = "DELETE FROM supplier WHERE supplierID='" + index + "'";
             s.execute(query);
             populateTables();
+            logs.writeLogs("DELETED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -763,6 +777,7 @@ public class dbManager {
             String query = "DELETE FROM employee WHERE employeeID='" + index + "'";
             s.execute(query);
             populateEmpTable();
+            logs.writeLogs("DELETED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -777,6 +792,7 @@ public class dbManager {
                     + "' WHERE employeeFName='" + Username + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(queryUpdate);
             preparedStmt.executeUpdate();
+            logs.writeLogs("UPDATED");
             s.close();
             conn.close();
         } catch (SQLException exp) {

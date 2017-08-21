@@ -39,6 +39,11 @@ public class internalClock extends Thread {
     public void setLogoutTimeStamp() {
         logoutTime = new SimpleDateFormat("hh:mm:ss").format(new Date());
     }
+    
+     public String setCurrentTimeStamp() {
+        String time = new SimpleDateFormat("hh:mm:ss").format(new Date());
+        return time;
+    }
 
     public String calculateHours(int i, String previousHours) {
         String time;
