@@ -35,7 +35,7 @@ public class xmlManager {
     File xmlSettings = new File(location);
     String resoultion;
     String tableCount;
-     String email;
+    String email;
 
     public xmlManager() {
         xmlValidition();
@@ -68,8 +68,8 @@ public class xmlManager {
                 Element tableNumber = document.createElement("tableNum");
                 tableNumber.appendChild(document.createTextNode("15"));
                 generalSettings.appendChild(tableNumber);
-                
-                  Element emailAddress = document.createElement("emailAddress");
+
+                Element emailAddress = document.createElement("emailAddress");
                 emailAddress.appendChild(document.createTextNode("null"));
                 generalSettings.appendChild(emailAddress);
 
@@ -125,8 +125,8 @@ public class xmlManager {
                 if ("tableNum".equals(node.getNodeName())) {
                     node.setTextContent(selectedTable);
                 }
-                
-                 if ("emailAddress".equals(node.getNodeName())) {
+
+                if ("emailAddress".equals(node.getNodeName())) {
                     node.setTextContent(emailAddress);
                 }
             }
@@ -154,8 +154,8 @@ public class xmlManager {
     public String getTableCount() {
         return tableCount;
     }
-    
-       public String getEmail() {
+
+    public String getEmail() {
         return email;
     }
 
