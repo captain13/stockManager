@@ -29,7 +29,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     userManager user = new userManager();
     xmlManager settings = new xmlManager();
     dbManager system = new dbManager();
-    logSystem logs=new logSystem();
+    logSystem logs = new logSystem();
     internalClock clock = new internalClock();
     HashMap<String, NewOrder> tables = new HashMap<>();
     boolean enableKeypad = false;
@@ -42,9 +42,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         clock.internalClock();
         system.populateTables();
         system.populateOrder();
-        setTableCount();
-        getResolution();
-
+        getSetting();
     }
 
     public final void setTableDesign() {
@@ -242,7 +240,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         return tblOrderHistory;
     }
 
-    public final void getResolution() {
+    public final void getSetting() {
+        setTableCount();
+        setResolution();
+        setEmail();
+    }
+
+    public final void setResolution() {
         String resolution = settings.getResolution();
         comboBoxSceen.setSelectedItem(resolution);
     }
@@ -251,13 +255,17 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         String table = settings.getTableCount();
         comboBoxTableCount.setSelectedItem(table);
     }
+    
+    public void setEmail() {
+        jLabel1.setText(settings.getEmail());
+    }
 
     public final void setSelectedTable() {
         n = Integer.parseInt(getSelectedTable());
         tableLayout();
     }
 
-    public void setResolution() {
+    public void changeResolution() {
         switch (getSelectedResolution()) {
             case "Windowed Screen":
                 windows();
@@ -289,6 +297,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public String getSelectedTable() {
         return comboBoxTableCount.getSelectedItem().toString();
     }
+
+    public String getEmail() {
+        return jLabel1.getText();
+    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -369,6 +382,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jButton4 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -1175,6 +1190,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        jButton9.setText("Reset Logs");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Email");
+
         javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
         Settings.setLayout(SettingsLayout);
         SettingsLayout.setHorizontalGroup(
@@ -1188,13 +1212,18 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         .addGap(25, 25, 25)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(SettingsLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jCheckBox1)
-                            .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblScreen)
-                                .addComponent(lblLogo)
-                                .addComponent(lblLogo1)))
+                        .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SettingsLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jCheckBox1)
+                                    .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblScreen)
+                                        .addComponent(lblLogo)
+                                        .addComponent(lblLogo1))))
+                            .addGroup(SettingsLayout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(jLabel1)))
                         .addGap(32, 32, 32)
                         .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1202,7 +1231,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboBoxTableCount, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboBoxLogo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboBoxSceen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(comboBoxSceen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(593, Short.MAX_VALUE))
         );
         SettingsLayout.setVerticalGroup(
@@ -1225,12 +1255,16 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox1)
                 .addGap(9, 9, 9)
-                .addComponent(jButton8)
+                .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton8)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -1298,7 +1332,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonTakeAwayActionPerformed
 
     private void buttonLayoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLayoutActionPerformed
-     JOptionPane.showMessageDialog(null, "Draw Opened");
+        JOptionPane.showMessageDialog(null, "Draw Opened");
     }//GEN-LAST:event_buttonLayoutActionPerformed
 
     private void buttonReprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprintActionPerformed
@@ -1307,7 +1341,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void comboBoxSceenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxSceenItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
-            setResolution();
+            changeResolution();
         }
     }//GEN-LAST:event_comboBoxSceenItemStateChanged
 
@@ -1430,7 +1464,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReportsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        settings.updateSettings(getSelectedResolution(), getSelectedTable());
+        settings.updateSettings(getSelectedResolution(), getSelectedTable(), getEmail());
         JOptionPane.showMessageDialog(null, "Settings Saved");
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -1484,13 +1518,17 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonManageSpecialsActionPerformed
 
     private void buttonEmployee1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmployee1ActionPerformed
-          String file = System.getProperty("user.home") + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\logs\\logs.txt";
+        String file = System.getProperty("user.home") + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\logs\\logs.txt";
         Runtime runtime = Runtime.getRuntime();
         try {
             Process p = runtime.exec("notepad " + file);
         } catch (IOException ex) {
         }
     }//GEN-LAST:event_buttonEmployee1ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        logs.refreshLogs();
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1561,7 +1599,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

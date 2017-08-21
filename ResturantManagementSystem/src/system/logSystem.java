@@ -61,4 +61,13 @@ public class logSystem {
         }
     }
 
+    public void refreshLogs() {
+        String text = null;
+        try {
+            FileWriter fileWriter = new FileWriter(file, false);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }
+
 }

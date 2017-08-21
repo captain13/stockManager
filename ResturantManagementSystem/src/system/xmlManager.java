@@ -35,6 +35,7 @@ public class xmlManager {
     File xmlSettings = new File(location);
     String resoultion;
     String tableCount;
+     String email;
 
     public xmlManager() {
         xmlValidition();
@@ -43,7 +44,7 @@ public class xmlManager {
     public final void xmlValidition() {
         if (xmlSettings.exists()) {
             getSettings();
-            System.out.println("Found");
+            System.out.println("Settings file exists");
         } else {
             System.out.println("File not found");
             try {
@@ -67,6 +68,10 @@ public class xmlManager {
                 Element tableNumber = document.createElement("tableNum");
                 tableNumber.appendChild(document.createTextNode("15"));
                 generalSettings.appendChild(tableNumber);
+                
+                  Element emailAddress = document.createElement("emailAddress");
+                emailAddress.appendChild(document.createTextNode("null"));
+                generalSettings.appendChild(emailAddress);
 
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 Transformer transformer = transformerFactory.newTransformer();
@@ -90,6 +95,7 @@ public class xmlManager {
             NodeList nList = document.getElementsByTagName("generalsettings");
             resoultion = document.getElementsByTagName("resolution").item(0).getTextContent();
             tableCount = document.getElementsByTagName("tableNum").item(0).getTextContent();
+            email = document.getElementsByTagName("emailAddress").item(0).getTextContent();
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             Logger.getLogger(xmlManager.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -97,7 +103,7 @@ public class xmlManager {
         }
     }
 
-    public void updateSettings(String selectedItem, String selectedTable) {
+    public void updateSettings(String selectedItem, String selectedTable, String emailAddress) {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder;
         try {
@@ -118,6 +124,10 @@ public class xmlManager {
 
                 if ("tableNum".equals(node.getNodeName())) {
                     node.setTextContent(selectedTable);
+                }
+                
+                 if ("emailAddress".equals(node.getNodeName())) {
+                    node.setTextContent(emailAddress);
                 }
             }
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -143,6 +153,10 @@ public class xmlManager {
 
     public String getTableCount() {
         return tableCount;
+    }
+    
+       public String getEmail() {
+        return email;
     }
 
 }

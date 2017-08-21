@@ -3,5 +3,6 @@
 <generalsettings>
         <resolution>Windowed Screen</resolution>
         <logo>default</logo>
-        <tableNum>20</tableNum>
+        <tableNum>15</tableNum>
+        <emailAddress>zcsastock@gmail.com</emailAddress>
     </generalsettings></settings>
