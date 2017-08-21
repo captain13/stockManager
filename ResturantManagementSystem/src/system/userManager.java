@@ -11,8 +11,8 @@ public class userManager {
 
     static ArrayList usernames = new ArrayList();
     static Login loginSystem;
-    Logout logoutSystem;
     static UserForm userLog;
+    Logout logoutSystem;
     dbManager newManager = new dbManager();
     internalClock clock = new internalClock();
 
@@ -51,13 +51,10 @@ public class userManager {
 
     public void logout() {
         String username = Logout.getUsername();
-        System.out.println(username);
         int rowIndex = Logout.getRowIndex();
-        System.out.println(rowIndex);
         clock.setLogoutTimeStamp();
         newManager.updateHours(username, rowIndex);
         newManager.updateEmployeeStatusOut(username);
         usernames.remove(rowIndex);
-        logoutSystem.populateTable();
     }
 }

@@ -225,7 +225,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         time = new Thread(() -> {
             try {
                 while (isRunning == true) {
-                    lblClock1.setText(new SimpleDateFormat("hh:mm:ss").format(new Date()));
+                    lblClock1.setText(new SimpleDateFormat("HH:mm:ss").format(new Date()));
                 }
             } catch (Exception e) {
             }

@@ -49,7 +49,7 @@ public class dbManager {
     public void populateTables() {
         String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(g)", "Item Threshold", "Item Limit"};
         String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
-        String columnNamesRecipeList[] = {"Recipe ID", "Recipe Name", "Inventory ID","Item Name", "Quantity"};
+        String columnNamesRecipeList[] = {"Recipe ID", "Recipe Name", "Inventory ID", "Item Name", "Quantity"};
         String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
         try {
 
@@ -109,8 +109,8 @@ public class dbManager {
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
-        
-            try {
+
+        try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -141,7 +141,7 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-                System.out.println(exc);
+            System.out.println(exc);
         }
 
         try {
@@ -280,7 +280,7 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT* FROM sales";
+            String query = "SELECT* FROM sales UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -494,7 +494,6 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (SQLException exp) {
-            exp.printStackTrace();
         }
         return time;
     }
@@ -754,11 +753,10 @@ public class dbManager {
             String query = "DELETE FROM inventory WHERE inventoryID='" + index + "'";
             s.execute(query);
             populateTables();
-              logs.writeLogs("DELETED");
+            logs.writeLogs("DELETED");
             s.close();
             conn.close();
         } catch (SQLException exp) {
-            exp.printStackTrace();
         }
     }
 
@@ -767,6 +765,8 @@ public class dbManager {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String query = "DELETE FROM recipe WHERE recipeID='" + index + "'";
+             String query1 = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
+            s.execute(query1);
             s.execute(query);
             populateTables();
             removeRecipeList(index);
@@ -916,7 +916,6 @@ public class dbManager {
                     + " -u " + username + " -p" + password + " resturantdb  -r " + location;
             Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
             int processComplete = runtimeProcess.waitFor();
-            System.out.println(processComplete);
             if (processComplete == 0) {
                 JOptionPane.showMessageDialog(null, "Backup Complete");
             } else {

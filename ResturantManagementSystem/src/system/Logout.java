@@ -9,9 +9,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Logout extends javax.swing.JFrame {
 
-    static ArrayList usernames = new ArrayList();
+    ArrayList usernames = new ArrayList();
     userManager newManager = new userManager();
     internalClock clock = new internalClock();
+    DefaultTableModel tableModel;
 
     public Logout(ArrayList usernames) {
         initComponents();
@@ -20,14 +21,16 @@ public class Logout extends javax.swing.JFrame {
         populateTable();
     }
 
-    public void populateTable() {
+    public final void populateTable() {
         String columnNames[] = {"Name", "Login Time"};
+        tableLoginedUsers.removeAll();
         Object row[][] = new Object[usernames.size()][2];
+
         for (int i = 0; i < usernames.size(); i++) {
             row[i][0] = usernames.get(i);
             row[i][1] = clock.getLoginTimeStamp().get(i);
         }
-        DefaultTableModel tableModel = new DefaultTableModel(row, columnNames);
+        tableModel = new DefaultTableModel(row, columnNames);
         tableLoginedUsers.setModel(tableModel);
     }
 
@@ -146,6 +149,7 @@ public class Logout extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         newManager.logout();
+        populateTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

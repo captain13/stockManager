@@ -24,7 +24,7 @@ public class UserForm extends javax.swing.JFrame {
         populateTable();
     }
 
-    public void populateTable() {
+    public final void populateTable() {
         String columnNames[] = {"Name"};
         DefaultTableModel tableModel = new DefaultTableModel();
         tableLoginedUsers.setModel(tableModel);
@@ -42,7 +42,7 @@ public class UserForm extends javax.swing.JFrame {
         }
     }
 
-    public static String getUsername() {
+    public String getUsername() {
         System.out.println(username);
         return username;
     }
