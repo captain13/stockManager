@@ -13,7 +13,7 @@ import javax.swing.filechooser.FileFilter;
 public class AddDatabase extends javax.swing.JFrame {
 
     String imagePath;
-    static String newImagePath;
+    String newImagePath;
     dbManager database = new dbManager();
 
     public AddDatabase() {
@@ -91,7 +91,7 @@ public class AddDatabase extends javax.swing.JFrame {
     }
 
     public Double getReorderLevel() {
-        return (Double.parseDouble(comboxThreshold.getSelectedItem().toString().replace("%", ""))/100);
+        return (Double.parseDouble(comboxThreshold.getSelectedItem().toString().replace("%", "")) / 100);
     }
 
     public String getRecipe() {
@@ -111,6 +111,12 @@ public class AddDatabase extends javax.swing.JFrame {
     }
 
     public String getImageDirectory() {
+        String testPath=System.getProperty("user.home") + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\";
+        //Developers Line
+        if (newImagePath.startsWith(testPath)){
+            String fileName=newImagePath.substring(newImagePath.lastIndexOf("\\")+1);
+            newImagePath="./src/images/"+fileName;
+        }
         return newImagePath.replace("\\", "/");
     }
 

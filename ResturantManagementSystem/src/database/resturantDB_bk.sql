@@ -33,7 +33,7 @@ CREATE TABLE `employee` (
   `employeePosition` varchar(45) DEFAULT NULL,
   `admin` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`employeeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +148,7 @@ CREATE TABLE `recipe` (
   `recipeImageDirectory` varchar(150) DEFAULT NULL,
   `recipeCount` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`recipeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +157,7 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
-INSERT INTO `recipe` VALUES (1,'Chicken Burger & Chips','65.00','9.10','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_chickenBurger.jpg',NULL),(2,'Beef Burger & Chips','65.00','9.10','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_beefBurger.jpg',NULL),(3,'Chicken Wings & Chips','55.00','7.70','Light Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_chickenWings.jpg',NULL),(4,'Pork Ribs & Chips','90.00','12.60','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_porkRibs.jpg',NULL),(5,'California Pizza','90.00','12.60','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_pizza1.jpg',NULL),(6,'Salami Pizza','85.00','11.90','Main Meal','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_f_pizza.jpg',NULL),(7,'Chips','20.00','2.80','Extra','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_e_chips.jpg',NULL),(8,'Coke','15.00','2.10','Drinks','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_d_cokeLogo.jpg',NULL),(9,'Coke Zero','15.00','2.10','Drinks','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_d_cokeLightLogo.jpg',NULL),(10,'Fanta','15.00','2.10','Drinks','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_d_fantaLogo.jpg',NULL),(11,'Lipton Peach Ice-Tea','20.00','2.80','Drinks','C:/Users/Andrew/Documents/NetBeansProjects/stockManager/ResturantManagementSystem/src/images/_d_liptonLogo.jpg',NULL);
+INSERT INTO `recipe` VALUES (1,'Chicken Burger & Chips','65.00','9.10','Main Meal','./src/images/_f_chickenBurger.jpg',NULL),(2,'Beef Burger & Chips','65.00','9.10','Main Meal','./src/images/_f_beefBurger.jpg',NULL),(3,'Chicken Wings & Chips','55.00','7.70','Light Meal','./src/images/_f_chickenWings.jpg',NULL),(4,'Pork Ribs & Chips','90.00','12.60','Main Meal','./src/images/_f_porkRibs.jpg',NULL),(5,'California Pizza','90.00','12.60','Main Meal','./src/images/_f_pizza1.jpg',NULL),(6,'Salami Pizza','85.00','11.90','Main Meal','./src/images/_f_pizza.jpg',NULL),(7,'Chips','20.00','2.80','Extra','./src/images/_e_chips.jpg',''),(8,'Coke','15.00','2.10','Drinks','./src/images/_d_cokeLogo.jpg',NULL),(9,'Coke Zero','15.00','2.10','Drinks','./src/images/_d_cokeLightLogo.jpg',NULL),(10,'Fanta','15.00','2.10','Drinks','./src/images/_d_fantaLogo.jpg',NULL),(11,'Lipton Peach Ice-Tea','20.00','2.80','Drinks','./src/images/_d_liptonLogo.jpg',NULL);
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,6 +244,35 @@ LOCK TABLES `sales_employee` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sales_recipe`
+--
+
+DROP TABLE IF EXISTS `sales_recipe`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sales_recipe` (
+  `sales_recipeID` int(11) NOT NULL,
+  `recipeID` int(11) NOT NULL,
+  `saleID` int(11) NOT NULL,
+  `inventoryID` int(11) NOT NULL,
+  PRIMARY KEY (`sales_recipeID`,`recipeID`,`saleID`,`inventoryID`),
+  KEY `fk_sales_recipt_reciept1` (`recipeID`),
+  KEY `fk_sales_recipe_Sale1` (`saleID`,`inventoryID`),
+  CONSTRAINT `fk_sales_recipe_Sale1` FOREIGN KEY (`saleID`, `inventoryID`) REFERENCES `sale` (`saleID`, `inventory_inventoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_sales_recipt_reciept1` FOREIGN KEY (`recipeID`) REFERENCES `recipe` (`recipeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sales_recipe`
+--
+
+LOCK TABLES `sales_recipe` WRITE;
+/*!40000 ALTER TABLE `sales_recipe` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sales_recipe` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `stockorder`
 --
 
@@ -311,4 +340,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-20 18:47:49
+-- Dump completed on 2017-08-21 10:48:50
