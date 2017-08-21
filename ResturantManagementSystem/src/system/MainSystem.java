@@ -44,6 +44,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         system.populateTables();
         system.populateOrder();
         getSetting();
+        setTableDesign();
     }
 
     public final void setTableDesign() {
@@ -58,6 +59,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         tableRecipe.getColumnModel().getColumn(2).setPreferredWidth(150);
         tableRecipe.getColumnModel().getColumn(3).setPreferredWidth(50);
         tableRecipe.getColumnModel().getColumn(3).setPreferredWidth(50);
+
+        tableRecipeList.getColumnModel().getColumn(0).setPreferredWidth(25);
+        tableRecipeList.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tableRecipeList.getColumnModel().getColumn(2).setPreferredWidth(25);
+        tableRecipeList.getColumnModel().getColumn(3).setPreferredWidth(200);
+        tableRecipeList.getColumnModel().getColumn(4).setPreferredWidth(25);
 
         tableSupplier.getColumnModel().getColumn(0).setPreferredWidth(100);
         tableSupplier.getColumnModel().getColumn(1).setPreferredWidth(300);
