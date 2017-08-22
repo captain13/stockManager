@@ -47,7 +47,7 @@ public class dbManager {
     }
 
     public void populateTables() {
-        String columnNamesInventory[] = {"Inventory ID", "Item Name","Category", "Quantity(g)", "Item Threshold", "Item Limit"};
+        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit"};
         String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
         String columnNamesRecipeList[] = {"Recipe ID", "Recipe Name", "Inventory ID", "Item Name", "Quantity"};
         String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
@@ -524,7 +524,7 @@ public class dbManager {
             Statement s = conn.createStatement();
             String insertQuery = "INSERT INTO inventory (item,category ,qty,itemThreshold,itemLimit)"
                     + "VALUES ('" + item + "',"
-                     + "'" + category + "',"
+                    + "'" + category + "',"
                     + "'" + quantity + "',"
                     + "'" + threshold + "', '"
                     + limit + "')";
@@ -765,7 +765,7 @@ public class dbManager {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String query = "DELETE FROM recipe WHERE recipeID='" + index + "'";
-             String query1 = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
+            String query1 = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
             s.execute(query1);
             s.execute(query);
             populateTables();
@@ -818,12 +818,12 @@ public class dbManager {
         } catch (SQLException exp) {
         }
     }
-    
-        public void updateSpecials(String recipeName, double price) {
+
+    public void updateSpecials(String recipeName, double price) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "UPDATE recipe set special= '1',specialPrice='"+price+"' WHERE recipeName='" + recipeName + "'";
+            String query = "UPDATE recipe set special= '1',specialPrice='" + price + "' WHERE recipeName='" + recipeName + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.executeUpdate();
             getSpecialDetails();

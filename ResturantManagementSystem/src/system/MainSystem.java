@@ -105,111 +105,126 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public static void searchITable() {
-        try {
-            TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tblInventory.getModel());
-            tblInventory.setRowSorter(rowSorter);
-            textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    String text = textboxSearch.getText();
-                    if (text.trim().length() == 0) {
-                        rowSorter.setRowFilter(null);
-                    } else {
-                        rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                    }
-                }
+        if (tblInventory.getRowCount() != 1) {
+            tblInventory.setRowSorter(null);
 
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    String text = textboxSearch.getText();
-                    if (text.trim().length() == 0) {
-                        rowSorter.setRowFilter(null);
-                    } else {
-                        rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+        } else {
+            try {
+                TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tblInventory.getModel());
+                tblInventory.setRowSorter(rowSorter);
+                textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
+                    @Override
+                    public void insertUpdate(DocumentEvent e) {
+                        String text = textboxSearch.getText();
+                        if (text.trim().length() == 0) {
+                            rowSorter.setRowFilter(null);
+                        } else {
+                            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        }
                     }
-                }
 
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                }
-            });
-        } catch (Exception ex) {
+                    @Override
+                    public void removeUpdate(DocumentEvent e) {
+                        String text = textboxSearch.getText();
+                        if (text.trim().length() == 0) {
+                            rowSorter.setRowFilter(null);
+                        } else {
+                            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        }
+                    }
+
+                    @Override
+                    public void changedUpdate(DocumentEvent e) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });
+            } catch (Exception ex) {
+            }
         }
     }
 
     public static void searchRTable() {
-        try {
-            TableRowSorter<TableModel> rowSorterRecipe = new TableRowSorter<>(tableRecipe.getModel());
-            tableRecipe.setRowSorter(rowSorterRecipe);
+        if (tableRecipe.getRowCount() != 1) {
+            tableRecipe.setRowSorter(null);
 
-            ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
-            sortKeys.add(new RowSorter.SortKey(2, SortOrder.DESCENDING));
-            sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
-            rowSorterRecipe.setSortKeys(sortKeys);
+        } else {
+            try {
+                TableRowSorter<TableModel> rowSorterRecipe = new TableRowSorter<>(tableRecipe.getModel());
+                tableRecipe.setRowSorter(rowSorterRecipe);
 
-            textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    String text = textboxSearch.getText();
-                    if (text.trim().length() == 0) {
-                        rowSorterRecipe.setRowFilter(null);
-                    } else {
-                        rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+                sortKeys.add(new RowSorter.SortKey(2, SortOrder.DESCENDING));
+                sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
+                rowSorterRecipe.setSortKeys(sortKeys);
+
+                textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
+                    @Override
+                    public void insertUpdate(DocumentEvent e) {
+                        String text = textboxSearch.getText();
+                        if (text.trim().length() == 0) {
+                            rowSorterRecipe.setRowFilter(null);
+                        } else {
+                            rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        }
                     }
-                }
 
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    String text = textboxSearch.getText();
-                    if (text.trim().length() == 0) {
-                        rowSorterRecipe.setRowFilter(null);
-                    } else {
-                        rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    @Override
+                    public void removeUpdate(DocumentEvent e) {
+                        String text = textboxSearch.getText();
+                        if (text.trim().length() == 0) {
+                            rowSorterRecipe.setRowFilter(null);
+                        } else {
+                            rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        }
                     }
-                }
 
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                }
-            });
-        } catch (Exception ex) {
+                    @Override
+                    public void changedUpdate(DocumentEvent e) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });
+            } catch (Exception ex) {
+            }
         }
     }
 
     public static void searchSTable() {
-        try {
-            TableRowSorter<TableModel> rowSorterSup = new TableRowSorter<>(tableSupplier.getModel());
-            tableSupplier.setRowSorter(rowSorterSup);
-            textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    String text = textboxSearch.getText();
-                    if (text.trim().length() == 0) {
-                        rowSorterSup.setRowFilter(null);
-                    } else {
-                        rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+        if (tableSupplier.getRowCount() != 1) {
+            tableSupplier.setRowSorter(null);
+
+        } else {
+            try {
+                TableRowSorter<TableModel> rowSorterSup = new TableRowSorter<>(tableSupplier.getModel());
+                tableSupplier.setRowSorter(rowSorterSup);
+                textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
+                    @Override
+                    public void insertUpdate(DocumentEvent e) {
+                        String text = textboxSearch.getText();
+                        if (text.trim().length() == 0) {
+                            rowSorterSup.setRowFilter(null);
+                        } else {
+                            rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        }
                     }
-                }
 
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    String text = textboxSearch.getText();
+                    @Override
+                    public void removeUpdate(DocumentEvent e) {
+                        String text = textboxSearch.getText();
 
-                    if (text.trim().length() == 0) {
-                        rowSorterSup.setRowFilter(null);
-                    } else {
-                        rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        if (text.trim().length() == 0) {
+                            rowSorterSup.setRowFilter(null);
+                        } else {
+                            rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                        }
                     }
-                }
 
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    throw new UnsupportedOperationException("Not supported yet.");
-                }
-            });
-        } catch (Exception ex) {
+                    @Override
+                    public void changedUpdate(DocumentEvent e) {
+                        throw new UnsupportedOperationException("Not supported yet.");
+                    }
+                });
+            } catch (Exception ex) {
+            }
         }
     }
 
