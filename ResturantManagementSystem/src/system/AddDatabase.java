@@ -22,7 +22,7 @@ public class AddDatabase extends javax.swing.JFrame {
 
     public void insert() {
         if (!"".equals(textfieldItem.getText()) || !"".equals(textfieldQty.getText())) {
-            database.insertInventory(getItem(), getQuantity(), getLimit(), getReorderLevel());
+            database.insertInventory(getItem(), getInventoryCategory(),getQuantity(), getLimit(), getReorderLevel());
         } else {
         }
         if (!"".equals(textfieldDisName.getText()) || !"".equals(textfieldDisEmail.getText()) || !"".equals(textfieldDisContact.getText())) {
@@ -31,8 +31,8 @@ public class AddDatabase extends javax.swing.JFrame {
         }
         if (!"".equals(textRecipe.getText()) || !"".equals(textPrice.getText())) {
             database.insertRecipe(getRecipe(), getPrice(), getVAT(), getImageDirectory(), getCategory());
-            RecipeForm newForm = new RecipeForm(getRecipe());
-            newForm.setVisible(true);
+//            RecipeForm newForm = new RecipeForm(getRecipe());
+//            newForm.setVisible(true);
         } else {
         }
     }
@@ -82,16 +82,20 @@ public class AddDatabase extends javax.swing.JFrame {
         return textfieldItem.getText();
     }
 
-    public String getQuantity() {
-        return textfieldQty.getText();
+    public int getQuantity() {
+        return Integer.parseInt(textfieldQty.getText());
     }
 
-    public Double getLimit() {
-        return Double.parseDouble(textfieldLimit.getText());
+    public int getLimit() {
+        return Integer.parseInt(textfieldLimit.getText());
     }
 
     public Double getReorderLevel() {
         return (Double.parseDouble(comboxThreshold.getSelectedItem().toString().replace("%", "")) / 100);
+    }
+    
+    public String getInventoryCategory() {
+        return comboxThreshold1.getSelectedItem().toString();
     }
 
     public String getRecipe() {
@@ -161,6 +165,8 @@ public class AddDatabase extends javax.swing.JFrame {
         lblQty3 = new javax.swing.JLabel();
         lblQty4 = new javax.swing.JLabel();
         comboxThreshold = new javax.swing.JComboBox<>();
+        lblQty5 = new javax.swing.JLabel();
+        comboxThreshold1 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         lblCostPerItem1 = new javax.swing.JLabel();
         textRecipe = new javax.swing.JTextField();
@@ -204,31 +210,38 @@ public class AddDatabase extends javax.swing.JFrame {
 
         comboxThreshold.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "20%", "25%", "30%", "40%", "50%", "60%", "70%", "75%", "80%" }));
 
+        lblQty5.setText("Category");
+
+        comboxThreshold1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Meat", "Pastry", "Dairy", "Vegetable", "Soft Drinks", "Alochol", "Sauces" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblTitle)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblItem)
-                            .addComponent(lblQty))
-                        .addGap(46, 46, 46)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textfieldQty, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                            .addComponent(textfieldItem)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblQty4)
-                            .addComponent(lblQty3))
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboxThreshold, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textfieldLimit, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblTitle)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblItem)
+                                .addComponent(lblQty))
+                            .addGap(46, 46, 46)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(textfieldQty, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                                .addComponent(textfieldItem)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblQty4)
+                                .addComponent(lblQty3))
+                            .addGap(17, 17, 17)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(comboxThreshold, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textfieldLimit, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                                .addComponent(comboxThreshold1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(lblQty5))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,7 +264,11 @@ public class AddDatabase extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQty3)
                     .addComponent(comboxThreshold, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblQty5)
+                    .addComponent(comboxThreshold1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         tabbedPanel.addTab("Inventory", jPanel1);
@@ -476,6 +493,7 @@ public class AddDatabase extends javax.swing.JFrame {
     private javax.swing.JButton buttonCancel;
     private javax.swing.JComboBox<String> comboxCat;
     private javax.swing.JComboBox<String> comboxThreshold;
+    private javax.swing.JComboBox<String> comboxThreshold1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
@@ -495,6 +513,7 @@ public class AddDatabase extends javax.swing.JFrame {
     private javax.swing.JLabel lblQty2;
     private javax.swing.JLabel lblQty3;
     private javax.swing.JLabel lblQty4;
+    private javax.swing.JLabel lblQty5;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel recipeImage;
     private static javax.swing.JTabbedPane tabbedPanel;

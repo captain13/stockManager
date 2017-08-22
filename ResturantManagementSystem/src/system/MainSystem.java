@@ -44,7 +44,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         system.populateTables();
         system.populateOrder();
         getSetting();
-        setTableDesign();
+        //setTableDesign();
     }
 
     public final void setTableDesign() {

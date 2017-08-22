@@ -37,18 +37,18 @@ public class Booking extends javax.swing.JFrame {
     }
 
     public String getDate() {
-        String date = comboboxDay.getSelectedItem().toString() + "/"
-                + comboboxMonth.getSelectedItem().toString() + "/"
-                + comboboxYear.getSelectedItem().toString();
+        String date = comboboxYear.getSelectedItem().toString() + "-"
+                + comboboxMonth.getSelectedItem().toString() + "-"
+                + comboboxDay.getSelectedItem().toString();
         return date;
     }
 
-    public String getTableNum() {
-        return textTable.getText();
+    public int getTableNum() {
+        return Integer.parseInt(textTable.getText());
     }
 
-    public String getCustomerNum() {
-        return textCustomerNum.getText();
+    public int getCustomerNum() {
+        return Integer.parseInt(textCustomerNum.getText());
     }
 
     public String getTime() {

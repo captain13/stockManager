@@ -47,7 +47,7 @@ public class dbManager {
     }
 
     public void populateTables() {
-        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(g)", "Item Threshold", "Item Limit"};
+        String columnNamesInventory[] = {"Inventory ID", "Item Name","Category", "Quantity(g)", "Item Threshold", "Item Limit"};
         String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
         String columnNamesRecipeList[] = {"Recipe ID", "Recipe Name", "Inventory ID", "Item Name", "Quantity"};
         String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
@@ -344,7 +344,7 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT FROM recipe";
+            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT FROM recipe WHERE special=true";
             ResultSet rs = s.executeQuery(query);
 
             int i = 0;
@@ -519,12 +519,13 @@ public class dbManager {
         }
     }
 
-    public void insertInventory(String item, String quantity, Double limit, Double threshold) {
+    public void insertInventory(String item, String category, int quantity, int limit, Double threshold) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuery = "INSERT INTO inventory (item, qty,itemThreshold,itemLimit)"
+            String insertQuery = "INSERT INTO inventory (item,category ,qty,itemThreshold,itemLimit)"
                     + "VALUES ('" + item + "',"
+                     + "'" + category + "',"
                     + "'" + quantity + "',"
                     + "'" + threshold + "', '"
                     + limit + "')";
@@ -638,7 +639,7 @@ public class dbManager {
         }
     }
 
-    public void insertReservations(String employee, String date, String time, String customerName, String tableNum, String customerNum) {
+    public void insertReservations(String employee, String date, String time, String customerName, int tableNum, int customerNum) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
