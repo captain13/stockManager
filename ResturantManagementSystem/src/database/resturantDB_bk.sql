@@ -33,7 +33,7 @@ CREATE TABLE `employee` (
   `employeePosition` varchar(45) DEFAULT NULL,
   `admin` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`employeeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'Andrew','Schwabe','Password','076 273 1721','00:00',NULL,NULL,1),(2,'Zane','Smith','Password','034 233 8321','00:00',NULL,NULL,1),(3,'Chad','Phillips','Password','087 237 1277','00:00',NULL,NULL,0),(4,'Sean','Thompson','Password','072 377 1122','00:00',NULL,NULL,0);
+INSERT INTO `employee` VALUES (1,'Andrew','Schwabe','Password','076 273 1721','00:00',NULL,NULL,1),(2,'Zane','Smith','Password','034 233 8321','00:00',NULL,NULL,1),(3,'Chad','Phillips','Password','087 237 1277','00:00',NULL,NULL,0),(4,'Sean','Thompson','Password','072 377 1122','00:00',NULL,NULL,0),(5,'Itumeleng','Madisha','Password','072 377 1122','00:00',NULL,NULL,0);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +91,7 @@ CREATE TABLE `inventory_recipe` (
   KEY `fk_inventory_recipt_reciept1` (`recipeID`),
   CONSTRAINT `fk_inventory_recipt_inventory` FOREIGN KEY (`inventoryID`) REFERENCES `inventory` (`inventoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_inventory_recipt_reciept1` FOREIGN KEY (`recipeID`) REFERENCES `recipe` (`recipeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,6 +100,7 @@ CREATE TABLE `inventory_recipe` (
 
 LOCK TABLES `inventory_recipe` WRITE;
 /*!40000 ALTER TABLE `inventory_recipe` DISABLE KEYS */;
+INSERT INTO `inventory_recipe` VALUES (1,1,1,200),(2,3,1,100),(3,4,1,50),(4,5,1,50),(5,8,1,100),(6,2,2,200),(7,3,2,100),(8,4,2,50),(9,5,2,50),(10,8,2,100);
 /*!40000 ALTER TABLE `inventory_recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,15 +143,15 @@ DROP TABLE IF EXISTS `recipe`;
 CREATE TABLE `recipe` (
   `recipeID` int(11) NOT NULL AUTO_INCREMENT,
   `recipeName` varchar(45) DEFAULT NULL,
-  `recipePrice` varchar(45) DEFAULT NULL,
-  `specialPrice` varchar(45) DEFAULT NULL,
-  `recipeVAT` varchar(45) DEFAULT NULL,
+  `recipePrice` double DEFAULT NULL,
+  `specialPrice` double DEFAULT NULL,
+  `recipeVAT` double DEFAULT NULL,
   `recipeType` varchar(45) DEFAULT NULL,
   `recipeImageDirectory` varchar(150) DEFAULT NULL,
-  `recipeCount` varchar(45) DEFAULT NULL,
+  `recipeCount` int(11) DEFAULT NULL,
   `special` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`recipeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,6 +160,7 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
+INSERT INTO `recipe` VALUES (1,'Chicken Burger & Chips',75,60,10.5,'Main Meal','./src/images/_f_chickenBurger.jpg',NULL,1),(2,'Beef Burger & Chips',75,60,10.5,'Main Meal','./src/images/_f_beefBurger.jpg',NULL,1);
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,4 +314,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-22 19:16:31
+-- Dump completed on 2017-08-22 20:50:35

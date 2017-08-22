@@ -97,7 +97,7 @@ public class Specials extends javax.swing.JFrame {
                         .addComponent(lblSpecials4)))
                 .addContainerGap())
             .addGroup(pnlSpecialLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(76, 76, 76)
                 .addComponent(buttonClose)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

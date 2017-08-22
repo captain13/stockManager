@@ -344,7 +344,7 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT FROM recipe WHERE special=true";
+            String query = "SELECT recipeID, recipeName,recipeType, specialPrice FROM recipe WHERE special=true";
             ResultSet rs = s.executeQuery(query);
 
             int i = 0;
@@ -353,8 +353,7 @@ public class dbManager {
                 row[i][1] = rs.getObject(2);
                 row[i][2] = rs.getObject(3);
                 row[i][3] = rs.getObject(4);
-                row[i][4] = rs.getObject(5);
-                row[i][5] = new Boolean(false);
+                row[i][4] = new Boolean(false);
                 i++;
             }
 
@@ -814,6 +813,20 @@ public class dbManager {
             s.execute(query);
             populateEmpTable();
             logs.writeLogs("DELETED");
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
+    }
+    
+        public void updateSpecials(String recipeName, double price) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "UPDATE recipe set special= '1',specialPrice='"+price+"' WHERE recipeName='" + recipeName + "'";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.executeUpdate();
+            getSpecialDetails();
             s.close();
             conn.close();
         } catch (SQLException exp) {

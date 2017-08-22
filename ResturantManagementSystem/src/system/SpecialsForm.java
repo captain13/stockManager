@@ -14,8 +14,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SpecialsForm extends javax.swing.JFrame {
 
-    String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT", "Active"};
+    String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Discounted Price", "Active"};
     dbManager system = new dbManager();
+    SpecialsPrompt prompt;
+    SpecialsForm newForm;
     Object[][] row;
 
     public SpecialsForm() {
@@ -60,8 +62,6 @@ public class SpecialsForm extends javax.swing.JFrame {
                     return String.class;
                     case 3:
                     return String.class;
-                    case 4:
-                    return String.class;
                     default:
                     return Boolean.class;
                 }
@@ -74,6 +74,11 @@ public class SpecialsForm extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Delete");
 
@@ -95,6 +100,7 @@ public class SpecialsForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -148,12 +154,17 @@ public class SpecialsForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        prompt = new SpecialsPrompt();
+        prompt.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
