@@ -274,13 +274,30 @@ public class dbManager {
         }
     }
 
-    public void populateSales(JTable sales) {
+    public void populateSales(JTable sales,String type) {
         String columnNames[] = {"ID", "Sales Date", "Total Sale"};
+        String query=null;
+        String date=clock.getCurrentDate();
+        String currentDATE[]=clock.getCurrentDate().split("-");
+        String month=currentDATE[1];
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT* FROM sales UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales";
+            if ("ALL".equals(type)) {
+                 query = "SELECT* FROM sales "
+                         + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales";
+            }
+            if ("DAY".equals(type)) {
+                 query = "SELECT* FROM sales WHERE salesDate='"+date+"' "
+                         + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales "
+                         + "WHERE salesDate='"+date+"'";
+            }
+            if ("MONTH".equals(type)) {
+                 query = "SELECT* FROM sales WHERE MONTH(salesDate)='"+month+"' "
+                         + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales "
+                         + "WHERE MONTH(salesDate)='"+month+"'";
+            }
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();

@@ -8,7 +8,7 @@ public class Reports extends javax.swing.JFrame {
     dbManager newManager=new dbManager();
     public Reports() {
         initComponents();
-        newManager.populateSales(tableSales);
+        newManager.populateSales(tableSales,"ALL");
     }
 
     public int getID() {
@@ -149,7 +149,7 @@ public class Reports extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose1ActionPerformed
-        newManager.populateSales(tableSales);
+        newManager.populateSales(tableSales,"ALL");
     }//GEN-LAST:event_buttonClose1ActionPerformed
 
     private void buttonClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose2ActionPerformed
@@ -157,11 +157,11 @@ public class Reports extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonClose2ActionPerformed
 
     private void buttonClose3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose3ActionPerformed
-        // TODO add your handling code here:
+         newManager.populateSales(tableSales,"MONTH");
     }//GEN-LAST:event_buttonClose3ActionPerformed
 
     private void buttonClose4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose4ActionPerformed
-        // TODO add your handling code here:
+         newManager.populateSales(tableSales,"DAY");
     }//GEN-LAST:event_buttonClose4ActionPerformed
 
 
