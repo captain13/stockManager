@@ -153,7 +153,7 @@ public class dbManager {
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
             DefaultTableModel tableModel2 = new DefaultTableModel();
-            MainSystem.tableSupplier.setModel(tableModel2);
+            MainSystem.tblSupplier.setModel(tableModel2);
 
             for (int i = 0; i < columnNamesSuppler.length; i++) {
                 tableModel2.addColumn(columnNamesSuppler[i]);
@@ -891,26 +891,88 @@ public class dbManager {
         }
     }
 
-    public static void update() {
+   //Updates Inventory table with "Update" button
+   public void updateInventory(Object ID, Object item, Object qty, Object itemT, Object itemL) {
+        try {
+            //connect to db
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            //update query
+            String query = "UPDATE inventory set item='" + item + "' '" 
+                    + "' ,qty='" + qty + "' '" 
+                    + "' ,itemThreshold='" + itemT + "' '"
+                    + "' ,itemLimit='" + itemL + "' WHERE inventoryID='" + ID + "'";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.executeUpdate();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            //prints SQL Exception
+            System.out.println("Error: " + exp);
+        }
+    }
+   
+      //Updates recipe table with "Update" button
+   public void updateRecipe(Object ID, Object name, Object price, Object vat, Object type) {
+        try {
+            //connect to db
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            //update query
+            String query = "UPDATE recipe set recipeName='" + name + "' '" 
+                    + "' ,recipePrice='" + price + "' '" 
+                    + "' ,recipeVAT='" + vat + "' '"
+                    + "' ,recipeType='" + type + "' WHERE recipeID='" + ID + "'";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.executeUpdate();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            //prints SQL Exception
+            System.out.println("Error: " + exp);
+        }
+    }
+         //Updates supplier table with "Update" button
+    public void updateSupplier(Object ID, Object name, Object email, Object num, Object address) {
+        try {
+            //connect to db
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            //update query
+            String query = "UPDATE supplier set supplierName='" + name + "' '" 
+                    + "' ,supplierEmail='" + email + "' '" 
+                    + "' ,supplierNumber='" + num + "' '"
+                    + "' ,supplierAddress='" + address + "' WHERE supplierID='" + ID + "'";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.executeUpdate();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            //prints SQL Exception
+            System.out.println("Error: " + exp);
+        }
+    }
+    
+    //Updates inventory_recipe table with "Update" button
+//    public void updateRecipeList(Object rID, Object rName, Object iID, Object iName, Object qty) {
 //        try {
+//            //connect to db
 //            Connection conn = DriverManager.getConnection(url, username, password);
 //            Statement s = conn.createStatement();
-//            String query = "UPDATE Book set Title='" + titleBox.getText()
-//                    + "' ,Author='" + authorBox.getText() + "' '"
-//                    + "' ,Year='" + yearBox.getText() + "' '"
-//                    + "' ,Edtion='" + edBox.getText() + "' '"
-//                    + "' ,Category='" + catBox.getText() + "' '"
-//                    + "' ,Publisher='" + pubBox.getText() + "' '"
-//                    + "' ,Copies='" + copiesBox.getText() + "' WHERE ISBN='" + isbnBox.getText() + "'";
+//            //update query
+//            String query = "UPDATE inventory_recipe set inventory_recipe.qty='" + qty + "' '" 
+//                    + "' ,supplierEmail='" + email + "' '" 
+//                    + "' ,supplierNumber='" + num + "' '"
+//                    + "' ,supplierAddress='" + address + "' WHERE inventoryID='" + rID + "' AND recipeID='" +iID+ "'";
 //            PreparedStatement preparedStmt = conn.prepareStatement(query);
 //            preparedStmt.executeUpdate();
 //            s.close();
 //            conn.close();
 //        } catch (SQLException exp) {
-//            System.out.println("Error");
-//            exp.printStackTrace();
+//            //prints SQL Exception
+//            System.out.println("Error: " + exp);
 //        }
-    }
+//    }
 
     public boolean login(String userName, String passWord) {
         ArrayList userPasswordAL = new ArrayList();
