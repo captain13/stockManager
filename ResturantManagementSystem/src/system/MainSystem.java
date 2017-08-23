@@ -1535,9 +1535,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         for (r = 0; r < rowCount; r++) {
             Object ID = tblInventory.getModel().getValueAt(r, 0);
             Object item = tblInventory.getModel().getValueAt(r, 1);
-            Object qty = tblInventory.getModel().getValueAt(r, 2);
-            Object itemT = tblInventory.getModel().getValueAt(r, 3);
-            Object itemL = tblInventory.getModel().getValueAt(r, 4);
+            Object qty = tblInventory.getModel().getValueAt(r, 3);
+            Object itemT = tblInventory.getModel().getValueAt(r, 4);
+            Object itemL = tblInventory.getModel().getValueAt(r, 5);
             //Pass table contents to database update code
             database.updateInventory(ID, item, qty, itemT, itemL);
         }
