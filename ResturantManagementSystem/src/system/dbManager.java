@@ -61,7 +61,7 @@ public class dbManager {
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
             DefaultTableModel tableModel = new DefaultTableModel();
-            MainSystem.tblInventory.setModel(tableModel);
+            MainSystem.tblSuplier.setModel(tableModel);
 
             for (int i = 0; i < columnCount; i++) {
                 tableModel.addColumn(columnNamesInventory[i]);
@@ -88,7 +88,7 @@ public class dbManager {
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             DefaultTableModel tableModel1 = new DefaultTableModel();
-            MainSystem.tableRecipe.setModel(tableModel1);
+            MainSystem.tableInventory.setModel(tableModel1);
 
             int columnCount = metaData.getColumnCount();
             for (int i = 0; i < columnCount; i++) {
@@ -153,7 +153,7 @@ public class dbManager {
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
             DefaultTableModel tableModel2 = new DefaultTableModel();
-            MainSystem.tblSupplier.setModel(tableModel2);
+            MainSystem.tblRecipe.setModel(tableModel2);
 
             for (int i = 0; i < columnNamesSuppler.length; i++) {
                 tableModel2.addColumn(columnNamesSuppler[i]);
