@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 public class Employee extends javax.swing.JFrame {
 
     dbManager newManager = new dbManager();
+    
+    
 
     public Employee() {
         initComponents();
@@ -162,7 +164,9 @@ public class Employee extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPasswordActionPerformed
-        // TODO add your handling code here:
+       
+      newManager.updateEmployee();
+      newManager.showActiveEmp();
     }//GEN-LAST:event_buttonPasswordActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed

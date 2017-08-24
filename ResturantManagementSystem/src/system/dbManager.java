@@ -533,7 +533,9 @@ public class dbManager {
         } catch (SQLException exp) {
             System.out.println(exp);
         }
-    }
+}
+
+
 
     public void insertInventory(String item, String category, int quantity, int limit, Double threshold) {
         try {
@@ -955,6 +957,8 @@ public class dbManager {
     
     //Updates inventory_recipe table with "Update" button
 //    public void updateRecipeList(Object rID, Object rName, Object iID, Object iName, Object qty) {
+
+    public static void update() {
 //        try {
 //            //connect to db
 //            Connection conn = DriverManager.getConnection(url, username, password);
@@ -1040,4 +1044,22 @@ public class dbManager {
             JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
         }
     }
-}
+
+    public void updateEmployee() {
+        
+        String employeeID = JOptionPane.showInputDialog("Please enter the employeeID");
+   
+        String employeePass = JOptionPane.showInputDialog("Please Enter your New Password");
+    try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String updateQuery = "UPDATE employee set employeePassword='"+employeePass+" WHERE employeeID =" + employeeID+"'"; 
+            s.execute(updateQuery);
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+    }
+
