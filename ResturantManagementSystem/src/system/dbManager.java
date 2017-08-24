@@ -274,29 +274,29 @@ public class dbManager {
         }
     }
 
-    public void populateSales(JTable sales,String type) {
+    public void populateSales(JTable sales, String type) {
         String columnNames[] = {"ID", "Sales Date", "Total Sale"};
-        String query=null;
-        String date=clock.getCurrentDate();
-        String currentDATE[]=clock.getCurrentDate().split("-");
-        String month=currentDATE[1];
+        String query = null;
+        String date = clock.getCurrentDate();
+        String currentDATE[] = clock.getCurrentDate().split("-");
+        String month = currentDATE[1];
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             if ("ALL".equals(type)) {
-                 query = "SELECT* FROM sales "
-                         + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales";
+                query = "SELECT* FROM sales "
+                        + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales";
             }
             if ("DAY".equals(type)) {
-                 query = "SELECT* FROM sales WHERE salesDate='"+date+"' "
-                         + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales "
-                         + "WHERE salesDate='"+date+"'";
+                query = "SELECT* FROM sales WHERE salesDate='" + date + "' "
+                        + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales "
+                        + "WHERE salesDate='" + date + "'";
             }
             if ("MONTH".equals(type)) {
-                 query = "SELECT* FROM sales WHERE MONTH(salesDate)='"+month+"' "
-                         + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales "
-                         + "WHERE MONTH(salesDate)='"+month+"'";
+                query = "SELECT* FROM sales WHERE MONTH(salesDate)='" + month + "' "
+                        + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales "
+                        + "WHERE MONTH(salesDate)='" + month + "'";
             }
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
@@ -533,9 +533,7 @@ public class dbManager {
         } catch (SQLException exp) {
             System.out.println(exp);
         }
-}
-
-
+    }
 
     public void insertInventory(String item, String category, int quantity, int limit, Double threshold) {
         try {
@@ -893,15 +891,15 @@ public class dbManager {
         }
     }
 
-   //Updates Inventory table with "Update" button
-   public void updateInventory(Object ID, Object item, Object qty, Object itemT, Object itemL) {
+    //Updates Inventory table with "Update" button
+    public void updateInventory(Object ID, Object item, Object qty, Object itemT, Object itemL) {
         try {
             //connect to db
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             //update query
-            String query = "UPDATE inventory set item='" + item + "' '" 
-                    + "' ,qty='" + qty + "' '" 
+            String query = "UPDATE inventory set item='" + item + "' '"
+                    + "' ,qty='" + qty + "' '"
                     + "' ,itemThreshold='" + itemT + "' '"
                     + "' ,itemLimit='" + itemL + "' WHERE inventoryID='" + ID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -913,16 +911,16 @@ public class dbManager {
             System.out.println("Error: " + exp);
         }
     }
-   
-      //Updates recipe table with "Update" button
-   public void updateRecipe(Object ID, Object name, Object price, Object vat, Object type) {
+
+    //Updates recipe table with "Update" button
+    public void updateRecipe(Object ID, Object name, Object price, Object vat, Object type) {
         try {
             //connect to db
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             //update query
-            String query = "UPDATE recipe set recipeName='" + name + "' '" 
-                    + "' ,recipePrice='" + price + "' '" 
+            String query = "UPDATE recipe set recipeName='" + name + "' '"
+                    + "' ,recipePrice='" + price + "' '"
                     + "' ,recipeVAT='" + vat + "' '"
                     + "' ,recipeType='" + type + "' WHERE recipeID='" + ID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -934,15 +932,16 @@ public class dbManager {
             System.out.println("Error: " + exp);
         }
     }
-         //Updates supplier table with "Update" button
+    //Updates supplier table with "Update" button
+
     public void updateSupplier(Object ID, Object name, Object email, Object num, Object address) {
         try {
             //connect to db
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             //update query
-            String query = "UPDATE supplier set supplierName='" + name + "' '" 
-                    + "' ,supplierEmail='" + email + "' '" 
+            String query = "UPDATE supplier set supplierName='" + name + "' '"
+                    + "' ,supplierEmail='" + email + "' '"
                     + "' ,supplierNumber='" + num + "' '"
                     + "' ,supplierAddress='" + address + "' WHERE supplierID='" + ID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -954,28 +953,20 @@ public class dbManager {
             System.out.println("Error: " + exp);
         }
     }
-    
-    //Updates inventory_recipe table with "Update" button
-//    public void updateRecipeList(Object rID, Object rName, Object iID, Object iName, Object qty) {
 
-    public static void update() {
-//        try {
-//            //connect to db
-//            Connection conn = DriverManager.getConnection(url, username, password);
-//            Statement s = conn.createStatement();
-//            //update query
-//            String query = "UPDATE inventory_recipe set inventory_recipe.qty='" + qty + "' '" 
-//                    + "' ,supplierEmail='" + email + "' '" 
-//                    + "' ,supplierNumber='" + num + "' '"
-//                    + "' ,supplierAddress='" + address + "' WHERE inventoryID='" + rID + "' AND recipeID='" +iID+ "'";
-//            PreparedStatement preparedStmt = conn.prepareStatement(query);
-//            preparedStmt.executeUpdate();
-//            s.close();
-//            conn.close();
-//        } catch (SQLException exp) {
-//            //prints SQL Exception
-//            System.out.println("Error: " + exp);
-//        }
+     public void updateEmployee(String user, String newPassword) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String updateQuery = "UPDATE employee SET employeePassword='" + newPassword + "' WHERE employeeFName ='" + user + "'";
+            s.execute(updateQuery);
+            PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
+            preparedStmt.executeUpdate();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
     }
 
     public boolean login(String userName, String passWord) {
@@ -1044,20 +1035,4 @@ public class dbManager {
             JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
         }
     }
-
-    public void updateEmployee(String user,String newPassword) {
-    try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String updateQuery = "UPDATE employee SET employeePassword='"+newPassword+"' WHERE employeeFName ='" + user + "'"; 
-            s.execute(updateQuery);  
-            PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
-            preparedStmt.executeUpdate();
-            s.close();
-            conn.close();
-        } catch (SQLException exp) {
-            System.out.println(exp);
-        }
-    }
-    }
-
+}
