@@ -976,7 +976,7 @@ public class dbManager {
 //            //prints SQL Exception
 //            System.out.println("Error: " + exp);
 //        }
-//    }
+    }
 
     public boolean login(String userName, String passWord) {
         ArrayList userPasswordAL = new ArrayList();
@@ -1045,16 +1045,14 @@ public class dbManager {
         }
     }
 
-    public void updateEmployee() {
-        
-        String employeeID = JOptionPane.showInputDialog("Please enter the employeeID");
-   
-        String employeePass = JOptionPane.showInputDialog("Please Enter your New Password");
+    public void updateEmployee(String user,String newPassword) {
     try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String updateQuery = "UPDATE employee set employeePassword='"+employeePass+" WHERE employeeID =" + employeeID+"'"; 
-            s.execute(updateQuery);
+            String updateQuery = "UPDATE employee SET employeePassword='"+newPassword+"' WHERE employeeFName ='" + user + "'"; 
+            s.execute(updateQuery);  
+            PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
+            preparedStmt.executeUpdate();
             s.close();
             conn.close();
         } catch (SQLException exp) {

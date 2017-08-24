@@ -9,8 +9,6 @@ import javax.swing.JOptionPane;
 public class Employee extends javax.swing.JFrame {
 
     dbManager newManager = new dbManager();
-    
-    
 
     public Employee() {
         initComponents();
@@ -20,6 +18,22 @@ public class Employee extends javax.swing.JFrame {
     public int getID() {
         int id = (int) tableEmp.getValueAt(tableEmp.getSelectedRow(), 0);
         return id;
+    }
+
+    public String getUsername() {
+        String username = tableEmp.getValueAt(tableEmp.getSelectedRow(), 1).toString();
+        return username;
+    }
+
+    public void changePassword() {
+        String password = JOptionPane.showInputDialog("Please Enter your New Password");
+        String passwordConfirm = JOptionPane.showInputDialog("Please Confirm Password");
+        if (password.equals(passwordConfirm)) {
+            newManager.updateEmployee(getUsername(), password);
+            JOptionPane.showMessageDialog(null, "Passwords Changed");
+        } else {
+            JOptionPane.showMessageDialog(null, "Passwords do not Match");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -164,9 +178,7 @@ public class Employee extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPasswordActionPerformed
-       
-      newManager.updateEmployee();
-      newManager.showActiveEmp();
+        changePassword();
     }//GEN-LAST:event_buttonPasswordActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
