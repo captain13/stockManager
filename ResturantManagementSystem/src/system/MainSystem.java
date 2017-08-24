@@ -25,7 +25,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     Booking booking = new Booking();
     Calendar calendar = new Calendar();
-    Specials specials = new Specials();
+    Specials specials;
     userManager user = new userManager();
     xmlManager settings = new xmlManager();
     dbManager system = new dbManager();
@@ -34,6 +34,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     HashMap<String, NewOrder> tables = new HashMap<>();
     boolean enableKeypad = false;
     int n;
+    ArrayList specialsItem = new ArrayList();
 
     public MainSystem() {
         initComponents();
@@ -523,6 +524,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         });
 
         buttonEvents.setText("Events");
+        buttonEvents.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEventsActionPerformed(evt);
+            }
+        });
 
         buttonSpecials.setText("Specials");
         buttonSpecials.addActionListener(new java.awt.event.ActionListener() {
@@ -1500,6 +1506,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         try {
             calendar.setVisible(false);
             booking.setVisible(false);
+            specials = new Specials(specialsItem);
             specials.setVisible(true);
         } catch (RuntimeException ignore) {
         }
@@ -1713,6 +1720,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private void buttonManageSpecialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonManageSpecialsActionPerformed
         SpecialsForm newForm = new SpecialsForm();
         newForm.setVisible(true);
+        newForm.setSpecialsArray(specialsItem);
     }//GEN-LAST:event_buttonManageSpecialsActionPerformed
 
     private void buttonEmployee1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmployee1ActionPerformed
@@ -1755,6 +1763,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         //s.setVisible(true);
         updateRecipe();
     }//GEN-LAST:event_buttonRecipeEdit1ActionPerformed
+
+    private void buttonEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEventsActionPerformed
+        System.out.println(specialsItem);
+    }//GEN-LAST:event_buttonEventsActionPerformed
 
     /**
      * @param args the command line arguments

@@ -212,7 +212,7 @@ public class AddDatabase extends javax.swing.JFrame {
 
         lblQty5.setText("Category");
 
-        comboxThreshold1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Meat", "Pastry", "Dairy", "Vegetable", "Soft Drinks", "Alochol", "Sauces" }));
+        comboxThreshold1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Meat", "Grain", "Dairy", "Vegetable", "Soft Drinks", "Alcohol", "Sauces" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

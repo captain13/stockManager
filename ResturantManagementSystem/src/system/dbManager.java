@@ -361,7 +361,7 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT recipeID, recipeName,recipeType, specialPrice FROM recipe WHERE special=true";
+            String query = "SELECT recipeID, recipeName,recipeType, specialPrice,recipeImageDirectory FROM recipe WHERE special=true";
             ResultSet rs = s.executeQuery(query);
 
             int i = 0;
@@ -371,6 +371,7 @@ public class dbManager {
                 row[i][2] = rs.getObject(3);
                 row[i][3] = rs.getObject(4);
                 row[i][4] = new Boolean(false);
+                row[i][5] = rs.getObject(5);
                 i++;
             }
 
@@ -954,7 +955,7 @@ public class dbManager {
         }
     }
 
-     public void updateEmployee(String user, String newPassword) {
+    public void updateEmployee(String user, String newPassword) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();

@@ -127,6 +127,9 @@
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JTable() {&#xa;            @Override&#xa;            public Class getColumnClass(int column) {&#xa;                switch (column) {&#xa;                    case 0:&#xa;                        return String.class;&#xa;                    case 1:&#xa;                        return String.class;&#xa;                    case 2:&#xa;                        return String.class;&#xa;                    case 3:&#xa;                        return String.class;&#xa;                    default:&#xa;                        return Boolean.class;&#xa;                }&#xa;            }&#xa;        };"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

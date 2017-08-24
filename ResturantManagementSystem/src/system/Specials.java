@@ -6,10 +6,9 @@
 package system;
 
 import java.awt.GridLayout;
-import java.awt.Insets;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -17,35 +16,32 @@ import javax.swing.border.EmptyBorder;
  */
 public class Specials extends javax.swing.JFrame {
 
-    private static boolean IS_RUNNING = false;
+    ArrayList specialsItem = new ArrayList();
+    JButton button;
 
-    public Specials() {
-        if (IS_RUNNING) {
-            throw new RuntimeException();
-        } else {
-            IS_RUNNING = true;
-        }
+    public Specials(ArrayList Item) {
         initComponents();
-        super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.specialsItem = Item;
         setLayout();
-    }
-
-    @Override
-    public void dispose() {
-        Specials.IS_RUNNING = false;
-        super.dispose();
     }
 
     public final void setLayout() {
         GridLayout grid = new GridLayout(0, 2);
-        JButton button;
+
         pnlItems.setLayout(grid);
-        for (int i = 1; i <= 6; i++) {
-            ImageIcon icon = new ImageIcon("./src/images/_f_porkRibs.jpg");
+        int emptySpaceTab = 6 - specialsItem.size();
+        for (int i = 1; i <= specialsItem.size(); i++) {
+            ImageIcon icon = new ImageIcon(specialsItem.get(i - 1).toString());
             button = new JButton(icon);
             button.setContentAreaFilled(false);
             button.setFocusPainted(false);
             pnlItems.add(button);
+        }
+
+        for (int i = 0; i < emptySpaceTab; i++) {
+            JButton emptyButton = new JButton();
+            pnlItems.add(emptyButton);
+            emptyButton.setVisible(false);
         }
     }
 
@@ -65,6 +61,7 @@ public class Specials extends javax.swing.JFrame {
         setResizable(false);
 
         pnlSpecial.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlSpecial.setPreferredSize(new java.awt.Dimension(235, 370));
 
         buttonClose.setText("Close");
         buttonClose.addActionListener(new java.awt.event.ActionListener() {
@@ -107,8 +104,8 @@ public class Specials extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlItems, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(pnlItems, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
                 .addComponent(buttonClose)
                 .addContainerGap())
         );
@@ -117,13 +114,11 @@ public class Specials extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlSpecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlSpecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlSpecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
