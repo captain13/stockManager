@@ -25,11 +25,10 @@ public class userManager {
         loginSystem.setVisible(true);
     }
 
-    public String createUserLog() {
+    public void createUserLog(String waiter) {
         userLog = new UserForm(usernames);
+        userLog.setWaiter(waiter);
         userLog.setVisible(true);
-        String waiter = userLog.getUsername();
-        return waiter;
     }
 
     public void createLogout() {

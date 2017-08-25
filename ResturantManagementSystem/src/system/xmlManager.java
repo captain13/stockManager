@@ -36,6 +36,7 @@ public class xmlManager {
     String resoultion;
     String tableCount;
     String email;
+    String password;
 
     public final void xmlValidition() {
         if (xmlSettings.exists()) {
@@ -92,6 +93,7 @@ public class xmlManager {
             resoultion = document.getElementsByTagName("resolution").item(0).getTextContent();
             tableCount = document.getElementsByTagName("tableNum").item(0).getTextContent();
             email = document.getElementsByTagName("emailAddress").item(0).getTextContent();
+            password = document.getElementsByTagName("emailPassword").item(0).getTextContent();
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             Logger.getLogger(xmlManager.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -125,6 +127,7 @@ public class xmlManager {
                 if ("emailAddress".equals(node.getNodeName())) {
                     node.setTextContent(emailAddress);
                 }
+
             }
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -152,7 +155,13 @@ public class xmlManager {
     }
 
     public String getEmail() {
+        getSettings();
         return email;
+    }
+
+    public String getEmailPassword() {
+        getSettings();
+        return password;
     }
 
 }

@@ -13,6 +13,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,10 +22,10 @@ import javax.mail.internet.MimeMessage;
 public class emailClient {
 
     xmlManager settings = new xmlManager();
-    String emailAddress = settings.getEmail();
-    String password = "Password32";
+    String emailAddress=settings.getEmail();
+    String password = settings.getEmailPassword();
 
-    public void sendEmail(String recipientAddress,String subject,String text) {
+    public void sendEmail(String recipientAddress, String subject, String text) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -52,11 +53,20 @@ public class emailClient {
 
             Transport.send(message);
 
-            System.out.println("Done");
+            JOptionPane.showMessageDialog(null, "Email Sent");
 
         } catch (MessagingException e) {
+            JOptionPane.showMessageDialog(null, "Email Failed to Send");
             throw new RuntimeException(e);
         }
     }
-}
 
+    public void emailTemplate(String supplier, String item, String qty) {
+        String template = "Dear " + supplier + "\n" + "\n"
+                + "We would like to order " + item + "(s) with the quantity of " + qty + "(g) \n" + "\n"
+                + "Regards \n"
+                + "Zcsas Development Team";
+        System.out.println(template);
+        sendEmail("swabe@live.co.za", "Reorder", template);
+    }
+}

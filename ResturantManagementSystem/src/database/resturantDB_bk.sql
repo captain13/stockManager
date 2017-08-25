@@ -42,7 +42,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'Andrew','Schwabe','Password','076 273 1721','00:00',NULL,NULL,1),(2,'Zane','Smith','Password','034 233 8321','00:00',NULL,NULL,1),(3,'Chad','Phillips','Password','087 237 1277','00:00',NULL,NULL,0),(4,'Sean','Thompson','Password','072 377 1122','00:00',NULL,NULL,0),(5,'Itumeleng','Madisha','Password','072 377 1122','00:00',NULL,NULL,0);
+INSERT INTO `employee` VALUES (1,'Andrew','Schwabe','Password','076 273 1721','0hrs5','Deactive',NULL,1),(2,'Zane','Smith','Password','034 233 8321','00hrs0',NULL,NULL,1),(3,'Chad','Phillips','Password','087 237 1277','00hrs0',NULL,NULL,0),(4,'Sean','Thompson','Password','072 377 1122','00hrs0',NULL,NULL,0),(5,'Itumeleng','Madisha','Password','072 377 1122','00hrs0',NULL,NULL,0);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (1,'Chicken Fillet ',NULL,1000,0.25,1000),(2,'Beef Burger Patty',NULL,1000,0.25,1000),(3,'Burger rolls',NULL,1000,0.25,1000),(4,'Lettuce',NULL,100,0.5,1000),(5,'Tomatoe',NULL,100,0.5,100),(6,'Chicken Wings',NULL,1000,0.2,1000),(7,'Pork Ribs',NULL,1000,0.2,1000),(8,'Chips',NULL,1000,0.2,1000);
+INSERT INTO `inventory` VALUES (1,'Chicken Fillet ','Meat',1000,0.25,1000),(2,'Beef Burger Patty','Meat',1000,0.25,1000),(3,'Burger rolls','Grain',1000,0.25,1000),(4,'Lettuce','Vegatable',100,0.5,1000),(5,'Tomatoe','Vegatable',100,0.5,100),(6,'Chicken Wings','Meat',1000,0.2,1000),(7,'Pork Ribs','Meat',1000,0.2,1000),(8,'Chips','Other',1000,0.2,1000);
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,7 +267,7 @@ CREATE TABLE `stockorder` (
   KEY `fk_stockOrder_supplier1` (`supplierID`),
   CONSTRAINT `fk_stockOrder_inventory1` FOREIGN KEY (`inventoryID`) REFERENCES `inventory` (`inventoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_stockOrder_supplier1` FOREIGN KEY (`supplierID`) REFERENCES `supplier` (`supplierID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -276,6 +276,7 @@ CREATE TABLE `stockorder` (
 
 LOCK TABLES `stockorder` WRITE;
 /*!40000 ALTER TABLE `stockorder` DISABLE KEYS */;
+INSERT INTO `stockorder` VALUES (1,1,2,'2017-08-25','2017-01-01',2,'Not Delievered'),(2,2,1,'2017-08-25','2017-01-01',2000,'Not Delievered'),(3,1,2,'2017-08-25','2017-01-01',2000,'Not Delievered'),(4,4,2,'2017-08-25','2017-07-05',2000,'Not Delievered'),(5,5,2,'2017-08-25','2017-09-06',2000,'Not Delievered'),(6,7,1,'2017-08-25','2017-10-08',2000,'Not Delievered'),(10,8,2,'2017-08-25','2017-07-06',1000,'Not Delievered');
 /*!40000 ALTER TABLE `stockorder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -315,4 +316,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-22 21:52:01
+-- Dump completed on 2017-08-25 20:58:22

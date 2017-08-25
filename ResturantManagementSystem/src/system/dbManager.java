@@ -61,7 +61,7 @@ public class dbManager {
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
             DefaultTableModel tableModel = new DefaultTableModel();
-            MainSystem.tblSuplier.setModel(tableModel);
+            MainSystem.tblInventory.setModel(tableModel);
 
             for (int i = 0; i < columnCount; i++) {
                 tableModel.addColumn(columnNamesInventory[i]);
@@ -88,7 +88,7 @@ public class dbManager {
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             DefaultTableModel tableModel1 = new DefaultTableModel();
-            MainSystem.tableInventory.setModel(tableModel1);
+            MainSystem.tableRecipe.setModel(tableModel1);
 
             int columnCount = metaData.getColumnCount();
             for (int i = 0; i < columnCount; i++) {
@@ -153,7 +153,7 @@ public class dbManager {
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
             DefaultTableModel tableModel2 = new DefaultTableModel();
-            MainSystem.tblRecipe.setModel(tableModel2);
+            MainSystem.tblSupplier.setModel(tableModel2);
 
             for (int i = 0; i < columnNamesSuppler.length; i++) {
                 tableModel2.addColumn(columnNamesSuppler[i]);
@@ -241,12 +241,15 @@ public class dbManager {
     }
 
     public void populateOrder() {
-        String columnNamesEmp[] = {"ID", "Inventory ID", "Supplier ID", "Date Ordered", "ETA", "Quantity(kg)", "Status"};
+        String columnNamesEmp[] = {"ID", "Item", "Supplier Name", "Date Ordered", "ETA", "Quantity(g)", "Status"};
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT* FROM stockOrder";
+            String query = "SELECT stockOrderID, inventory.item, supplier.supplierName,dateOrdered, dateETA, quantity, status "
+                    + "FROM stockOrder, inventory, supplier "
+                    + "WHERE inventory.inventoryID=stockorder.inventoryID "
+                    + "AND supplier.supplierID=stockorder.supplierID";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -446,6 +449,36 @@ public class dbManager {
         return recipe;
     }
 
+    public Object[][] getSupplier() {
+        int count = getSupplierCount();
+        Object supplier[][]= new Object[count][5];
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT * FROM supplier ";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            int i = 0;
+            while (rs.next()) {
+                supplier[i][0] = rs.getString(1);
+                supplier[i][1] = rs.getString(2);
+                supplier[i][2] = rs.getString(3);
+                supplier[i][3] = rs.getString(4);
+                supplier[i][4] = rs.getString(5);
+                i++;
+            }
+            
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+        return supplier;
+    }
+
     public int getRecipesCount() {
         int count = 0;
         try {
@@ -464,6 +497,66 @@ public class dbManager {
             System.out.println(exc);
         }
         return count;
+    }
+    
+    public int getSupplierCount() {
+        int count = 0;
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT COUNT(supplierID) FROM supplier";
+            ResultSet rs = s.executeQuery(query);
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+        return count;
+    }
+
+    public String getSupplierName(String ID) {
+        String supplierName = null;
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT supplierName FROM supplier WHERE supplierID='" + ID + "'";
+            ResultSet rs = s.executeQuery(query);
+            if (rs.next()) {
+                supplierName = rs.getString(1);
+            }
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+        return supplierName;
+    }
+
+    public String getItemName(String ID) {
+        String itemName = null;
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT item FROM inventory WHERE inventoryID='" + ID + "'";
+            ResultSet rs = s.executeQuery(query);
+            if (rs.next()) {
+                itemName = rs.getString(1);
+            }
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+        return itemName;
     }
 
     public void showActiveEmp() {

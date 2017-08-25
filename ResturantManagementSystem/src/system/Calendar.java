@@ -5,32 +5,18 @@
  */
 package system;
 
-
-
 /**
  *
  * @author Andrew
  */
 public class Calendar extends javax.swing.JFrame {
-   
-    private static boolean IS_RUNNING = false;
-    
+
     public Calendar() {
-       if (IS_RUNNING) {
-            throw new RuntimeException();
-        } else {
-            IS_RUNNING = true;
-        }
+
         initComponents();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-    
-     @Override
-    public void dispose() {
-        Calendar.IS_RUNNING = false;
-        super.dispose();
-    }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

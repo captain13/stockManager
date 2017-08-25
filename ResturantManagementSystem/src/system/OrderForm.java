@@ -1,36 +1,91 @@
 package system;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Andrew
  */
 public class OrderForm extends javax.swing.JFrame {
-    dbManager newManager=new dbManager();
-    
+
+    dbManager newManager = new dbManager();
+    emailClient client = new emailClient();
+    internalClock clock = new internalClock();
+
     public OrderForm() {
         initComponents();
         setLocationRelativeTo(null);
+        setCurrentDate();
+        getRecipeInfo();
+        getSupplierInfo();
     }
 
-    public static String getInventoryID() {
-        return textInvenID.getText();
+    public final void getRecipeInfo() {
+        int n = newManager.getRecipesCount();
+        Object[][] recipeInfo = new Object[n][5];
+        int index = 0;
+        for (int i = 0; i < n; i++) {
+            System.arraycopy(newManager.getRecipe()[i], 0, recipeInfo[i], 0, 5);
+        }
+        for (int i = 0; i < recipeInfo.length; i++) {
+            jComboBox1.addItem(recipeInfo[i][1].toString());
+        }
     }
 
-    public static String getSupplierID() {
-        return textSupID.getText();
+    public final void getSupplierInfo() {
+        int n = newManager.getSupplierCount();
+        Object[][] supplierInfo = new Object[n][5];
+        int index = 0;
+        for (int i = 0; i < n; i++) {
+            System.arraycopy(newManager.getSupplier()[i], 0, supplierInfo[i], 0, 5);
+        }
+        
+        for (int i = 0; i < supplierInfo.length; i++) {
+            jComboBox2.addItem(supplierInfo[i][1].toString());
+        }
     }
 
-    public static String getQuantity() {
-        return textSupID.getText();
+    public String getInventoryID() {
+        return jComboBox1.getSelectedItem().toString();
     }
-    
-     public static String getDate() {
+
+    public String getSupplierID() {
+        return jComboBox2.getSelectedItem().toString();
+    }
+
+    public String getQuantity() {
+        return textQuantity.getText();
+    }
+
+    public String getInventoryName() {
+        return newManager.getItemName(getInventoryID());
+    }
+
+    public String getSupplierName() {
+        return newManager.getSupplierName(getSupplierID());
+    }
+
+    public static String getDate() {
         String date = comboboxYear.getSelectedItem().toString() + "-"
                 + comboboxMonth.getSelectedItem().toString() + "-"
                 + comboboxDay.getSelectedItem().toString();
         return date;
     }
 
+    public void sendEmail() {
+        if (sendEmailCheck.isSelected()) {
+            client.emailTemplate(getSupplierName(), getInventoryName(), getQuantity());
+        }
+    }
+
+    public final void setCurrentDate() {
+        String currentDate = clock.getCurrentDate();
+        String date[] = currentDate.split("-");
+        String day = date[2];
+        String month = date[1];
+        comboboxDay.setSelectedItem(day);
+        comboboxMonth.setSelectedItem(month);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,8 +101,6 @@ public class OrderForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        textInvenID = new javax.swing.JTextField();
-        textSupID = new javax.swing.JTextField();
         textQuantity = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -55,7 +108,9 @@ public class OrderForm extends javax.swing.JFrame {
         comboboxYear = new javax.swing.JComboBox<>();
         comboboxDay = new javax.swing.JComboBox<>();
         comboboxMonth = new javax.swing.JComboBox<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        sendEmailCheck = new javax.swing.JCheckBox();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -92,7 +147,7 @@ public class OrderForm extends javax.swing.JFrame {
 
         comboboxMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
-        jCheckBox1.setText("Send Email");
+        sendEmailCheck.setText("Send Email");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,9 +173,9 @@ public class OrderForm extends javax.swing.JFrame {
                                             .addComponent(jLabel4)
                                             .addComponent(jLabel3))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(textInvenID, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                            .addComponent(textSupID)))))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel5)
@@ -138,7 +193,7 @@ public class OrderForm extends javax.swing.JFrame {
                         .addComponent(comboboxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jCheckBox1)))
+                        .addComponent(sendEmailCheck)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -149,11 +204,11 @@ public class OrderForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(textInvenID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(textSupID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -165,7 +220,7 @@ public class OrderForm extends javax.swing.JFrame {
                     .addComponent(comboboxDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboboxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1)
+                .addComponent(sendEmailCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -192,8 +247,13 @@ public class OrderForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      newManager.insertStockOrder(getInventoryID(),getSupplierID(),getQuantity(),getDate());
-      this.dispose();
+        if (!"".equals(getSupplierID()) || !"".equals(getInventoryID()) || !"".equals(getQuantity())) {
+            newManager.insertStockOrder(getInventoryID(), getSupplierID(), getQuantity(), getDate());
+            sendEmail();
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please Enter All Fields");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -203,15 +263,15 @@ public class OrderForm extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> comboboxYear;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private static javax.swing.JTextField textInvenID;
+    private javax.swing.JCheckBox sendEmailCheck;
     private static javax.swing.JTextField textQuantity;
-    private static javax.swing.JTextField textSupID;
     // End of variables declaration//GEN-END:variables
 }

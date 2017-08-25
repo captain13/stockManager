@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class UserForm extends javax.swing.JFrame {
 
     ArrayList usernames = new ArrayList();
-    private static String username;
+    String username;
 
     public UserForm(ArrayList usernames) {
         initComponents();
@@ -42,14 +42,17 @@ public class UserForm extends javax.swing.JFrame {
         }
     }
 
-    public String getUsername() {
-        System.out.println(username);
-        return username;
+    public void setUsername() {
+        username = tableLoginedUsers.getValueAt(tableLoginedUsers.getSelectedRow() + 1, 0).toString();
+        System.out.println(username + "1");
     }
 
-    public void setUsername() {
-        System.out.println(tableLoginedUsers.getSelectedRow());
-        username = tableLoginedUsers.getValueAt(tableLoginedUsers.getSelectedRow() + 1, 0).toString();
+    public void setWaiter(String waiter) {
+       this.username = waiter;
+    }
+    
+    public boolean setComplete(){
+        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -157,7 +160,6 @@ public class UserForm extends javax.swing.JFrame {
 
     private void tableLoginedUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableLoginedUsersMouseClicked
         setUsername();
-       // NewOrder.setUsername();
         this.dispose();
     }//GEN-LAST:event_tableLoginedUsersMouseClicked
 

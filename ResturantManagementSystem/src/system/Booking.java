@@ -6,26 +6,14 @@ package system;
  */
 public class Booking extends javax.swing.JFrame {
 
-    private boolean IS_RUNNING = false;
     dbManager newManager = new dbManager();
     internalClock clock = new internalClock();
 
     public Booking() {
-        if (IS_RUNNING) {
-            throw new RuntimeException();
-        } else {
-            IS_RUNNING = true;
-        }
         initComponents();
         newManager.populateReservation();
         setCurrentDate();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    }
-
-    @Override
-    public void dispose() {
-        IS_RUNNING = false;
-        super.dispose();
     }
 
     public String getCustomerName() {
@@ -60,7 +48,7 @@ public class Booking extends javax.swing.JFrame {
     public final void setCurrentDate() {
         String currentDate = clock.getCurrentDate();
         String date[] = currentDate.split("-");
-        String day = date[0];
+        String day = date[2];
         String month = date[1];
         comboboxDay.setSelectedItem(day);
         comboboxMonth.setSelectedItem(month);

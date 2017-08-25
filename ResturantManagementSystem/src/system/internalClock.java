@@ -50,7 +50,7 @@ public class internalClock extends Thread {
 
         int hours;
         int minutes;
-        String previousHoursArray[] = previousHours.split(":");
+        String previousHoursArray[] = previousHours.split("hrs");
         String inArray[] = loginTime.get(i).split(":");
         String outArray[] = logoutTime.split(":");
 
@@ -69,7 +69,7 @@ public class internalClock extends Thread {
             loginTime.remove(i);
         }
 
-        return time = hours + ":" + minutes + ":00";
+        return time = hours + "hrs" + minutes;
     }
 
 }

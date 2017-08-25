@@ -14,7 +14,7 @@ public class SpecialsPrompt extends javax.swing.JFrame {
     dbManager newManager = new dbManager();
     SpecialsForm form;
     Object[][] recipeInfo;
-
+  
     public SpecialsPrompt() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -36,12 +36,10 @@ public class SpecialsPrompt extends javax.swing.JFrame {
     public String getSelectedItem() {
         return jComboBox1.getSelectedItem().toString();
     }
-    
+
     public Double getSpecialsPrice() {
         return Double.parseDouble(jTextField1.getText());
     }
-
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -145,7 +143,7 @@ public class SpecialsPrompt extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        newManager.updateSpecials(getSelectedItem(),getSpecialsPrice());
+        newManager.updateSpecials(getSelectedItem(), getSpecialsPrice());
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
