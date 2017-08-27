@@ -42,7 +42,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'Andrew','Schwabe','Password','076 273 1721','0hrs5','Deactive',NULL,1),(2,'Zane','Smith','Password','034 233 8321','00hrs0',NULL,NULL,1),(3,'Chad','Phillips','Password','087 237 1277','00hrs0',NULL,NULL,0),(4,'Sean','Thompson','Password','072 377 1122','00hrs0',NULL,NULL,0),(5,'Itumeleng','Madisha','Password','072 377 1122','00hrs0',NULL,NULL,0);
+INSERT INTO `employee` VALUES (1,'Andrew','Schwabe','Password','076 273 1721','00:00',NULL,NULL,1),(2,'Zane','Smith','Password','034 233 8321','00:00',NULL,NULL,1),(3,'Chad','Phillips','Password','087 237 1277','00:00',NULL,NULL,0),(4,'Sean','Thompson','Password','072 377 1122','00:00',NULL,NULL,0),(5,'Itumeleng','Madisha','Password','072 377 1122','00:00',NULL,NULL,0);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (1,'Chicken Fillet ','Meat',1000,0.25,1000),(2,'Beef Burger Patty','Meat',1000,0.25,1000),(3,'Burger rolls','Grain',1000,0.25,1000),(4,'Lettuce','Vegatable',100,0.5,1000),(5,'Tomatoe','Vegatable',100,0.5,100),(6,'Chicken Wings','Meat',1000,0.2,1000),(7,'Pork Ribs','Meat',1000,0.2,1000),(8,'Chips','Other',1000,0.2,1000);
+INSERT INTO `inventory` VALUES (1,'Chicken Fillet ',NULL,1000,0.25,1000),(2,'Beef Burger Patty',NULL,1000,0.25,1000),(3,'Burger rolls',NULL,1000,0.25,1000),(4,'Lettuce',NULL,100,0.5,1000),(5,'Tomatoe',NULL,100,0.5,100),(6,'Chicken Wings',NULL,1000,0.2,1000),(7,'Pork Ribs',NULL,1000,0.2,1000),(8,'Chips',NULL,1000,0.2,1000);
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +100,6 @@ CREATE TABLE `inventory_recipe` (
 
 LOCK TABLES `inventory_recipe` WRITE;
 /*!40000 ALTER TABLE `inventory_recipe` DISABLE KEYS */;
-INSERT INTO `inventory_recipe` VALUES (1,1,1,200),(2,3,1,100),(3,4,1,50),(4,5,1,50),(5,8,1,100),(6,2,2,200),(7,3,2,100),(8,4,2,50),(9,5,2,50),(10,8,2,100);
 /*!40000 ALTER TABLE `inventory_recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,13 +143,14 @@ CREATE TABLE `recipe` (
   `recipeID` int(11) NOT NULL AUTO_INCREMENT,
   `recipeName` varchar(45) DEFAULT NULL,
   `recipePrice` double DEFAULT NULL,
-  `specialPrice` double DEFAULT NULL,
   `recipeVAT` double DEFAULT NULL,
   `recipeType` varchar(45) DEFAULT NULL,
   `recipeImageDirectory` varchar(150) DEFAULT NULL,
   `recipeCount` int(11) DEFAULT NULL,
-  `special` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`recipeID`)
+  `specialsID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`recipeID`),
+  KEY `fk_recipe_specials1_idx` (`specialsID`),
+  CONSTRAINT `fk_recipe_specials1` FOREIGN KEY (`specialsID`) REFERENCES `specials` (`specialsID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -160,7 +160,6 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
-INSERT INTO `recipe` VALUES (1,'Chicken Burger & Chips',75,60,10.5,'Main Meal','./src/images/_f_chickenBurger.jpg',NULL,1),(2,'Beef Burger & Chips',75,60,10.5,'Main Meal','./src/images/_f_beefBurger.jpg',NULL,1);
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +214,6 @@ CREATE TABLE `sales` (
 
 LOCK TABLES `sales` WRITE;
 /*!40000 ALTER TABLE `sales` DISABLE KEYS */;
-INSERT INTO `sales` VALUES (1,'2017-08-22',150),(2,'2017-08-22',200),(3,'2017-08-23',75),(4,'2017-09-03',300);
 /*!40000 ALTER TABLE `sales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,6 +246,30 @@ LOCK TABLES `sales_employee` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `specials`
+--
+
+DROP TABLE IF EXISTS `specials`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `specials` (
+  `specialsID` int(11) NOT NULL AUTO_INCREMENT,
+  `specialsPrice` double DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`specialsID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `specials`
+--
+
+LOCK TABLES `specials` WRITE;
+/*!40000 ALTER TABLE `specials` DISABLE KEYS */;
+/*!40000 ALTER TABLE `specials` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `stockorder`
 --
 
@@ -276,7 +298,6 @@ CREATE TABLE `stockorder` (
 
 LOCK TABLES `stockorder` WRITE;
 /*!40000 ALTER TABLE `stockorder` DISABLE KEYS */;
-INSERT INTO `stockorder` VALUES (1,1,2,'2017-08-25','2017-01-01',2,'Not Delievered'),(2,2,1,'2017-08-25','2017-01-01',2000,'Not Delievered'),(3,1,2,'2017-08-25','2017-01-01',2000,'Not Delievered'),(4,4,2,'2017-08-25','2017-07-05',2000,'Not Delievered'),(5,5,2,'2017-08-25','2017-09-06',2000,'Not Delievered'),(6,7,1,'2017-08-25','2017-10-08',2000,'Not Delievered'),(10,8,2,'2017-08-25','2017-07-06',1000,'Not Delievered');
 /*!40000 ALTER TABLE `stockorder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -316,4 +337,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-25 20:58:22
+-- Dump completed on 2017-08-27 15:26:44

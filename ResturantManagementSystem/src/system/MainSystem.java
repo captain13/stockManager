@@ -453,8 +453,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonRecipeEdit1 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblSupplier = new javax.swing.JTable();
-        radioID = new javax.swing.JRadioButton();
-        radioItem = new javax.swing.JRadioButton();
         jButton5 = new javax.swing.JButton();
         Management = new javax.swing.JPanel();
         buttonOrderHistory = new javax.swing.JButton();
@@ -861,8 +859,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(buttonPrint, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
                     .addComponent(buttonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlInventoryLayout.setVerticalGroup(
             pnlInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -876,7 +875,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonPrint)
                 .addContainerGap())
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Inventory", pnlInventory);
@@ -959,7 +958,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonRecipeEdit)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Recipe", pnlRecipe);
@@ -1037,7 +1036,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonRecipeEdit2)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Recipe List", pnlRecipeList);
@@ -1120,19 +1119,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonRecipeEdit1)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Supplier", pnlSupplier);
-
-        radioID.setText("ID no.");
-        radioID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioIDActionPerformed(evt);
-            }
-        });
-
-        radioItem.setText("Item");
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo_help.png"))); // NOI18N
         jButton5.setBorder(null);
@@ -1153,17 +1143,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(jTabbedPane2)
                     .addGroup(InventoryLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(InventoryLayout.createSequentialGroup()
-                                .addComponent(jButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblSearch)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(textboxSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(InventoryLayout.createSequentialGroup()
-                                .addComponent(radioItem)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radioID)))
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(textboxSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)))
                 .addContainerGap())
         );
@@ -1177,11 +1161,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         .addComponent(lblSearch))
                     .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioID)
-                    .addComponent(radioItem))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane2))
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE))
         );
 
         TabbedPanel.addTab("Database", Inventory);
@@ -1507,7 +1487,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         try {
             calendar.setVisible(false);
             booking.setVisible(false);
-            specials = new Specials(specialsItem);
+            specials = new Specials();
             specials.setVisible(true);
         } catch (RuntimeException ignore) {
         }
@@ -1568,10 +1548,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 break;
         }
     }//GEN-LAST:event_comboBoxLogoItemStateChanged
-
-    private void radioIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioIDActionPerformed
-
-    }//GEN-LAST:event_radioIDActionPerformed
 
     private void TabbedPanelStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_TabbedPanelStateChanged
         booking.setVisible(false);
@@ -1722,7 +1698,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private void buttonManageSpecialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonManageSpecialsActionPerformed
         SpecialsForm newForm = new SpecialsForm();
         newForm.setVisible(true);
-        newForm.setSpecialsArray(specialsItem);
     }//GEN-LAST:event_buttonManageSpecialsActionPerformed
 
     private void buttonEmployee1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmployee1ActionPerformed
@@ -1874,8 +1849,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel pnlRecipe;
     private javax.swing.JPanel pnlRecipeList;
     private javax.swing.JPanel pnlSupplier;
-    private javax.swing.JRadioButton radioID;
-    private javax.swing.JRadioButton radioItem;
     public static javax.swing.JTable tableRecipe;
     public static javax.swing.JTable tableRecipeList;
     public static javax.swing.JTable tblInventory;

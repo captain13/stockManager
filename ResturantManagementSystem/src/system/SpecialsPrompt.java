@@ -143,7 +143,7 @@ public class SpecialsPrompt extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        newManager.updateSpecials(getSelectedItem(), getSpecialsPrice());
+        newManager.insertSpecials(getSpecialsPrice(),getSelectedItem());
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

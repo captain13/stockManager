@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SpecialsForm extends javax.swing.JFrame {
 
-    String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Discounted Price", "Active"};
+    String columnNamesRecipe[] = {"Specials ID", "Description", "Type", "Discounted Price", "Active"};
     dbManager system = new dbManager();
     SpecialsPrompt prompt;
     SpecialsForm newForm;
@@ -37,18 +37,8 @@ public class SpecialsForm extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel(row, columnNamesRecipe);
         jTable1.setModel(model);
     }
-
-    public void setSpecialsArray() {
-        specialsItem.removeAll(specialsItem);
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            if ((jTable1.getValueAt(i, 4)).equals(true)) {
-                specialsItem.add(row[i][5]);
-            }
-        }
-    }
-
-    public void setSpecialsArray(ArrayList specialsItem) {
-        this.specialsItem = specialsItem;
+    public String getSpecialID() {
+        return jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
     }
 
     @SuppressWarnings("unchecked")
@@ -175,7 +165,7 @@ public class SpecialsForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        setSpecialsArray();
+        system.updateSpecials(getSpecialID());
     }//GEN-LAST:event_jTable1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

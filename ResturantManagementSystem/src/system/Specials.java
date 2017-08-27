@@ -16,22 +16,38 @@ import javax.swing.JButton;
  */
 public class Specials extends javax.swing.JFrame {
 
-    ArrayList specialsItem = new ArrayList();
+    dbManager newManager = new dbManager();
+    Object specialsItem[];
     JButton button;
 
-    public Specials(ArrayList Item) {
+    public Specials() {
         initComponents();
-        this.specialsItem = Item;
         setLayout();
     }
 
     public final void setLayout() {
+        int j = 0;
         GridLayout grid = new GridLayout(0, 2);
-
         pnlItems.setLayout(grid);
-        int emptySpaceTab = 6 - specialsItem.size();
-        for (int i = 1; i <= specialsItem.size(); i++) {
-            ImageIcon icon = new ImageIcon(specialsItem.get(i - 1).toString());
+
+        for (int i = 0; i < newManager.getSpecialDetails().length; i++) {
+            if (newManager.getSpecialDetails()[i][4].equals(true)) {
+                j++;
+                System.out.println(j);
+            }
+        }
+        specialsItem = new Object[j];
+
+        for (int i = 0; i < newManager.getSpecialDetails().length; i++) {
+            if (newManager.getSpecialDetails()[i][4].equals(true)) {
+                specialsItem[i] = newManager.getSpecialDetails()[i][5];
+            }
+        }
+
+        int emptySpaceTab = 6 - specialsItem.length;
+        System.out.println(specialsItem.length);
+        for (int i = 1; i <= specialsItem.length; i++) {
+            ImageIcon icon = new ImageIcon(specialsItem[i - 1].toString());
             button = new JButton(icon);
             button.setContentAreaFilled(false);
             button.setFocusPainted(false);
@@ -43,6 +59,7 @@ public class Specials extends javax.swing.JFrame {
             pnlItems.add(emptyButton);
             emptyButton.setVisible(false);
         }
+
     }
 
     @SuppressWarnings("unchecked")
