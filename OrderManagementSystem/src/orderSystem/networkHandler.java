@@ -7,6 +7,8 @@ package orderSystem;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -17,13 +19,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class networkHandler {
 
-    Object columnNames[] = {"Table","Order", "Qty", "Time Stamp", "Status"};
+    Object columnNames[] = {"Table", "Order", "Qty", "Time Stamp", "Status"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     internalClock clock = new internalClock();
+    boolean IS_RUNNING = true;
 
     public void recieveData(JTable table) {
         new Thread(() -> {
-            while (true) {
+            while (IS_RUNNING) {
 
                 table.setModel(model);
                 try {
@@ -31,9 +34,7 @@ public class networkHandler {
                     Socket socket = new Socket("10.0.0.169", 9999);
                     ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream());
                     Object[][] order = (Object[][]) objectInput.readObject();
-                    for (int i = 0; i < order.length; i++) {
-                        System.out.println(order[i][0]);
-                    }
+
                     row = new Object[columnNames.length];
 
                     for (int i = 0; i < order.length; i++) {
@@ -53,5 +54,33 @@ public class networkHandler {
 
             }
         }).start();
+    }
+
+    public void sendData(JTable table) {
+
+        try {
+            String[][] recipeName = null;
+            ServerSocket myServerSocket = new ServerSocket(9998);
+            Socket skt = myServerSocket.accept();
+
+            recipeName = new String[table.getRowCount()][5];
+            for (int i = 0; i < table.getRowCount(); i++) {
+
+                recipeName[i][0] = (table.getValueAt(i, 0).toString());
+                recipeName[i][1] = (table.getValueAt(i, 1).toString());
+                recipeName[i][2] = (table.getValueAt(i, 2).toString());
+                recipeName[i][3] = (table.getValueAt(i, 3).toString());
+                recipeName[i][4] = (table.getValueAt(i, 4).toString());
+            }
+
+            ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());
+            objectOutput.writeObject(recipeName);
+            myServerSocket.close();
+        } catch (IOException e) {
+        }
+    }
+
+    public void stopThread() {
+        IS_RUNNING = false;
     }
 }
