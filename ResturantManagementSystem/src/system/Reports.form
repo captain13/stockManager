@@ -57,6 +57,7 @@
                       <Component id="buttonClose2" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                       <Component id="buttonClose3" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                       <Component id="buttonClose4" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                      <Component id="buttonClose5" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="341" max="32767" attributes="0"/>
               </Group>
@@ -82,7 +83,9 @@
                   <Component id="buttonClose3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="buttonClose2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="171" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="buttonClose5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="142" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -163,6 +166,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonClose4ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="buttonClose5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Stock Control"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonClose5ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

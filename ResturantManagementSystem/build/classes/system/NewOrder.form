@@ -346,7 +346,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="buttonOverride">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Print Order"/>
+        <Property name="text" type="java.lang.String" value="Send Order"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOverrideActionPerformed"/>

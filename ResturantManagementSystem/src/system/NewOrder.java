@@ -10,10 +10,13 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -40,6 +43,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     Object[][] recipeInfo;
     Object[][] drinksInfo;
     dbManager newManager = new dbManager();
+    networkHandler network = new networkHandler();
     String key;
     HashMap tables;
 
@@ -430,7 +434,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
         menuPane.addTab("Extras", extraTab);
 
-        buttonOverride.setText("Print Order");
+        buttonOverride.setText("Send Order");
         buttonOverride.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOverrideActionPerformed(evt);
@@ -528,7 +532,11 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_buttonPayActionPerformed
 
     private void buttonOverrideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOverrideActionPerformed
-        interrupTime();
+        try {
+            network.sendData(tblItems,key);
+        } catch (IOException ex) {
+            Logger.getLogger(NewOrder.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonOverrideActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed

@@ -8,8 +8,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
@@ -30,11 +35,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     xmlManager settings = new xmlManager();
     dbManager system = new dbManager();
     logSystem logs = new logSystem();
+    networkHandler network = new networkHandler();
     internalClock clock = new internalClock();
     HashMap<String, NewOrder> tables = new HashMap<>();
     boolean enableKeypad = false;
     int n;
-    ArrayList specialsItem = new ArrayList();
 
     public MainSystem() {
         initComponents();
@@ -137,7 +142,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
                     @Override
                     public void changedUpdate(DocumentEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        throw new UnsupportedOperationException("Not supported yet.");
                     }
                 });
             } catch (Exception ex) {
@@ -417,11 +422,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jButton3 = new javax.swing.JButton();
         Orders = new javax.swing.JPanel();
         pnlOrderLeft = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
         buttonReprint = new javax.swing.JButton();
         buttonLayout = new javax.swing.JButton();
         buttonTakeAway = new javax.swing.JButton();
+        buttonReprint2 = new javax.swing.JButton();
         pnlLayout = new javax.swing.JPanel();
         buttonReprint1 = new javax.swing.JButton();
         Inventory = new javax.swing.JPanel();
@@ -679,19 +683,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         TabbedPanel.addTab("Dashboard", Dashboard);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Bill:", null},
-                {"Waiter:", null},
-                {"No. Customers", null}
-            },
-            new String [] {
-                "", "Table #"
-            }
-        ));
-        jTable4.setGridColor(new java.awt.Color(204, 204, 204));
-        jScrollPane2.setViewportView(jTable4);
-
         buttonReprint.setText("Reprint");
         buttonReprint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -713,6 +704,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        buttonReprint2.setText("Setup TCP");
+        buttonReprint2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonReprint2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlOrderLeftLayout = new javax.swing.GroupLayout(pnlOrderLeft);
         pnlOrderLeft.setLayout(pnlOrderLeftLayout);
         pnlOrderLeftLayout.setHorizontalGroup(
@@ -722,8 +720,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addGroup(pnlOrderLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonReprint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonTakeAway, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(buttonTakeAway, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonReprint2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         pnlOrderLeftLayout.setVerticalGroup(
             pnlOrderLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -734,9 +732,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(buttonLayout, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonReprint, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonReprint2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         pnlLayout.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1161,7 +1159,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         .addComponent(lblSearch))
                     .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE))
+                .addComponent(jTabbedPane2))
         );
 
         TabbedPanel.addTab("Database", Inventory);
@@ -1691,7 +1689,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        String email=JOptionPane.showInputDialog(null,"Enter new Email Address");
+        String email = JOptionPane.showInputDialog(null, "Enter new Email Address");
         currentEmail.setText(email);
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1721,7 +1719,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void buttonRecipeAdd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAdd2ActionPerformed
-        // TODO add your handling code here:
+        RecipeForm newForm = new RecipeForm("Test");
+        newForm.setVisible(true);
     }//GEN-LAST:event_buttonRecipeAdd2ActionPerformed
 
     private void buttonRecipeDelete2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete2ActionPerformed
@@ -1745,8 +1744,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonRecipeEdit1ActionPerformed
 
     private void buttonEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEventsActionPerformed
-        System.out.println(specialsItem);
+
     }//GEN-LAST:event_buttonEventsActionPerformed
+
+    private void buttonReprint2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprint2ActionPerformed
+        try {
+            network.sendData();
+        } catch (IOException ex) {
+        }
+    }//GEN-LAST:event_buttonReprint2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1809,6 +1815,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonReports;
     private javax.swing.JButton buttonReprint;
     private javax.swing.JButton buttonReprint1;
+    private javax.swing.JButton buttonReprint2;
     private javax.swing.JButton buttonSpecials;
     private javax.swing.JButton buttonTakeAway;
     private javax.swing.JComboBox<String> comboBoxLogo;
@@ -1825,13 +1832,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable4;
     private static javax.swing.JLabel lblClock;
     private static javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblImage;

@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -23,11 +24,13 @@ public class RecipeForm extends javax.swing.JFrame implements ActionListener {
     dbManager newManager = new dbManager();
     JComboBox box;
     JTextField field;
-    JButton button;
+    JButton buttonAdd;
+    JButton emptybutton;
     int n = 8;
     int m = 1;
     private final ArrayList<JTextField> textFields = new ArrayList<>();
     private final ArrayList<JComboBox> comboBox = new ArrayList<>();
+    private Map<String, JButton> dynamicButtons;
 
     /**
      * Creates new form recipe
@@ -55,16 +58,14 @@ public class RecipeForm extends javax.swing.JFrame implements ActionListener {
             comboBox.add(box);
         }
 
-        button = new JButton("+");
-        jPanel2.add(button);
-        button.setPreferredSize(new Dimension(40, 40));
-        button.addActionListener(this);
+        buttonAdd = new JButton("+");
+        jPanel2.add(buttonAdd);
+        buttonAdd.setPreferredSize(new Dimension(40, 40));
+        buttonAdd.addActionListener(this);
 
         for (int i = 1; i <= n; i++) {
-            box = new JComboBox();
-            field = new JTextField();
-            jPanel2.add(box).setVisible(false);
-            jPanel2.add(field).setVisible(false);
+            emptybutton= new JButton();
+            jPanel2.add(emptybutton).setVisible(false);
         }
         if (n != 0) {
             n--;
@@ -84,7 +85,6 @@ public class RecipeForm extends javax.swing.JFrame implements ActionListener {
             if (!"".equals(textFields.get(i).getText())) {
                 newManager.insertRecipeList(item, qty);
                 this.dispose();
-                System.out.println("ran");
             }
         }
     }
