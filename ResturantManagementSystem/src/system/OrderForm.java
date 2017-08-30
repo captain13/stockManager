@@ -11,46 +11,55 @@ public class OrderForm extends javax.swing.JFrame {
     dbManager newManager = new dbManager();
     emailClient client = new emailClient();
     internalClock clock = new internalClock();
+    Object[][] recipeInfo = null;
+    Object[][] supplierInfo = null;
 
     public OrderForm() {
         initComponents();
         setLocationRelativeTo(null);
         setCurrentDate();
-        getRecipeInfo();
+        getInventoryItem();
         getSupplierInfo();
     }
 
-    public final void getRecipeInfo() {
-        int n = newManager.getRecipesCount();
-        Object[][] recipeInfo = new Object[n][5];
-        int index = 0;
+    public final void getInventoryItem() {
+        int n = newManager.getIngredients().length;
+        recipeInfo = new Object[n][2];
         for (int i = 0; i < n; i++) {
-            System.arraycopy(newManager.getRecipe()[i], 0, recipeInfo[i], 0, 5);
-        }
-        for (int i = 0; i < recipeInfo.length; i++) {
-            jComboBox1.addItem(recipeInfo[i][1].toString());
+            recipeInfo[i][0] = newManager.getIngredients()[i][0];
+            recipeInfo[i][1] = newManager.getIngredients()[i][1];
+            jComboBox1.addItem((String) recipeInfo[i][1]);
         }
     }
 
     public final void getSupplierInfo() {
         int n = newManager.getSupplierCount();
-        Object[][] supplierInfo = new Object[n][5];
+        supplierInfo = new Object[n][5];
         int index = 0;
         for (int i = 0; i < n; i++) {
             System.arraycopy(newManager.getSupplier()[i], 0, supplierInfo[i], 0, 5);
-        }
-        
-        for (int i = 0; i < supplierInfo.length; i++) {
             jComboBox2.addItem(supplierInfo[i][1].toString());
         }
     }
 
     public String getInventoryID() {
-        return jComboBox1.getSelectedItem().toString();
+        String ID = null;
+        for (int i = 0; i < recipeInfo.length; i++) {
+            if (jComboBox1.getSelectedItem().toString().equals(recipeInfo[i][1])) {
+                ID = recipeInfo[i][0].toString();
+            }
+        }
+        return ID;
     }
 
     public String getSupplierID() {
-        return jComboBox2.getSelectedItem().toString();
+        String ID = null;
+        for (int i = 0; i < supplierInfo.length; i++) {
+            if (jComboBox2.getSelectedItem().toString().equals(supplierInfo[i][1])) {
+                ID = supplierInfo[i][0].toString();
+            }
+        }
+        return ID;
     }
 
     public String getQuantity() {

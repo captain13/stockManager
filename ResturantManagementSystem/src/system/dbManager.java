@@ -389,19 +389,27 @@ public class dbManager {
         return row;
     }
 
-    public String[] getIngredients() {
-        String ingredients[] = new String[100];
+    public String[][] getIngredients() {
+        int count = 0;
+        String ingredients[][] = null;
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT item FROM inventory ";
-            ResultSet rs = s.executeQuery(query);
 
+            String queryCount = "SELECT COUNT(inventoryID) FROM inventory ";
+            ResultSet rs = s.executeQuery(queryCount);
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+            String query = "SELECT inventoryID,item FROM inventory ";
+            rs = s.executeQuery(query);
+            ingredients = new String[count][2];
             int i = 0;
             while (rs.next()) {
-
-                ingredients[i] = rs.getString("item");
+                ingredients[i][0] = rs.getString("inventoryID");
+                ingredients[i][1] = rs.getString("item");
                 i++;
             }
 
@@ -462,8 +470,6 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "SELECT * FROM supplier ";
             ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
             int i = 0;
             while (rs.next()) {
                 supplier[i][0] = rs.getString(1);
@@ -1139,6 +1145,22 @@ public class dbManager {
             s.execute(updateQuery);
             PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
             preparedStmt.executeUpdate();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
+    public void updateConfirmOrder(String orderID) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String updateQuery = "UPDATE stockorder SET status='Delievered' WHERE stockOrderID ='" + orderID + "'";
+            s.execute(updateQuery);
+            PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
+            preparedStmt.executeUpdate();
+            populateOrder();
             s.close();
             conn.close();
         } catch (SQLException exp) {

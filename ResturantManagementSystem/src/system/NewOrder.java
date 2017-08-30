@@ -64,7 +64,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
     public void menuLayout() {
 
-        int n = newManager.getRecipesCount();
+        int n = newManager.getRecipe().length;
         recipeInfo = new Object[n][5];
         int index = 0;
         for (int i = 0; i < n; i++) {

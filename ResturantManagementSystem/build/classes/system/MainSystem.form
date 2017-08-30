@@ -193,7 +193,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="buttonEvents">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Events"/>
+                    <Property name="text" type="java.lang.String" value="Reminders"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEventsActionPerformed"/>
@@ -469,15 +469,10 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="buttonReprint2" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="buttonReprint" max="32767" attributes="0"/>
-                                  <Component id="buttonLayout" alignment="1" pref="241" max="32767" attributes="0"/>
-                                  <Component id="buttonTakeAway" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="buttonTakeAway" max="32767" attributes="0"/>
+                          <Component id="buttonLayout" alignment="1" pref="251" max="32767" attributes="0"/>
+                          <Component id="buttonReprint" max="32767" attributes="0"/>
+                          <Component id="buttonReprint2" alignment="1" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -609,7 +604,7 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="buttonAdd" pref="79" max="32767" attributes="0"/>
                                   <Component id="buttonDelete" alignment="0" max="32767" attributes="0"/>
@@ -617,8 +612,8 @@
                                   <Component id="buttonPrint" alignment="0" max="32767" attributes="0"/>
                                   <Component id="buttonEdit1" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" min="-2" pref="745" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                              <Component id="jScrollPane3" pref="745" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1202,6 +1197,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Confirm Order"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOrderHistoryActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="buttonAlert">
               <Properties>
