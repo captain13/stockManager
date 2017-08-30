@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,7 +43,9 @@ public class networkHandler {
             ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());
             objectOutput.writeObject(recipeName);
             myServerSocket.close();
+            JOptionPane.showMessageDialog(null, "Order Sent to Kitchen");
         } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Failed to Send Order");
         }
     }
 

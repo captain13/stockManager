@@ -241,7 +241,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public void updateInventory() {
         //stops editting of table cell to allow button event
-
         tableRecipe.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
         if (tableRecipe.isEditing()) {
             tableRecipe.getCellEditor().cancelCellEditing();
@@ -259,6 +258,20 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 //Pass table contents to database update code
                 system.updateRecipe(ID, name, price, vat, type);
             }
+        }
+    }
+
+    public void updateShrinkage() {
+        tblInventory.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+        if (tblInventory.isEditing()) {
+            tblInventory.getCellEditor().cancelCellEditing();
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            String inventoryID =tblInventory.getValueAt(tblInventory.getSelectedRow(), 0).toString();
+            String qty =tblInventory.getValueAt(tblInventory.getSelectedRow(), 3).toString();
+            system.updateInventoryShrinkage(inventoryID, qty);
         }
     }
 
@@ -280,6 +293,24 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 Object address = tblSupplier.getModel().getValueAt(r, 4);
                 //Pass table contents to database update code
                 system.updateSupplier(ID, name, email, num, address);
+            }
+        }
+    }
+
+    public void updateRecipeList() {
+        tblInventory.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+        if (tblInventory.isEditing()) {
+            tblInventory.getCellEditor().cancelCellEditing();
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            int rowCount = tableRecipeList.getModel().getRowCount();
+            for (int i = 0; i < rowCount; i++) {
+                String recipeID = tableRecipeList.getModel().getValueAt(i, 0).toString();
+                String inventoryID = tableRecipeList.getModel().getValueAt(i, 2).toString();
+                String qty = tableRecipeList.getModel().getValueAt(i, 4).toString();
+                system.updateRecipeList(inventoryID, recipeID, qty);
             }
         }
     }
@@ -314,6 +345,16 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public int getIDrecipe() {
         int id = (int) tableRecipe.getValueAt(tableRecipe.getSelectedRow(), 0);
+        return id;
+    }
+
+    public int getIDrecipeListRecipe() {
+        int id = (int) tableRecipeList.getValueAt(tableRecipeList.getSelectedRow(), 0);
+        return id;
+    }
+
+    public int getIDrecipeListInventory() {
+        int id = (int) tableRecipeList.getValueAt(tableRecipeList.getSelectedRow(), 2);
         return id;
     }
 
@@ -420,15 +461,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         pnlLayout = new javax.swing.JPanel();
         buttonReprint1 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        pnlOrderLeft = new javax.swing.JPanel();
+        pnlViewOrder = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        pnlManageOrder = new javax.swing.JPanel();
         buttonReprint = new javax.swing.JButton();
         buttonLayout = new javax.swing.JButton();
         buttonTakeAway = new javax.swing.JButton();
         buttonReprint2 = new javax.swing.JButton();
-        pnlOrderLeft1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         Inventory = new javax.swing.JPanel();
         textboxSearch = new javax.swing.JTextField();
         lblSearch = new javax.swing.JLabel();
@@ -440,24 +481,27 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonEdit = new javax.swing.JButton();
         buttonDelete = new javax.swing.JButton();
         buttonPrint = new javax.swing.JButton();
+        buttonEdit1 = new javax.swing.JButton();
         pnlRecipe = new javax.swing.JPanel();
         buttonRecipeAdd = new javax.swing.JButton();
         buttonRecipeDelete = new javax.swing.JButton();
         buttonRecipeEdit = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tableRecipe = new javax.swing.JTable();
+        buttonRecipeEdit3 = new javax.swing.JButton();
         pnlRecipeList = new javax.swing.JPanel();
-        buttonRecipeAdd2 = new javax.swing.JButton();
         buttonRecipeDelete2 = new javax.swing.JButton();
         buttonRecipeEdit2 = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tableRecipeList = new javax.swing.JTable();
+        buttonRecipeDelete3 = new javax.swing.JButton();
         pnlSupplier = new javax.swing.JPanel();
         buttonRecipeAdd1 = new javax.swing.JButton();
         buttonRecipeDelete1 = new javax.swing.JButton();
         buttonRecipeEdit1 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblSupplier = new javax.swing.JTable();
+        buttonRecipeEdit4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         Management = new javax.swing.JPanel();
         buttonOrderHistory = new javax.swing.JButton();
@@ -486,7 +530,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jButton9 = new javax.swing.JButton();
         currentEmail = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -706,6 +749,51 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.setGridColor(new java.awt.Color(204, 204, 204));
+        jScrollPane2.setViewportView(jTable1);
+
+        jButton1.setText("Refresh");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlViewOrderLayout = new javax.swing.GroupLayout(pnlViewOrder);
+        pnlViewOrder.setLayout(pnlViewOrderLayout);
+        pnlViewOrderLayout.setHorizontalGroup(
+            pnlViewOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlViewOrderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(pnlViewOrderLayout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(jButton1)
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+        pnlViewOrderLayout.setVerticalGroup(
+            pnlViewOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlViewOrderLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(0, 17, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("View Orders", pnlViewOrder);
+
         buttonReprint.setText("Reprint");
         buttonReprint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -734,21 +822,21 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        javax.swing.GroupLayout pnlOrderLeftLayout = new javax.swing.GroupLayout(pnlOrderLeft);
-        pnlOrderLeft.setLayout(pnlOrderLeftLayout);
-        pnlOrderLeftLayout.setHorizontalGroup(
-            pnlOrderLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOrderLeftLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlManageOrderLayout = new javax.swing.GroupLayout(pnlManageOrder);
+        pnlManageOrder.setLayout(pnlManageOrderLayout);
+        pnlManageOrderLayout.setHorizontalGroup(
+            pnlManageOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlManageOrderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlOrderLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlManageOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonReprint2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonReprint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonLayout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
                     .addComponent(buttonTakeAway, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-        pnlOrderLeftLayout.setVerticalGroup(
-            pnlOrderLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOrderLeftLayout.createSequentialGroup()
+        pnlManageOrderLayout.setVerticalGroup(
+            pnlManageOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlManageOrderLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(buttonTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -760,51 +848,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Place", pnlOrderLeft);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
-
-        jButton1.setText("Refresh");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnlOrderLeft1Layout = new javax.swing.GroupLayout(pnlOrderLeft1);
-        pnlOrderLeft1.setLayout(pnlOrderLeft1Layout);
-        pnlOrderLeft1Layout.setHorizontalGroup(
-            pnlOrderLeft1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOrderLeft1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(pnlOrderLeft1Layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(jButton1)
-                .addContainerGap(92, Short.MAX_VALUE))
-        );
-        pnlOrderLeft1Layout.setVerticalGroup(
-            pnlOrderLeft1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOrderLeft1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(0, 17, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("View Orders", pnlOrderLeft1);
+        jTabbedPane1.addTab("Manage", pnlManageOrder);
 
         javax.swing.GroupLayout OrdersLayout = new javax.swing.GroupLayout(Orders);
         Orders.setLayout(OrdersLayout);
@@ -890,6 +934,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         buttonPrint.setText("Print");
 
+        buttonEdit1.setText("Shrikage");
+        buttonEdit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEdit1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlInventoryLayout = new javax.swing.GroupLayout(pnlInventory);
         pnlInventory.setLayout(pnlInventoryLayout);
         pnlInventoryLayout.setHorizontalGroup(
@@ -897,18 +948,20 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             .addGroup(pnlInventoryLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(buttonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                     .addComponent(buttonDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonPrint, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                    .addComponent(buttonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buttonEdit1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnlInventoryLayout.setVerticalGroup(
             pnlInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInventoryLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(buttonEdit1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonDelete)
@@ -977,6 +1030,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             tableRecipe.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        buttonRecipeEdit3.setText("Print");
+        buttonRecipeEdit3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRecipeEdit3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlRecipeLayout = new javax.swing.GroupLayout(pnlRecipe);
         pnlRecipe.setLayout(pnlRecipeLayout);
         pnlRecipeLayout.setHorizontalGroup(
@@ -984,11 +1044,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             .addGroup(pnlRecipeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlRecipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buttonRecipeEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buttonRecipeAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                    .addComponent(buttonRecipeDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonRecipeEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonRecipeEdit3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE))
         );
         pnlRecipeLayout.setVerticalGroup(
             pnlRecipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -999,18 +1060,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(buttonRecipeDelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonRecipeEdit)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonRecipeEdit3)
+                .addContainerGap())
             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Recipe", pnlRecipe);
-
-        buttonRecipeAdd2.setText("Add");
-        buttonRecipeAdd2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonRecipeAdd2ActionPerformed(evt);
-            }
-        });
 
         buttonRecipeDelete2.setText("Delete");
         buttonRecipeDelete2.addActionListener(new java.awt.event.ActionListener() {
@@ -1020,6 +1076,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         });
 
         buttonRecipeEdit2.setText("Edit");
+        buttonRecipeEdit2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRecipeEdit2ActionPerformed(evt);
+            }
+        });
 
         tableRecipeList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1055,6 +1116,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             tableRecipeList.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        buttonRecipeDelete3.setText("Print");
+        buttonRecipeDelete3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRecipeDelete3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlRecipeListLayout = new javax.swing.GroupLayout(pnlRecipeList);
         pnlRecipeList.setLayout(pnlRecipeListLayout);
         pnlRecipeListLayout.setHorizontalGroup(
@@ -1062,23 +1130,23 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             .addGroup(pnlRecipeListLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlRecipeListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buttonRecipeEdit2, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeAdd2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeDelete2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buttonRecipeEdit2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonRecipeDelete2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                    .addComponent(buttonRecipeDelete3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE))
         );
         pnlRecipeListLayout.setVerticalGroup(
             pnlRecipeListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
             .addGroup(pnlRecipeListLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buttonRecipeAdd2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonRecipeDelete2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonRecipeEdit2)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonRecipeDelete3)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Recipe List", pnlRecipeList);
@@ -1138,18 +1206,26 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             tblSupplier.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        buttonRecipeEdit4.setText("Print");
+        buttonRecipeEdit4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRecipeEdit4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlSupplierLayout = new javax.swing.GroupLayout(pnlSupplier);
         pnlSupplier.setLayout(pnlSupplierLayout);
         pnlSupplierLayout.setHorizontalGroup(
             pnlSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSupplierLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonRecipeAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonRecipeEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonRecipeDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonRecipeAdd1, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                    .addComponent(buttonRecipeDelete1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonRecipeEdit1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonRecipeEdit4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE))
         );
         pnlSupplierLayout.setVerticalGroup(
             pnlSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1160,7 +1236,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(buttonRecipeDelete1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonRecipeEdit1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonRecipeEdit4)
+                .addContainerGap())
             .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
         );
 
@@ -1495,19 +1573,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         TabbedPanel.addTab("Settings", Settings);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 867, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
-        );
-
-        TabbedPanel.addTab("test", jPanel1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1775,13 +1840,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void buttonRecipeAdd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAdd2ActionPerformed
-        RecipeForm newForm = new RecipeForm("Test");
-        newForm.setVisible(true);
-    }//GEN-LAST:event_buttonRecipeAdd2ActionPerformed
-
     private void buttonRecipeDelete2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete2ActionPerformed
-        // TODO add your handling code here:
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            system.removeRecipeList(getIDrecipeListRecipe(), getIDrecipeListInventory());
+        }
     }//GEN-LAST:event_buttonRecipeDelete2ActionPerformed
 
     private void buttonRecipeEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEditActionPerformed
@@ -1812,8 +1875,28 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReprint2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       network.recieveData(jTable1);
+        network.recieveData(jTable1);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void buttonRecipeEdit3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonRecipeEdit3ActionPerformed
+
+    private void buttonRecipeDelete3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonRecipeDelete3ActionPerformed
+
+    private void buttonRecipeEdit4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonRecipeEdit4ActionPerformed
+
+    private void buttonRecipeEdit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit2ActionPerformed
+        updateRecipeList();
+    }//GEN-LAST:event_buttonRecipeEdit2ActionPerformed
+
+    private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
+        updateShrinkage();
+    }//GEN-LAST:event_buttonEdit1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1852,6 +1935,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonClose;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonEdit;
+    private javax.swing.JButton buttonEdit1;
     private javax.swing.JButton buttonEmail;
     private javax.swing.JButton buttonEmployee;
     private javax.swing.JButton buttonEmployee1;
@@ -1866,13 +1950,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonPromotions;
     private javax.swing.JButton buttonRecipeAdd;
     private javax.swing.JButton buttonRecipeAdd1;
-    private javax.swing.JButton buttonRecipeAdd2;
     private javax.swing.JButton buttonRecipeDelete;
     private javax.swing.JButton buttonRecipeDelete1;
     private javax.swing.JButton buttonRecipeDelete2;
+    private javax.swing.JButton buttonRecipeDelete3;
     private javax.swing.JButton buttonRecipeEdit;
     private javax.swing.JButton buttonRecipeEdit1;
     private javax.swing.JButton buttonRecipeEdit2;
+    private javax.swing.JButton buttonRecipeEdit3;
+    private javax.swing.JButton buttonRecipeEdit4;
     private javax.swing.JButton buttonReports;
     private javax.swing.JButton buttonReprint;
     private javax.swing.JButton buttonReprint1;
@@ -1893,7 +1979,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1915,12 +2000,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel pnlInventory;
     public static javax.swing.JPanel pnlLayout;
     private javax.swing.JPanel pnlLeft;
-    private javax.swing.JPanel pnlOrderLeft;
-    private javax.swing.JPanel pnlOrderLeft1;
+    private javax.swing.JPanel pnlManageOrder;
     private javax.swing.JPanel pnlPanel;
     private javax.swing.JPanel pnlRecipe;
     private javax.swing.JPanel pnlRecipeList;
     private javax.swing.JPanel pnlSupplier;
+    private javax.swing.JPanel pnlViewOrder;
     public static javax.swing.JTable tableRecipe;
     public static javax.swing.JTable tableRecipeList;
     public static javax.swing.JTable tblInventory;

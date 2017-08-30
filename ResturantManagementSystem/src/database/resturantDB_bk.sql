@@ -70,7 +70,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (1,'Chicken Fillet ',NULL,1000,0.25,1000),(2,'Beef Burger Patty',NULL,1000,0.25,1000),(3,'Burger rolls',NULL,1000,0.25,1000),(4,'Lettuce',NULL,100,0.5,1000),(5,'Tomatoe',NULL,100,0.5,100),(6,'Chicken Wings',NULL,1000,0.2,1000),(7,'Pork Ribs',NULL,1000,0.2,1000),(8,'Chips',NULL,1000,0.2,1000);
+INSERT INTO `inventory` VALUES (1,'Chicken Fillet ',NULL,1000,0.25,1000),(2,'Beef Burger Patty',NULL,1000,0.25,1000),(3,'Burger rolls',NULL,1000,0.25,1000),(4,'Lettuce',NULL,100,0.5,1000),(5,'Tomatoe',NULL,100,0.5,100),(6,'Chicken Wings',NULL,1000,0.2,1000),(7,'Pork Ribs',NULL,1000,0.2,1000),(8,'Chips',NULL,100,0.2,1000);
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +100,7 @@ CREATE TABLE `inventory_recipe` (
 
 LOCK TABLES `inventory_recipe` WRITE;
 /*!40000 ALTER TABLE `inventory_recipe` DISABLE KEYS */;
-INSERT INTO `inventory_recipe` VALUES (11,1,3,200),(12,3,3,100),(13,4,3,50),(14,5,3,50),(15,8,3,100),(16,2,4,200),(17,3,4,100),(18,4,4,50),(19,5,4,50),(20,8,4,100);
+INSERT INTO `inventory_recipe` VALUES (11,1,3,200),(12,3,3,100),(13,4,3,50),(14,5,3,50),(15,8,3,100),(16,2,4,200),(17,3,4,100),(18,4,4,50),(19,5,4,50),(20,8,4,160);
 /*!40000 ALTER TABLE `inventory_recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +161,7 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
-INSERT INTO `recipe` VALUES (3,'Chicken Burger & Chips',75,10.5,'Main Meal','./src/images/_f_chickenBurger.jpg',NULL,NULL),(4,'Beef Burger & Chips',75,10.5,'Main Meal','./src/images/_f_beefBurger.jpg',NULL,NULL);
+INSERT INTO `recipe` VALUES (3,'Chicken Burger & Chips',75,10.5,'Main Meal','./src/images/_f_chickenBurger.jpg',8,NULL),(4,'Beef Burger & Chips',75,10.5,'Main Meal','./src/images/_f_beefBurger.jpg',8,NULL);
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,7 +207,7 @@ CREATE TABLE `sales` (
   `salesDate` date DEFAULT NULL,
   `totalCost` double DEFAULT NULL,
   PRIMARY KEY (`salesID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -291,7 +291,7 @@ CREATE TABLE `stockorder` (
   KEY `fk_stockOrder_supplier1` (`supplierID`),
   CONSTRAINT `fk_stockOrder_inventory1` FOREIGN KEY (`inventoryID`) REFERENCES `inventory` (`inventoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_stockOrder_supplier1` FOREIGN KEY (`supplierID`) REFERENCES `supplier` (`supplierID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -339,4 +339,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-27 15:46:19
+-- Dump completed on 2017-08-30 20:27:17

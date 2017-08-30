@@ -416,12 +416,12 @@ public class dbManager {
 
     public Object[][] getRecipe() {
         int count = getRecipesCount();
-        Object recipe[][] = new Object[count][5];
+        Object recipe[][] = new Object[count][6];
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT recipeName,recipePrice,recipeImageDirectory,recipeType FROM recipe ";
+            String query = "SELECT recipeName,recipePrice,recipeImageDirectory,recipeType,recipeCount FROM recipe ";
             ResultSet rs = s.executeQuery(query);
 
             int i = 0;
@@ -431,6 +431,7 @@ public class dbManager {
                 recipe[i][2] = rs.getString(2);
                 recipe[i][3] = rs.getString(3);
                 recipe[i][4] = rs.getString(4);
+                recipe[i][5] = rs.getString(5);
                 i++;
             }
 
@@ -851,7 +852,7 @@ public class dbManager {
             s.execute(insertQuerySup);
             String selectQuery = "SELECT * FROM specials ORDER BY specialsID DESC LIMIT 1";
             ResultSet rs = s.executeQuery(selectQuery);
-            String ID=null;
+            String ID = null;
             while (rs.next()) {
                 ID = rs.getString("specialsID");
             }
@@ -908,6 +909,20 @@ public class dbManager {
         }
     }
 
+    public void removeRecipeList(int index, int ID) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'AND inventoryID='" + ID + "'";
+            s.execute(query);
+            populateTables();
+            logs.writeLogs("DELETED");
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
+    }
+
     public void removeSupplier(int index) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -940,7 +955,7 @@ public class dbManager {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "UPDATE specials set status= '1' WHERE specialsID='"+specialsID+"'";
+            String query = "UPDATE specials set status= '1' WHERE specialsID='" + specialsID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.executeUpdate();
             getSpecialDetails();
@@ -1033,6 +1048,36 @@ public class dbManager {
             System.out.println("Error: " + exp);
         }
     }
+
+    public void updateInventoryShrinkage(String ID, String qty) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "UPDATE inventory set qty='" + qty + "' "
+                    + "WHERE inventoryID='" + ID + "'";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.executeUpdate();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
+    public void updateRecipeList(String iventoryID, String recipeID, String qty) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "UPDATE inventory_recipe set qty='" + qty + "' "
+                    + "WHERE  inventoryID='" + iventoryID + "'AND recipeID='" + recipeID + "'";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.executeUpdate();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
     //Updates supplier table with "Update" button
 
     public void updateSupplier(Object ID, Object name, Object email, Object num, Object address) {
@@ -1075,6 +1120,22 @@ public class dbManager {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String updateQuery = "UPDATE recipe SET specialsID='" + specialsID + "' WHERE recipeName ='" + recipeName + "'";
+            s.execute(updateQuery);
+            PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
+            preparedStmt.executeUpdate();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
+    public void updateOrderCount(String order) {
+        System.out.println(order);
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String updateQuery = "UPDATE recipe SET recipeCount=(recipeCount+1) WHERE recipeName ='" + order + "'";
             s.execute(updateQuery);
             PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
             preparedStmt.executeUpdate();

@@ -1,19 +1,38 @@
 package system;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Andrew
  */
 public class Reports extends javax.swing.JFrame {
-    dbManager newManager=new dbManager();
+
+    dbManager newManager = new dbManager();
+    Object[][] row;
+
     public Reports() {
         initComponents();
-        newManager.populateSales(tableSales,"ALL");
+        newManager.populateSales(tableSales, "ALL");
     }
 
     public int getID() {
         int id = (int) tableSales.getValueAt(tableSales.getSelectedRow(), 0);
         return id;
+    }
+
+    public void populateStockCount() {
+        String columnNames[] = {"Item", "Ordered Count"};
+
+        int n = newManager.getRecipe().length;
+        row = new Object[n][2];
+        int index = 0;
+        for (int i = 0; i < n; i++) {
+            row[i][0] = newManager.getRecipe()[i][1];
+            row[i][1] = newManager.getRecipe()[i][5];
+        }
+        DefaultTableModel tableModel = new DefaultTableModel(row, columnNames);
+        tableSales.setModel(tableModel);
     }
 
     @SuppressWarnings("unchecked")
@@ -160,23 +179,23 @@ public class Reports extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose1ActionPerformed
-        newManager.populateSales(tableSales,"ALL");
+        newManager.populateSales(tableSales, "ALL");
     }//GEN-LAST:event_buttonClose1ActionPerformed
 
     private void buttonClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose2ActionPerformed
-       newManager.populateEmployeeSales(tableSales);
+        newManager.populateEmployeeSales(tableSales);
     }//GEN-LAST:event_buttonClose2ActionPerformed
 
     private void buttonClose3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose3ActionPerformed
-         newManager.populateSales(tableSales,"MONTH");
+        newManager.populateSales(tableSales, "MONTH");
     }//GEN-LAST:event_buttonClose3ActionPerformed
 
     private void buttonClose4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose4ActionPerformed
-         newManager.populateSales(tableSales,"DAY");
+        newManager.populateSales(tableSales, "DAY");
     }//GEN-LAST:event_buttonClose4ActionPerformed
 
     private void buttonClose5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose5ActionPerformed
-        // TODO add your handling code here:
+        populateStockCount();
     }//GEN-LAST:event_buttonClose5ActionPerformed
 
 

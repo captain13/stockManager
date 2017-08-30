@@ -15,8 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -222,9 +220,6 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         this.setSize(xSize, ySize);
     }
 
-//    public static void setUsername() {
-//        nameTF.setText(UserForm.getUsername());
-//    }
     public void internalClock() {
         time = new Thread(() -> {
             try {
@@ -276,6 +271,14 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 totalAmount();
             } catch (ArrayIndexOutOfBoundsException exp) {
             }
+        }
+    }
+
+    public void updateOrdercount() {
+        for (int i = 0; i < tblItems.getRowCount(); i++) {
+            System.out.println(tblItems.getRowCount());
+            String order = tblItems.getModel().getValueAt(i, 0).toString();
+            newManager.updateOrderCount(order);
         }
     }
 
@@ -533,10 +536,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
     private void buttonOverrideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOverrideActionPerformed
         try {
-            network.sendData(tblItems,key);
+            network.sendData(tblItems, key);
         } catch (IOException ex) {
-            Logger.getLogger(NewOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
+        updateOrdercount();
     }//GEN-LAST:event_buttonOverrideActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
