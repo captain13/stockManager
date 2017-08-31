@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -50,33 +51,19 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         system.populateOrder();
         network.recieveData(jTable1);
         getSetting();
-//        setTableDesign();
+        //  setTableDesign();
     }
 
     public final void setTableDesign() {
-        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
-        tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
-        tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
-        tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
-        tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
-
-        tableRecipe.getColumnModel().getColumn(0).setPreferredWidth(50);
-        tableRecipe.getColumnModel().getColumn(1).setPreferredWidth(300);
-        tableRecipe.getColumnModel().getColumn(2).setPreferredWidth(150);
-        tableRecipe.getColumnModel().getColumn(3).setPreferredWidth(50);
-        tableRecipe.getColumnModel().getColumn(3).setPreferredWidth(50);
-
-        tableRecipeList.getColumnModel().getColumn(0).setPreferredWidth(25);
-        tableRecipeList.getColumnModel().getColumn(1).setPreferredWidth(200);
-        tableRecipeList.getColumnModel().getColumn(2).setPreferredWidth(25);
-        tableRecipeList.getColumnModel().getColumn(3).setPreferredWidth(200);
-        tableRecipeList.getColumnModel().getColumn(4).setPreferredWidth(25);
-
-        tblSupplier.getColumnModel().getColumn(0).setPreferredWidth(100);
-        tblSupplier.getColumnModel().getColumn(1).setPreferredWidth(300);
-        tblSupplier.getColumnModel().getColumn(2).setPreferredWidth(300);
-        tblSupplier.getColumnModel().getColumn(3).setPreferredWidth(200);
-        tblSupplier.getColumnModel().getColumn(4).setPreferredWidth(250);
+//        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit"};
+//        DefaultTableModel tableModel = new DefaultTableModel(system.populateInventoryTables(), columnNamesInventory);
+//        tblInventory.setModel(tableModel);
+//        searchITable();
+//        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
+//        tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
     }
 
     public final void tableLayout() {
@@ -266,17 +253,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public void updateShrinkage() {
-        tblInventory.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
-        if (tblInventory.isEditing()) {
-            tblInventory.getCellEditor().cancelCellEditing();
-        }
-
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            String inventoryID = tblInventory.getValueAt(tblInventory.getSelectedRow(), 0).toString();
-            String qty = tblInventory.getValueAt(tblInventory.getSelectedRow(), 3).toString();
-            system.updateInventoryShrinkage(inventoryID, qty);
-        }
+        String qty = JOptionPane.showInputDialog(null, "Enter the Shrinkage for the Select Item");
+        String item = tblInventory.getValueAt(tblInventory.getSelectedRow(), 1).toString();
+        system.updateInventoryQty(item, qty,"-");
     }
 
     public void updateRecipe() {
@@ -350,7 +329,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             String qty = tblOrderHistory.getValueAt(tblOrderHistory.getSelectedRow(), 5).toString();
             System.out.println(qty);
             system.updateConfirmOrder(orderID);
-            system.updateInventoryQty(item, qty);
+            system.updateInventoryQty(item, qty, "+");
         }
     }
 
@@ -958,7 +937,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         buttonPrint.setText("Print");
 
-        buttonEdit1.setText("Shrikage");
+        buttonEdit1.setText("Shrinkage");
         buttonEdit1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonEdit1ActionPerformed(evt);
@@ -972,7 +951,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             .addGroup(pnlInventoryLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(buttonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                    .addComponent(buttonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonPrint, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

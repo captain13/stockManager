@@ -617,7 +617,7 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="buttonAdd" pref="79" max="32767" attributes="0"/>
+                                  <Component id="buttonAdd" max="32767" attributes="0"/>
                                   <Component id="buttonDelete" alignment="0" max="32767" attributes="0"/>
                                   <Component id="buttonEdit" alignment="0" max="32767" attributes="0"/>
                                   <Component id="buttonPrint" alignment="0" max="32767" attributes="0"/>
@@ -745,7 +745,7 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="buttonEdit1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Shrikage"/>
+                        <Property name="text" type="java.lang.String" value="Shrinkage"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEdit1ActionPerformed"/>

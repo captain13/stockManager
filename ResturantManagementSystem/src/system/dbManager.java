@@ -46,13 +46,10 @@ public class dbManager {
         }
     }
 
-//    public void populateTables() {
-//        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit"};
-//        String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
-//        String columnNamesRecipeList[] = {"Recipe ID", "Recipe Name", "Inventory ID", "Item Name", "Quantity"};
-//        String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
-//        try {
+//    public Object[][] populateInventoryTables() {
+//        Object[][] row = null;
 //
+//        try {
 //            Class.forName(driver).newInstance();
 //            Connection conn = DriverManager.getConnection(url, username, password);
 //            Statement s = conn.createStatement();
@@ -60,153 +57,63 @@ public class dbManager {
 //            ResultSet rs = s.executeQuery(query);
 //            ResultSetMetaData metaData = rs.getMetaData();
 //            int columnCount = metaData.getColumnCount();
-//            DefaultTableModel tableModel = new DefaultTableModel();
-//            MainSystem.tblInventory.setModel(tableModel);
-//
-//            for (int i = 0; i < columnCount; i++) {
-//                tableModel.addColumn(columnNamesInventory[i]);
-//            }
-//            Object[] row = new Object[columnCount];
-//
+//            int rowCount = 0;
 //            while (rs.next()) {
-//                for (int i = 0; i < columnCount; i++) {
-//                    row[i] = rs.getObject(i + 1);
-//                }
-//                MainSystem.searchITable();
-//                tableModel.addRow(row);
+//                rowCount++;
 //            }
+//            rs = s.executeQuery(query);
+//            row = new Object[rowCount][columnCount];
+//            int i = 0;
+//            while (rs.next()) {
+//                row[i][0] = rs.getObject(1);
+//                row[i][1] = rs.getObject(2);
+//                row[i][2] = rs.getObject(3);
+//                row[i][3] = rs.getObject(4);
+//                row[i][4] = rs.getObject(5);
+//                row[i][5] = rs.getObject(6);
+//                i++;
+//
+//            }
+//
 //            rs.close();
 //            s.close();
 //            conn.close();
 //        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
 //        }
-//        try {
-//            Class.forName(driver).newInstance();
-//            Connection conn = DriverManager.getConnection(url, username, password);
-//            Statement s = conn.createStatement();
-//            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT FROM recipe";
-//            ResultSet rs = s.executeQuery(query);
-//            ResultSetMetaData metaData = rs.getMetaData();
-//            DefaultTableModel tableModel1 = new DefaultTableModel();
-//            MainSystem.tableRecipe.setModel(tableModel1);
-//
-//            int columnCount = metaData.getColumnCount();
-//            for (int i = 0; i < columnCount; i++) {
-//                tableModel1.addColumn(columnNamesRecipe[i]);
-//            }
-//
-//            Object[] row = new Object[columnCount];
-//
-//            while (rs.next()) {
-//                for (int i = 0; i < columnCount; i++) {
-//                    row[i] = rs.getObject(i + 1);
-//                }
-//                MainSystem.searchRTable();
-//                tableModel1.addRow(row);
-//            }
-//            rs.close();
-//            s.close();
-//            conn.close();
-//        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-//        }
-//
-//        try {
-//            Class.forName(driver).newInstance();
-//            Connection conn = DriverManager.getConnection(url, username, password);
-//            Statement s = conn.createStatement();
-//            String query = "SELECT inventory_recipe.recipeID, recipe.recipeName, inventory_recipe.inventoryID, "
-//                    + "inventory.item,inventory_recipe.qty "
-//                    + "FROM inventory_recipe, recipe,inventory "
-//                    + "WHERE recipe.recipeID=inventory_recipe.recipeID "
-//                    + "AND inventory.inventoryID=inventory_recipe.inventoryID ";
-//            ResultSet rs = s.executeQuery(query);
-//            ResultSetMetaData metaData = rs.getMetaData();
-//            DefaultTableModel tableModel1 = new DefaultTableModel();
-//            MainSystem.tableRecipeList.setModel(tableModel1);
-//
-//            int columnCount = 5;
-//            for (int i = 0; i < columnCount; i++) {
-//                tableModel1.addColumn(columnNamesRecipeList[i]);
-//            }
-//
-//            Object[] row = new Object[columnCount];
-//
-//            while (rs.next()) {
-//                for (int i = 0; i < columnCount; i++) {
-//                    row[i] = rs.getObject(i + 1);
-//                }
-//                tableModel1.addRow(row);
-//            }
-//            rs.close();
-//            s.close();
-//            conn.close();
-//        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-//            System.out.println(exc);
-//        }
-//
-//        try {
-//            Class.forName(driver).newInstance();
-//            Connection conn = DriverManager.getConnection(url, username, password);
-//            Statement s = conn.createStatement();
-//            String query = "SELECT * FROM supplier";
-//            ResultSet rs = s.executeQuery(query);
-//            ResultSetMetaData metaData = rs.getMetaData();
-//            int columnCount = metaData.getColumnCount();
-//            DefaultTableModel tableModel2 = new DefaultTableModel();
-//            MainSystem.tblSupplier.setModel(tableModel2);
-//
-//            for (int i = 0; i < columnNamesSuppler.length; i++) {
-//                tableModel2.addColumn(columnNamesSuppler[i]);
-//            }
-//            Object[] row = new Object[columnCount];
-//
-//            while (rs.next()) {
-//                for (int i = 0; i < columnCount; i++) {
-//                    row[i] = rs.getObject(i + 1);
-//                }
-//                MainSystem.searchSTable();
-//                tableModel2.addRow(row);
-//            }
-//            rs.close();
-//            s.close();
-//            conn.close();
-//        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-//
-//        }
+//        return row;
 //    }
-    public void populateInventoryTables() {
-        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit"};
-
-        try {
-
-            Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String query = "SELECT * FROM inventory ";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            DefaultTableModel tableModel = new DefaultTableModel();
-            MainSystem.tblInventory.setModel(tableModel);
-
-            for (int i = 0; i < columnCount; i++) {
-                tableModel.addColumn(columnNamesInventory[i]);
-            }
-            Object[] row = new Object[columnCount];
-
-            while (rs.next()) {
+        public void populateInventoryTables() {
+            String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit"};
+            try {
+    
+                Class.forName(driver).newInstance();
+                Connection conn = DriverManager.getConnection(url, username, password);
+                Statement s = conn.createStatement();
+                String query = "SELECT * FROM inventory ";
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                DefaultTableModel tableModel = new DefaultTableModel();
+                MainSystem.tblInventory.setModel(tableModel);
+    
                 for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
+                    tableModel.addColumn(columnNamesInventory[i]);
                 }
-                MainSystem.searchITable();
-                tableModel.addRow(row);
+                Object[] row = new Object[columnCount];
+    
+                while (rs.next()) {
+                    for (int i = 0; i < columnCount; i++) {
+                        row[i] = rs.getObject(i + 1);
+                    }
+                    MainSystem.searchITable();
+                    tableModel.addRow(row);
+                }
+                rs.close();
+                s.close();
+                conn.close();
+            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             }
-            rs.close();
-            s.close();
-            conn.close();
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
-    }
 
     public void populateRecipeTables() {
         String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
@@ -1190,28 +1097,12 @@ public class dbManager {
         }
     }
 
-    public void updateInventoryShrinkage(String ID, String qty) {
-        try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String query = "UPDATE inventory set qty='" + qty + "' "
-                    + "WHERE inventoryID='" + ID + "'";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.executeUpdate();
-            s.close();
-            conn.close();
-        } catch (SQLException exp) {
-            System.out.println(exp);
-        }
-    }
-
-    //merger updateInventoryShrinkage and updateInventoryQty
-    public void updateInventoryQty(String item, String qty) {
+    public void updateInventoryQty(String item, String qty,String operator) {
         int ID = getInvetoryID(item);
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "UPDATE inventory set qty=qty+'" + qty + "' "
+            String query = "UPDATE inventory set qty=qty"+operator+"'" + qty + "' "
                     + "WHERE inventoryID='" + ID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             System.out.println("ran");
