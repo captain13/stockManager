@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +24,15 @@ public class networkHandler {
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     internalClock clock = new internalClock();
     boolean IS_RUNNING = true;
+    String IP;
+
+    public networkHandler() {
+       getIP(); 
+    }
+
+    public final void getIP() {
+        IP = JOptionPane.showInputDialog(null, "Enter Host IP address");
+    }
 
     public void recieveData(JTable table) {
         new Thread(() -> {
@@ -31,7 +41,7 @@ public class networkHandler {
                 table.setModel(model);
                 try {
                     Object[] row = null;
-                    Socket socket = new Socket("10.0.0.169", 9999);
+                    Socket socket = new Socket(IP, 9999);
                     ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream());
                     Object[][] order = (Object[][]) objectInput.readObject();
 

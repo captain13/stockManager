@@ -478,6 +478,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonLayout = new javax.swing.JButton();
         buttonTakeAway = new javax.swing.JButton();
         buttonReprint2 = new javax.swing.JButton();
+        buttonReprint3 = new javax.swing.JButton();
         Inventory = new javax.swing.JPanel();
         textboxSearch = new javax.swing.JTextField();
         lblSearch = new javax.swing.JLabel();
@@ -823,10 +824,17 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        buttonReprint2.setText("Test TCP");
+        buttonReprint2.setText("Setup TCP");
         buttonReprint2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonReprint2ActionPerformed(evt);
+            }
+        });
+
+        buttonReprint3.setText("Test TCP");
+        buttonReprint3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonReprint3ActionPerformed(evt);
             }
         });
 
@@ -838,6 +846,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             .addComponent(buttonLayout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
             .addComponent(buttonReprint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(buttonReprint2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(buttonReprint3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlManageOrderLayout.setVerticalGroup(
             pnlManageOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -850,7 +859,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(buttonReprint, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonReprint2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonReprint3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Manage", pnlManageOrder);
@@ -1878,10 +1889,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonEventsActionPerformed
 
     private void buttonReprint2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprint2ActionPerformed
-        try {
-            network.sendData();
-        } catch (IOException ex) {
-        }
+      network.getIP();
     }//GEN-LAST:event_buttonReprint2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1911,6 +1919,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private void buttonOrderHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOrderHistoryActionPerformed
         updateStockOrder();
     }//GEN-LAST:event_buttonOrderHistoryActionPerformed
+
+    private void buttonReprint3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprint3ActionPerformed
+        try {
+            network.sendData();
+        } catch (IOException ex) {
+        }
+    }//GEN-LAST:event_buttonReprint3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1977,6 +1992,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonReprint;
     private javax.swing.JButton buttonReprint1;
     private javax.swing.JButton buttonReprint2;
+    private javax.swing.JButton buttonReprint3;
     private javax.swing.JButton buttonSpecials;
     private javax.swing.JButton buttonTakeAway;
     private javax.swing.JComboBox<String> comboBoxLogo;

@@ -25,6 +25,11 @@ public class networkHandler {
     internalClock clock = new internalClock();
     boolean IS_RUNNING = true;
     dbManager system = new dbManager();
+    String IP;
+    
+    public final void getIP() {
+        IP = JOptionPane.showInputDialog(null, "Enter Host IP address");
+    }
 
     public void sendData(JTable table, String tableNum) throws IOException {
         String[][] recipeName = null;
@@ -77,7 +82,7 @@ public class networkHandler {
                 table.setModel(model);
                 try {
                     Object[] row = null;
-                    Socket socket = new Socket("10.0.0.169", 9998);
+                    Socket socket = new Socket(IP, 9998);
                     ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream());
                     Object[][] order = (Object[][]) objectInput.readObject();
 

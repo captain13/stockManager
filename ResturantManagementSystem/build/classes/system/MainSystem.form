@@ -473,6 +473,7 @@
                           <Component id="buttonLayout" alignment="1" pref="251" max="32767" attributes="0"/>
                           <Component id="buttonReprint" max="32767" attributes="0"/>
                           <Component id="buttonReprint2" alignment="1" max="32767" attributes="0"/>
+                          <Component id="buttonReprint3" alignment="0" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -486,7 +487,9 @@
                               <Component id="buttonReprint" min="-2" pref="55" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonReprint2" min="-2" pref="55" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="buttonReprint3" min="-2" pref="55" max="-2" attributes="0"/>
+                              <EmptySpace pref="111" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -518,10 +521,18 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="buttonReprint2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Test TCP"/>
+                        <Property name="text" type="java.lang.String" value="Setup TCP"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonReprint2ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="buttonReprint3">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Test TCP"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonReprint3ActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>

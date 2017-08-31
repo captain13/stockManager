@@ -161,7 +161,7 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
-INSERT INTO `recipe` VALUES (3,'Chicken Burger & Chips',75,10.5,'Main Meal','./src/images/_f_chickenBurger.jpg',8,NULL),(4,'Beef Burger & Chips',75,10.5,'Main Meal','./src/images/_f_beefBurger.jpg',8,NULL);
+INSERT INTO `recipe` VALUES (3,'Chicken Burger & Chips',75,10.5,'Main Meal','./src/images/_f_chickenBurger.jpg',8,1),(4,'Beef Burger & Chips',75,10.5,'Main Meal','./src/images/_f_beefBurger.jpg',8,2);
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +259,7 @@ CREATE TABLE `specials` (
   `specialsPrice` double DEFAULT NULL,
   `status` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`specialsID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,6 +268,7 @@ CREATE TABLE `specials` (
 
 LOCK TABLES `specials` WRITE;
 /*!40000 ALTER TABLE `specials` DISABLE KEYS */;
+INSERT INTO `specials` VALUES (1,60,0),(2,80,0);
 /*!40000 ALTER TABLE `specials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,7 +292,7 @@ CREATE TABLE `stockorder` (
   KEY `fk_stockOrder_supplier1` (`supplierID`),
   CONSTRAINT `fk_stockOrder_inventory1` FOREIGN KEY (`inventoryID`) REFERENCES `inventory` (`inventoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_stockOrder_supplier1` FOREIGN KEY (`supplierID`) REFERENCES `supplier` (`supplierID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -300,6 +301,7 @@ CREATE TABLE `stockorder` (
 
 LOCK TABLES `stockorder` WRITE;
 /*!40000 ALTER TABLE `stockorder` DISABLE KEYS */;
+INSERT INTO `stockorder` VALUES (1,1,1,'2017-08-31','2017-08-31',2000,'Delievered'),(2,4,2,'2017-08-31','2017-10-10',2000,'Not Delievered');
 /*!40000 ALTER TABLE `stockorder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,4 +341,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-30 20:27:17
+-- Dump completed on 2017-08-31  0:32:04
