@@ -269,8 +269,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            String inventoryID =tblInventory.getValueAt(tblInventory.getSelectedRow(), 0).toString();
-            String qty =tblInventory.getValueAt(tblInventory.getSelectedRow(), 3).toString();
+            String inventoryID = tblInventory.getValueAt(tblInventory.getSelectedRow(), 0).toString();
+            String qty = tblInventory.getValueAt(tblInventory.getSelectedRow(), 3).toString();
             system.updateInventoryShrinkage(inventoryID, qty);
         }
     }
@@ -337,12 +337,16 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         }
     }
-    
+
     public void updateStockOrder() {
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            String orderID =tblOrderHistory.getValueAt(tblOrderHistory.getSelectedRow(), 0).toString();
+            String orderID = tblOrderHistory.getValueAt(tblOrderHistory.getSelectedRow(), 0).toString();
+            String item = tblOrderHistory.getValueAt(tblOrderHistory.getSelectedRow(), 1).toString();
+            String qty = tblOrderHistory.getValueAt(tblOrderHistory.getSelectedRow(), 5).toString();
+            System.out.println(qty);
             system.updateConfirmOrder(orderID);
+            system.updateInventoryQty(item, qty);
         }
     }
 
@@ -1889,7 +1893,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonEventsActionPerformed
 
     private void buttonReprint2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprint2ActionPerformed
-      network.getIP();
+        network.getIP();
     }//GEN-LAST:event_buttonReprint2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

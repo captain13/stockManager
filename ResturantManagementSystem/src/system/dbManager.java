@@ -1069,6 +1069,24 @@ public class dbManager {
             System.out.println(exp);
         }
     }
+    //merger updateInventoryShrinkage and updateInventoryQty
+     public void updateInventoryQty(String item, String qty) {
+        int ID= getInvetoryID(item);
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "UPDATE inventory set qty=qty+'" + qty + "' "
+                    + "WHERE inventoryID='" + ID + "'";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            System.out.println("ran");
+            preparedStmt.executeUpdate();
+            populateTables();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
 
     public void updateRecipeList(String iventoryID, String recipeID, String qty) {
         try {
