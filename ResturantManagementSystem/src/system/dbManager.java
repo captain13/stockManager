@@ -46,11 +46,137 @@ public class dbManager {
         }
     }
 
-    public void populateTables() {
+//    public void populateTables() {
+//        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit"};
+//        String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
+//        String columnNamesRecipeList[] = {"Recipe ID", "Recipe Name", "Inventory ID", "Item Name", "Quantity"};
+//        String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
+//        try {
+//
+//            Class.forName(driver).newInstance();
+//            Connection conn = DriverManager.getConnection(url, username, password);
+//            Statement s = conn.createStatement();
+//            String query = "SELECT * FROM inventory ";
+//            ResultSet rs = s.executeQuery(query);
+//            ResultSetMetaData metaData = rs.getMetaData();
+//            int columnCount = metaData.getColumnCount();
+//            DefaultTableModel tableModel = new DefaultTableModel();
+//            MainSystem.tblInventory.setModel(tableModel);
+//
+//            for (int i = 0; i < columnCount; i++) {
+//                tableModel.addColumn(columnNamesInventory[i]);
+//            }
+//            Object[] row = new Object[columnCount];
+//
+//            while (rs.next()) {
+//                for (int i = 0; i < columnCount; i++) {
+//                    row[i] = rs.getObject(i + 1);
+//                }
+//                MainSystem.searchITable();
+//                tableModel.addRow(row);
+//            }
+//            rs.close();
+//            s.close();
+//            conn.close();
+//        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+//        }
+//        try {
+//            Class.forName(driver).newInstance();
+//            Connection conn = DriverManager.getConnection(url, username, password);
+//            Statement s = conn.createStatement();
+//            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT FROM recipe";
+//            ResultSet rs = s.executeQuery(query);
+//            ResultSetMetaData metaData = rs.getMetaData();
+//            DefaultTableModel tableModel1 = new DefaultTableModel();
+//            MainSystem.tableRecipe.setModel(tableModel1);
+//
+//            int columnCount = metaData.getColumnCount();
+//            for (int i = 0; i < columnCount; i++) {
+//                tableModel1.addColumn(columnNamesRecipe[i]);
+//            }
+//
+//            Object[] row = new Object[columnCount];
+//
+//            while (rs.next()) {
+//                for (int i = 0; i < columnCount; i++) {
+//                    row[i] = rs.getObject(i + 1);
+//                }
+//                MainSystem.searchRTable();
+//                tableModel1.addRow(row);
+//            }
+//            rs.close();
+//            s.close();
+//            conn.close();
+//        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+//        }
+//
+//        try {
+//            Class.forName(driver).newInstance();
+//            Connection conn = DriverManager.getConnection(url, username, password);
+//            Statement s = conn.createStatement();
+//            String query = "SELECT inventory_recipe.recipeID, recipe.recipeName, inventory_recipe.inventoryID, "
+//                    + "inventory.item,inventory_recipe.qty "
+//                    + "FROM inventory_recipe, recipe,inventory "
+//                    + "WHERE recipe.recipeID=inventory_recipe.recipeID "
+//                    + "AND inventory.inventoryID=inventory_recipe.inventoryID ";
+//            ResultSet rs = s.executeQuery(query);
+//            ResultSetMetaData metaData = rs.getMetaData();
+//            DefaultTableModel tableModel1 = new DefaultTableModel();
+//            MainSystem.tableRecipeList.setModel(tableModel1);
+//
+//            int columnCount = 5;
+//            for (int i = 0; i < columnCount; i++) {
+//                tableModel1.addColumn(columnNamesRecipeList[i]);
+//            }
+//
+//            Object[] row = new Object[columnCount];
+//
+//            while (rs.next()) {
+//                for (int i = 0; i < columnCount; i++) {
+//                    row[i] = rs.getObject(i + 1);
+//                }
+//                tableModel1.addRow(row);
+//            }
+//            rs.close();
+//            s.close();
+//            conn.close();
+//        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+//            System.out.println(exc);
+//        }
+//
+//        try {
+//            Class.forName(driver).newInstance();
+//            Connection conn = DriverManager.getConnection(url, username, password);
+//            Statement s = conn.createStatement();
+//            String query = "SELECT * FROM supplier";
+//            ResultSet rs = s.executeQuery(query);
+//            ResultSetMetaData metaData = rs.getMetaData();
+//            int columnCount = metaData.getColumnCount();
+//            DefaultTableModel tableModel2 = new DefaultTableModel();
+//            MainSystem.tblSupplier.setModel(tableModel2);
+//
+//            for (int i = 0; i < columnNamesSuppler.length; i++) {
+//                tableModel2.addColumn(columnNamesSuppler[i]);
+//            }
+//            Object[] row = new Object[columnCount];
+//
+//            while (rs.next()) {
+//                for (int i = 0; i < columnCount; i++) {
+//                    row[i] = rs.getObject(i + 1);
+//                }
+//                MainSystem.searchSTable();
+//                tableModel2.addRow(row);
+//            }
+//            rs.close();
+//            s.close();
+//            conn.close();
+//        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+//
+//        }
+//    }
+    public void populateInventoryTables() {
         String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit"};
-        String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
-        String columnNamesRecipeList[] = {"Recipe ID", "Recipe Name", "Inventory ID", "Item Name", "Quantity"};
-        String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
+
         try {
 
             Class.forName(driver).newInstance();
@@ -80,6 +206,11 @@ public class dbManager {
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
+    }
+
+    public void populateRecipeTables() {
+        String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
+
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -109,7 +240,10 @@ public class dbManager {
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
+    }
 
+    public void populateRecipeListTables() {
+        String columnNamesRecipeList[] = {"Recipe ID", "Recipe Name", "Inventory ID", "Item Name", "Quantity"};
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -143,7 +277,10 @@ public class dbManager {
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
+    }
 
+    public void populateSupplierTables() {
+        String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -650,7 +787,7 @@ public class dbManager {
                     + "'" + threshold + "', '"
                     + limit + "')";
             s.execute(insertQuery);
-            populateTables();
+            populateInventoryTables();
             logs.writeLogs("ADDED");
             s.close();
             conn.close();
@@ -677,7 +814,7 @@ public class dbManager {
             while (rs.next()) {
                 ID = rs.getString("recipeID");
             }
-            populateTables();
+            populateRecipeTables();
             logs.writeLogs("ADDED");
             s.close();
             conn.close();
@@ -696,7 +833,6 @@ public class dbManager {
             while (rs.next()) {
                 ID = Integer.parseInt(rs.getString("recipeID"));
             }
-            populateTables();
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -715,7 +851,6 @@ public class dbManager {
             while (rs.next()) {
                 ID = Integer.parseInt(rs.getString("inventoryID"));
             }
-            populateTables();
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -732,7 +867,7 @@ public class dbManager {
                     + getRecipeID() + "', '"
                     + qty + "')";
             s.execute(insertQuerySup);
-            populateTables();
+            populateRecipeListTables();
             logs.writeLogs("ADDED");
             s.close();
             conn.close();
@@ -751,7 +886,7 @@ public class dbManager {
                     + number + "', '"
                     + address + "')";
             s.execute(insertQuerySup);
-            populateTables();
+            populateSupplierTables();
             logs.writeLogs("ADDED");
             s.close();
             conn.close();
@@ -876,7 +1011,7 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM inventory WHERE inventoryID='" + index + "'";
             s.execute(query);
-            populateTables();
+            populateInventoryTables();
             logs.writeLogs("DELETED");
             s.close();
             conn.close();
@@ -892,7 +1027,7 @@ public class dbManager {
             String query1 = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
             s.execute(query1);
             s.execute(query);
-            populateTables();
+            populateRecipeTables();
             removeRecipeList(index);
             logs.writeLogs("DELETED");
             s.close();
@@ -907,7 +1042,7 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
             s.execute(query);
-            populateTables();
+            populateRecipeListTables();
             logs.writeLogs("DELETED");
             s.close();
             conn.close();
@@ -921,7 +1056,7 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'AND inventoryID='" + ID + "'";
             s.execute(query);
-            populateTables();
+            populateRecipeListTables();
             logs.writeLogs("DELETED");
             s.close();
             conn.close();
@@ -935,7 +1070,7 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM supplier WHERE supplierID='" + index + "'";
             s.execute(query);
-            populateTables();
+            populateSupplierTables();
             logs.writeLogs("DELETED");
             s.close();
             conn.close();
@@ -1069,9 +1204,10 @@ public class dbManager {
             System.out.println(exp);
         }
     }
+
     //merger updateInventoryShrinkage and updateInventoryQty
-     public void updateInventoryQty(String item, String qty) {
-        int ID= getInvetoryID(item);
+    public void updateInventoryQty(String item, String qty) {
+        int ID = getInvetoryID(item);
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -1080,7 +1216,7 @@ public class dbManager {
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             System.out.println("ran");
             preparedStmt.executeUpdate();
-            populateTables();
+            populateInventoryTables();
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -1243,7 +1379,11 @@ public class dbManager {
 
             if (processComplete == 0) {
                 JOptionPane.showMessageDialog(null, "Database Successfully Restored");
-                populateTables();
+                populateInventoryTables();
+                populateRecipeTables();
+                populateRecipeListTables();
+                populateSupplierTables();
+                populateOrder();
             } else {
                 JOptionPane.showMessageDialog(null, "Restore Failed");
             }

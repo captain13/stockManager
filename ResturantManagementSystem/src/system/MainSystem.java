@@ -31,7 +31,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     dbManager system = new dbManager();
     logSystem logs = new logSystem();
     networkHandler network = new networkHandler();
-    receiptHandler receipt=new receiptHandler();
+    receiptHandler receipt = new receiptHandler();
     internalClock clock = new internalClock();
     HashMap<String, NewOrder> tables = new HashMap<>();
     boolean enableKeypad = false;
@@ -43,7 +43,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         settings.xmlValidition();
         logs.logValidation();
         clock.internalClock();
-        system.populateTables();
+        system.populateInventoryTables();
+        system.populateRecipeTables();
+        system.populateRecipeListTables();
+        system.populateSupplierTables();
         system.populateOrder();
         network.recieveData(jTable1);
         getSetting();
@@ -1665,7 +1668,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonLayoutActionPerformed
 
     private void buttonReprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprintActionPerformed
-            receipt.printReceipt();
+        receipt.printReceipt();
     }//GEN-LAST:event_buttonReprintActionPerformed
 
     private void comboBoxSceenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxSceenItemStateChanged
