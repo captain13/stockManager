@@ -15,9 +15,11 @@ public class AddDatabase extends javax.swing.JFrame {
     String imagePath;
     String newImagePath;
     dbManager database = new dbManager();
+    MainSystem system;
 
-    public AddDatabase() {
+    public AddDatabase(MainSystem sytem) {
         initComponents();
+        this.system=sytem;
     }
 
     public void insert() {
@@ -490,6 +492,10 @@ public class AddDatabase extends javax.swing.JFrame {
 
     private void buttonAccpetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccpetActionPerformed
         insert();
+        system.populateInvnetoryTable();
+        system.populateRecipeTable();
+        system.populateRecipeListTable();
+        system.populateSupplierTable();
         this.dispose();
     }//GEN-LAST:event_buttonAccpetActionPerformed
 

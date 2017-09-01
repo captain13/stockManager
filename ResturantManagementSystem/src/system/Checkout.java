@@ -10,6 +10,7 @@ public class Checkout extends javax.swing.JFrame {
     String user;
     double currentTotal;
     dbManager newManager = new dbManager();
+    receiptHandler newHandler = new receiptHandler();
 
     public Checkout(String user) {
         initComponents();
@@ -263,8 +264,7 @@ public class Checkout extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        //calculateBill();
-        receiptHandler newHandler = new receiptHandler();
+        calculateBill();
         newHandler.printReceipt();
         newHandler.writeTextToPDF();
         this.dispose();//for debugging

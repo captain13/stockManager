@@ -46,78 +46,43 @@ public class dbManager {
         }
     }
 
-//    public Object[][] populateInventoryTables() {
-//        Object[][] row = null;
-//
-//        try {
-//            Class.forName(driver).newInstance();
-//            Connection conn = DriverManager.getConnection(url, username, password);
-//            Statement s = conn.createStatement();
-//            String query = "SELECT * FROM inventory ";
-//            ResultSet rs = s.executeQuery(query);
-//            ResultSetMetaData metaData = rs.getMetaData();
-//            int columnCount = metaData.getColumnCount();
-//            int rowCount = 0;
-//            while (rs.next()) {
-//                rowCount++;
-//            }
-//            rs = s.executeQuery(query);
-//            row = new Object[rowCount][columnCount];
-//            int i = 0;
-//            while (rs.next()) {
-//                row[i][0] = rs.getObject(1);
-//                row[i][1] = rs.getObject(2);
-//                row[i][2] = rs.getObject(3);
-//                row[i][3] = rs.getObject(4);
-//                row[i][4] = rs.getObject(5);
-//                row[i][5] = rs.getObject(6);
-//                i++;
-//
-//            }
-//
-//            rs.close();
-//            s.close();
-//            conn.close();
-//        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-//        }
-//        return row;
-//    }
-        public void populateInventoryTables() {
-            String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit"};
-            try {
-    
-                Class.forName(driver).newInstance();
-                Connection conn = DriverManager.getConnection(url, username, password);
-                Statement s = conn.createStatement();
-                String query = "SELECT * FROM inventory ";
-                ResultSet rs = s.executeQuery(query);
-                ResultSetMetaData metaData = rs.getMetaData();
-                int columnCount = metaData.getColumnCount();
-                DefaultTableModel tableModel = new DefaultTableModel();
-                MainSystem.tblInventory.setModel(tableModel);
-    
-                for (int i = 0; i < columnCount; i++) {
-                    tableModel.addColumn(columnNamesInventory[i]);
-                }
-                Object[] row = new Object[columnCount];
-    
-                while (rs.next()) {
-                    for (int i = 0; i < columnCount; i++) {
-                        row[i] = rs.getObject(i + 1);
-                    }
-                    MainSystem.searchITable();
-                    tableModel.addRow(row);
-                }
-                rs.close();
-                s.close();
-                conn.close();
-            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+    public Object[][] getInventoryData() {
+        Object[][] rowData = null;
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT * FROM inventory ";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            int rowCount = 0;
+            while (rs.next()) {
+                rowCount++;
             }
+            rs = s.executeQuery(query);
+            rowData = new Object[rowCount][columnCount];
+            int i = 0;
+            while (rs.next()) {
+                rowData[i][0] = rs.getObject(1);
+                rowData[i][1] = rs.getObject(2);
+                rowData[i][2] = rs.getObject(3);
+                rowData[i][3] = rs.getObject(4);
+                rowData[i][4] = rs.getObject(5);
+                rowData[i][5] = rs.getObject(6);
+                i++;
+            }
+
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
+        return rowData;
+    }
 
-    public void populateRecipeTables() {
-        String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
-
+    public Object[][] getRecipeData() {
+        Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -125,32 +90,33 @@ public class dbManager {
             String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT FROM recipe";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
-            DefaultTableModel tableModel1 = new DefaultTableModel();
-            MainSystem.tableRecipe.setModel(tableModel1);
-
             int columnCount = metaData.getColumnCount();
-            for (int i = 0; i < columnCount; i++) {
-                tableModel1.addColumn(columnNamesRecipe[i]);
-            }
-
-            Object[] row = new Object[columnCount];
-
+            int rowCount = 0;
             while (rs.next()) {
-                for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
-                }
-                MainSystem.searchRTable();
-                tableModel1.addRow(row);
+                rowCount++;
             }
+            rs = s.executeQuery(query);
+            rowData = new Object[rowCount][columnCount];
+            int i = 0;
+            while (rs.next()) {
+                rowData[i][0] = rs.getObject(1);
+                rowData[i][1] = rs.getObject(2);
+                rowData[i][2] = rs.getObject(3);
+                rowData[i][3] = rs.getObject(4);
+                rowData[i][4] = rs.getObject(5);
+                i++;
+            }
+
             rs.close();
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
+        return rowData;
     }
 
-    public void populateRecipeListTables() {
-        String columnNamesRecipeList[] = {"Recipe ID", "Recipe Name", "Inventory ID", "Item Name", "Quantity"};
+    public Object[][] getRecipeListData() {
+        Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -162,32 +128,33 @@ public class dbManager {
                     + "AND inventory.inventoryID=inventory_recipe.inventoryID ";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
-            DefaultTableModel tableModel1 = new DefaultTableModel();
-            MainSystem.tableRecipeList.setModel(tableModel1);
-
-            int columnCount = 5;
-            for (int i = 0; i < columnCount; i++) {
-                tableModel1.addColumn(columnNamesRecipeList[i]);
-            }
-
-            Object[] row = new Object[columnCount];
-
+            int columnCount = metaData.getColumnCount();
+            int rowCount = 0;
             while (rs.next()) {
-                for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
-                }
-                tableModel1.addRow(row);
+                rowCount++;
             }
+            rs = s.executeQuery(query);
+            rowData = new Object[rowCount][columnCount];
+            int i = 0;
+            while (rs.next()) {
+                rowData[i][0] = rs.getObject(1);
+                rowData[i][1] = rs.getObject(2);
+                rowData[i][2] = rs.getObject(3);
+                rowData[i][3] = rs.getObject(4);
+                rowData[i][4] = rs.getObject(5);
+                i++;
+            }
+
             rs.close();
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-            System.out.println(exc);
         }
+        return rowData;
     }
 
-    public void populateSupplierTables() {
-        String columnNamesSuppler[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
+    public Object[][] getSuppleirData() {
+        Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -196,27 +163,65 @@ public class dbManager {
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
-            DefaultTableModel tableModel2 = new DefaultTableModel();
-            MainSystem.tblSupplier.setModel(tableModel2);
-
-            for (int i = 0; i < columnNamesSuppler.length; i++) {
-                tableModel2.addColumn(columnNamesSuppler[i]);
-            }
-            Object[] row = new Object[columnCount];
-
+            int rowCount = 0;
             while (rs.next()) {
-                for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
-                }
-                MainSystem.searchSTable();
-                tableModel2.addRow(row);
+                rowCount++;
+            }
+            rs = s.executeQuery(query);
+            rowData = new Object[rowCount][columnCount];
+            int i = 0;
+            while (rs.next()) {
+                rowData[i][0] = rs.getObject(1);
+                rowData[i][1] = rs.getObject(2);
+                rowData[i][2] = rs.getObject(3);
+                rowData[i][3] = rs.getObject(4);
+                rowData[i][4] = rs.getObject(5);
+                i++;
             }
             rs.close();
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-
         }
+        return rowData;
+    }
+    
+     public Object[][] getOrderData() {
+        Object[][] rowData = null;
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT stockOrderID, inventory.item, supplier.supplierName,dateOrdered, dateETA, quantity, status "
+                    + "FROM stockOrder, inventory, supplier "
+                    + "WHERE inventory.inventoryID=stockorder.inventoryID "
+                    + "AND supplier.supplierID=stockorder.supplierID";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            int rowCount = 0;
+            while (rs.next()) {
+                rowCount++;
+            }
+            rs = s.executeQuery(query);
+            rowData = new Object[rowCount][columnCount];
+            int i = 0;
+            while (rs.next()) {
+                rowData[i][0] = rs.getObject(1);
+                rowData[i][1] = rs.getObject(2);
+                rowData[i][2] = rs.getObject(3);
+                rowData[i][3] = rs.getObject(4);
+                rowData[i][4] = rs.getObject(5);
+                rowData[i][5] = rs.getObject(6);
+                rowData[i][6] = rs.getObject(7);
+                i++;
+            }
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+        }
+        return rowData;
     }
 
     public void populateEmpTable() {
@@ -273,43 +278,6 @@ public class dbManager {
                     row[i] = rs.getObject(i + 1);
                 }
                 tableModelRes.addRow(row);
-            }
-            Booking.tableRes.getColumnModel().getColumn(0).setPreferredWidth(45);
-            Booking.tableRes.getColumnModel().getColumn(2).setPreferredWidth(45);
-            rs.close();
-            s.close();
-            conn.close();
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-            System.out.println(exc);
-        }
-    }
-
-    public void populateOrder() {
-        String columnNamesEmp[] = {"ID", "Item", "Supplier Name", "Date Ordered", "ETA", "Quantity(g)", "Status"};
-        try {
-            Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String query = "SELECT stockOrderID, inventory.item, supplier.supplierName,dateOrdered, dateETA, quantity, status "
-                    + "FROM stockOrder, inventory, supplier "
-                    + "WHERE inventory.inventoryID=stockorder.inventoryID "
-                    + "AND supplier.supplierID=stockorder.supplierID";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            DefaultTableModel tableModel = new DefaultTableModel();
-            MainSystem.getOrderTable().setModel(tableModel);
-
-            for (int i = 0; i < columnCount; i++) {
-                tableModel.addColumn(columnNamesEmp[i]);
-            }
-            Object[] row = new Object[columnCount];
-
-            while (rs.next()) {
-                for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
-                }
-                tableModel.addRow(row);
             }
             Booking.tableRes.getColumnModel().getColumn(0).setPreferredWidth(45);
             Booking.tableRes.getColumnModel().getColumn(2).setPreferredWidth(45);
@@ -694,7 +662,6 @@ public class dbManager {
                     + "'" + threshold + "', '"
                     + limit + "')";
             s.execute(insertQuery);
-            populateInventoryTables();
             logs.writeLogs("ADDED");
             s.close();
             conn.close();
@@ -721,7 +688,6 @@ public class dbManager {
             while (rs.next()) {
                 ID = rs.getString("recipeID");
             }
-            populateRecipeTables();
             logs.writeLogs("ADDED");
             s.close();
             conn.close();
@@ -774,7 +740,6 @@ public class dbManager {
                     + getRecipeID() + "', '"
                     + qty + "')";
             s.execute(insertQuerySup);
-            populateRecipeListTables();
             logs.writeLogs("ADDED");
             s.close();
             conn.close();
@@ -793,7 +758,6 @@ public class dbManager {
                     + number + "', '"
                     + address + "')";
             s.execute(insertQuerySup);
-            populateSupplierTables();
             logs.writeLogs("ADDED");
             s.close();
             conn.close();
@@ -835,7 +799,6 @@ public class dbManager {
                     + date + "', '"
                     + quantity + "', 'Not Delievered')";
             s.execute(insertQuerySup);
-            populateOrder();
             logs.writeLogs("ADDED");
             s.close();
             conn.close();
@@ -859,7 +822,6 @@ public class dbManager {
                 ID = rs.getString("salesID");
             }
             insertEmployeeSales(ID, user);
-            populateOrder();
             logs.writeLogs("ADDED");
             s.close();
             conn.close();
@@ -918,7 +880,6 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM inventory WHERE inventoryID='" + index + "'";
             s.execute(query);
-            populateInventoryTables();
             logs.writeLogs("DELETED");
             s.close();
             conn.close();
@@ -934,7 +895,6 @@ public class dbManager {
             String query1 = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
             s.execute(query1);
             s.execute(query);
-            populateRecipeTables();
             removeRecipeList(index);
             logs.writeLogs("DELETED");
             s.close();
@@ -949,7 +909,6 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
             s.execute(query);
-            populateRecipeListTables();
             logs.writeLogs("DELETED");
             s.close();
             conn.close();
@@ -963,7 +922,7 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'AND inventoryID='" + ID + "'";
             s.execute(query);
-            populateRecipeListTables();
+
             logs.writeLogs("DELETED");
             s.close();
             conn.close();
@@ -977,7 +936,6 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM supplier WHERE supplierID='" + index + "'";
             s.execute(query);
-            populateSupplierTables();
             logs.writeLogs("DELETED");
             s.close();
             conn.close();
@@ -1097,17 +1055,16 @@ public class dbManager {
         }
     }
 
-    public void updateInventoryQty(String item, String qty,String operator) {
+    public void updateInventoryQty(String item, String qty, String operator) {
         int ID = getInvetoryID(item);
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "UPDATE inventory set qty=qty"+operator+"'" + qty + "' "
+            String query = "UPDATE inventory set qty=qty" + operator + "'" + qty + "' "
                     + "WHERE inventoryID='" + ID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             System.out.println("ran");
             preparedStmt.executeUpdate();
-            populateInventoryTables();
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -1205,7 +1162,6 @@ public class dbManager {
             s.execute(updateQuery);
             PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
             preparedStmt.executeUpdate();
-            populateOrder();
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -1270,11 +1226,6 @@ public class dbManager {
 
             if (processComplete == 0) {
                 JOptionPane.showMessageDialog(null, "Database Successfully Restored");
-                populateInventoryTables();
-                populateRecipeTables();
-                populateRecipeListTables();
-                populateSupplierTables();
-                populateOrder();
             } else {
                 JOptionPane.showMessageDialog(null, "Restore Failed");
             }

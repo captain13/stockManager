@@ -44,21 +44,68 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         settings.xmlValidition();
         logs.logValidation();
         clock.internalClock();
-        system.populateInventoryTables();
-        system.populateRecipeTables();
-        system.populateRecipeListTables();
-        system.populateSupplierTables();
-        system.populateOrder();
         network.recieveData(jTable1);
+        populateInvnetoryTable();
+        populateRecipeTable();
+        populateRecipeListTable();
+        populateSupplierTable();
+        populateOrderTable();
         getSetting();
-        //  setTableDesign();
     }
 
-    public final void setTableDesign() {
-//        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit"};
-//        DefaultTableModel tableModel = new DefaultTableModel(system.populateInventoryTables(), columnNamesInventory);
-//        tblInventory.setModel(tableModel);
-//        searchITable();
+    public final void populateInvnetoryTable() {
+        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit"};
+        DefaultTableModel tableModel = new DefaultTableModel(system.getInventoryData(), columnNamesInventory);
+        tblInventory.setModel(tableModel);
+        searchITable();
+        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
+        tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
+    }
+
+    public final void populateRecipeTable() {
+        String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
+        DefaultTableModel tableModel = new DefaultTableModel(system.getRecipeData(), columnNamesRecipe);
+        tableRecipe.setModel(tableModel);
+        searchRTable();
+//        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
+//        tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
+    }
+
+    public final void populateRecipeListTable() {
+        String columnNamesRecipeList[] = {"Recipe ID", "Recipe Name", "Inventory ID", "Item Name", "Quantity"};
+        DefaultTableModel tableModel = new DefaultTableModel(system.getRecipeListData(), columnNamesRecipeList);
+        tableRecipeList.setModel(tableModel);
+//         searchTable();
+//        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
+//        tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
+    }
+//
+
+    public final void populateSupplierTable() {
+        String columnNamesSupplier[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
+        DefaultTableModel tableModel = new DefaultTableModel(system.getSuppleirData(), columnNamesSupplier);
+        tblSupplier.setModel(tableModel);
+        searchSTable();
+//        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
+//        tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
+    }
+
+    public final void populateOrderTable() {
+        String columnNames[] = {"ID", "Item", "Supplier Name", "Date Ordered", "ETA", "Quantity(g)", "Status"};
+        DefaultTableModel tableModel = new DefaultTableModel(system.getOrderData(), columnNames);
+        tblOrderHistory.setModel(tableModel);
 //        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
 //        tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
 //        tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
@@ -98,127 +145,110 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public static void searchITable() {
-        if (tblInventory.getRowCount() != 1) {
-            tblInventory.setRowSorter(null);
-
-        } else {
-            try {
-                TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tblInventory.getModel());
-                tblInventory.setRowSorter(rowSorter);
-
-                textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
-                    @Override
-                    public void insertUpdate(DocumentEvent e) {
-                        String text = textboxSearch.getText();
-                        if (text.trim().length() == 0) {
-                            rowSorter.setRowFilter(null);
-                        } else {
-                            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                        }
+        try {
+            TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tblInventory.getModel());
+            tblInventory.setRowSorter(rowSorter);
+            textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    String text = textboxSearch.getText();
+                    if (text.trim().length() == 0) {
+                        rowSorter.setRowFilter(null);
+                    } else {
+                        rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
+                }
 
-                    @Override
-                    public void removeUpdate(DocumentEvent e) {
-                        String text = textboxSearch.getText();
-                        if (text.trim().length() == 0) {
-                            rowSorter.setRowFilter(null);
-                        } else {
-                            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                        }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    String text = textboxSearch.getText();
+                    if (text.trim().length() == 0) {
+                        rowSorter.setRowFilter(null);
+                    } else {
+                        rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
+                }
 
-                    @Override
-                    public void changedUpdate(DocumentEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet.");
-                    }
-                });
-            } catch (Exception ex) {
-            }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                }
+            });
+        } catch (Exception ex) {
         }
     }
 
     public static void searchRTable() {
-        if (tableRecipe.getRowCount() != 1) {
-            tableRecipe.setRowSorter(null);
+        try {
+            TableRowSorter<TableModel> rowSorterRecipe = new TableRowSorter<>(tableRecipe.getModel());
+            tableRecipe.setRowSorter(rowSorterRecipe);
 
-        } else {
-            try {
-                TableRowSorter<TableModel> rowSorterRecipe = new TableRowSorter<>(tableRecipe.getModel());
-                tableRecipe.setRowSorter(rowSorterRecipe);
+            ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+            sortKeys.add(new RowSorter.SortKey(2, SortOrder.DESCENDING));
+            sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
+            rowSorterRecipe.setSortKeys(sortKeys);
 
-                ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
-                sortKeys.add(new RowSorter.SortKey(2, SortOrder.DESCENDING));
-                sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
-                rowSorterRecipe.setSortKeys(sortKeys);
-
-                textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
-                    @Override
-                    public void insertUpdate(DocumentEvent e) {
-                        String text = textboxSearch.getText();
-                        if (text.trim().length() == 0) {
-                            rowSorterRecipe.setRowFilter(null);
-                        } else {
-                            rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                        }
+            textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    String text = textboxSearch.getText();
+                    if (text.trim().length() == 0) {
+                        rowSorterRecipe.setRowFilter(null);
+                    } else {
+                        rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
+                }
 
-                    @Override
-                    public void removeUpdate(DocumentEvent e) {
-                        String text = textboxSearch.getText();
-                        if (text.trim().length() == 0) {
-                            rowSorterRecipe.setRowFilter(null);
-                        } else {
-                            rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                        }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    String text = textboxSearch.getText();
+                    if (text.trim().length() == 0) {
+                        rowSorterRecipe.setRowFilter(null);
+                    } else {
+                        rowSorterRecipe.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
+                }
 
-                    @Override
-                    public void changedUpdate(DocumentEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    }
-                });
-            } catch (Exception ex) {
-            }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+        } catch (Exception ex) {
         }
     }
 
-    public static void searchSTable() {
-        if (tblSupplier.getRowCount() != 1) {
-            tblSupplier.setRowSorter(null);
-
-        } else {
-            try {
-                TableRowSorter<TableModel> rowSorterSup = new TableRowSorter<>(tblSupplier.getModel());
-                tblSupplier.setRowSorter(rowSorterSup);
-                textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
-                    @Override
-                    public void insertUpdate(DocumentEvent e) {
-                        String text = textboxSearch.getText();
-                        if (text.trim().length() == 0) {
-                            rowSorterSup.setRowFilter(null);
-                        } else {
-                            rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                        }
+    public void searchSTable() {
+        try {
+            TableRowSorter<TableModel> rowSorterSup = new TableRowSorter<>(tblSupplier.getModel());
+            tblSupplier.setRowSorter(rowSorterSup);
+            textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    String text = textboxSearch.getText();
+                    if (text.trim().length() == 0) {
+                        rowSorterSup.setRowFilter(null);
+                    } else {
+                        rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
+                }
 
-                    @Override
-                    public void removeUpdate(DocumentEvent e) {
-                        String text = textboxSearch.getText();
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    String text = textboxSearch.getText();
 
-                        if (text.trim().length() == 0) {
-                            rowSorterSup.setRowFilter(null);
-                        } else {
-                            rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                        }
+                    if (text.trim().length() == 0) {
+                        rowSorterSup.setRowFilter(null);
+                    } else {
+                        rowSorterSup.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                     }
+                }
 
-                    @Override
-                    public void changedUpdate(DocumentEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet.");
-                    }
-                });
-            } catch (Exception ex) {
-            }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    throw new UnsupportedOperationException("Not supported yet.");
+                }
+            });
+        } catch (Exception ex) {
         }
     }
 
@@ -255,7 +285,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public void updateShrinkage() {
         String qty = JOptionPane.showInputDialog(null, "Enter the Shrinkage for the Select Item");
         String item = tblInventory.getValueAt(tblInventory.getSelectedRow(), 1).toString();
-        system.updateInventoryQty(item, qty,"-");
+        system.updateInventoryQty(item, qty, "-");
     }
 
     public void updateRecipe() {
@@ -1686,7 +1716,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_TabbedPanelFocusGained
 
     private void buttonRecipeAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAddActionPerformed
-        AddDatabase database = new AddDatabase();
+        AddDatabase database = new AddDatabase(this);
         database.setVisible(true);
         AddDatabase.getTabbedPanel().setSelectedIndex(1);
         if (keypadCheck() == true) {
@@ -1702,10 +1732,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         //Admin login object set to visible
         //s.setVisible(true);
         updateSupplier();
+        populateInvnetoryTable();
     }//GEN-LAST:event_buttonEditActionPerformed
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        AddDatabase database = new AddDatabase();
+        AddDatabase database = new AddDatabase(this);
         database.setVisible(true);
         if (keypadCheck() == true) {
             Keyboard k = new Keyboard();
@@ -1715,7 +1746,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonRecipeAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAdd1ActionPerformed
-        AddDatabase database = new AddDatabase();
+        AddDatabase database = new AddDatabase(this);
         database.setVisible(true);
         AddDatabase.getTabbedPanel().setSelectedIndex(2);
         if (keypadCheck() == true) {
@@ -1733,6 +1764,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             system.removeInventory(getID());
+            populateInvnetoryTable();
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
@@ -1740,6 +1772,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             system.removeRecipe(getIDrecipe());
+            populateRecipeTable();
         }
     }//GEN-LAST:event_buttonRecipeDeleteActionPerformed
 
@@ -1747,6 +1780,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             system.removeSupplier(getIDsupplier());
+            populateSupplierTable();
         }
     }//GEN-LAST:event_buttonRecipeDelete1ActionPerformed
 
@@ -1759,7 +1793,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void buttonMakeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMakeOrderActionPerformed
-        OrderForm newOrder = new OrderForm();
+        OrderForm newOrder = new OrderForm(this);
         newOrder.setVisible(true);
     }//GEN-LAST:event_buttonMakeOrderActionPerformed
 
@@ -1815,6 +1849,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to retore?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             system.restore();
+            populateInvnetoryTable();
+            populateRecipeTable();
+            populateRecipeListTable();
+            populateSupplierTable();
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -1861,6 +1899,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         //Admin login object set to visible
         //s.setVisible(true);
         updateInventory();
+        populateRecipeTable();
     }//GEN-LAST:event_buttonRecipeEditActionPerformed
 
     private void buttonRecipeEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit1ActionPerformed
@@ -1869,6 +1908,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         //Admin login object set to visible
         //s.setVisible(true);
         updateRecipe();
+        populateSupplierTable();
     }//GEN-LAST:event_buttonRecipeEdit1ActionPerformed
 
     private void buttonEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEventsActionPerformed
@@ -1901,10 +1941,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
         updateShrinkage();
+        populateInvnetoryTable();
     }//GEN-LAST:event_buttonEdit1ActionPerformed
 
     private void buttonOrderHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOrderHistoryActionPerformed
         updateStockOrder();
+        populateInvnetoryTable();
+        populateOrderTable();
     }//GEN-LAST:event_buttonOrderHistoryActionPerformed
 
     private void buttonReprint3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprint3ActionPerformed
@@ -2027,7 +2070,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public static javax.swing.JTable tableRecipeList;
     public static javax.swing.JTable tblInventory;
     private static javax.swing.JTable tblOrderHistory;
-    public static javax.swing.JTable tblSupplier;
+    private javax.swing.JTable tblSupplier;
     private static javax.swing.JTextField textboxSearch;
     // End of variables declaration//GEN-END:variables
 }

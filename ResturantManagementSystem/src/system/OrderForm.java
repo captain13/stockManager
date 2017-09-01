@@ -8,18 +8,20 @@ import javax.swing.JOptionPane;
  */
 public class OrderForm extends javax.swing.JFrame {
 
+    MainSystem system;
     dbManager newManager = new dbManager();
     emailClient client = new emailClient();
     internalClock clock = new internalClock();
     Object[][] recipeInfo = null;
     Object[][] supplierInfo = null;
 
-    public OrderForm() {
+    public OrderForm(MainSystem system) {
         initComponents();
         setLocationRelativeTo(null);
         setCurrentDate();
         getInventoryItem();
         getSupplierInfo();
+        this.system = system;
     }
 
     public final void getInventoryItem() {
@@ -259,6 +261,7 @@ public class OrderForm extends javax.swing.JFrame {
         if (!"".equals(getSupplierID()) || !"".equals(getInventoryID()) || !"".equals(getQuantity())) {
             newManager.insertStockOrder(getInventoryID(), getSupplierID(), getQuantity(), getDate());
             sendEmail();
+            system.populateOrderTable();
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Please Enter All Fields");
