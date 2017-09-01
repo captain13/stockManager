@@ -61,6 +61,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         startTime();
         this.tables = tables;
     }
+//
+//    NewOrder() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     public void menuLayout() {
 
@@ -235,7 +239,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         return Double.parseDouble(textfieldTotal.getText().replaceAll("R", ""));
     }
 
-    public String getWaiter() {
+    public static String getWaiter() {
         return nameTF.getText();
     }
 
@@ -280,6 +284,16 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             String order = tblItems.getModel().getValueAt(i, 0).toString();
             newManager.updateOrderCount(order);
         }
+    }
+    
+    public static String[][] itemsList() {
+        int rowCount = tblItems.getRowCount();
+        String[][] list = new String[rowCount][3];
+        for (int i = 0; i < rowCount; i++) {
+            for (int n = 0; n < 3; n++)
+            list[i][n] = tblItems.getValueAt(i, n).toString();
+        }
+        return list;
     }
 
     public void closeTable() {

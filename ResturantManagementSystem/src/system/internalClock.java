@@ -40,7 +40,7 @@ public class internalClock extends Thread {
         logoutTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
     }
     
-     public String setCurrentTimeStamp() {
+     public static String setCurrentTimeStamp() {
         String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
         return time;
     }

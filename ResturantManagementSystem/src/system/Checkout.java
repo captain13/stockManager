@@ -263,7 +263,11 @@ public class Checkout extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        calculateBill();
+        //calculateBill();
+        receiptHandler newHandler = new receiptHandler();
+        newHandler.printReceipt();
+        newHandler.writeTextToPDF();
+        this.dispose();//for debugging
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
