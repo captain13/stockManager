@@ -1,18 +1,25 @@
 package system;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Andrew
  */
-public class Employee extends javax.swing.JFrame {
+public class EmployeeForm extends javax.swing.JFrame {
 
     dbManager newManager = new dbManager();
 
-    public Employee() {
+    public EmployeeForm() {
         initComponents();
-        newManager.populateEmpTable();
+        populateEmployeeTable(); 
+    }
+
+    public final void populateEmployeeTable() {
+        String columnNames[] = {"ID", "First Name", "Last Name", "Number", "Hours Worked"};
+        DefaultTableModel tableModel = new DefaultTableModel(newManager.getEmployeeData(), columnNames);
+        tableEmp.setModel(tableModel);
     }
 
     public int getID() {
@@ -178,7 +185,7 @@ public class Employee extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        AddEmployee s = new AddEmployee();
+        AddEmployee s = new AddEmployee(this);
         s.setVisible(true);
     }//GEN-LAST:event_buttonAddActionPerformed
 
@@ -186,6 +193,7 @@ public class Employee extends javax.swing.JFrame {
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             newManager.removeEmployee(getID());
+            populateEmployeeTable();
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
@@ -201,7 +209,7 @@ public class Employee extends javax.swing.JFrame {
         if (jToggleButton1.isSelected()) {
             newManager.showActiveEmp();
         } else {
-            newManager.populateEmpTable();
+           populateEmployeeTable();
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 

@@ -13,7 +13,6 @@ public class SpecialsPrompt extends javax.swing.JFrame {
 
     dbManager newManager = new dbManager();
     SpecialsForm form;
-    Object[] recipeInfo;
   
     public SpecialsPrompt() {
         initComponents();
@@ -22,11 +21,9 @@ public class SpecialsPrompt extends javax.swing.JFrame {
     }
 
     public final void getRecipeName() {
-        int n = newManager.getRecipe().length;
-        recipeInfo = new Object[n];
+        int n = newManager.getRecipeData().length;
         for (int i = 0; i < n; i++) {
-             recipeInfo[i] =newManager.getRecipe()[i][1];
-            jComboBox1.addItem((String) recipeInfo[i]);
+            jComboBox1.addItem((String) newManager.getRecipeData()[i][1]);
         }
     }
 

@@ -61,11 +61,11 @@ public class networkHandler {
 
         try {
 
-            for (int i = 0; i < system.getRecipe().length; i++) {
-                recipeName = new String[system.getRecipe().length][3];
+            for (int i = 0; i < system.getRecipeData().length; i++) {
+                recipeName = new String[system.getRecipeData().length][3];
                 recipeName[i][0] = "Null";
-                recipeName[i][1] = system.getRecipe()[i][1];
-                recipeName[i][2] = system.getRecipe()[i][2];
+                recipeName[i][1] = system.getRecipeData()[i][1];
+                recipeName[i][2] = system.getRecipeData()[i][2];
             }
 
             ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());

@@ -24,7 +24,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
-    Booking booking = new Booking();
+    BookingForm booking = new BookingForm();
     Calendar calendar = new Calendar();
     Specials specials;
     userManager user = new userManager();
@@ -144,7 +144,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    public static void searchITable() {
+    public void searchITable() {
         try {
             TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tblInventory.getModel());
             tblInventory.setRowSorter(rowSorter);
@@ -177,7 +177,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    public static void searchRTable() {
+    public void searchRTable() {
         try {
             TableRowSorter<TableModel> rowSorterRecipe = new TableRowSorter<>(tableRecipe.getModel());
             tableRecipe.setRowSorter(rowSorterRecipe);
@@ -396,7 +396,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         return lblClock;
     }
 
-    public static JTable getOrderTable() {
+    public JTable getOrderTable() {
         return tblOrderHistory;
     }
 
@@ -1628,7 +1628,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void buttonEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmployeeActionPerformed
-        Employee emp = new Employee();
+        EmployeeForm emp = new EmployeeForm();
         emp.setVisible(true);
     }//GEN-LAST:event_buttonEmployeeActionPerformed
 
@@ -2066,10 +2066,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel pnlRecipeList;
     private javax.swing.JPanel pnlSupplier;
     private javax.swing.JPanel pnlViewOrder;
-    public static javax.swing.JTable tableRecipe;
-    public static javax.swing.JTable tableRecipeList;
-    public static javax.swing.JTable tblInventory;
-    private static javax.swing.JTable tblOrderHistory;
+    private javax.swing.JTable tableRecipe;
+    private javax.swing.JTable tableRecipeList;
+    private javax.swing.JTable tblInventory;
+    private javax.swing.JTable tblOrderHistory;
     private javax.swing.JTable tblSupplier;
     private static javax.swing.JTextField textboxSearch;
     // End of variables declaration//GEN-END:variables

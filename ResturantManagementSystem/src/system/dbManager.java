@@ -87,7 +87,7 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT FROM recipe";
+            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT,recipeImageDirectory FROM recipe";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -104,6 +104,7 @@ public class dbManager {
                 rowData[i][2] = rs.getObject(3);
                 rowData[i][3] = rs.getObject(4);
                 rowData[i][4] = rs.getObject(5);
+                 rowData[i][5] = rs.getObject(6);
                 i++;
             }
 
@@ -185,8 +186,8 @@ public class dbManager {
         }
         return rowData;
     }
-    
-     public Object[][] getOrderData() {
+
+    public Object[][] getOrderData() {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
@@ -224,8 +225,8 @@ public class dbManager {
         return rowData;
     }
 
-    public void populateEmpTable() {
-        String columnNamesEmp[] = {"ID", "First Name", "Last Name", "Number", "Hours Worked"};
+    public Object[][] getEmployeeData() {
+        Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -234,29 +235,31 @@ public class dbManager {
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
-            DefaultTableModel tableModel3 = new DefaultTableModel();
-            Employee.tableEmp.setModel(tableModel3);
-
-            for (int i = 0; i < columnCount; i++) {
-                tableModel3.addColumn(columnNamesEmp[i]);
-            }
-            Object[] row = new Object[columnCount];
-
+            int rowCount = 0;
             while (rs.next()) {
-                for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
-                }
-                tableModel3.addRow(row);
+                rowCount++;
+            }
+            rs = s.executeQuery(query);
+            rowData = new Object[rowCount][columnCount];
+            int i = 0;
+            while (rs.next()) {
+                rowData[i][0] = rs.getObject(1);
+                rowData[i][1] = rs.getObject(2);
+                rowData[i][2] = rs.getObject(3);
+                rowData[i][3] = rs.getObject(4);
+                rowData[i][4] = rs.getObject(5);
+                i++;
             }
             rs.close();
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
+        return rowData;
     }
 
-    public void populateReservation() {
-        String columnNamesEmp[] = {"Employee", "Date", "Time", "Customer", "Table No.", "No. Customer"};
+    public Object[][] getReservationData() {
+        Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -265,32 +268,32 @@ public class dbManager {
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
-            DefaultTableModel tableModelRes = new DefaultTableModel();
-            Booking.tableRes.setModel(tableModelRes);
-
-            for (int i = 0; i < columnCount; i++) {
-                tableModelRes.addColumn(columnNamesEmp[i]);
-            }
-            Object[] row = new Object[columnCount];
-
+            int rowCount = 0;
             while (rs.next()) {
-                for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
-                }
-                tableModelRes.addRow(row);
+                rowCount++;
             }
-            Booking.tableRes.getColumnModel().getColumn(0).setPreferredWidth(45);
-            Booking.tableRes.getColumnModel().getColumn(2).setPreferredWidth(45);
+            rs = s.executeQuery(query);
+            rowData = new Object[rowCount][columnCount];
+            int i = 0;
+            while (rs.next()) {
+                rowData[i][0] = rs.getObject(1);
+                rowData[i][1] = rs.getObject(2);
+                rowData[i][2] = rs.getObject(3);
+                rowData[i][3] = rs.getObject(4);
+                rowData[i][4] = rs.getObject(5);
+                rowData[i][5] = rs.getObject(6);
+                i++;
+            }
             rs.close();
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-            System.out.println(exc);
         }
+        return rowData;
     }
 
-    public void populateSales(JTable sales, String type) {
-        String columnNames[] = {"ID", "Sales Date", "Total Sale"};
+    public Object[][] getSalesData(String type) {
+        Object[][] rowData = null;
         String query = null;
         String date = clock.getCurrentDate();
         String currentDATE[] = clock.getCurrentDate().split("-");
@@ -316,30 +319,29 @@ public class dbManager {
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
-            DefaultTableModel tableModel = new DefaultTableModel();
-            sales.setModel(tableModel);
-
-            for (int i = 0; i < columnCount; i++) {
-                tableModel.addColumn(columnNames[i]);
-            }
-            Object[] row = new Object[columnCount];
-
+            int rowCount = 0;
             while (rs.next()) {
-                for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
-                }
-                tableModel.addRow(row);
+                rowCount++;
+            }
+            rs = s.executeQuery(query);
+            rowData = new Object[rowCount][columnCount];
+            int i = 0;
+            while (rs.next()) {
+                rowData[i][0] = rs.getObject(1);
+                rowData[i][1] = rs.getObject(2);
+                rowData[i][2] = rs.getObject(3);
+                i++;
             }
             rs.close();
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-            System.out.println(exc);
         }
+        return rowData;
     }
 
-    public void populateEmployeeSales(JTable sales) {
-        String columnNames[] = {"Sale ID", "User", "Employee ID"};
+    public Object[][] getEmployeeSales() {
+        Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -348,47 +350,54 @@ public class dbManager {
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
-            DefaultTableModel tableModel = new DefaultTableModel();
-            sales.setModel(tableModel);
-
-            for (int i = 0; i < columnCount; i++) {
-                tableModel.addColumn(columnNames[i]);
-            }
-            Object[] row = new Object[columnCount];
-
+            int rowCount = 0;
             while (rs.next()) {
-                for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
-                }
-                tableModel.addRow(row);
+                rowCount++;
+            }
+            rs = s.executeQuery(query);
+            rowData = new Object[rowCount][columnCount];
+            int i = 0;
+            while (rs.next()) {
+                rowData[i][0] = rs.getObject(1);
+                rowData[i][1] = rs.getObject(2);
+                rowData[i][2] = rs.getObject(3);
+                i++;
             }
             rs.close();
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-            System.out.println(exc);
         }
+        return rowData;
     }
 
-    public Object[][] getSpecialDetails() {
-        Object[][] row = new Object[getRecipesCount()][6];
+    public Object[][] getSpecialData() {
+        Object[][] rowData =null;
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
+
             String query = "SELECT recipe.specialsID, recipeName,recipeType, specialsPrice,recipeImageDirectory, status "
                     + "FROM recipe,specials "
                     + "WHERE recipe.specialsID=specials.specialsID";
             ResultSet rs = s.executeQuery(query);
-
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            int rowCount = 0;
+            while (rs.next()) {
+                rowCount++;
+            }
+            rowData = new Object[rowCount][columnCount];
+            rs = s.executeQuery(query);
             int i = 0;
             while (rs.next()) {
-                row[i][0] = rs.getObject(1);
-                row[i][1] = rs.getObject(2);
-                row[i][2] = rs.getObject(3);
-                row[i][3] = rs.getObject(4);
-                row[i][4] = rs.getObject(6);
-                row[i][5] = rs.getObject(5);
+                rowData[i][0] = rs.getObject(1);
+                rowData[i][1] = rs.getObject(2);
+                rowData[i][2] = rs.getObject(3);
+                rowData[i][3] = rs.getObject(4);
+                rowData[i][4] = rs.getObject(6);
+                rowData[i][5] = rs.getObject(5);
                 i++;
             }
 
@@ -398,7 +407,7 @@ public class dbManager {
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
-        return row;
+        return rowData;
     }
 
     public String[][] getIngredients() {
@@ -433,84 +442,17 @@ public class dbManager {
         }
         return ingredients;
     }
-
-    public Object[][] getRecipe() {
-        int count = getRecipesCount();
-        Object recipe[][] = new Object[count][6];
+    
+     public String getItemName(String ID) {
+        String itemName = null;
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT recipeName,recipePrice,recipeImageDirectory,recipeType,recipeCount FROM recipe ";
-            ResultSet rs = s.executeQuery(query);
-
-            int i = 0;
-            while (rs.next()) {
-                recipe[i][0] = i;
-                recipe[i][1] = rs.getString(1);
-                recipe[i][2] = rs.getString(2);
-                recipe[i][3] = rs.getString(3);
-                recipe[i][4] = rs.getString(4);
-                recipe[i][5] = rs.getString(5);
-                i++;
-            }
-
-//            for (int j = 0; j < i; j++) {
-//                System.out.println(recipe[j][0]);
-//                System.out.println(recipe[j][1]);
-//                System.out.println(recipe[j][2]);
-//                System.out.println(recipe[j][3]);
-//            }
-//                recipeName.add(rs.getString(1));
-//                recipeIndex.add(rs.getString(2));
-//                recipeImage.add(rs.getString(3));
-            rs.close();
-            s.close();
-            conn.close();
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-            System.out.println(exc);
-        }
-        return recipe;
-    }
-
-    public Object[][] getSupplier() {
-        int count = getSupplierCount();
-        Object supplier[][] = new Object[count][5];
-        try {
-            Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String query = "SELECT * FROM supplier ";
-            ResultSet rs = s.executeQuery(query);
-            int i = 0;
-            while (rs.next()) {
-                supplier[i][0] = rs.getString(1);
-                supplier[i][1] = rs.getString(2);
-                supplier[i][2] = rs.getString(3);
-                supplier[i][3] = rs.getString(4);
-                supplier[i][4] = rs.getString(5);
-                i++;
-            }
-
-            rs.close();
-            s.close();
-            conn.close();
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-            System.out.println(exc);
-        }
-        return supplier;
-    }
-
-    public int getRecipesCount() {
-        int count = 0;
-        try {
-            Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String query = "SELECT COUNT(recipeID) FROM recipe";
+            String query = "SELECT item FROM inventory WHERE inventoryID='" + ID + "'";
             ResultSet rs = s.executeQuery(query);
             if (rs.next()) {
-                count = rs.getInt(1);
+                itemName = rs.getString(1);
             }
             rs.close();
             s.close();
@@ -518,27 +460,7 @@ public class dbManager {
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
-        return count;
-    }
-
-    public int getSupplierCount() {
-        int count = 0;
-        try {
-            Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String query = "SELECT COUNT(supplierID) FROM supplier";
-            ResultSet rs = s.executeQuery(query);
-            if (rs.next()) {
-                count = rs.getInt(1);
-            }
-            rs.close();
-            s.close();
-            conn.close();
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-            System.out.println(exc);
-        }
-        return count;
+        return itemName;
     }
 
     public String getSupplierName(String ID) {
@@ -561,26 +483,7 @@ public class dbManager {
         return supplierName;
     }
 
-    public String getItemName(String ID) {
-        String itemName = null;
-        try {
-            Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String query = "SELECT item FROM inventory WHERE inventoryID='" + ID + "'";
-            ResultSet rs = s.executeQuery(query);
-            if (rs.next()) {
-                itemName = rs.getString(1);
-            }
-            rs.close();
-            s.close();
-            conn.close();
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
-            System.out.println(exc);
-        }
-        return itemName;
-    }
-
+    //delete later
     public void showActiveEmp() {
         String columnNamesEmp[] = {"First Name", "Last Name", "Active"};
         try {
@@ -592,7 +495,7 @@ public class dbManager {
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
             DefaultTableModel tableModel3 = new DefaultTableModel();
-            Employee.tableEmp.setModel(tableModel3);
+            EmployeeForm.tableEmp.setModel(tableModel3);
 
             for (int i = 0; i < columnCount; i++) {
                 tableModel3.addColumn(columnNamesEmp[i]);
@@ -642,7 +545,6 @@ public class dbManager {
                     + "00:00" + "','"
                     + adminRights + "')";
             s.execute(insertQuery);
-            populateEmpTable();
             logs.writeLogs("ADDED");
             s.close();
             conn.close();
@@ -778,7 +680,6 @@ public class dbManager {
                     + customerNum + "')";
             s.execute(insertQuerySup);
             JOptionPane.showMessageDialog(null, "Reservation Added");
-            populateReservation();
             logs.writeLogs("ADDED");
             s.close();
             conn.close();
@@ -949,7 +850,6 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM employee WHERE employeeID='" + index + "'";
             s.execute(query);
-            populateEmpTable();
             logs.writeLogs("DELETED");
             s.close();
             conn.close();
@@ -964,7 +864,7 @@ public class dbManager {
             String query = "UPDATE specials set status= '1' WHERE specialsID='" + specialsID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.executeUpdate();
-            getSpecialDetails();
+            getSpecialData();
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -1139,7 +1039,6 @@ public class dbManager {
     }
 
     public void updateOrderCount(String order) {
-        System.out.println(order);
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();

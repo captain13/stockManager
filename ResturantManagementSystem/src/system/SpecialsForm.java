@@ -29,14 +29,10 @@ public class SpecialsForm extends javax.swing.JFrame {
     }
 
     public final void setTable() {
-        int n = system.getSpecialDetails().length;
-        row = new Object[n][6];
-        for (int i = 0; i < n; i++) {
-            System.arraycopy(system.getSpecialDetails()[i], 0, row[i], 0, 6);
-        }
-        DefaultTableModel model = new DefaultTableModel(row, columnNamesRecipe);
+        DefaultTableModel model = new DefaultTableModel(system.getSpecialData(), columnNamesRecipe);
         jTable1.setModel(model);
     }
+    
     public String getSpecialID() {
         return jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
     }

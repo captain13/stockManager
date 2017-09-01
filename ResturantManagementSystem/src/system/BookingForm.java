@@ -1,19 +1,32 @@
 package system;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Andrew
  */
-public class Booking extends javax.swing.JFrame {
+public class BookingForm extends javax.swing.JFrame {
 
     dbManager newManager = new dbManager();
     internalClock clock = new internalClock();
 
-    public Booking() {
+    public BookingForm() {
         initComponents();
-        newManager.populateReservation();
+        populateReservationTable();
         setCurrentDate();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    public final void populateReservationTable() {
+        String columnNames[] = {"Employee", "Date", "Time", "Customer", "Table No.", "No. Customer"};
+        DefaultTableModel tableModel = new DefaultTableModel(newManager.getReservationData(), columnNames);
+        tableReservation.setModel(tableModel);
+//        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
+//        tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
     }
 
     public String getCustomerName() {
@@ -118,7 +131,7 @@ public class Booking extends javax.swing.JFrame {
         comboboxYear = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableRes = new javax.swing.JTable();
+        tableReservation = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -282,8 +295,8 @@ public class Booking extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Add Revervation", jPanel1);
 
-        tableRes.setAutoCreateRowSorter(true);
-        tableRes.setModel(new javax.swing.table.DefaultTableModel(
+        tableReservation.setAutoCreateRowSorter(true);
+        tableReservation.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -294,8 +307,8 @@ public class Booking extends javax.swing.JFrame {
                 "Employee ID", "Date", "Table No.", "No.of People"
             }
         ));
-        tableRes.setGridColor(new java.awt.Color(204, 204, 204));
-        jScrollPane1.setViewportView(tableRes);
+        tableReservation.setGridColor(new java.awt.Color(204, 204, 204));
+        jScrollPane1.setViewportView(tableReservation);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -338,6 +351,7 @@ public class Booking extends javax.swing.JFrame {
 
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
         newManager.insertReservations(getEmployee(), getDate(), getTime(), getCustomerName(), getTableNum(), getCustomerNum());
+        populateReservationTable();
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
@@ -375,7 +389,7 @@ public class Booking extends javax.swing.JFrame {
     private javax.swing.JLabel lblNumber4;
     private javax.swing.JLabel lblTime;
     private javax.swing.JLabel lblTitle;
-    public static javax.swing.JTable tableRes;
+    public static javax.swing.JTable tableReservation;
     public static javax.swing.JTextField textCustomerName;
     public static javax.swing.JTextField textCustomerNum;
     public static javax.swing.JTextField textEmp;

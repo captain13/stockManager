@@ -30,17 +30,17 @@ public class Specials extends javax.swing.JFrame {
         GridLayout grid = new GridLayout(0, 2);
         pnlItems.setLayout(grid);
 
-        for (int i = 0; i < newManager.getSpecialDetails().length; i++) {
-            if (newManager.getSpecialDetails()[i][4].equals(true)) {
+        for (int i = 0; i < newManager.getSpecialData().length; i++) {
+            if (newManager.getSpecialData()[i][4].equals(true)) {
                 j++;
                 System.out.println(j);
             }
         }
         specialsItem = new Object[j];
 
-        for (int i = 0; i < newManager.getSpecialDetails().length; i++) {
-            if (newManager.getSpecialDetails()[i][4].equals(true)) {
-                specialsItem[i] = newManager.getSpecialDetails()[i][5];
+        for (int i = 0; i < newManager.getSpecialData().length; i++) {
+            if (newManager.getSpecialData()[i][4].equals(true)) {
+                specialsItem[i] = newManager.getSpecialData()[i][5];
             }
         }
 

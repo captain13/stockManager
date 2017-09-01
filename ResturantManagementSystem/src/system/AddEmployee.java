@@ -8,11 +8,13 @@ import javax.swing.JOptionPane;
  */
 public class AddEmployee extends javax.swing.JFrame {
     dbManager newManger=new dbManager();
+    EmployeeForm newForm;
     /**
      * Creates new form AddEmployee
      */
-    public AddEmployee() {
+    public AddEmployee(EmployeeForm newForm) {
         initComponents();
+        this.newForm=newForm;
     }
 
     public String getEmpFirstName() {
@@ -219,6 +221,7 @@ public class AddEmployee extends javax.swing.JFrame {
 
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
         newManger.insertEmployee(getEmpFirstName(), getEmpLastName(), getEmpPassword(), getEmpContact(), getAdminRights());
+        newForm.populateEmployeeTable();
         this.dispose();
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 

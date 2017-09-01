@@ -13,7 +13,29 @@ public class Reports extends javax.swing.JFrame {
 
     public Reports() {
         initComponents();
-        newManager.populateSales(tableSales, "ALL");
+        populateOrderTable("ALL");
+    }
+
+    public final void populateOrderTable(String action) {
+        String columnNames[] = {"ID", "Sales Date", "Total Sale"};
+        DefaultTableModel tableModel = new DefaultTableModel(newManager.getSalesData(action), columnNames);
+        tableSales.setModel(tableModel);
+//        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
+//        tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
+    }
+    
+      public final void populateEmployeeSalesTable() {
+        String columnNames[] = {"Sale ID", "User", "Employee ID"};
+        DefaultTableModel tableModel = new DefaultTableModel(newManager.getEmployeeSales(), columnNames);
+        tableSales.setModel(tableModel);
+//        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
+//        tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
     }
 
     public int getID() {
@@ -24,12 +46,12 @@ public class Reports extends javax.swing.JFrame {
     public void populateStockCount() {
         String columnNames[] = {"Item", "Ordered Count"};
 
-        int n = newManager.getRecipe().length;
+        int n = newManager.getRecipeData().length;
         row = new Object[n][2];
         int index = 0;
         for (int i = 0; i < n; i++) {
-            row[i][0] = newManager.getRecipe()[i][1];
-            row[i][1] = newManager.getRecipe()[i][5];
+            row[i][0] = newManager.getRecipeData()[i][1];
+            row[i][1] = newManager.getRecipeData()[i][5];
         }
         DefaultTableModel tableModel = new DefaultTableModel(row, columnNames);
         tableSales.setModel(tableModel);
@@ -179,19 +201,19 @@ public class Reports extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose1ActionPerformed
-        newManager.populateSales(tableSales, "ALL");
+        populateOrderTable("ALL");
     }//GEN-LAST:event_buttonClose1ActionPerformed
 
     private void buttonClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose2ActionPerformed
-        newManager.populateEmployeeSales(tableSales);
+        populateEmployeeSalesTable();
     }//GEN-LAST:event_buttonClose2ActionPerformed
 
     private void buttonClose3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose3ActionPerformed
-        newManager.populateSales(tableSales, "MONTH");
+        populateOrderTable("MONTH");
     }//GEN-LAST:event_buttonClose3ActionPerformed
 
     private void buttonClose4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose4ActionPerformed
-        newManager.populateSales(tableSales, "DAY");
+        populateOrderTable("DAY");
     }//GEN-LAST:event_buttonClose4ActionPerformed
 
     private void buttonClose5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose5ActionPerformed

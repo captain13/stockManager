@@ -67,21 +67,12 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 //    }
 
     public void menuLayout() {
-
-        int n = newManager.getRecipe().length;
-        recipeInfo = new Object[n][5];
+        int n = newManager.getRecipeData().length;
+        recipeInfo = new Object[n][6];
         int index = 0;
         for (int i = 0; i < n; i++) {
-            System.arraycopy(newManager.getRecipe()[i], 0, recipeInfo[i], 0, 5);
+            System.arraycopy(newManager.getRecipeData()[i], 0, recipeInfo[i], 0, 6);
         }
-
-//        for (int i = 0; i < n; i++) {
-//            System.out.println(recipeInfo[i][0]);
-//            System.out.println(recipeInfo[i][1]);
-//            System.out.println(recipeInfo[i][2]);
-//            System.out.println(recipeInfo[i][3]);
-//            System.out.println(recipeInfo[i][4]);
-//        }
         GridLayout menuLayout = new GridLayout(0, 8);
         mainMealTab.setLayout(menuLayout);
         drinksTab.setLayout(menuLayout);
@@ -95,8 +86,8 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         int emptySpaceTab5 = 0;
 
         for (int i = 0; i < n; i++) {
-            if (recipeInfo[i][4].equals("Main Meal")) {
-                ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
+            if (recipeInfo[i][2].equals("Main Meal")) {
+                ImageIcon icon = (new ImageIcon(recipeInfo[i][5].toString()));
                 button = new JButton(recipeInfo[i][1].toString(), icon);
                 button.setVerticalTextPosition(SwingConstants.BOTTOM);
                 button.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -211,7 +202,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         String buttonId = ae.getActionCommand();
         for (Object[] recipeInfo1 : recipeInfo) {
             if (buttonId.equals(recipeInfo1[1].toString())) {
-                model.addRow(new Object[]{recipeInfo1[1], "1", recipeInfo1[2]});
+                model.addRow(new Object[]{recipeInfo1[1], "1", recipeInfo1[3]});
             }
         }
         totalAmount();

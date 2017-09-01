@@ -35,12 +35,9 @@ public class OrderForm extends javax.swing.JFrame {
     }
 
     public final void getSupplierInfo() {
-        int n = newManager.getSupplierCount();
-        supplierInfo = new Object[n][5];
-        int index = 0;
+        int n = newManager.getSuppleirData().length;
         for (int i = 0; i < n; i++) {
-            System.arraycopy(newManager.getSupplier()[i], 0, supplierInfo[i], 0, 5);
-            jComboBox2.addItem(supplierInfo[i][1].toString());
+            jComboBox2.addItem(newManager.getSuppleirData()[i][1].toString());
         }
     }
 
