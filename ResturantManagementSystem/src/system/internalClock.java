@@ -3,6 +3,7 @@ package system;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JLabel;
 
 /**
  *
@@ -11,24 +12,25 @@ import java.util.Date;
 public class internalClock extends Thread {
 
     static ArrayList<String> loginTime = new ArrayList();
-    static String logoutTime;
-    static String currentDate;
+    String logoutTime;
+    String currentDate;
 
-    public void internalClock() {
+    public void internalClock(JLabel time, JLabel date) {
         new Thread(() -> {
             while (true) {
-                MainSystem.getTime().setText(new SimpleDateFormat("HH:mm:ss").format(new Date()));
-                MainSystem.getDate().setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+                time.setText(new SimpleDateFormat("HH:mm:ss").format(new Date()));
+                date.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
             }
         }).start();
     }
 
-    public void setLoginTimeStamp() {
-        loginTime.add(new SimpleDateFormat("HH:mm:ss").format(new Date()));
-    }
-
     public ArrayList getLoginTimeStamp() {
         return loginTime;
+    }
+
+    public String getCurrentTimeStamp() {
+        String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
+        return time;
     }
 
     public String getCurrentDate() {
@@ -37,12 +39,11 @@ public class internalClock extends Thread {
     }
 
     public void setLogoutTimeStamp() {
-        logoutTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
+        logoutTime = getCurrentTimeStamp();
     }
-    
-     public static String setCurrentTimeStamp() {
-        String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
-        return time;
+
+    public void setLoginTimeStamp() {
+        loginTime.add(getCurrentTimeStamp());
     }
 
     public String calculateHours(int i, String previousHours) {

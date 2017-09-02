@@ -43,7 +43,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         system.dbValidation();
         settings.xmlValidition();
         logs.logValidation();
-        clock.internalClock();
+        clock.internalClock(lblClock,lblDate);
         network.recieveData(jTable1);
         populateInvnetoryTable();
         populateRecipeTable();
@@ -386,14 +386,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public int getIDsupplier() {
         int id = (int) tblSupplier.getValueAt(tblSupplier.getSelectedRow(), 0);
         return id;
-    }
-
-    public static JLabel getDate() {
-        return lblDate;
-    }
-
-    public static JLabel getTime() {
-        return lblClock;
     }
 
     public JTable getOrderTable() {
@@ -2048,8 +2040,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;
-    private static javax.swing.JLabel lblClock;
-    private static javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblClock;
+    private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblLogo1;

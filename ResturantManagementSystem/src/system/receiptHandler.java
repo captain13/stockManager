@@ -25,12 +25,13 @@ public class receiptHandler {
     String head;
     String body;
     String tail;
+    internalClock clock=new internalClock();
 
     public void header() {
         head = "********************************** \n"
                 + "COMPANY NAME " + " " + "\n"
-                + "TIME " + internalClock.setCurrentTimeStamp() + " "
-                + internalClock.currentDate + " \n"
+                + "TIME " + clock.getCurrentTimeStamp() + " "
+                + clock.currentDate + " \n"
                 + "********************************** ";
         System.out.println(head);
     }

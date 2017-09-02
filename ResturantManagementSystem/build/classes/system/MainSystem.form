@@ -263,9 +263,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Date"/>
                   </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
-                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="buttonLogin">
                   <Properties>
@@ -282,9 +279,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Clock"/>
                   </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
-                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="buttonLogOut">
                   <Properties>
