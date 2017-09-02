@@ -31,7 +31,7 @@ public class receiptHandler {
         head = "********************************** \n"
                 + "COMPANY NAME " + " " + "\n"
                 + "TIME " + clock.getCurrentTimeStamp() + " "
-                + clock.currentDate + " \n"
+                + clock.getCurrentDate() + " \n"
                 + "********************************** ";
         System.out.println(head);
     }

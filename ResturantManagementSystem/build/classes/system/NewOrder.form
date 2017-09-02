@@ -33,31 +33,39 @@
                   <Component id="jToggleButton8" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="buttonEdit" alignment="0" pref="166" max="32767" attributes="0"/>
-                          <Component id="buttonClose" alignment="1" max="32767" attributes="0"/>
-                          <Component id="buttonPay" alignment="1" pref="166" max="32767" attributes="0"/>
-                          <Component id="textfieldTotal" alignment="0" pref="166" max="32767" attributes="0"/>
-                          <Component id="jScrollPane2" alignment="1" pref="0" max="32767" attributes="0"/>
-                          <Component id="buttonOverride" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblTitle" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblClock1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblWaiter" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="nameTF" min="-2" pref="78" max="-2" attributes="0"/>
+                                  <Component id="buttonEdit" alignment="0" pref="166" max="32767" attributes="0"/>
+                                  <Component id="buttonClose" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="textfieldTotal" alignment="0" pref="166" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane2" alignment="1" pref="0" max="32767" attributes="0"/>
+                                  <Component id="buttonOverride" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblTitle" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblClock1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="lblWaiter" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="nameTF" min="-2" pref="78" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="lblNum" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="customerNo" min="-2" pref="34" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblNum" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="customerNo" min="-2" pref="34" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="buttonEdit1" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="buttonPay" pref="168" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="menuPane" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
@@ -89,10 +97,12 @@
                       </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="lblClock1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="buttonPay" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonOverride" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonEdit1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonEdit" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -118,7 +128,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonEdit">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Edit Order"/>
+        <Property name="text" type="java.lang.String" value="Remove Order"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEditActionPerformed"/>
@@ -358,6 +368,14 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="customerNo">
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonEdit1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Edit Order"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEdit1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
