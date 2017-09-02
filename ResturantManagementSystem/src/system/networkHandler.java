@@ -26,7 +26,7 @@ public class networkHandler {
     boolean IS_RUNNING = true;
     dbManager system = new dbManager();
     String IP;
-    
+
     public final void getIP() {
         IP = JOptionPane.showInputDialog(null, "Enter Host IP address");
     }
@@ -39,12 +39,10 @@ public class networkHandler {
         try {
             recipeName = new String[table.getRowCount()][3];
             for (int i = 0; i < table.getRowCount(); i++) {
-
                 recipeName[i][0] = tableNum;
                 recipeName[i][1] = (table.getValueAt(i, 0).toString());
                 recipeName[i][2] = (table.getValueAt(i, 1).toString());
             }
-
             ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());
             objectOutput.writeObject(recipeName);
             myServerSocket.close();
@@ -60,9 +58,9 @@ public class networkHandler {
         Socket skt = myServerSocket.accept();
 
         try {
-
+            recipeName = new String[system.getRecipeData().length][3];
             for (int i = 0; i < system.getRecipeData().length; i++) {
-                recipeName = new String[system.getRecipeData().length][3];
+
                 recipeName[i][0] = "Null";
                 recipeName[i][1] = system.getRecipeData()[i][1];
                 recipeName[i][2] = system.getRecipeData()[i][2];

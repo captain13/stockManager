@@ -27,7 +27,7 @@ public class networkHandler {
     String IP;
 
     public networkHandler() {
-       getIP(); 
+        getIP();
     }
 
     public final void getIP() {
@@ -44,7 +44,6 @@ public class networkHandler {
                     Socket socket = new Socket(IP, 9999);
                     ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream());
                     Object[][] order = (Object[][]) objectInput.readObject();
-
                     row = new Object[columnNames.length];
 
                     for (int i = 0; i < order.length; i++) {
@@ -53,8 +52,8 @@ public class networkHandler {
                         row[2] = order[i][2];
                         row[3] = clock.setCurrentTimeStamp();
                         row[4] = "Not Ready";
+                        model.addRow(row);
                     }
-                    model.addRow(row);
 
                     socket.close();
                 } catch (ClassNotFoundException e) {
