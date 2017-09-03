@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 public class EmployeeForm extends javax.swing.JFrame {
 
     dbManager newManager = new dbManager();
-   
 
     public EmployeeForm() {
         initComponents();
@@ -42,6 +41,10 @@ public class EmployeeForm extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Passwords do not Match");
         }
+    }
+
+    public void calculateWage() {
+        newManager.calcHoursWorked(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -216,8 +219,7 @@ public class EmployeeForm extends javax.swing.JFrame {
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         //Employee Salary
-        newManager.calcHoursWorked(null);
-
+        calculateWage();
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

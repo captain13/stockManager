@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 public class internalClock extends Thread {
 
     static ArrayList<String> loginTime = new ArrayList();
-    String logoutTime;
+    static String logoutTime;
     String currentDate;
 
     public void internalClock(JLabel time, JLabel date) {
