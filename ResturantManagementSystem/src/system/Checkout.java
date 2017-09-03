@@ -8,28 +8,33 @@ public class Checkout extends javax.swing.JFrame {
 
     String number;
     String user;
+    double total;
     double currentTotal;
     dbManager newManager = new dbManager();
     receiptHandler newHandler = new receiptHandler();
 
-    public Checkout(String user) {
+    public Checkout(String user, Double total) {
         initComponents();
         super.setLocationRelativeTo(null);
         this.user = user;
+        this.total = total;
+        jTextField1.setText(total.toString());
     }
 
     public void calculateBill() {
-        double total;
-        currentTotal = NewOrder.getTotal();
+        double totalCost;
+        currentTotal = total;
         if (number != null) {
-            total = Double.parseDouble(number) - currentTotal;
+            totalCost = Double.parseDouble(number) - currentTotal;
 
-            if (total >= 0) {
-                totalField.setText("Change: R" + Double.toString(total));
+            if (totalCost >= 0) {
+                jTextField2.setText("Change: R" + Double.toString(totalCost));
                 newManager.insertSales(currentTotal, user);
+                newHandler.printReceipt(total);
+                newHandler.writeTextToPDF();
 
-            } else if (total < 0) {
-                totalField.setText("Outstanding: R" + Double.toString(total));
+            } else if (totalCost < 0) {
+                jTextField2.setText("Outstanding: R" + Double.toString(totalCost));
             }
         }
     }
@@ -61,6 +66,7 @@ public class Checkout extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -237,6 +243,18 @@ public class Checkout extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(75, 75, 75));
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -245,14 +263,17 @@ public class Checkout extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                    .addComponent(jTextField3))
+                    .addComponent(jTextField3)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -323,9 +344,6 @@ public class Checkout extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         calculateBill();
-        newHandler.printReceipt();
-        newHandler.writeTextToPDF();
-        this.dispose();//for debugging
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -386,6 +404,14 @@ public class Checkout extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -405,6 +431,7 @@ public class Checkout extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     public static javax.swing.JFormattedTextField totalField;
     // End of variables declaration//GEN-END:variables

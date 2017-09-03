@@ -966,6 +966,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         lblSearch.setText("Search ");
 
+        pnlInventory.setBackground(new java.awt.Color(255, 255, 255));
+
         tblInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -1003,30 +1005,50 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             tblInventory.getColumnModel().getColumn(5).setHeaderValue("Distrubutor Name");
         }
 
+        buttonAdd.setBackground(new java.awt.Color(0, 138, 231));
+        buttonAdd.setForeground(new java.awt.Color(255, 255, 255));
         buttonAdd.setText("Add");
+        buttonAdd.setContentAreaFilled(false);
+        buttonAdd.setOpaque(true);
         buttonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAddActionPerformed(evt);
             }
         });
 
+        buttonEdit.setBackground(new java.awt.Color(0, 138, 231));
+        buttonEdit.setForeground(new java.awt.Color(255, 255, 255));
         buttonEdit.setText("Edit");
+        buttonEdit.setContentAreaFilled(false);
+        buttonEdit.setOpaque(true);
         buttonEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonEditActionPerformed(evt);
             }
         });
 
+        buttonDelete.setBackground(new java.awt.Color(0, 138, 231));
+        buttonDelete.setForeground(new java.awt.Color(255, 255, 255));
         buttonDelete.setText("Delete");
+        buttonDelete.setContentAreaFilled(false);
+        buttonDelete.setOpaque(true);
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDeleteActionPerformed(evt);
             }
         });
 
+        buttonPrint.setBackground(new java.awt.Color(75, 75, 75));
+        buttonPrint.setForeground(new java.awt.Color(255, 255, 255));
         buttonPrint.setText("Print");
+        buttonPrint.setContentAreaFilled(false);
+        buttonPrint.setOpaque(true);
 
+        buttonEdit1.setBackground(new java.awt.Color(0, 138, 231));
+        buttonEdit1.setForeground(java.awt.Color.white);
         buttonEdit1.setText("Shrinkage");
+        buttonEdit1.setContentAreaFilled(false);
+        buttonEdit1.setOpaque(true);
         buttonEdit1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonEdit1ActionPerformed(evt);
@@ -1734,7 +1756,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonLayoutActionPerformed
 
     private void buttonReprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprintActionPerformed
-        receipt.printReceipt();
+        
     }//GEN-LAST:event_buttonReprintActionPerformed
 
     private void comboBoxSceenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxSceenItemStateChanged

@@ -317,6 +317,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jTextField1" alignment="0" pref="165" max="32767" attributes="0"/>
                           <Component id="jTextField3" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTextField2" alignment="1" pref="165" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -326,7 +327,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" pref="193" max="-2" attributes="0"/>
+                      <Component id="jTextField1" min="-2" pref="51" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jTextField2" min="-2" pref="51" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jTextField3" min="-2" pref="58" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -336,8 +339,16 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="jTextField1">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField3">
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField2">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

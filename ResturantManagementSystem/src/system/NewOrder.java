@@ -226,7 +226,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         });
     }
 
-    public static Double getTotal() {
+    public Double getTotal() {
         return Double.parseDouble(textfieldTotal.getText().replaceAll("R", ""));
     }
 
@@ -330,14 +330,22 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
         lblTitle.setText("Order");
 
+        buttonEdit.setBackground(new java.awt.Color(0, 138, 231));
+        buttonEdit.setForeground(new java.awt.Color(255, 255, 255));
         buttonEdit.setText("Remove Order");
+        buttonEdit.setContentAreaFilled(false);
+        buttonEdit.setOpaque(true);
         buttonEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonEditActionPerformed(evt);
             }
         });
 
+        buttonClose.setBackground(new java.awt.Color(0, 138, 231));
+        buttonClose.setForeground(new java.awt.Color(255, 255, 255));
         buttonClose.setText("Close");
+        buttonClose.setContentAreaFilled(false);
+        buttonClose.setOpaque(true);
         buttonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCloseActionPerformed(evt);
@@ -349,7 +357,11 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         textfieldTotal.setFocusable(false);
         textfieldTotal.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
 
+        buttonPay.setBackground(new java.awt.Color(0, 138, 231));
+        buttonPay.setForeground(new java.awt.Color(255, 255, 255));
         buttonPay.setText("Pay");
+        buttonPay.setContentAreaFilled(false);
+        buttonPay.setOpaque(true);
         buttonPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonPayActionPerformed(evt);
@@ -372,7 +384,11 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         tblItems.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(tblItems);
 
+        jToggleButton8.setBackground(new java.awt.Color(75, 75, 75));
+        jToggleButton8.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton8.setText("Close Table");
+        jToggleButton8.setContentAreaFilled(false);
+        jToggleButton8.setOpaque(true);
         jToggleButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton8ActionPerformed(evt);
@@ -384,6 +400,8 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         lblNum.setText("No. of Customers:");
 
         lblClock1.setText("Clock");
+
+        mainMealTab.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout mainMealTabLayout = new javax.swing.GroupLayout(mainMealTab);
         mainMealTab.setLayout(mainMealTabLayout);
@@ -450,14 +468,22 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
         menuPane.addTab("Extras", extraTab);
 
+        buttonOverride.setBackground(new java.awt.Color(0, 138, 231));
+        buttonOverride.setForeground(new java.awt.Color(255, 255, 255));
         buttonOverride.setText("Send Order");
+        buttonOverride.setContentAreaFilled(false);
+        buttonOverride.setOpaque(true);
         buttonOverride.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOverrideActionPerformed(evt);
             }
         });
 
+        buttonEdit1.setBackground(new java.awt.Color(0, 138, 231));
+        buttonEdit1.setForeground(new java.awt.Color(255, 255, 255));
         buttonEdit1.setText("Edit Order");
+        buttonEdit1.setContentAreaFilled(false);
+        buttonEdit1.setOpaque(true);
         buttonEdit1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonEdit1ActionPerformed(evt);
@@ -557,7 +583,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayActionPerformed
-        Checkout s = new Checkout(getWaiter());
+        Checkout s = new Checkout(getWaiter(),getTotal());
         s.setVisible(true);
     }//GEN-LAST:event_buttonPayActionPerformed
 

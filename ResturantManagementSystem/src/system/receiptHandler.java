@@ -43,21 +43,24 @@ public class receiptHandler {
         System.out.println(body);
     }
 
-    public void tail() {
-        tail = "Total " + NewOrder.getTotal() + "\n"
-                + "                                     \n"
+    public void tail(double total) {
+        tail = "Total " +total + "\n"
+                + "                                   \n"
                 + "********************************** \n"
-                + "THANK YOU PLEASE COME AGAIN        \n"
-                + "WAITER " + NewOrder.getWaiter() + "  \n"
+                + "             THANK YOU             \n"
+                + "         PLEASE COME AGAIN         \n"
+                + "                                   \n"
+                + "             WAITER                \n"
+                         + NewOrder.getWaiter() + "  \n"
                 + "********************************** ";
         System.out.println(tail);
     }
 
-    public void printReceipt() {
+    public void printReceipt(double total) {
         //String whitespace_charclass = "["  + whitespace_chars + "]";
         header();
         body();
-        tail();
+        tail(total);
         //        for (String[] itemsList : NewOrder.itemsList()) {
         //            for (String itemsList1 : itemsList) {
         //                System.out.print(itemsList1 + " ");
