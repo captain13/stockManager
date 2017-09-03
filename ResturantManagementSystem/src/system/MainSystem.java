@@ -11,6 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static javafx.scene.paint.Color.color;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -39,6 +42,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     HashMap<String, NewOrder> tables = new HashMap<>();
     boolean enableKeypad = false;
     int n;
+     JButton button;
 
     public MainSystem() {
         initComponents();
@@ -117,7 +121,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public final void tableLayout() {
         pnlLayout.removeAll();
-        JButton button;
         GridLayout tableLayout = new GridLayout(0, 4);
         pnlLayout.setLayout(tableLayout);
         int emptySpace = 20 - n;
@@ -463,13 +466,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         TabbedPanel = new javax.swing.JTabbedPane();
         Dashboard = new javax.swing.JPanel();
         lblImage = new javax.swing.JLabel();
-        lblVersion = new javax.swing.JLabel();
         buttonClose = new javax.swing.JButton();
         pnlLeft = new javax.swing.JPanel();
         buttonBookings = new javax.swing.JButton();
         buttonEvents = new javax.swing.JButton();
         buttonSpecials = new javax.swing.JButton();
         buttonPromotions = new javax.swing.JButton();
+        lblVersion = new javax.swing.JLabel();
         pnlPanel = new javax.swing.JPanel();
         lblDate = new javax.swing.JLabel();
         buttonLogin = new javax.swing.JButton();
@@ -567,14 +570,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        Dashboard.setBackground(new java.awt.Color(242, 241, 241));
+        Dashboard.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblImage.setBackground(new java.awt.Color(255, 255, 255));
         lblImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo_White.png"))); // NOI18N
         lblImage.setToolTipText("");
-
-        lblVersion.setText("Version 1.0.0");
 
         buttonClose.setBackground(new java.awt.Color(75, 75, 75));
         buttonClose.setForeground(new java.awt.Color(255, 255, 255));
@@ -589,6 +589,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 buttonCloseActionPerformed(evt);
             }
         });
+
+        pnlLeft.setBackground(new java.awt.Color(245, 245, 245));
 
         buttonBookings.setBackground(new java.awt.Color(0, 138, 231));
         buttonBookings.setForeground(new java.awt.Color(255, 255, 255));
@@ -634,6 +636,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        lblVersion.setText("Version 1.0.0");
+
         javax.swing.GroupLayout pnlLeftLayout = new javax.swing.GroupLayout(pnlLeft);
         pnlLeft.setLayout(pnlLeftLayout);
         pnlLeftLayout.setHorizontalGroup(
@@ -651,6 +655,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         .addComponent(buttonBookings, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(pnlLeftLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(lblVersion)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlLeftLayout.setVerticalGroup(
             pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -663,8 +671,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(buttonPromotions, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonEvents, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
+                .addComponent(lblVersion)
+                .addGap(20, 20, 20))
         );
+
+        pnlPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         lblDate.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblDate.setText("Date");
@@ -694,36 +706,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        javax.swing.GroupLayout pnlPanelLayout = new javax.swing.GroupLayout(pnlPanel);
-        pnlPanel.setLayout(pnlPanelLayout);
-        pnlPanelLayout.setHorizontalGroup(
-            pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonLogOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlPanelLayout.createSequentialGroup()
-                        .addGroup(pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblClock, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDate, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        pnlPanelLayout.setVerticalGroup(
-            pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblClock, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonLogOut)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo_help.png"))); // NOI18N
         jButton3.setBorder(null);
         jButton3.setBorderPainted(false);
@@ -734,25 +716,56 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        javax.swing.GroupLayout pnlPanelLayout = new javax.swing.GroupLayout(pnlPanel);
+        pnlPanel.setLayout(pnlPanelLayout);
+        pnlPanelLayout.setHorizontalGroup(
+            pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPanelLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDate)
+                    .addComponent(lblClock)
+                    .addGroup(pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(buttonLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonLogOut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        pnlPanelLayout.setVerticalGroup(
+            pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPanelLayout.createSequentialGroup()
+                .addGroup(pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblClock, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlPanelLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonLogin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonLogOut)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+        );
+
         javax.swing.GroupLayout DashboardLayout = new javax.swing.GroupLayout(Dashboard);
         Dashboard.setLayout(DashboardLayout);
         DashboardLayout.setHorizontalGroup(
             DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DashboardLayout.createSequentialGroup()
+                .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DashboardLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblVersion)
-                        .addGap(225, 225, 225)
-                        .addComponent(buttonClose, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
-                        .addGap(178, 178, 178))
+                        .addGap(154, 154, 154)
+                        .addComponent(buttonClose, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                        .addGap(130, 130, 130))
                     .addGroup(DashboardLayout.createSequentialGroup()
-                        .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(95, 95, 95)
-                        .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
-                        .addGap(114, 114, 114)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                        .addGap(87, 87, 87)))
                 .addComponent(pnlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -761,24 +774,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             .addGroup(DashboardLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(DashboardLayout.createSequentialGroup()
-                        .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(DashboardLayout.createSequentialGroup()
-                                .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(DashboardLayout.createSequentialGroup()
-                                        .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 176, Short.MAX_VALUE))
-                                    .addComponent(lblImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(DashboardLayout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblVersion)
-                            .addComponent(buttonClose))
-                        .addContainerGap())
-                    .addComponent(pnlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(17, 467, Short.MAX_VALUE)
+                        .addComponent(buttonClose)
+                        .addContainerGap())))
+            .addComponent(pnlLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         TabbedPanel.addTab("Dashboard", Dashboard);
@@ -898,6 +900,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonReprint2.setForeground(new java.awt.Color(255, 255, 255));
         buttonReprint2.setText("Setup TCP");
         buttonReprint2.setContentAreaFilled(false);
+        buttonReprint2.setOpaque(true);
         buttonReprint2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonReprint2ActionPerformed(evt);
@@ -964,6 +967,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         );
 
         TabbedPanel.addTab("Orders", Orders);
+
+        Inventory.setBackground(new java.awt.Color(255, 255, 255));
+
+        textboxSearch.setBackground(new java.awt.Color(240, 240, 240));
 
         lblSearch.setText("Search ");
 
@@ -1554,7 +1561,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 508, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(buttonOrderHistory)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1569,9 +1576,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(buttonEmployee)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(buttonEmployee1)
-                    .addGap(266, 266, 266)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
                     .addComponent(buttonManageSpecials)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout ManagementLayout = new javax.swing.GroupLayout(Management);
@@ -1586,13 +1593,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         );
         ManagementLayout.setVerticalGroup(
             ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ManagementLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(ManagementLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                .addGap(90, 90, 90))
         );
 
         TabbedPanel.addTab("Management", Management);

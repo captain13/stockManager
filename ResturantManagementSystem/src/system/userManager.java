@@ -24,7 +24,7 @@ public class userManager {
         loginSystem = new Login();
         loginSystem.setVisible(true);
     }
-
+    
     public void createUserLog(String waiter) {
         userLog = new UserForm(usernames);
         userLog.setWaiter(waiter);
@@ -45,6 +45,20 @@ public class userManager {
             loginSystem.disposeLogin();
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
+        }
+    }
+    
+       public boolean adimLoginAuthentication(String username, String password) {
+        boolean login = newManager.login(username, password);
+        if (login == true) {
+            addUser(username);
+            clock.setLoginTimeStamp();
+            newManager.updateEmployeeStatusIn(username);
+            loginSystem.disposeLogin();
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
+            return false;
         }
     }
 
