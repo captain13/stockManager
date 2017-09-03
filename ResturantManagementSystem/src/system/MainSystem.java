@@ -1,5 +1,6 @@
 package system;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -1953,12 +1954,18 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+              
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.getLookAndFeelDefaults().put("Button.toolBarBorderBackground", Color.BLUE);
+                    UIManager.getLookAndFeelDefaults().put("Button.foreground", Color.WHITE);
                     break;
-
+                }
+                 if ("Macintosh".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
