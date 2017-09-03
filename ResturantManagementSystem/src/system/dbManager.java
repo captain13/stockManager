@@ -27,7 +27,7 @@ public class dbManager {
     internalClock clock = new internalClock();
     String url = "jdbc:mysql://localhost:3306/resturantdb";
     String username = "root";
-    String password = "root";
+    String password = "Mouse";
     String driver = "com.mysql.jdbc.Driver";
     String currentUsersHomeDir = System.getProperty("user.home");
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";
@@ -104,7 +104,7 @@ public class dbManager {
                 rowData[i][2] = rs.getObject(3);
                 rowData[i][3] = rs.getObject(4);
                 rowData[i][4] = rs.getObject(5);
-                 rowData[i][5] = rs.getObject(6);
+                rowData[i][5] = rs.getObject(6);
                 i++;
             }
 
@@ -372,7 +372,7 @@ public class dbManager {
     }
 
     public Object[][] getSpecialData() {
-        Object[][] rowData =null;
+        Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -442,8 +442,8 @@ public class dbManager {
         }
         return ingredients;
     }
-    
-     public String getItemName(String ID) {
+
+    public String getItemName(String ID) {
         String itemName = null;
         try {
             Class.forName(driver).newInstance();
@@ -530,6 +530,32 @@ public class dbManager {
             conn.close();
         } catch (SQLException exp) {
         }
+        return time;
+    }
+
+    public String calcHoursWorked(String Username) {
+        String time = "0";
+
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String querySelect = "SELECT employeeHoursWorked FROM employee WHERE employeeFName='" + Username + "'";
+            ResultSet rs = s.executeQuery(querySelect);
+            while (rs.next()) {
+                time = rs.getString("employeeHoursWorked");
+            }
+
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
+        Double hoursWorked = Double.parseDouble(time);
+
+        Double rate = Double.parseDouble(JOptionPane.showInputDialog("Please Enter the rate of the employee"));
+        Double Salary = hoursWorked * rate;
+
+        JOptionPane.showMessageDialog(null, "The employee should get R" + Salary);
+
         return time;
     }
 

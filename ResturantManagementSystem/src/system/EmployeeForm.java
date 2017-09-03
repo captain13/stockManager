@@ -10,10 +10,11 @@ import javax.swing.table.DefaultTableModel;
 public class EmployeeForm extends javax.swing.JFrame {
 
     dbManager newManager = new dbManager();
+   
 
     public EmployeeForm() {
         initComponents();
-        populateEmployeeTable(); 
+        populateEmployeeTable();
     }
 
     public final void populateEmployeeTable() {
@@ -209,14 +210,15 @@ public class EmployeeForm extends javax.swing.JFrame {
         if (jToggleButton1.isSelected()) {
             newManager.showActiveEmp();
         } else {
-           populateEmployeeTable();
+            populateEmployeeTable();
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+        //Employee Salary
+        newManager.calcHoursWorked(null);
 
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
