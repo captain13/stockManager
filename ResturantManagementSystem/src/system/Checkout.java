@@ -53,7 +53,8 @@ public class Checkout extends javax.swing.JFrame {
     }
 
     public final void getDiscount() {
-        String discount = String.format("R%.2f", (JOptionPane.showInputDialog(null, "Enter Discount")));
+        String discountString=JOptionPane.showInputDialog(null, "Enter Discount");
+        String discount = String.format("R%.2f", (discountString));
         discountField.setText("Discount: R" + discount);
     }
 

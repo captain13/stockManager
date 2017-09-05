@@ -289,9 +289,9 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     }
 
     public void addEdit() {
-        Object value = "- "+JOptionPane.showInputDialog(null, "Enter message");
+        Object value = "- " + JOptionPane.showInputDialog(null, "Enter message");
         int row = tblItems.getSelectedRow();
-        model.addRow(new Object[]{value,"","0"});
+        model.addRow(new Object[]{value, "", "0"});
     }
 
     public void closeTable() {
@@ -360,6 +360,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         buttonPay.setBackground(new java.awt.Color(0, 138, 231));
         buttonPay.setForeground(new java.awt.Color(255, 255, 255));
         buttonPay.setText("Pay");
+        buttonPay.setToolTipText("Test");
         buttonPay.setContentAreaFilled(false);
         buttonPay.setOpaque(true);
         buttonPay.addActionListener(new java.awt.event.ActionListener() {
@@ -583,8 +584,12 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayActionPerformed
-        Checkout s = new Checkout(getWaiter(),getTotal());
-        s.setVisible(true);
+        if ("".equals(textfieldTotal.getText())) {
+            JOptionPane.showMessageDialog(null, "Nothing in Till");
+        } else {
+            Checkout checkout = new Checkout(getWaiter(), getTotal());
+            checkout.setVisible(true);
+        }
     }//GEN-LAST:event_buttonPayActionPerformed
 
     private void buttonOverrideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOverrideActionPerformed
@@ -600,7 +605,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_buttonEditActionPerformed
 
     private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
-      addEdit();
+        addEdit();
     }//GEN-LAST:event_buttonEdit1ActionPerformed
 
 
