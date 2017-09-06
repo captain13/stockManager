@@ -39,12 +39,22 @@
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="TabbedPanel">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="4b" green="4b" red="4b" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="tabPlacement" type="int" value="2"/>
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="TabbedPanelStateChanged"/>
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TabbedPanelFocusGained"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JTabbedPane(&#xd;&#xa;      JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);&#xd;&#xa;    TabbedPanel.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {&#xd;&#xa;      @Override&#xd;&#xa;        protected int calculateTabHeight(&#xd;&#xa;        int tabPlacement, int tabIndex, int fontHeight) {&#xd;&#xa;        return 50;&#xd;&#xa;      }&#xd;&#xa;            @Override&#xd;&#xa;       protected int calculateTabWidth(&#xd;&#xa;       int tabPlacement, int tabIndex, FontMetrics metrics) {&#xd;&#xa;           return 100;&#xd;&#xa;        }&#xd;&#xa;&#xd;&#xa;      @Override&#xd;&#xa;        protected void paintTab(&#xd;&#xa;        Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex,&#xd;&#xa;        Rectangle iconRect, Rectangle textRect) {&#xd;&#xa;         rects[tabIndex].height=50;&#xd;&#xa;          rects[tabIndex].width=100;&#xd;&#xa;        super.paintTab(g, tabPlacement, rects, tabIndex, iconRect, textRect);&#xd;&#xa;      }&#xd;&#xa;    });&#xd;&#xa;    "/>
+      </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -70,12 +80,12 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
-                              <Component id="buttonClose" pref="297" max="32767" attributes="0"/>
+                              <Component id="buttonClose" pref="219" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                              <Component id="lblImage" pref="399" max="32767" attributes="0"/>
+                              <Component id="lblImage" pref="321" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -91,17 +101,17 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="pnlPanel" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="17" pref="467" max="32767" attributes="0"/>
+                              <EmptySpace min="17" pref="490" max="32767" attributes="0"/>
                               <Component id="buttonClose" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <Component id="pnlLeft" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblImage" min="-2" pref="473" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="pnlLeft" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -165,13 +175,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="buttonBookings" pref="60" max="32767" attributes="0"/>
+                          <Component id="buttonBookings" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="buttonSpecials" pref="60" max="32767" attributes="0"/>
+                          <Component id="buttonSpecials" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="buttonPromotions" pref="60" max="32767" attributes="0"/>
+                          <Component id="buttonPromotions" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="buttonEvents" pref="60" max="32767" attributes="0"/>
+                          <Component id="buttonEvents" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
                           <Component id="lblVersion" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -386,10 +396,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="pnlLayout" max="32767" attributes="0"/>
-                          <Component id="buttonReprint1" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="pnlLayout" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jTabbedPane1" min="-2" pref="256" max="-2" attributes="0"/>
                   </Group>
@@ -397,12 +404,8 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="pnlLayout" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonReprint1" min="-2" pref="55" max="-2" attributes="0"/>
-                  </Group>
                   <Component id="jTabbedPane1" max="32767" attributes="0"/>
+                  <Component id="pnlLayout" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -418,14 +421,11 @@
                   <Color id="Default Cursor"/>
                 </Property>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-              </AuxValues>
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="613" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="567" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -435,22 +435,6 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Component class="javax.swing.JButton" name="buttonReprint1">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="4b" green="4b" red="4b" type="rgb"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Edit"/>
-                <Property name="contentAreaFilled" type="boolean" value="false"/>
-                <Property name="opaque" type="boolean" value="true"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonReprint1ActionPerformed"/>
-              </Events>
-            </Component>
             <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -490,7 +474,7 @@
                               <Component id="jScrollPane2" min="-2" pref="370" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="80" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="103" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -581,7 +565,7 @@
                               <Component id="buttonReprint2" min="-2" pref="55" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonReprint3" min="-2" pref="55" max="-2" attributes="0"/>
-                              <EmptySpace pref="174" max="32767" attributes="0"/>
+                              <EmptySpace pref="197" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -774,7 +758,7 @@
                                   <Component id="buttonEdit1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" pref="715" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -793,7 +777,7 @@
                               <Component id="buttonPrint" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane3" pref="447" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" pref="470" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -961,7 +945,7 @@
                                   <Component id="buttonRecipeEdit3" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" pref="715" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -978,7 +962,7 @@
                               <Component id="buttonRecipeEdit3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane4" pref="447" max="32767" attributes="0"/>
+                          <Component id="jScrollPane4" pref="470" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -1082,13 +1066,13 @@
                                   <Component id="buttonRecipeDelete3" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jScrollPane6" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane6" pref="715" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane6" alignment="0" pref="447" max="32767" attributes="0"/>
+                          <Component id="jScrollPane6" alignment="0" pref="470" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonRecipeDelete2" min="-2" max="-2" attributes="0"/>
@@ -1194,7 +1178,7 @@
                                   <Component id="buttonRecipeEdit4" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="jScrollPane5" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane5" pref="715" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1211,7 +1195,7 @@
                               <Component id="buttonRecipeEdit4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane5" alignment="0" pref="447" max="32767" attributes="0"/>
+                          <Component id="jScrollPane5" alignment="0" pref="470" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -1350,7 +1334,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="674" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="628" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1360,7 +1344,7 @@
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="411" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="434" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1463,7 +1447,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="508" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="531" max="32767" attributes="0"/>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -1670,7 +1654,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="583" max="32767" attributes="0"/>
+                      <EmptySpace pref="537" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1709,7 +1693,7 @@
                       <Component id="jButton7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton9" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="161" max="32767" attributes="0"/>
+                      <EmptySpace pref="184" max="32767" attributes="0"/>
                       <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
