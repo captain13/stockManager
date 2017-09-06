@@ -536,7 +536,6 @@ public class dbManager {
 
     public String calcHoursWorked(String Username) {
         String time = "0";
-
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -550,8 +549,6 @@ public class dbManager {
             conn.close();
         } catch (SQLException exp) {
         }
-
-
         return time;
     }
     

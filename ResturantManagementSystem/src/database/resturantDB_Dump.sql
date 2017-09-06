@@ -141,11 +141,14 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `resturantdb`.`receipt` ;
 
 CREATE TABLE IF NOT EXISTS `resturantdb`.`receipt` (
-  `receiptID` INT(11) NOT NULL AUTO_INCREMENT,
+  `ID` INT(11) NOT NULL AUTO_INCREMENT,
+  `receiptNumber` INT NOT NULL,
   `recipeID` INT(11) NOT NULL,
-  `salesID` INT(11) NOT NULL,
   `orderQuantity` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`receiptID`, `recipeID`, `salesID`),
+  `salesID` INT(11) NOT NULL,
+  `date` DATE NULL,
+  `cost` DOUBLE NULL,
+  PRIMARY KEY (`ID`, `recipeID`, `salesID`),
   INDEX `fk_receipt_recipe1` (`recipeID` ASC),
   INDEX `fk_receipt_sales1` (`salesID` ASC),
   CONSTRAINT `fk_receipt_recipe1`
@@ -263,59 +266,3 @@ DEFAULT CHARACTER SET = utf8;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
--- -----------------------------------------------------
--- Data for table `resturantDB`.`inventory`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `resturantDB`;
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (1, 'Chicken Fillet', 'Meat',1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (2, 'Beef Burger Patty', 'Meat',1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (3, 'Burger rolls','Grain', 1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (4, 'Lettuce','Vegetable', 100, 0.50, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (5, 'Tomatoe','Vegetable', 100, 0.50, 100);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (6, 'Chicken Wings','Meat', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (7, 'Pork Ribs','Meat', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (8, 'Chips','Other', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (9, 'Chicken Fillet', 'Meat',1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (10, 'Beef Burger Patty', 'Meat',1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (11, 'Burger rolls','Grain', 1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (12, 'Lettuce','Vegetable', 100, 0.50, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (13, 'Tomatoe','Vegetable', 100, 0.50, 100);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (14, 'Chicken Wings','Meat', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (15, 'Pork Ribs','Meat', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (16, 'Chips','Other', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (17, 'Chicken Fillet', 'Meat',1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (18, 'Beef Burger Patty', 'Meat',1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (19, 'Burger rolls','Grain', 1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (20, 'Lettuce','Vegetable', 100, 0.50, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (21, 'Tomatoe','Vegetable', 100, 0.50, 100);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (22, 'Chicken Wings','Meat', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (23, 'Pork Ribs','Meat', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (24, 'Chips','Other', 1000, 0.2, 1000);
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `resturantDB`.`supplier`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `resturantDB`;
-INSERT INTO `resturantDB`.`supplier` (`supplierID`, `supplierName`, `supplierEmail`, `supplierNumber`, `supplierAddress`) VALUES (1, 'Meat Co.', 'meatco@gmail.com', '084 772 2883', 'Rondebosch');
-INSERT INTO `resturantDB`.`supplier` (`supplierID`, `supplierName`, `supplierEmail`, `supplierNumber`, `supplierAddress`) VALUES (2, 'VegCity', 'vegcity@hotmail.co.za', '078 232 1221', 'Claremont');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `resturantDB`.`employee`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `resturantDB`;
-INSERT INTO `resturantDB`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES (1, 'Andrew', 'Schwabe', 'Password', '076 273 1721', '00:00', NULL, NULL, 1);
-INSERT INTO `resturantDB`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES (2, 'Zane', 'Smith', 'Password', '034 233 8321', '00:00', NULL, NULL, 1);
-INSERT INTO `resturantDB`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES (3, 'Chad', 'Phillips', 'Password', '087 237 1277', '00:00', NULL, NULL, 0);
-INSERT INTO `resturantDB`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES (4, 'Sean', 'Thompson', 'Password', '072 377 1122', '00:00', NULL, NULL, 0);
-INSERT INTO `resturantDB`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES (5, 'Itumeleng', 'Madisha', 'Password', '072 377 1122', '00:00', NULL, NULL, 0);
-
-COMMIT;

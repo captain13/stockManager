@@ -2132,9 +2132,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    UIManager.getLookAndFeelDefaults().put("TabbedPane.contentOpaque",true);
-                     UIManager.getLookAndFeelDefaults().put("TabbedPane.tabAreaBackground",Color.red);
-                      UIManager.getLookAndFeelDefaults().put("TabbedPane.foreground",Color.blue);
                     break;
                 }
                 if ("Macintosh".equals(info.getName())) {
