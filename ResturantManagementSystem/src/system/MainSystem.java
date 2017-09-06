@@ -157,6 +157,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         try {
             TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tblInventory.getModel());
             tblInventory.setRowSorter(rowSorter);
+
             textboxSearch.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
@@ -421,6 +422,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         currentEmail.setText(settings.getEmail());
     }
 
+    public void setEmailPassword() {
+        jPasswordField1.setText(settings.getEmailPassword());
+    }
+
     public final void setSelectedTable() {
         n = Integer.parseInt(getSelectedTable());
         tableLayout();
@@ -462,8 +467,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public String getEmail() {
         return currentEmail.getText();
     }
-    
-     public String getEmailPassword() {
+
+    public String getEmailPassword() {
         return jPasswordField1.getText();
     }
 
@@ -2173,7 +2178,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReportsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        settings.updateSettings(getSelectedResolution(), getSelectedTable(), getEmail(),getEmailPassword());
+        settings.updateSettings(getSelectedResolution(), getSelectedTable(), getEmail(), getEmailPassword());
         JOptionPane.showMessageDialog(null, "Settings Saved");
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -2223,7 +2228,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         String email = JOptionPane.showInputDialog(null, "Enter new Email Address");
-        if("".equals(email)||email==null){
+        if ("".equals(email) || email == null) {
         } else {
             currentEmail.setText(email);
         }
@@ -2251,8 +2256,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-       String password = JOptionPane.showInputDialog(null, "Enter new Email password");
-        if("".equals(password)||password==null){
+        String password = JOptionPane.showInputDialog(null, "Enter new Email password");
+        if ("".equals(password) || password == null) {
         } else {
             jPasswordField1.setText(password);
         }
@@ -2317,9 +2322,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonEdit1ActionPerformed
 
     private void buttonOrderHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOrderHistoryActionPerformed
-        updateStockOrder();
-        populateInvnetoryTable();
-        populateOrderTable();
+        if (tblOrderHistory.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "No Item Selected");
+        } else {
+            updateStockOrder();
+            populateInvnetoryTable();
+            populateOrderTable();
+        }
     }//GEN-LAST:event_buttonOrderHistoryActionPerformed
 
     private void buttonReprint3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprint3ActionPerformed

@@ -243,23 +243,21 @@ INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, 
 INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (5, 'Tomatoe','Vegetable', 100, 0.50, 100);
 INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (6, 'Chicken Wings','Meat', 1000, 0.2, 1000);
 INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (7, 'Pork Ribs','Meat', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (8, 'Chips','Other', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (9, 'Chicken Fillet', 'Meat',1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (10, 'Beef Burger Patty', 'Meat',1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (11, 'Burger rolls','Grain', 1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (12, 'Lettuce','Vegetable', 100, 0.50, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (13, 'Tomatoe','Vegetable', 100, 0.50, 100);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (14, 'Chicken Wings','Meat', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (15, 'Pork Ribs','Meat', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (16, 'Chips','Other', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (17, 'Chicken Fillet', 'Meat',1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (18, 'Beef Burger Patty', 'Meat',1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (19, 'Burger rolls','Grain', 1000, 0.25, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (20, 'Lettuce','Vegetable', 100, 0.50, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (21, 'Tomatoe','Vegetable', 100, 0.50, 100);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (22, 'Chicken Wings','Meat', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (23, 'Pork Ribs','Meat', 1000, 0.2, 1000);
-INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (24, 'Chips','Other', 1000, 0.2, 1000);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (8, 'Chicken Breast','Meat', 1000, 0.2, 1000);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (9, 'Avocardo', 'Vegetable',1000, 0.25, 1000);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (10, 'Steak', 'Meat',1000, 0.25, 1000);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (11, 'Cheese','Dairy', 1000, 0.25, 1000);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (12, 'Feta','Dairy', 100, 0.50, 1000);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (13, 'Pizza Base','Grain', 100, 0.50, 100);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (14, 'Napoletan Sauce','Other', 1000, 0.2, 1000);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (15, 'Bacon','Meat', 1000, 0.2, 1000);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (16, 'Castle Light','Alcohol', 1000, 0.2, 1000);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (17, 'Black Label Beer', 'Alcohol',1000, 0.25, 1000);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (18, 'Coke','Soft Drinks', 100, 0.50, 1000);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (19, 'Coke Light','Soft Drinks', 100, 0.50, 100);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (20, 'Sprite','Soft Drinks', 1000, 0.2, 1000);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (21, 'Fanta','Soft Drinks', 1000, 0.2, 1000);
+INSERT INTO `resturantDB`.`inventory` (`inventoryID`, `item`,`category`, `qty`, `itemThreshold`, `itemLimit`) VALUES (22, 'Ice Tea','Soft Drinks', 6600, 0.2, 1000);
 COMMIT;
 
 
