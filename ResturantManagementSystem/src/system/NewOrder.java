@@ -262,8 +262,12 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try {
-                model.removeRow(tblItems.getSelectedRow());
-                totalAmount();
+                if (tblItems.getSelectedRow() == -1) {
+                    JOptionPane.showMessageDialog(null, "No Item Selected");
+                } else {
+                    model.removeRow(tblItems.getSelectedRow());
+                    totalAmount();
+                }
             } catch (ArrayIndexOutOfBoundsException exp) {
             }
         }
@@ -289,9 +293,11 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     }
 
     public void addEdit() {
-        Object value = "- " + JOptionPane.showInputDialog(null, "Enter message");
-        int row = tblItems.getSelectedRow();
-        model.addRow(new Object[]{value, "", "0"});
+        Object value = JOptionPane.showInputDialog(null, "Enter message");
+        if (!value.equals("")) {
+            int row = tblItems.getSelectedRow();
+            model.addRow(new Object[]{"- " + value, "", "0"});
+        }
     }
 
     public void closeTable() {
@@ -302,22 +308,22 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        nameTF = new javax.swing.JLabel();
-        customerNo = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        buttonClose = new javax.swing.JButton();
-        buttonEdit = new javax.swing.JButton();
-        buttonEdit1 = new javax.swing.JButton();
-        buttonOverride = new javax.swing.JButton();
-        buttonPay = new javax.swing.JButton();
-        lblClock1 = new javax.swing.JLabel();
-        lblNum = new javax.swing.JLabel();
-        lblWaiter = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        lblTitle = new javax.swing.JLabel();
+        textfieldTotal = new javax.swing.JFormattedTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblItems = new javax.swing.JTable();
-        textfieldTotal = new javax.swing.JFormattedTextField();
-        lblTitle = new javax.swing.JLabel();
+        lblWaiter = new javax.swing.JLabel();
+        lblNum = new javax.swing.JLabel();
+        nameTF = new javax.swing.JLabel();
+        customerNo = new javax.swing.JLabel();
+        lblClock1 = new javax.swing.JLabel();
+        buttonPay = new javax.swing.JButton();
+        buttonOverride = new javax.swing.JButton();
+        buttonEdit1 = new javax.swing.JButton();
+        buttonEdit = new javax.swing.JButton();
+        buttonClose = new javax.swing.JButton();
         menuPane = new javax.swing.JTabbedPane();
         mainMealTab = new javax.swing.JPanel();
         lightMealTab = new javax.swing.JPanel();
@@ -330,67 +336,12 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         setUndecorated(true);
         setSize(new java.awt.Dimension(1366, 768));
 
-        buttonClose.setBackground(new java.awt.Color(0, 138, 231));
-        buttonClose.setForeground(new java.awt.Color(255, 255, 255));
-        buttonClose.setText("Close");
-        buttonClose.setContentAreaFilled(false);
-        buttonClose.setOpaque(true);
-        buttonClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCloseActionPerformed(evt);
-            }
-        });
+        lblTitle.setText("Order");
 
-        buttonEdit.setBackground(new java.awt.Color(0, 138, 231));
-        buttonEdit.setForeground(new java.awt.Color(255, 255, 255));
-        buttonEdit.setText("Remove Order");
-        buttonEdit.setContentAreaFilled(false);
-        buttonEdit.setOpaque(true);
-        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEditActionPerformed(evt);
-            }
-        });
-
-        buttonEdit1.setBackground(new java.awt.Color(0, 138, 231));
-        buttonEdit1.setForeground(new java.awt.Color(255, 255, 255));
-        buttonEdit1.setText("Edit Order");
-        buttonEdit1.setContentAreaFilled(false);
-        buttonEdit1.setOpaque(true);
-        buttonEdit1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEdit1ActionPerformed(evt);
-            }
-        });
-
-        buttonOverride.setBackground(new java.awt.Color(0, 138, 231));
-        buttonOverride.setForeground(new java.awt.Color(255, 255, 255));
-        buttonOverride.setText("Send Order");
-        buttonOverride.setContentAreaFilled(false);
-        buttonOverride.setOpaque(true);
-        buttonOverride.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOverrideActionPerformed(evt);
-            }
-        });
-
-        buttonPay.setBackground(new java.awt.Color(0, 138, 231));
-        buttonPay.setForeground(new java.awt.Color(255, 255, 255));
-        buttonPay.setText("Pay");
-        buttonPay.setToolTipText("Test");
-        buttonPay.setContentAreaFilled(false);
-        buttonPay.setOpaque(true);
-        buttonPay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonPayActionPerformed(evt);
-            }
-        });
-
-        lblClock1.setText("Clock");
-
-        lblNum.setText("No. of Customers:");
-
-        lblWaiter.setText("Waiter:");
+        textfieldTotal.setCaretColor(new java.awt.Color(255, 255, 255));
+        textfieldTotal.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        textfieldTotal.setFocusable(false);
+        textfieldTotal.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
 
         tblItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -408,51 +359,122 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         tblItems.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(tblItems);
 
-        textfieldTotal.setCaretColor(new java.awt.Color(255, 255, 255));
-        textfieldTotal.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        textfieldTotal.setFocusable(false);
-        textfieldTotal.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
+        lblWaiter.setText("Waiter:");
 
-        lblTitle.setText("Order");
+        lblNum.setText("No. of Customers:");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        lblClock1.setText("Clock");
+
+        buttonPay.setBackground(new java.awt.Color(0, 138, 231));
+        buttonPay.setForeground(new java.awt.Color(255, 255, 255));
+        buttonPay.setText("Pay");
+        buttonPay.setToolTipText("Test");
+        buttonPay.setContentAreaFilled(false);
+        buttonPay.setOpaque(true);
+        buttonPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPayActionPerformed(evt);
+            }
+        });
+
+        buttonOverride.setBackground(new java.awt.Color(0, 138, 231));
+        buttonOverride.setForeground(new java.awt.Color(255, 255, 255));
+        buttonOverride.setText("Send Order");
+        buttonOverride.setContentAreaFilled(false);
+        buttonOverride.setOpaque(true);
+        buttonOverride.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOverrideActionPerformed(evt);
+            }
+        });
+
+        buttonEdit1.setBackground(new java.awt.Color(0, 138, 231));
+        buttonEdit1.setForeground(new java.awt.Color(255, 255, 255));
+        buttonEdit1.setText("Edit Order");
+        buttonEdit1.setContentAreaFilled(false);
+        buttonEdit1.setOpaque(true);
+        buttonEdit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEdit1ActionPerformed(evt);
+            }
+        });
+
+        buttonEdit.setBackground(new java.awt.Color(0, 138, 231));
+        buttonEdit.setForeground(new java.awt.Color(255, 255, 255));
+        buttonEdit.setText("Remove Order");
+        buttonEdit.setContentAreaFilled(false);
+        buttonEdit.setOpaque(true);
+        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditActionPerformed(evt);
+            }
+        });
+
+        buttonClose.setBackground(new java.awt.Color(0, 138, 231));
+        buttonClose.setForeground(new java.awt.Color(255, 255, 255));
+        buttonClose.setText("Close");
+        buttonClose.setContentAreaFilled(false);
+        buttonClose.setOpaque(true);
+        buttonClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCloseActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitle)
-                            .addComponent(lblClock1)
-                            .addComponent(lblWaiter)
-                            .addComponent(lblNum))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(buttonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(buttonClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonOverride, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonEdit1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textfieldTotal)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(buttonPay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonOverride, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonEdit1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(2, 2, 2))
+                    .addComponent(buttonPay, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblClock1)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lblWaiter)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lblNum)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(customerNo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblTitle))
+                        .addGap(0, 112, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(textfieldTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(lblTitle)
+                .addGap(74, 74, 74)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textfieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblWaiter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblWaiter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(customerNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNum))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblClock1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonPay)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonOverride)
@@ -461,7 +483,13 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonClose))
+                .addComponent(buttonClose)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(31, 31, 31)
+                    .addComponent(textfieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(471, Short.MAX_VALUE)))
         );
 
         mainMealTab.setBackground(new java.awt.Color(255, 255, 255));
@@ -470,63 +498,71 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         mainMealTab.setLayout(mainMealTabLayout);
         mainMealTabLayout.setHorizontalGroup(
             mainMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGap(0, 610, Short.MAX_VALUE)
         );
         mainMealTabLayout.setVerticalGroup(
             mainMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 446, Short.MAX_VALUE)
+            .addGap(0, 475, Short.MAX_VALUE)
         );
 
         menuPane.addTab("Main Meals", mainMealTab);
+
+        lightMealTab.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout lightMealTabLayout = new javax.swing.GroupLayout(lightMealTab);
         lightMealTab.setLayout(lightMealTabLayout);
         lightMealTabLayout.setHorizontalGroup(
             lightMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGap(0, 610, Short.MAX_VALUE)
         );
         lightMealTabLayout.setVerticalGroup(
             lightMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 446, Short.MAX_VALUE)
+            .addGap(0, 475, Short.MAX_VALUE)
         );
 
         menuPane.addTab("Light Meals", lightMealTab);
+
+        dessertTab.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout dessertTabLayout = new javax.swing.GroupLayout(dessertTab);
         dessertTab.setLayout(dessertTabLayout);
         dessertTabLayout.setHorizontalGroup(
             dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGap(0, 610, Short.MAX_VALUE)
         );
         dessertTabLayout.setVerticalGroup(
             dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 446, Short.MAX_VALUE)
+            .addGap(0, 475, Short.MAX_VALUE)
         );
 
         menuPane.addTab("Desserts", dessertTab);
+
+        drinksTab.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout drinksTabLayout = new javax.swing.GroupLayout(drinksTab);
         drinksTab.setLayout(drinksTabLayout);
         drinksTabLayout.setHorizontalGroup(
             drinksTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGap(0, 610, Short.MAX_VALUE)
         );
         drinksTabLayout.setVerticalGroup(
             drinksTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 446, Short.MAX_VALUE)
+            .addGap(0, 475, Short.MAX_VALUE)
         );
 
         menuPane.addTab("Drinks", drinksTab);
+
+        extraTab.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout extraTabLayout = new javax.swing.GroupLayout(extraTab);
         extraTab.setLayout(extraTabLayout);
         extraTabLayout.setHorizontalGroup(
             extraTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGap(0, 610, Short.MAX_VALUE)
         );
         extraTabLayout.setVerticalGroup(
             extraTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 446, Short.MAX_VALUE)
+            .addGap(0, 475, Short.MAX_VALUE)
         );
 
         menuPane.addTab("Extras", extraTab);
@@ -542,66 +578,43 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToggleButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(menuPane))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(menuPane)))
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(menuPane)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToggleButton8)
                 .addContainerGap())
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(233, 233, 233)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customerNo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(nameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(customerNo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(243, 243, 243))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jToggleButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton8ActionPerformed
-        closeTable();
-        this.dispose();
-    }//GEN-LAST:event_jToggleButton8ActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
         interrupTime();
@@ -633,6 +646,11 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         addEdit();
     }//GEN-LAST:event_buttonEdit1ActionPerformed
 
+    private void jToggleButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton8ActionPerformed
+        closeTable();
+        this.dispose();
+    }//GEN-LAST:event_jToggleButton8ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonClose;
@@ -644,8 +662,8 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     private javax.swing.JPanel dessertTab;
     private javax.swing.JPanel drinksTab;
     private javax.swing.JPanel extraTab;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToggleButton jToggleButton8;
     private javax.swing.JLabel lblClock1;

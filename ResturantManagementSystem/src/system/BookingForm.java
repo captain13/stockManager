@@ -163,12 +163,14 @@ public class BookingForm extends javax.swing.JFrame {
 
         lblNumber1.setText("No. of customers");
 
+        textCustomerNum.setBackground(new java.awt.Color(240, 240, 240));
         textCustomerNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textCustomerNumActionPerformed(evt);
             }
         });
 
+        textEmp.setBackground(new java.awt.Color(240, 240, 240));
         textEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textEmpActionPerformed(evt);
@@ -181,6 +183,7 @@ public class BookingForm extends javax.swing.JFrame {
 
         lblNumber3.setText("Table No.");
 
+        textTable.setBackground(new java.awt.Color(240, 240, 240));
         textTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textTableActionPerformed(evt);
@@ -200,6 +203,7 @@ public class BookingForm extends javax.swing.JFrame {
 
         lblNumber4.setText("Customer Name");
 
+        textCustomerName.setBackground(new java.awt.Color(240, 240, 240));
         textCustomerName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textCustomerNameActionPerformed(evt);
