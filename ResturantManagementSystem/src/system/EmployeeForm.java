@@ -74,16 +74,25 @@ public class EmployeeForm extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        buttonAdd.setBackground(new java.awt.Color(0, 138, 231));
+        buttonAdd.setForeground(new java.awt.Color(255, 255, 255));
         buttonAdd.setText("Add Employee");
+        buttonAdd.setContentAreaFilled(false);
+        buttonAdd.setOpaque(true);
         buttonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAddActionPerformed(evt);
             }
         });
 
+        buttonClose.setBackground(new java.awt.Color(75, 75, 75));
+        buttonClose.setForeground(new java.awt.Color(255, 255, 255));
         buttonClose.setText("Close");
+        buttonClose.setContentAreaFilled(false);
+        buttonClose.setOpaque(true);
         buttonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCloseActionPerformed(evt);
@@ -104,28 +113,44 @@ public class EmployeeForm extends javax.swing.JFrame {
         tableEmp.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane1.setViewportView(tableEmp);
 
+        buttonPassword.setBackground(new java.awt.Color(0, 138, 231));
+        buttonPassword.setForeground(new java.awt.Color(255, 255, 255));
         buttonPassword.setText("Change Employee Password");
+        buttonPassword.setContentAreaFilled(false);
+        buttonPassword.setOpaque(true);
         buttonPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonPasswordActionPerformed(evt);
             }
         });
 
+        buttonDelete.setBackground(new java.awt.Color(0, 138, 231));
+        buttonDelete.setForeground(new java.awt.Color(255, 255, 255));
         buttonDelete.setText("Delete Employee");
+        buttonDelete.setContentAreaFilled(false);
+        buttonDelete.setOpaque(true);
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDeleteActionPerformed(evt);
             }
         });
 
+        jToggleButton1.setBackground(new java.awt.Color(0, 138, 231));
+        jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton1.setText("Currently Logged in");
+        jToggleButton1.setContentAreaFilled(false);
+        jToggleButton1.setOpaque(true);
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
             }
         });
 
+        jToggleButton2.setBackground(new java.awt.Color(0, 138, 231));
+        jToggleButton2.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton2.setText("Calculate Wage");
+        jToggleButton2.setContentAreaFilled(false);
+        jToggleButton2.setOpaque(true);
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton2ActionPerformed(evt);

@@ -32,9 +32,20 @@ public class SpecialsForm extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel(system.getSpecialData(), columnNamesRecipe);
         jTable1.setModel(model);
     }
-    
+
     public String getSpecialID() {
         return jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+    }
+
+    public int getStatus() {
+        String check=jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString();
+        if ("true".equals(check)) {
+            System.out.println("ran");
+            return 1;
+        } else {
+            System.out.println("ran2");
+            return 0;
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -67,18 +78,31 @@ public class SpecialsForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jButton1.setBackground(new java.awt.Color(0, 138, 231));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Add");
+        jButton1.setContentAreaFilled(false);
+        jButton1.setOpaque(true);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(0, 138, 231));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Delete");
+        jButton2.setContentAreaFilled(false);
+        jButton2.setOpaque(true);
 
+        jButton3.setBackground(new java.awt.Color(75, 75, 75));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Close");
+        jButton3.setContentAreaFilled(false);
+        jButton3.setOpaque(true);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -161,7 +185,7 @@ public class SpecialsForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        system.updateSpecials(getSpecialID());
+        system.updateSpecials(getSpecialID(), getStatus());
     }//GEN-LAST:event_jTable1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -77,10 +77,15 @@ public class Specials extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
+        pnlSpecial.setBackground(new java.awt.Color(255, 255, 255));
         pnlSpecial.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlSpecial.setPreferredSize(new java.awt.Dimension(235, 370));
 
+        buttonClose.setBackground(new java.awt.Color(75, 75, 75));
+        buttonClose.setForeground(new java.awt.Color(255, 255, 255));
         buttonClose.setText("Close");
+        buttonClose.setContentAreaFilled(false);
+        buttonClose.setOpaque(true);
         buttonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCloseActionPerformed(evt);
@@ -121,8 +126,8 @@ public class Specials extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlItems, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(22, 22, 22)
+                .addComponent(pnlItems, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(buttonClose)
                 .addContainerGap())
         );

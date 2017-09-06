@@ -878,11 +878,11 @@ public class dbManager {
         }
     }
 
-    public void updateSpecials(String specialsID) {
+    public void updateSpecials(String specialsID,int status) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "UPDATE specials set status= '1' WHERE specialsID='" + specialsID + "'";
+            String query = "UPDATE specials set status= '"+status+"' WHERE specialsID='" + specialsID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.executeUpdate();
             getSpecialData();

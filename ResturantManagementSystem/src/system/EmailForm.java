@@ -49,9 +49,14 @@ public class EmailForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jButton3.setBackground(new java.awt.Color(0, 138, 231));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Send");
+        jButton3.setContentAreaFilled(false);
+        jButton3.setOpaque(true);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -70,7 +75,11 @@ public class EmailForm extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(75, 75, 75));
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Close");
+        jButton4.setContentAreaFilled(false);
+        jButton4.setOpaque(true);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);

@@ -302,44 +302,33 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitle = new javax.swing.JLabel();
-        buttonEdit = new javax.swing.JButton();
+        nameTF = new javax.swing.JLabel();
+        customerNo = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         buttonClose = new javax.swing.JButton();
-        textfieldTotal = new javax.swing.JFormattedTextField();
+        buttonEdit = new javax.swing.JButton();
+        buttonEdit1 = new javax.swing.JButton();
+        buttonOverride = new javax.swing.JButton();
         buttonPay = new javax.swing.JButton();
+        lblClock1 = new javax.swing.JLabel();
+        lblNum = new javax.swing.JLabel();
+        lblWaiter = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblItems = new javax.swing.JTable();
-        jToggleButton8 = new javax.swing.JToggleButton();
-        lblWaiter = new javax.swing.JLabel();
-        lblNum = new javax.swing.JLabel();
-        lblClock1 = new javax.swing.JLabel();
+        textfieldTotal = new javax.swing.JFormattedTextField();
+        lblTitle = new javax.swing.JLabel();
         menuPane = new javax.swing.JTabbedPane();
         mainMealTab = new javax.swing.JPanel();
         lightMealTab = new javax.swing.JPanel();
         dessertTab = new javax.swing.JPanel();
         drinksTab = new javax.swing.JPanel();
         extraTab = new javax.swing.JPanel();
-        buttonOverride = new javax.swing.JButton();
-        nameTF = new javax.swing.JLabel();
-        customerNo = new javax.swing.JLabel();
-        buttonEdit1 = new javax.swing.JButton();
+        jToggleButton8 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setSize(new java.awt.Dimension(1366, 768));
-
-        lblTitle.setText("Order");
-
-        buttonEdit.setBackground(new java.awt.Color(0, 138, 231));
-        buttonEdit.setForeground(new java.awt.Color(255, 255, 255));
-        buttonEdit.setText("Remove Order");
-        buttonEdit.setContentAreaFilled(false);
-        buttonEdit.setOpaque(true);
-        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEditActionPerformed(evt);
-            }
-        });
 
         buttonClose.setBackground(new java.awt.Color(0, 138, 231));
         buttonClose.setForeground(new java.awt.Color(255, 255, 255));
@@ -352,10 +341,38 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             }
         });
 
-        textfieldTotal.setCaretColor(new java.awt.Color(255, 255, 255));
-        textfieldTotal.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        textfieldTotal.setFocusable(false);
-        textfieldTotal.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
+        buttonEdit.setBackground(new java.awt.Color(0, 138, 231));
+        buttonEdit.setForeground(new java.awt.Color(255, 255, 255));
+        buttonEdit.setText("Remove Order");
+        buttonEdit.setContentAreaFilled(false);
+        buttonEdit.setOpaque(true);
+        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditActionPerformed(evt);
+            }
+        });
+
+        buttonEdit1.setBackground(new java.awt.Color(0, 138, 231));
+        buttonEdit1.setForeground(new java.awt.Color(255, 255, 255));
+        buttonEdit1.setText("Edit Order");
+        buttonEdit1.setContentAreaFilled(false);
+        buttonEdit1.setOpaque(true);
+        buttonEdit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEdit1ActionPerformed(evt);
+            }
+        });
+
+        buttonOverride.setBackground(new java.awt.Color(0, 138, 231));
+        buttonOverride.setForeground(new java.awt.Color(255, 255, 255));
+        buttonOverride.setText("Send Order");
+        buttonOverride.setContentAreaFilled(false);
+        buttonOverride.setOpaque(true);
+        buttonOverride.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOverrideActionPerformed(evt);
+            }
+        });
 
         buttonPay.setBackground(new java.awt.Color(0, 138, 231));
         buttonPay.setForeground(new java.awt.Color(255, 255, 255));
@@ -368,6 +385,12 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 buttonPayActionPerformed(evt);
             }
         });
+
+        lblClock1.setText("Clock");
+
+        lblNum.setText("No. of Customers:");
+
+        lblWaiter.setText("Waiter:");
 
         tblItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -385,6 +408,129 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         tblItems.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(tblItems);
 
+        textfieldTotal.setCaretColor(new java.awt.Color(255, 255, 255));
+        textfieldTotal.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        textfieldTotal.setFocusable(false);
+        textfieldTotal.setFont(new java.awt.Font("DialogInput", 0, 24)); // NOI18N
+
+        lblTitle.setText("Order");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTitle)
+                            .addComponent(lblClock1)
+                            .addComponent(lblWaiter)
+                            .addComponent(lblNum))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(buttonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(buttonClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonOverride, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonEdit1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textfieldTotal)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(buttonPay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(lblTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textfieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblWaiter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblClock1)
+                .addGap(18, 18, 18)
+                .addComponent(buttonPay)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonOverride)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonEdit1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonClose))
+        );
+
+        mainMealTab.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout mainMealTabLayout = new javax.swing.GroupLayout(mainMealTab);
+        mainMealTab.setLayout(mainMealTabLayout);
+        mainMealTabLayout.setHorizontalGroup(
+            mainMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 579, Short.MAX_VALUE)
+        );
+        mainMealTabLayout.setVerticalGroup(
+            mainMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 446, Short.MAX_VALUE)
+        );
+
+        menuPane.addTab("Main Meals", mainMealTab);
+
+        javax.swing.GroupLayout lightMealTabLayout = new javax.swing.GroupLayout(lightMealTab);
+        lightMealTab.setLayout(lightMealTabLayout);
+        lightMealTabLayout.setHorizontalGroup(
+            lightMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 579, Short.MAX_VALUE)
+        );
+        lightMealTabLayout.setVerticalGroup(
+            lightMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 446, Short.MAX_VALUE)
+        );
+
+        menuPane.addTab("Light Meals", lightMealTab);
+
+        javax.swing.GroupLayout dessertTabLayout = new javax.swing.GroupLayout(dessertTab);
+        dessertTab.setLayout(dessertTabLayout);
+        dessertTabLayout.setHorizontalGroup(
+            dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 579, Short.MAX_VALUE)
+        );
+        dessertTabLayout.setVerticalGroup(
+            dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 446, Short.MAX_VALUE)
+        );
+
+        menuPane.addTab("Desserts", dessertTab);
+
+        javax.swing.GroupLayout drinksTabLayout = new javax.swing.GroupLayout(drinksTab);
+        drinksTab.setLayout(drinksTabLayout);
+        drinksTabLayout.setHorizontalGroup(
+            drinksTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 579, Short.MAX_VALUE)
+        );
+        drinksTabLayout.setVerticalGroup(
+            drinksTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 446, Short.MAX_VALUE)
+        );
+
+        menuPane.addTab("Drinks", drinksTab);
+
+        javax.swing.GroupLayout extraTabLayout = new javax.swing.GroupLayout(extraTab);
+        extraTab.setLayout(extraTabLayout);
+        extraTabLayout.setHorizontalGroup(
+            extraTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 579, Short.MAX_VALUE)
+        );
+        extraTabLayout.setVerticalGroup(
+            extraTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 446, Short.MAX_VALUE)
+        );
+
+        menuPane.addTab("Extras", extraTab);
+
         jToggleButton8.setBackground(new java.awt.Color(75, 75, 75));
         jToggleButton8.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton8.setText("Close Table");
@@ -396,177 +542,56 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             }
         });
 
-        lblWaiter.setText("Waiter:");
-
-        lblNum.setText("No. of Customers:");
-
-        lblClock1.setText("Clock");
-
-        mainMealTab.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout mainMealTabLayout = new javax.swing.GroupLayout(mainMealTab);
-        mainMealTab.setLayout(mainMealTabLayout);
-        mainMealTabLayout.setHorizontalGroup(
-            mainMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToggleButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menuPane))
+                .addContainerGap())
         );
-        mainMealTabLayout.setVerticalGroup(
-            mainMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(menuPane)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jToggleButton8)
+                .addContainerGap())
         );
-
-        menuPane.addTab("Main Meals", mainMealTab);
-
-        javax.swing.GroupLayout lightMealTabLayout = new javax.swing.GroupLayout(lightMealTab);
-        lightMealTab.setLayout(lightMealTabLayout);
-        lightMealTabLayout.setHorizontalGroup(
-            lightMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
-        );
-        lightMealTabLayout.setVerticalGroup(
-            lightMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
-
-        menuPane.addTab("Light Meals", lightMealTab);
-
-        javax.swing.GroupLayout dessertTabLayout = new javax.swing.GroupLayout(dessertTab);
-        dessertTab.setLayout(dessertTabLayout);
-        dessertTabLayout.setHorizontalGroup(
-            dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
-        );
-        dessertTabLayout.setVerticalGroup(
-            dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
-
-        menuPane.addTab("Desserts", dessertTab);
-
-        javax.swing.GroupLayout drinksTabLayout = new javax.swing.GroupLayout(drinksTab);
-        drinksTab.setLayout(drinksTabLayout);
-        drinksTabLayout.setHorizontalGroup(
-            drinksTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
-        );
-        drinksTabLayout.setVerticalGroup(
-            drinksTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
-
-        menuPane.addTab("Drinks", drinksTab);
-
-        javax.swing.GroupLayout extraTabLayout = new javax.swing.GroupLayout(extraTab);
-        extraTab.setLayout(extraTabLayout);
-        extraTabLayout.setHorizontalGroup(
-            extraTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
-        );
-        extraTabLayout.setVerticalGroup(
-            extraTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
-
-        menuPane.addTab("Extras", extraTab);
-
-        buttonOverride.setBackground(new java.awt.Color(0, 138, 231));
-        buttonOverride.setForeground(new java.awt.Color(255, 255, 255));
-        buttonOverride.setText("Send Order");
-        buttonOverride.setContentAreaFilled(false);
-        buttonOverride.setOpaque(true);
-        buttonOverride.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOverrideActionPerformed(evt);
-            }
-        });
-
-        buttonEdit1.setBackground(new java.awt.Color(0, 138, 231));
-        buttonEdit1.setForeground(new java.awt.Color(255, 255, 255));
-        buttonEdit1.setText("Edit Order");
-        buttonEdit1.setContentAreaFilled(false);
-        buttonEdit1.setOpaque(true);
-        buttonEdit1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEdit1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(233, 233, 233)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(buttonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                                    .addComponent(buttonClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(textfieldTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(buttonOverride, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblTitle)
-                                            .addComponent(lblClock1)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblWaiter)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(nameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblNum)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(customerNo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(buttonEdit1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(12, 12, 12))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(buttonPay, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addComponent(menuPane)
-                        .addGap(22, 22, 22)))
-                .addContainerGap())
+                    .addComponent(nameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerNo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textfieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblWaiter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nameTF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(customerNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblClock1)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonPay)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonOverride)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonEdit1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonEdit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonClose)
-                        .addGap(27, 27, 27))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(menuPane)
-                        .addGap(6, 6, 6)))
-                .addComponent(jToggleButton8)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(nameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(customerNo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(243, 243, 243))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -619,6 +644,8 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     private javax.swing.JPanel dessertTab;
     private javax.swing.JPanel drinksTab;
     private javax.swing.JPanel extraTab;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToggleButton jToggleButton8;
     private javax.swing.JLabel lblClock1;

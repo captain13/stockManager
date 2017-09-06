@@ -30,16 +30,21 @@ public class Calendar extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setUndecorated(true);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        buttonClose.setBackground(new java.awt.Color(75, 75, 75));
+        buttonClose.setForeground(new java.awt.Color(255, 255, 255));
         buttonClose.setText("Close");
+        buttonClose.setContentAreaFilled(false);
+        buttonClose.setOpaque(true);
         buttonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCloseActionPerformed(evt);
             }
         });
 
-        jCalendar.setDecorationBackgroundColor(new java.awt.Color(204, 204, 204));
+        jCalendar.setDecorationBackgroundColor(new java.awt.Color(0, 138, 231));
         jCalendar.setMinSelectableDate(new java.util.Date(978303708000L));
         jCalendar.setNullDateButtonText("");
         jCalendar.setTodayButtonText("");
@@ -60,7 +65,7 @@ public class Calendar extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(lblTitle)
                             .addGap(0, 371, Short.MAX_VALUE))
-                        .addComponent(jCalendar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                        .addComponent(jCalendar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(buttonClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addContainerGap()))
         );

@@ -75,9 +75,14 @@ public class Reports extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        buttonClose.setBackground(new java.awt.Color(75, 75, 75));
+        buttonClose.setForeground(new java.awt.Color(255, 255, 255));
         buttonClose.setText("Close");
+        buttonClose.setContentAreaFilled(false);
+        buttonClose.setOpaque(true);
         buttonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCloseActionPerformed(evt);
@@ -98,35 +103,55 @@ public class Reports extends javax.swing.JFrame {
         tableSales.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane1.setViewportView(tableSales);
 
+        buttonClose1.setBackground(new java.awt.Color(0, 138, 231));
+        buttonClose1.setForeground(new java.awt.Color(255, 255, 255));
         buttonClose1.setText("Sales History");
+        buttonClose1.setContentAreaFilled(false);
+        buttonClose1.setOpaque(true);
         buttonClose1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonClose1ActionPerformed(evt);
             }
         });
 
+        buttonClose2.setBackground(new java.awt.Color(0, 138, 231));
+        buttonClose2.setForeground(new java.awt.Color(255, 255, 255));
         buttonClose2.setText("Employee Preformance");
+        buttonClose2.setContentAreaFilled(false);
+        buttonClose2.setOpaque(true);
         buttonClose2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonClose2ActionPerformed(evt);
             }
         });
 
+        buttonClose3.setBackground(new java.awt.Color(0, 138, 231));
+        buttonClose3.setForeground(new java.awt.Color(255, 255, 255));
         buttonClose3.setText("Monthly Sales");
+        buttonClose3.setContentAreaFilled(false);
+        buttonClose3.setOpaque(true);
         buttonClose3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonClose3ActionPerformed(evt);
             }
         });
 
+        buttonClose4.setBackground(new java.awt.Color(0, 138, 231));
+        buttonClose4.setForeground(new java.awt.Color(255, 255, 255));
         buttonClose4.setText("Daily Sales");
+        buttonClose4.setContentAreaFilled(false);
+        buttonClose4.setOpaque(true);
         buttonClose4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonClose4ActionPerformed(evt);
             }
         });
 
+        buttonClose5.setBackground(new java.awt.Color(0, 138, 231));
+        buttonClose5.setForeground(new java.awt.Color(255, 255, 255));
         buttonClose5.setText("Stock Control");
+        buttonClose5.setContentAreaFilled(false);
+        buttonClose5.setOpaque(true);
         buttonClose5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonClose5ActionPerformed(evt);
