@@ -31,7 +31,8 @@ public class dbManager {
     String driver = "com.mysql.jdbc.Driver";
     String currentUsersHomeDir = System.getProperty("user.home");
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";
-
+    private String time;
+    
     public void dbValidation() {
         String url = "jdbc:mysql://localhost:3306";
         try {
@@ -549,15 +550,12 @@ public class dbManager {
             conn.close();
         } catch (SQLException exp) {
         }
-        Double hoursWorked = Double.parseDouble(time);
 
-        Double rate = Double.parseDouble(JOptionPane.showInputDialog("Please Enter the rate of the employee"));
-        Double Salary = hoursWorked * rate;
-
-        JOptionPane.showMessageDialog(null, "The employee should get R" + Salary);
 
         return time;
     }
+    
+    
 
     public void insertEmployee(String firstName, String lastName, String empPassword, String contact, int adminRights) {
         try {
@@ -1159,4 +1157,7 @@ public class dbManager {
             JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
         }
     }
-}
+
+
+    }
+

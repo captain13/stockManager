@@ -42,9 +42,19 @@ public class EmployeeForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Passwords do not Match");
         }
     }
+    
+   
 
     public void calculateWage() {
         newManager.calcHoursWorked(null);
+        
+        String time = newManager.calcHoursWorked(null);;
+        Double hoursWorked = Double.parseDouble(time);
+
+        Double rate = Double.parseDouble(JOptionPane.showInputDialog("Please Enter the rate of the employee"));
+        Double Salary = hoursWorked * rate;
+
+        JOptionPane.showMessageDialog(null, "The employee should get R" + Salary);
     }
 
     @SuppressWarnings("unchecked")
