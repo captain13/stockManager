@@ -462,6 +462,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public String getEmail() {
         return currentEmail.getText();
     }
+    
+     public String getEmailPassword() {
+        return jPasswordField1.getText();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -2172,7 +2176,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReportsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        settings.updateSettings(getSelectedResolution(), getSelectedTable(), getEmail());
+        settings.updateSettings(getSelectedResolution(), getSelectedTable(), getEmail(),getEmailPassword());
         JOptionPane.showMessageDialog(null, "Settings Saved");
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -2222,7 +2226,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         String email = JOptionPane.showInputDialog(null, "Enter new Email Address");
-        currentEmail.setText(email);
+        if("".equals(email)||email==null){
+        } else {
+            currentEmail.setText(email);
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void buttonManageSpecialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonManageSpecialsActionPerformed
@@ -2247,7 +2254,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
+       String password = JOptionPane.showInputDialog(null, "Enter new Email password");
+        if("".equals(password)||password==null){
+        } else {
+            jPasswordField1.setText(password);
+        }
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void buttonRecipeDelete2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete2ActionPerformed

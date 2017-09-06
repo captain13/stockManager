@@ -69,6 +69,10 @@ public class xmlManager {
                 Element emailAddress = document.createElement("emailAddress");
                 emailAddress.appendChild(document.createTextNode("null"));
                 generalSettings.appendChild(emailAddress);
+                
+                 Element emailPassword = document.createElement("emailPassword");
+                emailPassword.appendChild(document.createTextNode("null"));
+                generalSettings.appendChild(emailPassword);
 
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 Transformer transformer = transformerFactory.newTransformer();
@@ -101,7 +105,7 @@ public class xmlManager {
         }
     }
 
-    public void updateSettings(String selectedItem, String selectedTable, String emailAddress) {
+    public void updateSettings(String selectedItem, String selectedTable, String emailAddress,String emailPassword) {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder;
         try {
@@ -126,6 +130,10 @@ public class xmlManager {
 
                 if ("emailAddress".equals(node.getNodeName())) {
                     node.setTextContent(emailAddress);
+                }
+                
+                  if ("emailPassword".equals(node.getNodeName())) {
+                    node.setTextContent(emailPassword);
                 }
 
             }

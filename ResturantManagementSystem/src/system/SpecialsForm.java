@@ -40,10 +40,8 @@ public class SpecialsForm extends javax.swing.JFrame {
     public int getStatus() {
         String check=jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString();
         if ("true".equals(check)) {
-            System.out.println("ran");
             return 1;
         } else {
-            System.out.println("ran2");
             return 0;
         }
     }
