@@ -46,9 +46,8 @@ public class EmployeeForm extends javax.swing.JFrame {
    
 
     public void calculateWage() {
-        newManager.calcHoursWorked(null);
         
-        String time = newManager.calcHoursWorked(null);;
+        String time = newManager.calcHoursWorked(null);
         Double hoursWorked = Double.parseDouble(time);
 
         Double rate = Double.parseDouble(JOptionPane.showInputDialog("Please Enter the rate of the employee"));
