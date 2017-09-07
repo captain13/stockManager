@@ -1,6 +1,7 @@
 package system;
 
 import javax.swing.JOptionPane;
+import static system.NewOrder.tblItems;
 
 /**
  *
@@ -39,6 +40,15 @@ public class Checkout extends javax.swing.JFrame {
                 decductionField.setText("Change: " + String.format("R%.2f", (totalCost)));
                 newManager.insertSales(currentTotal, user);
                 newHandler.printReceipt(total);
+                int rowCount = tblItems.getRowCount();
+                for (int i = 0; i < rowCount; i++) {
+
+                    int recipeID = newManager.getRecipeID(tblItems.getValueAt(i, 0).toString());
+                    String cost =tblItems.getValueAt(i, 2).toString();
+                    int saleID = newManager.getSalesID();
+                    newManager.insertReceipt(recipeID, saleID, cost);
+
+                }
                 newHandler.writeTextToPDF();
 
             } else if (totalCost < 0) {
@@ -53,7 +63,7 @@ public class Checkout extends javax.swing.JFrame {
     }
 
     public final void getDiscount() {
-        String discountString=JOptionPane.showInputDialog(null, "Enter Discount");
+        String discountString = JOptionPane.showInputDialog(null, "Enter Discount");
         String discount = String.format("R%.2f", discountString);
         discountField.setText("Discount: R" + discount);
     }

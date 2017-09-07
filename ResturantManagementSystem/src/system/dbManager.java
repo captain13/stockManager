@@ -589,26 +589,115 @@ public class dbManager {
             System.out.println(exp);
         }
     }
-
-    public void insertRecipe(String name, String price, String vat, String directory, String category) {
-        String ID = "";
+    
+    // recipe needs to be edited 
+    public void insertRecipe(int orderQty, int salID, double cost) {
+//        String recID = "";
+//        String recipeID = "";
+//        try {
+//            Connection conn = DriverManager.getConnection(url, username, password);
+//            Statement s = conn.createStatement();
+//            String insertQuery = "INSERT INTO receipt(receiptNumber, recipeID, orderQuantity, salesID, date, time , cost)"
+//                    + "VALUES ('" + recID + "','"
+//                    + recipeID+ "', '"
+//                    + orderQty + "', '"
+//                    + salID + "', '"
+//                    + clock.currentDate + "', '"
+//                    + clock.getCurrentTimeStamp() + "', '"
+//                    + cost + "')";
+//            s.execute(insertQuery);
+//            String selectQuery = "SELECT * FROM recipe ORDER BY recipeID DESC LIMIT 1";
+//            ResultSet rs = s.executeQuery(selectQuery);
+//
+//            while (rs.next()) {
+//                ID = rs.getString("recipeID");
+//            }
+//            logs.writeLogs("ADDED");
+//            s.close();
+//            conn.close();
+//        } catch (SQLException exp) {
+//        }
+    }
+        
+    public int getRecipeID(String item) {
+        int ID = 0;
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO recipe(recipeName, recipePrice,recipeVAT,recipeType,recipeImageDirectory)"
-                    + "VALUES ('" + name + "','"
-                    + price + "', '"
-                    + vat + "', '"
-                    + category + "', '"
-                    + directory + "')";
-            s.execute(insertQuerySup);
-            String selectQuery = "SELECT * FROM recipe ORDER BY recipeID DESC LIMIT 1";
+            String selectQuery = "SELECT * FROM recipe WHERE recipeName='" + item + "'";
             ResultSet rs = s.executeQuery(selectQuery);
 
             while (rs.next()) {
-                ID = rs.getString("recipeID");
+                ID = Integer.parseInt(rs.getString("recipeID"));
             }
-            logs.writeLogs("ADDED");
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
+        return ID;
+    }
+    
+    public int getRecipeCost(String item) {
+        int cost = 0;
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String selectQuery = "SELECT * FROM recipe WHERE recipeName='" + item + "'";
+            ResultSet rs = s.executeQuery(selectQuery);
+
+            while (rs.next()) {
+                cost = Integer.parseInt(rs.getString("cost"));
+            }
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
+        return cost;
+    }
+    
+    public int getSalesID() {
+        int ID = 0;
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String selectQuery = "SELECT * FROM sale ORDER BY saleID DESC LIMIT 1";
+            ResultSet rs = s.executeQuery(selectQuery);
+
+            while (rs.next()) {
+                ID = Integer.parseInt(rs.getString("saleID"));
+                System.out.println(ID);
+            }
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }//getRecipeCost(
+        return ID;
+    }
+
+    public void insertReceipt(int recipeID, int salesID, String cost) {
+        int receiptID = 0;
+        
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+//            String selectQuery = "SELECT * FROM receipt ORDER BY recipeNumber DESC LIMIT 1";
+//            ResultSet rs = s.executeQuery(selectQuery);
+//            while (rs.next()) {
+//                receiptID = rs.getString("receiptID");
+//            }
+            receiptID += 1;
+            
+            String insertQuery = "INSERT INTO receipt(receiptNumber, recipeID, orderQuantity, salesID, date, time , cost)"
+                    + "VALUES ('" + receiptID + "','"
+                    + recipeID + "', '"
+                    + "1" + "', '"
+                    + salesID + "', '"
+                    + clock.getCurrentDate() + "', '"
+                    + clock.getCurrentTimeStamp() + "', '"
+                    + cost + "')";
+            s.execute(insertQuery);
+         
+            logs.writeLogs("ADDED receipt");
             s.close();
             conn.close();
         } catch (SQLException exp) {

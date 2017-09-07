@@ -132,6 +132,7 @@ CREATE TABLE IF NOT EXISTS `resturantdb`.`receipt` (
   `orderQuantity` INT(11) NULL DEFAULT NULL,
   `salesID` INT(11) NOT NULL,
   `date` DATE NULL,
+  `time` TIME NULL,
   `cost` DOUBLE NULL,
   PRIMARY KEY (`ID`, `recipeID`, `salesID`),
   INDEX `fk_receipt_recipe1` (`recipeID` ASC),

@@ -32,7 +32,7 @@ public class AddDatabase extends javax.swing.JFrame {
         } else {
         }
         if (!"".equals(textRecipe.getText()) || !"".equals(textPrice.getText())) {
-            database.insertRecipe(getRecipe(), getPrice(), getVAT(), getImageDirectory(), getCategory());
+           // database.insertRecipe(getRecipe(), getPrice(), getVAT(), getImageDirectory(), getCategory());
             RecipeForm newForm = new RecipeForm(getRecipe());
             newForm.setVisible(true);
         } else {

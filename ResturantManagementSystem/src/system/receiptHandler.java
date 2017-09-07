@@ -26,6 +26,7 @@ public class receiptHandler {
     String body;
     String tail;
     internalClock clock = new internalClock();
+    dbManager newManager = new dbManager();
     int n = 45;
     String stars = new String(new char[n]).replace("\0", "*");
     String spaces = new String(new char[n]).replace("\0", " "); 
