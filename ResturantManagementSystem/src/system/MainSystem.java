@@ -34,7 +34,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     xmlManager settings = new xmlManager();
     dbManager system = new dbManager();
     logSystem logs = new logSystem();
-    Prints prints = new Prints();
+    printHandler prints = new printHandler();
     networkHandler network = new networkHandler();
     receiptHandler receipt = new receiptHandler();
     internalClock clock = new internalClock();
@@ -140,7 +140,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String buttonId = ae.getActionCommand();
         if (tables.get(buttonId) == null) {
-            String waiter=user.createUserLog();
+            String waiter = user.createUserLog();
             String customer = JOptionPane.showInputDialog(null, "Enter Number of Customers");
             if (!"".equals(waiter) && (!"".equals(customer))
                     && customer != null && waiter != null) {
@@ -2036,7 +2036,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         if (keypadCheck() == true) {
             Keyboard key = new Keyboard();
             key.setLocation(600, 650);
-            key.setVisible(true);}
+            key.setVisible(true);
+        }
         try {
             booking.setVisible(true);
             specials.setVisible(false);
@@ -2121,12 +2122,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonEditActionPerformed
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        AddDatabase database = new AddDatabase(this);
-        database.setVisible(true);
-        if (keypadCheck() == true) {
-            Keyboard k = new Keyboard();
-            k.setLocation(350, 530);
-            k.setVisible(true);
+        if (user.createAdminLogin() == true) {
+            AddDatabase database = new AddDatabase(this);
+            database.setVisible(true);
+            if (keypadCheck() == true) {
+                Keyboard k = new Keyboard();
+                k.setLocation(350, 530);
+                k.setVisible(true);
+            }
         }
     }//GEN-LAST:event_buttonAddActionPerformed
 
@@ -2350,7 +2353,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReprint3ActionPerformed
 
     private void buttonPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrintActionPerformed
-            prints.printTextToPDF();
+        prints.printTextToPDF();
     }//GEN-LAST:event_buttonPrintActionPerformed
 
     /**

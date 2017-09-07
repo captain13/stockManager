@@ -30,21 +30,29 @@ public class userManager {
         newform.setVisible(true);
         return newform.getUsername();
     }
+    
+     public boolean createAdminLogin() {
+        LoginAdmin newlogAdmin = new LoginAdmin(null, true);
+        newlogAdmin.setVisible(true);
+        return newlogAdmin.getStatus();
+    }
 
     public void createLogout() {
         logoutSystem = new Logout(usernames);
         logoutSystem.setVisible(true);
     }
 
-    public void loginAuthentication(String username, String password) {
+    public boolean loginAuthentication(String username, String password) {
         boolean login = newManager.login(username, password);
         if (login == true) {
             addUser(username);
             clock.setLoginTimeStamp();
             newManager.updateEmployeeStatusIn(username);
             loginSystem.disposeLogin();
+            return true;
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
+             return false;
         }
     }
 

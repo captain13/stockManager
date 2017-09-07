@@ -19,14 +19,14 @@ import java.util.Arrays;
  *
  * @author Tumi
  */
-public class Prints {
+public class printHandler {
 
     String inventory;
     String Heading;
     String name;
     dbManager db = new dbManager();
 
-    public Prints() {
+    public printHandler() {
         this.name = "Inventory Table      " + "\n" + "\n";
         this.inventory = Arrays.deepToString(db.getInventoryData());
         this.Heading = "Inventory ID    Item Name    Category    Quantity(g)    Item Threshold    Item Limit \n " + "\n";
