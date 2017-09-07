@@ -60,14 +60,22 @@ public class LoginAdmin extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        buttonCancel.setBackground(new java.awt.Color(75, 75, 75));
+        buttonCancel.setForeground(new java.awt.Color(255, 255, 255));
         buttonCancel.setText("Cancel");
+        buttonCancel.setContentAreaFilled(false);
+        buttonCancel.setOpaque(true);
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCancelActionPerformed(evt);
             }
         });
 
+        lblLogin.setBackground(new java.awt.Color(75, 75, 75));
+        lblLogin.setForeground(new java.awt.Color(255, 255, 255));
         lblLogin.setText("Login");
+        lblLogin.setContentAreaFilled(false);
+        lblLogin.setOpaque(true);
         lblLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lblLoginActionPerformed(evt);

@@ -232,7 +232,7 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber,employeeHoursWorked FROM employee";
+            String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber,employeeHoursWorked, admin FROM employee";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -249,6 +249,7 @@ public class dbManager {
                 rowData[i][2] = rs.getObject(3);
                 rowData[i][3] = rs.getObject(4);
                 rowData[i][4] = rs.getObject(5);
+                rowData[i][5] = rs.getObject(6);
                 i++;
             }
             rs.close();

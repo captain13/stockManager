@@ -49,24 +49,11 @@ public class userManager {
             clock.setLoginTimeStamp();
             newManager.updateEmployeeStatusIn(username);
             loginSystem.disposeLogin();
+            JOptionPane.showMessageDialog(null, "Logged In");
             return true;
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
              return false;
-        }
-    }
-
-    public boolean adimLoginAuthentication(String username, String password) {
-        boolean login = newManager.login(username, password);
-        if (login == true) {
-            addUser(username);
-            clock.setLoginTimeStamp();
-            newManager.updateEmployeeStatusIn(username);
-            loginSystem.disposeLogin();
-            return true;
-        } else {
-            JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
-            return false;
         }
     }
 
