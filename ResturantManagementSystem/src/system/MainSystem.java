@@ -42,7 +42,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     boolean enableKeypad = false;
     int n;
     JButton button;
-    Border blackline = BorderFactory.createLineBorder(Color.WHITE);
+    Border whiteLine = BorderFactory.createLineBorder(Color.WHITE);
 
     public MainSystem() {
         initComponents();
@@ -128,7 +128,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             button = new JButton("Table " + i);
             button.setBackground(new Color(0, 138, 231));
             button.setForeground(new Color(255, 255, 255));
-            button.setBorder(blackline);
+            button.setBorder(whiteLine);
             button.setContentAreaFilled(false);
             button.setOpaque(true);
             button.addActionListener(this);
@@ -141,12 +141,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         String buttonId = ae.getActionCommand();
         if (tables.get(buttonId) == null) {
             String waiter = user.createUserLog();
-            String customer = JOptionPane.showInputDialog(null, "Enter Number of Customers");
-            if (!"".equals(waiter) && (!"".equals(customer))
-                    && customer != null && waiter != null) {
-                tables.put(buttonId, new NewOrder(waiter, customer, buttonId, tables));
-                tables.get(buttonId).setVisible(true);
-            } else {
+            if (waiter!=null) {
+                String customer = JOptionPane.showInputDialog(null, "Enter Number of Customers");
+
+                if (!"".equals(waiter) && (!"".equals(customer))
+                        && customer != null && waiter != null) {
+                    tables.put(buttonId, new NewOrder(waiter, customer, buttonId, tables));
+                    tables.get(buttonId).setVisible(true);
+                } else {
+                }
             }
         } else {
             tables.get(buttonId).setVisible(true);
