@@ -34,6 +34,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     xmlManager settings = new xmlManager();
     dbManager system = new dbManager();
     logSystem logs = new logSystem();
+    Prints prints = new Prints();
     networkHandler network = new networkHandler();
     receiptHandler receipt = new receiptHandler();
     internalClock clock = new internalClock();
@@ -581,9 +582,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         lblLogo1 = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         lblScreen = new javax.swing.JLabel();
-        comboBoxSceen = new javax.swing.JComboBox<>();
-        comboBoxLogo = new javax.swing.JComboBox<>();
-        comboBoxTableCount = new javax.swing.JComboBox<>();
+        comboBoxSceen = new javax.swing.JComboBox<String>();
+        comboBoxLogo = new javax.swing.JComboBox<String>();
+        comboBoxTableCount = new javax.swing.JComboBox<String>();
         lblSettings1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         currentEmail2 = new javax.swing.JLabel();
@@ -1050,6 +1051,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonAdd.setBackground(new java.awt.Color(0, 138, 231));
         buttonAdd.setForeground(new java.awt.Color(255, 255, 255));
         buttonAdd.setText("Add");
+        buttonAdd.setToolTipText("insert into db");
         buttonAdd.setContentAreaFilled(false);
         buttonAdd.setOpaque(true);
         buttonAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -1085,6 +1087,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonPrint.setText("Print");
         buttonPrint.setContentAreaFilled(false);
         buttonPrint.setOpaque(true);
+        buttonPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPrintActionPerformed(evt);
+            }
+        });
 
         buttonEdit1.setBackground(new java.awt.Color(0, 138, 231));
         buttonEdit1.setForeground(java.awt.Color.white);
@@ -1727,21 +1734,21 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         lblScreen.setText("Resolution");
 
-        comboBoxSceen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Windowed Screen", "Fullscreen" }));
+        comboBoxSceen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Windowed Screen", "Fullscreen" }));
         comboBoxSceen.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxSceenItemStateChanged(evt);
             }
         });
 
-        comboBoxLogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "Demo 1", "Demo 2" }));
+        comboBoxLogo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "Demo 1", "Demo 2" }));
         comboBoxLogo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxLogoItemStateChanged(evt);
             }
         });
 
-        comboBoxTableCount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
+        comboBoxTableCount.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
         comboBoxTableCount.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxTableCountItemStateChanged(evt);
@@ -2341,6 +2348,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         } catch (IOException ex) {
         }
     }//GEN-LAST:event_buttonReprint3ActionPerformed
+
+    private void buttonPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrintActionPerformed
+            prints.printTextToPDF();
+    }//GEN-LAST:event_buttonPrintActionPerformed
 
     /**
      * @param args the command line arguments
