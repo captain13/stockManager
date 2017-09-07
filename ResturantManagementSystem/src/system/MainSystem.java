@@ -139,8 +139,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String buttonId = ae.getActionCommand();
         if (tables.get(buttonId) == null) {
-            // String waiter =user.createUserLog();
-            String waiter = JOptionPane.showInputDialog(null, "Enter Waiter ID");
+            String waiter=user.createUserLog();
             String customer = JOptionPane.showInputDialog(null, "Enter Number of Customers");
             if (!"".equals(waiter) && (!"".equals(customer))
                     && customer != null && waiter != null) {

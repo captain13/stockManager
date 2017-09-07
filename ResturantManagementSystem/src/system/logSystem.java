@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class logSystem {
 
-    String fileName = System.getProperty("user.home") + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\logs\\logs.txt";
+    String fileName =  ".\\src\\logs\\logs.txt";
     internalClock clock = new internalClock();
     File file = new File(fileName);
 

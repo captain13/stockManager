@@ -11,10 +11,10 @@ public class userManager {
 
     static ArrayList usernames = new ArrayList();
     static Login loginSystem;
-    static UserForm userLog;
     Logout logoutSystem;
     dbManager newManager = new dbManager();
     internalClock clock = new internalClock();
+    LoginForm newform;
 
     public void addUser(String username) {
         usernames.add(username);
@@ -24,11 +24,11 @@ public class userManager {
         loginSystem = new Login();
         loginSystem.setVisible(true);
     }
-    
-    public void createUserLog(String waiter) {
-        userLog = new UserForm(usernames);
-        userLog.setWaiter(waiter);
-        userLog.setVisible(true);
+
+    public String createUserLog() {
+        LoginForm newform = new LoginForm(null, true, usernames);
+        newform.setVisible(true);
+        return newform.getUsername();
     }
 
     public void createLogout() {
@@ -47,8 +47,8 @@ public class userManager {
             JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
         }
     }
-    
-       public boolean adimLoginAuthentication(String username, String password) {
+
+    public boolean adimLoginAuthentication(String username, String password) {
         boolean login = newManager.login(username, password);
         if (login == true) {
             addUser(username);
