@@ -26,13 +26,10 @@ public class printHandler {
     String name;
     dbManager db = new dbManager();
 
-    public printHandler() {
-        this.name = "Inventory Table      " + "\n" + "\n";
-        this.inventory = Arrays.deepToString(db.getInventoryData());
-        this.Heading = "Inventory ID    Item Name    Category    Quantity(g)    Item Threshold    Item Limit \n " + "\n";
-    }
-
     public void printTextToPDF() {
+        name = "Inventory Table      " + "\n" + "\n";
+        inventory = Arrays.deepToString(db.getInventoryData());
+        Heading = "Inventory ID    Item Name    Category    Quantity(g)    Item Threshold    Item Limit \n " + "\n";
         String currentUsersHomeDir = System.getProperty("user.home");
         String file_name = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\docs\\Print.pdf";
         Document document = new Document();

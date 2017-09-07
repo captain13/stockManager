@@ -2102,23 +2102,23 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_TabbedPanelFocusGained
 
     private void buttonRecipeAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAddActionPerformed
-        AddDatabase database = new AddDatabase(this);
-        database.setVisible(true);
-        AddDatabase.getTabbedPanel().setSelectedIndex(1);
-        if (keypadCheck() == true) {
-            Keyboard k = new Keyboard();
-            k.setLocation(350, 530);
-            k.setVisible(true);
+        if (user.createAdminLogin() == true) {
+            AddDatabase database = new AddDatabase(this);
+            database.setVisible(true);
+            AddDatabase.getTabbedPanel().setSelectedIndex(1);
+            if (keypadCheck() == true) {
+                Keyboard k = new Keyboard();
+                k.setLocation(350, 530);
+                k.setVisible(true);
+            }
         }
     }//GEN-LAST:event_buttonRecipeAddActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
-        //Admin login window object created
-        //AdminLogin s = new AdminLogin();
-        //Admin login object set to visible
-        //s.setVisible(true);
-        updateSupplier();
-        populateInvnetoryTable();
+        if (user.createAdminLogin() == true) {
+            updateSupplier();
+            populateInvnetoryTable();
+        }
     }//GEN-LAST:event_buttonEditActionPerformed
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
@@ -2134,37 +2134,45 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonRecipeAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAdd1ActionPerformed
-        AddDatabase database = new AddDatabase(this);
-        database.setVisible(true);
-        AddDatabase.getTabbedPanel().setSelectedIndex(2);
-        if (keypadCheck() == true) {
-            Keyboard k = new Keyboard();
-            k.setLocation(350, 530);
-            k.setVisible(true);
+        if (user.createAdminLogin() == true) {
+            AddDatabase database = new AddDatabase(this);
+            database.setVisible(true);
+            AddDatabase.getTabbedPanel().setSelectedIndex(2);
+            if (keypadCheck() == true) {
+                Keyboard k = new Keyboard();
+                k.setLocation(350, 530);
+                k.setVisible(true);
+            }
         }
     }//GEN-LAST:event_buttonRecipeAdd1ActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            system.removeInventory(getID());
-            populateInvnetoryTable();
+        if (user.createAdminLogin() == true) {
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                system.removeInventory(getID());
+                populateInvnetoryTable();
+            }
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonRecipeDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDeleteActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            system.removeRecipe(getIDrecipe());
-            populateRecipeTable();
+        if (user.createAdminLogin() == true) {
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                system.removeRecipe(getIDrecipe());
+                populateRecipeTable();
+            }
         }
     }//GEN-LAST:event_buttonRecipeDeleteActionPerformed
 
     private void buttonRecipeDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete1ActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            system.removeSupplier(getIDsupplier());
-            populateSupplierTable();
+        if (user.createAdminLogin() == true) {
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                system.removeSupplier(getIDsupplier());
+                populateSupplierTable();
+            }
         }
     }//GEN-LAST:event_buttonRecipeDelete1ActionPerformed
 
@@ -2278,28 +2286,26 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void buttonRecipeDelete2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete2ActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            system.removeRecipeList(getIDrecipeListRecipe(), getIDrecipeListInventory());
+        if (user.createAdminLogin() == true) {
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                system.removeRecipeList(getIDrecipeListRecipe(), getIDrecipeListInventory());
+            }
         }
     }//GEN-LAST:event_buttonRecipeDelete2ActionPerformed
 
     private void buttonRecipeEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEditActionPerformed
-        //Admin login window object created
-        //AdminLogin s = new AdminLogin();
-        //Admin login object set to visible
-        //s.setVisible(true);
-        updateInventory();
-        populateRecipeTable();
+        if (user.createAdminLogin() == true) {
+            updateInventory();
+            populateRecipeTable();
+        }
     }//GEN-LAST:event_buttonRecipeEditActionPerformed
 
     private void buttonRecipeEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit1ActionPerformed
-        //Admin login window object created
-        //AdminLogin s = new AdminLogin();
-        //Admin login object set to visible
-        //s.setVisible(true);
-        updateRecipe();
-        populateSupplierTable();
+        if (user.createAdminLogin() == true) {
+            updateRecipe();
+            populateSupplierTable();
+        }
     }//GEN-LAST:event_buttonRecipeEdit1ActionPerformed
 
     private void buttonEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEventsActionPerformed
@@ -2327,7 +2333,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonRecipeEdit4ActionPerformed
 
     private void buttonRecipeEdit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit2ActionPerformed
-        updateRecipeList();
+        if (user.createAdminLogin() == true) {
+            updateRecipeList();
+        }
     }//GEN-LAST:event_buttonRecipeEdit2ActionPerformed
 
     private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
