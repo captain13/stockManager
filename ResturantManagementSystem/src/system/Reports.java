@@ -51,7 +51,7 @@ public class Reports extends javax.swing.JFrame {
         int index = 0;
         for (int i = 0; i < n; i++) {
             row[i][0] = newManager.getRecipeData()[i][1];
-            row[i][1] = newManager.getRecipeData()[i][5];
+            row[i][1] = newManager.getRecipeData()[i][6];
         }
         DefaultTableModel tableModel = new DefaultTableModel(row, columnNames);
         tableSales.setModel(tableModel);

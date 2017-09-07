@@ -28,8 +28,8 @@ public class OrderForm extends javax.swing.JFrame {
         int n = newManager.getIngredients().length;
         recipeInfo = new Object[n][2];
         for (int i = 0; i < n; i++) {
-            recipeInfo[i][0] = newManager.getIngredients()[i][0];
-            recipeInfo[i][1] = newManager.getIngredients()[i][1];
+            recipeInfo[i][0] = newManager.getInventoryData()[i][0];
+            recipeInfo[i][1] = newManager.getInventoryData()[i][1];
             jComboBox1.addItem((String) recipeInfo[i][1]);
         }
     }

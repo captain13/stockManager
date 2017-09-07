@@ -54,7 +54,7 @@ public class Checkout extends javax.swing.JFrame {
 
     public final void getDiscount() {
         String discountString=JOptionPane.showInputDialog(null, "Enter Discount");
-        String discount = String.format("R%.2f", (discountString));
+        String discount = String.format("R%.2f", discountString);
         discountField.setText("Discount: R" + discount);
     }
 
@@ -308,7 +308,7 @@ public class Checkout extends javax.swing.JFrame {
             }
         });
 
-        discountButton.setText("Cancel");
+        discountButton.setText("Close");
         discountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 discountButtonActionPerformed(evt);

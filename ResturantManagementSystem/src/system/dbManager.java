@@ -32,7 +32,7 @@ public class dbManager {
     String currentUsersHomeDir = System.getProperty("user.home");
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";
     private String time;
-    
+
     public void dbValidation() {
         String url = "jdbc:mysql://localhost:3306";
         try {
@@ -88,7 +88,7 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT,recipeImageDirectory FROM recipe";
+            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT,recipeImageDirectory, recipeCount FROM recipe";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -106,6 +106,7 @@ public class dbManager {
                 rowData[i][3] = rs.getObject(4);
                 rowData[i][4] = rs.getObject(5);
                 rowData[i][5] = rs.getObject(6);
+                rowData[i][6] = rs.getObject(7);
                 i++;
             }
 
@@ -411,9 +412,9 @@ public class dbManager {
         return rowData;
     }
 
-    public String[][] getIngredients() {
+    public String[] getIngredients() {
         int count = 0;
-        String ingredients[][] = null;
+        String ingredients[] = null;
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -427,11 +428,10 @@ public class dbManager {
             }
             String query = "SELECT inventoryID,item FROM inventory ";
             rs = s.executeQuery(query);
-            ingredients = new String[count][2];
+            ingredients = new String[count];
             int i = 0;
             while (rs.next()) {
-                ingredients[i][0] = rs.getString("inventoryID");
-                ingredients[i][1] = rs.getString("item");
+                ingredients[i] = rs.getString("item");
                 i++;
             }
 
@@ -551,8 +551,6 @@ public class dbManager {
         }
         return time;
     }
-    
-    
 
     public void insertEmployee(String firstName, String lastName, String empPassword, String contact, int adminRights) {
         try {
@@ -878,11 +876,11 @@ public class dbManager {
         }
     }
 
-    public void updateSpecials(String specialsID,int status) {
+    public void updateSpecials(String specialsID, int status) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "UPDATE specials set status= '"+status+"' WHERE specialsID='" + specialsID + "'";
+            String query = "UPDATE specials set status= '" + status + "' WHERE specialsID='" + specialsID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.executeUpdate();
             getSpecialData();
@@ -1155,6 +1153,4 @@ public class dbManager {
         }
     }
 
-
-    }
-
+}

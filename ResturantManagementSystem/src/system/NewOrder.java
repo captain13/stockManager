@@ -103,8 +103,8 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             emptySpaceTab1 = 40 - index;
             index = 0;
 
-            if (recipeInfo[i][4].equals("Light Meal")) {
-                ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
+            if (recipeInfo[i][2].equals("Light Meal")) {
+                ImageIcon icon = (new ImageIcon(recipeInfo[i][5].toString()));
                 button = new JButton(recipeInfo[i][1].toString(), icon);
                 button.setVerticalTextPosition(SwingConstants.BOTTOM);
                 button.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -115,12 +115,13 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 button.addActionListener(this);
                 lightMealTab.add(button);
                 index++;
+                System.out.println("ran");
             }
             emptySpaceTab2 = 40 - index;
             index = 0;
 
-            if (recipeInfo[i][4].equals("Dessert")) {
-                ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
+            if (recipeInfo[i][2].equals("Dessert")) {
+                ImageIcon icon = (new ImageIcon(recipeInfo[i][5].toString()));
                 button = new JButton(recipeInfo[i][1].toString(), icon);
                 button.setVerticalTextPosition(SwingConstants.BOTTOM);
                 button.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -135,8 +136,8 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             emptySpaceTab3 = 40 - index;
             index = 0;
 
-            if (recipeInfo[i][4].equals("Drinks")) {
-                ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
+            if (recipeInfo[i][2].equals("Drinks")) {
+                ImageIcon icon = (new ImageIcon(recipeInfo[i][5].toString()));
                 button = new JButton(recipeInfo[i][1].toString(), icon);
                 button.setVerticalTextPosition(SwingConstants.BOTTOM);
                 button.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -151,8 +152,8 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             emptySpaceTab4 = 40 - index;
             index = 0;
 
-            if (recipeInfo[i][4].equals("Extra")) {
-                ImageIcon icon = (new ImageIcon(recipeInfo[i][3].toString()));
+            if (recipeInfo[i][2].equals("Extra")) {
+                ImageIcon icon = (new ImageIcon(recipeInfo[i][5].toString()));
                 button = new JButton(recipeInfo[i][1].toString(), icon);
                 button.setVerticalTextPosition(SwingConstants.BOTTOM);
                 button.setHorizontalTextPosition(SwingConstants.CENTER);
