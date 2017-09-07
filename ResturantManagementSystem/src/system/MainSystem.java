@@ -1717,6 +1717,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jCheckBox1.setSelected(true);
         jCheckBox1.setText("Enable KeyPad");
         jCheckBox1.setContentAreaFilled(false);
 
@@ -2025,6 +2026,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonSpecialsActionPerformed
 
     private void buttonBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookingsActionPerformed
+        if (keypadCheck() == true) {
+            Keyboard key = new Keyboard();
+            key.setLocation(600, 650);
+            key.setVisible(true);}
         try {
             booking.setVisible(true);
             specials.setVisible(false);
