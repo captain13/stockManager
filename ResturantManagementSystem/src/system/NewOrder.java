@@ -282,17 +282,6 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         }
     }
 
-    public static String[][] itemsList() {
-        int rowCount = tblItems.getRowCount();
-        String[][] list = new String[rowCount][3];
-        for (int i = 0; i < rowCount; i++) {
-            for (int n = 0; n < 3; n++) {
-                list[i][n] = tblItems.getValueAt(i, n).toString();
-            }
-        }
-        return list;
-    }
-
     public void addEdit() {
         Object value = JOptionPane.showInputDialog(null, "Enter message");
         if (!value.equals("")) {
@@ -335,7 +324,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setSize(new java.awt.Dimension(1366, 768));
+        setSize(new java.awt.Dimension(700, 768));
 
         lblTitle.setText("Order");
 
@@ -413,7 +402,8 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
         buttonClose.setBackground(new java.awt.Color(0, 138, 231));
         buttonClose.setForeground(new java.awt.Color(255, 255, 255));
-        buttonClose.setText("Close");
+        buttonClose.setText("Return");
+        buttonClose.setToolTipText("");
         buttonClose.setContentAreaFilled(false);
         buttonClose.setOpaque(true);
         buttonClose.addActionListener(new java.awt.event.ActionListener() {
@@ -503,7 +493,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         );
         mainMealTabLayout.setVerticalGroup(
             mainMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
 
         menuPane.addTab("Main Meals", mainMealTab);
@@ -518,7 +508,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         );
         lightMealTabLayout.setVerticalGroup(
             lightMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
 
         menuPane.addTab("Light Meals", lightMealTab);
@@ -533,7 +523,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         );
         dessertTabLayout.setVerticalGroup(
             dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
 
         menuPane.addTab("Desserts", dessertTab);
@@ -548,7 +538,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         );
         drinksTabLayout.setVerticalGroup(
             drinksTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
 
         menuPane.addTab("Drinks", drinksTab);
@@ -563,14 +553,14 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         );
         extraTabLayout.setVerticalGroup(
             extraTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
 
         menuPane.addTab("Extras", extraTab);
 
         jToggleButton8.setBackground(new java.awt.Color(75, 75, 75));
         jToggleButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton8.setText("Close Table");
+        jToggleButton8.setText("Clear Table");
         jToggleButton8.setContentAreaFilled(false);
         jToggleButton8.setOpaque(true);
         jToggleButton8.addActionListener(new java.awt.event.ActionListener() {

@@ -8,12 +8,12 @@ package system;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
+import static system.NewOrder.tblItems;
 
 /**
  *
@@ -25,49 +25,99 @@ public class receiptHandler {
     String head;
     String body;
     String tail;
-    internalClock clock=new internalClock();
+    internalClock clock = new internalClock();
+    int n = 45;
+    String stars = new String(new char[n]).replace("\0", "*");
+    String spaces = new String(new char[n]).replace("\0", " "); 
 
     public void header() {
-        head = "********************************** \n"
+        head =  stars + "\n"
                 + "COMPANY NAME " + " " + "\n"
-                + "TIME " + clock.getCurrentTimeStamp() + " "
-                + clock.getCurrentDate() + " \n"
-                + "********************************** ";
+                + clock.getCurrentTimeStamp() + " "
+                + clock.getCurrentDate() + "\n"
+                + stars + "\n";
         System.out.println(head);
     }
 
-    public void body() {
-        body = "                                     \n"
-                + "Item                   Qty Price \n"
-                + " " + Arrays.deepToString(NewOrder.itemsList()).replaceAll("[^\\p{javaSpaceChar}{2,}a-zA-Z0-9&]", "\n") + " ";
+    public void body(double total) {
+        body = spaces + "\n"
+                //Need to change
+                + "Items                                      Qty   Price"
+                + " " + Arrays.deepToString(itemsList()).replaceAll("[^\\p{javaSpaceChar}{2.a-zA-Z0-9&,}]", "\n") + " "
+                + "Total " +total + "\n"
+                + "Amount........................\n";
         System.out.println(body);
     }
 
-    public void tail(double total) {
-        tail = "Total " +total + "\n"
-                + "                                   \n"
-                + "********************************** \n"
-                + "             THANK YOU             \n"
-                + "         PLEASE COME AGAIN         \n"
-                + "                                   \n"
-                + "             WAITER                \n"
-                         + NewOrder.getWaiter() + "  \n"
-                + "********************************** ";
+    public void tail() {
+        tail =  spaces + "\n"
+                + stars + "\n"
+                + "THANK YOU\n"
+                + "PLEASE COME AGAIN\n"
+                + spaces + "\n"
+                + "WAITER\n"
+                + NewOrder.getWaiter() + "\n"
+                + stars + "\n";
         System.out.println(tail);
+    }
+//    
+//    public String[] spaces(String i, String q, String p) {
+//        String[] str = new String[3];
+//        str[0] = i;
+//        str[1] = q;
+//        str[2] = p;
+//        for (int n = 0; n < 3; n++) {        
+//            int len = str[n].length();
+//            int spc = 30 - len;
+//            str[n] = str[n] + "" + printS(spc);
+//        }
+//        return str;
+//    }
+    
+    public String[][] itemsList() {
+        int rowCount = tblItems.getRowCount();
+        String[][] list = new String[rowCount][3];
+        for (int i = 0; i < rowCount; i++) {
+            for (int n = 0; n < 3; n++) {
+                switch (n) {
+                    case 0:
+                        {
+                            int len = tblItems.getValueAt(i, n).toString().length();
+                            int spc = 30 - len;
+                            list[i][n] = tblItems.getValueAt(i, n).toString() + "" + printS(spc);
+                            break;
+                        }
+                    case 1:
+                        {
+                            int len = tblItems.getValueAt(i, n).toString().length();
+                            int spc = 5 - len;
+                            list[i][n] = tblItems.getValueAt(i, n).toString() + "" + printS(spc);
+                            break;
+                        }
+                    case 2:
+                        {
+                            int len = tblItems.getValueAt(i, n).toString().length();
+                            int spc = 5 - len;
+                            list[i][n] = tblItems.getValueAt(i, n).toString() + "" + printS(spc);
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+        }
+        return list;
+    }
+    
+    private String printS(int n){
+        String spc = new String(new char[n]).replace("\0", " ");
+        return spc;
     }
 
     public void printReceipt(double total) {
-        //String whitespace_charclass = "["  + whitespace_chars + "]";
         header();
-        body();
-        tail(total);
-        //        for (String[] itemsList : NewOrder.itemsList()) {
-        //            for (String itemsList1 : itemsList) {
-        //                System.out.print(itemsList1 + " ");
-        //            }
-        //            System.out.println();
-        //        }
-        
+        body(total);
+        tail();
     }
 
     public void writeTextToPDF() {
