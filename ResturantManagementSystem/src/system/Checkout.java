@@ -45,8 +45,7 @@ public class Checkout extends javax.swing.JFrame {
 
                     int recipeID = newManager.getRecipeID(tblItems.getValueAt(i, 0).toString());
                     String cost =tblItems.getValueAt(i, 2).toString();
-                    int saleID = newManager.getSalesID();
-                    newManager.insertReceipt(recipeID, saleID, cost);
+                    newManager.insertReceipt(recipeID, cost);
 
                 }
                 newHandler.writeTextToPDF();

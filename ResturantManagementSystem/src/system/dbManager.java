@@ -661,23 +661,22 @@ public class dbManager {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String selectQuery = "SELECT * FROM sale ORDER BY saleID DESC LIMIT 1";
+            String selectQuery = "SELECT * FROM sales ORDER BY salesID DESC LIMIT 1";
             ResultSet rs = s.executeQuery(selectQuery);
 
             while (rs.next()) {
-                ID = Integer.parseInt(rs.getString("saleID"));
+               ID = Integer.parseInt(rs.getString("salesID"));
                 System.out.println(ID);
             }
             s.close();
             conn.close();
         } catch (SQLException exp) {
-        }//getRecipeCost(
+        }
         return ID;
     }
 
-    public void insertReceipt(int recipeID, int salesID, String cost) {
+    public void insertReceipt(int recipeID, String cost) {
         int receiptID = 0;
-        
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -688,11 +687,11 @@ public class dbManager {
 //            }
             receiptID += 1;
             
-            String insertQuery = "INSERT INTO receipt(receiptNumber, recipeID, orderQuantity, salesID, date, time , cost)"
-                    + "VALUES ('" + receiptID + "','"
+            String insertQuery = "INSERT INTO receipt( recipeID, orderQuantity, salesID, date, time , cost)"
+                    + "VALUES ('"
                     + recipeID + "', '"
                     + "1" + "', '"
-                    + salesID + "', '"
+                    + getSalesID() + "', '"
                     + clock.getCurrentDate() + "', '"
                     + clock.getCurrentTimeStamp() + "', '"
                     + cost + "')";
@@ -702,6 +701,7 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (SQLException exp) {
+            System.out.println(exp);
         }
     }
 

@@ -127,7 +127,6 @@ DROP TABLE IF EXISTS `resturantdb`.`receipt` ;
 
 CREATE TABLE IF NOT EXISTS `resturantdb`.`receipt` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
-  `receiptNumber` INT NOT NULL,
   `recipeID` INT(11) NOT NULL,
   `orderQuantity` INT(11) NULL DEFAULT NULL,
   `salesID` INT(11) NOT NULL,
