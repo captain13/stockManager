@@ -88,11 +88,6 @@ public class RecipeForm extends javax.swing.JFrame implements ActionListener {
             }
         }
     }
-    
-    public static void main(String[] args) {
-        RecipeForm newform=new RecipeForm("");
-        newform.setVisible(true);
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

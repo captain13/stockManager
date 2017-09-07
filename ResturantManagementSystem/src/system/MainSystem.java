@@ -34,6 +34,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     xmlManager settings = new xmlManager();
     dbManager system = new dbManager();
     logSystem logs = new logSystem();
+    printHandler prints = new printHandler();
     networkHandler network = new networkHandler();
     receiptHandler receipt = new receiptHandler();
     internalClock clock = new internalClock();
@@ -139,7 +140,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String buttonId = ae.getActionCommand();
         if (tables.get(buttonId) == null) {
-            String waiter=user.createUserLog();
+            String waiter = user.createUserLog();
             String customer = JOptionPane.showInputDialog(null, "Enter Number of Customers");
             if (!"".equals(waiter) && (!"".equals(customer))
                     && customer != null && waiter != null) {
@@ -581,9 +582,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         lblLogo1 = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         lblScreen = new javax.swing.JLabel();
-        comboBoxSceen = new javax.swing.JComboBox<>();
-        comboBoxLogo = new javax.swing.JComboBox<>();
-        comboBoxTableCount = new javax.swing.JComboBox<>();
+        comboBoxSceen = new javax.swing.JComboBox<String>();
+        comboBoxLogo = new javax.swing.JComboBox<String>();
+        comboBoxTableCount = new javax.swing.JComboBox<String>();
         lblSettings1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         currentEmail2 = new javax.swing.JLabel();
@@ -1050,6 +1051,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonAdd.setBackground(new java.awt.Color(0, 138, 231));
         buttonAdd.setForeground(new java.awt.Color(255, 255, 255));
         buttonAdd.setText("Add");
+        buttonAdd.setToolTipText("insert into db");
         buttonAdd.setContentAreaFilled(false);
         buttonAdd.setOpaque(true);
         buttonAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -1085,6 +1087,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonPrint.setText("Print");
         buttonPrint.setContentAreaFilled(false);
         buttonPrint.setOpaque(true);
+        buttonPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPrintActionPerformed(evt);
+            }
+        });
 
         buttonEdit1.setBackground(new java.awt.Color(0, 138, 231));
         buttonEdit1.setForeground(java.awt.Color.white);
@@ -1717,6 +1724,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jCheckBox1.setSelected(true);
         jCheckBox1.setText("Enable KeyPad");
         jCheckBox1.setContentAreaFilled(false);
 
@@ -1726,21 +1734,21 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         lblScreen.setText("Resolution");
 
-        comboBoxSceen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Windowed Screen", "Fullscreen" }));
+        comboBoxSceen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Windowed Screen", "Fullscreen" }));
         comboBoxSceen.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxSceenItemStateChanged(evt);
             }
         });
 
-        comboBoxLogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "Demo 1", "Demo 2" }));
+        comboBoxLogo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "Demo 1", "Demo 2" }));
         comboBoxLogo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxLogoItemStateChanged(evt);
             }
         });
 
-        comboBoxTableCount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
+        comboBoxTableCount.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
         comboBoxTableCount.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxTableCountItemStateChanged(evt);
@@ -2025,6 +2033,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonSpecialsActionPerformed
 
     private void buttonBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookingsActionPerformed
+        if (keypadCheck() == true) {
+            Keyboard key = new Keyboard();
+            key.setLocation(600, 650);
+            key.setVisible(true);
+        }
         try {
             booking.setVisible(true);
             specials.setVisible(false);
@@ -2089,67 +2102,77 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_TabbedPanelFocusGained
 
     private void buttonRecipeAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAddActionPerformed
-        AddDatabase database = new AddDatabase(this);
-        database.setVisible(true);
-        AddDatabase.getTabbedPanel().setSelectedIndex(1);
-        if (keypadCheck() == true) {
-            Keyboard k = new Keyboard();
-            k.setLocation(350, 530);
-            k.setVisible(true);
+        if (user.createAdminLogin() == true) {
+            AddDatabase database = new AddDatabase(this);
+            database.setVisible(true);
+            AddDatabase.getTabbedPanel().setSelectedIndex(1);
+            if (keypadCheck() == true) {
+                Keyboard k = new Keyboard();
+                k.setLocation(350, 530);
+                k.setVisible(true);
+            }
         }
     }//GEN-LAST:event_buttonRecipeAddActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
-        //Admin login window object created
-        //AdminLogin s = new AdminLogin();
-        //Admin login object set to visible
-        //s.setVisible(true);
-        updateSupplier();
-        populateInvnetoryTable();
+        if (user.createAdminLogin() == true) {
+            updateSupplier();
+            populateInvnetoryTable();
+        }
     }//GEN-LAST:event_buttonEditActionPerformed
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        AddDatabase database = new AddDatabase(this);
-        database.setVisible(true);
-        if (keypadCheck() == true) {
-            Keyboard k = new Keyboard();
-            k.setLocation(350, 530);
-            k.setVisible(true);
+        if (user.createAdminLogin() == true) {
+            AddDatabase database = new AddDatabase(this);
+            database.setVisible(true);
+            if (keypadCheck() == true) {
+                Keyboard k = new Keyboard();
+                k.setLocation(350, 530);
+                k.setVisible(true);
+            }
         }
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonRecipeAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAdd1ActionPerformed
-        AddDatabase database = new AddDatabase(this);
-        database.setVisible(true);
-        AddDatabase.getTabbedPanel().setSelectedIndex(2);
-        if (keypadCheck() == true) {
-            Keyboard k = new Keyboard();
-            k.setLocation(350, 530);
-            k.setVisible(true);
+        if (user.createAdminLogin() == true) {
+            AddDatabase database = new AddDatabase(this);
+            database.setVisible(true);
+            AddDatabase.getTabbedPanel().setSelectedIndex(2);
+            if (keypadCheck() == true) {
+                Keyboard k = new Keyboard();
+                k.setLocation(350, 530);
+                k.setVisible(true);
+            }
         }
     }//GEN-LAST:event_buttonRecipeAdd1ActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            system.removeInventory(getID());
-            populateInvnetoryTable();
+        if (user.createAdminLogin() == true) {
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                system.removeInventory(getID());
+                populateInvnetoryTable();
+            }
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonRecipeDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDeleteActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            system.removeRecipe(getIDrecipe());
-            populateRecipeTable();
+        if (user.createAdminLogin() == true) {
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                system.removeRecipe(getIDrecipe());
+                populateRecipeTable();
+            }
         }
     }//GEN-LAST:event_buttonRecipeDeleteActionPerformed
 
     private void buttonRecipeDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete1ActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            system.removeSupplier(getIDsupplier());
-            populateSupplierTable();
+        if (user.createAdminLogin() == true) {
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                system.removeSupplier(getIDsupplier());
+                populateSupplierTable();
+            }
         }
     }//GEN-LAST:event_buttonRecipeDelete1ActionPerformed
 
@@ -2263,28 +2286,26 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void buttonRecipeDelete2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete2ActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            system.removeRecipeList(getIDrecipeListRecipe(), getIDrecipeListInventory());
+        if (user.createAdminLogin() == true) {
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                system.removeRecipeList(getIDrecipeListRecipe(), getIDrecipeListInventory());
+            }
         }
     }//GEN-LAST:event_buttonRecipeDelete2ActionPerformed
 
     private void buttonRecipeEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEditActionPerformed
-        //Admin login window object created
-        //AdminLogin s = new AdminLogin();
-        //Admin login object set to visible
-        //s.setVisible(true);
-        updateInventory();
-        populateRecipeTable();
+        if (user.createAdminLogin() == true) {
+            updateInventory();
+            populateRecipeTable();
+        }
     }//GEN-LAST:event_buttonRecipeEditActionPerformed
 
     private void buttonRecipeEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit1ActionPerformed
-        //Admin login window object created
-        //AdminLogin s = new AdminLogin();
-        //Admin login object set to visible
-        //s.setVisible(true);
-        updateRecipe();
-        populateSupplierTable();
+        if (user.createAdminLogin() == true) {
+            updateRecipe();
+            populateSupplierTable();
+        }
     }//GEN-LAST:event_buttonRecipeEdit1ActionPerformed
 
     private void buttonEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEventsActionPerformed
@@ -2312,7 +2333,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonRecipeEdit4ActionPerformed
 
     private void buttonRecipeEdit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit2ActionPerformed
-        updateRecipeList();
+        if (user.createAdminLogin() == true) {
+            updateRecipeList();
+        }
     }//GEN-LAST:event_buttonRecipeEdit2ActionPerformed
 
     private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
@@ -2336,6 +2359,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         } catch (IOException ex) {
         }
     }//GEN-LAST:event_buttonReprint3ActionPerformed
+
+    private void buttonPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrintActionPerformed
+        prints.printTextToPDF();
+    }//GEN-LAST:event_buttonPrintActionPerformed
 
     /**
      * @param args the command line arguments
