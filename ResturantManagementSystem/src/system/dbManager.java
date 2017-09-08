@@ -590,36 +590,25 @@ public class dbManager {
             System.out.println(exp);
         }
     }
-    
-    // recipe needs to be edited 
-    public void insertRecipe(int orderQty, int salID, double cost) {
-//        String recID = "";
-//        String recipeID = "";
-//        try {
-//            Connection conn = DriverManager.getConnection(url, username, password);
-//            Statement s = conn.createStatement();
-//            String insertQuery = "INSERT INTO receipt(receiptNumber, recipeID, orderQuantity, salesID, date, time , cost)"
-//                    + "VALUES ('" + recID + "','"
-//                    + recipeID+ "', '"
-//                    + orderQty + "', '"
-//                    + salID + "', '"
-//                    + clock.currentDate + "', '"
-//                    + clock.getCurrentTimeStamp() + "', '"
-//                    + cost + "')";
-//            s.execute(insertQuery);
-//            String selectQuery = "SELECT * FROM recipe ORDER BY recipeID DESC LIMIT 1";
-//            ResultSet rs = s.executeQuery(selectQuery);
-//
-//            while (rs.next()) {
-//                ID = rs.getString("recipeID");
-//            }
-//            logs.writeLogs("ADDED");
-//            s.close();
-//            conn.close();
-//        } catch (SQLException exp) {
-//        }
+
+    public void insertRecipe(String recipe, double price, double vat, String imageDirectory, String category) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String insertQuery = "INSERT INTO recipe(recipeName, recipePrice, recipeVAT,recipeType, recipeImageDirectory, recipeCount)"
+                    + "VALUES ('" + recipe + "','"
+                    + price + "', '"
+                    + vat + "', '"
+                    + category + "', '"
+                    + imageDirectory + "','0')";
+            s.execute(insertQuery);
+            logs.writeLogs("ADDED");
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
     }
-        
+
     public int getRecipeID(String item) {
         int ID = 0;
         try {
@@ -637,7 +626,7 @@ public class dbManager {
         }
         return ID;
     }
-    
+
     public int getRecipeCost(String item) {
         int cost = 0;
         try {
@@ -655,7 +644,7 @@ public class dbManager {
         }
         return cost;
     }
-    
+
     public int getSalesID() {
         int ID = 0;
         try {
@@ -665,7 +654,7 @@ public class dbManager {
             ResultSet rs = s.executeQuery(selectQuery);
 
             while (rs.next()) {
-               ID = Integer.parseInt(rs.getString("salesID"));
+                ID = Integer.parseInt(rs.getString("salesID"));
                 System.out.println(ID);
             }
             s.close();
@@ -686,7 +675,7 @@ public class dbManager {
 //                receiptID = rs.getString("receiptID");
 //            }
             receiptID += 1;
-            
+
             String insertQuery = "INSERT INTO receipt( recipeID, orderQuantity, salesID, date, time , cost)"
                     + "VALUES ('"
                     + recipeID + "', '"
@@ -696,7 +685,7 @@ public class dbManager {
                     + clock.getCurrentTimeStamp() + "', '"
                     + cost + "')";
             s.execute(insertQuery);
-         
+
             logs.writeLogs("ADDED receipt");
             s.close();
             conn.close();

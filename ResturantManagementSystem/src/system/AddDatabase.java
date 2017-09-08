@@ -19,21 +19,24 @@ public class AddDatabase extends javax.swing.JFrame {
 
     public AddDatabase(MainSystem sytem) {
         initComponents();
-        this.system=sytem;
+        this.system = sytem;
     }
 
     public void insert() {
         if (!"".equals(textfieldItem.getText()) || !"".equals(textfieldQty.getText())) {
             database.insertInventory(getItem(), getInventoryCategory(), getQuantity(), getLimit(), getReorderLevel());
+            system.populateInvnetoryTable();
         } else {
         }
         if (!"".equals(textfieldDisName.getText()) || !"".equals(textfieldDisEmail.getText()) || !"".equals(textfieldDisContact.getText())) {
             database.insertSupplier(getSupName(), getSupEmail(), getSupContact(), getSupAddress());
+            system.populateSupplierTable();
         } else {
         }
         if (!"".equals(textRecipe.getText()) || !"".equals(textPrice.getText())) {
-           // database.insertRecipe(getRecipe(), getPrice(), getVAT(), getImageDirectory(), getCategory());
-            RecipeForm newForm = new RecipeForm(getRecipe());
+            database.insertRecipe(getRecipe(), getPrice(), getVAT(), getImageDirectory(), getCategory());
+            system.populateRecipeTable();
+            RecipeForm newForm = new RecipeForm(getRecipe(), system);
             newForm.setVisible(true);
         } else {
         }
@@ -105,12 +108,12 @@ public class AddDatabase extends javax.swing.JFrame {
         return textRecipe.getText();
     }
 
-    public String getPrice() {
-        return textPrice.getText() + ".00";
+    public Double getPrice() {
+        return Double.parseDouble(textPrice.getText());
     }
 
-    public String getVAT() {
-        return textVAT.getText();
+    public Double getVAT() {
+        return Double.parseDouble(textVAT.getText());
     }
 
     public String getCategory() {
@@ -535,10 +538,6 @@ public class AddDatabase extends javax.swing.JFrame {
 
     private void buttonAccpetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccpetActionPerformed
         insert();
-        system.populateInvnetoryTable();
-        system.populateRecipeTable();
-        system.populateRecipeListTable();
-        system.populateSupplierTable();
         this.dispose();
     }//GEN-LAST:event_buttonAccpetActionPerformed
 

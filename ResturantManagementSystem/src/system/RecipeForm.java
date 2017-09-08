@@ -31,15 +31,19 @@ public class RecipeForm extends javax.swing.JFrame implements ActionListener {
     private final ArrayList<JTextField> textFields = new ArrayList<>();
     private final ArrayList<JComboBox> comboBox = new ArrayList<>();
     private Map<String, JButton> dynamicButtons;
+    MainSystem system;
 
     /**
      * Creates new form recipe
+     * @param recipe
+     * @param sytem
      */
-    public RecipeForm(String recipe) {
+    public RecipeForm(String recipe, MainSystem sytem) {
         initComponents();
         this.setLocationRelativeTo(null);
         Layout();
         jLabel1.setText(recipe + "'s Ingredients");
+        this.system=sytem;
     }
 
     public final void Layout() {
@@ -64,7 +68,7 @@ public class RecipeForm extends javax.swing.JFrame implements ActionListener {
         buttonAdd.addActionListener(this);
 
         for (int i = 1; i <= n; i++) {
-            emptybutton= new JButton();
+            emptybutton = new JButton();
             jPanel2.add(emptybutton).setVisible(false);
         }
         if (n != 0) {
@@ -84,6 +88,7 @@ public class RecipeForm extends javax.swing.JFrame implements ActionListener {
             String item = (String) comboBox.get(i).getSelectedItem();
             if (!"".equals(textFields.get(i).getText())) {
                 newManager.insertRecipeList(item, qty);
+                system.populateRecipeListTable();
                 this.dispose();
             }
         }
