@@ -548,6 +548,7 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (SQLException exp) {
+            System.out.println(exp);
         }
         return time;
     }

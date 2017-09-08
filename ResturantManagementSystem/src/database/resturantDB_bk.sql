@@ -42,7 +42,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'Andrew','Schwabe','Password','076 273 1721','00:00',NULL,NULL,1),(2,'Zane','Smith','Password','034 233 8321','00:00',NULL,NULL,1),(3,'Chad','Phillips','Password','087 237 1277','00:00',NULL,NULL,0),(4,'Sean','Thomson','Password','072 377 1122','00:00',NULL,NULL,0),(5,'Itumeleng','Madisha','Password','072 377 1122','00:00',NULL,NULL,0);
+INSERT INTO `employee` VALUES (1,'Andrew','Schwabe','Password','076 273 1721','00:00','Active',NULL,1),(2,'Zane','Smith','Password','034 233 8321','00:00',NULL,NULL,1),(3,'Chad','Phillips','Password','087 237 1277','00:00',NULL,NULL,0),(4,'Sean','Thomson','Password','072 377 1122','00:00',NULL,NULL,0),(5,'Itumeleng','Madisha','Password','072 377 1122','00:00',NULL,NULL,0);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +89,7 @@ CREATE TABLE `inventory_recipe` (
   PRIMARY KEY (`inventory_recipeID`,`inventoryID`,`recipeID`),
   KEY `fk_inventory_recipt_inventory` (`inventoryID`),
   KEY `fk_inventory_recipt_reciept1` (`recipeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `inventory_recipe` (
 
 LOCK TABLES `inventory_recipe` WRITE;
 /*!40000 ALTER TABLE `inventory_recipe` DISABLE KEYS */;
-INSERT INTO `inventory_recipe` VALUES (1,1,3,200),(2,3,3,100),(3,4,3,50),(4,5,3,50),(5,8,3,100),(6,2,4,200),(7,3,4,100),(8,4,4,50),(9,5,4,50),(10,8,4,160);
+INSERT INTO `inventory_recipe` VALUES (1,1,3,200),(2,3,3,100),(3,4,3,50),(4,5,3,50),(5,8,3,100),(6,2,4,200),(7,3,4,100),(8,4,4,50),(9,5,4,50),(10,8,4,160),(13,18,5,330),(14,4,6,200),(15,5,6,100),(16,9,6,50),(17,12,6,50);
 /*!40000 ALTER TABLE `inventory_recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,16 +111,16 @@ DROP TABLE IF EXISTS `receipt`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `receipt` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `receiptNumber` int(11) NOT NULL,
   `recipeID` int(11) NOT NULL,
   `orderQuantity` int(11) DEFAULT NULL,
   `salesID` int(11) NOT NULL,
   `date` date DEFAULT NULL,
+  `time` time DEFAULT NULL,
   `cost` double DEFAULT NULL,
   PRIMARY KEY (`ID`,`recipeID`,`salesID`),
   KEY `fk_receipt_recipe1` (`recipeID`),
   KEY `fk_receipt_sales1` (`salesID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,6 +129,7 @@ CREATE TABLE `receipt` (
 
 LOCK TABLES `receipt` WRITE;
 /*!40000 ALTER TABLE `receipt` DISABLE KEYS */;
+INSERT INTO `receipt` VALUES (1,3,1,6,'2017-09-07','23:53:45',75),(2,3,1,6,'2017-09-07','23:53:45',75),(3,3,1,6,'2017-09-08','18:41:56',75),(4,3,1,6,'2017-09-08','18:41:57',75),(5,4,1,6,'2017-09-08','18:41:57',75),(6,4,1,6,'2017-09-08','18:41:57',75),(7,3,1,6,'2017-09-08','18:41:57',75),(8,0,1,6,'2017-09-08','18:41:57',0);
 /*!40000 ALTER TABLE `receipt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +151,7 @@ CREATE TABLE `recipe` (
   `specialsID` int(11) DEFAULT NULL,
   PRIMARY KEY (`recipeID`),
   KEY `fk_recipe_specials1_idx` (`specialsID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +160,7 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
-INSERT INTO `recipe` VALUES (3,'Chicken Burger & Chips',75,10.5,'Main Meal','./src/images/_f_chickenBurger.jpg',8,NULL),(4,'Beef Burger & Chips',75,10.5,'Main Meal','./src/images/_f_beefBurger.jpg',8,NULL);
+INSERT INTO `recipe` VALUES (3,'Chicken Burger & Chips',75,10.5,'Main Meal','./src/images/_f_chickenBurger.jpg',8,NULL),(4,'Beef Burger & Chips',75,10.5,'Main Meal','./src/images/_f_beefBurger.jpg',8,NULL),(5,'Coke',15,2.1,'Drinks','./src/images/_d_cokeLogo.jpg',0,NULL),(6,'Green Salad',35,4.9,'Light Meal','./src/images/_f_caesarSalad.jpg',0,NULL);
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +181,7 @@ CREATE TABLE `reservation` (
   `reservationNumberPeople` int(11) DEFAULT NULL,
   PRIMARY KEY (`reservationID`,`employeeID`),
   KEY `fk_reservation_employee1` (`employeeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,6 +190,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES (1,1,'2017-09-11','13:00','Sarah',2,10);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +206,7 @@ CREATE TABLE `sales` (
   `salesDate` date DEFAULT NULL,
   `totalCost` double DEFAULT NULL,
   PRIMARY KEY (`salesID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,6 +215,7 @@ CREATE TABLE `sales` (
 
 LOCK TABLES `sales` WRITE;
 /*!40000 ALTER TABLE `sales` DISABLE KEYS */;
+INSERT INTO `sales` VALUES (5,'2017-09-07',150),(6,'2017-09-08',375);
 /*!40000 ALTER TABLE `sales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +233,7 @@ CREATE TABLE `sales_employee` (
   PRIMARY KEY (`sales_employeeID`,`employeeID`,`salesID`),
   KEY `fk_sales_employee_employee1` (`employeeID`),
   KEY `fk_sales_employee_sales1` (`salesID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,6 +242,7 @@ CREATE TABLE `sales_employee` (
 
 LOCK TABLES `sales_employee` WRITE;
 /*!40000 ALTER TABLE `sales_employee` DISABLE KEYS */;
+INSERT INTO `sales_employee` VALUES (1,1,6);
 /*!40000 ALTER TABLE `sales_employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,7 +288,7 @@ CREATE TABLE `stockorder` (
   PRIMARY KEY (`stockOrderID`,`inventoryID`,`supplierID`),
   KEY `fk_stockOrder_inventory1` (`inventoryID`),
   KEY `fk_stockOrder_supplier1` (`supplierID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -310,7 +314,7 @@ CREATE TABLE `supplier` (
   `supplierNumber` varchar(45) DEFAULT NULL,
   `supplierAddress` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`supplierID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,7 +323,7 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES (1,'Meat Co.','meatco@gmail.com','084 772 2883','Rondebosch'),(2,'VegCity','vegcity@hotmail.co.za','078 232 1221','Claremont');
+INSERT INTO `supplier` VALUES (1,'Meat Co.','meatco@gmail.com','084 772 2883','Rondebosch'),(2,'VegCity','vegcity@hotmail.co.za','078 232 1221','Claremont'),(3,'073 237 1288','ValleysGrain@gmail.com','ValleysGrain Corp','Newlands');
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -332,4 +336,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-07 13:33:26
+-- Dump completed on 2017-09-08 19:17:09

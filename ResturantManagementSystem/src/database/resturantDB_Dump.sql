@@ -222,11 +222,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `resturantdb`;
-INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES (1,'Andrew','Schwabe','Password','076 273 1721','00:00',NULL,NULL,1);
-INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES(2,'Zane','Smith','Password','034 233 8321','00:00',NULL,NULL,1);
-INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES(3,'Chad','Phillips','Password','087 237 1277','00:00',NULL,NULL,0);
-INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES(4,'Sean','Thomson','Password','072 377 1122','00:00',NULL,NULL,0);
-INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES(5,'Itumeleng','Madisha','Password','072 377 1122','00:00',NULL,NULL,0);
+INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES (1,'Andrew','Schwabe','Password','076 273 1721','0hrs00',NULL,NULL,1);
+INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES(2,'Zane','Smith','Password','034 233 8321','0hrs00',NULL,NULL,1);
+INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES(3,'Chad','Phillips','Password','087 237 1277','0hrs00',NULL,NULL,0);
+INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES(4,'Sean','Thomson','Password','072 377 1122','0hrs00',NULL,NULL,0);
+INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES(5,'Itumeleng','Madisha','Password','072 377 1122','0hrs00',NULL,NULL,0);
 COMMIT;
 
 
