@@ -833,6 +833,7 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
+                            <Property name="enabled" type="boolean" value="false"/>
                             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="cc" green="cc" red="cc" type="rgb"/>
                             </Property>
@@ -1057,6 +1058,7 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
+                            <Property name="enabled" type="boolean" value="false"/>
                             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="cc" green="cc" red="cc" type="rgb"/>
                             </Property>
@@ -1105,7 +1107,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="buttonRecipeEdit2" max="32767" attributes="0"/>
+                                  <Component id="buttonRecipeListEdit" max="32767" attributes="0"/>
                                   <Component id="buttonRecipeDelete2" pref="79" max="32767" attributes="0"/>
                                   <Component id="buttonRecipeDelete3" alignment="1" max="32767" attributes="0"/>
                               </Group>
@@ -1121,7 +1123,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonRecipeDelete2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="buttonRecipeEdit2" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonRecipeListEdit" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="buttonRecipeDelete3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1146,7 +1148,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonRecipeDelete2ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="buttonRecipeEdit2">
+                    <Component class="javax.swing.JButton" name="buttonRecipeListEdit">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="e7" green="8a" red="0" type="rgb"/>
@@ -1159,7 +1161,7 @@
                         <Property name="opaque" type="boolean" value="true"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonRecipeEdit2ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonRecipeListEditActionPerformed"/>
                       </Events>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane6">
@@ -1197,6 +1199,7 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
+                            <Property name="enabled" type="boolean" value="false"/>
                             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="cc" green="cc" red="cc" type="rgb"/>
                             </Property>
@@ -1247,7 +1250,7 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="buttonRecipeAdd1" alignment="0" pref="79" max="32767" attributes="0"/>
                                   <Component id="buttonRecipeDelete1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="buttonRecipeEdit1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="buttonSupplierEdit" alignment="0" max="32767" attributes="0"/>
                                   <Component id="buttonRecipeEdit4" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -1263,7 +1266,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonRecipeDelete1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="buttonRecipeEdit1" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonSupplierEdit" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="buttonRecipeEdit4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1305,7 +1308,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonRecipeDelete1ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="buttonRecipeEdit1">
+                    <Component class="javax.swing.JButton" name="buttonSupplierEdit">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="e7" green="8a" red="0" type="rgb"/>
@@ -1318,7 +1321,7 @@
                         <Property name="opaque" type="boolean" value="true"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonRecipeEdit1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSupplierEditActionPerformed"/>
                       </Events>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane5">
@@ -1356,6 +1359,7 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
+                            <Property name="enabled" type="boolean" value="false"/>
                             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="cc" green="cc" red="cc" type="rgb"/>
                             </Property>

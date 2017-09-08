@@ -141,7 +141,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         String buttonId = ae.getActionCommand();
         if (tables.get(buttonId) == null) {
             String waiter = user.createUserLog();
-            if (waiter!=null) {
+            if (waiter != null) {
                 String customer = JOptionPane.showInputDialog(null, "Enter Number of Customers");
 
                 if (!"".equals(waiter) && (!"".equals(customer))
@@ -274,24 +274,109 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public void updateInventory() {
-        //stops editting of table cell to allow button event
-        tableRecipe.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
-        if (tableRecipe.isEditing()) {
-            tableRecipe.getCellEditor().cancelCellEditing();
-        }
-
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            int rowCount = tableRecipe.getModel().getRowCount();
-            for (int r = 0; r < rowCount; r++) {
-                Object ID = tableRecipe.getModel().getValueAt(r, 0);
-                Object name = tableRecipe.getModel().getValueAt(r, 1);
-                Object price = tableRecipe.getModel().getValueAt(r, 2);
-                Object vat = tableRecipe.getModel().getValueAt(r, 3);
-                Object type = tableRecipe.getModel().getValueAt(r, 4);
-                //Pass table contents to database update code
-                system.updateRecipe(ID, name, price, vat, type);
+        if ("Edit".equals(buttonEdit.getText())) {
+            buttonEdit.setText("Save");
+            tblInventory.setEnabled(true);
+        } else if ("Save".equals(buttonEdit.getText())) {
+            tblInventory.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+            if (tblInventory.isEditing()) {
+                tblInventory.getCellEditor().cancelCellEditing();
             }
+            //Creates database manager object 
+
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                int rowCount = tblInventory.getModel().getRowCount();
+                for (int r = 0; r < rowCount; r++) {
+                    Object ID = tblInventory.getModel().getValueAt(r, 0);
+                    Object item = tblInventory.getModel().getValueAt(r, 1);
+                    Object qty = tblInventory.getModel().getValueAt(r, 3);
+                    Object itemT = tblInventory.getModel().getValueAt(r, 4);
+                    Object itemL = tblInventory.getModel().getValueAt(r, 5);
+                    system.updateInventory(ID, item, qty, itemT, itemL);
+                }
+            }
+            buttonEdit.setText("Edit");
+            tblInventory.setEnabled(false);
+        }
+    }
+
+    public void updateRecipe() {
+        if ("Edit".equals(buttonRecipeEdit.getText())) {
+            buttonRecipeEdit.setText("Save");
+            tableRecipe.setEnabled(true);
+        } else if ("Save".equals(buttonRecipeEdit.getText())) {
+            //stops editting of table cell to allow button event
+            tableRecipe.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+            if (tableRecipe.isEditing()) {
+                tableRecipe.getCellEditor().cancelCellEditing();
+            }
+
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                int rowCount = tableRecipe.getModel().getRowCount();
+                for (int r = 0; r < rowCount; r++) {
+                    Object ID = tableRecipe.getModel().getValueAt(r, 0);
+                    Object name = tableRecipe.getModel().getValueAt(r, 1);
+                    Object price = tableRecipe.getModel().getValueAt(r, 3);
+                    Object vat = tableRecipe.getModel().getValueAt(r, 4);
+                    Object type = tableRecipe.getModel().getValueAt(r, 2);
+                    //Pass table contents to database update code
+                    system.updateRecipe(ID, name, price, vat, type);
+                }
+            }
+            buttonRecipeEdit.setText("Edit");
+            tableRecipe.setEnabled(false);
+        }
+    }
+
+    public void updateRecipeList() {
+        if ("Edit".equals(buttonRecipeListEdit.getText())) {
+            buttonRecipeListEdit.setText("Save");
+            tableRecipeList.setEnabled(true);
+        } else if ("Save".equals(buttonRecipeListEdit.getText())) {
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                int rowCount = tableRecipeList.getModel().getRowCount();
+                for (int i = 0; i < rowCount; i++) {
+                    String recipeID = tableRecipeList.getModel().getValueAt(i, 0).toString();
+                    String inventoryID = tableRecipeList.getModel().getValueAt(i, 2).toString();
+                    String qty = tableRecipeList.getModel().getValueAt(i, 4).toString();
+                    system.updateRecipeList(inventoryID, recipeID, qty);
+                }
+            }
+            buttonRecipeListEdit.setText("Edit");
+            tableRecipeList.setEnabled(false);
+        }
+    }
+
+    public void updateSupplier() {
+        if ("Edit".equals(buttonSupplierEdit.getText())) {
+            buttonSupplierEdit.setText("Save");
+            tblSupplier.setEnabled(true);
+        } else if ("Save".equals(buttonSupplierEdit.getText())) {
+
+            //stops editting of table cell to allow button event
+            if (tblSupplier.isEditing()) {
+                tblSupplier.getCellEditor().cancelCellEditing();
+            }
+            tblSupplier.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                int rowCount = tblSupplier.getModel().getRowCount();
+                for (int r = 0; r < rowCount; r++) {
+                    Object ID = tblSupplier.getModel().getValueAt(r, 0);
+                    Object name = tblSupplier.getModel().getValueAt(r, 1);
+                    Object email = tblSupplier.getModel().getValueAt(r, 2);
+                    Object num = tblSupplier.getModel().getValueAt(r, 3);
+                    Object address = tblSupplier.getModel().getValueAt(r, 4);
+                    //Pass table contents to database update code
+                    system.updateSupplier(ID, name, email, num, address);
+                }
+            }
+            buttonSupplierEdit.setText("Edit");
+            tblSupplier.setEnabled(false);
         }
     }
 
@@ -299,69 +384,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         String qty = JOptionPane.showInputDialog(null, "Enter the Shrinkage for the Select Item");
         String item = tblInventory.getValueAt(tblInventory.getSelectedRow(), 1).toString();
         system.updateInventoryQty(item, qty, "-");
-    }
-
-    public void updateRecipe() {
-        //stops editting of table cell to allow button event
-        if (tblSupplier.isEditing()) {
-            tblSupplier.getCellEditor().cancelCellEditing();
-        }
-        tblSupplier.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
-
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            int rowCount = tblSupplier.getModel().getRowCount();
-            for (int r = 0; r < rowCount; r++) {
-                Object ID = tblSupplier.getModel().getValueAt(r, 0);
-                Object name = tblSupplier.getModel().getValueAt(r, 1);
-                Object email = tblSupplier.getModel().getValueAt(r, 2);
-                Object num = tblSupplier.getModel().getValueAt(r, 3);
-                Object address = tblSupplier.getModel().getValueAt(r, 4);
-                //Pass table contents to database update code
-                system.updateSupplier(ID, name, email, num, address);
-            }
-        }
-    }
-
-    public void updateRecipeList() {
-        tblInventory.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
-        if (tblInventory.isEditing()) {
-            tblInventory.getCellEditor().cancelCellEditing();
-        }
-
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            int rowCount = tableRecipeList.getModel().getRowCount();
-            for (int i = 0; i < rowCount; i++) {
-                String recipeID = tableRecipeList.getModel().getValueAt(i, 0).toString();
-                String inventoryID = tableRecipeList.getModel().getValueAt(i, 2).toString();
-                String qty = tableRecipeList.getModel().getValueAt(i, 4).toString();
-                system.updateRecipeList(inventoryID, recipeID, qty);
-            }
-        }
-    }
-
-    public void updateSupplier() {
-        //stops editting of table cell to allow button event
-        tblInventory.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
-        if (tblInventory.isEditing()) {
-            tblInventory.getCellEditor().cancelCellEditing();
-        }
-        //Creates database manager object 
-
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            int rowCount = tblInventory.getModel().getRowCount();
-            for (int r = 0; r < rowCount; r++) {
-                Object ID = tblInventory.getModel().getValueAt(r, 0);
-                Object item = tblInventory.getModel().getValueAt(r, 1);
-                Object qty = tblInventory.getModel().getValueAt(r, 3);
-                Object itemT = tblInventory.getModel().getValueAt(r, 4);
-                Object itemL = tblInventory.getModel().getValueAt(r, 5);
-                //Pass table contents to database update code
-                system.updateInventory(ID, item, qty, itemT, itemL);
-            }
-        }
     }
 
     public void updateStockOrder() {
@@ -552,14 +574,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonRecipeEdit3 = new javax.swing.JButton();
         pnlRecipeList = new javax.swing.JPanel();
         buttonRecipeDelete2 = new javax.swing.JButton();
-        buttonRecipeEdit2 = new javax.swing.JButton();
+        buttonRecipeListEdit = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tableRecipeList = new javax.swing.JTable();
         buttonRecipeDelete3 = new javax.swing.JButton();
         pnlSupplier = new javax.swing.JPanel();
         buttonRecipeAdd1 = new javax.swing.JButton();
         buttonRecipeDelete1 = new javax.swing.JButton();
-        buttonRecipeEdit1 = new javax.swing.JButton();
+        buttonSupplierEdit = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblSupplier = new javax.swing.JTable();
         buttonRecipeEdit4 = new javax.swing.JButton();
@@ -585,9 +607,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         lblLogo1 = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         lblScreen = new javax.swing.JLabel();
-        comboBoxSceen = new javax.swing.JComboBox<String>();
-        comboBoxLogo = new javax.swing.JComboBox<String>();
-        comboBoxTableCount = new javax.swing.JComboBox<String>();
+        comboBoxSceen = new javax.swing.JComboBox<>();
+        comboBoxLogo = new javax.swing.JComboBox<>();
+        comboBoxTableCount = new javax.swing.JComboBox<>();
         lblSettings1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         currentEmail2 = new javax.swing.JLabel();
@@ -1042,6 +1064,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 "ID no.", "Item", "Quantity", "Cost per Unit", "Distrubutor ID ", "Distrubutor Name"
             }
         ));
+        tblInventory.setEnabled(false);
         tblInventory.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane3.setViewportView(tblInventory);
         if (tblInventory.getColumnModel().getColumnCount() > 0) {
@@ -1204,6 +1227,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 "ID no.", "Item", "Ingredients"
             }
         ));
+        tableRecipe.setEnabled(false);
         tableRecipe.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane4.setViewportView(tableRecipe);
         if (tableRecipe.getColumnModel().getColumnCount() > 0) {
@@ -1265,14 +1289,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        buttonRecipeEdit2.setBackground(new java.awt.Color(0, 138, 231));
-        buttonRecipeEdit2.setForeground(new java.awt.Color(255, 255, 255));
-        buttonRecipeEdit2.setText("Edit");
-        buttonRecipeEdit2.setContentAreaFilled(false);
-        buttonRecipeEdit2.setOpaque(true);
-        buttonRecipeEdit2.addActionListener(new java.awt.event.ActionListener() {
+        buttonRecipeListEdit.setBackground(new java.awt.Color(0, 138, 231));
+        buttonRecipeListEdit.setForeground(new java.awt.Color(255, 255, 255));
+        buttonRecipeListEdit.setText("Edit");
+        buttonRecipeListEdit.setContentAreaFilled(false);
+        buttonRecipeListEdit.setOpaque(true);
+        buttonRecipeListEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonRecipeEdit2ActionPerformed(evt);
+                buttonRecipeListEditActionPerformed(evt);
             }
         });
 
@@ -1304,6 +1328,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 "ID no.", "Item", "Ingredients"
             }
         ));
+        tableRecipeList.setEnabled(false);
         tableRecipeList.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane6.setViewportView(tableRecipeList);
         if (tableRecipeList.getColumnModel().getColumnCount() > 0) {
@@ -1328,7 +1353,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             .addGroup(pnlRecipeListLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlRecipeListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buttonRecipeEdit2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonRecipeListEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonRecipeDelete2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                     .addComponent(buttonRecipeDelete3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
@@ -1341,7 +1366,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap()
                 .addComponent(buttonRecipeDelete2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonRecipeEdit2)
+                .addComponent(buttonRecipeListEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonRecipeDelete3)
                 .addContainerGap())
@@ -1373,14 +1398,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        buttonRecipeEdit1.setBackground(new java.awt.Color(0, 138, 231));
-        buttonRecipeEdit1.setForeground(new java.awt.Color(255, 255, 255));
-        buttonRecipeEdit1.setText("Edit");
-        buttonRecipeEdit1.setContentAreaFilled(false);
-        buttonRecipeEdit1.setOpaque(true);
-        buttonRecipeEdit1.addActionListener(new java.awt.event.ActionListener() {
+        buttonSupplierEdit.setBackground(new java.awt.Color(0, 138, 231));
+        buttonSupplierEdit.setForeground(new java.awt.Color(255, 255, 255));
+        buttonSupplierEdit.setText("Edit");
+        buttonSupplierEdit.setContentAreaFilled(false);
+        buttonSupplierEdit.setOpaque(true);
+        buttonSupplierEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonRecipeEdit1ActionPerformed(evt);
+                buttonSupplierEditActionPerformed(evt);
             }
         });
 
@@ -1412,6 +1437,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 "ID no.", "Item", "Ingredients"
             }
         ));
+        tblSupplier.setEnabled(false);
         tblSupplier.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane5.setViewportView(tblSupplier);
         if (tblSupplier.getColumnModel().getColumnCount() > 0) {
@@ -1438,7 +1464,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addGroup(pnlSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonRecipeAdd1, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                     .addComponent(buttonRecipeDelete1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeEdit1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonSupplierEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonRecipeEdit4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE))
@@ -1451,7 +1477,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonRecipeDelete1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonRecipeEdit1)
+                .addComponent(buttonSupplierEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonRecipeEdit4)
                 .addContainerGap())
@@ -1737,21 +1763,21 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         lblScreen.setText("Resolution");
 
-        comboBoxSceen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Windowed Screen", "Fullscreen" }));
+        comboBoxSceen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Windowed Screen", "Fullscreen" }));
         comboBoxSceen.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxSceenItemStateChanged(evt);
             }
         });
 
-        comboBoxLogo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "Demo 1", "Demo 2" }));
+        comboBoxLogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "Demo 1", "Demo 2" }));
         comboBoxLogo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxLogoItemStateChanged(evt);
             }
         });
 
-        comboBoxTableCount.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
+        comboBoxTableCount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
         comboBoxTableCount.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxTableCountItemStateChanged(evt);
@@ -2118,10 +2144,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonRecipeAddActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
-        if (user.createAdminLogin() == true) {
-            updateSupplier();
-            populateInvnetoryTable();
-        }
+        updateInventory();
+        populateInvnetoryTable();
     }//GEN-LAST:event_buttonEditActionPerformed
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
@@ -2298,18 +2322,18 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonRecipeDelete2ActionPerformed
 
     private void buttonRecipeEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEditActionPerformed
-        if (user.createAdminLogin() == true) {
-            updateInventory();
-            populateRecipeTable();
-        }
+//        if (user.createAdminLogin() == true) {
+        updateRecipe();
+        populateRecipeTable();
+//        }
     }//GEN-LAST:event_buttonRecipeEditActionPerformed
 
-    private void buttonRecipeEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit1ActionPerformed
-        if (user.createAdminLogin() == true) {
-            updateRecipe();
-            populateSupplierTable();
-        }
-    }//GEN-LAST:event_buttonRecipeEdit1ActionPerformed
+    private void buttonSupplierEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupplierEditActionPerformed
+//        if (user.createAdminLogin() == true) {
+        updateSupplier();
+        populateSupplierTable();
+//        }
+    }//GEN-LAST:event_buttonSupplierEditActionPerformed
 
     private void buttonEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEventsActionPerformed
 
@@ -2335,11 +2359,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonRecipeEdit4ActionPerformed
 
-    private void buttonRecipeEdit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit2ActionPerformed
-        if (user.createAdminLogin() == true) {
-            updateRecipeList();
-        }
-    }//GEN-LAST:event_buttonRecipeEdit2ActionPerformed
+    private void buttonRecipeListEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeListEditActionPerformed
+//        if (user.createAdminLogin() == true) {
+        updateRecipeList();
+//        }
+    }//GEN-LAST:event_buttonRecipeListEditActionPerformed
 
     private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
         updateShrinkage();
@@ -2428,15 +2452,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonRecipeDelete2;
     private javax.swing.JButton buttonRecipeDelete3;
     private javax.swing.JButton buttonRecipeEdit;
-    private javax.swing.JButton buttonRecipeEdit1;
-    private javax.swing.JButton buttonRecipeEdit2;
     private javax.swing.JButton buttonRecipeEdit3;
     private javax.swing.JButton buttonRecipeEdit4;
+    private javax.swing.JButton buttonRecipeListEdit;
     private javax.swing.JButton buttonReports;
     private javax.swing.JButton buttonReprint;
     private javax.swing.JButton buttonReprint2;
     private javax.swing.JButton buttonReprint3;
     private javax.swing.JButton buttonSpecials;
+    private javax.swing.JButton buttonSupplierEdit;
     private javax.swing.JButton buttonTakeAway;
     private javax.swing.JComboBox<String> comboBoxLogo;
     private javax.swing.JComboBox<String> comboBoxSceen;
