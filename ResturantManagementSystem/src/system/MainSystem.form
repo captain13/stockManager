@@ -1812,17 +1812,21 @@
                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="lblScreen" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblLogo" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblLogo1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblLogo1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblLogo2" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="comboBoxTableCount" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="comboBoxLogo" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="comboBoxSceen" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="comboBoxTableCount1" min="-2" pref="145" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="comboBoxTableCount" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="comboBoxLogo" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="comboBoxSceen" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -1850,9 +1854,14 @@
                               <Component id="comboBoxTableCount" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblLogo1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="comboBoxTableCount1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblLogo2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="73" max="32767" attributes="0"/>
+                          <EmptySpace pref="48" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1947,6 +1956,29 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="General Settings"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblLogo2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Theme Colour"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="comboBoxTableCount1">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="4">
+                        <StringItem index="0" value="Blue"/>
+                        <StringItem index="1" value="Green"/>
+                        <StringItem index="2" value="Red"/>
+                        <StringItem index="3" value="Orange"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboBoxTableCount1ItemStateChanged"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

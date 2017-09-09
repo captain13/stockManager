@@ -619,6 +619,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             Checkout checkout = new Checkout(getWaiter(), getTotal());
             checkout.setVisible(true);
         }
+        updateOrdercount();
     }//GEN-LAST:event_buttonPayActionPerformed
 
     private void buttonOverrideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOverrideActionPerformed
@@ -626,7 +627,6 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             network.sendData(tblItems, key);
         } catch (IOException ex) {
         }
-        updateOrdercount();
     }//GEN-LAST:event_buttonOverrideActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed

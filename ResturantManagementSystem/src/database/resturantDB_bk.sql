@@ -42,7 +42,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'Andrew','Schwabe','Password','076 273 1721','00:00','Active',NULL,1),(2,'Zane','Smith','Password','034 233 8321','00:00',NULL,NULL,1),(3,'Chad','Phillips','Password','087 237 1277','00:00',NULL,NULL,0),(4,'Sean','Thomson','Password','072 377 1122','00:00',NULL,NULL,0),(5,'Itumeleng','Madisha','Password','072 377 1122','00:00',NULL,NULL,0);
+INSERT INTO `employee` VALUES (1,'Andrew','Schwabe','','076 273 1721','0hrs1','Deactive',NULL,1),(2,'Zane','Smith','Password','034 233 8321','0hrs00',NULL,NULL,1),(3,'Chad','Phillips','Password','087 237 1277','0hrs00',NULL,NULL,0),(4,'Sean','Thomson','Password','072 377 1122','0hrs00',NULL,NULL,0),(5,'Itumeleng','Madisha','Password','072 377 1122','0hrs00',NULL,NULL,0);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (1,'Chicken Fillet','Meat',1000,0.25,1000),(2,'Beef Burger Patty','Meat',1000,0.25,1000),(3,'Burger rolls','Grain',1000,0.25,1000),(4,'Lettuce','Vegetable',100,0.5,1000),(5,'Tomatoe','Vegetable',100,0.5,100),(6,'Chicken Wings','Meat',1000,0.2,1000),(7,'Pork Ribs','Meat',1000,0.2,1000),(8,'Chicken Breast','Meat',1000,0.2,1000),(9,'Avocardo','Vegetable',1000,0.25,1000),(10,'Steak','Meat',1000,0.25,1000),(11,'Cheese','Dairy',1000,0.25,1000),(12,'Feta','Dairy',100,0.5,1000),(13,'Pizza Base','Grain',100,0.5,100),(14,'Napoletan Sauce','Other',1000,0.2,1000),(15,'Bacon','Meat',1000,0.2,1000),(16,'Castle Light','Alcohol',1000,0.2,1000),(17,'Black Label Beer','Alcohol',1000,0.25,1000),(18,'Coke','Soft Drinks',100,0.5,1000),(19,'Coke Light','Soft Drinks',100,0.5,100),(20,'Sprite','Soft Drinks',1000,0.2,1000),(21,'Fanta','Soft Drinks',1000,0.2,1000),(22,'Ice Tea','Soft Drinks',6600,0.2,1000);
+INSERT INTO `inventory` VALUES (1,'Chicken Fillet','Meat',1000,0.25,1000),(2,'Beef Burger Patty','Meat',1000,0.25,1000),(3,'Burger rolls','Grain',1000,0.25,1000),(4,'Lettuce','Vegetable',100,0.5,1000),(5,'Tomatoe','Vegetable',100,0.5,100),(6,'Chicken Wings','Meat',1000,0.2,1000),(7,'Pork Ribs','Meat',1000,0.2,1000),(8,'Chicken Breast','Meat',1000,0.2,1000),(9,'Avocardo','Vegetable',1000,0.25,1000),(10,'Steak','Meat',1000,0.25,1000),(11,'Cheese','Dairy',1000,0.25,1000),(12,'Feta','Dairy',100,0.5,1000),(13,'Pizza Base','Grain',100,0.5,100),(14,'Napoletan Sauce','Other',1000,0.2,1000),(15,'Bacon','Meat',1000,0.2,1000),(16,'Castle Light','Alcohol',1000,0.2,1000),(17,'Black Label Beer','Alcohol',1000,0.25,1000),(18,'Coke','Soft Drinks',100,0.5,1000),(19,'Coke Light','Soft Drinks',100,0.5,100),(20,'Sprite','Soft Drinks',1000,0.2,1000),(21,'Fanta','Soft Drinks',1000,0.2,1000),(22,'Ice Tea Peach','Soft Drinks',6600,0.2,1000);
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +98,7 @@ CREATE TABLE `inventory_recipe` (
 
 LOCK TABLES `inventory_recipe` WRITE;
 /*!40000 ALTER TABLE `inventory_recipe` DISABLE KEYS */;
-INSERT INTO `inventory_recipe` VALUES (1,1,3,200),(2,3,3,100),(3,4,3,50),(4,5,3,50),(5,8,3,100),(6,2,4,200),(7,3,4,100),(8,4,4,50),(9,5,4,50),(10,8,4,160),(13,18,5,330),(14,4,6,200),(15,5,6,100),(16,9,6,50),(17,12,6,50);
+INSERT INTO `inventory_recipe` VALUES (1,1,3,200),(2,3,3,100),(3,4,3,50),(4,5,3,50),(5,8,3,100),(6,2,4,200),(7,3,4,100),(8,4,4,50),(9,5,4,50),(10,8,4,160),(13,18,5,330),(14,4,6,200),(15,5,6,100),(16,9,6,50),(17,12,6,55);
 /*!40000 ALTER TABLE `inventory_recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,7 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
-INSERT INTO `recipe` VALUES (3,'Chicken Burger & Chips',75,10.5,'Main Meal','./src/images/_f_chickenBurger.jpg',8,NULL),(4,'Beef Burger & Chips',75,10.5,'Main Meal','./src/images/_f_beefBurger.jpg',8,NULL),(5,'Coke',15,2.1,'Drinks','./src/images/_d_cokeLogo.jpg',0,NULL),(6,'Green Salad',35,4.9,'Light Meal','./src/images/_f_caesarSalad.jpg',0,NULL);
+INSERT INTO `recipe` VALUES (3,'Chicken Burger & Chips',75,10.5,'Main Meal','./src/images/_f_chickenBurger.jpg',8,NULL),(4,'Beef Burger & Chips',75,10.5,'Main Meal','./src/images/_f_beefBurger.jpg',8,NULL),(5,'CokeLight',15,2.1,'Drinks','./src/images/_d_cokeLogo.jpg',0,NULL),(6,'Green Salad',35,4.9,'Light Meal','./src/images/_f_caesarSalad.jpg',0,NULL);
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -323,7 +323,7 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES (1,'Meat Co.','meatco@gmail.com','084 772 2883','Rondebosch'),(2,'VegCity','vegcity@hotmail.co.za','078 232 1221','Claremont'),(3,'073 237 1288','ValleysGrain@gmail.com','ValleysGrain Corp','Newlands');
+INSERT INTO `supplier` VALUES (1,'Meat Co.','meatco@gmail.com','084 772 2883','Rondebosch'),(2,'VegCity','vegcity@hotmail.co.za','078 232 1221','Claremont'),(3,'ValleysGrain Corp','ValleysGrain@gmail.com','075 382 8832','Newlands');
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -336,4 +336,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-08 19:17:09
+-- Dump completed on 2017-09-08 23:02:22
