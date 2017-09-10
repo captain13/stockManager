@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class emailClient {
 
-    xmlManager settings = new xmlManager();
+    settingsManager settings = new settingsManager();
     String emailAddress=settings.getEmail();
     String password = settings.getEmailPassword();
 

@@ -5,6 +5,7 @@
  */
 package system;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -45,15 +46,13 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     String key;
     HashMap tables;
 
-    public NewOrder(String waiterID, String customerNum, String key, HashMap tables) {
+    public NewOrder(String waiterID, String customerNum, String key, HashMap tables, Color color) {
         initComponents();
         getScreenResolution();
         this.setLocation(0, 0);
         this.key = key;
-        tblItems.setModel(model);
-        tblItems.getColumnModel().getColumn(0).setPreferredWidth(90);
-        tblItems.getColumnModel().getColumn(1).setPreferredWidth(25);
-        tblItems.getColumnModel().getColumn(2).setPreferredWidth(45);
+        setButtonColor(color);
+        setTableLayout();
         internalClock();
         nameTF.setText(waiterID);
         customerNo.setText(customerNum);
@@ -280,6 +279,21 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             String order = tblItems.getModel().getValueAt(i, 0).toString();
             newManager.updateOrderCount(order);
         }
+    }
+
+    public void setTableLayout() {
+        tblItems.setModel(model);
+        tblItems.getColumnModel().getColumn(0).setPreferredWidth(90);
+        tblItems.getColumnModel().getColumn(1).setPreferredWidth(25);
+        tblItems.getColumnModel().getColumn(2).setPreferredWidth(45);
+    }
+
+    public void setButtonColor(Color color) {
+        buttonPay.setBackground(color);
+        buttonOverride.setBackground(color);
+        buttonEdit1.setBackground(color);
+        buttonEdit.setBackground(color);
+        buttonClose.setBackground(color);
     }
 
     public void addEdit() {

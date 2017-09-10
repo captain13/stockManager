@@ -31,7 +31,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     Calendar calendar = new Calendar();
     Specials specials;
     userManager user = new userManager();
-    xmlManager settings = new xmlManager();
+    settingsManager settings = new settingsManager();
     dbManager system = new dbManager();
     logSystem logs = new logSystem();
     printHandler prints = new printHandler();
@@ -147,7 +147,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
                 if (!"".equals(waiter) && (!"".equals(customer))
                         && customer != null && waiter != null) {
-                    tables.put(buttonId, new NewOrder(waiter, customer, buttonId, tables));
+                    tables.put(buttonId, new NewOrder(waiter, customer, buttonId, tables,color));
                     tables.get(buttonId).setVisible(true);
                 } else {
                 }
@@ -432,6 +432,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         setTableCount();
         setResolution();
         setEmail();
+        setThemeColor();
     }
 
     public final void setResolution() {
@@ -450,6 +451,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public void setEmailPassword() {
         jPasswordField1.setText(settings.getEmailPassword());
+    }
+
+    public void setThemeColor() {
+        comboBoxTableColor.setSelectedItem(settings.getThemeColor());
     }
 
     public final void setSelectedTable() {
@@ -488,6 +493,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public String getSelectedTable() {
         return comboBoxTableCount.getSelectedItem().toString();
+    }
+
+    public String getSelectedColor() {
+        return comboBoxTableColor.getSelectedItem().toString();
     }
 
     public String getEmail() {
@@ -655,7 +664,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         comboBoxTableCount = new javax.swing.JComboBox<>();
         lblSettings1 = new javax.swing.JLabel();
         lblLogo2 = new javax.swing.JLabel();
-        comboBoxTableCount1 = new javax.swing.JComboBox<>();
+        comboBoxTableColor = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         currentEmail2 = new javax.swing.JLabel();
         currentEmail1 = new javax.swing.JLabel();
@@ -1833,10 +1842,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         lblLogo2.setText("Theme Colour");
 
-        comboBoxTableCount1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blue", "Green", "Red", "Orange" }));
-        comboBoxTableCount1.addItemListener(new java.awt.event.ItemListener() {
+        comboBoxTableColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blue", "Green", "Red", "Orange" }));
+        comboBoxTableColor.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboBoxTableCount1ItemStateChanged(evt);
+                comboBoxTableColorItemStateChanged(evt);
             }
         });
 
@@ -1860,7 +1869,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                             .addComponent(lblLogo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboBoxTableCount1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBoxTableColor, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(comboBoxTableCount, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(comboBoxLogo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1886,7 +1895,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(lblLogo1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBoxTableCount1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxTableColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogo2))
                 .addGap(12, 12, 12)
                 .addComponent(jCheckBox1)
@@ -2142,7 +2151,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeAwayActionPerformed
         if (tables.get("takeAway") == null) {
-            tables.put("takeAway", new NewOrder("Guest", null, "takeAway", tables));
+            tables.put("takeAway", new NewOrder("Guest", null, "takeAway", tables,color));
         } else {
             tables.get("takeAway").setVisible(true);
         }
@@ -2288,7 +2297,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReportsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        settings.updateSettings(getSelectedResolution(), getSelectedTable(), getEmail(), getEmailPassword());
+        settings.updateSettings(getSelectedResolution(), getSelectedTable(), getEmail(), getEmailPassword(), getSelectedColor());
         JOptionPane.showMessageDialog(null, "Settings Saved");
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -2452,23 +2461,23 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         prints.printTextToPDF();
     }//GEN-LAST:event_buttonPrintActionPerformed
 
-    private void comboBoxTableCount1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxTableCount1ItemStateChanged
+    private void comboBoxTableColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxTableColorItemStateChanged
 
-        if (comboBoxTableCount1.getSelectedItem() == "Blue") {
+        if (comboBoxTableColor.getSelectedItem() == "Blue") {
             color = new Color(0, 138, 231);
         }
-        if (comboBoxTableCount1.getSelectedItem() == "Red") {
+        if (comboBoxTableColor.getSelectedItem() == "Red") {
             color = new Color(255, 56, 53);
         }
-        if (comboBoxTableCount1.getSelectedItem() == "Green") {
+        if (comboBoxTableColor.getSelectedItem() == "Green") {
             color = new Color(52, 173, 64);
         }
-        if (comboBoxTableCount1.getSelectedItem() == "Orange") {
-            color = new Color(255, 139, 0);
+        if (comboBoxTableColor.getSelectedItem() == "Orange") {
+            color = new Color(232, 87, 17);
         }
         buttonColor(color);
         tableLayout(color);
-    }//GEN-LAST:event_comboBoxTableCount1ItemStateChanged
+    }//GEN-LAST:event_comboBoxTableColorItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -2543,8 +2552,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonTakeAway;
     private javax.swing.JComboBox<String> comboBoxLogo;
     private javax.swing.JComboBox<String> comboBoxSceen;
+    private javax.swing.JComboBox<String> comboBoxTableColor;
     private javax.swing.JComboBox<String> comboBoxTableCount;
-    private javax.swing.JComboBox<String> comboBoxTableCount1;
     private javax.swing.JLabel currentEmail;
     private javax.swing.JLabel currentEmail1;
     private javax.swing.JLabel currentEmail2;

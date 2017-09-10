@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
  *
  * @author Andrew
  */
-public class xmlManager {
+public class settingsManager {
 
     String currentUsersHomeDir = System.getProperty("user.home");
     //String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\system\\Settings.xml";
@@ -37,6 +37,7 @@ public class xmlManager {
     String tableCount;
     String email;
     String password;
+    String color;
 
     public final void xmlValidition() {
         if (xmlSettings.exists()) {
@@ -69,10 +70,14 @@ public class xmlManager {
                 Element emailAddress = document.createElement("emailAddress");
                 emailAddress.appendChild(document.createTextNode("null"));
                 generalSettings.appendChild(emailAddress);
-                
-                 Element emailPassword = document.createElement("emailPassword");
+
+                Element emailPassword = document.createElement("emailPassword");
                 emailPassword.appendChild(document.createTextNode("null"));
                 generalSettings.appendChild(emailPassword);
+
+                Element themeColor = document.createElement("themeColor");
+                themeColor.appendChild(document.createTextNode("Blue"));
+                generalSettings.appendChild(themeColor);
 
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 Transformer transformer = transformerFactory.newTransformer();
@@ -98,14 +103,15 @@ public class xmlManager {
             tableCount = document.getElementsByTagName("tableNum").item(0).getTextContent();
             email = document.getElementsByTagName("emailAddress").item(0).getTextContent();
             password = document.getElementsByTagName("emailPassword").item(0).getTextContent();
+            color = document.getElementsByTagName("themeColor").item(0).getTextContent();
         } catch (ParserConfigurationException | SAXException | IOException ex) {
-            Logger.getLogger(xmlManager.class
+            Logger.getLogger(settingsManager.class
                     .getName()).log(Level.SEVERE, null, ex);
 
         }
     }
 
-    public void updateSettings(String selectedItem, String selectedTable, String emailAddress,String emailPassword) {
+    public void updateSettings(String selectedItem, String selectedTable, String emailAddress, String emailPassword, String themeColor) {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder;
         try {
@@ -131,9 +137,12 @@ public class xmlManager {
                 if ("emailAddress".equals(node.getNodeName())) {
                     node.setTextContent(emailAddress);
                 }
-                
-                  if ("emailPassword".equals(node.getNodeName())) {
+
+                if ("emailPassword".equals(node.getNodeName())) {
                     node.setTextContent(emailPassword);
+                }
+                if ("themeColor".equals(node.getNodeName())) {
+                    node.setTextContent(themeColor);
                 }
 
             }
@@ -145,7 +154,7 @@ public class xmlManager {
 
         } catch (ParserConfigurationException | SAXException | IOException ex) {
         } catch (TransformerException ex) {
-            Logger.getLogger(xmlManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(settingsManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -170,6 +179,10 @@ public class xmlManager {
     public String getEmailPassword() {
         getSettings();
         return password;
+    }
+    
+      public String getThemeColor() {
+        return color;
     }
 
 }
