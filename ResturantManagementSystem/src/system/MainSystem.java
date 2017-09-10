@@ -147,7 +147,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
                 if (!"".equals(waiter) && (!"".equals(customer))
                         && customer != null && waiter != null) {
-                    tables.put(buttonId, new NewOrder(waiter, customer, buttonId, tables,color));
+                    tables.put(buttonId, new NewOrder(waiter, customer, buttonId, tables, color));
                     tables.get(buttonId).setVisible(true);
                 } else {
                 }
@@ -432,6 +432,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         setTableCount();
         setResolution();
         setEmail();
+        setEmailPassword();
         setThemeColor();
     }
 
@@ -485,6 +486,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public void windows() {
         this.setSize(800, 600);
         this.setLocationRelativeTo(null);
+        this.pack();
     }
 
     public String getSelectedResolution() {
@@ -2151,7 +2153,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeAwayActionPerformed
         if (tables.get("takeAway") == null) {
-            tables.put("takeAway", new NewOrder("Guest", null, "takeAway", tables,color));
+            tables.put("takeAway", new NewOrder("Guest", null, "takeAway", tables, color));
         } else {
             tables.get("takeAway").setVisible(true);
         }
@@ -2399,14 +2401,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonRecipeEditActionPerformed
 
     private void buttonSupplierEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupplierEditActionPerformed
-//        if (user.createAdminLogin() == true) {
         updateSupplier();
         populateSupplierTable();
-//        }
+
     }//GEN-LAST:event_buttonSupplierEditActionPerformed
 
     private void buttonEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEventsActionPerformed
-        RemindersForm newForm=new RemindersForm();
+        RemindersForm newForm = new RemindersForm();
         newForm.setVisible(true);
     }//GEN-LAST:event_buttonEventsActionPerformed
 
@@ -2431,9 +2432,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonRecipeEdit4ActionPerformed
 
     private void buttonRecipeListEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeListEditActionPerformed
-//        if (user.createAdminLogin() == true) {
         updateRecipeList();
-//        }
     }//GEN-LAST:event_buttonRecipeListEditActionPerformed
 
     private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
@@ -2471,7 +2470,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             color = new Color(255, 56, 53);
         }
         if (comboBoxTableColor.getSelectedItem() == "Green") {
-            color = new Color(52, 173, 64);
+            color = new Color(1, 190, 2);
         }
         if (comboBoxTableColor.getSelectedItem() == "Orange") {
             color = new Color(232, 87, 17);

@@ -172,12 +172,10 @@ public class settingsManager {
     }
 
     public String getEmail() {
-        getSettings();
         return email;
     }
 
     public String getEmailPassword() {
-        getSettings();
         return password;
     }
     
