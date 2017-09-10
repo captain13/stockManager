@@ -2406,7 +2406,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonSupplierEditActionPerformed
 
     private void buttonEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEventsActionPerformed
-
+        RemindersForm newForm=new RemindersForm();
+        newForm.setVisible(true);
     }//GEN-LAST:event_buttonEventsActionPerformed
 
     private void buttonReprint2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprint2ActionPerformed

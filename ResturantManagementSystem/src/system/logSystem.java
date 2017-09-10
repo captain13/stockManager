@@ -47,7 +47,6 @@ public class logSystem {
 
     public void writeLogs(String action) {
         String text = clock.getCurrentDate() + " " + clock.getCurrentTimeStamp() + " record " + action + " to database";
-        System.out.println(text);
         try {
             FileWriter fileWriter = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
