@@ -687,7 +687,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         setLocation(new java.awt.Point(0, 0));
         setUndecorated(true);
 
-        TabbedPanel.setBackground(new java.awt.Color(75, 75, 75));
+        TabbedPanel.setBackground(new java.awt.Color(53, 53, 53));
         TabbedPanel.setForeground(new java.awt.Color(255, 255, 255));
         TabbedPanel.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         TabbedPanel.setOpaque(true);

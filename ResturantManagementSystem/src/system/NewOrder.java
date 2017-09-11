@@ -340,6 +340,9 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         setUndecorated(true);
         setSize(new java.awt.Dimension(700, 768));
 
+        jPanel3.setBackground(new java.awt.Color(53, 53, 53));
+
+        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setText("Order");
 
         textfieldTotal.setCaretColor(new java.awt.Color(255, 255, 255));
@@ -363,10 +366,17 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         tblItems.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(tblItems);
 
+        lblWaiter.setForeground(new java.awt.Color(255, 255, 255));
         lblWaiter.setText("Waiter:");
 
+        lblNum.setForeground(new java.awt.Color(255, 255, 255));
         lblNum.setText("No. of Customers:");
 
+        nameTF.setForeground(new java.awt.Color(255, 255, 255));
+
+        customerNo.setForeground(new java.awt.Color(255, 255, 255));
+
+        lblClock1.setForeground(new java.awt.Color(255, 255, 255));
         lblClock1.setText("Clock");
 
         buttonPay.setBackground(new java.awt.Color(0, 138, 231));
