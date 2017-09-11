@@ -120,6 +120,10 @@ public class receiptHandler {
         body(total);
         tail();
     }
+    
+    public String getReceipt() {
+       return head+body+tail;
+    }
 
     public void writeTextToPDF() {
         String currentUsersHomeDir = System.getProperty("user.home");

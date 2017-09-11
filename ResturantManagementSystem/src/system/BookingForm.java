@@ -192,7 +192,7 @@ public class BookingForm extends javax.swing.JFrame {
 
         buttonCancel.setBackground(new java.awt.Color(75, 75, 75));
         buttonCancel.setForeground(new java.awt.Color(255, 255, 255));
-        buttonCancel.setText("Cancel");
+        buttonCancel.setText("Close");
         buttonCancel.setContentAreaFilled(false);
         buttonCancel.setOpaque(true);
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {

@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 public class emailClient {
 
     settingsManager settings = new settingsManager();
+    receiptHandler newHandler = new receiptHandler();
     String emailAddress;
     String password;
 
@@ -74,5 +75,11 @@ public class emailClient {
                 + "Zcsas Development Team";
         System.out.println(template);
         sendEmail("swabe@live.co.za", "Reorder", template);
+    }
+
+    public void emailTemplate(String email, double total) {
+        newHandler.printReceipt(total);
+        String text = newHandler.getReceipt();
+        sendEmail(email, "Receipt", text);
     }
 }

@@ -543,6 +543,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonEmail.setBackground(color);
         buttonReports.setBackground(color);
         buttonEmployee.setBackground(color);
+        buttonLogs.setBackground(color);
 
         jButton4.setBackground(color);
         jButton7.setBackground(color);
@@ -652,7 +653,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonReports = new javax.swing.JButton();
         buttonEmployee = new javax.swing.JButton();
         buttonManageSpecials = new javax.swing.JButton();
-        buttonEmployee1 = new javax.swing.JButton();
+        buttonLogs = new javax.swing.JButton();
         Settings = new javax.swing.JPanel();
         lblSettings = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -1715,13 +1716,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        buttonEmployee1.setBackground(new java.awt.Color(0, 138, 231));
-        buttonEmployee1.setForeground(new java.awt.Color(255, 255, 255));
-        buttonEmployee1.setText("View Logs");
-        buttonEmployee1.setContentAreaFilled(false);
-        buttonEmployee1.addActionListener(new java.awt.event.ActionListener() {
+        buttonLogs.setBackground(new java.awt.Color(0, 138, 231));
+        buttonLogs.setForeground(new java.awt.Color(255, 255, 255));
+        buttonLogs.setText("View Logs");
+        buttonLogs.setContentAreaFilled(false);
+        buttonLogs.setOpaque(true);
+        buttonLogs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEmployee1ActionPerformed(evt);
+                buttonLogsActionPerformed(evt);
             }
         });
 
@@ -1745,7 +1747,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                                     .addComponent(buttonReports, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(buttonEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(buttonManageSpecials, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(buttonEmployee1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1766,7 +1768,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(buttonEmployee)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(buttonEmployee1)
+                    .addComponent(buttonLogs)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
                     .addComponent(buttonManageSpecials)
                     .addContainerGap()))
@@ -2360,14 +2362,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         newForm.setVisible(true);
     }//GEN-LAST:event_buttonManageSpecialsActionPerformed
 
-    private void buttonEmployee1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmployee1ActionPerformed
-        String file = System.getProperty("user.home") + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\logs\\logs.txt";
-        Runtime runtime = Runtime.getRuntime();
-        try {
-            Process p = runtime.exec("notepad " + file);
-        } catch (IOException ex) {
-        }
-    }//GEN-LAST:event_buttonEmployee1ActionPerformed
+    private void buttonLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogsActionPerformed
+     LogForm newForm=new LogForm();
+     newForm.setVisible(true);
+    }//GEN-LAST:event_buttonLogsActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to Delete Logs?", null, JOptionPane.YES_NO_OPTION);
@@ -2523,11 +2521,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonEdit1;
     private javax.swing.JButton buttonEmail;
     private javax.swing.JButton buttonEmployee;
-    private javax.swing.JButton buttonEmployee1;
     private javax.swing.JButton buttonEvents;
     private javax.swing.JButton buttonLayout;
     private javax.swing.JButton buttonLogOut;
     private javax.swing.JButton buttonLogin;
+    private javax.swing.JButton buttonLogs;
     private javax.swing.JButton buttonMakeOrder;
     private javax.swing.JButton buttonManageSpecials;
     private javax.swing.JButton buttonOrderHistory;

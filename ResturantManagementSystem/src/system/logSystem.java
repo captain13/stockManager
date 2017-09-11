@@ -5,12 +5,15 @@
  */
 package system;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -45,8 +48,8 @@ public class logSystem {
         }
     }
 
-    public void writeLogs(String action) {
-        String text = clock.getCurrentDate() + " " + clock.getCurrentTimeStamp() + " record " + action + " to database";
+    public void writeLogs(String action, String table) {
+        String text = clock.getCurrentDate() + " " + clock.getCurrentTimeStamp() + " record " + action + " to "+table+" table";
         try {
             FileWriter fileWriter = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -54,6 +57,20 @@ public class logSystem {
             bufferedWriter.write(text);
             bufferedWriter.newLine();
             bufferedWriter.close();
+
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }
+    
+    public final void readLogs(JTextArea TextArea) {
+        try {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            TextArea.read(bufferedReader, null);
+            int length = TextArea.getDocument().getLength();
+            TextArea.setCaretPosition(length - 1);
+            bufferedReader.close();
 
         } catch (IOException ex) {
             System.out.println(ex);

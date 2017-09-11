@@ -565,7 +565,7 @@ public class dbManager {
                     + "00:00" + "','"
                     + adminRights + "')";
             s.execute(insertQuery);
-            logs.writeLogs("ADDED");
+            logs.writeLogs("ADDED", "Employee");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -584,7 +584,7 @@ public class dbManager {
                     + "'" + threshold + "', '"
                     + limit + "')";
             s.execute(insertQuery);
-            logs.writeLogs("ADDED");
+            logs.writeLogs("ADDED", "Inventory");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -603,7 +603,7 @@ public class dbManager {
                     + category + "', '"
                     + imageDirectory + "','0')";
             s.execute(insertQuery);
-            logs.writeLogs("ADDED");
+            logs.writeLogs("ADDED", "Recipe");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -687,7 +687,7 @@ public class dbManager {
                     + cost + "')";
             s.execute(insertQuery);
 
-            logs.writeLogs("ADDED receipt");
+            logs.writeLogs("ADDED", "receipt");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -740,7 +740,7 @@ public class dbManager {
                     + getRecipeID() + "', '"
                     + qty + "')";
             s.execute(insertQuerySup);
-            logs.writeLogs("ADDED");
+            logs.writeLogs("ADDED", "Inventory_recipe");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -758,7 +758,7 @@ public class dbManager {
                     + number + "', '"
                     + address + "')";
             s.execute(insertQuerySup);
-            logs.writeLogs("ADDED");
+            logs.writeLogs("ADDED", "Supplier");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -778,7 +778,7 @@ public class dbManager {
                     + customerNum + "')";
             s.execute(insertQuerySup);
             JOptionPane.showMessageDialog(null, "Reservation Added");
-            logs.writeLogs("ADDED");
+            logs.writeLogs("ADDED", "Reservations");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -798,7 +798,7 @@ public class dbManager {
                     + date + "', '"
                     + quantity + "', 'Not Delievered')";
             s.execute(insertQuerySup);
-            logs.writeLogs("ADDED");
+            logs.writeLogs("ADDED", "StockOrder");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -821,7 +821,7 @@ public class dbManager {
                 ID = rs.getString("salesID");
             }
             insertEmployeeSales(ID, user);
-            logs.writeLogs("ADDED");
+            logs.writeLogs("ADDED", "Sales");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -844,7 +844,7 @@ public class dbManager {
                     + "VALUES ('" + employeeID + "','"
                     + ID + "')";
             s.execute(insertQuerySup);
-            logs.writeLogs("ADDED");
+            logs.writeLogs("ADDED", "EmployeeSales");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -866,6 +866,7 @@ public class dbManager {
                 ID = rs.getString("specialsID");
             }
             updateRecipeSpecialsID(ID, recipeName);
+            logs.writeLogs("ADDED", "Specials");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -879,7 +880,7 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM inventory WHERE inventoryID='" + index + "'";
             s.execute(query);
-            logs.writeLogs("DELETED");
+            logs.writeLogs("DELETED", "Inventory");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -895,12 +896,13 @@ public class dbManager {
             s.execute(query1);
             s.execute(query);
             removeRecipeList(index);
-            logs.writeLogs("DELETED");
+            logs.writeLogs("DELETED", "Recipe");
             s.close();
             conn.close();
         } catch (SQLException exp) {
         }
     }
+//test to see duplicates
 
     public void removeRecipeList(int index) {
         try {
@@ -908,7 +910,7 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
             s.execute(query);
-            logs.writeLogs("DELETED");
+            logs.writeLogs("DELETED", "Inventory_recipe");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -921,8 +923,7 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'AND inventoryID='" + ID + "'";
             s.execute(query);
-
-            logs.writeLogs("DELETED");
+            logs.writeLogs("DELETED", "Inventory_recipe");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -935,7 +936,7 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM supplier WHERE supplierID='" + index + "'";
             s.execute(query);
-            logs.writeLogs("DELETED");
+            logs.writeLogs("DELETED","Supplier");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -948,7 +949,7 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "DELETE FROM employee WHERE employeeID='" + index + "'";
             s.execute(query);
-            logs.writeLogs("DELETED");
+            logs.writeLogs("DELETED","Employee");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -978,7 +979,7 @@ public class dbManager {
                     + "' WHERE employeeFName='" + Username + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(queryUpdate);
             preparedStmt.executeUpdate();
-            logs.writeLogs("UPDATED");
+            logs.writeLogs("UPDATED","Employee");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -1024,6 +1025,7 @@ public class dbManager {
                     + "' ,itemLimit='" + itemL + "' WHERE inventoryID='" + ID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.executeUpdate();
+            logs.writeLogs("UPDATED","Inventory");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -1045,6 +1047,7 @@ public class dbManager {
                     + "' ,recipeType='" + type + "' WHERE recipeID='" + ID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.executeUpdate();
+            logs.writeLogs("UPDATED","Recipe");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -1061,8 +1064,8 @@ public class dbManager {
             String query = "UPDATE inventory set qty=qty" + operator + "'" + qty + "' "
                     + "WHERE inventoryID='" + ID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            System.out.println("ran");
             preparedStmt.executeUpdate();
+             logs.writeLogs("UPDATED","Inventory");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -1078,6 +1081,7 @@ public class dbManager {
                     + "WHERE  inventoryID='" + iventoryID + "'AND recipeID='" + recipeID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.executeUpdate();
+             logs.writeLogs("UPDATED","Inventory_recipe");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -1098,6 +1102,7 @@ public class dbManager {
                     + "' ,supplierAddress='" + address + "' WHERE supplierID='" + ID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.executeUpdate();
+             logs.writeLogs("UPDATED","Supplier");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -1114,6 +1119,7 @@ public class dbManager {
             s.execute(updateQuery);
             PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
             preparedStmt.executeUpdate();
+             logs.writeLogs("UPDATED","Employee");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -1144,6 +1150,7 @@ public class dbManager {
             s.execute(updateQuery);
             PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
             preparedStmt.executeUpdate();
+             logs.writeLogs("UPDATED","recipe");
             s.close();
             conn.close();
         } catch (SQLException exp) {

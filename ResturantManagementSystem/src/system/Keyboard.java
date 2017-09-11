@@ -39,7 +39,7 @@ public class Keyboard extends javax.swing.JFrame {
         super.dispose();
     }
 
-    public void draggablePanel() {
+    public final void draggablePanel() {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -59,22 +59,6 @@ public class Keyboard extends javax.swing.JFrame {
                 Point currCoords = e.getLocationOnScreen();
                 setLocation(currCoords.x - mouseDownCompCoords.x, currCoords.y - mouseDownCompCoords.y);
             }
-//     this.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mousePressed(MouseEvent ev) {
-//                x = ev.getX();
-//                y = ev.getY();
-//            }
-
-//
-//       this.addMouseMotionListener(new MouseMotionAdapter() {
-//            @Override
-//            public void mouseDragged(MouseEvent evt) {
-//                x = (evt.getXOnScreen() - x);
-//                y = (evt.getYOnScreen() - y);
-//              setLocation(x, y);
-//
-//            }
         });
     }
 
@@ -655,16 +639,17 @@ public class Keyboard extends javax.swing.JFrame {
                                 .addComponent(jButton48)
                                 .addComponent(jButton49))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton17)
-                                .addComponent(jButton18)
-                                .addComponent(jButton19)
-                                .addComponent(jButton20)
-                                .addComponent(jButton11)
-                                .addComponent(jButton12)
-                                .addComponent(jButton13)
-                                .addComponent(jButton50)
-                                .addComponent(jButton51, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton51, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton17)
+                                    .addComponent(jButton18)
+                                    .addComponent(jButton19)
+                                    .addComponent(jButton20)
+                                    .addComponent(jButton11)
+                                    .addComponent(jButton12)
+                                    .addComponent(jButton13)
+                                    .addComponent(jButton50)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jButton23)

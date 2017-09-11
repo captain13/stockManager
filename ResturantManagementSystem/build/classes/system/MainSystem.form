@@ -1547,7 +1547,7 @@
                                       </Group>
                                       <Component id="buttonManageSpecials" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="buttonEmployee1" min="-2" pref="167" max="-2" attributes="0"/>
+                                  <Component id="buttonLogs" min="-2" pref="167" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -1572,7 +1572,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonEmployee" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="buttonEmployee1" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonLogs" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="266" max="32767" attributes="0"/>
                               <Component id="buttonManageSpecials" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -1691,7 +1691,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonManageSpecialsActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="buttonEmployee1">
+                <Component class="javax.swing.JButton" name="buttonLogs">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="e7" green="8a" red="0" type="rgb"/>
@@ -1701,9 +1701,10 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="View Logs"/>
                     <Property name="contentAreaFilled" type="boolean" value="false"/>
+                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEmployee1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonLogsActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
