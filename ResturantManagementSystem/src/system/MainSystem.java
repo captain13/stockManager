@@ -2465,10 +2465,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             color = new Color(0, 138, 231);
         }
         if (comboBoxTableColor.getSelectedItem() == "Red") {
-            color = new Color(255, 56, 53);
+            color = new Color(255, 46, 43);
         }
         if (comboBoxTableColor.getSelectedItem() == "Green") {
-            color = new Color(1, 190, 2);
+            color = new Color(51, 190, 52);
         }
         if (comboBoxTableColor.getSelectedItem() == "Orange") {
             color = new Color(232, 87, 17);

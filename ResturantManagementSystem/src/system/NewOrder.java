@@ -394,7 +394,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
         buttonEdit1.setBackground(new java.awt.Color(0, 138, 231));
         buttonEdit1.setForeground(new java.awt.Color(255, 255, 255));
-        buttonEdit1.setText("Edit Order");
+        buttonEdit1.setText("Order Instructions");
         buttonEdit1.setContentAreaFilled(false);
         buttonEdit1.setOpaque(true);
         buttonEdit1.addActionListener(new java.awt.event.ActionListener() {
@@ -574,7 +574,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
         jToggleButton8.setBackground(new java.awt.Color(75, 75, 75));
         jToggleButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton8.setText("Clear Table");
+        jToggleButton8.setText("Close Table");
         jToggleButton8.setContentAreaFilled(false);
         jToggleButton8.setOpaque(true);
         jToggleButton8.addActionListener(new java.awt.event.ActionListener() {
