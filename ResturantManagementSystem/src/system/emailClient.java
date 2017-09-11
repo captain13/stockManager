@@ -22,8 +22,14 @@ import javax.swing.JOptionPane;
 public class emailClient {
 
     settingsManager settings = new settingsManager();
-    String emailAddress=settings.getEmail();
-    String password = settings.getEmailPassword();
+    String emailAddress;
+    String password;
+
+    public emailClient() {
+        settings.getSettings();
+        emailAddress = settings.getEmail();
+        password = settings.getEmailPassword();
+    }
 
     public void sendEmail(String recipientAddress, String subject, String text) {
         Properties props = new Properties();
