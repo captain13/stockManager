@@ -27,9 +27,9 @@ public class printHandler {
     dbManager db = new dbManager();
 
     public void printTextToPDF() {
-        name = "Inventory Table      " + "\n" + "\n";
-        inventory = Arrays.deepToString(db.getInventoryData());
-        Heading = "Inventory ID    Item Name    Category    Quantity(g)    Item Threshold    Item Limit \n " + "\n";
+        name = "Inventory Table " + "\n" + "\n";
+        inventory = Arrays.deepToString(db.getInventoryData()).replaceAll("[^\\p{javaSpaceChar}{2.a-zA-Z0-9&,}]", "\n") + "";
+        Heading = "Inventory ID, Item Name, Category, Quantity(g), Item Threshold, Item Limit \n ";
         String currentUsersHomeDir = System.getProperty("user.home");
         String file_name = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\docs\\Print.pdf";
         Document document = new Document();
