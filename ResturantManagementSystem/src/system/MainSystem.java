@@ -122,7 +122,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public final void tableLayout(Color color) {
         pnlLayout.removeAll();
-        GridLayout tableLayout = new GridLayout(0, 4);
+        GridLayout tableLayout = new GridLayout(0, 5);
         pnlLayout.setLayout(tableLayout);
         int emptySpace = 20 - n;
         for (int i = 1; i <= n; i++) {
