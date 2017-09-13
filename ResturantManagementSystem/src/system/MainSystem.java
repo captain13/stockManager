@@ -662,12 +662,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         lblLogo1 = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         lblScreen = new javax.swing.JLabel();
-        comboBoxSceen = new javax.swing.JComboBox<>();
-        comboBoxLogo = new javax.swing.JComboBox<>();
-        comboBoxTableCount = new javax.swing.JComboBox<>();
+        comboBoxSceen = new javax.swing.JComboBox<String>();
+        comboBoxLogo = new javax.swing.JComboBox<String>();
+        comboBoxTableCount = new javax.swing.JComboBox<String>();
         lblSettings1 = new javax.swing.JLabel();
         lblLogo2 = new javax.swing.JLabel();
-        comboBoxTableColor = new javax.swing.JComboBox<>();
+        comboBoxTableColor = new javax.swing.JComboBox<String>();
         jPanel3 = new javax.swing.JPanel();
         currentEmail2 = new javax.swing.JLabel();
         currentEmail1 = new javax.swing.JLabel();
@@ -1168,6 +1168,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonPrint.setBackground(new java.awt.Color(75, 75, 75));
         buttonPrint.setForeground(new java.awt.Color(255, 255, 255));
         buttonPrint.setText("Print");
+        buttonPrint.setToolTipText("Prints the table to a pdf document");
         buttonPrint.setContentAreaFilled(false);
         buttonPrint.setOpaque(true);
         buttonPrint.addActionListener(new java.awt.event.ActionListener() {
@@ -1708,6 +1709,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonManageSpecials.setBackground(new java.awt.Color(75, 75, 75));
         buttonManageSpecials.setForeground(new java.awt.Color(255, 255, 255));
         buttonManageSpecials.setText("Manage Specials");
+        buttonManageSpecials.setToolTipText("Used to add, delete or edit specials");
         buttonManageSpecials.setContentAreaFilled(false);
         buttonManageSpecials.setOpaque(true);
         buttonManageSpecials.addActionListener(new java.awt.event.ActionListener() {
@@ -1821,21 +1823,21 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         lblScreen.setText("Resolution");
 
-        comboBoxSceen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Windowed Screen", "Fullscreen" }));
+        comboBoxSceen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Windowed Screen", "Fullscreen" }));
         comboBoxSceen.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxSceenItemStateChanged(evt);
             }
         });
 
-        comboBoxLogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "Demo 1", "Demo 2" }));
+        comboBoxLogo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "Demo 1", "Demo 2" }));
         comboBoxLogo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxLogoItemStateChanged(evt);
             }
         });
 
-        comboBoxTableCount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
+        comboBoxTableCount.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
         comboBoxTableCount.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxTableCountItemStateChanged(evt);
@@ -1846,7 +1848,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         lblLogo2.setText("Theme Colour");
 
-        comboBoxTableColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blue", "Green", "Red", "Orange" }));
+        comboBoxTableColor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Blue", "Green", "Red", "Orange" }));
         comboBoxTableColor.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxTableColorItemStateChanged(evt);

@@ -902,6 +902,7 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Print"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Prints the table to a pdf document"/>
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                         <Property name="opaque" type="boolean" value="true"/>
                       </Properties>
@@ -1684,6 +1685,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Manage Specials"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Used to add, delete or edit specials"/>
                     <Property name="contentAreaFilled" type="boolean" value="false"/>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
