@@ -275,8 +275,9 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
     public void updateOrdercount() {
         int n = tblItems.getRowCount();
+        System.out.println(n);
         for (int i = 0; i < n; i++) {
-            System.out.println("iterate" + i);
+            System.out.println("iterate " + i);
             System.out.println("Count " + n);
             String order = tblItems.getValueAt(i, 0).toString();
             System.out.println(order);

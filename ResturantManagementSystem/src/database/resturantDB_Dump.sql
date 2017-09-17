@@ -241,6 +241,7 @@ CREATE TABLE IF NOT EXISTS `resturantdb`.`expenses` (
   `expensesAmount` DOUBLE NULL,
   `wageID` INT NULL,
   `stockOrderID` INT(11) NULL,
+  `date` DATE NULL,
   PRIMARY KEY (`expensesID`),
   INDEX `fk_expenses_wage1_idx` (`wageID` ASC),
   INDEX `fk_expenses_stockorder1_idx` (`stockOrderID` ASC))
@@ -258,8 +259,8 @@ START TRANSACTION;
 USE `resturantdb`;
 INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `admin`) VALUES (1,'Andrew','Schwabe','Password','076 273 1721','0hrs00',NULL,1);
 INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `admin`) VALUES(2,'Zane','Smith','Password','034 233 8321','0hrs00',NULL,1);
-INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `admin`) VALUES(3,'Chad','Phillips','Password','087 237 1277','0hrs00',NULL,0);
-INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `admin`) VALUES(4,'Sean','Thomson','Password','072 377 1122','0hrs00',NULL,0);
+INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`,  `admin`) VALUES(3,'Chad','Phillips','Password','087 237 1277','0hrs00',NULL,0);
+INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`,  `admin`) VALUES(4,'Sean','Thomson','Password','072 377 1122','0hrs00',NULL,0);
 INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `admin`) VALUES(5,'Itumeleng','Madisha','Password','072 377 1122','0hrs00',NULL,0);
 COMMIT;
 

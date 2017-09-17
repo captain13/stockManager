@@ -61,8 +61,8 @@ public class OrderForm extends javax.swing.JFrame {
         return ID;
     }
 
-    public String getQuantity() {
-        return textQuantity.getText();
+    public double getQuantity() {
+        return Double.parseDouble(textQuantity.getText());
     }
 
     public String getInventoryName() {
@@ -94,10 +94,18 @@ public class OrderForm extends javax.swing.JFrame {
         comboboxDay.setSelectedItem(day);
         comboboxMonth.setSelectedItem(month);
     }
-    
-    public double calcCost(){
-        double price=100;
-        return  price;
+
+    public double calcCost() {
+        double itemCost = 0;
+        double price;
+        for (int i = 0; i < newManager.getInventoryData().length; i++) {
+            if (jComboBox1.getSelectedItem().toString().equals(newManager.getInventoryData()[i][1])) {
+                itemCost = Double.parseDouble(newManager.getInventoryData()[i][6].toString());
+                System.out.println(itemCost);
+            }
+        }
+        price = (getQuantity()/100) * itemCost;
+        return price;
     }
 
     /**
@@ -272,9 +280,10 @@ public class OrderForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (!"".equals(getSupplierID()) || !"".equals(getInventoryID()) || !"".equals(getQuantity())) {
-            newManager.insertStockOrder(getInventoryID(), getSupplierID(), getQuantity(), getDate(),calcCost());
+            newManager.insertStockOrder(getInventoryID(), getSupplierID(), getQuantity(), getDate(), calcCost());
             sendEmail();
             system.populateOrderTable();
+            newManager.insertExpenses("Stock Order", calcCost(), clock.getCurrentDate());
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Please Enter All Fields");

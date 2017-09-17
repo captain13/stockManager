@@ -26,10 +26,21 @@ public class Reports extends javax.swing.JFrame {
 //        tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
 //        tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
     }
-    
-      public final void populateEmployeeSalesTable() {
+
+    public final void populateEmployeeSalesTable() {
         String columnNames[] = {"Sale ID", "User", "Employee ID"};
         DefaultTableModel tableModel = new DefaultTableModel(newManager.getEmployeeSales(), columnNames);
+        tableSales.setModel(tableModel);
+//        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
+//        tblInventory.getColumnModel().getColumn(2).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(3).setPreferredWidth(100);
+//        tblInventory.getColumnModel().getColumn(4).setPreferredWidth(100);
+    }
+
+    public final void populateExpensesTable() {
+        String columnNames[] = {"ID", "Type", "Date", "Total Expense"};
+        DefaultTableModel tableModel = new DefaultTableModel(newManager.getExpensesData(), columnNames);
         tableSales.setModel(tableModel);
 //        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
 //        tblInventory.getColumnModel().getColumn(1).setPreferredWidth(300);
@@ -70,6 +81,7 @@ public class Reports extends javax.swing.JFrame {
         buttonClose3 = new javax.swing.JButton();
         buttonClose4 = new javax.swing.JButton();
         buttonClose5 = new javax.swing.JButton();
+        buttonClose6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -158,6 +170,17 @@ public class Reports extends javax.swing.JFrame {
             }
         });
 
+        buttonClose6.setBackground(new java.awt.Color(0, 138, 231));
+        buttonClose6.setForeground(new java.awt.Color(255, 255, 255));
+        buttonClose6.setText("Expenses");
+        buttonClose6.setContentAreaFilled(false);
+        buttonClose6.setOpaque(true);
+        buttonClose6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonClose6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -169,7 +192,8 @@ public class Reports extends javax.swing.JFrame {
                     .addComponent(buttonClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonClose3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonClose4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonClose5, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonClose5, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonClose6, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(341, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -189,10 +213,12 @@ public class Reports extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonClose3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonClose6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonClose2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonClose5)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -245,6 +271,10 @@ public class Reports extends javax.swing.JFrame {
         populateStockCount();
     }//GEN-LAST:event_buttonClose5ActionPerformed
 
+    private void buttonClose6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose6ActionPerformed
+        populateExpensesTable();
+    }//GEN-LAST:event_buttonClose6ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonClose;
@@ -253,6 +283,7 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JButton buttonClose3;
     private javax.swing.JButton buttonClose4;
     private javax.swing.JButton buttonClose5;
+    private javax.swing.JButton buttonClose6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableSales;

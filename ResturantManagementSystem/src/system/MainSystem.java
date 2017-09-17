@@ -551,6 +551,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonReports.setBackground(color);
         buttonEmployee.setBackground(color);
         buttonLogs.setBackground(color);
+        buttonManageSpecials.setBackground(color);
 
         jButton4.setBackground(color);
         jButton7.setBackground(color);
@@ -661,6 +662,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonEmployee = new javax.swing.JButton();
         buttonManageSpecials = new javax.swing.JButton();
         buttonLogs = new javax.swing.JButton();
+        buttonLogs1 = new javax.swing.JButton();
         Settings = new javax.swing.JPanel();
         lblSettings = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -1683,7 +1685,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         buttonReports.setBackground(new java.awt.Color(0, 138, 231));
         buttonReports.setForeground(new java.awt.Color(255, 255, 255));
-        buttonReports.setText("Report");
+        buttonReports.setText("View Reports");
         buttonReports.setContentAreaFilled(false);
         buttonReports.setOpaque(true);
         buttonReports.addActionListener(new java.awt.event.ActionListener() {
@@ -1694,7 +1696,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         buttonEmployee.setBackground(new java.awt.Color(0, 138, 231));
         buttonEmployee.setForeground(new java.awt.Color(255, 255, 255));
-        buttonEmployee.setText("Employees");
+        buttonEmployee.setText("Manage Employees");
         buttonEmployee.setContentAreaFilled(false);
         buttonEmployee.setOpaque(true);
         buttonEmployee.addActionListener(new java.awt.event.ActionListener() {
@@ -1703,7 +1705,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        buttonManageSpecials.setBackground(new java.awt.Color(75, 75, 75));
+        buttonManageSpecials.setBackground(new java.awt.Color(0, 138, 231));
         buttonManageSpecials.setForeground(new java.awt.Color(255, 255, 255));
         buttonManageSpecials.setText("Manage Specials");
         buttonManageSpecials.setToolTipText("Used to add, delete or edit specials");
@@ -1726,32 +1728,61 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        buttonLogs1.setBackground(new java.awt.Color(75, 75, 75));
+        buttonLogs1.setForeground(new java.awt.Color(255, 255, 255));
+        buttonLogs1.setText("Day End Report");
+        buttonLogs1.setContentAreaFilled(false);
+        buttonLogs1.setOpaque(true);
+        buttonLogs1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLogs1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 187, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(buttonLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(buttonEmployee, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonManageSpecials, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(buttonReports, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonLogs1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(buttonAlert, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(buttonOrderHistory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(buttonMakeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(buttonEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(buttonReports, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(buttonEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(buttonManageSpecials, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(buttonLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(buttonAlert, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonOrderHistory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonMakeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(buttonEmployee)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonManageSpecials)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonReports)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonLogs)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonLogs1)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -1762,15 +1793,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(buttonAlert)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(buttonEmail)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(buttonReports)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(buttonEmployee)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(buttonLogs)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
-                    .addComponent(buttonManageSpecials)
-                    .addContainerGap()))
+                    .addContainerGap(426, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout ManagementLayout = new javax.swing.GroupLayout(Management);
@@ -1779,8 +1802,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ManagementLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
         ManagementLayout.setVerticalGroup(
@@ -2474,6 +2497,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         tableLayout(color);
     }//GEN-LAST:event_comboBoxTableColorItemStateChanged
 
+    private void buttonLogs1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogs1ActionPerformed
+        DayEndForm newForm=new DayEndForm();
+        newForm.setVisible(true);
+    }//GEN-LAST:event_buttonLogs1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2523,6 +2551,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonLogOut;
     private javax.swing.JButton buttonLogin;
     private javax.swing.JButton buttonLogs;
+    private javax.swing.JButton buttonLogs1;
     private javax.swing.JButton buttonMakeOrder;
     private javax.swing.JButton buttonManageSpecials;
     private javax.swing.JButton buttonOrderHistory;

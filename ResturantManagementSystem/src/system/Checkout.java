@@ -471,7 +471,9 @@ public class Checkout extends javax.swing.JFrame {
 
     private void cancelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton1ActionPerformed
         String email = JOptionPane.showInputDialog(null, "Enter Customer Email");
-        newClient.emailTemplate(email, total);
+        if (email != null) {
+            newClient.emailTemplate(email, total);
+        }
     }//GEN-LAST:event_cancelButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -68,7 +68,7 @@ public class emailClient {
         }
     }
 
-    public void emailTemplate(String supplier, String item, String qty) {
+    public void emailTemplate(String supplier, String item, double qty) {
         String template = "Dear " + supplier + "\n" + "\n"
                 + "We would like to order " + item + "(s) with the quantity of " + qty + "(g) \n" + "\n"
                 + "Regards \n"

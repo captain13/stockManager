@@ -228,6 +228,40 @@ public class dbManager {
         return rowData;
     }
 
+    public Object[][] getExpensesData() {
+        Object[][] rowData = null;
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT expensesID,expensesType,date, expensesAmount FROM expenses "
+                    + "UNION ALL SELECT '','','TOTAL', SUM(expensesAmount) FROM expenses";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            int rowCount = 0;
+            while (rs.next()) {
+                rowCount++;
+            }
+            rs = s.executeQuery(query);
+            rowData = new Object[rowCount][columnCount];
+            int i = 0;
+            while (rs.next()) {
+                rowData[i][0] = rs.getObject(1);
+                rowData[i][1] = rs.getObject(2);
+                rowData[i][2] = rs.getObject(3);
+                rowData[i][3] = rs.getString(4);
+                i++;
+            }
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+        return rowData;
+    }
+
     public Object[][] getEmployeeData() {
         Object[][] rowData = null;
         try {
@@ -446,6 +480,50 @@ public class dbManager {
         return ingredients;
     }
 
+    public double getDayExpenses() {
+        double totalExpenses = 0;
+        String date = clock.getCurrentDate();
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT SUM(expensesAmount) FROM expenses WHERE date='" + date + "' ";
+            ResultSet rs = s.executeQuery(query);
+            if (rs.next()) {
+                totalExpenses = rs.getDouble(1);
+            }
+
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+        return totalExpenses;
+    }
+    
+    public double getDaySales() {
+        double totalSales = 0;
+        String date = clock.getCurrentDate();
+        try {
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT SUM(totalCost) FROM sales WHERE salesDate='" + date + "' ";
+            ResultSet rs = s.executeQuery(query);
+            if (rs.next()) {
+                totalSales = rs.getDouble(1);
+            }
+
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+        return totalSales;
+    }
+
     public String getItemName(String ID) {
         String itemName = null;
         try {
@@ -568,6 +646,23 @@ public class dbManager {
                     + adminRights + "')";
             s.execute(insertQuery);
             logs.writeLogs("ADDED", "Employee");
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
+    public void insertExpenses(String type, double amount, String date) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String insertQuery = "INSERT INTO expenses (expensesType, expensesAmount,date)"
+                    + "VALUES ('" + type + "', '"
+                    + amount + "','"
+                    + date + "')";
+            s.execute(insertQuery);
+            logs.writeLogs("ADDED", "Expenses");
             s.close();
             conn.close();
         } catch (SQLException exp) {
@@ -789,7 +884,7 @@ public class dbManager {
 
     }
 
-    public void insertStockOrder(String inventoryID, String supplierID, String quantity, String date, double cost) {
+    public void insertStockOrder(String inventoryID, String supplierID, double quantity, String date, double cost) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -1146,10 +1241,11 @@ public class dbManager {
     }
 
     public void updateOrderCount(String order) {
+        System.out.println("ran");
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String updateQuery = "UPDATE recipe SET recipeCount=(recipeCount+1) WHERE recipeName ='" + order + "'";
+            String updateQuery = "UPDATE recipe SET recipeCount=recipeCount+1 WHERE recipeName ='" + order + "'";
             s.execute(updateQuery);
             PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
             preparedStmt.executeUpdate();
