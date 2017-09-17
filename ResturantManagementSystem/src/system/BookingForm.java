@@ -82,7 +82,6 @@ public class BookingForm extends javax.swing.JFrame {
 
     public final void setTableNum() {
         int n = Integer.parseInt(settings.getTableCount());
-//        int n = 5;
         for (int i = 0; i < n; i++) {
             comboTableNum.addItem((i + 1) + "");
         }

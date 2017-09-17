@@ -566,3 +566,14 @@
 2017-09-17 14:06:08 record ADDED to StockOrder table
 2017-09-17 14:10:52 record ADDED to StockOrder table
 2017-09-17 14:11:11 record ADDED to StockOrder table
+2017-09-17 14:54:13 record UPDATED to recipe table
+2017-09-17 14:54:18 record ADDED to Sales table
+2017-09-17 14:59:57 record UPDATED to recipe table
+2017-09-17 14:59:57 record UPDATED to recipe table
+2017-09-17 15:00:00 record ADDED to Sales table
+2017-09-17 15:01:33 record UPDATED to recipe table
+2017-09-17 15:01:36 record ADDED to Sales table
+2017-09-17 15:01:36 record ADDED to receipt table
+2017-09-17 15:08:56 record UPDATED to recipe table
+2017-09-17 15:08:59 record ADDED to Sales table
+2017-09-17 15:08:59 record ADDED to receipt table
