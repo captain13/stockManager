@@ -53,9 +53,9 @@ public class OrderForm extends javax.swing.JFrame {
 
     public String getSupplierID() {
         String ID = null;
-        for (int i = 0; i < supplierInfo.length; i++) {
-            if (jComboBox2.getSelectedItem().toString().equals(supplierInfo[i][1])) {
-                ID = supplierInfo[i][0].toString();
+        for (int i = 0; i < newManager.getSuppleirData().length; i++) {
+            if (jComboBox2.getSelectedItem().toString().equals(newManager.getSuppleirData()[i][1])) {
+                ID = newManager.getSuppleirData()[i][0].toString();
             }
         }
         return ID;
@@ -93,6 +93,11 @@ public class OrderForm extends javax.swing.JFrame {
         String month = date[1];
         comboboxDay.setSelectedItem(day);
         comboboxMonth.setSelectedItem(month);
+    }
+    
+    public double calcCost(){
+        double price=100;
+        return  price;
     }
 
     /**
@@ -267,7 +272,7 @@ public class OrderForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (!"".equals(getSupplierID()) || !"".equals(getInventoryID()) || !"".equals(getQuantity())) {
-            newManager.insertStockOrder(getInventoryID(), getSupplierID(), getQuantity(), getDate());
+            newManager.insertStockOrder(getInventoryID(), getSupplierID(), getQuantity(), getDate(),calcCost());
             sendEmail();
             system.populateOrderTable();
             this.dispose();

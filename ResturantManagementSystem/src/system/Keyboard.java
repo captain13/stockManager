@@ -19,24 +19,13 @@ public class Keyboard extends javax.swing.JFrame {
     int x;
     int y;
     String text;
-    private static boolean IS_RUNNING = false;
+ 
     Point mouseDownCompCoords = null;
 
     public Keyboard() {
-        if (IS_RUNNING) {
-            throw new RuntimeException();
-        } else {
-            IS_RUNNING = true;
-        }
         initComponents();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         draggablePanel();
-    }
-
-    @Override
-    public void dispose() {
-        Keyboard.IS_RUNNING = false;
-        super.dispose();
     }
 
     public final void draggablePanel() {

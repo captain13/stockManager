@@ -68,6 +68,7 @@ public class RemindersForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Reminder Added");
             bufferedWriter.newLine();
             bufferedWriter.close();
+            this.dispose();
 
         } catch (IOException ex) {
             System.out.println(ex);
@@ -101,7 +102,6 @@ public class RemindersForm extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setUndecorated(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());

@@ -178,7 +178,7 @@ public class SpecialsForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        prompt = new SpecialsPrompt();
+        prompt = new SpecialsPrompt(this);
         prompt.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

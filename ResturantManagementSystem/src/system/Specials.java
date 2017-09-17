@@ -6,7 +6,6 @@
 package system;
 
 import java.awt.GridLayout;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -33,7 +32,6 @@ public class Specials extends javax.swing.JFrame {
         for (int i = 0; i < newManager.getSpecialData().length; i++) {
             if (newManager.getSpecialData()[i][4].equals(true)) {
                 j++;
-                System.out.println(j);
             }
         }
         specialsItem = new Object[j];
@@ -72,10 +70,19 @@ public class Specials extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
         setResizable(false);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                formFocusLost(evt);
+            }
+        });
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
+            }
+        });
 
         pnlSpecial.setBackground(new java.awt.Color(255, 255, 255));
         pnlSpecial.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -150,6 +157,14 @@ public class Specials extends javax.swing.JFrame {
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
         dispose();
     }//GEN-LAST:event_buttonCloseActionPerformed
+
+    private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
+         this.dispose();
+    }//GEN-LAST:event_formFocusLost
+
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        this.dispose();
+    }//GEN-LAST:event_formWindowStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

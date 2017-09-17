@@ -27,8 +27,8 @@ import javax.swing.table.TableRowSorter;
  */
 public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
-    BookingForm booking = new BookingForm();
-    Calendar calendar = new Calendar();
+    BookingForm booking;
+    Calendar calendar;
     Specials specials;
     userManager user = new userManager();
     settingsManager settings = new settingsManager();
@@ -61,7 +61,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public final void populateInvnetoryTable() {
-        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit"};
+        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit","Item Cost"};
         DefaultTableModel tableModel = new DefaultTableModel(system.getInventoryData(), columnNamesInventory);
         tblInventory.setModel(tableModel);
         searchITable();
@@ -110,7 +110,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public final void populateOrderTable() {
-        String columnNames[] = {"ID", "Item", "Supplier Name", "Date Ordered", "ETA", "Quantity(g)", "Status"};
+        String columnNames[] = {"ID", "Item", "Supplier Name", "Date Ordered", "ETA", "Quantity(g)", "Status","Estimate Cost"};
         DefaultTableModel tableModel = new DefaultTableModel(system.getOrderData(), columnNames);
         tblOrderHistory.setModel(tableModel);
 //        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -135,6 +135,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             button.addActionListener(this);
             pnlLayout.add(button);
         }
+
+        for (int i = 1; i < emptySpace; i++) {
+            JButton emptyButton = new JButton();
+            pnlLayout.add(emptyButton);
+            emptyButton.setVisible(false);
+        }
     }
 
     @Override
@@ -146,7 +152,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 String customer = JOptionPane.showInputDialog(null, "Enter Number of Customers");
 
                 if (!"".equals(waiter) && (!"".equals(customer))
-                        && customer != null && waiter != null) {
+                        && customer != null) {
                     tables.put(buttonId, new NewOrder(waiter, customer, buttonId, tables, color));
                     tables.get(buttonId).setVisible(true);
                 } else {
@@ -385,6 +391,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         String qty = JOptionPane.showInputDialog(null, "Enter the Shrinkage for the Select Item");
         String item = tblInventory.getValueAt(tblInventory.getSelectedRow(), 1).toString();
         system.updateInventoryQty(item, qty, "-");
+        populateInvnetoryTable();
     }
 
     public void updateStockOrder() {
@@ -662,12 +669,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         lblLogo1 = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         lblScreen = new javax.swing.JLabel();
-        comboBoxSceen = new javax.swing.JComboBox<String>();
-        comboBoxLogo = new javax.swing.JComboBox<String>();
-        comboBoxTableCount = new javax.swing.JComboBox<String>();
+        comboBoxSceen = new javax.swing.JComboBox<>();
+        comboBoxLogo = new javax.swing.JComboBox<>();
+        comboBoxTableCount = new javax.swing.JComboBox<>();
         lblSettings1 = new javax.swing.JLabel();
         lblLogo2 = new javax.swing.JLabel();
-        comboBoxTableColor = new javax.swing.JComboBox<String>();
+        comboBoxTableColor = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         currentEmail2 = new javax.swing.JLabel();
         currentEmail1 = new javax.swing.JLabel();
@@ -691,16 +698,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         TabbedPanel.setForeground(new java.awt.Color(255, 255, 255));
         TabbedPanel.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         TabbedPanel.setOpaque(true);
-        TabbedPanel.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                TabbedPanelStateChanged(evt);
-            }
-        });
-        TabbedPanel.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                TabbedPanelFocusGained(evt);
-            }
-        });
 
         Dashboard.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1134,7 +1131,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonAdd.setBackground(new java.awt.Color(0, 138, 231));
         buttonAdd.setForeground(new java.awt.Color(255, 255, 255));
         buttonAdd.setText("Add");
-        buttonAdd.setToolTipText("insert into db");
+        buttonAdd.setToolTipText("Insert into Database");
         buttonAdd.setContentAreaFilled(false);
         buttonAdd.setOpaque(true);
         buttonAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -1813,7 +1810,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jCheckBox1.setSelected(true);
         jCheckBox1.setText("Enable KeyPad");
         jCheckBox1.setContentAreaFilled(false);
 
@@ -1823,21 +1819,21 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         lblScreen.setText("Resolution");
 
-        comboBoxSceen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Windowed Screen", "Fullscreen" }));
+        comboBoxSceen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Windowed Screen", "Fullscreen" }));
         comboBoxSceen.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxSceenItemStateChanged(evt);
             }
         });
 
-        comboBoxLogo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "Demo 1", "Demo 2" }));
+        comboBoxLogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "Demo 1", "Demo 2" }));
         comboBoxLogo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxLogoItemStateChanged(evt);
             }
         });
 
-        comboBoxTableCount.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
+        comboBoxTableCount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
         comboBoxTableCount.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxTableCountItemStateChanged(evt);
@@ -1848,7 +1844,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         lblLogo2.setText("Theme Colour");
 
-        comboBoxTableColor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Blue", "Green", "Red", "Orange" }));
+        comboBoxTableColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blue", "Green", "Red", "Orange" }));
         comboBoxTableColor.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxTableColorItemStateChanged(evt);
@@ -2120,6 +2116,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonPromotionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPromotionsActionPerformed
         try {
+            calendar = new Calendar();
             calendar.setVisible(true);
             booking.setVisible(false);
             specials.setVisible(false);
@@ -2129,10 +2126,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonSpecialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSpecialsActionPerformed
         try {
-            calendar.setVisible(false);
-            booking.setVisible(false);
             specials = new Specials();
             specials.setVisible(true);
+            calendar.setVisible(false);
+            booking.setVisible(false);
         } catch (RuntimeException ignore) {
         }
     }//GEN-LAST:event_buttonSpecialsActionPerformed
@@ -2144,6 +2141,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             key.setVisible(true);
         }
         try {
+            booking = new BookingForm();
             booking.setVisible(true);
             specials.setVisible(false);
             calendar.setVisible(false);
@@ -2156,10 +2154,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeAwayActionPerformed
-        if (tables.get("takeAway") == null) {
-            tables.put("takeAway", new NewOrder("Guest", null, "takeAway", tables, color));
+        if (tables.get("Take Away") == null) {
+            tables.put("Take Away", new NewOrder("Take Away", "1", "Take Away", tables, color));
         } else {
-            tables.get("takeAway").setVisible(true);
+            tables.get("Take Away").setVisible(true);
         }
     }//GEN-LAST:event_buttonTakeAwayActionPerformed
 
@@ -2197,14 +2195,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 break;
         }
     }//GEN-LAST:event_comboBoxLogoItemStateChanged
-
-    private void TabbedPanelStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_TabbedPanelStateChanged
-        booking.setVisible(false);
-    }//GEN-LAST:event_TabbedPanelStateChanged
-
-    private void TabbedPanelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TabbedPanelFocusGained
-        booking.setVisible(false);
-    }//GEN-LAST:event_TabbedPanelFocusGained
 
     private void buttonRecipeAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAddActionPerformed
         if (user.createAdminLogin() == true) {
@@ -2365,8 +2355,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonManageSpecialsActionPerformed
 
     private void buttonLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogsActionPerformed
-     LogForm newForm=new LogForm();
-     newForm.setVisible(true);
+        LogForm newForm = new LogForm();
+        newForm.setVisible(true);
     }//GEN-LAST:event_buttonLogsActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -2436,8 +2426,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonRecipeListEditActionPerformed
 
     private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
-        updateShrinkage();
-        populateInvnetoryTable();
+        tblInventory.setEnabled(true);
+        if (tblInventory.getSelectedRow() == (-1)) {
+        } else {
+            updateShrinkage();
+            populateInvnetoryTable();
+            tblInventory.setEnabled(false);
+        }
     }//GEN-LAST:event_buttonEdit1ActionPerformed
 
     private void buttonOrderHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOrderHistoryActionPerformed

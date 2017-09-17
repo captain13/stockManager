@@ -158,16 +158,12 @@ public class settingsManager {
         }
     }
 
-    public void getSetting() {
-        getResolution();
-        getTableCount();
-    }
-
     public String getResolution() {
         return resoultion;
     }
 
     public String getTableCount() {
+       getSettings();
         return tableCount;
     }
 
@@ -178,8 +174,8 @@ public class settingsManager {
     public String getEmailPassword() {
         return password;
     }
-    
-      public String getThemeColor() {
+
+    public String getThemeColor() {
         return color;
     }
 

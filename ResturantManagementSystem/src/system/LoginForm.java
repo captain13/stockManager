@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author Andrew
@@ -28,7 +27,7 @@ public class LoginForm extends javax.swing.JDialog {
     }
 
     public final void populateTable() {
-        String columnNames[] = {"Name"};
+        String columnNames[] = {"Employee"};
         DefaultTableModel tableModel = new DefaultTableModel();
         tableLoginedUsers.setModel(tableModel);
 
@@ -43,11 +42,6 @@ public class LoginForm extends javax.swing.JDialog {
             }
             tableModel.addRow(row);
         }
-    }
-
-    public void setUsername() {
-        username = tableLoginedUsers.getValueAt(tableLoginedUsers.getSelectedRow() + 1, 0).toString();
-        System.out.println(username + "1");
     }
 
     public String getUsername() {
@@ -72,6 +66,8 @@ public class LoginForm extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         jLabel1.setText("Logged in Users");
 
         tableLoginedUsers.setModel(new javax.swing.table.DefaultTableModel(
@@ -91,8 +87,12 @@ public class LoginForm extends javax.swing.JDialog {
                 "Name"
             }
         ));
+        tableLoginedUsers.setEditingColumn(0);
+        tableLoginedUsers.setEditingRow(0);
         tableLoginedUsers.setEnabled(false);
         tableLoginedUsers.setGridColor(new java.awt.Color(204, 204, 204));
+        tableLoginedUsers.setShowHorizontalLines(false);
+        tableLoginedUsers.setShowVerticalLines(false);
         tableLoginedUsers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableLoginedUsersMouseClicked(evt);
@@ -118,12 +118,12 @@ public class LoginForm extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(jButton2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +131,7 @@ public class LoginForm extends javax.swing.JDialog {
                 .addGap(7, 7, 7)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
                 .addContainerGap())
@@ -153,7 +153,7 @@ public class LoginForm extends javax.swing.JDialog {
 
     private void tableLoginedUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableLoginedUsersMouseClicked
         if (evt.getClickCount() == 2 && !evt.isConsumed() && evt.getButton() == MouseEvent.BUTTON1) {
-            setUsername();
+            username = tableLoginedUsers.getValueAt(tableLoginedUsers.rowAtPoint(evt.getPoint()), 0).toString();
             this.dispose();
         }
     }//GEN-LAST:event_tableLoginedUsersMouseClicked

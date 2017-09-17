@@ -15,7 +15,7 @@ public class Checkout extends javax.swing.JFrame {
     double currentTotal;
     dbManager newManager = new dbManager();
     receiptHandler newHandler = new receiptHandler();
-    emailClient newClient=new emailClient();
+    emailClient newClient = new emailClient();
 
     public Checkout(String user, Double total) {
         initComponents();
@@ -27,8 +27,8 @@ public class Checkout extends javax.swing.JFrame {
 
     public final void startup() {
         totalField.setText("Subtotal: " + String.format("R%.2f", (total * 0.86)));
-        totalCostField.setText("Total: " + String.format("R%.2f", (total)));
         setTax();
+        setTotal();
     }
 
     public void calculateBill() {
@@ -45,7 +45,7 @@ public class Checkout extends javax.swing.JFrame {
                 for (int i = 0; i < rowCount; i++) {
 
                     int recipeID = newManager.getRecipeID(tblItems.getValueAt(i, 0).toString());
-                    String cost =tblItems.getValueAt(i, 2).toString();
+                    String cost = tblItems.getValueAt(i, 2).toString();
                     newManager.insertReceipt(recipeID, cost);
 
                 }
@@ -62,10 +62,16 @@ public class Checkout extends javax.swing.JFrame {
         taxField.setText("Tax: " + tax);
     }
 
+    public final void setTotal() {
+        totalCostField.setText("Total: " + String.format("R%.2f", (total)));
+    }
+
     public final void getDiscount() {
-        String discountString = JOptionPane.showInputDialog(null, "Enter Discount");
-        String discount = String.format("R%.2f", discountString);
-        discountField.setText("Discount: R" + discount);
+        double discount = Double.parseDouble(JOptionPane.showInputDialog(null, "Enter Discount"));
+        String discountString = String.format("R%.2f", discount);
+        discountField.setText("Discount: " + discountString);
+        total = total - discount;
+        setTotal();
     }
 
     /**
@@ -464,7 +470,7 @@ public class Checkout extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void cancelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton1ActionPerformed
-       String email=JOptionPane.showInputDialog(null,"Enter Customer Email");
+        String email = JOptionPane.showInputDialog(null, "Enter Customer Email");
         newClient.emailTemplate(email, total);
     }//GEN-LAST:event_cancelButton1ActionPerformed
 

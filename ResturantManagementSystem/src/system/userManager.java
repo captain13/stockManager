@@ -26,7 +26,7 @@ public class userManager {
     }
 
     public String createUserLog() {
-        LoginForm newform = new LoginForm(null, true, usernames);
+         newform = new LoginForm(null, true, usernames);
         newform.setVisible(true);
         return newform.getUsername();
     }

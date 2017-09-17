@@ -51,10 +51,6 @@
         <Property name="tabPlacement" type="int" value="2"/>
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
-      <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="TabbedPanelStateChanged"/>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TabbedPanelFocusGained"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JTabbedPane(&#xd;&#xa;      JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);&#xd;&#xa;    TabbedPanel.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {&#xd;&#xa;      @Override&#xd;&#xa;        protected int calculateTabHeight(&#xd;&#xa;        int tabPlacement, int tabIndex, int fontHeight) {&#xd;&#xa;        return 50;&#xd;&#xa;      }&#xd;&#xa;            @Override&#xd;&#xa;       protected int calculateTabWidth(&#xd;&#xa;       int tabPlacement, int tabIndex, FontMetrics metrics) {&#xd;&#xa;           return 100;&#xd;&#xa;        }&#xd;&#xa;&#xd;&#xa;      @Override&#xd;&#xa;        protected void paintTab(&#xd;&#xa;        Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex,&#xd;&#xa;        Rectangle iconRect, Rectangle textRect) {&#xd;&#xa;         rects[tabIndex].height=50;&#xd;&#xa;          rects[tabIndex].width=100;&#xd;&#xa;        super.paintTab(g, tabPlacement, rects, tabIndex, iconRect, textRect);&#xd;&#xa;      }&#xd;&#xa;    });&#xd;&#xa;    "/>
       </AuxValues>
@@ -853,7 +849,7 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Add"/>
-                        <Property name="toolTipText" type="java.lang.String" value="insert into db"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Insert into Database"/>
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                         <Property name="opaque" type="boolean" value="true"/>
                       </Properties>
@@ -1872,7 +1868,6 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="jCheckBox1">
                   <Properties>
-                    <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Enable KeyPad"/>
                     <Property name="contentAreaFilled" type="boolean" value="false"/>
                   </Properties>

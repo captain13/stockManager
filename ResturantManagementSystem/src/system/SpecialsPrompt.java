@@ -14,10 +14,11 @@ public class SpecialsPrompt extends javax.swing.JFrame {
     dbManager newManager = new dbManager();
     SpecialsForm form;
   
-    public SpecialsPrompt() {
+    public SpecialsPrompt(SpecialsForm oldForm) {
         initComponents();
         this.setLocationRelativeTo(null);
         getRecipeName();
+        this.form=oldForm;
     }
 
     public final void getRecipeName() {
@@ -149,6 +150,7 @@ public class SpecialsPrompt extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         newManager.insertSpecials(getSpecialsPrice(),getSelectedItem());
+        form.setTable();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

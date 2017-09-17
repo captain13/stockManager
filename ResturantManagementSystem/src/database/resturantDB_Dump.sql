@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS `resturantdb`.`employee` (
   `employeeContactNumber` VARCHAR(45) NULL DEFAULT NULL,
   `employeeHoursWorked` VARCHAR(45) NULL DEFAULT '00:00',
   `employeeStatus` VARCHAR(45) NULL DEFAULT NULL,
-  `employeePosition` VARCHAR(45) NULL DEFAULT NULL,
   `admin` TINYINT(1) NULL DEFAULT '0',
   PRIMARY KEY (`employeeID`))
 ENGINE = InnoDB
@@ -44,9 +43,10 @@ CREATE TABLE IF NOT EXISTS `resturantdb`.`inventory` (
   `inventoryID` INT(11) NOT NULL AUTO_INCREMENT,
   `item` VARCHAR(45) NULL DEFAULT NULL,
   `category` VARCHAR(45) NULL DEFAULT NULL,
-  `qty` INT(11) NULL DEFAULT NULL,
+  `qty` INT(20) NULL DEFAULT NULL,
   `itemThreshold` DOUBLE NULL DEFAULT NULL,
   `itemLimit` INT(11) NULL DEFAULT NULL,
+  `itemCost` DOUBLE NULL,
   PRIMARY KEY (`inventoryID`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 9
@@ -127,11 +127,11 @@ DROP TABLE IF EXISTS `resturantdb`.`receipt` ;
 
 CREATE TABLE IF NOT EXISTS `resturantdb`.`receipt` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
+  `receiptNumber` INT NOT NULL,
   `recipeID` INT(11) NOT NULL,
   `orderQuantity` INT(11) NULL DEFAULT NULL,
   `salesID` INT(11) NOT NULL,
   `date` DATE NULL,
-  `time` TIME NULL,
   `cost` DOUBLE NULL,
   PRIMARY KEY (`ID`, `recipeID`, `salesID`),
   INDEX `fk_receipt_recipe1` (`recipeID` ASC),
@@ -205,12 +205,45 @@ CREATE TABLE IF NOT EXISTS `resturantdb`.`stockorder` (
   `dateETA` DATE NULL DEFAULT NULL,
   `quantity` DOUBLE NULL DEFAULT NULL,
   `status` VARCHAR(45) NULL DEFAULT NULL,
+  `totalCost` DOUBLE NULL,
   PRIMARY KEY (`stockOrderID`, `inventoryID`, `supplierID`),
   INDEX `fk_stockOrder_inventory1` (`inventoryID` ASC),
   INDEX `fk_stockOrder_supplier1` (`supplierID` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `resturantdb`.`wage`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `resturantdb`.`wage` ;
+
+CREATE TABLE IF NOT EXISTS `resturantdb`.`wage` (
+  `wageID` INT NOT NULL,
+  `employeeID` INT(11) NOT NULL,
+  `wageAmount` DOUBLE NULL,
+  `postion` VARCHAR(45) NULL,
+  PRIMARY KEY (`wageID`, `employeeID`),
+  INDEX `fk_wage_employee1_idx` (`employeeID` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `resturantdb`.`expenses`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `resturantdb`.`expenses` ;
+
+CREATE TABLE IF NOT EXISTS `resturantdb`.`expenses` (
+  `expensesID` INT NOT NULL AUTO_INCREMENT,
+  `expensesType` VARCHAR(45) NULL,
+  `expensesAmount` DOUBLE NULL,
+  `wageID` INT NULL,
+  `stockOrderID` INT(11) NULL,
+  PRIMARY KEY (`expensesID`),
+  INDEX `fk_expenses_wage1_idx` (`wageID` ASC),
+  INDEX `fk_expenses_stockorder1_idx` (`stockOrderID` ASC))
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -222,11 +255,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `resturantdb`;
-INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES (1,'Andrew','Schwabe','Password','076 273 1721','0hrs00',NULL,NULL,1);
-INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES(2,'Zane','Smith','Password','034 233 8321','0hrs00',NULL,NULL,1);
-INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES(3,'Chad','Phillips','Password','087 237 1277','0hrs00',NULL,NULL,0);
-INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES(4,'Sean','Thomson','Password','072 377 1122','0hrs00',NULL,NULL,0);
-INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `employeePosition`, `admin`) VALUES(5,'Itumeleng','Madisha','Password','072 377 1122','0hrs00',NULL,NULL,0);
+INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`,  `admin`) VALUES (1,'Andrew','Schwabe','Password','076 273 1721','0hrs00',NULL,1);
+INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`, `admin`) VALUES(2,'Zane','Smith','Password','034 233 8321','0hrs00',NULL,1);
+INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`,  `admin`) VALUES(3,'Chad','Phillips','Password','087 237 1277','0hrs00',NULL,0);
+INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`,  `admin`) VALUES(4,'Sean','Thomson','Password','072 377 1122','0hrs00',NULL,0);
+INSERT INTO `resturantdb`.`employee` (`employeeID`, `employeeFName`, `employeeLName`, `employeePassword`, `employeeContactNumber`, `employeeHoursWorked`, `employeeStatus`,  `admin`) VALUES(5,'Itumeleng','Madisha','Password','072 377 1122','0hrs00',NULL,0);
 COMMIT;
 
 
