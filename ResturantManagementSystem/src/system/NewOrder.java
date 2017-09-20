@@ -13,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
@@ -29,18 +28,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public final class NewOrder extends javax.swing.JFrame implements ActionListener {
 
-    String recipeName;
-    String recipeIndex;
-    String recipeImage;
-    ArrayList<JButton> buttonArray = new ArrayList();
+//    String recipeName;
+//    String recipeIndex;
+//    String recipeImage;
+//    ArrayList<JButton> buttonArray = new ArrayList();
     Thread time;
     JButton button;
-    String waiter;
+//    String waiter;
     String columnNames[] = {"Item", "Qty", "Price"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     boolean isRunning = false;
     Object[][] recipeInfo;
-    Object[][] drinksInfo;
+//    Object[][] drinksInfo;
     dbManager newManager = new dbManager();
     networkHandler network = new networkHandler();
     String key;
@@ -51,6 +50,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         getScreenResolution();
         this.setLocation(0, 0);
         this.key = key;
+        this.tables = tables;
         setButtonColor(color);
         setTableLayout();
         internalClock();
@@ -58,12 +58,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         customerNo.setText(customerNum);
         menuLayout();
         startTime();
-        this.tables = tables;
     }
-//
-//    NewOrder() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
 
     public void menuLayout() {
         int n = newManager.getRecipeData().length;
@@ -114,7 +109,6 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 button.addActionListener(this);
                 lightMealTab.add(button);
                 index++;
-                System.out.println("ran");
             }
             emptySpaceTab2 = 40 - index;
             index = 0;
@@ -275,7 +269,6 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
     public void updateOrdercount() {
         int n = tblItems.getRowCount();
-        System.out.println(n);
         for (int i = 0; i < n; i++) {
             System.out.println("iterate " + i);
             System.out.println("Count " + n);
@@ -338,6 +331,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         dessertTab = new javax.swing.JPanel();
         drinksTab = new javax.swing.JPanel();
         extraTab = new javax.swing.JPanel();
+        specialTab = new javax.swing.JPanel();
         jToggleButton8 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -586,6 +580,19 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
 
         menuPane.addTab("Extras", extraTab);
 
+        javax.swing.GroupLayout specialTabLayout = new javax.swing.GroupLayout(specialTab);
+        specialTab.setLayout(specialTabLayout);
+        specialTabLayout.setHorizontalGroup(
+            specialTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 610, Short.MAX_VALUE)
+        );
+        specialTabLayout.setVerticalGroup(
+            specialTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 625, Short.MAX_VALUE)
+        );
+
+        menuPane.addTab("Specials", specialTab);
+
         jToggleButton8.setBackground(new java.awt.Color(75, 75, 75));
         jToggleButton8.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton8.setText("Close Table");
@@ -693,6 +700,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     private javax.swing.JPanel mainMealTab;
     private javax.swing.JTabbedPane menuPane;
     private static javax.swing.JLabel nameTF;
+    private javax.swing.JPanel specialTab;
     public static javax.swing.JTable tblItems;
     public static javax.swing.JFormattedTextField textfieldTotal;
     // End of variables declaration//GEN-END:variables

@@ -302,7 +302,9 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT employeeID,reservationDate,reservationTime,reservationCustomer,reservationTableNumber,reservationNumberPeople FROM reservation";
+            String query = "SELECT employeeID,reservationTableNumber,reservationDate,reservationTime,"
+                    + "reservationCustomer, contactNumber,"
+                    + "reservationNumberPeople FROM reservation";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -320,6 +322,7 @@ public class dbManager {
                 rowData[i][3] = rs.getObject(4);
                 rowData[i][4] = rs.getObject(5);
                 rowData[i][5] = rs.getObject(6);
+                rowData[i][6] = rs.getObject(7);
                 i++;
             }
             rs.close();
@@ -438,7 +441,6 @@ public class dbManager {
                 rowData[i][5] = rs.getObject(5);
                 i++;
             }
-
             rs.close();
             s.close();
             conn.close();
@@ -447,7 +449,7 @@ public class dbManager {
         }
         return rowData;
     }
-
+    //Clean up needed-remove
     public String[] getIngredients() {
         int count = 0;
         String ingredients[] = null;
@@ -501,7 +503,7 @@ public class dbManager {
         }
         return totalExpenses;
     }
-    
+
     public double getDaySales() {
         double totalSales = 0;
         String date = clock.getCurrentDate();
@@ -743,6 +745,7 @@ public class dbManager {
         return cost;
     }
 
+     //Clean up needed-added in sub-query
     public int getSalesID() {
         int ID = 0;
         try {
@@ -791,7 +794,8 @@ public class dbManager {
             System.out.println(exp);
         }
     }
-
+    
+     //Clean up needed-sub-query
     public int getRecipeID() {
         int ID = 0;
         try {
@@ -862,17 +866,19 @@ public class dbManager {
         }
     }
 
-    public void insertReservations(String employee, String date, String time, String customerName, int tableNum, int customerNum) {
+    public void insertReservations(String employee, String date, String time, String customerName, int tableNum, int customerNum, String contact) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO reservation(employeeID, reservationDate, reservationTime, reservationCustomer,reservationTableNumber,reservationNumberPeople)"
+            String insertQuerySup = "INSERT INTO reservation(employeeID, reservationDate,"
+                    + " reservationTime, reservationCustomer,reservationTableNumber,reservationNumberPeople,contactNumber)"
                     + "VALUES ('" + employee + "','"
                     + date + "','"
                     + time + "','"
                     + customerName + "', '"
                     + tableNum + "', '"
-                    + customerNum + "')";
+                    + customerNum + "', '"
+                    + contact + "')";
             s.execute(insertQuerySup);
             JOptionPane.showMessageDialog(null, "Reservation Added");
             logs.writeLogs("ADDED", "Reservations");
@@ -1271,7 +1277,8 @@ public class dbManager {
             System.out.println(exp);
         }
     }
-
+    
+     //Clean up needed-revise
     public boolean login(String userName, String passWord) {
         ArrayList userPasswordAL = new ArrayList();
         ArrayList<String> userNameAL = new ArrayList();

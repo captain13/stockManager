@@ -43,7 +43,6 @@ public class Specials extends javax.swing.JFrame {
         }
 
         int emptySpaceTab = 6 - specialsItem.length;
-        System.out.println(specialsItem.length);
         for (int i = 1; i <= specialsItem.length; i++) {
             ImageIcon icon = new ImageIcon(specialsItem[i - 1].toString());
             button = new JButton(icon);

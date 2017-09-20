@@ -3,7 +3,7 @@
     
     
 <generalsettings>
-        <resolution>Fullscreen</resolution>
+        <resolution>Windowed Screen</resolution>
         <logo>default</logo>
         <tableNum>20</tableNum>
         <emailAddress>zcsastock@gmail.com</emailAddress>

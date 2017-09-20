@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
@@ -39,7 +38,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     receiptHandler receipt = new receiptHandler();
     internalClock clock = new internalClock();
     HashMap<String, NewOrder> tables = new HashMap<>();
-    Border whiteLine = BorderFactory.createLineBorder(Color.WHITE);
     Color color = new Color(0, 138, 231);
     boolean enableKeypad = false;
     int n;
@@ -61,7 +59,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public final void populateInvnetoryTable() {
-        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit","Item Cost"};
+        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit", "Item Cost"};
         DefaultTableModel tableModel = new DefaultTableModel(system.getInventoryData(), columnNamesInventory);
         tblInventory.setModel(tableModel);
         searchITable();
@@ -110,7 +108,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public final void populateOrderTable() {
-        String columnNames[] = {"ID", "Item", "Supplier Name", "Date Ordered", "ETA", "Quantity(g)", "Status","Estimate Cost"};
+        String columnNames[] = {"ID", "Item", "Supplier Name", "Date Ordered", "ETA", "Quantity(g)", "Status", "Estimate Cost"};
         DefaultTableModel tableModel = new DefaultTableModel(system.getOrderData(), columnNames);
         tblOrderHistory.setModel(tableModel);
 //        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -124,12 +122,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         pnlLayout.removeAll();
         GridLayout tableLayout = new GridLayout(0, 5);
         pnlLayout.setLayout(tableLayout);
+        tableLayout.setHgap(2);
+        tableLayout.setVgap(2);
         int emptySpace = 20 - n;
         for (int i = 1; i <= n; i++) {
             button = new JButton("Table " + i);
             button.setBackground(color);
             button.setForeground(new Color(255, 255, 255));
-            button.setBorder(whiteLine);
             button.setContentAreaFilled(false);
             button.setOpaque(true);
             button.addActionListener(this);
@@ -929,6 +928,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         pnlViewOrder.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -2498,7 +2498,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_comboBoxTableColorItemStateChanged
 
     private void buttonLogs1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogs1ActionPerformed
-        DayEndForm newForm=new DayEndForm();
+        DayEndForm newForm = new DayEndForm();
         newForm.setVisible(true);
     }//GEN-LAST:event_buttonLogs1ActionPerformed
 

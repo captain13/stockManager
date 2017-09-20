@@ -294,3 +294,17 @@
 2017-09-17 22:25:06 record ADDED to receipt table
 2017-09-17 22:25:06 record ADDED to receipt table
 2017-09-17 22:25:06 record ADDED to receipt table
+2017-09-18 13:41:23 record ADDED to Reservations table
+2017-09-18 16:41:54 record ADDED to Reservations table
+2017-09-18 16:54:17 record UPDATED to Employee table
+2017-09-18 16:54:58 record UPDATED to recipe table
+2017-09-18 16:54:58 record UPDATED to recipe table
+2017-09-18 16:55:09 record ADDED to EmployeeSales table
+2017-09-18 16:55:09 record ADDED to Sales table
+2017-09-18 16:55:09 record ADDED to receipt table
+2017-09-18 16:55:09 record ADDED to receipt table
+2017-09-19 12:40:03 record ADDED to StockOrder table
+2017-09-19 12:40:03 record ADDED to Expenses table
+2017-09-19 12:52:18 record UPDATED to Inventory table
+2017-09-19 12:52:32 record UPDATED to Inventory table
+2017-09-19 13:05:01 record ADDED to Specials table

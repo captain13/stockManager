@@ -21,11 +21,66 @@ import javax.swing.JTextArea;
  */
 public class logSystem {
 
-    String fileName =  ".\\src\\logs\\logs.txt";
+    String fileName;
     internalClock clock = new internalClock();
-    File file = new File(fileName);
+    File file;
+
+    public File getFileName() {
+        String currentDate = clock.getCurrentDate();
+        String date[] = currentDate.split("-");
+        int year = Integer.parseInt(date[0]);
+        int month = Integer.parseInt(date[1]);
+        String monthName = "logs";
+
+        switch (month) {
+            case 1:
+                monthName = "January";
+                break;
+            case 2:
+                monthName = "February";
+                break;
+            case 3:
+                monthName = "March";
+                break;
+            case 4:
+                monthName = "April";
+                break;
+            case 5:
+                monthName = "May";
+                break;
+
+            case 6:
+                monthName = "June";
+                break;
+            case 7:
+                monthName = "July";
+                break;
+
+            case 8:
+                monthName = "August";
+                break;
+
+            case 9:
+                monthName = "September";
+                break;
+            case 10:
+                monthName = "October";
+                break;
+
+            case 11:
+                monthName = "November";
+                break;
+
+            case 12:
+                monthName = "December";
+                break;
+        }
+        fileName = ".\\src\\logs\\" + monthName + year + ".txt";
+        return file = new File(fileName);
+    }
 
     public void logValidation() {
+        getFileName();
         boolean exists = file.exists();
         if (exists) {
             System.out.println("Log file exisits");
@@ -40,16 +95,16 @@ public class logSystem {
 
     }
 
-    public void getLogs() {
-        Runtime runtime = Runtime.getRuntime();
-        try {
-            Process p = runtime.exec("notepad " + file);
-        } catch (IOException ex) {
-        }
-    }
-
+//    public void getLogs() {
+//        Runtime runtime = Runtime.getRuntime();
+//        try {
+//            Process p = runtime.exec("notepad " + file);
+//        } catch (IOException ex) {
+//        }
+//    }
     public void writeLogs(String action, String table) {
-        String text = clock.getCurrentDate() + " " + clock.getCurrentTimeStamp() + " record " + action + " to "+table+" table";
+        getFileName();
+        String text = clock.getCurrentDate() + " " + clock.getCurrentTimeStamp() + " record " + action + " to " + table + " table";
         try {
             FileWriter fileWriter = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -62,14 +117,15 @@ public class logSystem {
             System.out.println(ex);
         }
     }
-    
+
     public final void readLogs(JTextArea TextArea) {
+        getFileName();
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             TextArea.read(bufferedReader, null);
             int length = TextArea.getDocument().getLength();
-            TextArea.setCaretPosition(length - 1);
+            TextArea.setCaretPosition(length);
             bufferedReader.close();
 
         } catch (IOException ex) {
@@ -78,6 +134,7 @@ public class logSystem {
     }
 
     public void refreshLogs() {
+        getFileName();
         String text = null;
         try {
             FileWriter fileWriter = new FileWriter(file, false);
