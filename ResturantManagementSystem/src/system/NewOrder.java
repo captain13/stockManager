@@ -12,9 +12,12 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -35,7 +38,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     Thread time;
     JButton button;
 //    String waiter;
-    String columnNames[] = {"Item", "Qty", "Price"};
+    String columnNames[] = {"Item", "Qty", "Price", "Check"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     boolean isRunning = false;
     Object[][] recipeInfo;
@@ -196,7 +199,8 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         String buttonId = ae.getActionCommand();
         for (Object[] recipeInfo1 : recipeInfo) {
             if (buttonId.equals(recipeInfo1[1].toString())) {
-                model.addRow(new Object[]{recipeInfo1[1], "1", recipeInfo1[3]});
+                boolean check = false;
+                model.addRow(new Object[]{recipeInfo1[1], "1", recipeInfo1[3], check});
             }
         }
         totalAmount();
@@ -658,9 +662,19 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_buttonPayActionPerformed
 
     private void buttonOverrideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOverrideActionPerformed
+
         try {
-            network.sendData(tblItems, key);
+            
+            for (int i = 0; i < tblItems.getRowCount(); i++) {
+                if (tblItems.getValueAt(i, 3).equals(false)) {
+                    newManager.recipeStockUpdstor(tblItems, key);
+                    network.sendData(tblItems, key);
+                }
+                tblItems.setValueAt(true, i, 3);
+            }
+        } catch (SQLException ex) {
         } catch (IOException ex) {
+            Logger.getLogger(NewOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonOverrideActionPerformed
 

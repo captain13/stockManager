@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -449,6 +450,7 @@ public class dbManager {
         }
         return rowData;
     }
+
     //Clean up needed-remove
     public String[] getIngredients() {
         int count = 0;
@@ -745,7 +747,7 @@ public class dbManager {
         return cost;
     }
 
-     //Clean up needed-added in sub-query
+    //Clean up needed-added in sub-query
     public int getSalesID() {
         int ID = 0;
         try {
@@ -794,8 +796,8 @@ public class dbManager {
             System.out.println(exp);
         }
     }
-    
-     //Clean up needed-sub-query
+
+    //Clean up needed-sub-query
     public int getRecipeID() {
         int ID = 0;
         try {
@@ -1277,8 +1279,8 @@ public class dbManager {
             System.out.println(exp);
         }
     }
-    
-     //Clean up needed-revise
+
+    //Clean up needed-revise
     public boolean login(String userName, String passWord) {
         ArrayList userPasswordAL = new ArrayList();
         ArrayList<String> userNameAL = new ArrayList();
@@ -1342,6 +1344,37 @@ public class dbManager {
 
         } catch (IOException | InterruptedException | HeadlessException ex) {
             JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
+        }
+    }
+
+    // revise- simplify if possible
+    void recipeStockUpdstor(JTable table, String tableNum) throws SQLException {
+        try {
+            for (int i = 0; i < table.getRowCount(); i++) {
+                Connection conn = DriverManager.getConnection(url, username, password);
+                Statement s = conn.createStatement();
+                String selectQuery = "SELECT recipeID FROM recipe WHERE recipeName='" + table.getValueAt(i, 0).toString() + "'";
+                ResultSet rs = s.executeQuery(selectQuery);
+                String ID = null;
+                while (rs.next()) {
+                    ID = rs.getString("recipeID");
+                    selectQuery = "SELECT * FROM inventory_recipe WHERE recipeID= '" + ID + "'";
+                    rs = s.executeQuery(selectQuery);
+                    String inventoryID = null;
+                    String qty = null;
+                    while (rs.next()) {
+                        inventoryID = rs.getString("inventoryID");
+                        System.out.println(inventoryID);
+                        qty = rs.getString("qty");
+                        System.out.println(qty);
+                        String query = "Update inventory set qty = (qty-'" + qty + "') WHERE inventoryID = '" + inventoryID + "'";
+                        PreparedStatement preparedstmt = conn.prepareStatement(query);
+                        preparedstmt.executeUpdate();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NewOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
