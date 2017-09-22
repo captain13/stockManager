@@ -2480,7 +2480,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonPrintActionPerformed
 
     private void comboBoxTableColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxTableColorItemStateChanged
-         if (comboBoxTableColor.getSelectedItem() == "Black") {
+        if (comboBoxTableColor.getSelectedItem() == "Black") {
             color = new Color(53, 53, 53);
         }
         if (comboBoxTableColor.getSelectedItem() == "Blue") {

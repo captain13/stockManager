@@ -6,17 +6,14 @@
 package system;
 
 import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -31,19 +28,22 @@ import javax.swing.table.DefaultTableModel;
  */
 public final class NewOrder extends javax.swing.JFrame implements ActionListener {
 
-//    String recipeName;
-//    String recipeIndex;
-//    String recipeImage;
-//    ArrayList<JButton> buttonArray = new ArrayList();
+    int emptySpaceTab1 = 43;
+    int emptySpaceTab2 = 43;
+    int emptySpaceTab3 = 43;
+    int emptySpaceTab4 = 43;
+    int emptySpaceTab5 = 43;
+    int index1 = 0;
+    int index2 = 0;
+    int index3 = 0;
+    int index4 = 0;
+    int index5 = 0;
     Thread time;
     JButton button;
-//    String waiter;
     String columnNames[] = {"Item", "Qty", "Price", "Check"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     boolean isRunning = false;
     Object[][] recipeInfo;
-//    Object order[][] = null;
-//    Object[][] drinksInfo;
     dbManager newManager = new dbManager();
     networkHandler network = new networkHandler();
     String key;
@@ -72,17 +72,6 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         for (int i = 0; i < n; i++) {
             System.arraycopy(newManager.getRecipeData()[i], 0, recipeInfo[i], 0, 6);
         }
-        GridLayout menuLayout = new GridLayout(0, 8);
-        mainMealTab.setLayout(menuLayout);
-        drinksTab.setLayout(menuLayout);
-        lightMealTab.setLayout(menuLayout);
-        dessertTab.setLayout(menuLayout);
-        extraTab.setLayout(menuLayout);
-        int emptySpaceTab1 = 0;
-        int emptySpaceTab2 = 0;
-        int emptySpaceTab3 = 0;
-        int emptySpaceTab4 = 0;
-        int emptySpaceTab5 = 0;
 
         for (int i = 0; i < n; i++) {
             if (recipeInfo[i][2].equals("Main Meal")) {
@@ -90,17 +79,17 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 button = new JButton(recipeInfo[i][1].toString(), icon);
                 button.setVerticalTextPosition(SwingConstants.BOTTOM);
                 button.setHorizontalTextPosition(SwingConstants.CENTER);
+                button.setPreferredSize(new Dimension(50, 50));
                 button.setMargin(new Insets(0, 0, 0, 0));
                 button.setContentAreaFilled(false);
                 button.setFocusPainted(false);
-                button.setBorder(new EmptyBorder(0, 0, 0, 0));
                 button.addActionListener(this);
                 mainMealTab.add(button);
-                index++;
+                ++index1;
             }
 
-            emptySpaceTab1 = 40 - index;
-            index = 0;
+            emptySpaceTab1 = emptySpaceTab1 - index1;
+            index1 = 0;
 
             if (recipeInfo[i][2].equals("Light Meal")) {
                 ImageIcon icon = (new ImageIcon(recipeInfo[i][5].toString()));
@@ -113,10 +102,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 button.setBorder(new EmptyBorder(0, 0, 0, 0));
                 button.addActionListener(this);
                 lightMealTab.add(button);
-                index++;
+                index2++;
             }
-            emptySpaceTab2 = 40 - index;
-            index = 0;
+            emptySpaceTab2 = emptySpaceTab2 - index2;
+            index2 = 0;
 
             if (recipeInfo[i][2].equals("Dessert")) {
                 ImageIcon icon = (new ImageIcon(recipeInfo[i][5].toString()));
@@ -129,10 +118,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 button.setBorder(new EmptyBorder(0, 0, 0, 0));
                 button.addActionListener(this);
                 dessertTab.add(button);
-                index++;
+                index3++;
             }
-            emptySpaceTab3 = 40 - index;
-            index = 0;
+            emptySpaceTab3 = emptySpaceTab3 - index3;
+            index3 = 0;
 
             if (recipeInfo[i][2].equals("Drinks")) {
                 ImageIcon icon = (new ImageIcon(recipeInfo[i][5].toString()));
@@ -145,10 +134,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 button.setBorder(new EmptyBorder(0, 0, 0, 0));
                 button.addActionListener(this);
                 drinksTab.add(button);
-                index++;
+                index4++;
             }
-            emptySpaceTab4 = 40 - index;
-            index = 0;
+            emptySpaceTab4 = emptySpaceTab4 - index4;
+            index4 = 0;
 
             if (recipeInfo[i][2].equals("Extra")) {
                 ImageIcon icon = (new ImageIcon(recipeInfo[i][5].toString()));
@@ -161,10 +150,10 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
                 button.setBorder(new EmptyBorder(0, 0, 0, 0));
                 button.addActionListener(this);
                 extraTab.add(button);
-                index++;
+                index5++;
             }
-            emptySpaceTab5 = 40 - index;
-            index = 0;
+            emptySpaceTab5 = emptySpaceTab5 - index5;
+            index5 = 0;
         }
 
         for (int i = 1; i < emptySpaceTab1; i++) {
@@ -543,91 +532,26 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         );
 
         mainMealTab.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout mainMealTabLayout = new javax.swing.GroupLayout(mainMealTab);
-        mainMealTab.setLayout(mainMealTabLayout);
-        mainMealTabLayout.setHorizontalGroup(
-            mainMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
-        );
-        mainMealTabLayout.setVerticalGroup(
-            mainMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
-        );
-
+        mainMealTab.setLayout(new java.awt.GridLayout(0, 7));
         menuPane.addTab("Main Meals", mainMealTab);
 
         lightMealTab.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout lightMealTabLayout = new javax.swing.GroupLayout(lightMealTab);
-        lightMealTab.setLayout(lightMealTabLayout);
-        lightMealTabLayout.setHorizontalGroup(
-            lightMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
-        );
-        lightMealTabLayout.setVerticalGroup(
-            lightMealTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
-        );
-
+        lightMealTab.setLayout(new java.awt.GridLayout(0, 7));
         menuPane.addTab("Light Meals", lightMealTab);
 
         dessertTab.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout dessertTabLayout = new javax.swing.GroupLayout(dessertTab);
-        dessertTab.setLayout(dessertTabLayout);
-        dessertTabLayout.setHorizontalGroup(
-            dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
-        );
-        dessertTabLayout.setVerticalGroup(
-            dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
-        );
-
+        dessertTab.setLayout(new java.awt.GridLayout(0, 7));
         menuPane.addTab("Desserts", dessertTab);
 
         drinksTab.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout drinksTabLayout = new javax.swing.GroupLayout(drinksTab);
-        drinksTab.setLayout(drinksTabLayout);
-        drinksTabLayout.setHorizontalGroup(
-            drinksTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
-        );
-        drinksTabLayout.setVerticalGroup(
-            drinksTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
-        );
-
+        drinksTab.setLayout(new java.awt.GridLayout(0, 7));
         menuPane.addTab("Drinks", drinksTab);
 
         extraTab.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout extraTabLayout = new javax.swing.GroupLayout(extraTab);
-        extraTab.setLayout(extraTabLayout);
-        extraTabLayout.setHorizontalGroup(
-            extraTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
-        );
-        extraTabLayout.setVerticalGroup(
-            extraTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
-        );
-
+        extraTab.setLayout(new java.awt.GridLayout(0, 7));
         menuPane.addTab("Extras", extraTab);
 
-        javax.swing.GroupLayout specialTabLayout = new javax.swing.GroupLayout(specialTab);
-        specialTab.setLayout(specialTabLayout);
-        specialTabLayout.setHorizontalGroup(
-            specialTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
-        );
-        specialTabLayout.setVerticalGroup(
-            specialTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
-        );
-
+        specialTab.setLayout(new java.awt.GridLayout(0, 7));
         menuPane.addTab("Specials", specialTab);
 
         jToggleButton8.setBackground(new java.awt.Color(75, 75, 75));
