@@ -47,12 +47,14 @@ public class networkHandler {
                     row = new Object[columnNames.length];
 
                     for (int i = 0; i < order.length; i++) {
+                        if(order[i][1]!=(null)){
                         row[0] = order[i][0];
                         row[1] = order[i][1];
                         row[2] = order[i][2];
                         row[3] = clock.setCurrentTimeStamp();
                         row[4] = "Not Ready";
                         model.addRow(row);
+                        }
                     }
 
                     socket.close();

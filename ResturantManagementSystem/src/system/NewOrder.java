@@ -12,7 +12,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,11 +41,13 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     boolean isRunning = false;
     Object[][] recipeInfo;
+//    Object order[][] = null;
 //    Object[][] drinksInfo;
     dbManager newManager = new dbManager();
     networkHandler network = new networkHandler();
     String key;
     HashMap tables;
+    int n = 0;
 
     public NewOrder(String waiterID, String customerNum, String key, HashMap tables, Color color) {
         initComponents();
@@ -302,6 +303,36 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         if (!value.equals("")) {
             int row = tblItems.getSelectedRow();
             model.addRow(new Object[]{"- " + value, "", "0"});
+        }
+    }
+
+    public void table() {
+
+        int index = tblItems.getRowCount() - n;
+        System.out.println("n: "+n);
+        System.out.println("index "+index);
+        Object order[][] = new Object[tblItems.getRowCount()][3];
+        try {
+
+            for (int i = 0; i < tblItems.getRowCount(); i++) {
+
+                if (tblItems.getValueAt(i, 3).equals(false)) {
+                    order[i][0] = tblItems.getValueAt(i, 0);
+                    order[i][1] = tblItems.getValueAt(i, 1);
+                    order[i][2] = tblItems.getValueAt(i, 2);
+                    n = ++n;
+                }
+                tblItems.setValueAt(true, i, 3);
+                //                newManager.recipeStockUpdstor(tblItems, key);
+            }
+            for (int i = 0; i < order.length; i++) {
+                System.out.println(order[i][0]);
+                System.out.println(order[i][1]);
+                System.out.println(order[i][2]); 
+            }
+            network.sendData(order, key);
+        } catch (IOException ex) {
+            System.out.println(ex);
         }
     }
 
@@ -662,20 +693,19 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_buttonPayActionPerformed
 
     private void buttonOverrideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOverrideActionPerformed
-
-        try {
-            
-            for (int i = 0; i < tblItems.getRowCount(); i++) {
-                if (tblItems.getValueAt(i, 3).equals(false)) {
-                    newManager.recipeStockUpdstor(tblItems, key);
-                    network.sendData(tblItems, key);
-                }
-                tblItems.setValueAt(true, i, 3);
-            }
-        } catch (SQLException ex) {
-        } catch (IOException ex) {
-            Logger.getLogger(NewOrder.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        table();
+//        try {
+//            for (int i = 0; i < tblItems.getRowCount(); i++) {
+//                if (tblItems.getValueAt(i, 3).equals(false)) {
+//                    newManager.recipeStockUpdstor(tblItems, key);
+//                    network.sendData(tblItems, key);
+//                }
+//                tblItems.setValueAt(true, i, 3);
+//            }
+//        } catch (SQLException ex) {
+//        } catch (IOException ex) {
+//            Logger.getLogger(NewOrder.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_buttonOverrideActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed

@@ -31,25 +31,25 @@ public class networkHandler {
         IP = JOptionPane.showInputDialog(null, "Enter Host IP address");
     }
 
-    public void sendData(JTable table, String tableNum) throws IOException {
+    public void sendData(Object[][] table, String tableNum) throws IOException {
         String[][] recipeName = null;
-        ServerSocket myServerSocket = new ServerSocket(9999);
-        Socket skt = myServerSocket.accept();
+        try (ServerSocket myServerSocket = new ServerSocket(9999)) {
+            Socket skt = myServerSocket.accept();
 
-        try {
-            recipeName = new String[table.getRowCount()][3];
-            for (int i = 0; i < table.getRowCount(); i++) {
-                recipeName[i][0] = tableNum;
-                recipeName[i][1] = (table.getValueAt(i, 0).toString());
-                recipeName[i][2] = (table.getValueAt(i, 1).toString());
-            }
+//        try {
+//            recipeName = new String[table.getRowCount()][3];
+//            for (int i = 0; i < table.getRowCount(); i++) {
+//                recipeName[i][0] = tableNum;
+//                recipeName[i][1] = (table.getValueAt(i, 0).toString());
+//                recipeName[i][2] = (table.getValueAt(i, 1).toString());
+//            }
             ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());
-            objectOutput.writeObject(recipeName);
-            myServerSocket.close();
-            JOptionPane.showMessageDialog(null, "Order Sent to Kitchen");
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Failed to Send Order");
+            objectOutput.writeObject(table);
         }
+        JOptionPane.showMessageDialog(null, "Order Sent to Kitchen");
+//        } catch (IOException e) {
+//            JOptionPane.showMessageDialog(null, "Failed to Send Order");
+//        }
     }
 
     public void sendData() throws IOException {

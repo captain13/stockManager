@@ -400,3 +400,8 @@
 2017-09-21 14:11:48 record ADDED to receipt table
 2017-09-21 14:11:48 record ADDED to receipt table
 2017-09-21 14:13:40 record ADDED to Specials table
+2017-09-21 21:52:05 record UPDATED to recipe table
+2017-09-21 21:52:05 record UPDATED to recipe table
+2017-09-22 12:20:52 record UPDATED to recipe table
+2017-09-22 12:20:52 record UPDATED to recipe table
+2017-09-22 12:20:53 record UPDATED to recipe table
