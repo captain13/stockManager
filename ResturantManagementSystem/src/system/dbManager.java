@@ -1348,7 +1348,7 @@ public class dbManager {
     }
 
     // revise- simplify if possible
-    void recipeStockUpdstor(JTable table, String tableNum) throws SQLException {
+    void recipeStockUpdate(JTable table, String tableNum) {
         try {
             for (int i = 0; i < table.getRowCount(); i++) {
                 Connection conn = DriverManager.getConnection(url, username, password);

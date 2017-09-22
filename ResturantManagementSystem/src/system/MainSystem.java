@@ -312,7 +312,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             buttonRecipeEdit.setText("Save");
             tableRecipe.setEnabled(true);
         } else if ("Save".equals(buttonRecipeEdit.getText())) {
-            //stops editting of table cell to allow button event
+            //stops editting of getTableOrder cell to allow button event
             tableRecipe.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
             if (tableRecipe.isEditing()) {
                 tableRecipe.getCellEditor().cancelCellEditing();
@@ -327,7 +327,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     Object price = tableRecipe.getModel().getValueAt(r, 3);
                     Object vat = tableRecipe.getModel().getValueAt(r, 4);
                     Object type = tableRecipe.getModel().getValueAt(r, 2);
-                    //Pass table contents to database update code
+                    //Pass getTableOrder contents to database update code
                     system.updateRecipe(ID, name, price, vat, type);
                 }
             }
@@ -362,7 +362,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             tblSupplier.setEnabled(true);
         } else if ("Save".equals(buttonSupplierEdit.getText())) {
 
-            //stops editting of table cell to allow button event
+            //stops editting of getTableOrder cell to allow button event
             if (tblSupplier.isEditing()) {
                 tblSupplier.getCellEditor().cancelCellEditing();
             }
@@ -377,7 +377,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     Object email = tblSupplier.getModel().getValueAt(r, 2);
                     Object num = tblSupplier.getModel().getValueAt(r, 3);
                     Object address = tblSupplier.getModel().getValueAt(r, 4);
-                    //Pass table contents to database update code
+                    //Pass getTableOrder contents to database update code
                     system.updateSupplier(ID, name, email, num, address);
                 }
             }

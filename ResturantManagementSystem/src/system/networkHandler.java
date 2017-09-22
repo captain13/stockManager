@@ -10,6 +10,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -31,25 +34,18 @@ public class networkHandler {
         IP = JOptionPane.showInputDialog(null, "Enter Host IP address");
     }
 
-    public void sendData(Object[][] table, String tableNum) throws IOException {
-        String[][] recipeName = null;
+    public void sendData(Object[][] table) {
         try (ServerSocket myServerSocket = new ServerSocket(9999)) {
             Socket skt = myServerSocket.accept();
-
-//        try {
-//            recipeName = new String[table.getRowCount()][3];
-//            for (int i = 0; i < table.getRowCount(); i++) {
-//                recipeName[i][0] = tableNum;
-//                recipeName[i][1] = (table.getValueAt(i, 0).toString());
-//                recipeName[i][2] = (table.getValueAt(i, 1).toString());
-//            }
+            skt.setSoTimeout(5000);
             ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());
             objectOutput.writeObject(table);
+            JOptionPane.showMessageDialog(null, "Order Sent to Kitchen");
+        } catch (SocketTimeoutException s) {
+            JOptionPane.showMessageDialog(null,"Socket timed out");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Failed to Send Order");
         }
-        JOptionPane.showMessageDialog(null, "Order Sent to Kitchen");
-//        } catch (IOException e) {
-//            JOptionPane.showMessageDialog(null, "Failed to Send Order");
-//        }
     }
 
     public void sendData() throws IOException {
@@ -61,7 +57,7 @@ public class networkHandler {
             recipeName = new String[system.getRecipeData().length][3];
             for (int i = 0; i < system.getRecipeData().length; i++) {
 
-                recipeName[i][0] = "Null";
+                recipeName[i][0] = "Test";
                 recipeName[i][1] = system.getRecipeData()[i][1];
                 recipeName[i][2] = system.getRecipeData()[i][2];
             }
@@ -71,6 +67,7 @@ public class networkHandler {
             myServerSocket.close();
         } catch (IOException e) {
         }
+
     }
 
     public void recieveData(JTable table) {
