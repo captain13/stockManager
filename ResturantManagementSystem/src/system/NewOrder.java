@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -288,6 +289,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         tblItems.getColumnModel().getColumn(0).setPreferredWidth(90);
         tblItems.getColumnModel().getColumn(1).setPreferredWidth(25);
         tblItems.getColumnModel().getColumn(2).setPreferredWidth(45);
+        tblItems.getColumnModel().getColumn(3).setPreferredWidth(25);
     }
 
     public void setButtonColor(Color color) {
@@ -333,7 +335,23 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         lblTitle = new javax.swing.JLabel();
         textfieldTotal = new javax.swing.JFormattedTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblItems = new javax.swing.JTable();
+        tblItems = new JTable() {
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                    return String.class;
+                    case 1:
+                    return String.class;
+                    case 2:
+                    return String.class;
+                    case 3:
+                    return Boolean.class;
+                    default:
+                    return String.class;
+                }
+            }
+        };
         lblWaiter = new javax.swing.JLabel();
         lblNum = new javax.swing.JLabel();
         nameTF = new javax.swing.JLabel();

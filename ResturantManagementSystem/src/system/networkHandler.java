@@ -34,18 +34,21 @@ public class networkHandler {
         IP = JOptionPane.showInputDialog(null, "Enter Host IP address");
     }
 
-    public void sendData(Object[][] table) {
-        try (ServerSocket myServerSocket = new ServerSocket(9999)) {
-            Socket skt = myServerSocket.accept();
-            skt.setSoTimeout(5000);
-            ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());
-            objectOutput.writeObject(table);
+    public void sendData(Object[][] order) {
+        try (ServerSocket serverSocket = new ServerSocket(9999)) {
+            serverSocket.setSoTimeout(5000);
+            Socket socket = serverSocket.accept();
+            ObjectOutputStream objectOutput = new ObjectOutputStream(socket.getOutputStream());
+            objectOutput.writeObject(order);
+            socket.close();
+            serverSocket.close();
             JOptionPane.showMessageDialog(null, "Order Sent to Kitchen");
         } catch (SocketTimeoutException s) {
-            JOptionPane.showMessageDialog(null,"Socket timed out");
+            JOptionPane.showMessageDialog(null,"Timed Out");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Failed to Send Order");
         }
+        
     }
 
     public void sendData() throws IOException {

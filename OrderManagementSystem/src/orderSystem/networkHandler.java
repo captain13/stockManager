@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -47,22 +48,23 @@ public class networkHandler {
                     row = new Object[columnNames.length];
 
                     for (int i = 0; i < order.length; i++) {
-                        if(order[i][1]!=(null)){
-                        row[0] = order[i][0];
-                        row[1] = order[i][1];
-                        row[2] = order[i][2];
-                        row[3] = clock.setCurrentTimeStamp();
-                        row[4] = "Not Ready";
-                        model.addRow(row);
+                        if (order[i][1] != (null)) {
+                            row[0] = order[i][0];
+                            row[1] = order[i][1];
+                            row[2] = order[i][2];
+                            row[3] = clock.setCurrentTimeStamp();
+                            row[4] = "Not Ready";
+                            model.addRow(row);
                         }
                     }
 
                     socket.close();
                 } catch (ClassNotFoundException e) {
                     System.out.println("The title list has not come from the server");
+                } catch (SocketTimeoutException s) {
+                    JOptionPane.showMessageDialog(null, "Timed Out");
                 } catch (IOException ex) {
                 }
-
             }
         }).start();
     }
@@ -71,8 +73,9 @@ public class networkHandler {
 
         try {
             String[][] recipeName = null;
-            ServerSocket myServerSocket = new ServerSocket(9998);
-            Socket skt = myServerSocket.accept();
+            ServerSocket serverSocket = new ServerSocket(9998);
+            serverSocket.setSoTimeout(5000);
+            Socket skt = serverSocket.accept();
 
             recipeName = new String[table.getRowCount()][5];
             for (int i = 0; i < table.getRowCount(); i++) {
@@ -86,7 +89,8 @@ public class networkHandler {
 
             ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());
             objectOutput.writeObject(recipeName);
-            myServerSocket.close();
+            skt.close();
+            serverSocket.close();
         } catch (IOException e) {
         }
     }
