@@ -12,6 +12,7 @@ public class BookingForm extends javax.swing.JFrame {
     dbManager newManager = new dbManager();
     internalClock clock = new internalClock();
     settingsManager settings = new settingsManager();
+    Keyboard k = new Keyboard();
 
     public BookingForm() {
         initComponents();
@@ -20,6 +21,7 @@ public class BookingForm extends javax.swing.JFrame {
         setEmployeeID();
         setTableNum();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        k.setVisible(true);
     }
 
     public final void populateReservationTable() {
@@ -487,13 +489,11 @@ public class BookingForm extends javax.swing.JFrame {
     }//GEN-LAST:event_comboboxYearActionPerformed
 
     private void textCustomerNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textCustomerNameMouseClicked
-        Keyboard k = new Keyboard(textCustomerName);
-        k.setVisible(true);
+        k.getTextfield(textCustomerName);
     }//GEN-LAST:event_textCustomerNameMouseClicked
 
     private void textCustomerContactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textCustomerContactMouseClicked
-        Keyboard k = new Keyboard(textCustomerContact);
-        k.setVisible(true);
+        k.getTextfield(textCustomerContact);
     }//GEN-LAST:event_textCustomerContactMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
