@@ -257,6 +257,11 @@ public class BookingForm extends javax.swing.JFrame {
         lblNumber4.setText("Customer Name");
 
         textCustomerName.setBackground(new java.awt.Color(240, 240, 240));
+        textCustomerName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textCustomerNameMouseClicked(evt);
+            }
+        });
 
         comboboxMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
         comboboxMonth.addActionListener(new java.awt.event.ActionListener() {
@@ -286,6 +291,11 @@ public class BookingForm extends javax.swing.JFrame {
         comboCustomerNum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select...", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
 
         textCustomerContact.setBackground(new java.awt.Color(240, 240, 240));
+        textCustomerContact.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textCustomerContactMouseClicked(evt);
+            }
+        });
 
         lblNumber5.setText("Customer Contact");
 
@@ -475,6 +485,16 @@ public class BookingForm extends javax.swing.JFrame {
     private void comboboxYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxYearActionPerformed
         checkPredateYear();
     }//GEN-LAST:event_comboboxYearActionPerformed
+
+    private void textCustomerNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textCustomerNameMouseClicked
+        Keyboard k = new Keyboard(textCustomerName);
+        k.setVisible(true);
+    }//GEN-LAST:event_textCustomerNameMouseClicked
+
+    private void textCustomerContactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textCustomerContactMouseClicked
+        Keyboard k = new Keyboard(textCustomerContact);
+        k.setVisible(true);
+    }//GEN-LAST:event_textCustomerContactMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAccept1;

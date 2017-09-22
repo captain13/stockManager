@@ -2158,11 +2158,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonSpecialsActionPerformed
 
     private void buttonBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookingsActionPerformed
-        if (keypadCheck() == true) {
-            Keyboard key = new Keyboard();
-            key.setLocation(600, 650);
-            key.setVisible(true);
-        }
         try {
             booking = new BookingForm();
             booking.setVisible(true);
@@ -2224,11 +2219,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             AddDatabase database = new AddDatabase(this);
             database.setVisible(true);
             AddDatabase.getTabbedPanel().setSelectedIndex(1);
-            if (keypadCheck() == true) {
-                Keyboard k = new Keyboard();
-                k.setLocation(350, 530);
-                k.setVisible(true);
-            }
         }
     }//GEN-LAST:event_buttonRecipeAddActionPerformed
 
@@ -2241,11 +2231,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         if (user.createAdminLogin() == true) {
             AddDatabase database = new AddDatabase(this);
             database.setVisible(true);
-            if (keypadCheck() == true) {
-                Keyboard k = new Keyboard();
-                k.setLocation(350, 530);
-                k.setVisible(true);
-            }
         }
     }//GEN-LAST:event_buttonAddActionPerformed
 
@@ -2254,11 +2239,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             AddDatabase database = new AddDatabase(this);
             database.setVisible(true);
             AddDatabase.getTabbedPanel().setSelectedIndex(2);
-            if (keypadCheck() == true) {
-                Keyboard k = new Keyboard();
-                k.setLocation(350, 530);
-                k.setVisible(true);
-            }
         }
     }//GEN-LAST:event_buttonRecipeAdd1ActionPerformed
 
