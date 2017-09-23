@@ -345,16 +345,16 @@ public class dbManager {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             if ("ALL".equals(type)) {
-                query = "SELECT* FROM sales "
+                query = "SELECT salesID,salesDate,totalCost FROM sales "
                         + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales";
             }
             if ("DAY".equals(type)) {
-                query = "SELECT* FROM sales WHERE salesDate='" + date + "' "
+                query = "SELECT salesID,salesDate,totalCost FROM sales WHERE salesDate='" + date + "' "
                         + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales "
                         + "WHERE salesDate='" + date + "'";
             }
             if ("MONTH".equals(type)) {
-                query = "SELECT* FROM sales WHERE MONTH(salesDate)='" + month + "' "
+                query = "SELECT salesID,salesDate,totalCost FROM sales WHERE MONTH(salesDate)='" + month + "' "
                         + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales "
                         + "WHERE MONTH(salesDate)='" + month + "'";
             }
@@ -378,6 +378,7 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
         }
         return rowData;
     }
@@ -834,6 +835,42 @@ public class dbManager {
         return ID;
     }
 
+    public double getCashTotal() {
+        double cashTotal = 0;
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String selectQuery = "SELECT SUM(totalCost) FROM sales WHERE saleType='Cash'";
+            ResultSet rs = s.executeQuery(selectQuery);
+
+            while (rs.next()) {
+                cashTotal = rs.getDouble(1);
+            }
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
+        return cashTotal;
+    }
+
+    public double getCreditTotal() {
+        double creditTotal = 0;
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String selectQuery = "SELECT SUM(totalCost) FROM sales WHERE saleType='Credit'";
+            ResultSet rs = s.executeQuery(selectQuery);
+
+            while (rs.next()) {
+                creditTotal = rs.getDouble(1);
+            }
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
+        return creditTotal;
+    }
+
     public void insertRecipeList(String item, String qty) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -912,13 +949,14 @@ public class dbManager {
         }
     }
 
-    public void insertSales(double currentTotal, String user) {
+    public void insertSales(double currentTotal, String user, String type) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO sales(salesDate,totalCost)"
+            String insertQuerySup = "INSERT INTO sales(salesDate,totalCost,saleType)"
                     + "VALUES ('" + clock.getCurrentDate() + "','"
-                    + currentTotal + "')";
+                    + currentTotal + "','"
+                    + type + "')";
             s.execute(insertQuerySup);
             String selectQuery = "SELECT * FROM sales ORDER BY salesID DESC LIMIT 1";
             ResultSet rs = s.executeQuery(selectQuery);
