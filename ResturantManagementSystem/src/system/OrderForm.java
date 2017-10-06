@@ -25,7 +25,7 @@ public class OrderForm extends javax.swing.JFrame {
     }
 
     public final void getInventoryItem() {
-        int n = newManager.getIngredients().length;
+        int n = newManager.getInventoryData().length;
         recipeInfo = new Object[n][2];
         for (int i = 0; i < n; i++) {
             recipeInfo[i][0] = newManager.getInventoryData()[i][0];

@@ -269,7 +269,7 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber,employeeHoursWorked, admin FROM employee";
+            String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber,employeeHoursWorked, admin, employeePassword FROM employee";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -287,6 +287,7 @@ public class dbManager {
                 rowData[i][3] = rs.getObject(4);
                 rowData[i][4] = rs.getObject(5);
                 rowData[i][5] = rs.getObject(6);
+                rowData[i][6] = rs.getObject(7);
                 i++;
             }
             rs.close();
@@ -451,25 +452,23 @@ public class dbManager {
         }
         return rowData;
     }
-
-    //Clean up needed-remove
+    
     public String[] getIngredients() {
-        int count = 0;
         String ingredients[] = null;
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-
-            String queryCount = "SELECT COUNT(inventoryID) FROM inventory ";
-            ResultSet rs = s.executeQuery(queryCount);
-
-            if (rs.next()) {
-                count = rs.getInt(1);
+            String query = "SELECT item FROM inventory ";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            int rowCount = 0;
+            while (rs.next()) {
+                rowCount++;
             }
-            String query = "SELECT inventoryID,item FROM inventory ";
             rs = s.executeQuery(query);
-            ingredients = new String[count];
+            ingredients = new String[rowCount];
             int i = 0;
             while (rs.next()) {
                 ingredients[i] = rs.getString("item");
@@ -602,7 +601,7 @@ public class dbManager {
     }
 
     public String getHoursWorked(String Username) {
-        String time = "00:00:00";
+        String time = "00hrs00";
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
@@ -748,43 +747,18 @@ public class dbManager {
         return cost;
     }
 
-    //Clean up needed-added in sub-query
-    public int getSalesID() {
-        int ID = 0;
-        try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String selectQuery = "SELECT * FROM sales ORDER BY salesID DESC LIMIT 1";
-            ResultSet rs = s.executeQuery(selectQuery);
-
-            while (rs.next()) {
-                ID = Integer.parseInt(rs.getString("salesID"));
-                System.out.println(ID);
-            }
-            s.close();
-            conn.close();
-        } catch (SQLException exp) {
-        }
-        return ID;
-    }
-
     public void insertReceipt(int recipeID, String cost) {
         int receiptID = 0;
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-//            String selectQuery = "SELECT * FROM receipt ORDER BY recipeNumber DESC LIMIT 1";
-//            ResultSet rs = s.executeQuery(selectQuery);
-//            while (rs.next()) {
-//                receiptID = rs.getString("receiptID");
-//            }
             receiptID += 1;
 
             String insertQuery = "INSERT INTO receipt( recipeID, orderQuantity, salesID, date, time , cost)"
                     + "VALUES ('"
                     + recipeID + "', '"
-                    + "1" + "', '"
-                    + getSalesID() + "', '"
+                    + "1" + "', "
+                    + "(SELECT salesID FROM sales ORDER BY salesID DESC LIMIT 1), '"
                     + clock.getCurrentDate() + "', '"
                     + clock.getCurrentTimeStamp() + "', '"
                     + cost + "')";
@@ -797,26 +771,7 @@ public class dbManager {
             System.out.println(exp);
         }
     }
-
-    //Clean up needed-sub-query
-    public int getRecipeID() {
-        int ID = 0;
-        try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String selectQuery = "SELECT * FROM recipe ORDER BY recipeID DESC LIMIT 1";
-            ResultSet rs = s.executeQuery(selectQuery);
-
-            while (rs.next()) {
-                ID = Integer.parseInt(rs.getString("recipeID"));
-            }
-            s.close();
-            conn.close();
-        } catch (SQLException exp) {
-        }
-        return ID;
-    }
-
+    
     public int getInvetoryID(String item) {
         int ID = 0;
         try {
@@ -876,8 +831,8 @@ public class dbManager {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String insertQuerySup = "INSERT INTO inventory_recipe(inventoryID, recipeID,qty)"
-                    + "VALUES ('" + getInvetoryID(item) + "','"
-                    + getRecipeID() + "', '"
+                    + "VALUES ('" + getInvetoryID(item) + "',"
+                    + "(SELECT recipeID FROM recipe ORDER BY recipeID DESC LIMIT 1), '"
                     + qty + "')";
             s.execute(insertQuerySup);
             logs.writeLogs("ADDED", "Inventory_recipe");
@@ -1046,7 +1001,6 @@ public class dbManager {
         } catch (SQLException exp) {
         }
     }
-//test to see duplicates
 
     public void removeRecipeList(int index) {
         try {
@@ -1302,6 +1256,36 @@ public class dbManager {
             System.out.println(exp);
         }
     }
+      // revise- simplify if possible
+    public void recipeStockUpdate(JTable table, String tableNum) {
+        try {
+            for (int i = 0; i < table.getRowCount(); i++) {
+                Connection conn = DriverManager.getConnection(url, username, password);
+                Statement s = conn.createStatement();
+                String selectQuery = "SELECT recipeID FROM recipe WHERE recipeName='" + table.getValueAt(i, 0).toString() + "'";
+                ResultSet rs = s.executeQuery(selectQuery);
+                String ID = null;
+                while (rs.next()) {
+                    ID = rs.getString("recipeID");
+                    selectQuery = "SELECT * FROM inventory_recipe WHERE recipeID= '" + ID + "'";
+                    rs = s.executeQuery(selectQuery);
+                    String inventoryID = null;
+                    String qty = null;
+                    while (rs.next()) {
+                        inventoryID = rs.getString("inventoryID");
+                        System.out.println(inventoryID);
+                        qty = rs.getString("qty");
+                        System.out.println(qty);
+                        String query = "Update inventory set qty =  GREATEST(0,qty-'" + qty + "') WHERE inventoryID = '" + inventoryID + "'";
+                        PreparedStatement preparedstmt = conn.prepareStatement(query);
+                        preparedstmt.executeUpdate();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NewOrder.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void updateConfirmOrder(String orderID) {
         try {
@@ -1316,36 +1300,6 @@ public class dbManager {
         } catch (SQLException exp) {
             System.out.println(exp);
         }
-    }
-
-    //Clean up needed-revise
-    public boolean login(String userName, String passWord) {
-        ArrayList userPasswordAL = new ArrayList();
-        ArrayList<String> userNameAL = new ArrayList();
-        boolean login = false;
-        try {
-            Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String query = "SELECT employeeFName,employeePassword FROM employee";
-            ResultSet rs = s.executeQuery(query);
-            while (rs.next()) {
-                userNameAL.add(rs.getString("employeeFName"));
-                userPasswordAL.add(rs.getString("employeePassword"));
-            }
-            for (int i = 0; i < userPasswordAL.size(); i++) {
-                if (userName.equals(userNameAL.get(i)) && passWord.equals(userPasswordAL.get(i))) {
-                    i = userNameAL.size();
-                    login = true;
-                } else {
-                    login = false;
-                }
-            }
-
-        } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(dbManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return login;
     }
 
     public void backup() {
@@ -1384,36 +1338,4 @@ public class dbManager {
             JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
         }
     }
-
-    // revise- simplify if possible
-    void recipeStockUpdate(JTable table, String tableNum) {
-        try {
-            for (int i = 0; i < table.getRowCount(); i++) {
-                Connection conn = DriverManager.getConnection(url, username, password);
-                Statement s = conn.createStatement();
-                String selectQuery = "SELECT recipeID FROM recipe WHERE recipeName='" + table.getValueAt(i, 0).toString() + "'";
-                ResultSet rs = s.executeQuery(selectQuery);
-                String ID = null;
-                while (rs.next()) {
-                    ID = rs.getString("recipeID");
-                    selectQuery = "SELECT * FROM inventory_recipe WHERE recipeID= '" + ID + "'";
-                    rs = s.executeQuery(selectQuery);
-                    String inventoryID = null;
-                    String qty = null;
-                    while (rs.next()) {
-                        inventoryID = rs.getString("inventoryID");
-                        System.out.println(inventoryID);
-                        qty = rs.getString("qty");
-                        System.out.println(qty);
-                        String query = "Update inventory set qty =  GREATEST(0,qty-'" + qty + "') WHERE inventoryID = '" + inventoryID + "'";
-                        PreparedStatement preparedstmt = conn.prepareStatement(query);
-                        preparedstmt.executeUpdate();
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(NewOrder.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
 }

@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author Andrew
  */
 public class LoginAdmin extends javax.swing.JDialog {
-     
+
     dbManager newDBManager = new dbManager();
     userManager newManager = new userManager();
     boolean accept;
@@ -22,14 +22,25 @@ public class LoginAdmin extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
-       public boolean loginAuthentication(String username, String password) {
-        boolean login = newDBManager.login(username, password);
+
+    public boolean loginAuthentication(String username, String password) {
+        boolean login = false;
+        for (int i = 0; i < newDBManager.getEmployeeData().length; i++) {
+            if (login == false) {
+                if (username.equals(newDBManager.getEmployeeData()[i][1])
+                        && password.equals(newDBManager.getEmployeeData()[i][6])
+                        && newDBManager.getEmployeeData()[i][5].equals(true)) {
+                    login = true;
+                } else {
+                    login = false;
+                }
+            }
+        }
         if (login == true) {
             return true;
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
-             return false;
+            return false;
         }
     }
 
@@ -157,7 +168,7 @@ public class LoginAdmin extends javax.swing.JDialog {
         String username = textfieldUser.getText();
         String password = passwordFieldBox.getText();
         accept = loginAuthentication(username, password);
-         this.dispose();
+        this.dispose();
     }//GEN-LAST:event_lblLoginActionPerformed
 
 
