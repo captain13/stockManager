@@ -41,7 +41,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'Andrew','Schwabe','Password','076 273 1721','0hrs00','Active',1),(2,'Zane','Smith','Password','034 233 8321','0hrs00',NULL,1),(3,'Chad','Phillips','Password','087 237 1277','0hrs00',NULL,0),(4,'Sean','Thomson','Password','072 377 1122','0hrs00',NULL,0),(5,'Itumeleng','Madisha','Password','072 377 1122','0hrs00',NULL,0);
+INSERT INTO `employee` VALUES (1,'Andrew','Schwabe','Password','076 273 1721','0hrs00',NULL,1),(2,'Zane','Smith','Password','034 233 8321','0hrs00',NULL,1),(3,'Chad','Phillips','Password','087 237 1277','0hrs00',NULL,0),(4,'Sean','Thomson','Password','072 377 1122','0hrs00',NULL,0),(5,'Itumeleng','Madisha','Password','072 377 1122','0hrs00',NULL,0);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `expenses` (
   PRIMARY KEY (`expensesID`),
   KEY `fk_expenses_wage1_idx` (`wageID`),
   KEY `fk_expenses_stockorder1_idx` (`stockOrderID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,6 +71,7 @@ CREATE TABLE `expenses` (
 
 LOCK TABLES `expenses` WRITE;
 /*!40000 ALTER TABLE `expenses` DISABLE KEYS */;
+INSERT INTO `expenses` VALUES (1,'Stock Order',150.00,'2017-09-23',NULL,NULL);
 /*!40000 ALTER TABLE `expenses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,7 +100,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (1,'Chicken Fillet','Meat',-4200,0.25,1000,15.00),(2,'Beef Burger Patty','Meat',1000,0.25,1000,15.00),(3,'Burger rolls','Grain',-1600,0.25,1000,15.00),(4,'Lettuce','Vegetable',-1200,0.5,1000,15.00),(5,'Tomatoe','Vegetable',-1200,0.5,100,15.00),(6,'Chicken Wings','Meat',1000,0.2,1000,15.00),(7,'Pork Ribs','Meat',1000,0.2,1000,15.00),(8,'Chicken Breast','Meat',1000,0.2,1000,15.00),(9,'Avocardo','Vegetable',1000,0.25,1000,15.00),(10,'Steak','Meat',1000,0.25,1000,15.00),(11,'Cheese','Dairy',1000,0.25,1000,15.00),(12,'Feta','Dairy',100,0.5,1000,15.00),(13,'Pizza Base','Grain',100,0.5,100,15.00),(14,'Napoletan Sauce','Other',1000,0.2,1000,15.00),(15,'Bacon','Meat',1000,0.2,1000,15.00),(16,'Castle Light','Alcohol',1000,0.2,1000,15.00),(17,'Black Label Beer','Alcohol',1000,0.25,1000,15.00),(18,'Coke','Soft Drinks',100,0.5,1000,15.00),(19,'Coke Light','Soft Drinks',100,0.5,100,15.00),(20,'Sprite','Soft Drinks',1000,0.2,1000,15.00),(21,'Fanta','Soft Drinks',1000,0.2,1000,15.00),(22,'Ice Tea','Soft Drinks',6600,0.2,1000,15.00),(23,'Chips','Other',-2500,0.5,100,15.00);
+INSERT INTO `inventory` VALUES (1,'Chicken Fillet','Meat',2900,0.25,1000,15.00),(2,'Beef Burger Patty','Meat',1000,0.25,1000,15.00),(3,'Burger rolls','Grain',400,0.25,1000,15.00),(4,'Lettuce','Vegetable',600,0.5,1000,15.00),(5,'Tomatoe','Vegetable',550,0.5,100,15.00),(6,'Chicken Wings','Meat',1000,0.2,1000,15.00),(7,'Pork Ribs','Meat',100,0.2,1000,15.00),(8,'Chicken Breast','Meat',1000,0.2,1000,15.00),(9,'Avocardo','Vegetable',1000,0.25,1000,15.00),(10,'Steak','Meat',1000,0.25,1000,15.00),(11,'Cheese','Dairy',1000,0.25,1000,15.00),(12,'Feta','Dairy',100,0.5,1000,15.00),(13,'Pizza Base','Grain',100,0.5,100,15.00),(14,'Napoletan Sauce','Other',1000,0.2,1000,15.00),(15,'Bacon','Meat',1000,0.2,1000,15.00),(16,'Castle Light','Alcohol',1000,0.2,1000,15.00),(17,'Black Label Beer','Alcohol',1000,0.25,1000,15.00),(18,'Coke','Soft Drinks',100,0.5,1000,15.00),(19,'Coke Light','Soft Drinks',100,0.5,100,15.00),(20,'Sprite','Soft Drinks',1000,0.2,1000,15.00),(21,'Fanta','Soft Drinks',1000,0.2,1000,15.00),(22,'Ice Tea','Soft Drinks',6600,0.2,1000,15.00),(23,'Chips','Other',-1300,0.5,100,15.00);
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +150,7 @@ CREATE TABLE `receipt` (
   PRIMARY KEY (`ID`,`recipeID`,`salesID`),
   KEY `fk_receipt_recipe1` (`recipeID`),
   KEY `fk_receipt_sales1` (`salesID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +159,7 @@ CREATE TABLE `receipt` (
 
 LOCK TABLES `receipt` WRITE;
 /*!40000 ALTER TABLE `receipt` DISABLE KEYS */;
-INSERT INTO `receipt` VALUES (1,1,1,5,'2017-09-22','20:57:52',75.00),(2,1,1,5,'2017-09-22','20:57:52',75.00);
+INSERT INTO `receipt` VALUES (1,1,1,0,'2017-09-23','17:12:44',75.00),(2,1,1,0,'2017-09-23','17:12:44',75.00),(3,1,1,0,'2017-09-23','17:12:44',75.00),(4,1,1,5,'2017-09-23','17:14:54',75.00),(5,1,1,5,'2017-09-23','17:14:54',75.00),(6,1,1,5,'2017-09-23','17:14:54',75.00),(7,1,1,6,'2017-09-23','17:15:15',75.00),(8,1,1,6,'2017-09-23','17:15:15',75.00),(9,1,1,6,'2017-09-23','17:15:15',75.00),(10,3,1,6,'2017-09-23','17:15:16',75.00),(11,3,1,6,'2017-09-23','17:15:16',75.00),(12,3,1,6,'2017-09-23','17:15:16',75.00),(13,1,1,7,'2017-09-23','20:14:52',75.00),(14,1,1,7,'2017-09-23','20:14:52',75.00),(15,4,1,7,'2017-09-23','20:14:52',75.00),(16,4,1,7,'2017-09-23','20:14:52',75.00),(17,13,1,7,'2017-09-23','20:14:52',75.00),(18,14,1,7,'2017-09-23','20:14:52',75.00),(19,7,1,7,'2017-09-23','20:14:52',75.00),(20,11,1,7,'2017-09-23','20:14:52',75.00);
 /*!40000 ALTER TABLE `receipt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,7 +190,7 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
-INSERT INTO `recipe` VALUES (1,'Chicken Burger & Chips',75.00,10.50,'Main Meal','./src/images/_f_chickenBurger.jpg',44,NULL),(2,'Beef Burger & Chips',75.00,10.50,'Main Meal','./src/images/_f_beefBurger.jpg',8,NULL),(3,'Pork Ribs & Chips',75.00,10.50,'Main Meal','./src/images/_f_porkRibs.jpg',8,NULL),(4,'Chicken Wings & Chips',75.00,10.50,'Light Meal','./src/images/_f_chickenWings.jpg',8,NULL),(5,'Green Salad',75.00,10.50,'Light Meal','./src/images/_f_salad.jpg',8,NULL),(6,'Ceasar Salad',75.00,10.50,'Light Meal','./src/images/_f_caesarSalad.jpg',8,NULL),(7,'Coke',75.00,10.50,'Drinks','./src/images/_d_cokeLogo.jpg',8,NULL),(8,'Coke Light',75.00,10.50,'Drinks','./src/images/_d_cokeLightLogo.jpg',8,NULL),(9,'Fanta',75.00,10.50,'Drinks','./src/images/_d_fantaLogo.jpg',8,NULL),(10,'Sprite',75.00,10.50,'Drinks','./src/images/_d_spriteLogo.jpg',8,NULL),(11,'Ice Tea Peach',75.00,10.50,'Drinks','./src/images/_d_liptonLogo.jpg',8,NULL),(12,'Ice Tea Lemon',75.00,10.50,'Drinks','./src/images/_d_liptonLogo.jpg',8,NULL),(13,'Ice Cream and Chocolate Sauce',75.00,10.50,'Dessert','./src/images/_f_chickenBurger.jpg',8,NULL),(14,'Chocolate Mouse',75.00,10.50,'Dessert','./src/images/_f_beefBurger.jpg',8,NULL),(15,'Large Chips',75.00,10.50,'Extra','./src/images/_e_chips.jpg',8,NULL),(16,'Small Chips',75.00,10.50,'Extra','./src/images/_e_chips.jpg',8,NULL),(17,'Avocardo',75.00,10.50,'Extra','./src/images/_e_avocardo.jpg',8,NULL),(18,'Feta',75.00,10.50,'Extra','./src/images/_f_beefBurger.jpg',8,NULL),(19,'Tomato',75.00,10.50,'Extra','./src/images/_f_chickenBurger.jpg',8,NULL);
+INSERT INTO `recipe` VALUES (1,'Chicken Burger & Chips',75.00,10.50,'Main Meal','./src/images/_f_chickenBurger.jpg',30,NULL),(2,'Beef Burger & Chips',75.00,10.50,'Main Meal','./src/images/_f_beefBurger.jpg',8,NULL),(3,'Pork Ribs & Chips',75.00,10.50,'Main Meal','./src/images/_f_porkRibs.jpg',14,NULL),(4,'Chicken Wings & Chips',75.00,10.50,'Light Meal','./src/images/_f_chickenWings.jpg',12,NULL),(5,'Green Salad',75.00,10.50,'Light Meal','./src/images/_f_salad.jpg',8,NULL),(6,'Ceasar Salad',75.00,10.50,'Light Meal','./src/images/_f_caesarSalad.jpg',8,NULL),(7,'Coke',75.00,10.50,'Drinks','./src/images/_d_cokeLogo.jpg',10,NULL),(8,'Coke Light',75.00,10.50,'Drinks','./src/images/_d_cokeLightLogo.jpg',8,NULL),(9,'Fanta',75.00,10.50,'Drinks','./src/images/_d_fantaLogo.jpg',8,NULL),(10,'Sprite',75.00,10.50,'Drinks','./src/images/_d_spriteLogo.jpg',8,NULL),(11,'Ice Tea Peach',75.00,10.50,'Drinks','./src/images/_d_liptonLogo.jpg',10,NULL),(12,'Ice Tea Lemon',75.00,10.50,'Drinks','./src/images/_d_liptonLogo.jpg',8,NULL),(13,'Ice Cream & Chocolate Sauce',75.00,10.50,'Dessert','./src/images/_d_Choc_Icecream.jpg',10,NULL),(14,'Chocolate Mousse',75.00,10.50,'Dessert','./src/images/_d_Choc_Mousse.jpg',10,NULL),(15,'Large Chips',75.00,10.50,'Extra','./src/images/_e_chips.jpg',8,NULL),(16,'Small Chips',75.00,10.50,'Extra','./src/images/_e_chips.jpg',8,NULL),(17,'Avocardo',75.00,10.50,'Extra','./src/images/_e_avocardo.jpg',8,NULL),(18,'Feta',75.00,10.50,'Extra','./src/images/_e_feta.jpg',8,NULL),(19,'Tomato',75.00,10.50,'Extra','./src/images/_e_tomato.jpg',8,NULL);
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,8 +235,9 @@ CREATE TABLE `sales` (
   `salesID` int(11) NOT NULL AUTO_INCREMENT,
   `salesDate` date DEFAULT NULL,
   `totalCost` decimal(10,2) DEFAULT NULL,
+  `saleType` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`salesID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,7 +246,7 @@ CREATE TABLE `sales` (
 
 LOCK TABLES `sales` WRITE;
 /*!40000 ALTER TABLE `sales` DISABLE KEYS */;
-INSERT INTO `sales` VALUES (5,'2017-09-22',100.00);
+INSERT INTO `sales` VALUES (5,'2017-09-23',225.00,'Cash'),(6,'2017-09-23',450.00,'Credit'),(7,'2017-09-23',600.00,'Credit');
 /*!40000 ALTER TABLE `sales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -317,7 +319,7 @@ CREATE TABLE `stockorder` (
   PRIMARY KEY (`stockOrderID`,`inventoryID`,`supplierID`),
   KEY `fk_stockOrder_inventory1` (`inventoryID`),
   KEY `fk_stockOrder_supplier1` (`supplierID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -326,6 +328,7 @@ CREATE TABLE `stockorder` (
 
 LOCK TABLES `stockorder` WRITE;
 /*!40000 ALTER TABLE `stockorder` DISABLE KEYS */;
+INSERT INTO `stockorder` VALUES (11,1,1,'2017-09-23','2017-09-23',1000,'Not Delievered',150.00);
 /*!40000 ALTER TABLE `stockorder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,7 +355,7 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES (1,'Meat Co.','meatco@gmail.com','084 772 2883','Rondebosch'),(2,'VegCity','vegcity@hotmail.co.za','078 232 1221','Claremont');
+INSERT INTO `supplier` VALUES (1,'Meat Co.','swabe@live.co.za','084 772 2883','Rondebosch'),(2,'VegCity','swabe@live.co.za','078 232 1221','Claremont');
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -391,4 +394,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-22 21:54:39
+-- Dump completed on 2017-10-06 14:22:23

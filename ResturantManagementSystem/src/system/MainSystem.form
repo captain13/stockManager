@@ -832,7 +832,6 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
-                            <Property name="enabled" type="boolean" value="false"/>
                             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="cc" green="cc" red="cc" type="rgb"/>
                             </Property>
@@ -1058,7 +1057,6 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
-                            <Property name="enabled" type="boolean" value="false"/>
                             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="cc" green="cc" red="cc" type="rgb"/>
                             </Property>
@@ -1199,7 +1197,6 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
-                            <Property name="enabled" type="boolean" value="false"/>
                             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="cc" green="cc" red="cc" type="rgb"/>
                             </Property>
@@ -1359,7 +1356,6 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
-                            <Property name="enabled" type="boolean" value="false"/>
                             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="cc" green="cc" red="cc" type="rgb"/>
                             </Property>
@@ -2090,7 +2086,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="currentEmail1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Email Adress"/>
+                    <Property name="text" type="java.lang.String" value="Email Address"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="currentEmail">

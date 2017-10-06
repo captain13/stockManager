@@ -1,6 +1,7 @@
 package system;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -16,7 +17,9 @@ import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -42,6 +45,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     boolean enableKeypad = false;
     int n;
     JButton button;
+    boolean editable = false;
 
     public MainSystem() {
         initComponents();
@@ -60,7 +64,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public final void populateInvnetoryTable() {
         String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit", "Item Cost"};
-        DefaultTableModel tableModel = new DefaultTableModel(system.getInventoryData(), columnNamesInventory);
+        DefaultTableModel tableModel = new DefaultTableModel(system.getInventoryData(), columnNamesInventory) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return editable;
+            }
+        };
         tblInventory.setModel(tableModel);
         searchITable();
         tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -72,7 +81,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public final void populateRecipeTable() {
         String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
-        DefaultTableModel tableModel = new DefaultTableModel(system.getRecipeData(), columnNamesRecipe);
+        DefaultTableModel tableModel = new DefaultTableModel(system.getRecipeData(), columnNamesRecipe) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return editable;
+            }
+        };
         tableRecipe.setModel(tableModel);
         searchRTable();
 //        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -84,7 +98,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public final void populateRecipeListTable() {
         String columnNamesRecipeList[] = {"Recipe ID", "Recipe Name", "Inventory ID", "Item Name", "Quantity"};
-        DefaultTableModel tableModel = new DefaultTableModel(system.getRecipeListData(), columnNamesRecipeList);
+        DefaultTableModel tableModel = new DefaultTableModel(system.getRecipeListData(), columnNamesRecipeList) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return editable;
+            }
+        };
         tableRecipeList.setModel(tableModel);
 //         searchTable();
 //        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -97,7 +116,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public final void populateSupplierTable() {
         String columnNamesSupplier[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
-        DefaultTableModel tableModel = new DefaultTableModel(system.getSuppleirData(), columnNamesSupplier);
+        DefaultTableModel tableModel = new DefaultTableModel(system.getSuppleirData(), columnNamesSupplier) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return editable;
+            }
+        };
         tblSupplier.setModel(tableModel);
         searchSTable();
 //        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -282,7 +306,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public void updateInventory() {
         if ("Edit".equals(buttonEdit.getText())) {
             buttonEdit.setText("Save");
-            tblInventory.setEnabled(true);
+            editable = true;
         } else if ("Save".equals(buttonEdit.getText())) {
             tblInventory.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
             if (tblInventory.isEditing()) {
@@ -303,14 +327,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 }
             }
             buttonEdit.setText("Edit");
-            tblInventory.setEnabled(false);
+            editable = false;
         }
     }
 
     public void updateRecipe() {
         if ("Edit".equals(buttonRecipeEdit.getText())) {
             buttonRecipeEdit.setText("Save");
-            tableRecipe.setEnabled(true);
+            editable = true;
         } else if ("Save".equals(buttonRecipeEdit.getText())) {
             //stops editting of getTableOrder cell to allow button event
             tableRecipe.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
@@ -332,14 +356,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 }
             }
             buttonRecipeEdit.setText("Edit");
-            tableRecipe.setEnabled(false);
+            editable = false;
         }
     }
 
     public void updateRecipeList() {
         if ("Edit".equals(buttonRecipeListEdit.getText())) {
             buttonRecipeListEdit.setText("Save");
-            tableRecipeList.setEnabled(true);
+            editable = true;
         } else if ("Save".equals(buttonRecipeListEdit.getText())) {
             int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
@@ -352,14 +376,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 }
             }
             buttonRecipeListEdit.setText("Edit");
-            tableRecipeList.setEnabled(false);
+            editable = false;
         }
     }
 
     public void updateSupplier() {
         if ("Edit".equals(buttonSupplierEdit.getText())) {
             buttonSupplierEdit.setText("Save");
-            tblSupplier.setEnabled(true);
+            editable = true;
         } else if ("Save".equals(buttonSupplierEdit.getText())) {
 
             //stops editting of getTableOrder cell to allow button event
@@ -382,7 +406,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 }
             }
             buttonSupplierEdit.setText("Edit");
-            tblSupplier.setEnabled(false);
+            editable = false;
         }
     }
 
@@ -1120,7 +1144,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 "ID no.", "Item", "Quantity", "Cost per Unit", "Distrubutor ID ", "Distrubutor Name"
             }
         ));
-        tblInventory.setEnabled(false);
         tblInventory.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane3.setViewportView(tblInventory);
         if (tblInventory.getColumnModel().getColumnCount() > 0) {
@@ -1284,7 +1307,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 "ID no.", "Item", "Ingredients"
             }
         ));
-        tableRecipe.setEnabled(false);
         tableRecipe.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane4.setViewportView(tableRecipe);
         if (tableRecipe.getColumnModel().getColumnCount() > 0) {
@@ -1385,7 +1407,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 "ID no.", "Item", "Ingredients"
             }
         ));
-        tableRecipeList.setEnabled(false);
         tableRecipeList.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane6.setViewportView(tableRecipeList);
         if (tableRecipeList.getColumnModel().getColumnCount() > 0) {
@@ -1494,7 +1515,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 "ID no.", "Item", "Ingredients"
             }
         ));
-        tblSupplier.setEnabled(false);
         tblSupplier.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane5.setViewportView(tblSupplier);
         if (tblSupplier.getColumnModel().getColumnCount() > 0) {
@@ -1932,7 +1952,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         currentEmail2.setText("Email Password");
 
-        currentEmail1.setText("Email Adress");
+        currentEmail1.setText("Email Address");
 
         currentEmail.setText("Email");
 
@@ -2449,12 +2469,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonRecipeListEditActionPerformed
 
     private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
-        tblInventory.setEnabled(true);
         if (tblInventory.getSelectedRow() == (-1)) {
         } else {
             updateShrinkage();
             populateInvnetoryTable();
-            tblInventory.setEnabled(false);
         }
     }//GEN-LAST:event_buttonEdit1ActionPerformed
 

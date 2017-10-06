@@ -53,8 +53,9 @@ public class networkHandler {
 
     public void sendData() throws IOException {
         Object[][] recipeName = null;
-        ServerSocket myServerSocket = new ServerSocket(9999);
-        Socket skt = myServerSocket.accept();
+        ServerSocket serverSocket = new ServerSocket(9999);
+        serverSocket.setSoTimeout(5000);
+        Socket skt = serverSocket.accept();
 
         try {
             recipeName = new String[system.getRecipeData().length][3];
@@ -67,7 +68,7 @@ public class networkHandler {
 
             ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());
             objectOutput.writeObject(recipeName);
-            myServerSocket.close();
+            serverSocket.close();
         } catch (IOException e) {
         }
 
