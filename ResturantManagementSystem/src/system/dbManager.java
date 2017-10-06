@@ -1405,7 +1405,7 @@ public class dbManager {
                         System.out.println(inventoryID);
                         qty = rs.getString("qty");
                         System.out.println(qty);
-                        String query = "Update inventory set qty = (qty-'" + qty + "') WHERE inventoryID = '" + inventoryID + "'";
+                        String query = "Update inventory set qty =  GREATEST(0,qty-'" + qty + "') WHERE inventoryID = '" + inventoryID + "'";
                         PreparedStatement preparedstmt = conn.prepareStatement(query);
                         preparedstmt.executeUpdate();
                     }

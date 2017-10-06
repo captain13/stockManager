@@ -723,6 +723,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         TabbedPanel.setForeground(new java.awt.Color(255, 255, 255));
         TabbedPanel.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         TabbedPanel.setOpaque(true);
+        TabbedPanel.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                TabbedPanelStateChanged(evt);
+            }
+        });
 
         Dashboard.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -2521,6 +2526,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         DayEndForm newForm = new DayEndForm();
         newForm.setVisible(true);
     }//GEN-LAST:event_buttonLogs1ActionPerformed
+
+    private void TabbedPanelStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_TabbedPanelStateChanged
+       if(TabbedPanel.getSelectedIndex()==2){
+          populateInvnetoryTable();
+       }
+    }//GEN-LAST:event_TabbedPanelStateChanged
 
     /**
      * @param args the command line arguments
