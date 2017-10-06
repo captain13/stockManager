@@ -840,7 +840,7 @@ public class dbManager {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String selectQuery = "SELECT SUM(totalCost) FROM sales WHERE saleType='Cash'";
+            String selectQuery = "SELECT SUM(totalCost) FROM sales WHERE saleType='Cash' AND salesDate='" + clock.getCurrentDate() + "'";
             ResultSet rs = s.executeQuery(selectQuery);
 
             while (rs.next()) {
@@ -858,7 +858,7 @@ public class dbManager {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String selectQuery = "SELECT SUM(totalCost) FROM sales WHERE saleType='Credit'";
+            String selectQuery = "SELECT SUM(totalCost) FROM sales WHERE saleType='Credit' AND salesDate='" + clock.getCurrentDate() + "'";
             ResultSet rs = s.executeQuery(selectQuery);
 
             while (rs.next()) {

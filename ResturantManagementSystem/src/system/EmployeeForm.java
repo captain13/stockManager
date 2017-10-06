@@ -1,5 +1,6 @@
 package system;
 
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -11,9 +12,10 @@ public class EmployeeForm extends javax.swing.JFrame {
 
     dbManager newManager = new dbManager();
 
-    public EmployeeForm() {
+    public EmployeeForm(Color color) {
         initComponents();
         populateEmployeeTable();
+        setButtonColor(color);
     }
 
     public final void populateEmployeeTable() {
@@ -42,17 +44,23 @@ public class EmployeeForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Passwords do not Match");
         }
     }
-    
-   
 
     public void calculateWage() {
-        String waiter=tableEmp.getValueAt(tableEmp.getSelectedRow(),0).toString();
+        String waiter = tableEmp.getValueAt(tableEmp.getSelectedRow(), 0).toString();
         String time = newManager.calcHoursWorked(waiter);
         Double hoursWorked = Double.parseDouble(time);
         Double rate = Double.parseDouble(JOptionPane.showInputDialog("Please Enter the rate of the employee"));
         Double Salary = hoursWorked * rate;
 
         JOptionPane.showMessageDialog(null, "The employee should get R" + Salary);
+    }
+
+    public final void setButtonColor(Color color) {
+        buttonAdd.setBackground(color);
+        buttonDelete.setBackground(color);
+        buttonPassword.setBackground(color);
+        toggleLogin.setBackground(color);
+        buttonWage.setBackground(color);
     }
 
     @SuppressWarnings("unchecked")
@@ -66,8 +74,8 @@ public class EmployeeForm extends javax.swing.JFrame {
         tableEmp = new javax.swing.JTable();
         buttonPassword = new javax.swing.JButton();
         buttonDelete = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        toggleLogin = new javax.swing.JToggleButton();
+        buttonWage = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -134,25 +142,25 @@ public class EmployeeForm extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setBackground(new java.awt.Color(0, 138, 231));
-        jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton1.setText("Currently Logged in");
-        jToggleButton1.setContentAreaFilled(false);
-        jToggleButton1.setOpaque(true);
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        toggleLogin.setBackground(new java.awt.Color(0, 138, 231));
+        toggleLogin.setForeground(new java.awt.Color(255, 255, 255));
+        toggleLogin.setText("Currently Logged in");
+        toggleLogin.setContentAreaFilled(false);
+        toggleLogin.setOpaque(true);
+        toggleLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                toggleLoginActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setBackground(new java.awt.Color(0, 138, 231));
-        jToggleButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton2.setText("Calculate Wage");
-        jToggleButton2.setContentAreaFilled(false);
-        jToggleButton2.setOpaque(true);
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonWage.setBackground(new java.awt.Color(0, 138, 231));
+        buttonWage.setForeground(new java.awt.Color(255, 255, 255));
+        buttonWage.setText("Calculate Wage");
+        buttonWage.setContentAreaFilled(false);
+        buttonWage.setOpaque(true);
+        buttonWage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                buttonWageActionPerformed(evt);
             }
         });
 
@@ -163,8 +171,8 @@ public class EmployeeForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(toggleLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonWage, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(467, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -182,9 +190,9 @@ public class EmployeeForm extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(96, 96, 96)
-                .addComponent(jToggleButton1)
+                .addComponent(toggleLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton2)
+                .addComponent(buttonWage)
                 .addContainerGap(138, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -242,28 +250,27 @@ public class EmployeeForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_buttonCloseActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        if (jToggleButton1.isSelected()) {
+    private void toggleLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleLoginActionPerformed
+        if (toggleLogin.isSelected()) {
             newManager.showActiveEmp();
         } else {
             populateEmployeeTable();
         }
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_toggleLoginActionPerformed
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        //Employee Salary
+    private void buttonWageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWageActionPerformed
         calculateWage();
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    }//GEN-LAST:event_buttonWageActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonClose;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonPassword;
+    private javax.swing.JButton buttonWage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
     public static javax.swing.JTable tableEmp;
+    private javax.swing.JToggleButton toggleLogin;
     // End of variables declaration//GEN-END:variables
 }

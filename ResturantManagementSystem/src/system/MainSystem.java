@@ -2153,7 +2153,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void buttonEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmployeeActionPerformed
-        EmployeeForm emp = new EmployeeForm();
+        EmployeeForm emp = new EmployeeForm(color);
         emp.setVisible(true);
     }//GEN-LAST:event_buttonEmployeeActionPerformed
 
@@ -2326,12 +2326,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonMakeOrderActionPerformed
 
     private void buttonEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmailActionPerformed
-        EmailForm newEmail = new EmailForm();
+        EmailForm newEmail = new EmailForm(color);
         newEmail.setVisible(true);
     }//GEN-LAST:event_buttonEmailActionPerformed
 
     private void buttonReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReportsActionPerformed
-        Reports newReport = new Reports();
+        Reports newReport = new Reports(color);
         newReport.setVisible(true);
     }//GEN-LAST:event_buttonReportsActionPerformed
 
@@ -2393,7 +2393,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void buttonManageSpecialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonManageSpecialsActionPerformed
-        SpecialsForm newForm = new SpecialsForm();
+        SpecialsForm newForm = new SpecialsForm(color);
         newForm.setVisible(true);
     }//GEN-LAST:event_buttonManageSpecialsActionPerformed
 

@@ -50,6 +50,8 @@ public class Checkout extends javax.swing.JFrame {
 
                 }
                 newHandler.writeTextToPDF();
+                JOptionPane.showMessageDialog(null, "Transaction Complete");
+                inputField.setText("");
 
             } else if (totalCost < 0) {
                 decductionField.setText("Outstanding: R" + String.format("R%.2f", (totalCost)));

@@ -1,5 +1,6 @@
 package system;
 
+import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -11,9 +12,10 @@ public class Reports extends javax.swing.JFrame {
     dbManager newManager = new dbManager();
     Object[][] row;
 
-    public Reports() {
+    public Reports(Color color) {
         initComponents();
         populateOrderTable("ALL");
+        setButtonColor(color);
     }
 
     public final void populateOrderTable(String action) {
@@ -68,6 +70,15 @@ public class Reports extends javax.swing.JFrame {
         tableSales.setModel(tableModel);
     }
 
+    public final void setButtonColor(Color color) {
+        buttonSales.setBackground(color);
+        buttonSalesDaily.setBackground(color);
+        buttonSalesMonthly.setBackground(color);
+        buttonExpense.setBackground(color);
+        buttonEmployeePerform.setBackground(color);
+        buttonStock.setBackground(color);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -76,12 +87,12 @@ public class Reports extends javax.swing.JFrame {
         buttonClose = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableSales = new javax.swing.JTable();
-        buttonClose1 = new javax.swing.JButton();
-        buttonClose2 = new javax.swing.JButton();
-        buttonClose3 = new javax.swing.JButton();
-        buttonClose4 = new javax.swing.JButton();
-        buttonClose5 = new javax.swing.JButton();
-        buttonClose6 = new javax.swing.JButton();
+        buttonSales = new javax.swing.JButton();
+        buttonEmployeePerform = new javax.swing.JButton();
+        buttonSalesMonthly = new javax.swing.JButton();
+        buttonSalesDaily = new javax.swing.JButton();
+        buttonStock = new javax.swing.JButton();
+        buttonExpense = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -113,71 +124,72 @@ public class Reports extends javax.swing.JFrame {
             }
         ));
         tableSales.setGridColor(new java.awt.Color(204, 204, 204));
+        tableSales.setShowVerticalLines(false);
         jScrollPane1.setViewportView(tableSales);
 
-        buttonClose1.setBackground(new java.awt.Color(0, 138, 231));
-        buttonClose1.setForeground(new java.awt.Color(255, 255, 255));
-        buttonClose1.setText("Sales History");
-        buttonClose1.setContentAreaFilled(false);
-        buttonClose1.setOpaque(true);
-        buttonClose1.addActionListener(new java.awt.event.ActionListener() {
+        buttonSales.setBackground(new java.awt.Color(0, 138, 231));
+        buttonSales.setForeground(new java.awt.Color(255, 255, 255));
+        buttonSales.setText("Sales History");
+        buttonSales.setContentAreaFilled(false);
+        buttonSales.setOpaque(true);
+        buttonSales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonClose1ActionPerformed(evt);
+                buttonSalesActionPerformed(evt);
             }
         });
 
-        buttonClose2.setBackground(new java.awt.Color(0, 138, 231));
-        buttonClose2.setForeground(new java.awt.Color(255, 255, 255));
-        buttonClose2.setText("Employee Preformance");
-        buttonClose2.setContentAreaFilled(false);
-        buttonClose2.setOpaque(true);
-        buttonClose2.addActionListener(new java.awt.event.ActionListener() {
+        buttonEmployeePerform.setBackground(new java.awt.Color(0, 138, 231));
+        buttonEmployeePerform.setForeground(new java.awt.Color(255, 255, 255));
+        buttonEmployeePerform.setText("Employee Preformance");
+        buttonEmployeePerform.setContentAreaFilled(false);
+        buttonEmployeePerform.setOpaque(true);
+        buttonEmployeePerform.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonClose2ActionPerformed(evt);
+                buttonEmployeePerformActionPerformed(evt);
             }
         });
 
-        buttonClose3.setBackground(new java.awt.Color(0, 138, 231));
-        buttonClose3.setForeground(new java.awt.Color(255, 255, 255));
-        buttonClose3.setText("Monthly Sales");
-        buttonClose3.setContentAreaFilled(false);
-        buttonClose3.setOpaque(true);
-        buttonClose3.addActionListener(new java.awt.event.ActionListener() {
+        buttonSalesMonthly.setBackground(new java.awt.Color(0, 138, 231));
+        buttonSalesMonthly.setForeground(new java.awt.Color(255, 255, 255));
+        buttonSalesMonthly.setText("Monthly Sales");
+        buttonSalesMonthly.setContentAreaFilled(false);
+        buttonSalesMonthly.setOpaque(true);
+        buttonSalesMonthly.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonClose3ActionPerformed(evt);
+                buttonSalesMonthlyActionPerformed(evt);
             }
         });
 
-        buttonClose4.setBackground(new java.awt.Color(0, 138, 231));
-        buttonClose4.setForeground(new java.awt.Color(255, 255, 255));
-        buttonClose4.setText("Daily Sales");
-        buttonClose4.setContentAreaFilled(false);
-        buttonClose4.setOpaque(true);
-        buttonClose4.addActionListener(new java.awt.event.ActionListener() {
+        buttonSalesDaily.setBackground(new java.awt.Color(0, 138, 231));
+        buttonSalesDaily.setForeground(new java.awt.Color(255, 255, 255));
+        buttonSalesDaily.setText("Daily Sales");
+        buttonSalesDaily.setContentAreaFilled(false);
+        buttonSalesDaily.setOpaque(true);
+        buttonSalesDaily.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonClose4ActionPerformed(evt);
+                buttonSalesDailyActionPerformed(evt);
             }
         });
 
-        buttonClose5.setBackground(new java.awt.Color(0, 138, 231));
-        buttonClose5.setForeground(new java.awt.Color(255, 255, 255));
-        buttonClose5.setText("Stock Control");
-        buttonClose5.setContentAreaFilled(false);
-        buttonClose5.setOpaque(true);
-        buttonClose5.addActionListener(new java.awt.event.ActionListener() {
+        buttonStock.setBackground(new java.awt.Color(0, 138, 231));
+        buttonStock.setForeground(new java.awt.Color(255, 255, 255));
+        buttonStock.setText("Stock Control");
+        buttonStock.setContentAreaFilled(false);
+        buttonStock.setOpaque(true);
+        buttonStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonClose5ActionPerformed(evt);
+                buttonStockActionPerformed(evt);
             }
         });
 
-        buttonClose6.setBackground(new java.awt.Color(0, 138, 231));
-        buttonClose6.setForeground(new java.awt.Color(255, 255, 255));
-        buttonClose6.setText("Expenses");
-        buttonClose6.setContentAreaFilled(false);
-        buttonClose6.setOpaque(true);
-        buttonClose6.addActionListener(new java.awt.event.ActionListener() {
+        buttonExpense.setBackground(new java.awt.Color(0, 138, 231));
+        buttonExpense.setForeground(new java.awt.Color(255, 255, 255));
+        buttonExpense.setText("Expenses");
+        buttonExpense.setContentAreaFilled(false);
+        buttonExpense.setOpaque(true);
+        buttonExpense.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonClose6ActionPerformed(evt);
+                buttonExpenseActionPerformed(evt);
             }
         });
 
@@ -188,12 +200,12 @@ public class Reports extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonClose3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonClose4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonClose5, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonClose6, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonSales, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonEmployeePerform, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonSalesMonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonSalesDaily, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonStock, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonExpense, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(341, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -207,17 +219,17 @@ public class Reports extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buttonClose1)
+                .addComponent(buttonSales)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonClose4)
+                .addComponent(buttonSalesDaily)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonClose3)
+                .addComponent(buttonSalesMonthly)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonClose6)
+                .addComponent(buttonExpense)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonClose2)
+                .addComponent(buttonEmployeePerform)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonClose5)
+                .addComponent(buttonStock)
                 .addContainerGap(113, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -251,39 +263,39 @@ public class Reports extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_buttonCloseActionPerformed
 
-    private void buttonClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose1ActionPerformed
+    private void buttonSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalesActionPerformed
         populateOrderTable("ALL");
-    }//GEN-LAST:event_buttonClose1ActionPerformed
+    }//GEN-LAST:event_buttonSalesActionPerformed
 
-    private void buttonClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose2ActionPerformed
+    private void buttonEmployeePerformActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmployeePerformActionPerformed
         populateEmployeeSalesTable();
-    }//GEN-LAST:event_buttonClose2ActionPerformed
+    }//GEN-LAST:event_buttonEmployeePerformActionPerformed
 
-    private void buttonClose3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose3ActionPerformed
+    private void buttonSalesMonthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalesMonthlyActionPerformed
         populateOrderTable("MONTH");
-    }//GEN-LAST:event_buttonClose3ActionPerformed
+    }//GEN-LAST:event_buttonSalesMonthlyActionPerformed
 
-    private void buttonClose4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose4ActionPerformed
+    private void buttonSalesDailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalesDailyActionPerformed
         populateOrderTable("DAY");
-    }//GEN-LAST:event_buttonClose4ActionPerformed
+    }//GEN-LAST:event_buttonSalesDailyActionPerformed
 
-    private void buttonClose5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose5ActionPerformed
+    private void buttonStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStockActionPerformed
         populateStockCount();
-    }//GEN-LAST:event_buttonClose5ActionPerformed
+    }//GEN-LAST:event_buttonStockActionPerformed
 
-    private void buttonClose6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClose6ActionPerformed
+    private void buttonExpenseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExpenseActionPerformed
         populateExpensesTable();
-    }//GEN-LAST:event_buttonClose6ActionPerformed
+    }//GEN-LAST:event_buttonExpenseActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonClose;
-    private javax.swing.JButton buttonClose1;
-    private javax.swing.JButton buttonClose2;
-    private javax.swing.JButton buttonClose3;
-    private javax.swing.JButton buttonClose4;
-    private javax.swing.JButton buttonClose5;
-    private javax.swing.JButton buttonClose6;
+    private javax.swing.JButton buttonEmployeePerform;
+    private javax.swing.JButton buttonExpense;
+    private javax.swing.JButton buttonSales;
+    private javax.swing.JButton buttonSalesDaily;
+    private javax.swing.JButton buttonSalesMonthly;
+    private javax.swing.JButton buttonStock;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableSales;
