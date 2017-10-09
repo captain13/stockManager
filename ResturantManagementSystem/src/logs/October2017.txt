@@ -199,3 +199,4 @@
 2017-10-09 15:31:05 record UPDATED to recipe table
 2017-10-09 15:31:08 record ADDED to Sales table
 2017-10-09 15:31:08 record ADDED to receipt table
+2017-10-09 19:08:18 record UPDATED to Inventory table

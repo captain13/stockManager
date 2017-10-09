@@ -11,25 +11,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.IOException;
-<<<<<<< Updated upstream
-import java.sql.SQLException;
-=======
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
->>>>>>> Stashed changes
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import javax.xml.soap.Detail;
 
 /**
  *
@@ -1804,7 +1797,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        buttonAlert.setBackground(new java.awt.Color(0, 138, 231));
+        buttonAlert.setForeground(new java.awt.Color(255, 255, 255));
         buttonAlert.setText("Alert");
+        buttonAlert.setContentAreaFilled(false);
+        buttonAlert.setOpaque(true);
         buttonAlert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAlertActionPerformed(evt);
@@ -2210,6 +2207,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonPromotionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPromotionsActionPerformed
         try {
+
             calendarForm = new CalendarForm();
             booking.setVisible(false);
             specials.setVisible(false);
@@ -2503,33 +2501,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void buttonRecipeEdit3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit3ActionPerformed
-        try {
-            prints.printRecipe();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       prints.printRecipe();
     }//GEN-LAST:event_buttonRecipeEdit3ActionPerformed
 
     private void buttonRecipeDelete3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete3ActionPerformed
-        try {
-            prints.printRecipeList();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_buttonRecipeDelete3ActionPerformed
 
     private void buttonRecipeEdit4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit4ActionPerformed
-        try {
-            prints.printSupplier();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        prints.printSupplier();
     }//GEN-LAST:event_buttonRecipeEdit4ActionPerformed
 
     private void buttonRecipeListEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeListEditActionPerformed
@@ -2562,15 +2542,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReprint3ActionPerformed
 
     private void buttonPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrintActionPerformed
-        try {
-            prints.printInventory();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        prints.printInventory();
     }//GEN-LAST:event_buttonPrintActionPerformed
 
     private void comboBoxTableColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxTableColorItemStateChanged
