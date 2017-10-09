@@ -1,7 +1,6 @@
 package system;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -12,14 +11,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -30,7 +31,7 @@ import javax.swing.table.TableRowSorter;
 public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     BookingForm booking;
-    Calendar calendar;
+    CalendarForm calendarForm;
     Specials specials;
     userManager user = new userManager();
     settingsManager settings = new settingsManager();
@@ -46,6 +47,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     int n;
     JButton button;
     boolean editable = false;
+    ArrayList details = new ArrayList();
 
     public MainSystem() {
         initComponents();
@@ -60,6 +62,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         populateSupplierTable();
         populateOrderTable();
         getSetting();
+        system.checkStockLevel();
     }
 
     public final void populateInvnetoryTable() {
@@ -539,6 +542,42 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         return jPasswordField1.getText();
     }
 
+    public void calanderFunctionality(JTable tableReservation) {
+        for (int i = 0; i < tableReservation.getRowCount(); i++) {
+            String bookingDate = tableReservation.getValueAt(i, 2).toString();
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date bdate = sdf.parse(bookingDate);
+                Calendar now = Calendar.getInstance();
+                now.set(Calendar.HOUR, 0);
+                now.set(Calendar.MINUTE, 0);
+                now.set(Calendar.SECOND, 0);
+                Date cdate = sdf.parse(sdf.format(now.getTime()));
+                if (bdate.equals(cdate)) {
+                    buttonBookings.setText("Bookings !!!");
+                    buttonPromotions.setText("Calendar !!!");
+                    this.repaint();
+                    this.setVisible(true);
+                }
+            } catch (ParseException ex) {
+            }
+        }
+    }
+
+    public void alert(String inventoryID) {
+        details.add(inventoryID);
+        for (int i = 0; i < details.size(); i++) {
+            System.out.println(details.get(i));
+            if (details.get(i).equals(system.getInventoryData()[i][0])) {
+                String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit", "Item Cost"};
+                DefaultTableModel tableModel = new DefaultTableModel(system.getInventoryData(), columnNamesInventory);
+                tblOrderHistory.setModel(tableModel);
+
+            }
+        }
+    }
+
     public void buttonColor(Color color) {
 
         buttonBookings.setBackground(color);
@@ -678,7 +717,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         tblOrderHistory = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         buttonOrderHistory = new javax.swing.JButton();
-        buttonAlert = new javax.swing.JButton();
         buttonEmail = new javax.swing.JButton();
         buttonMakeOrder = new javax.swing.JButton();
         buttonReports = new javax.swing.JButton();
@@ -686,6 +724,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonManageSpecials = new javax.swing.JButton();
         buttonLogs = new javax.swing.JButton();
         buttonLogs1 = new javax.swing.JButton();
+        buttonAlert = new javax.swing.JToggleButton();
         Settings = new javax.swing.JPanel();
         lblSettings = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -1680,12 +1719,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        buttonAlert.setBackground(new java.awt.Color(0, 138, 231));
-        buttonAlert.setForeground(new java.awt.Color(255, 255, 255));
-        buttonAlert.setText("Alerts");
-        buttonAlert.setContentAreaFilled(false);
-        buttonAlert.setOpaque(true);
-
         buttonEmail.setBackground(new java.awt.Color(0, 138, 231));
         buttonEmail.setForeground(new java.awt.Color(255, 255, 255));
         buttonEmail.setText("Email");
@@ -1764,6 +1797,17 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        buttonAlert.setBackground(new java.awt.Color(0, 138, 231));
+        buttonAlert.setForeground(new java.awt.Color(255, 255, 255));
+        buttonAlert.setText("Alert");
+        buttonAlert.setContentAreaFilled(false);
+        buttonAlert.setOpaque(true);
+        buttonAlert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAlertActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1771,6 +1815,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonAlert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(buttonLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1787,9 +1832,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buttonAlert, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonOrderHistory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonOrderHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(buttonMakeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(buttonEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -1797,7 +1840,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(125, 125, 125)
+                .addGap(70, 70, 70)
+                .addComponent(buttonAlert)
+                .addGap(32, 32, 32)
                 .addComponent(buttonEmployee)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonManageSpecials)
@@ -1805,7 +1850,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(buttonReports)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonLogs)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
                 .addComponent(buttonLogs1)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1814,9 +1859,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(buttonOrderHistory)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(buttonMakeOrder)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(buttonAlert)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGap(35, 35, 35)
                     .addComponent(buttonEmail)
                     .addContainerGap(426, Short.MAX_VALUE)))
         );
@@ -2164,8 +2207,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonPromotionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPromotionsActionPerformed
         try {
-            calendar = new Calendar();
-            calendar.setVisible(true);
+
+            calendarForm = new CalendarForm();
             booking.setVisible(false);
             specials.setVisible(false);
         } catch (RuntimeException ignore) {
@@ -2176,7 +2219,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         try {
             specials = new Specials();
             specials.setVisible(true);
-            calendar.setVisible(false);
+            calendarForm.setVisible(false);
             booking.setVisible(false);
         } catch (RuntimeException ignore) {
         }
@@ -2192,7 +2235,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             booking = new BookingForm();
             booking.setVisible(true);
             specials.setVisible(false);
-            calendar.setVisible(false);
+            calendarForm.setVisible(false);
         } catch (RuntimeException ignore) {
         }
     }//GEN-LAST:event_buttonBookingsActionPerformed
@@ -2458,7 +2501,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void buttonRecipeEdit3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit3ActionPerformed
-        // TODO add your handling code here:
+       prints.printRecipe();
     }//GEN-LAST:event_buttonRecipeEdit3ActionPerformed
 
     private void buttonRecipeDelete3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete3ActionPerformed
@@ -2466,7 +2509,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonRecipeDelete3ActionPerformed
 
     private void buttonRecipeEdit4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit4ActionPerformed
-        // TODO add your handling code here:
+        prints.printSupplier();
     }//GEN-LAST:event_buttonRecipeEdit4ActionPerformed
 
     private void buttonRecipeListEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeListEditActionPerformed
@@ -2499,7 +2542,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReprint3ActionPerformed
 
     private void buttonPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrintActionPerformed
-        prints.printTextToPDF();
+        prints.printInventory();
     }//GEN-LAST:event_buttonPrintActionPerformed
 
     private void comboBoxTableColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxTableColorItemStateChanged
@@ -2528,10 +2571,20 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonLogs1ActionPerformed
 
     private void TabbedPanelStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_TabbedPanelStateChanged
-       if(TabbedPanel.getSelectedIndex()==2){
-          populateInvnetoryTable();
-       }
+        if (TabbedPanel.getSelectedIndex() == 2) {
+            populateInvnetoryTable();
+        }
     }//GEN-LAST:event_TabbedPanelStateChanged
+
+    private void buttonAlertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlertActionPerformed
+        buttonAlert.setText("Alert!!!");
+
+        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(g)"};
+        DefaultTableModel tableModel = new DefaultTableModel(system.checkStockLevel(), columnNamesInventory);
+        tblOrderHistory.setModel(tableModel);
+
+
+    }//GEN-LAST:event_buttonAlertActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2569,7 +2622,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel Settings;
     private javax.swing.JTabbedPane TabbedPanel;
     private javax.swing.JButton buttonAdd;
-    private javax.swing.JButton buttonAlert;
+    private javax.swing.JToggleButton buttonAlert;
     private javax.swing.JButton buttonBookings;
     private javax.swing.JButton buttonClose;
     private javax.swing.JButton buttonDelete;

@@ -171,3 +171,5 @@
 2017-10-06 18:56:46 record ADDED to Recipe table
 2017-10-06 18:57:05 record ADDED to Inventory_recipe table
 2017-10-06 18:57:05 record ADDED to Inventory_recipe table
+2017-10-09 22:56:35 record ADDED to Reservations table
+2017-10-09 23:05:42 record ADDED to Reservations table
