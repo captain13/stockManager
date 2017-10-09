@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -452,7 +451,7 @@ public class dbManager {
         }
         return rowData;
     }
-    
+
     public String[] getIngredients() {
         String ingredients[] = null;
         try {
@@ -771,7 +770,7 @@ public class dbManager {
             System.out.println(exp);
         }
     }
-    
+
     public int getInvetoryID(String item) {
         int ID = 0;
         try {
@@ -1256,7 +1255,8 @@ public class dbManager {
             System.out.println(exp);
         }
     }
-      // revise- simplify if possible
+    // revise- simplify if possible
+
     public void recipeStockUpdate(JTable table, String tableNum) {
         try {
             for (int i = 0; i < table.getRowCount(); i++) {
@@ -1279,12 +1279,41 @@ public class dbManager {
                         String query = "Update inventory set qty =  GREATEST(0,qty-'" + qty + "') WHERE inventoryID = '" + inventoryID + "'";
                         PreparedStatement preparedstmt = conn.prepareStatement(query);
                         preparedstmt.executeUpdate();
+
                     }
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(NewOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public Object[][] checkStockLevel() {
+        Connection conn;
+        Object stockLevel[][] = null;
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String selectQuery = "SELECT * FROM inventory WHERE qty<(itemThreshold*itemLimit)";
+            ResultSet rs = s.executeQuery(selectQuery);
+            rs = s.executeQuery(selectQuery);
+            int i = 0;
+            int rowCount = 0;
+            while (rs.next()) {
+                rowCount++;
+            }
+            rs = s.executeQuery(selectQuery);
+            stockLevel = new Object[rowCount][3];
+            while (rs.next()) {
+                stockLevel[i][0] = rs.getString(1);
+                stockLevel[i][1] = rs.getString(2);
+                stockLevel[i][2] = rs.getString(4);
+                i++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dbManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return stockLevel;
     }
 
     public void updateConfirmOrder(String orderID) {

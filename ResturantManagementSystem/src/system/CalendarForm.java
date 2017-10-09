@@ -5,16 +5,123 @@
  */
 package system;
 
+import com.toedter.calendar.IDateEvaluator;
+import java.awt.Color;
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Andrew
  */
-public class Calendar extends javax.swing.JFrame {
-
-    public Calendar() {
-
+public class CalendarForm extends javax.swing.JFrame {
+     ArrayList events=new ArrayList();
+    
+    public CalendarForm() {
         initComponents();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        HighlightEvaluator evaluator = new HighlightEvaluator();
+        evaluator.add(createDate(14));
+        evaluator.add(createDate(15));
+        evaluator.add(createDate(18));
+        evaluator.add(createDate(1));
+        //JCalendar jc = new JCalendar();
+
+        jCalendar.getDayChooser().addDateEvaluator(evaluator);
+        jCalendar.setCalendar(jCalendar.getCalendar());
+        System.out.println(jCalendar.getDayChooser().getBackground());
+        jCalendar.getDayChooser().setBackground(Color.yellow);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        change();
+    }
+
+    public void change() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(jCalendar.getDate());
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+
+        JPanel jpanel = jCalendar.getDayChooser().getDayPanel();
+        Component component[] = jpanel.getComponents();
+
+//arraylist of events
+        for (int i = 0; i < 10; i++) {
+            //selected month and year on JCalendar
+            
+                // Calculate the offset of the first day of the month
+                cal.set(Calendar.DAY_OF_MONTH, 1);
+                int offset = cal.get(Calendar.DAY_OF_WEEK) - 1;
+
+                //this value will differ from each month due to first days of each month
+                component[31].setBackground(Color.blue);
+            
+        }
+    }
+
+    private class HighlightEvaluator implements IDateEvaluator {
+
+        private final List<Date> list = new ArrayList<>();
+
+        public void add(Date date) {
+            list.add(date);
+        }
+
+        @Override
+        public boolean isSpecial(Date date) {
+            return list.contains(date);
+        }
+
+        @Override
+        public Color getSpecialForegroundColor() {
+            return Color.blue.darker();
+        }
+
+        @Override
+        public Color getSpecialBackroundColor() {
+            return Color.blue;
+        }
+
+        @Override
+        public String getSpecialTooltip() {
+            return "Highlighted event.";
+        }
+
+        @Override
+        public boolean isInvalid(Date date) {
+            return false;
+        }
+
+        @Override
+        public Color getInvalidForegroundColor() {
+            return null;
+        }
+
+        @Override
+        public Color getInvalidBackroundColor() {
+            return null;
+        }
+
+        @Override
+        public String getInvalidTooltip() {
+            return null;
+        }
+    }
+
+    private Date createDate(int d) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.DAY_OF_MONTH, d);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        return (c.getTime());
     }
 
     @SuppressWarnings("unchecked")
@@ -43,7 +150,9 @@ public class Calendar extends javax.swing.JFrame {
             }
         });
 
+        jCalendar.setBackground(new java.awt.Color(204, 204, 204));
         jCalendar.setDecorationBackgroundColor(new java.awt.Color(0, 138, 231));
+        jCalendar.setDoubleBuffered(false);
         jCalendar.setMinSelectableDate(new java.util.Date(978303708000L));
         jCalendar.setNullDateButtonText("");
         jCalendar.setTodayButtonText("");

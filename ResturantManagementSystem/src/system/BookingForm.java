@@ -22,6 +22,7 @@ public class BookingForm extends javax.swing.JFrame {
         setTableNum();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         k.setVisible(true);
+        new MainSystem().calanderFunctionality(tableReservation);
     }
 
     public final void populateReservationTable() {
