@@ -16,6 +16,7 @@ public class ReprintForm extends javax.swing.JFrame {
     String password = "root";
     String driver = "com.mysql.jdbc.Driver";
     dbManager system = new dbManager();
+    reprintHandler rHandler = new reprintHandler();
     
     public ReprintForm() {
         initComponents();
@@ -28,11 +29,11 @@ public class ReprintForm extends javax.swing.JFrame {
 
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        jButtonPrint = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaRef = new javax.swing.JTextArea();
         jComboBoxDt = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        jButtonClose = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jComboBoxWid = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -47,7 +48,12 @@ public class ReprintForm extends javax.swing.JFrame {
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setEnabled(false);
 
-        jButton1.setText("Print");
+        jButtonPrint.setText("Print");
+        jButtonPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPrintActionPerformed(evt);
+            }
+        });
 
         jTextAreaRef.setEditable(false);
         jTextAreaRef.setColumns(20);
@@ -61,7 +67,12 @@ public class ReprintForm extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Close");
+        jButtonClose.setText("Close");
+        jButtonClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCloseActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Date and Time");
 
@@ -82,9 +93,9 @@ public class ReprintForm extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(140, 140, 140)
-                .addComponent(jButton1)
+                .addComponent(jButtonPrint)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(jButtonClose)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,8 +131,8 @@ public class ReprintForm extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonClose)
+                    .addComponent(jButtonPrint))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -160,6 +171,14 @@ public class ReprintForm extends javax.swing.JFrame {
             jTextAreaRef.setText("");
         }
     }//GEN-LAST:event_jComboBoxTActionPerformed
+
+    private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCloseActionPerformed
+
+    private void jButtonPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrintActionPerformed
+        rHandler.writeTextToPDF(getPrintPreview());
+    }//GEN-LAST:event_jButtonPrintActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -280,6 +299,9 @@ public class ReprintForm extends javax.swing.JFrame {
         tail();
     }
     
+    public String getPrintPreview() {
+        return jTextAreaRef.getText();
+    }
     public final void fillCombo() {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -311,9 +333,9 @@ public class ReprintForm extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonClose;
+    private javax.swing.JButton jButtonPrint;
     private javax.swing.JComboBox<String> jComboBoxDt;
     private javax.swing.JComboBox<String> jComboBoxT;
     private javax.swing.JComboBox<String> jComboBoxWid;

@@ -2257,7 +2257,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonLayoutActionPerformed
 
     private void buttonReprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprintActionPerformed
-
+        ReprintForm reprint = new ReprintForm();
+        reprint.setVisible(true);
     }//GEN-LAST:event_buttonReprintActionPerformed
 
     private void comboBoxSceenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxSceenItemStateChanged
