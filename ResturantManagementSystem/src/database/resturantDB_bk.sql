@@ -100,7 +100,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (1,'Chicken Fillet','Meat',2900,0.25,1000,15.00),(2,'Beef Burger Patty','Meat',1000,0.25,1000,15.00),(3,'Burger rolls','Grain',400,0.25,1000,15.00),(4,'Lettuce','Vegetable',600,0.5,1000,15.00),(5,'Tomatoe','Vegetable',550,0.5,100,15.00),(6,'Chicken Wings','Meat',1000,0.2,1000,15.00),(7,'Pork Ribs','Meat',100,0.2,1000,15.00),(8,'Chicken Breast','Meat',1000,0.2,1000,15.00),(9,'Avocardo','Vegetable',1000,0.25,1000,15.00),(10,'Steak','Meat',1000,0.25,1000,15.00),(11,'Cheese','Dairy',1000,0.25,1000,15.00),(12,'Feta','Dairy',100,0.5,1000,15.00),(13,'Pizza Base','Grain',100,0.5,100,15.00),(14,'Napoletan Sauce','Other',1000,0.2,1000,15.00),(15,'Bacon','Meat',1000,0.2,1000,15.00),(16,'Castle Light','Alcohol',1000,0.2,1000,15.00),(17,'Black Label Beer','Alcohol',1000,0.25,1000,15.00),(18,'Coke','Soft Drinks',100,0.5,1000,15.00),(19,'Coke Light','Soft Drinks',100,0.5,100,15.00),(20,'Sprite','Soft Drinks',1000,0.2,1000,15.00),(21,'Fanta','Soft Drinks',1000,0.2,1000,15.00),(22,'Ice Tea','Soft Drinks',6600,0.2,1000,15.00),(23,'Chips','Other',700,0.5,100,15.00);
+INSERT INTO `inventory` VALUES (1,'Chicken Fillet','Meat',2900,0.25,1000,15.00),(2,'Beef Burger Patty','Meat',1000,0.25,1000,15.00),(3,'Burger rolls','Grain',400,0.25,1000,15.00),(4,'Lettuce','Vegetable',600,0.5,1000,15.00),(5,'Tomatoe','Vegetable',550,0.5,100,15.00),(6,'Chicken Wings','Meat',1000,0.2,1000,15.00),(7,'Pork Ribs','Meat',100,0.2,1000,15.00),(8,'Chicken Breast','Meat',1000,0.2,1000,15.00),(9,'Avocardo','Vegetable',1000,0.25,1000,15.00),(10,'Steak','Meat',1000,0.25,1000,15.00),(11,'Cheese','Dairy',1000,0.25,1000,15.00),(12,'Feta','Dairy',100,0.5,1000,15.00),(13,'Pizza Base','Grain',100,0.5,100,15.00),(14,'Napoletan Sauce','Other',1000,0.2,1000,15.00),(15,'Bacon','Meat',1000,0.2,1000,15.00),(16,'Castle Light','Alcohol',1000,0.2,1000,15.00),(17,'Black Label Beer','Alcohol',1000,0.25,1000,15.00),(18,'Coke','Soft Drinks',100,0.5,1000,15.00),(19,'Coke Light','Soft Drinks',100,0.5,100,15.00),(20,'Sprite','Soft Drinks',1000,0.2,1000,15.00),(21,'Fanta','Soft Drinks',1000,0.2,1000,15.00),(22,'Ice Tea','Soft Drinks',6600,0.2,1000,15.00),(23,'Chips','Other',-1300,0.5,100,15.00);
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -394,4 +394,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-09 19:08:24
+-- Dump completed on 2017-10-06 14:22:23

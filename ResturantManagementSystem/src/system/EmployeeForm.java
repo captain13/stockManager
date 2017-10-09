@@ -47,10 +47,9 @@ public class EmployeeForm extends javax.swing.JFrame {
 
     public void calculateWage() {
         String waiter = tableEmp.getValueAt(tableEmp.getSelectedRow(), 0).toString();
-        String time = newManager.getHoursWorked(waiter);
-        
+        String time = newManager.calcHoursWorked(waiter);
         Double hoursWorked = Double.parseDouble(time);
-        Double rate = Double.parseDouble(JOptionPane.showInputDialog("Please Enter the rate of the employee selected"));
+        Double rate = Double.parseDouble(JOptionPane.showInputDialog("Please Enter the rate of the employee"));
         Double Salary = hoursWorked * rate;
 
         JOptionPane.showMessageDialog(null, "The employee should get R" + Salary);
