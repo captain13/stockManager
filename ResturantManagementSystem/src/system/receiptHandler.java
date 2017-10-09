@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system;
 
 import com.itextpdf.text.*;
@@ -12,7 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.*;
 import static system.NewOrder.tblItems;
 
 /**
@@ -25,6 +19,7 @@ public class receiptHandler {
     String head;
     String body;
     String tail;
+    StringBuilder items = new StringBuilder();
     internalClock clock = new internalClock();
     dbManager newManager = new dbManager();
     int n = 45;
@@ -42,10 +37,9 @@ public class receiptHandler {
 
     public void body(double total) {
         body = spaces + "\n"
-                //Need to change
-                + "Items                                      Qty   Price"
-                + " " + Arrays.deepToString(itemsList()).replaceAll("[^\\p{javaSpaceChar}{2.a-zA-Z0-9&,}]", "\n") + " "
-                + "Total " +total + "\n"
+                + "Items                                    Qty   Price\n"            
+                + getReceipt() +"\n"
+                + "Total " + total + "\n" 
                 + "Amount........................\n";
         System.out.println(body);
     }
@@ -61,23 +55,10 @@ public class receiptHandler {
                 + stars + "\n";
         System.out.println(tail);
     }
-//    
-//    public String[] spaces(String i, String q, String p) {
-//        String[] str = new String[3];
-//        str[0] = i;
-//        str[1] = q;
-//        str[2] = p;
-//        for (int n = 0; n < 3; n++) {        
-//            int len = str[n].length();
-//            int spc = 30 - len;
-//            str[n] = str[n] + "" + printS(spc);
-//        }
-//        return str;
-//    }
     
-    public String[][] itemsList() {
+    public StringBuilder itemsList() {
         int rowCount = tblItems.getRowCount();
-        String[][] list = new String[rowCount][3];
+        items.setLength(0);
         for (int i = 0; i < rowCount; i++) {
             for (int n = 0; n < 3; n++) {
                 switch (n) {
@@ -85,29 +66,30 @@ public class receiptHandler {
                         {
                             int len = tblItems.getValueAt(i, n).toString().length();
                             int spc = 30 - len;
-                            list[i][n] = tblItems.getValueAt(i, n).toString() + "" + printS(spc);
+                            items.append(tblItems.getValueAt(i, n).toString()).append(printS(spc));
                             break;
                         }
                     case 1:
                         {
                             int len = tblItems.getValueAt(i, n).toString().length();
                             int spc = 5 - len;
-                            list[i][n] = tblItems.getValueAt(i, n).toString() + "" + printS(spc);
+                            items.append(tblItems.getValueAt(i, n).toString()).append(printS(spc));
                             break;
                         }
                     case 2:
                         {
                             int len = tblItems.getValueAt(i, n).toString().length();
                             int spc = 5 - len;
-                            list[i][n] = tblItems.getValueAt(i, n).toString() + "" + printS(spc);
+                            items.append(tblItems.getValueAt(i, n).toString()).append(printS(spc));
                             break;
                         }
                     default:
                         break;
                 }
             }
+            items.append("\n");
         }
-        return list;
+        return items;
     }
     
     private String printS(int n){
