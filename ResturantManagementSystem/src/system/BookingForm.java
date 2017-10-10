@@ -12,19 +12,26 @@ public class BookingForm extends javax.swing.JFrame {
     dbManager newManager = new dbManager();
     internalClock clock = new internalClock();
     settingsManager settings = new settingsManager();
-    Keyboard k = new Keyboard();
+    Keyboard k;
     MainSystem system;
 
-    public BookingForm(MainSystem system) {
+    public BookingForm(MainSystem system, boolean enabled) {
         initComponents();
         populateReservationTable();
         setCurrentDate();
         setEmployeeID();
         setTableNum();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        k.setVisible(true);
-        k.setBounds(700, 700, 575, 200);
         this.system = system;
+        isKeypadEnable(enabled);
+    }
+
+    public final void isKeypadEnable(boolean enabled) {
+        if (enabled == true) {
+            k = new Keyboard();
+            k.setVisible(true);
+            k.setBounds(700, 700, 575, 200);
+        }
     }
 
     public final void populateReservationTable() {

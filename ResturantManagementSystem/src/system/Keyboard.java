@@ -10,7 +10,6 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 
 /**
@@ -32,7 +31,6 @@ public class Keyboard extends javax.swing.JFrame {
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         draggablePanel();
         this.setLocation(350, 530);
-
     }
 
     public void setTextfield(JTextComponent textField) {
@@ -71,6 +69,7 @@ public class Keyboard extends javax.swing.JFrame {
                 c = c.toUpperCase();
                 if (caps == 1) {
                     caps = 0;
+                    jButton32.setForeground(Color.white);
                 }
                 break;
         }
@@ -311,6 +310,11 @@ public class Keyboard extends javax.swing.JFrame {
         jButton13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         jButton13.setContentAreaFilled(false);
         jButton13.setOpaque(true);
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton10.setBackground(new java.awt.Color(53, 53, 53));
         jButton10.setForeground(new java.awt.Color(255, 255, 255));
@@ -1242,11 +1246,12 @@ public class Keyboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton52ActionPerformed
 
     private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
-        n("n");
+        n(" ");
     }//GEN-LAST:event_jButton29ActionPerformed
 
     private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
         caps = 1;
+        jButton32.setForeground(new Color(0, 138, 241));
     }//GEN-LAST:event_jButton32ActionPerformed
 
     private void jButton58ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton58ActionPerformed
@@ -1272,6 +1277,10 @@ public class Keyboard extends javax.swing.JFrame {
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         caps = 1;
     }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+       n("\n");
+    }//GEN-LAST:event_jButton13ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

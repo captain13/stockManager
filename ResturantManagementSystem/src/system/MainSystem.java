@@ -705,6 +705,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonLogs = new javax.swing.JButton();
         buttonLogs1 = new javax.swing.JButton();
         buttonAlert = new javax.swing.JToggleButton();
+        lblTable = new javax.swing.JLabel();
         Settings = new javax.swing.JPanel();
         lblSettings = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -922,7 +923,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(buttonLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonLogOut)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 376, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 382, Short.MAX_VALUE)
                 .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -1021,7 +1022,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addGap(0, 119, Short.MAX_VALUE))
+                .addGap(0, 125, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("View Orders", pnlViewOrder);
@@ -1110,7 +1111,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(buttonReprint2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonReprint3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Manage", pnlManageOrder);
@@ -1263,7 +1264,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonPrint)
                 .addContainerGap())
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Inventory", pnlInventory);
@@ -1374,7 +1375,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonRecipeEdit3)
                 .addContainerGap())
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Recipe", pnlRecipe);
@@ -1463,7 +1464,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         );
         pnlRecipeListLayout.setVerticalGroup(
             pnlRecipeListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
             .addGroup(pnlRecipeListLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(buttonRecipeDelete2)
@@ -1582,7 +1583,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonRecipeEdit4)
                 .addContainerGap())
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Supplier", pnlSupplier);
@@ -1643,6 +1644,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         );
 
         TabbedPanel.addTab("Database", Inventory);
+
+        Management.setBackground(new java.awt.Color(255, 255, 255));
 
         tblOrderHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1835,7 +1838,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(buttonReports)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonLogs)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
                 .addComponent(buttonLogs1)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1849,6 +1852,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addContainerGap(426, Short.MAX_VALUE)))
         );
 
+        lblTable.setText("Order History");
+
         javax.swing.GroupLayout ManagementLayout = new javax.swing.GroupLayout(Management);
         Management.setLayout(ManagementLayout);
         ManagementLayout.setHorizontalGroup(
@@ -1856,15 +1861,22 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             .addGroup(ManagementLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
+                .addGroup(ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ManagementLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+                        .addGap(12, 12, 12))
+                    .addGroup(ManagementLayout.createSequentialGroup()
+                        .addComponent(lblTable)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         ManagementLayout.setVerticalGroup(
             ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(ManagementLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                .addComponent(lblTable)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
                 .addGap(90, 90, 90))
         );
 
@@ -2164,7 +2176,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -2211,14 +2223,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonSpecialsActionPerformed
 
     private void buttonBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookingsActionPerformed
-
-        if (keypadCheck() == true) {
-            Keyboard key = new Keyboard();
-            key.setLocation(600, 650);
-            key.setVisible(true);
-        }
         try {
-            booking = new BookingForm(this);
+            booking = new BookingForm(this,keypadCheck());
             booking.setVisible(true);
             specials.setVisible(false);
             calendarForm.setVisible(false);
@@ -2277,7 +2283,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonRecipeAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAddActionPerformed
         if (user.createAdminLogin() == true) {
-            AddDatabase database = new AddDatabase(this);
+            AddDatabase database = new AddDatabase(this,keypadCheck());
             database.setVisible(true);
             AddDatabase.getTabbedPanel().setSelectedIndex(1);
             if (keypadCheck() == true) {
@@ -2295,26 +2301,16 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         if (user.createAdminLogin() == true) {
-            AddDatabase database = new AddDatabase(this);
+            AddDatabase database = new AddDatabase(this,keypadCheck());
             database.setVisible(true);
-            if (keypadCheck() == true) {
-                Keyboard k = new Keyboard();
-                k.setLocation(350, 530);
-                k.setVisible(true);
-            }
         }
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonRecipeAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAdd1ActionPerformed
         if (user.createAdminLogin() == true) {
-            AddDatabase database = new AddDatabase(this);
+            AddDatabase database = new AddDatabase(this,keypadCheck());
             database.setVisible(true);
             AddDatabase.getTabbedPanel().setSelectedIndex(2);
-            if (keypadCheck() == true) {
-                Keyboard k = new Keyboard();
-                k.setLocation(350, 530);
-                k.setVisible(true);
-            }
         }
     }//GEN-LAST:event_buttonRecipeAdd1ActionPerformed
 
@@ -2357,12 +2353,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void buttonMakeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMakeOrderActionPerformed
-        OrderForm newOrder = new OrderForm(this);
+        OrderForm newOrder = new OrderForm(this,keypadCheck());
         newOrder.setVisible(true);
     }//GEN-LAST:event_buttonMakeOrderActionPerformed
 
     private void buttonEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmailActionPerformed
-        EmailForm newEmail = new EmailForm(color);
+        EmailForm newEmail = new EmailForm(color,keypadCheck());
         newEmail.setVisible(true);
     }//GEN-LAST:event_buttonEmailActionPerformed
 
@@ -2477,7 +2473,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonSupplierEditActionPerformed
 
     private void buttonEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEventsActionPerformed
-        RemindersForm newForm = new RemindersForm();
+        RemindersForm newForm = new RemindersForm(keypadCheck());
         newForm.setVisible(true);
     }//GEN-LAST:event_buttonEventsActionPerformed
 
@@ -2569,8 +2565,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private void buttonAlertItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_buttonAlertItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             stockAlert();
+            lblTable.setText("Stock Alerts");
         } else {
             populateOrderTable();
+            lblTable.setText("Order History");
         }
     }//GEN-LAST:event_buttonAlertItemStateChanged
 
@@ -2695,6 +2693,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel lblSettings1;
     private javax.swing.JLabel lblSettings2;
     private javax.swing.JLabel lblSettings3;
+    private javax.swing.JLabel lblTable;
     private javax.swing.JLabel lblVersion;
     private javax.swing.JPanel pnlInventory;
     private javax.swing.JPanel pnlLayout;

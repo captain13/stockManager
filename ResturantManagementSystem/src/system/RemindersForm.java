@@ -29,13 +29,20 @@ public class RemindersForm extends javax.swing.JFrame {
     Point mouseDownCompCoords = null;
     Keyboard k = new Keyboard();
 
-    public RemindersForm() {
+    public RemindersForm(boolean enabled) {
         initComponents();
         this.setLocationRelativeTo(null);
         readReminders();
         makePanelDraggable();
-        k.setVisible(true);
-        k.setBounds(700, 700, 575, 200);
+        isKeypadEnable(enabled);
+    }
+    
+        public final void isKeypadEnable(boolean enabled) {
+        if (enabled == true) {
+            k = new Keyboard();
+            k.setVisible(true);
+            k.setBounds(700, 700, 575, 200);
+        }
     }
 
     public final void makePanelDraggable() {

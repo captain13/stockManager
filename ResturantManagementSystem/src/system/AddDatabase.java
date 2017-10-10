@@ -17,17 +17,21 @@ public class AddDatabase extends javax.swing.JFrame {
     dbManager database = new dbManager();
     MainSystem system;
     Keyboard k = new Keyboard();
-    
 
-    public AddDatabase(MainSystem sytem) {
+    public AddDatabase(MainSystem sytem, boolean enabled) {
         initComponents();
         this.system = sytem;
-        k.setVisible(true);
-        k.setBounds(700, 700, 575, 200);
-       
+        isKeypadEnable(enabled);
     }
 
-    
+    public final void isKeypadEnable(boolean enabled) {
+        if (enabled == true) {
+            k = new Keyboard();
+            k.setVisible(true);
+            k.setBounds(700, 700, 575, 200);
+        }
+    }
+
     public void insert() {
         if (!"".equals(textfieldItem.getText()) || !"".equals(textfieldQty.getText())) {
             database.insertInventory(getItem(), getInventoryCategory(), getQuantity(), getLimit(), getReorderLevel(), getItemCost());
@@ -117,7 +121,7 @@ public class AddDatabase extends javax.swing.JFrame {
     public Double getPrice() {
         return Double.parseDouble(textPrice.getText());
     }
-    
+
     public Double getItemCost() {
         return Double.parseDouble(costText.getText());
     }
@@ -159,8 +163,6 @@ public class AddDatabase extends javax.swing.JFrame {
     public static JTabbedPane getTabbedPanel() {
         return tabbedPanel;
     }
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -647,9 +649,9 @@ public class AddDatabase extends javax.swing.JFrame {
         openImage();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
+
     private void textfieldQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldQtyActionPerformed
-        
+
     }//GEN-LAST:event_textfieldQtyActionPerformed
 
     private void textfieldItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldItemMouseClicked
@@ -693,7 +695,7 @@ public class AddDatabase extends javax.swing.JFrame {
     }//GEN-LAST:event_textfieldDisAddressMouseClicked
 
     private void textRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textRecipeActionPerformed
-        
+
     }//GEN-LAST:event_textRecipeActionPerformed
 
     private void costTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_costTextMouseClicked

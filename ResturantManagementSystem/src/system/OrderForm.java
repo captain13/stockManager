@@ -16,15 +16,22 @@ public class OrderForm extends javax.swing.JFrame {
     Object[][] supplierInfo = null;
     Keyboard k = new Keyboard();
 
-    public OrderForm(MainSystem system) {
+    public OrderForm(MainSystem system, boolean enabled) {
         initComponents();
         setLocationRelativeTo(null);
         setCurrentDate();
         getInventoryItem();
         getSupplierInfo();
         this.system = system;
-        k.setVisible(true);
-        k.setBounds(700, 700, 575, 200);
+        isKeypadEnable(enabled);
+    }
+
+    public final void isKeypadEnable(boolean enabled) {
+        if (enabled == true) {
+            k = new Keyboard();
+            k.setVisible(true);
+            k.setBounds(700, 700, 575, 200);
+        }
     }
 
     public final void getInventoryItem() {
@@ -107,7 +114,7 @@ public class OrderForm extends javax.swing.JFrame {
                 System.out.println(itemCost);
             }
         }
-        price = (getQuantity()/100) * itemCost;
+        price = (getQuantity() / 100) * itemCost;
         return price;
     }
 
