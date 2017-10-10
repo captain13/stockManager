@@ -22,6 +22,7 @@ public class BookingForm extends javax.swing.JFrame {
         setTableNum();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         k.setVisible(true);
+        k.setBounds(700, 700, 575, 200);
     }
 
     public final void populateReservationTable() {
@@ -264,6 +265,11 @@ public class BookingForm extends javax.swing.JFrame {
                 textCustomerNameMouseClicked(evt);
             }
         });
+        textCustomerName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textCustomerNameActionPerformed(evt);
+            }
+        });
 
         comboboxMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
         comboboxMonth.addActionListener(new java.awt.event.ActionListener() {
@@ -495,6 +501,10 @@ public class BookingForm extends javax.swing.JFrame {
     private void textCustomerContactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textCustomerContactMouseClicked
         k.getTextfield(textCustomerContact);
     }//GEN-LAST:event_textCustomerContactMouseClicked
+
+    private void textCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCustomerNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textCustomerNameActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAccept1;

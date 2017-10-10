@@ -28,10 +28,12 @@ public class networkHandler {
     internalClock clock = new internalClock();
     boolean IS_RUNNING = true;
     dbManager system = new dbManager();
-    String IP;
+    String IP="192.168.1.100";
 
     public final void getIP() {
-        IP = JOptionPane.showInputDialog(null, "Enter Host IP address");
+//        IP = JOptionPane.showInputDialog(null, "Enter Host IP address");
+        IP="192.168.1.100";
+        System.out.println(IP);
     }
 
     public void sendData(Object[][] order) {

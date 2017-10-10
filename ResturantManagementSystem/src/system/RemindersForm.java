@@ -17,6 +17,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author Andrew
@@ -27,12 +28,15 @@ public class RemindersForm extends javax.swing.JFrame {
     internalClock clock = new internalClock();
     File file = new File(fileName);
     Point mouseDownCompCoords = null;
+    Keyboard k = new Keyboard();
 
     public RemindersForm() {
         initComponents();
         this.setLocationRelativeTo(null);
         readReminders();
         makePanelDraggable();
+        k.setVisible(true);
+        k.setBounds(700, 700, 575, 200);
     }
 
     public final void makePanelDraggable() {
@@ -57,13 +61,17 @@ public class RemindersForm extends javax.swing.JFrame {
             }
         });
     }
-
+  
     public void writeReminders() {
+        
         String text = jTextArea1.getText();
+        text = text.substring(0,1).toUpperCase() + text.substring(1).toLowerCase();
+       
+        
         try {
             FileWriter fileWriter = new FileWriter(file, false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
+            
             bufferedWriter.write(text);
             JOptionPane.showMessageDialog(null, "Reminder Added");
             bufferedWriter.newLine();
@@ -88,7 +96,7 @@ public class RemindersForm extends javax.swing.JFrame {
             System.out.println(ex);
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -110,6 +118,11 @@ public class RemindersForm extends javax.swing.JFrame {
         jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jTextArea1.setRows(5);
         jTextArea1.setBorder(null);
+        jTextArea1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextArea1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton2.setBackground(new java.awt.Color(75, 75, 75));
@@ -200,8 +213,12 @@ public class RemindersForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        writeReminders();
+        writeReminders();        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextArea1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseClicked
+        k.getTextfield(jTextArea1);
+    }//GEN-LAST:event_jTextArea1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

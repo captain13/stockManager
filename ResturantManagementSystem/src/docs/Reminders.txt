@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 -Calander functionality					-Zane
 -insert reciept into database				-complete
 -create reciept template				-complete
@@ -18,6 +19,14 @@
 -general code improvements 
 -general settings added functionality
 -keyboard functionality 				-Sean
+=======
+-Reorder steak
+-Add item to menu
+-Delete Employee
+-h at 4 pm
+
+
+>>>>>>> Stashed changes
 
 Post testing
 

@@ -14,6 +14,7 @@ public class OrderForm extends javax.swing.JFrame {
     internalClock clock = new internalClock();
     Object[][] recipeInfo = null;
     Object[][] supplierInfo = null;
+    Keyboard k = new Keyboard();
 
     public OrderForm(MainSystem system) {
         initComponents();
@@ -22,6 +23,8 @@ public class OrderForm extends javax.swing.JFrame {
         getInventoryItem();
         getSupplierInfo();
         this.system = system;
+        k.setVisible(true);
+        k.setBounds(700, 700, 575, 200);
     }
 
     public final void getInventoryItem() {
@@ -148,6 +151,11 @@ public class OrderForm extends javax.swing.JFrame {
         jLabel5.setText("Quantity ");
 
         textQuantity.setBackground(new java.awt.Color(240, 240, 240));
+        textQuantity.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textQuantityMouseClicked(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(75, 75, 75));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -289,6 +297,10 @@ public class OrderForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please Enter All Fields");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void textQuantityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textQuantityMouseClicked
+        k.getTextfield(textQuantity);
+    }//GEN-LAST:event_textQuantityMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

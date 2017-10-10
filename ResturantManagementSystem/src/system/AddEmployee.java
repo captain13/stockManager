@@ -9,12 +9,15 @@ import javax.swing.JOptionPane;
 public class AddEmployee extends javax.swing.JFrame {
     dbManager newManger=new dbManager();
     EmployeeForm newForm;
+    Keyboard k = new Keyboard();
     /**
      * Creates new form AddEmployee
      */
     public AddEmployee(EmployeeForm newForm) {
         initComponents();
         this.newForm=newForm;
+        k.setVisible(true);
+        k.setBounds(700, 700, 575, 200);
     }
 
     public String getEmpFirstName() {
@@ -90,13 +93,43 @@ public class AddEmployee extends javax.swing.JFrame {
             }
         });
 
+        textfieildPassowrdC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieildPassowrdCMouseClicked(evt);
+            }
+        });
+
         lblPasswordC.setText("Confirm Password");
 
         lblPassword.setText("Password");
 
+        textfieildPassowrd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieildPassowrdMouseClicked(evt);
+            }
+        });
+
+        textfieildContact.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieildContactMouseClicked(evt);
+            }
+        });
+
         lblContact.setText("Contact no.");
 
         lblSname.setText("Last Name");
+
+        textfieildLname.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieildLnameMouseClicked(evt);
+            }
+        });
+
+        textfieildFname.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieildFnameMouseClicked(evt);
+            }
+        });
 
         lblFname.setText("First Name");
 
@@ -233,6 +266,26 @@ public class AddEmployee extends javax.swing.JFrame {
         newForm.populateEmployeeTable();
         this.dispose();
     }//GEN-LAST:event_buttonAccept1ActionPerformed
+
+    private void textfieildFnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieildFnameMouseClicked
+        k.getTextfield(textfieildFname);
+    }//GEN-LAST:event_textfieildFnameMouseClicked
+
+    private void textfieildLnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieildLnameMouseClicked
+        k.getTextfield(textfieildLname);
+    }//GEN-LAST:event_textfieildLnameMouseClicked
+
+    private void textfieildContactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieildContactMouseClicked
+        k.getTextfield(textfieildContact);
+    }//GEN-LAST:event_textfieildContactMouseClicked
+
+    private void textfieildPassowrdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieildPassowrdMouseClicked
+        k.getTextfield(textfieildPassowrd);
+    }//GEN-LAST:event_textfieildPassowrdMouseClicked
+
+    private void textfieildPassowrdCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieildPassowrdCMouseClicked
+        k.getTextfield(textfieildPassowrdC);
+    }//GEN-LAST:event_textfieildPassowrdCMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAccept;

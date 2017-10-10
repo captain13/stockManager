@@ -7,9 +7,12 @@ package system;
 public class Login extends javax.swing.JFrame {
 
     userManager newManager = new userManager();
+    Keyboard k = new Keyboard();   
 
     public Login() {
         initComponents();
+        k.setVisible(true);
+        k.setBounds(700, 700, 575, 200);
     }
 
     public void disposeLogin() {
@@ -57,9 +60,21 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        textfieldUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieldUserMouseClicked(evt);
+            }
+        });
+
         lblUsername.setText("Username");
 
         lblPassword.setText("Password");
+
+        passwordFieldBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passwordFieldBoxMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -129,6 +144,14 @@ public class Login extends javax.swing.JFrame {
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
+
+    private void textfieldUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldUserMouseClicked
+        k.getTextfield(textfieldUser);
+    }//GEN-LAST:event_textfieldUserMouseClicked
+
+    private void passwordFieldBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldBoxMouseClicked
+        k.getTextfield(passwordFieldBox);
+    }//GEN-LAST:event_passwordFieldBoxMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancel;

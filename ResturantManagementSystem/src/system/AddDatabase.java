@@ -16,12 +16,18 @@ public class AddDatabase extends javax.swing.JFrame {
     String newImagePath;
     dbManager database = new dbManager();
     MainSystem system;
+    Keyboard k = new Keyboard();
+    
 
     public AddDatabase(MainSystem sytem) {
         initComponents();
         this.system = sytem;
+        k.setVisible(true);
+        k.setBounds(700, 700, 575, 200);
+       
     }
 
+    
     public void insert() {
         if (!"".equals(textfieldItem.getText()) || !"".equals(textfieldQty.getText())) {
             database.insertInventory(getItem(), getInventoryCategory(), getQuantity(), getLimit(), getReorderLevel());
@@ -149,11 +155,14 @@ public class AddDatabase extends javax.swing.JFrame {
     public static JTabbedPane getTabbedPanel() {
         return tabbedPanel;
     }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         tabbedPanel = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -194,6 +203,8 @@ public class AddDatabase extends javax.swing.JFrame {
         buttonAccpet = new javax.swing.JButton();
         buttonCancel = new javax.swing.JButton();
 
+        jTextField1.setText("jTextField1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
         setUndecorated(true);
@@ -209,10 +220,30 @@ public class AddDatabase extends javax.swing.JFrame {
         lblTitle.setText("Inventory Details");
 
         textfieldQty.setBackground(new java.awt.Color(204, 204, 204));
+        textfieldQty.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieldQtyMouseClicked(evt);
+            }
+        });
+        textfieldQty.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textfieldQtyActionPerformed(evt);
+            }
+        });
 
         textfieldItem.setBackground(new java.awt.Color(204, 204, 204));
+        textfieldItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieldItemMouseClicked(evt);
+            }
+        });
 
         textfieldLimit.setBackground(new java.awt.Color(204, 204, 204));
+        textfieldLimit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieldLimitMouseClicked(evt);
+            }
+        });
 
         lblQty3.setText("Reorder Level");
 
@@ -291,10 +322,30 @@ public class AddDatabase extends javax.swing.JFrame {
         lblCostPerItem1.setText("Recipe Name");
 
         textRecipe.setBackground(new java.awt.Color(204, 204, 204));
+        textRecipe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textRecipeMouseClicked(evt);
+            }
+        });
+        textRecipe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textRecipeActionPerformed(evt);
+            }
+        });
 
         textVAT.setBackground(new java.awt.Color(204, 204, 204));
+        textVAT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textVATMouseClicked(evt);
+            }
+        });
 
         textPrice.setBackground(new java.awt.Color(204, 204, 204));
+        textPrice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textPriceMouseClicked(evt);
+            }
+        });
 
         lblItem1.setText("Price");
 
@@ -402,12 +453,32 @@ public class AddDatabase extends javax.swing.JFrame {
         lblDisName.setText("Distrubutor Name");
 
         textfieldDisName.setBackground(new java.awt.Color(204, 204, 204));
+        textfieldDisName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieldDisNameMouseClicked(evt);
+            }
+        });
 
         textfieldDisEmail.setBackground(new java.awt.Color(204, 204, 204));
+        textfieldDisEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieldDisEmailMouseClicked(evt);
+            }
+        });
 
         textfieldDisContact.setBackground(new java.awt.Color(204, 204, 204));
+        textfieldDisContact.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieldDisContactMouseClicked(evt);
+            }
+        });
 
         textfieldDisAddress.setBackground(new java.awt.Color(204, 204, 204));
+        textfieldDisAddress.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieldDisAddressMouseClicked(evt);
+            }
+        });
 
         lblDisContact2.setText("Distrubutor Address ");
 
@@ -548,6 +619,55 @@ public class AddDatabase extends javax.swing.JFrame {
         openImage();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
+    private void textfieldQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldQtyActionPerformed
+        
+    }//GEN-LAST:event_textfieldQtyActionPerformed
+
+    private void textfieldItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldItemMouseClicked
+        k.getTextfield(textfieldItem);
+    }//GEN-LAST:event_textfieldItemMouseClicked
+
+    private void textfieldQtyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldQtyMouseClicked
+        k.getTextfield(textfieldQty);
+    }//GEN-LAST:event_textfieldQtyMouseClicked
+
+    private void textfieldLimitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldLimitMouseClicked
+        k.getTextfield(textfieldLimit);
+    }//GEN-LAST:event_textfieldLimitMouseClicked
+
+    private void textRecipeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textRecipeMouseClicked
+        k.getTextfield(textRecipe);
+    }//GEN-LAST:event_textRecipeMouseClicked
+
+    private void textPriceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textPriceMouseClicked
+        k.getTextfield(textPrice);
+    }//GEN-LAST:event_textPriceMouseClicked
+
+    private void textVATMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textVATMouseClicked
+        k.getTextfield(textVAT);
+    }//GEN-LAST:event_textVATMouseClicked
+
+    private void textfieldDisNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldDisNameMouseClicked
+        k.getTextfield(textfieldDisName);
+    }//GEN-LAST:event_textfieldDisNameMouseClicked
+
+    private void textfieldDisEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldDisEmailMouseClicked
+        k.getTextfield(textfieldDisEmail);
+    }//GEN-LAST:event_textfieldDisEmailMouseClicked
+
+    private void textfieldDisContactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldDisContactMouseClicked
+        k.getTextfield(textfieldDisContact);
+    }//GEN-LAST:event_textfieldDisContactMouseClicked
+
+    private void textfieldDisAddressMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldDisAddressMouseClicked
+        k.getTextfield(textfieldDisAddress);
+    }//GEN-LAST:event_textfieldDisAddressMouseClicked
+
+    private void textRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textRecipeActionPerformed
+        
+    }//GEN-LAST:event_textRecipeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAccpet;
@@ -561,6 +681,7 @@ public class AddDatabase extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCostPerItem1;
     private javax.swing.JLabel lblDisContact;
     private javax.swing.JLabel lblDisContact1;

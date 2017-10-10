@@ -8,10 +8,14 @@ package system;
 public class EmailForm extends javax.swing.JFrame {
 
     emailClient email = new emailClient();
+    Keyboard k = new Keyboard();
+    
 
     public EmailForm() {
         initComponents();
         this.setLocationRelativeTo(null);
+        k.setVisible(true);
+        k.setBounds(700, 700, 575, 200);
     }
 
     public String getReciepent() {
@@ -65,6 +69,11 @@ public class EmailForm extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "swabe@live.co.za" }));
 
+        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField2MouseClicked(evt);
+            }
+        });
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -85,6 +94,11 @@ public class EmailForm extends javax.swing.JFrame {
         textAreaMessage.setBackground(new java.awt.Color(240, 240, 240));
         textAreaMessage.setColumns(20);
         textAreaMessage.setRows(5);
+        textAreaMessage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textAreaMessageMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(textAreaMessage);
 
         jLabel3.setText("Email");
@@ -167,6 +181,14 @@ public class EmailForm extends javax.swing.JFrame {
         email.sendEmail(getReciepent(), getSubject(), getText());
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
+        k.getTextfield(jTextField2);
+    }//GEN-LAST:event_jTextField2MouseClicked
+
+    private void textAreaMessageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textAreaMessageMouseClicked
+        k.getTextfield(textAreaMessage);
+    }//GEN-LAST:event_textAreaMessageMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
