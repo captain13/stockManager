@@ -33,11 +33,13 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     int emptySpaceTab3 = 43;
     int emptySpaceTab4 = 43;
     int emptySpaceTab5 = 43;
+    int emptySpaceTab6 = 43;
     int index1 = 0;
     int index2 = 0;
     int index3 = 0;
     int index4 = 0;
     int index5 = 0;
+    int index6 = 0;
     Thread time;
     JButton button;
     String columnNames[] = {"Item", "Qty", "Price", "Check"};
@@ -156,6 +158,24 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             index5 = 0;
         }
 
+        for (int i = 0; i < n; i++) {
+            if (!newManager.getRecipeData()[i][7].equals(0)) {
+                ImageIcon icon = (new ImageIcon(recipeInfo[i][5].toString()));
+                button = new JButton(recipeInfo[i][1].toString(), icon);
+                button.setVerticalTextPosition(SwingConstants.BOTTOM);
+                button.setHorizontalTextPosition(SwingConstants.CENTER);
+                button.setPreferredSize(new Dimension(50, 50));
+                button.setMargin(new Insets(0, 0, 0, 0));
+                button.setContentAreaFilled(false);
+                button.setFocusPainted(false);
+                button.addActionListener(this);
+                specialTab.add(button);
+                ++index1;
+            }
+            emptySpaceTab6 = emptySpaceTab5 - index6;
+            index5 = 0;
+        }
+
         for (int i = 1; i < emptySpaceTab1; i++) {
             JButton emptyButton = new JButton();
             mainMealTab.add(emptyButton);
@@ -183,15 +203,28 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             extraTab.add(emptyButton);
             emptyButton.setVisible(false);
         }
+
+        for (int i = 1; i < emptySpaceTab6; i++) {
+            JButton emptyButton = new JButton();
+            specialTab.add(emptyButton);
+            emptyButton.setVisible(false);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         String buttonId = ae.getActionCommand();
+        int ID = newManager.getRecipeID(buttonId);
+        int ID2 = newManager.getSpecialsID(buttonId);
         for (Object[] recipeInfo1 : recipeInfo) {
             if (buttonId.equals(recipeInfo1[1].toString())) {
                 boolean check = false;
-                model.addRow(new Object[]{recipeInfo1[1], "1", recipeInfo1[3], check});
+                System.out.println(newManager.getRecipeData()[ID + 1][7]);
+                if (!newManager.getRecipeData()[ID - 1][7].equals(0)&&newManager.getSpecialData()[(newManager.getSpecialsID(buttonId)-1)][4].equals(true)) {
+                    model.addRow(new Object[]{recipeInfo1[1], "1", newManager.getSpecialsPrice(buttonId), check});
+                } else {
+                    model.addRow(new Object[]{recipeInfo1[1], "1", recipeInfo1[3], check});
+                }
             }
         }
         totalAmount();
@@ -551,6 +584,7 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         extraTab.setLayout(new java.awt.GridLayout(0, 7));
         menuPane.addTab("Extras", extraTab);
 
+        specialTab.setBackground(new java.awt.Color(255, 255, 255));
         specialTab.setLayout(new java.awt.GridLayout(0, 7));
         menuPane.addTab("Specials", specialTab);
 

@@ -113,7 +113,7 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT,recipeImageDirectory, recipeCount FROM recipe";
+            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT,recipeImageDirectory, recipeCount, specialsID FROM recipe";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -132,6 +132,7 @@ public class dbManager {
                 rowData[i][4] = rs.getObject(5);
                 rowData[i][5] = rs.getObject(6);
                 rowData[i][6] = rs.getObject(7);
+                rowData[i][7] = rs.getObject(8);
                 i++;
             }
 
@@ -871,6 +872,53 @@ public class dbManager {
         } catch (SQLException exp) {
         }
         return ID;
+    }
+
+    public int getSpecialsID(String item) {
+        int ID = getRecipeID(item);
+        int ID2 = 0;
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String selectQuery = "SELECT specialsID FROM recipe WHERE recipeID='" + ID + "'";
+            ResultSet rs = s.executeQuery(selectQuery);
+
+            while (rs.next()) {
+                ID2 = Integer.parseInt(rs.getString(1));
+            }
+
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+        return ID2;
+    }
+
+    public double getSpecialsPrice(String item) {
+        int ID = getRecipeID(item);
+        int ID2 = 0;
+        double ID3 = 0;
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String selectQuery = "SELECT specialsID FROM recipe WHERE recipeID='" + ID + "'";
+            ResultSet rs = s.executeQuery(selectQuery);
+
+            while (rs.next()) {
+                ID2 = Integer.parseInt(rs.getString(1));
+            }
+            String selectQuery2 = "SELECT specialsPrice FROM specials WHERE specialsID='" + ID2 + "'";
+            rs = s.executeQuery(selectQuery2);
+            while (rs.next()) {
+                ID3 = rs.getDouble("specialsPrice");
+            }
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+        return ID3;
     }
 
     public int getRecipeCost(String item) {
