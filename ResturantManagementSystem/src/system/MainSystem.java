@@ -538,10 +538,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public final void bookingAlert() {
-        for (int i = 0; i < system.getReservationData().length; i++) {
-            if (system.getReservationData()[i][2].toString().equals(clock.getCurrentDate())) {
-                buttonBookings.setText("Bookings [" + i + "]");
+        if (system.getReservationData().length != 0) {
+            for (int i = 0; i < system.getReservationData().length; i++) {
+                if (system.getReservationData()[i][2].toString().equals(clock.getCurrentDate())) {
+                    buttonBookings.setText("Bookings [" + (i + 1) + "]");
+                }
             }
+        } else {
+             buttonBookings.setText("Bookings");
         }
     }
 
@@ -550,7 +554,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(g)"};
             DefaultTableModel tableModel = new DefaultTableModel(system.checkStockLevel(), columnNamesInventory);
             tblOrderHistory.setModel(tableModel);
-            buttonAlert.setText("Alert [" + i + "]");
+            buttonAlert.setText("Alert [" + (i + 1) + "]");
         }
     }
 
@@ -2414,6 +2418,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             populateRecipeListTable();
             populateSupplierTable();
         }
+        bookingAlert();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed

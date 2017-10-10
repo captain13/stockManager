@@ -5,6 +5,7 @@
  */
 package system;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -60,8 +61,8 @@ public class Keyboard extends javax.swing.JFrame {
             }
         });
     }
-    
-        private void n(String c) {
+
+    private void n(String c) {
         switch (caps) {
             case 0:
                 break;
@@ -1259,15 +1260,18 @@ public class Keyboard extends javax.swing.JFrame {
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         if (caps == 2) {
             caps = 0;
+            jToggleButton1.setForeground(Color.white);
+            jToggleButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         } else {
             caps = 2;
+            jToggleButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 138, 241)));
+            jToggleButton1.setForeground(new Color(0, 138, 241));
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         caps = 1;
     }//GEN-LAST:event_jButton23ActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
