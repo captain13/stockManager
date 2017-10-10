@@ -51,7 +51,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         logs.logValidation();
         clock.internalClock(lblClock, lblDate);
         network.recieveData(jTable1);
-        booking = new BookingForm(this);
         bookingAlert();
         stockAlert();
         populateInvnetoryTable();
@@ -423,7 +422,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             String orderID = tblOrderHistory.getValueAt(tblOrderHistory.getSelectedRow(), 0).toString();
             String item = tblOrderHistory.getValueAt(tblOrderHistory.getSelectedRow(), 1).toString();
             String qty = tblOrderHistory.getValueAt(tblOrderHistory.getSelectedRow(), 5).toString();
-            System.out.println(qty);
             system.updateConfirmOrder(orderID);
             system.updateInventoryQty(item, qty, "+");
         }
@@ -540,9 +538,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public final void bookingAlert() {
-        booking.GetTableInfo();
-        for (int i = 0; i < booking.GetTableInfo().length; i++) {
-            if (booking.GetTableInfo()[i].toString().equals(clock.getCurrentDate())) {
+        for (int i = 0; i < system.getReservationData().length; i++) {
+            if (system.getReservationData()[i][2].toString().equals(clock.getCurrentDate())) {
                 buttonBookings.setText("Bookings [" + i + "]");
             }
         }
@@ -1786,6 +1783,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 buttonAlertItemStateChanged(evt);
             }
         });
+        buttonAlert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAlertActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -2212,6 +2214,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             key.setVisible(true);
         }
         try {
+            booking = new BookingForm(this);
             booking.setVisible(true);
             specials.setVisible(false);
             calendarForm.setVisible(false);
@@ -2502,6 +2505,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         } else {
             updateShrinkage();
             populateInvnetoryTable();
+            system.checkStockLevel();
         }
     }//GEN-LAST:event_buttonEdit1ActionPerformed
 
@@ -2564,6 +2568,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             populateOrderTable();
         }
     }//GEN-LAST:event_buttonAlertItemStateChanged
+
+    private void buttonAlertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlertActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonAlertActionPerformed
 
     /**
      * @param args the command line arguments

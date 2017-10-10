@@ -585,19 +585,12 @@ public class dbManager {
             int i = 0;
             while (rs.next()) {
                 rowData[i][0] = rs.getObject(1);
-                System.out.println(rowData[i][0]);
                 rowData[i][1] = rs.getObject(2);
                 rowData[i][2] = rs.getObject(3);
                 rowData[i][3] = rs.getObject(4);
                 rowData[i][4] = rs.getObject(5);
                 rowData[i][5] = rs.getObject(6);
                 rowData[i][6] = rs.getObject(7);
-                System.out.println(rowData[i][1]);
-                System.out.println(rowData[i][2]);
-                System.out.println(rowData[i][3]);
-                System.out.println(rowData[i][4]);
-                System.out.println(rowData[i][5]);
-                System.out.println(rowData[i][6]);
                 i++;
             }
             rs.close();
