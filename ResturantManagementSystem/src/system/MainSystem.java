@@ -11,11 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -63,6 +59,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         populateOrderTable();
         getSetting();
         system.checkStockLevel();
+       // calanderFunctionality();
     }
 
     public final void populateInvnetoryTable() {
@@ -542,25 +539,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         return jPasswordField1.getText();
     }
 
-    public void calanderFunctionality(JTable tableReservation) {
-        for (int i = 0; i < tableReservation.getRowCount(); i++) {
-            String bookingDate = tableReservation.getValueAt(i, 2).toString();
-            Calendar calendar = Calendar.getInstance();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                Date bdate = sdf.parse(bookingDate);
-                Calendar now = Calendar.getInstance();
-                now.set(Calendar.HOUR, 0);
-                now.set(Calendar.MINUTE, 0);
-                now.set(Calendar.SECOND, 0);
-                Date cdate = sdf.parse(sdf.format(now.getTime()));
-                if (bdate.equals(cdate)) {
-                    buttonBookings.setText("Bookings !!!");
-                    buttonPromotions.setText("Calendar !!!");
-                    this.repaint();
-                    this.setVisible(true);
-                }
-            } catch (ParseException ex) {
+    public void calanderFunctionality() {
+        booking.GetTableInfo();
+        for (int i = 0; i < booking.GetTableInfo().length; i++) {
+            System.out.println("ran");
+            System.out.println(booking.GetTableInfo()[i]);
+         
+            if (booking.GetTableInfo()[i].toString().equals(clock.getCurrentDate())) {
+                buttonBookings.setText("Bookings !!!");
+                buttonPromotions.setText("Calendar !!!");
             }
         }
     }
@@ -2226,6 +2213,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonSpecialsActionPerformed
 
     private void buttonBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookingsActionPerformed
+    
         if (keypadCheck() == true) {
             Keyboard key = new Keyboard();
             key.setLocation(600, 650);
@@ -2238,6 +2226,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             calendarForm.setVisible(false);
         } catch (RuntimeException ignore) {
         }
+            calanderFunctionality();
     }//GEN-LAST:event_buttonBookingsActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
@@ -2502,7 +2491,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void buttonRecipeEdit3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit3ActionPerformed
-       prints.printRecipe();
+        prints.printRecipe();
     }//GEN-LAST:event_buttonRecipeEdit3ActionPerformed
 
     private void buttonRecipeDelete3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete3ActionPerformed
@@ -2601,6 +2590,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 if ("Macintosh".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {

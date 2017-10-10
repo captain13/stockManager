@@ -172,6 +172,15 @@ public class BookingForm extends javax.swing.JFrame {
         }
     }
 
+    public String[] GetTableInfo() {
+        String bookingDate[]=new String[tableReservation.getRowCount()];
+        for (int i = 0; i < tableReservation.getRowCount(); i++) {
+            bookingDate[i] = tableReservation.getValueAt(i, 2).toString();
+
+        }
+        return bookingDate;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
