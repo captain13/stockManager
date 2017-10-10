@@ -17,9 +17,7 @@ import javax.swing.text.JTextComponent;
  * @author Andrew
  */
 public class Keyboard extends javax.swing.JFrame {
-
     int caps = -0;
-
     int x;
     int y;
     String text;
@@ -1259,7 +1257,7 @@ public class Keyboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton58ActionPerformed
 
     private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton33ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed

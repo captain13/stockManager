@@ -377,6 +377,7 @@ public class Checkout extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         buttonGroup.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
         jRadioButton1.setText("Cash");
         jRadioButton1.setContentAreaFilled(false);
 
