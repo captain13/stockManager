@@ -761,25 +761,23 @@ public class dbManager {
         }
         return time;
     }
-
-    public String calcHoursWorked(String Username) {
-        String time = "0";
+    public String getEmployeeUsername() {
+        String Username = "";
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String querySelect = "SELECT employeeHoursWorked FROM employee WHERE employeeFName='" + Username + "'";
-            ResultSet rs = s.executeQuery(querySelect);
+            String selectQuery = "SELECT employeeID FROM employee'";
+            ResultSet rs = s.executeQuery(selectQuery);
             while (rs.next()) {
-                time = rs.getString("employeeHoursWorked");
+                Username = rs.getString("inventoryID");
             }
-
             s.close();
             conn.close();
         } catch (SQLException exp) {
-            System.out.println(exp);
         }
-        return time;
+        return Username;
     }
+ 
 
     public void insertEmployee(String firstName, String lastName, String empPassword, String contact, int adminRights) {
         try {
@@ -855,6 +853,21 @@ public class dbManager {
         } catch (SQLException exp) {
         }
     }
+    
+        public void insertWage(Double wage) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String insertQuerySup = "INSERT INTO wages(inventoryID, Wage)"+"VALUES ('" + getEmployeeUsername() + "','" +wage+ "')";
+            s.execute(insertQuerySup);
+            logs.writeLogs("ADDED", "wage");
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
 
     public int getRecipeID(String item) {
         int ID = 0;

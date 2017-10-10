@@ -45,16 +45,30 @@ public class EmployeeForm extends javax.swing.JFrame {
         }
     }
 
-   public void calculateWage() {
-        String waiter = tableEmp.getValueAt(tableEmp.getSelectedRow(), 0).toString();
-        String time = newManager.getHoursWorked(waiter);
-        
-        Double hoursWorked = Double.parseDouble(time);
-        Double rate = Double.parseDouble(JOptionPane.showInputDialog("Please Enter the rate of the employee selected"));
-        Double Salary = hoursWorked * rate;
+public Double calculateWage() {
+      
+       String confirmEmpID = JOptionPane.showInputDialog("Please enter the Employee Username");
+       
+        Double Wage = 0.0;
+       
+       
+       if(confirmEmpID.equals(getUsername()))
+               {
+       String salarySt = newManager.getHoursWorked(confirmEmpID);
+  
+       String a = Character.toString(salarySt.charAt(0)) + Character.toString(salarySt.charAt(4)) + Character.toString(salarySt.charAt(5));
+       
+       Double HoursWorked = Double.parseDouble(a);
+       Double rate = Double.parseDouble(JOptionPane.showInputDialog("Please enter the Rate"));
 
-        JOptionPane.showMessageDialog(null, "The employee should get R" + Salary);
-    }
+        Wage = HoursWorked * rate;
+       JOptionPane.showInputDialog("The Staff Member Should get R:", Wage);
+       
+       
+       }else JOptionPane.showInputDialog("There is no such user");
+    
+       return Wage;
+   }
 
 
     public final void setButtonColor(Color color) {
