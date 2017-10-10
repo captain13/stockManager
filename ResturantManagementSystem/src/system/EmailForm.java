@@ -1,5 +1,6 @@
-
 package system;
+
+import java.awt.Color;
 
 /**
  *
@@ -11,7 +12,7 @@ public class EmailForm extends javax.swing.JFrame {
     Keyboard k = new Keyboard();
     
 
-    public EmailForm() {
+    public EmailForm(Color color) {
         initComponents();
         this.setLocationRelativeTo(null);
         k.setVisible(true);
@@ -30,12 +31,16 @@ public class EmailForm extends javax.swing.JFrame {
         return textAreaMessage.getText();
     }
 
+    public final void setButtonColor(Color color) {
+        sendButton.setBackground(color);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        sendButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -52,14 +57,14 @@ public class EmailForm extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton3.setBackground(new java.awt.Color(0, 138, 231));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Send");
-        jButton3.setContentAreaFilled(false);
-        jButton3.setOpaque(true);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        sendButton.setBackground(new java.awt.Color(0, 138, 231));
+        sendButton.setForeground(new java.awt.Color(255, 255, 255));
+        sendButton.setText("Send");
+        sendButton.setContentAreaFilled(false);
+        sendButton.setOpaque(true);
+        sendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                sendButtonActionPerformed(evt);
             }
         });
 
@@ -116,7 +121,7 @@ public class EmailForm extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton3)
+                                    .addComponent(sendButton)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1)))
                             .addComponent(jButton4))
@@ -148,7 +153,7 @@ public class EmailForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(sendButton)
                         .addGap(305, 305, 305)
                         .addComponent(jButton4))
                     .addComponent(jScrollPane1))
@@ -177,10 +182,10 @@ public class EmailForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         email.sendEmail(getReciepent(), getSubject(), getText());
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_sendButtonActionPerformed
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
         k.getTextfield(jTextField2);
@@ -191,7 +196,6 @@ public class EmailForm extends javax.swing.JFrame {
     }//GEN-LAST:event_textAreaMessageMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -201,6 +205,7 @@ public class EmailForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton sendButton;
     private javax.swing.JTextArea textAreaMessage;
     // End of variables declaration//GEN-END:variables
 }

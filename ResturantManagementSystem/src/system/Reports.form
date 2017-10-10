@@ -56,12 +56,12 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="buttonClose1" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                      <Component id="buttonClose2" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                      <Component id="buttonClose3" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                      <Component id="buttonClose4" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                      <Component id="buttonClose5" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                      <Component id="buttonClose6" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                      <Component id="buttonSales" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                      <Component id="buttonEmployeePerform" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                      <Component id="buttonSalesMonthly" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                      <Component id="buttonSalesDaily" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                      <Component id="buttonStock" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                      <Component id="buttonExpense" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="341" max="32767" attributes="0"/>
               </Group>
@@ -80,17 +80,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="buttonClose1" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonSales" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="buttonClose4" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonSalesDaily" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="buttonClose3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonSalesMonthly" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="buttonClose6" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonExpense" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="buttonClose2" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonEmployeePerform" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="buttonClose5" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonStock" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="113" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -146,11 +146,12 @@
                 <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
                 </Property>
+                <Property name="showVerticalLines" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="buttonClose1">
+        <Component class="javax.swing.JButton" name="buttonSales">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e7" green="8a" red="0" type="rgb"/>
@@ -163,10 +164,10 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonClose1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSalesActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="buttonClose2">
+        <Component class="javax.swing.JButton" name="buttonEmployeePerform">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e7" green="8a" red="0" type="rgb"/>
@@ -179,10 +180,10 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonClose2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEmployeePerformActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="buttonClose3">
+        <Component class="javax.swing.JButton" name="buttonSalesMonthly">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e7" green="8a" red="0" type="rgb"/>
@@ -195,10 +196,10 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonClose3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSalesMonthlyActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="buttonClose4">
+        <Component class="javax.swing.JButton" name="buttonSalesDaily">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e7" green="8a" red="0" type="rgb"/>
@@ -211,10 +212,10 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonClose4ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSalesDailyActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="buttonClose5">
+        <Component class="javax.swing.JButton" name="buttonStock">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e7" green="8a" red="0" type="rgb"/>
@@ -227,10 +228,10 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonClose5ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonStockActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="buttonClose6">
+        <Component class="javax.swing.JButton" name="buttonExpense">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e7" green="8a" red="0" type="rgb"/>
@@ -243,7 +244,7 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonClose6ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonExpenseActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -51,6 +51,9 @@
         <Property name="tabPlacement" type="int" value="2"/>
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="TabbedPanelStateChanged"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JTabbedPane(&#xd;&#xa;      JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);&#xd;&#xa;    TabbedPanel.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {&#xd;&#xa;      @Override&#xd;&#xa;        protected int calculateTabHeight(&#xd;&#xa;        int tabPlacement, int tabIndex, int fontHeight) {&#xd;&#xa;        return 50;&#xd;&#xa;      }&#xd;&#xa;            @Override&#xd;&#xa;       protected int calculateTabWidth(&#xd;&#xa;       int tabPlacement, int tabIndex, FontMetrics metrics) {&#xd;&#xa;           return 100;&#xd;&#xa;        }&#xd;&#xa;&#xd;&#xa;      @Override&#xd;&#xa;        protected void paintTab(&#xd;&#xa;        Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex,&#xd;&#xa;        Rectangle iconRect, Rectangle textRect) {&#xd;&#xa;         rects[tabIndex].height=50;&#xd;&#xa;          rects[tabIndex].width=100;&#xd;&#xa;        super.paintTab(g, tabPlacement, rects, tabIndex, iconRect, textRect);&#xd;&#xa;      }&#xd;&#xa;    });&#xd;&#xa;    "/>
       </AuxValues>
@@ -832,7 +835,6 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
-                            <Property name="enabled" type="boolean" value="false"/>
                             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="cc" green="cc" red="cc" type="rgb"/>
                             </Property>
@@ -1058,7 +1060,6 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
-                            <Property name="enabled" type="boolean" value="false"/>
                             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="cc" green="cc" red="cc" type="rgb"/>
                             </Property>
@@ -1199,7 +1200,6 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
-                            <Property name="enabled" type="boolean" value="false"/>
                             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="cc" green="cc" red="cc" type="rgb"/>
                             </Property>
@@ -1359,7 +1359,6 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
-                            <Property name="enabled" type="boolean" value="false"/>
                             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="cc" green="cc" red="cc" type="rgb"/>
                             </Property>
@@ -1527,9 +1526,10 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="buttonAlert" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   <Component id="buttonLogs" min="-2" pref="167" max="-2" attributes="0"/>
@@ -1552,10 +1552,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                      <Component id="buttonAlert" min="-2" pref="167" max="-2" attributes="0"/>
-                                      <Component id="buttonOrderHistory" alignment="1" min="-2" pref="167" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="buttonOrderHistory" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                                   <Component id="buttonMakeOrder" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                                   <Component id="buttonEmail" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                               </Group>
@@ -1567,7 +1564,9 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="buttonAlert" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="buttonEmployee" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="buttonManageSpecials" min="-2" max="-2" attributes="0"/>
@@ -1575,7 +1574,7 @@
                           <Component id="buttonReports" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="buttonLogs" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="278" max="32767" attributes="0"/>
                           <Component id="buttonLogs1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1585,9 +1584,7 @@
                               <Component id="buttonOrderHistory" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonMakeOrder" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="buttonAlert" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="buttonEmail" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="426" max="32767" attributes="0"/>
                           </Group>
@@ -1611,19 +1608,6 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOrderHistoryActionPerformed"/>
                   </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="buttonAlert">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e7" green="8a" red="0" type="rgb"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Alerts"/>
-                    <Property name="contentAreaFilled" type="boolean" value="false"/>
-                    <Property name="opaque" type="boolean" value="true"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="buttonEmail">
                   <Properties>
@@ -1736,6 +1720,22 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonLogs1ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JToggleButton" name="buttonAlert">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="e7" green="8a" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Alert"/>
+                    <Property name="contentAreaFilled" type="boolean" value="false"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAlertActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -2090,7 +2090,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="currentEmail1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Email Adress"/>
+                    <Property name="text" type="java.lang.String" value="Email Address"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="currentEmail">

@@ -27,7 +27,7 @@ import javax.swing.table.TableRowSorter;
 public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     BookingForm booking;
-    Calendar calendar;
+    CalendarForm calendarForm;
     Specials specials;
     userManager user = new userManager();
     settingsManager settings = new settingsManager();
@@ -42,6 +42,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     boolean enableKeypad = false;
     int n;
     JButton button;
+    boolean editable = false;
+    ArrayList details = new ArrayList();
 
     public MainSystem() {
         initComponents();
@@ -56,11 +58,18 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         populateSupplierTable();
         populateOrderTable();
         getSetting();
+        system.checkStockLevel();
+       // calanderFunctionality();
     }
 
     public final void populateInvnetoryTable() {
         String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit", "Item Cost"};
-        DefaultTableModel tableModel = new DefaultTableModel(system.getInventoryData(), columnNamesInventory);
+        DefaultTableModel tableModel = new DefaultTableModel(system.getInventoryData(), columnNamesInventory) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return editable;
+            }
+        };
         tblInventory.setModel(tableModel);
         searchITable();
         tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -72,7 +81,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public final void populateRecipeTable() {
         String columnNamesRecipe[] = {"Recipe ID", "Description", "Type", "Price", "VAT"};
-        DefaultTableModel tableModel = new DefaultTableModel(system.getRecipeData(), columnNamesRecipe);
+        DefaultTableModel tableModel = new DefaultTableModel(system.getRecipeData(), columnNamesRecipe) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return editable;
+            }
+        };
         tableRecipe.setModel(tableModel);
         searchRTable();
 //        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -84,7 +98,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public final void populateRecipeListTable() {
         String columnNamesRecipeList[] = {"Recipe ID", "Recipe Name", "Inventory ID", "Item Name", "Quantity"};
-        DefaultTableModel tableModel = new DefaultTableModel(system.getRecipeListData(), columnNamesRecipeList);
+        DefaultTableModel tableModel = new DefaultTableModel(system.getRecipeListData(), columnNamesRecipeList) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return editable;
+            }
+        };
         tableRecipeList.setModel(tableModel);
 //         searchTable();
 //        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -97,7 +116,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public final void populateSupplierTable() {
         String columnNamesSupplier[] = {"Supplier ID", "Name", "Email", "Contact Number", "Address"};
-        DefaultTableModel tableModel = new DefaultTableModel(system.getSuppleirData(), columnNamesSupplier);
+        DefaultTableModel tableModel = new DefaultTableModel(system.getSuppleirData(), columnNamesSupplier) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return editable;
+            }
+        };
         tblSupplier.setModel(tableModel);
         searchSTable();
 //        tblInventory.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -282,7 +306,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     public void updateInventory() {
         if ("Edit".equals(buttonEdit.getText())) {
             buttonEdit.setText("Save");
-            tblInventory.setEnabled(true);
+            editable = true;
         } else if ("Save".equals(buttonEdit.getText())) {
             tblInventory.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
             if (tblInventory.isEditing()) {
@@ -303,14 +327,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 }
             }
             buttonEdit.setText("Edit");
-            tblInventory.setEnabled(false);
+            editable = false;
         }
     }
 
     public void updateRecipe() {
         if ("Edit".equals(buttonRecipeEdit.getText())) {
             buttonRecipeEdit.setText("Save");
-            tableRecipe.setEnabled(true);
+            editable = true;
         } else if ("Save".equals(buttonRecipeEdit.getText())) {
             //stops editting of getTableOrder cell to allow button event
             tableRecipe.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
@@ -332,14 +356,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 }
             }
             buttonRecipeEdit.setText("Edit");
-            tableRecipe.setEnabled(false);
+            editable = false;
         }
     }
 
     public void updateRecipeList() {
         if ("Edit".equals(buttonRecipeListEdit.getText())) {
             buttonRecipeListEdit.setText("Save");
-            tableRecipeList.setEnabled(true);
+            editable = true;
         } else if ("Save".equals(buttonRecipeListEdit.getText())) {
             int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
@@ -352,14 +376,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 }
             }
             buttonRecipeListEdit.setText("Edit");
-            tableRecipeList.setEnabled(false);
+            editable = false;
         }
     }
 
     public void updateSupplier() {
         if ("Edit".equals(buttonSupplierEdit.getText())) {
             buttonSupplierEdit.setText("Save");
-            tblSupplier.setEnabled(true);
+            editable = true;
         } else if ("Save".equals(buttonSupplierEdit.getText())) {
 
             //stops editting of getTableOrder cell to allow button event
@@ -382,7 +406,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 }
             }
             buttonSupplierEdit.setText("Edit");
-            tblSupplier.setEnabled(false);
+            editable = false;
         }
     }
 
@@ -513,6 +537,32 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public String getEmailPassword() {
         return jPasswordField1.getText();
+    }
+
+    public void calanderFunctionality() {
+        booking.GetTableInfo();
+        for (int i = 0; i < booking.GetTableInfo().length; i++) {
+            System.out.println("ran");
+            System.out.println(booking.GetTableInfo()[i]);
+         
+            if (booking.GetTableInfo()[i].toString().equals(clock.getCurrentDate())) {
+                buttonBookings.setText("Bookings !!!");
+                buttonPromotions.setText("Calendar !!!");
+            }
+        }
+    }
+
+    public void alert(String inventoryID) {
+        details.add(inventoryID);
+        for (int i = 0; i < details.size(); i++) {
+            System.out.println(details.get(i));
+            if (details.get(i).equals(system.getInventoryData()[i][0])) {
+                String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit", "Item Cost"};
+                DefaultTableModel tableModel = new DefaultTableModel(system.getInventoryData(), columnNamesInventory);
+                tblOrderHistory.setModel(tableModel);
+
+            }
+        }
     }
 
     public void buttonColor(Color color) {
@@ -654,7 +704,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         tblOrderHistory = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         buttonOrderHistory = new javax.swing.JButton();
-        buttonAlert = new javax.swing.JButton();
         buttonEmail = new javax.swing.JButton();
         buttonMakeOrder = new javax.swing.JButton();
         buttonReports = new javax.swing.JButton();
@@ -662,6 +711,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonManageSpecials = new javax.swing.JButton();
         buttonLogs = new javax.swing.JButton();
         buttonLogs1 = new javax.swing.JButton();
+        buttonAlert = new javax.swing.JToggleButton();
         Settings = new javax.swing.JPanel();
         lblSettings = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -699,6 +749,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         TabbedPanel.setForeground(new java.awt.Color(255, 255, 255));
         TabbedPanel.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         TabbedPanel.setOpaque(true);
+        TabbedPanel.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                TabbedPanelStateChanged(evt);
+            }
+        });
 
         Dashboard.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1120,7 +1175,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 "ID no.", "Item", "Quantity", "Cost per Unit", "Distrubutor ID ", "Distrubutor Name"
             }
         ));
-        tblInventory.setEnabled(false);
         tblInventory.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane3.setViewportView(tblInventory);
         if (tblInventory.getColumnModel().getColumnCount() > 0) {
@@ -1284,7 +1338,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 "ID no.", "Item", "Ingredients"
             }
         ));
-        tableRecipe.setEnabled(false);
         tableRecipe.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane4.setViewportView(tableRecipe);
         if (tableRecipe.getColumnModel().getColumnCount() > 0) {
@@ -1385,7 +1438,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 "ID no.", "Item", "Ingredients"
             }
         ));
-        tableRecipeList.setEnabled(false);
         tableRecipeList.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane6.setViewportView(tableRecipeList);
         if (tableRecipeList.getColumnModel().getColumnCount() > 0) {
@@ -1494,7 +1546,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 "ID no.", "Item", "Ingredients"
             }
         ));
-        tblSupplier.setEnabled(false);
         tblSupplier.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane5.setViewportView(tblSupplier);
         if (tblSupplier.getColumnModel().getColumnCount() > 0) {
@@ -1655,12 +1706,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        buttonAlert.setBackground(new java.awt.Color(0, 138, 231));
-        buttonAlert.setForeground(new java.awt.Color(255, 255, 255));
-        buttonAlert.setText("Alerts");
-        buttonAlert.setContentAreaFilled(false);
-        buttonAlert.setOpaque(true);
-
         buttonEmail.setBackground(new java.awt.Color(0, 138, 231));
         buttonEmail.setForeground(new java.awt.Color(255, 255, 255));
         buttonEmail.setText("Email");
@@ -1739,6 +1784,17 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        buttonAlert.setBackground(new java.awt.Color(0, 138, 231));
+        buttonAlert.setForeground(new java.awt.Color(255, 255, 255));
+        buttonAlert.setText("Alert");
+        buttonAlert.setContentAreaFilled(false);
+        buttonAlert.setOpaque(true);
+        buttonAlert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAlertActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1746,6 +1802,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonAlert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(buttonLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1762,9 +1819,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buttonAlert, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonOrderHistory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonOrderHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(buttonMakeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(buttonEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -1772,7 +1827,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(125, 125, 125)
+                .addGap(70, 70, 70)
+                .addComponent(buttonAlert)
+                .addGap(32, 32, 32)
                 .addComponent(buttonEmployee)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonManageSpecials)
@@ -1780,7 +1837,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(buttonReports)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonLogs)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
                 .addComponent(buttonLogs1)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1789,9 +1846,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(buttonOrderHistory)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(buttonMakeOrder)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(buttonAlert)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGap(35, 35, 35)
                     .addComponent(buttonEmail)
                     .addContainerGap(426, Short.MAX_VALUE)))
         );
@@ -1932,7 +1987,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         currentEmail2.setText("Email Password");
 
-        currentEmail1.setText("Email Adress");
+        currentEmail1.setText("Email Address");
 
         currentEmail.setText("Email");
 
@@ -2133,14 +2188,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void buttonEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmployeeActionPerformed
-        EmployeeForm emp = new EmployeeForm();
+        EmployeeForm emp = new EmployeeForm(color);
         emp.setVisible(true);
     }//GEN-LAST:event_buttonEmployeeActionPerformed
 
     private void buttonPromotionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPromotionsActionPerformed
         try {
-            calendar = new Calendar();
-            calendar.setVisible(true);
+
+            calendarForm = new CalendarForm();
             booking.setVisible(false);
             specials.setVisible(false);
         } catch (RuntimeException ignore) {
@@ -2151,13 +2206,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         try {
             specials = new Specials();
             specials.setVisible(true);
-            calendar.setVisible(false);
+            calendarForm.setVisible(false);
             booking.setVisible(false);
         } catch (RuntimeException ignore) {
         }
     }//GEN-LAST:event_buttonSpecialsActionPerformed
 
     private void buttonBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookingsActionPerformed
+    
         if (keypadCheck() == true) {
             Keyboard key = new Keyboard();
             key.setLocation(600, 650);
@@ -2167,9 +2223,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             booking = new BookingForm();
             booking.setVisible(true);
             specials.setVisible(false);
-            calendar.setVisible(false);
+            calendarForm.setVisible(false);
         } catch (RuntimeException ignore) {
         }
+            calanderFunctionality();
     }//GEN-LAST:event_buttonBookingsActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
@@ -2189,7 +2246,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonLayoutActionPerformed
 
     private void buttonReprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReprintActionPerformed
-
+        ReprintForm reprint = new ReprintForm();
+        reprint.setVisible(true);
     }//GEN-LAST:event_buttonReprintActionPerformed
 
     private void comboBoxSceenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxSceenItemStateChanged
@@ -2306,12 +2364,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonMakeOrderActionPerformed
 
     private void buttonEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmailActionPerformed
-        EmailForm newEmail = new EmailForm();
+        EmailForm newEmail = new EmailForm(color);
         newEmail.setVisible(true);
     }//GEN-LAST:event_buttonEmailActionPerformed
 
     private void buttonReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReportsActionPerformed
-        Reports newReport = new Reports();
+        Reports newReport = new Reports(color);
         newReport.setVisible(true);
     }//GEN-LAST:event_buttonReportsActionPerformed
 
@@ -2373,7 +2431,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void buttonManageSpecialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonManageSpecialsActionPerformed
-        SpecialsForm newForm = new SpecialsForm();
+        SpecialsForm newForm = new SpecialsForm(color);
         newForm.setVisible(true);
     }//GEN-LAST:event_buttonManageSpecialsActionPerformed
 
@@ -2433,7 +2491,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void buttonRecipeEdit3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit3ActionPerformed
-        // TODO add your handling code here:
+        prints.printRecipe();
     }//GEN-LAST:event_buttonRecipeEdit3ActionPerformed
 
     private void buttonRecipeDelete3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete3ActionPerformed
@@ -2441,7 +2499,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonRecipeDelete3ActionPerformed
 
     private void buttonRecipeEdit4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit4ActionPerformed
-        // TODO add your handling code here:
+        prints.printSupplier();
     }//GEN-LAST:event_buttonRecipeEdit4ActionPerformed
 
     private void buttonRecipeListEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeListEditActionPerformed
@@ -2449,12 +2507,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonRecipeListEditActionPerformed
 
     private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
-        tblInventory.setEnabled(true);
         if (tblInventory.getSelectedRow() == (-1)) {
         } else {
             updateShrinkage();
             populateInvnetoryTable();
-            tblInventory.setEnabled(false);
         }
     }//GEN-LAST:event_buttonEdit1ActionPerformed
 
@@ -2476,7 +2532,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReprint3ActionPerformed
 
     private void buttonPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrintActionPerformed
-        prints.printTextToPDF();
+        prints.printInventory();
     }//GEN-LAST:event_buttonPrintActionPerformed
 
     private void comboBoxTableColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxTableColorItemStateChanged
@@ -2504,6 +2560,22 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         newForm.setVisible(true);
     }//GEN-LAST:event_buttonLogs1ActionPerformed
 
+    private void TabbedPanelStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_TabbedPanelStateChanged
+        if (TabbedPanel.getSelectedIndex() == 2) {
+            populateInvnetoryTable();
+        }
+    }//GEN-LAST:event_TabbedPanelStateChanged
+
+    private void buttonAlertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlertActionPerformed
+        buttonAlert.setText("Alert!!!");
+
+        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(g)"};
+        DefaultTableModel tableModel = new DefaultTableModel(system.checkStockLevel(), columnNamesInventory);
+        tblOrderHistory.setModel(tableModel);
+
+
+    }//GEN-LAST:event_buttonAlertActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2518,6 +2590,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 if ("Macintosh".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
@@ -2540,7 +2613,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel Settings;
     private javax.swing.JTabbedPane TabbedPanel;
     private javax.swing.JButton buttonAdd;
-    private javax.swing.JButton buttonAlert;
+    private javax.swing.JToggleButton buttonAlert;
     private javax.swing.JButton buttonBookings;
     private javax.swing.JButton buttonClose;
     private javax.swing.JButton buttonDelete;

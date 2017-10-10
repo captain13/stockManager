@@ -9,9 +9,9 @@ package system;
  *
  * @author Andrew
  */
-public class Calendar extends javax.swing.JFrame {
+public class CalendarForm extends javax.swing.JFrame {
 
-    public Calendar() {
+    public CalendarForm() {
 
         initComponents();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
