@@ -38,7 +38,7 @@ public class receiptHandler {
     public void body(double total) {
         body = spaces + "\n"
                 + "Items                                    Qty   Price\n"            
-                + getReceipt() +"\n"
+                + itemsList() +"\n"
                 + "Total " + total + "\n" 
                 + "Amount........................\n";
         System.out.println(body);

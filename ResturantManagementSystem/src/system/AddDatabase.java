@@ -30,7 +30,7 @@ public class AddDatabase extends javax.swing.JFrame {
     
     public void insert() {
         if (!"".equals(textfieldItem.getText()) || !"".equals(textfieldQty.getText())) {
-            database.insertInventory(getItem(), getInventoryCategory(), getQuantity(), getLimit(), getReorderLevel());
+            database.insertInventory(getItem(), getInventoryCategory(), getQuantity(), getLimit(), getReorderLevel(), getItemCost());
             system.populateInvnetoryTable();
         } else {
         }
@@ -117,6 +117,10 @@ public class AddDatabase extends javax.swing.JFrame {
     public Double getPrice() {
         return Double.parseDouble(textPrice.getText());
     }
+    
+    public Double getItemCost() {
+        return Double.parseDouble(costText.getText());
+    }
 
     public Double getVAT() {
         return Double.parseDouble(textVAT.getText());
@@ -177,6 +181,8 @@ public class AddDatabase extends javax.swing.JFrame {
         comboxThreshold = new javax.swing.JComboBox<>();
         lblQty5 = new javax.swing.JLabel();
         comboxThreshold1 = new javax.swing.JComboBox<>();
+        costText = new javax.swing.JTextField();
+        costLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblCostPerItem1 = new javax.swing.JLabel();
         textRecipe = new javax.swing.JTextField();
@@ -255,6 +261,15 @@ public class AddDatabase extends javax.swing.JFrame {
 
         comboxThreshold1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Meat", "Grain", "Dairy", "Vegetable", "Soft Drinks", "Alcohol", "Sauces" }));
 
+        costText.setBackground(new java.awt.Color(204, 204, 204));
+        costText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                costTextMouseClicked(evt);
+            }
+        });
+
+        costLabel.setText("Cost per Unit");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -264,27 +279,35 @@ public class AddDatabase extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblTitle)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblItem)
-                                    .addComponent(lblQty))
-                                .addGap(69, 69, 69))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblQty4)
                                     .addComponent(lblQty3)
                                     .addComponent(lblQty5))
-                                .addGap(40, 40, 40)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textfieldQty)
-                            .addComponent(textfieldItem, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboxThreshold, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textfieldLimit)
-                            .addComponent(comboxThreshold1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(44, 44, 44)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(comboxThreshold, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboxThreshold1, 0, 162, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblItem)
+                                                .addComponent(lblQty))
+                                            .addGap(69, 69, 69))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(lblQty4)
+                                            .addGap(61, 61, 61)))
+                                    .addComponent(costLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(costText)
+                                    .addComponent(textfieldQty, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textfieldItem, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                                    .addComponent(textfieldLimit, javax.swing.GroupLayout.Alignment.LEADING))))
                         .addGap(65, 65, 65))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -294,16 +317,21 @@ public class AddDatabase extends javax.swing.JFrame {
                 .addComponent(lblTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblItem)
-                    .addComponent(textfieldItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblQty)
-                    .addComponent(textfieldQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textfieldLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblQty4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblItem)
+                            .addComponent(textfieldItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblQty)
+                            .addComponent(textfieldQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textfieldLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblQty4))
+                        .addGap(13, 13, 13)
+                        .addComponent(costLabel))
+                    .addComponent(costText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQty3)
@@ -312,7 +340,7 @@ public class AddDatabase extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQty5)
                     .addComponent(comboxThreshold1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         tabbedPanel.addTab("Inventory", jPanel1);
@@ -668,6 +696,10 @@ public class AddDatabase extends javax.swing.JFrame {
         
     }//GEN-LAST:event_textRecipeActionPerformed
 
+    private void costTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_costTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_costTextMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAccpet;
@@ -675,6 +707,8 @@ public class AddDatabase extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboxCat;
     private javax.swing.JComboBox<String> comboxThreshold;
     private javax.swing.JComboBox<String> comboxThreshold1;
+    private javax.swing.JLabel costLabel;
+    private static javax.swing.JTextField costText;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;

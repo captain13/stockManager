@@ -20,6 +20,7 @@ public class internalClock extends Thread {
             while (true) {
                 time.setText(new SimpleDateFormat("HH:mm:ss").format(new Date()));
                 date.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+                
             }
         }).start();
     }

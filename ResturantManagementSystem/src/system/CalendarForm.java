@@ -5,16 +5,105 @@
  */
 package system;
 
+import com.toedter.calendar.IDateEvaluator;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.LineBorder;
+
 /**
  *
  * @author Andrew
  */
 public class CalendarForm extends javax.swing.JFrame {
 
+    LineBorder border = new LineBorder(Color.yellow);
+
     public CalendarForm() {
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            UIManager.put("Button.setEnable", true);
+            UIManager.put("Button.border", border);
+            UIManager.put("Button.background", Color.black);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(CalendarForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         initComponents();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        HighlightEvaluator evaluator = new HighlightEvaluator();
+        evaluator.add(createDate(14));
+        evaluator.add(createDate(15));
+
+        jCalendar.getDayChooser().addDateEvaluator(evaluator);
+        jCalendar.setCalendar(jCalendar.getCalendar());
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
+
+    private class HighlightEvaluator implements IDateEvaluator {
+
+        private final List<Date> list = new ArrayList<>();
+
+        public void add(Date date) {
+            list.add(date);
+        }
+
+        @Override
+        public boolean isSpecial(Date date) {
+            return list.contains(date);
+        }
+
+        @Override
+        public Color getSpecialForegroundColor() {
+            return new Color(0,138,241);
+        }
+
+        @Override
+        public Color getSpecialBackroundColor() {
+            return Color.blue;
+        }
+
+        @Override
+        public String getSpecialTooltip() {
+            return "Highlighted event.";
+        }
+
+        @Override
+        public boolean isInvalid(Date date) {
+            return false;
+        }
+
+        @Override
+        public Color getInvalidForegroundColor() {
+            return null;
+        }
+
+        @Override
+        public Color getInvalidBackroundColor() {
+            return null;
+        }
+
+        @Override
+        public String getInvalidTooltip() {
+            return null;
+        }
+    }
+
+    private Date createDate(int d) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.DAY_OF_MONTH, d);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        return (c.getTime());
     }
 
     @SuppressWarnings("unchecked")

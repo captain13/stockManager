@@ -715,16 +715,17 @@ public class dbManager {
         }
     }
 
-    public void insertInventory(String item, String category, int quantity, int limit, Double threshold) {
+    public void insertInventory(String item, String category, int quantity, int limit, Double threshold, Double cost) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuery = "INSERT INTO inventory (item,category ,qty,itemThreshold,itemLimit)"
+            String insertQuery = "INSERT INTO inventory (item,category ,qty,itemThreshold,itemLimit, itemCost)"
                     + "VALUES ('" + item + "',"
                     + "'" + category + "',"
                     + "'" + quantity + "',"
                     + "'" + threshold + "', '"
-                    + limit + "')";
+                    + limit + "', '"
+                    + cost + "')";
             s.execute(insertQuery);
             logs.writeLogs("ADDED", "Inventory");
             s.close();
@@ -1328,6 +1329,7 @@ public class dbManager {
         } catch (SQLException ex) {
             Logger.getLogger(NewOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
+        checkStockLevel();
     }
 
     public Object[][] checkStockLevel() {
@@ -1353,7 +1355,7 @@ public class dbManager {
                 i++;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(dbManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
         return stockLevel;
     }

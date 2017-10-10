@@ -43,7 +43,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     int n;
     JButton button;
     boolean editable = false;
-    ArrayList details = new ArrayList();
 
     public MainSystem() {
         initComponents();
@@ -52,14 +51,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         logs.logValidation();
         clock.internalClock(lblClock, lblDate);
         network.recieveData(jTable1);
+        booking = new BookingForm(this);
+        calanderFunctionality();
+        alert();
         populateInvnetoryTable();
         populateRecipeTable();
         populateRecipeListTable();
         populateSupplierTable();
         populateOrderTable();
         getSetting();
-        system.checkStockLevel();
-       // calanderFunctionality();
     }
 
     public final void populateInvnetoryTable() {
@@ -539,29 +539,21 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         return jPasswordField1.getText();
     }
 
-    public void calanderFunctionality() {
+    public final void calanderFunctionality() {
         booking.GetTableInfo();
         for (int i = 0; i < booking.GetTableInfo().length; i++) {
-            System.out.println("ran");
-            System.out.println(booking.GetTableInfo()[i]);
-         
             if (booking.GetTableInfo()[i].toString().equals(clock.getCurrentDate())) {
-                buttonBookings.setText("Bookings !!!");
-                buttonPromotions.setText("Calendar !!!");
+                buttonBookings.setText("Bookings [" + i + "]");
             }
         }
     }
 
-    public void alert(String inventoryID) {
-        details.add(inventoryID);
-        for (int i = 0; i < details.size(); i++) {
-            System.out.println(details.get(i));
-            if (details.get(i).equals(system.getInventoryData()[i][0])) {
-                String columnNamesInventory[] = {"Inventory ID", "Item Name", "Category", "Quantity(g)", "Item Threshold", "Item Limit", "Item Cost"};
-                DefaultTableModel tableModel = new DefaultTableModel(system.getInventoryData(), columnNamesInventory);
-                tblOrderHistory.setModel(tableModel);
-
-            }
+    public final void alert() {
+        for (int i = 0; i < system.checkStockLevel().length; i++) {
+            String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(g)"};
+            DefaultTableModel tableModel = new DefaultTableModel(system.checkStockLevel(), columnNamesInventory);
+            tblOrderHistory.setModel(tableModel);
+            buttonAlert.setText("Alert [" + i + "]");
         }
     }
 
@@ -1789,9 +1781,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonAlert.setText("Alert");
         buttonAlert.setContentAreaFilled(false);
         buttonAlert.setOpaque(true);
-        buttonAlert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAlertActionPerformed(evt);
+        buttonAlert.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                buttonAlertItemStateChanged(evt);
             }
         });
 
@@ -2213,20 +2205,19 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonSpecialsActionPerformed
 
     private void buttonBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookingsActionPerformed
-    
+
         if (keypadCheck() == true) {
             Keyboard key = new Keyboard();
             key.setLocation(600, 650);
             key.setVisible(true);
         }
         try {
-            booking = new BookingForm();
             booking.setVisible(true);
             specials.setVisible(false);
             calendarForm.setVisible(false);
         } catch (RuntimeException ignore) {
         }
-            calanderFunctionality();
+
     }//GEN-LAST:event_buttonBookingsActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
@@ -2566,15 +2557,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         }
     }//GEN-LAST:event_TabbedPanelStateChanged
 
-    private void buttonAlertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlertActionPerformed
-        buttonAlert.setText("Alert!!!");
-
-        String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(g)"};
-        DefaultTableModel tableModel = new DefaultTableModel(system.checkStockLevel(), columnNamesInventory);
-        tblOrderHistory.setModel(tableModel);
-
-
-    }//GEN-LAST:event_buttonAlertActionPerformed
+    private void buttonAlertItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_buttonAlertItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            alert();
+        } else {
+            populateOrderTable();
+        }
+    }//GEN-LAST:event_buttonAlertItemStateChanged
 
     /**
      * @param args the command line arguments

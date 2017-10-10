@@ -13,8 +13,9 @@ public class BookingForm extends javax.swing.JFrame {
     internalClock clock = new internalClock();
     settingsManager settings = new settingsManager();
     Keyboard k = new Keyboard();
+    MainSystem system ;
 
-    public BookingForm() {
+    public BookingForm(MainSystem system) {
         initComponents();
         populateReservationTable();
         setCurrentDate();
@@ -23,6 +24,7 @@ public class BookingForm extends javax.swing.JFrame {
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         k.setVisible(true);
         k.setBounds(700, 700, 575, 200);
+        this.system = system;
     }
 
     public final void populateReservationTable() {
@@ -484,6 +486,7 @@ public class BookingForm extends javax.swing.JFrame {
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
         newManager.insertReservations(getEmployee(), getDate(), getTime(), getCustomerName(), getTableNum(), getCustomerNum(), getCustomerContact());
         populateReservationTable();
+        system.calanderFunctionality();
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
