@@ -1,7 +1,16 @@
+-- MySQL Workbench Forward Engineering
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
+-- -----------------------------------------------------
+-- Schema resturantdb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema resturantdb
+-- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `resturantdb` DEFAULT CHARACTER SET utf8 ;
 USE `resturantdb` ;
 
@@ -125,9 +134,11 @@ CREATE TABLE IF NOT EXISTS `resturantdb`.`receipt` (
   `date` DATE NULL,
   `time` TIME NULL,
   `cost` DECIMAL(10,2) NULL,
-  PRIMARY KEY (`ID`, `recipeID`, `salesID`),
+  `employeeID` INT(11) NOT NULL,
+  PRIMARY KEY (`ID`, `recipeID`, `salesID`, `employeeID`),
   INDEX `fk_receipt_recipe1` (`recipeID` ASC),
-  INDEX `fk_receipt_sales1` (`salesID` ASC))
+  INDEX `fk_receipt_sales1` (`salesID` ASC),
+  INDEX `fk_receipt_employee1_idx` (`employeeID` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -157,11 +168,13 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `resturantdb`.`sales_employee` ;
 
-CREATE  TABLE IF NOT EXISTS `resturantdb`.`sales_employee` (
-  `sales_employeeID` INT(11) NOT NULL AUTO_INCREMENT ,
-  `employeeID` INT(11) NOT NULL ,
-  `salesID` INT(11) NOT NULL ,
-  PRIMARY KEY (`sales_employeeID`, `employeeID`, `salesID`) )
+CREATE TABLE IF NOT EXISTS `resturantdb`.`sales_employee` (
+  `sales_employeeID` INT(11) NOT NULL AUTO_INCREMENT,
+  `employeeID` INT(11) NOT NULL,
+  `salesID` INT(11) NOT NULL,
+  PRIMARY KEY (`sales_employeeID`, `employeeID`, `salesID`),
+  INDEX `fk_sales_employee_employee1` (`employeeID` ASC),
+  INDEX `fk_sales_employee_sales1` (`salesID` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -171,13 +184,13 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `resturantdb`.`supplier` ;
 
-CREATE  TABLE IF NOT EXISTS `resturantdb`.`supplier` (
-  `supplierID` INT(11) NOT NULL AUTO_INCREMENT ,
-  `supplierName` VARCHAR(45) NULL DEFAULT NULL ,
-  `supplierEmail` VARCHAR(45) NULL DEFAULT NULL ,
-  `supplierNumber` VARCHAR(45) NULL DEFAULT NULL ,
-  `supplierAddress` VARCHAR(45) NULL DEFAULT NULL ,
-  PRIMARY KEY (`supplierID`) )
+CREATE TABLE IF NOT EXISTS `resturantdb`.`supplier` (
+  `supplierID` INT(11) NOT NULL AUTO_INCREMENT,
+  `supplierName` VARCHAR(45) NULL DEFAULT NULL,
+  `supplierEmail` VARCHAR(45) NULL DEFAULT NULL,
+  `supplierNumber` VARCHAR(45) NULL DEFAULT NULL,
+  `supplierAddress` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`supplierID`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
@@ -236,7 +249,6 @@ CREATE TABLE IF NOT EXISTS `resturantdb`.`expenses` (
   INDEX `fk_expenses_wage1_idx` (`wageID` ASC),
   INDEX `fk_expenses_stockorder1_idx` (`stockOrderID` ASC))
 ENGINE = InnoDB;
-
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

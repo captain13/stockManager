@@ -263,3 +263,5 @@
 2017-10-10 17:13:31 record ADDED to Reservations table
 2017-10-10 17:15:29 record ADDED to Reservations table
 2017-10-10 17:15:30 record ADDED to Reservations table
+2017-10-10 17:28:44 record ADDED to Reservations table
+2017-10-10 18:50:49 record UPDATED to Inventory table

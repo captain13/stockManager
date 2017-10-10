@@ -13,7 +13,7 @@ public class BookingForm extends javax.swing.JFrame {
     internalClock clock = new internalClock();
     settingsManager settings = new settingsManager();
     Keyboard k = new Keyboard();
-    MainSystem system ;
+    MainSystem system;
 
     public BookingForm(MainSystem system) {
         initComponents();
@@ -475,9 +475,17 @@ public class BookingForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
-        newManager.insertReservations(getEmployee(), getDate(), getTime(), getCustomerName(), getTableNum(), getCustomerNum(), getCustomerContact());
-        populateReservationTable();
-        system.bookingAlert();
+        if (comboEmployee.getSelectedIndex() != 0 && comboTableNum.getSelectedIndex() != 0 && comboCustomerNum.getSelectedIndex() != 0) {
+            if (!"".equals(textCustomerName.getText()) && !"".equals(textCustomerContact.getText())) {
+                newManager.insertReservations(getEmployee(), getDate(), getTime(), getCustomerName(), getTableNum(), getCustomerNum(), getCustomerContact());
+                populateReservationTable();
+                system.bookingAlert();
+            } else {
+                JOptionPane.showMessageDialog(null, "Pleased Enter All Text Fields");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Pleased Select All Fields");
+        }
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
