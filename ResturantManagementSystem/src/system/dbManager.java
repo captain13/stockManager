@@ -82,6 +82,31 @@ public class dbManager {
         return rowData;
     }
 
+    public String getRecipeName(int id) {
+        String name = null;
+        try {
+            
+            Class.forName(driver).newInstance();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT recipeName FROM recipe WHERE recipeID ='" + id + "' ";
+            ResultSet rs = s.executeQuery(query);
+           
+            rs = s.executeQuery(query);
+
+            while (rs.next()) {
+                name = rs.getString(1);
+              
+            }
+
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+        }
+        return name;
+    }
+
     public Object[][] getRecipeData() {
         Object[][] rowData = null;
         try {
@@ -566,8 +591,88 @@ public class dbManager {
         }
         return supplierName;
     }
-    
-    public Object[][] getReprintReceipt(String date, String time) { 
+
+    public Object[][] getEmpSales(int emp) {
+        Object[][] sales = null;
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT receipt.date receipt.time FROM ((receipt INNER JOIN sales_employee ON receipt.salesID = sales_employee.salesID) INNER JOIN employee ON sales_employee.employeeID = '" + emp + "')";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            int rowCount = 0;
+            while (rs.next()) {
+                rowCount++;
+            }
+            rs = s.executeQuery(query);
+            sales = new Object[rowCount][columnCount];
+            int i = 0;
+            while (rs.next()) {
+                sales[i][0] = rs.getString("date");
+                sales[i][1] = rs.getString("time");
+                i++;
+            }
+
+        } catch (SQLException e) {
+
+        }
+        return sales;
+    }
+//
+//    public int getEmployeeID(String name) {
+//        int ID = 0;
+//        try {
+//            Connection conn = DriverManager.getConnection(url, username, password);
+//            Statement s = conn.createStatement();
+//            String query = "SELECT employeeID FROM employee WHERE name = '" + name + "'";
+//            ResultSet rs = s.executeQuery(query);
+//            int i = 0;
+//            while (rs.next()) {
+//                ID = rs.getInt(1);
+//                i++;
+//            }
+//
+//        } catch (SQLException e) {
+//
+//        }
+//        return ID;
+//    }
+
+    public Object[][] getReceiptData() {
+        Object[][] row = null;
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT * FROM receipt";// WHERE salesID = '"++"'";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            int rowCount = 0;
+            while (rs.next()) {
+                rowCount++;
+            }
+            rs = s.executeQuery(query);
+            row = new Object[rowCount][columnCount];
+            int i = 0;
+            while(rs.next()) {
+                row[i][0] = rs.getObject(1);
+                row[i][1] = rs.getObject(2);
+                row[i][2] = rs.getObject(3);
+                row[i][3] = rs.getObject(4);
+                row[i][4] = rs.getObject(5);
+                row[i][5] = rs.getObject(6);
+                row[i][6] = rs.getObject(7);
+                i++;
+             
+            }
+            
+        } catch (SQLException e) {
+            
+        }
+        return row;
+    }
+    public Object[][] getReprintReceipt(String date, String time) {
         Object[][] rowData = null;
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
@@ -583,6 +688,7 @@ public class dbManager {
             rs = s.executeQuery(query);
             rowData = new Object[rowCount][columnCount];
             int i = 0;
+
             while (rs.next()) {
                 rowData[i][0] = rs.getObject(1);
                 rowData[i][1] = rs.getObject(2);
@@ -591,16 +697,19 @@ public class dbManager {
                 rowData[i][4] = rs.getObject(5);
                 rowData[i][5] = rs.getObject(6);
                 rowData[i][6] = rs.getObject(7);
+
                 i++;
             }
             rs.close();
             s.close();
             conn.close();
-            } catch (SQLException exc) {
-                
-            }
+        } catch (SQLException exc) {
+
+        }
         return rowData;
     }
+    
+    
 
     //delete later
     public void showActiveEmp() {
@@ -784,21 +893,34 @@ public class dbManager {
 
     public void insertReceipt(int recipeID, String cost) {
         int receiptID = 0;
+        //String saleID = null;
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             receiptID += 1;
-
-            String insertQuery = "INSERT INTO receipt( recipeID, orderQuantity, salesID, date, time , cost)"
+            //String saleIDQuery = "SELECT salesID FROM sales ORDER BY salesID DESC LIMIT 1";
+//            ResultSet rs = s.executeQuery(saleIDQuery);
+//            while (rs.next()) {
+//                saleID = rs.getString("salesID");
+//            }
+//            
+//            String insertQuery1 = "INSERT INTO sales_employee(employeeID, salesID)"
+//                    + "VALUES ('"
+//                    + empID + "', '"
+//                    + saleID +"')";
+//            
+            String insertQuery = "INSERT INTO receipt( recipeID, orderQuantity, salesID, date, time , cost, employeeID)"
                     + "VALUES ('"
                     + recipeID + "', '"
                     + "1" + "', "
                     + "(SELECT salesID FROM sales ORDER BY salesID DESC LIMIT 1), '"
                     + clock.getCurrentDate() + "', '"
                     + clock.getCurrentTimeStamp() + "', '"
-                    + cost + "')";
+                    + cost + "'"
+                    + recipeID + "')";
             s.execute(insertQuery);
-
+            //s.execute(insertQuery1);
+            
             logs.writeLogs("ADDED", "receipt");
             s.close();
             conn.close();

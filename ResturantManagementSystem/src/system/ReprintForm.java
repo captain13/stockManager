@@ -20,6 +20,7 @@ public class ReprintForm extends javax.swing.JFrame {
     
     public ReprintForm() {
         initComponents();
+        this.setLocationRelativeTo(null);
         fillCombo();
     }
 
@@ -43,6 +44,7 @@ public class ReprintForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -77,6 +79,11 @@ public class ReprintForm extends javax.swing.JFrame {
         jLabel1.setText("Date and Time");
 
         jComboBoxWid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select waiter" }));
+        jComboBoxWid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxWidActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Waiter ID");
 
@@ -180,6 +187,10 @@ public class ReprintForm extends javax.swing.JFrame {
         rHandler.writeTextToPDF(getPrintPreview());
     }//GEN-LAST:event_jButtonPrintActionPerformed
 
+    private void jComboBoxWidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxWidActionPerformed
+        fillDateCombo();
+    }//GEN-LAST:event_jComboBoxWidActionPerformed
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -232,7 +243,7 @@ public class ReprintForm extends javax.swing.JFrame {
         String dt = jComboBoxDt.getSelectedItem().toString();
         String t = jComboBoxT.getSelectedItem().toString();
         body = spaces + "\n"
-                + "Items                          Qty   Price\n"            
+                + "Items                        Qty   Price\n"            
                 + itemsList(system.getReprintReceipt(dt,t)) +"\n"
                 + "Total " + total + "\n" 
                 + "Amount........................\n";
@@ -245,7 +256,7 @@ public class ReprintForm extends javax.swing.JFrame {
                 + "THANK YOU\n"
                 + "PLEASE COME AGAIN\n"
                 + spaces + "\n"
-                + "WAITER\n"
+                //+ "WAITER\n"
                 //+ NewOrder.getWaiter() + "\n"
                 + stars + "\n";
                 jTextAreaRef.append(tail);
@@ -253,36 +264,20 @@ public class ReprintForm extends javax.swing.JFrame {
     
     public StringBuilder itemsList(Object[][] list) {      
         items.setLength(0);
-        for (int i = 0; i < list.length; i++) {
-            for (int n = 0; n < list[i].length; n++) {
-                switch (n) {
-                    case 0:
-                        {
-                            int len = list[i][n].toString().length();
-                            int spc = 30 - len;
-                            items.append(list[i][n]).append(printS(spc));
-                            System.out.println(list[i][n]);
-                            break;
-                        }
-                    case 1:
-                        {
-                            int len = list[i][n].toString().length();
-                            int spc = 5 - len;
-                            items.append(list[i][n]).append(printS(spc));
-                            break;
-                        }
-                    case 2:
-                        {
-                            int len = list[i][n].toString().length();
-                            int spc = 5 - len;
-                            items.append(list[i][n]).append(printS(spc));
-                            total = total + Integer.parseInt(list[i][n].toString());
-                            break;
-                        }
-                    default:
-                        break;
-                }
-            }
+
+        int len;
+        int spc;
+        for (Object[] list1 : list) {
+            len = system.getRecipeName(Integer.parseInt(list1[0].toString())).length();
+            spc = 30 - len;
+            items.append(system.getRecipeName(Integer.parseInt(list1[0].toString()))).append(printS(spc));
+            len = list1[2].toString().length();
+            spc = 5 - len;
+            items.append(list1[2]).append(printS(spc));
+            len = list1[6].toString().length();
+            spc = 5 - len;
+            items.append(list1[6]).append(printS(spc));
+            total = total + Double.parseDouble(list1[6].toString());
             items.append("\n");
         }
         return items;
@@ -302,35 +297,34 @@ public class ReprintForm extends javax.swing.JFrame {
     public String getPrintPreview() {
         return jTextAreaRef.getText();
     }
-    public final void fillCombo() {
-        try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String query = "SELECT * FROM receipt, employee";
-            ResultSet rs = s.executeQuery(query);
-            
-            while(rs.next()) {
-                String dt = rs.getString("date");
-                String t = rs.getString("time");
-                String wid = rs.getString("employeeID");
-                jComboBoxDt.addItem(dt);
-                jComboBoxWid.addItem(wid);
-                jComboBoxT.addItem(t);
-            }
-            
-        } catch (SQLException e) {
-            
+    
+    public void fillCombo() {
+        Object[][] list = system.getReceiptData();
+        for (Object[] list1 :list) {
+            jComboBoxDt.addItem(list1[4].toString());
+            jComboBoxT.addItem(list1[5].toString());
+        }
+    }
+    
+    public void fillEmpCombo() {
+        Object[][] list = system.getEmployeeData();
+        for (Object[] list1 :list) {
+            jComboBoxWid.addItem(list1[0].toString());
+        }
+    }
+    
+    public void fillDateCombo() {
+        int id = Integer.parseInt(jComboBoxWid.getSelectedItem().toString());
+        Object[][] list = system.getEmpSales(id);
+        for (Object[] list1 :list) {
+            jComboBoxDt.addItem(list1[0].toString());
+            jComboBoxT.addItem(list1[1].toString());
         }
     }
     
     public void displayReceipt() {
-        String dt = jComboBoxDt.getSelectedItem().toString();
-        String t = jComboBoxT.getSelectedItem().toString();
         display();
     }
-//    public void reprintReceipt(){
-//        
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
