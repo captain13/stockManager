@@ -268,23 +268,23 @@ public class AddEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
     private void textfieildFnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieildFnameMouseClicked
-        k.getTextfield(textfieildFname);
+        k.setTextfield(textfieildFname);
     }//GEN-LAST:event_textfieildFnameMouseClicked
 
     private void textfieildLnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieildLnameMouseClicked
-        k.getTextfield(textfieildLname);
+        k.setTextfield(textfieildLname);
     }//GEN-LAST:event_textfieildLnameMouseClicked
 
     private void textfieildContactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieildContactMouseClicked
-        k.getTextfield(textfieildContact);
+        k.setTextfield(textfieildContact);
     }//GEN-LAST:event_textfieildContactMouseClicked
 
     private void textfieildPassowrdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieildPassowrdMouseClicked
-        k.getTextfield(textfieildPassowrd);
+        k.setTextfield(textfieildPassowrd);
     }//GEN-LAST:event_textfieildPassowrdMouseClicked
 
     private void textfieildPassowrdCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieildPassowrdCMouseClicked
-        k.getTextfield(textfieildPassowrdC);
+        k.setTextfield(textfieildPassowrdC);
     }//GEN-LAST:event_textfieildPassowrdCMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

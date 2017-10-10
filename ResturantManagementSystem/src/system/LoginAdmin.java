@@ -16,11 +16,14 @@ public class LoginAdmin extends javax.swing.JDialog {
     dbManager newDBManager = new dbManager();
     userManager newManager = new userManager();
     boolean accept;
+    Keyboard k = new Keyboard();
 
     public LoginAdmin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        k.setVisible(true);
+        k.setBounds(700, 700, 575, 200);
     }
 
     public boolean loginAuthentication(String username, String password) {
@@ -38,6 +41,7 @@ public class LoginAdmin extends javax.swing.JDialog {
         }
         if (login == true) {
             return true;
+            
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
             return false;
@@ -90,6 +94,18 @@ public class LoginAdmin extends javax.swing.JDialog {
         lblLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lblLoginActionPerformed(evt);
+            }
+        });
+
+        passwordFieldBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passwordFieldBoxMouseClicked(evt);
+            }
+        });
+
+        textfieldUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfieldUserMouseClicked(evt);
             }
         });
 
@@ -170,6 +186,14 @@ public class LoginAdmin extends javax.swing.JDialog {
         accept = loginAuthentication(username, password);
         this.dispose();
     }//GEN-LAST:event_lblLoginActionPerformed
+
+    private void textfieldUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldUserMouseClicked
+        k.setTextfield(textfieldUser);
+    }//GEN-LAST:event_textfieldUserMouseClicked
+
+    private void passwordFieldBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldBoxMouseClicked
+        k.setTextfield(passwordFieldBox);
+    }//GEN-LAST:event_passwordFieldBoxMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

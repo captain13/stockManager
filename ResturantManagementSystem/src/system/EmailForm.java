@@ -188,11 +188,11 @@ public class EmailForm extends javax.swing.JFrame {
     }//GEN-LAST:event_sendButtonActionPerformed
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
-        k.getTextfield(jTextField2);
+        k.setTextfield(jTextField2);
     }//GEN-LAST:event_jTextField2MouseClicked
 
     private void textAreaMessageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textAreaMessageMouseClicked
-        k.getTextfield(textAreaMessage);
+        k.setTextfield(textAreaMessage);
     }//GEN-LAST:event_textAreaMessageMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

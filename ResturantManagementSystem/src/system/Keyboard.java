@@ -9,8 +9,8 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 
 /**
  *
@@ -18,10 +18,12 @@ import javax.swing.JTextField;
  */
 public class Keyboard extends javax.swing.JFrame {
 
+    int caps = -0;
+
     int x;
     int y;
     String text;
-    JTextField textField;
+    JTextComponent textField;
     Point mouseDownCompCoords = null;
 
     public Keyboard() {
@@ -32,7 +34,7 @@ public class Keyboard extends javax.swing.JFrame {
 
     }
 
-    public void getTextfield(JTextField textField) {
+    public void setTextfield(JTextComponent textField) {
         this.textField = textField;
     }
 
@@ -316,6 +318,11 @@ public class Keyboard extends javax.swing.JFrame {
         jButton23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         jButton23.setContentAreaFilled(false);
         jButton23.setOpaque(true);
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
 
         jButton11.setBackground(new java.awt.Color(53, 53, 53));
         jButton11.setForeground(new java.awt.Color(255, 255, 255));
@@ -479,6 +486,11 @@ public class Keyboard extends javax.swing.JFrame {
         jToggleButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         jToggleButton1.setContentAreaFilled(false);
         jToggleButton1.setOpaque(true);
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         jButton32.setBackground(new java.awt.Color(53, 53, 53));
         jButton32.setForeground(new java.awt.Color(255, 255, 255));
@@ -486,6 +498,11 @@ public class Keyboard extends javax.swing.JFrame {
         jButton32.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         jButton32.setContentAreaFilled(false);
         jButton32.setOpaque(true);
+        jButton32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton32ActionPerformed(evt);
+            }
+        });
 
         jToggleButton2.setBackground(new java.awt.Color(53, 53, 53));
         jToggleButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -1024,38 +1041,31 @@ public class Keyboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton49ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        text = textField.getText() + "q";
-        textField.setText(text);
+        n("q");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        text = textField.getText() + "s";
-        textField.setText(text);
+        n("s");
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
-        text = textField.getText() + "1";
-        textField.setText(text);
+        n("1");
     }//GEN-LAST:event_jButton34ActionPerformed
 
     private void jButton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton35ActionPerformed
-        text = textField.getText() + "2";
-        textField.setText(text);
+        n("2");
     }//GEN-LAST:event_jButton35ActionPerformed
 
     private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton36ActionPerformed
-        text = textField.getText() + "3";
-        textField.setText(text);
+        n("3");
     }//GEN-LAST:event_jButton36ActionPerformed
 
     private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
-        text = textField.getText() + "4";
-        textField.setText(text);
+        n("4");
     }//GEN-LAST:event_jButton37ActionPerformed
 
     private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
-        text = textField.getText() + "5";
-        textField.setText(text);
+        n("5");
     }//GEN-LAST:event_jButton38ActionPerformed
 
     private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton39ActionPerformed
@@ -1064,214 +1074,204 @@ public class Keyboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton39ActionPerformed
 
     private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
-        text = textField.getText() + "7";
-        textField.setText(text);
+        n("7");
     }//GEN-LAST:event_jButton40ActionPerformed
 
     private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
-        text = textField.getText() + "8";
-        textField.setText(text);
+        n("8");
     }//GEN-LAST:event_jButton41ActionPerformed
 
     private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
-        text = textField.getText() + "9";
-        textField.setText(text);
+        n("9");
     }//GEN-LAST:event_jButton42ActionPerformed
 
     private void jButton43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton43ActionPerformed
-        text = textField.getText() + "0";
-        textField.setText(text);
+        n("0");
     }//GEN-LAST:event_jButton43ActionPerformed
 
     private void jButton44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton44ActionPerformed
-        text = textField.getText() + "-";
-        textField.setText(text);
+        n("-");
     }//GEN-LAST:event_jButton44ActionPerformed
 
     private void jButton45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton45ActionPerformed
-        text = textField.getText() + "=";
-        textField.setText(text);
+        n("=");
     }//GEN-LAST:event_jButton45ActionPerformed
 
     private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
-        if (textField.getText().length()>0){
-        StringBuffer sb = new StringBuffer(textField.getText());
-        sb = sb.deleteCharAt(textField.getText().length()-1);
-        textField.setText(sb.toString());
+        if (textField.getText().length() > 0) {
+            StringBuffer sb = new StringBuffer(textField.getText());
+            sb = sb.deleteCharAt(textField.getText().length() - 1);
+            textField.setText(sb.toString());
         }
     }//GEN-LAST:event_jButton46ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        text = textField.getText() + "w";
-        textField.setText(text);
+        n("w");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        text = textField.getText() + "e";
-        textField.setText(text);
+        n("e");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        text = textField.getText() + "r";
-        textField.setText(text);
+        n("r");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        text = textField.getText() + "t";
-        textField.setText(text);
+        n("t");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        text = textField.getText() + "y";
-        textField.setText(text);
+        n("y");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        text = textField.getText() + "u";
-        textField.setText(text);
+        n("u");
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        text = textField.getText() + "i";
-        textField.setText(text);
+        n("i");
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        text = textField.getText() + "o";
-        textField.setText(text);
+        n("o");
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        text = textField.getText() + "p";
-        textField.setText(text);
+        n("p");
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton47ActionPerformed
-        text = textField.getText() + "[";
-        textField.setText(text);
+        n("[");
     }//GEN-LAST:event_jButton47ActionPerformed
 
     private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton48ActionPerformed
-        text = textField.getText() + "]";
-        textField.setText(text);
+        n("]");
     }//GEN-LAST:event_jButton48ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        text = textField.getText() + "a";
-        textField.setText(text);
+        n("a");
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        text = textField.getText() + "d";
-        textField.setText(text);
+        n("d");
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        text = textField.getText() + "f";
-        textField.setText(text);
+        n("f");
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        text = textField.getText() + "g";
-        textField.setText(text);
+        n("g");
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        text = textField.getText() + "h";
-        textField.setText(text);
+        n("h");
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        text = textField.getText() + "j";
-        textField.setText(text);
+        n("j");
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        text = textField.getText() + "k";
-        textField.setText(text);
+        n("k");
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        text = textField.getText() + "l";
-        textField.setText(text);
+        n("l");
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton50ActionPerformed
-        text = textField.getText() + ";";
-        textField.setText(text);
+        n(";");
     }//GEN-LAST:event_jButton50ActionPerformed
 
     private void jButton51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton51ActionPerformed
-        text = textField.getText() + "'";
-        textField.setText(text);
+        n("'");
     }//GEN-LAST:event_jButton51ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        text = textField.getText() + "z";
-        textField.setText(text);
+        n("z");
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-        text = textField.getText() + "x";
-        textField.setText(text);
+        n("x");
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
-        text = textField.getText() + "c";
-        textField.setText(text);
+        n("c");
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
-        text = textField.getText() + "v";
-        textField.setText(text);
+        n("v");
     }//GEN-LAST:event_jButton27ActionPerformed
 
     private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
-        text = textField.getText() + "b";
-        textField.setText(text);
+        n("b");
     }//GEN-LAST:event_jButton28ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        text = textField.getText() + "n";
-        textField.setText(text);
+        n("n");
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        text = textField.getText() + "m";
-        textField.setText(text);
+        n("m");
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton54ActionPerformed
-        text = textField.getText() + ",";
-        textField.setText(text);
+        n(",");
     }//GEN-LAST:event_jButton54ActionPerformed
 
     private void jButton53ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton53ActionPerformed
-        text = textField.getText() + ".";
-        textField.setText(text);
+        n(".");
     }//GEN-LAST:event_jButton53ActionPerformed
 
     private void jButton52ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton52ActionPerformed
-        text = textField.getText() + "//";
-        textField.setText(text);
+        n("//");
     }//GEN-LAST:event_jButton52ActionPerformed
 
     private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
-        text = textField.getText() + " ";
-        textField.setText(text);
+        n("n");
     }//GEN-LAST:event_jButton29ActionPerformed
 
     private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
-        // TODO add your handling code here:
+        caps = 1;
     }//GEN-LAST:event_jButton32ActionPerformed
 
     private void jButton58ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton58ActionPerformed
-        text = textField.getText() + "+";
+        n("+");
     }//GEN-LAST:event_jButton58ActionPerformed
 
     private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton33ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        if (caps == 2) {
+            caps = 0;
+        } else {
+            caps = 2;
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        caps = 1;
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void n(String c) {
+        switch (caps) {
+            case 0:
+                break;
+            case 1:
+            case 2:
+                c = c.toUpperCase();
+                if (caps == 1) {
+                    caps = 0;
+                }
+                break;
+        }
+        text = textField.getText() + c;
+        textField.setText(text);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1336,7 +1336,4 @@ public class Keyboard extends javax.swing.JFrame {
     private javax.swing.JPanel pnlBoard;
     // End of variables declaration//GEN-END:variables
 
-    void getTextfield(JTextArea jTextArea1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

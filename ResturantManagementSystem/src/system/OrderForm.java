@@ -299,7 +299,7 @@ public class OrderForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void textQuantityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textQuantityMouseClicked
-        k.getTextfield(textQuantity);
+        k.setTextfield(textQuantity);
     }//GEN-LAST:event_textQuantityMouseClicked
 
 

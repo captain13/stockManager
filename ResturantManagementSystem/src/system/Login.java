@@ -146,11 +146,11 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void textfieldUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldUserMouseClicked
-        k.getTextfield(textfieldUser);
+        k.setTextfield(textfieldUser);
     }//GEN-LAST:event_textfieldUserMouseClicked
 
     private void passwordFieldBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldBoxMouseClicked
-        k.getTextfield(passwordFieldBox);
+        k.setTextfield(passwordFieldBox);
     }//GEN-LAST:event_passwordFieldBoxMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

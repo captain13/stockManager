@@ -625,43 +625,43 @@ public class AddDatabase extends javax.swing.JFrame {
     }//GEN-LAST:event_textfieldQtyActionPerformed
 
     private void textfieldItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldItemMouseClicked
-        k.getTextfield(textfieldItem);
+        k.setTextfield(textfieldItem);
     }//GEN-LAST:event_textfieldItemMouseClicked
 
     private void textfieldQtyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldQtyMouseClicked
-        k.getTextfield(textfieldQty);
+        k.setTextfield(textfieldQty);
     }//GEN-LAST:event_textfieldQtyMouseClicked
 
     private void textfieldLimitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldLimitMouseClicked
-        k.getTextfield(textfieldLimit);
+        k.setTextfield(textfieldLimit);
     }//GEN-LAST:event_textfieldLimitMouseClicked
 
     private void textRecipeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textRecipeMouseClicked
-        k.getTextfield(textRecipe);
+        k.setTextfield(textRecipe);
     }//GEN-LAST:event_textRecipeMouseClicked
 
     private void textPriceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textPriceMouseClicked
-        k.getTextfield(textPrice);
+        k.setTextfield(textPrice);
     }//GEN-LAST:event_textPriceMouseClicked
 
     private void textVATMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textVATMouseClicked
-        k.getTextfield(textVAT);
+        k.setTextfield(textVAT);
     }//GEN-LAST:event_textVATMouseClicked
 
     private void textfieldDisNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldDisNameMouseClicked
-        k.getTextfield(textfieldDisName);
+        k.setTextfield(textfieldDisName);
     }//GEN-LAST:event_textfieldDisNameMouseClicked
 
     private void textfieldDisEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldDisEmailMouseClicked
-        k.getTextfield(textfieldDisEmail);
+        k.setTextfield(textfieldDisEmail);
     }//GEN-LAST:event_textfieldDisEmailMouseClicked
 
     private void textfieldDisContactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldDisContactMouseClicked
-        k.getTextfield(textfieldDisContact);
+        k.setTextfield(textfieldDisContact);
     }//GEN-LAST:event_textfieldDisContactMouseClicked
 
     private void textfieldDisAddressMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldDisAddressMouseClicked
-        k.getTextfield(textfieldDisAddress);
+        k.setTextfield(textfieldDisAddress);
     }//GEN-LAST:event_textfieldDisAddressMouseClicked
 
     private void textRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textRecipeActionPerformed

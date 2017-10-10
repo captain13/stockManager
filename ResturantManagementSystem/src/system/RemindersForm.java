@@ -17,7 +17,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Andrew
@@ -61,17 +60,16 @@ public class RemindersForm extends javax.swing.JFrame {
             }
         });
     }
-  
+    
     public void writeReminders() {
-        
+
         String text = jTextArea1.getText();
-        text = text.substring(0,1).toUpperCase() + text.substring(1).toLowerCase();
-       
-        
+        text = text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
+
         try {
             FileWriter fileWriter = new FileWriter(file, false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            
+
             bufferedWriter.write(text);
             JOptionPane.showMessageDialog(null, "Reminder Added");
             bufferedWriter.newLine();
@@ -96,7 +94,7 @@ public class RemindersForm extends javax.swing.JFrame {
             System.out.println(ex);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -213,11 +211,11 @@ public class RemindersForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        writeReminders();        
+        writeReminders();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextArea1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseClicked
-        k.getTextfield(jTextArea1);
+        k.setTextfield(jTextArea1);
     }//GEN-LAST:event_jTextArea1MouseClicked
 
 

@@ -504,11 +504,11 @@ public class BookingForm extends javax.swing.JFrame {
     }//GEN-LAST:event_comboboxYearActionPerformed
 
     private void textCustomerNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textCustomerNameMouseClicked
-        k.getTextfield(textCustomerName);
+        k.setTextfield(textCustomerName);
     }//GEN-LAST:event_textCustomerNameMouseClicked
 
     private void textCustomerContactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textCustomerContactMouseClicked
-        k.getTextfield(textCustomerContact);
+        k.setTextfield(textCustomerContact);
     }//GEN-LAST:event_textCustomerContactMouseClicked
 
     private void textCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCustomerNameActionPerformed
