@@ -486,7 +486,7 @@ public class BookingForm extends javax.swing.JFrame {
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
         newManager.insertReservations(getEmployee(), getDate(), getTime(), getCustomerName(), getTableNum(), getCustomerNum(), getCustomerContact());
         populateReservationTable();
-        system.calanderFunctionality();
+        system.bookingAlert();
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed

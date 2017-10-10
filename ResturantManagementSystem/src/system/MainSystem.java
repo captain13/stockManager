@@ -52,8 +52,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         clock.internalClock(lblClock, lblDate);
         network.recieveData(jTable1);
         booking = new BookingForm(this);
-        calanderFunctionality();
-        alert();
+        bookingAlert();
+        stockAlert();
         populateInvnetoryTable();
         populateRecipeTable();
         populateRecipeListTable();
@@ -539,7 +539,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         return jPasswordField1.getText();
     }
 
-    public final void calanderFunctionality() {
+    public final void bookingAlert() {
         booking.GetTableInfo();
         for (int i = 0; i < booking.GetTableInfo().length; i++) {
             if (booking.GetTableInfo()[i].toString().equals(clock.getCurrentDate())) {
@@ -548,7 +548,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    public final void alert() {
+    public final void stockAlert() {
         for (int i = 0; i < system.checkStockLevel().length; i++) {
             String columnNamesInventory[] = {"Inventory ID", "Item Name", "Quantity(g)"};
             DefaultTableModel tableModel = new DefaultTableModel(system.checkStockLevel(), columnNamesInventory);
@@ -2187,7 +2187,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private void buttonPromotionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPromotionsActionPerformed
         try {
 
-            calendarForm = new CalendarForm();
+            calendarForm = new CalendarForm(color);
             booking.setVisible(false);
             specials.setVisible(false);
         } catch (RuntimeException ignore) {
@@ -2559,7 +2559,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonAlertItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_buttonAlertItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
-            alert();
+            stockAlert();
         } else {
             populateOrderTable();
         }

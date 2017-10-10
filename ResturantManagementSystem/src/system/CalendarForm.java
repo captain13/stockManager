@@ -7,44 +7,53 @@ package system;
 
 import com.toedter.calendar.IDateEvaluator;
 import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 /**
  *
  * @author Andrew
  */
-public class CalendarForm extends javax.swing.JFrame {
+public final class CalendarForm extends javax.swing.JFrame {
 
     LineBorder border = new LineBorder(Color.yellow);
+    dbManager newManager = new dbManager();
+    HighlightEvaluator evaluator = new HighlightEvaluator();
 
-    public CalendarForm() {
-        try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-            UIManager.put("Button.setEnable", true);
-            UIManager.put("Button.border", border);
-            UIManager.put("Button.background", Color.black);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(CalendarForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+    public CalendarForm(Color color) {
         initComponents();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        HighlightEvaluator evaluator = new HighlightEvaluator();
-        evaluator.add(createDate(14));
-        evaluator.add(createDate(15));
-
-        jCalendar.getDayChooser().addDateEvaluator(evaluator);
-        jCalendar.setCalendar(jCalendar.getCalendar());
+        addBookings();
+        setTheme(color);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+
+    }
+
+    public void addBookings() {
+        for (int i = 0; i < newManager.getReservationData().length; i++) {
+            try {
+                evaluator.add(new SimpleDateFormat("yyyy-MM-dd").parse(newManager.getReservationData()[i][2].toString()));
+            } catch (ParseException ex) {
+                Logger.getLogger(CalendarForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public final void setTheme(Color color) {
+        JPanel jpanel = jCalendar.getDayChooser().getDayPanel();
+        jpanel.setBackground(new Color(53, 53, 53));
+        jCalendar.setForeground(Color.white);
+        jCalendar.setDecorationBackgroundColor(color);
+        jCalendar.getDayChooser().addDateEvaluator(evaluator);
+        jCalendar.setCalendar(jCalendar.getCalendar());
     }
 
     private class HighlightEvaluator implements IDateEvaluator {
@@ -62,7 +71,7 @@ public class CalendarForm extends javax.swing.JFrame {
 
         @Override
         public Color getSpecialForegroundColor() {
-            return new Color(0,138,241);
+            return new Color(0, 138, 241);
         }
 
         @Override
@@ -96,16 +105,6 @@ public class CalendarForm extends javax.swing.JFrame {
         }
     }
 
-    private Date createDate(int d) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.DAY_OF_MONTH, d);
-        c.set(Calendar.HOUR_OF_DAY, 0);
-        c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
-        return (c.getTime());
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -137,7 +136,7 @@ public class CalendarForm extends javax.swing.JFrame {
         jCalendar.setNullDateButtonText("");
         jCalendar.setTodayButtonText("");
         jCalendar.setWeekOfYearVisible(false);
-        jCalendar.setWeekdayForeground(new java.awt.Color(0, 0, 0));
+        jCalendar.setWeekdayForeground(new java.awt.Color(255, 255, 255));
 
         lblTitle.setText("Calendar");
 
@@ -145,7 +144,7 @@ public class CalendarForm extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 434, Short.MAX_VALUE)
+            .addGap(0, 598, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -153,21 +152,21 @@ public class CalendarForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(lblTitle)
                             .addGap(0, 371, Short.MAX_VALUE))
-                        .addComponent(jCalendar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buttonClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jCalendar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+                        .addComponent(buttonClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE))
                     .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
+            .addGap(0, 416, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(lblTitle)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCalendar, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(buttonClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
 
@@ -175,11 +174,11 @@ public class CalendarForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

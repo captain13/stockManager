@@ -60,6 +60,22 @@ public class Keyboard extends javax.swing.JFrame {
             }
         });
     }
+    
+        private void n(String c) {
+        switch (caps) {
+            case 0:
+                break;
+            case 1:
+            case 2:
+                c = c.toUpperCase();
+                if (caps == 1) {
+                    caps = 0;
+                }
+                break;
+        }
+        text = textField.getText() + c;
+        textField.setText(text);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1257,21 +1273,6 @@ public class Keyboard extends javax.swing.JFrame {
         caps = 1;
     }//GEN-LAST:event_jButton23ActionPerformed
 
-    private void n(String c) {
-        switch (caps) {
-            case 0:
-                break;
-            case 1:
-            case 2:
-                c = c.toUpperCase();
-                if (caps == 1) {
-                    caps = 0;
-                }
-                break;
-        }
-        text = textField.getText() + c;
-        textField.setText(text);
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
