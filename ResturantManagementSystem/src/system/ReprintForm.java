@@ -25,9 +25,7 @@ public class ReprintForm extends javax.swing.JFrame {
     String stars = new String(new char[n]).replace("\0", "*");
     String spaces = new String(new char[n]).replace("\0", " ");
 
-    public void header() {
-        String dt = jComboBoxDt.getSelectedItem().toString();
-        String t = jComboBoxT.getSelectedItem().toString();
+    public void header(String dt, String t) {
         head = stars + "\n"
                 + "COMPANY NAME " + " " + "\n"
                 + dt + " "
@@ -36,9 +34,7 @@ public class ReprintForm extends javax.swing.JFrame {
         jTextAreaRef.append(head);
     }
 
-    public void body() {
-        String dt = jComboBoxDt.getSelectedItem().toString();
-        String t = jComboBoxT.getSelectedItem().toString();
+    public void body(String dt, String t) {
         body = spaces + "\n"
                 + "Items                        Qty   Price\n"
                 + itemsList(system.getReprintReceipt(dt, t)) + "\n"
@@ -61,7 +57,6 @@ public class ReprintForm extends javax.swing.JFrame {
 
     public StringBuilder itemsList(Object[][] list) {
         items.setLength(0);
-
         int len;
         int spc;
         for (Object[] list1 : list) {
@@ -86,8 +81,17 @@ public class ReprintForm extends javax.swing.JFrame {
     }
 
     public void display() {
-        header();
-        body();
+        String dt = null;
+        String t = null;
+        if (jComboBoxDt.getSelectedItem() != null) {
+            dt = jComboBoxDt.getSelectedItem().toString();
+        }
+        if (jComboBoxT.getSelectedItem() != null) {
+            t = jComboBoxT.getSelectedItem().toString();
+        }
+        
+        header(dt, t);
+        body(dt, t);
         tail();
     }
 
@@ -167,7 +171,7 @@ public class ReprintForm extends javax.swing.JFrame {
         jTextAreaRef.setRows(5);
         jScrollPane1.setViewportView(jTextAreaRef);
 
-        jComboBoxDt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select" }));
+        jComboBoxDt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
         jComboBoxDt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxDtActionPerformed(evt);
@@ -196,7 +200,7 @@ public class ReprintForm extends javax.swing.JFrame {
 
         jLabel2.setText("Waiter ID");
 
-        jComboBoxT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select" }));
+        jComboBoxT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
         jComboBoxT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTActionPerformed(evt);
@@ -267,8 +271,9 @@ public class ReprintForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxDtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDtActionPerformed
-        if (jComboBoxDt.getSelectedItem() != null && jComboBoxT.getSelectedItem() != null) {
+        if (jComboBoxDt.getSelectedItem() != null || jComboBoxT.getSelectedItem() != null) {
             jTextAreaRef.setText("");
+            total = 0;
             displayReceipt();
         } else {
             jTextAreaRef.setText("");
@@ -276,8 +281,9 @@ public class ReprintForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxDtActionPerformed
 
     private void jComboBoxTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTActionPerformed
-        if (jComboBoxDt.getSelectedItem() != null && jComboBoxT.getSelectedItem() != null) {
+        if (jComboBoxDt.getSelectedItem() != null || jComboBoxT.getSelectedItem() != null) {
             jTextAreaRef.setText("");
+            total = 0;
             displayReceipt();
         } else {
             jTextAreaRef.setText("");
