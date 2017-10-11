@@ -460,25 +460,6 @@
                 <Property name="rows" type="int" value="0"/>
               </Layout>
             </Container>
-            <Container class="javax.swing.JPanel" name="specialTab">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Specials">
-                    <Property name="tabTitle" type="java.lang.String" value="Specials"/>
-                  </JTabbedPaneConstraints>
-                </Constraint>
-              </Constraints>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                <Property name="columns" type="int" value="7"/>
-                <Property name="rows" type="int" value="0"/>
-              </Layout>
-            </Container>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JToggleButton" name="jToggleButton8">

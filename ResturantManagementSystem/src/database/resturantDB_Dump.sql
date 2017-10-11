@@ -134,11 +134,9 @@ CREATE TABLE IF NOT EXISTS `resturantdb`.`receipt` (
   `date` DATE NULL,
   `time` TIME NULL,
   `cost` DECIMAL(10,2) NULL,
-  `employeeID` INT(11) NOT NULL,
-  PRIMARY KEY (`ID`, `recipeID`, `salesID`, `employeeID`),
+  PRIMARY KEY (`ID`, `recipeID`, `salesID`),
   INDEX `fk_receipt_recipe1` (`recipeID` ASC),
-  INDEX `fk_receipt_sales1` (`salesID` ASC),
-  INDEX `fk_receipt_employee1_idx` (`employeeID` ASC))
+  INDEX `fk_receipt_sales1` (`salesID` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -224,7 +222,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `resturantdb`.`wage` ;
 
 CREATE TABLE IF NOT EXISTS `resturantdb`.`wage` (
-  `wageID` INT NOT NULL,
+  `wageID` INT NOT NULL AUTO_INCREMENT,
   `employeeID` INT(11) NOT NULL,
   `wageAmount` DECIMAL(10,2) NULL,
   `postion` VARCHAR(45) NULL,
@@ -305,25 +303,25 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `resturantdb`;
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (1,'Chicken Burger & Chips',75,10.5,'Main Meal','./src/images/_f_chickenBurger.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (2,'Beef Burger & Chips',75,10.5,'Main Meal','./src/images/_f_beefBurger.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (3,'Pork Ribs & Chips',75,10.5,'Main Meal','./src/images/_f_porkRibs.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (4,'Chicken Wings & Chips',75,10.5,'Light Meal','./src/images/_f_chickenWings.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (5,'Green Salad',75,10.5,'Light Meal','./src/images/_f_salad.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (6,'Ceasar Salad',75,10.5,'Light Meal','./src/images/_f_caesarSalad.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (7,'Coke',75,10.5,'Drinks','./src/images/_d_cokeLogo.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (8,'Coke Light',75,10.5,'Drinks','./src/images/_d_cokeLightLogo.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (9,'Fanta',75,10.5,'Drinks','./src/images/_d_fantaLogo.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (10,'Sprite',75,10.5,'Drinks','./src/images/_d_spriteLogo.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (11,'Ice Tea Peach',75,10.5,'Drinks','./src/images/_d_liptonLogo.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (12,'Ice Tea Lemon',75,10.5,'Drinks','./src/images/_d_liptonLogo.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (13,'Ice Cream & Chocolate Sauce',75,10.5,'Dessert','./src/images/_d_Choc_Icecream.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (14,'Chocolate Mousse',75,10.5,'Dessert','./src/images/_d_Choc_Mousse.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (15,'Large Chips',75,10.5,'Extra','./src/images/_e_chips.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (16,'Small Chips',75,10.5,'Extra','./src/images/_e_chips.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (17,'Avocardo',75,10.5,'Extra','./src/images/_e_avocardo.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (18,'Feta',75,10.5,'Extra','./src/images/_e_feta.jpg',8);
-INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`) VALUES (19,'Tomato',75,10.5,'Extra','./src/images/_e_tomato.jpg',8);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (1,'Chicken Burger & Chips',75,10.5,'Main Meal','./src/images/_f_chickenBurger.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (2,'Beef Burger & Chips',75,10.5,'Main Meal','./src/images/_f_beefBurger.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (3,'Pork Ribs & Chips',75,10.5,'Main Meal','./src/images/_f_porkRibs.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (4,'Chicken Wings & Chips',75,10.5,'Light Meal','./src/images/_f_chickenWings.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (5,'Green Salad',75,10.5,'Light Meal','./src/images/_f_salad.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (6,'Ceasar Salad',75,10.5,'Light Meal','./src/images/_f_caesarSalad.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (7,'Coke',75,10.5,'Drinks','./src/images/_d_cokeLogo.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (8,'Coke Light',75,10.5,'Drinks','./src/images/_d_cokeLightLogo.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (9,'Fanta',75,10.5,'Drinks','./src/images/_d_fantaLogo.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (10,'Sprite',75,10.5,'Drinks','./src/images/_d_spriteLogo.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (11,'Ice Tea Peach',75,10.5,'Drinks','./src/images/_d_liptonLogo.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (12,'Ice Tea Lemon',75,10.5,'Drinks','./src/images/_d_liptonLogo.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (13,'Ice Cream & Chocolate Sauce',75,10.5,'Dessert','./src/images/_d_Choc_Icecream.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (14,'Chocolate Mousse',75,10.5,'Dessert','./src/images/_d_Choc_Mousse.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (15,'Large Chips',75,10.5,'Extra','./src/images/_e_chips.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (16,'Small Chips',75,10.5,'Extra','./src/images/_e_chips.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (17,'Avocardo',75,10.5,'Extra','./src/images/_e_avocardo.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (18,'Feta',75,10.5,'Extra','./src/images/_e_feta.jpg',8,0);
+INSERT INTO `resturantdb`.`recipe` (`recipeID`, `recipeName`, `recipePrice`, `recipeVAT`,`recipeType`,`recipeImageDirectory`,`recipeCount`,`specialsID`) VALUES (19,'Tomato',75,10.5,'Extra','./src/images/_e_tomato.jpg',8,0);
 
 COMMIT;
 

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><settings>
     
-    
-    
 <generalsettings>
-        <resolution>Windowed Screen</resolution>
+        <resolution>Fullscreen</resolution>
         <logo>default</logo>
         <tableNum>20</tableNum>
-        <emailAddress>zcsastock@gmail.com</emailAddress>
-        <emailPassword>Password32</emailPassword>
+        <emailAddress>nullnull</emailAddress>
+        <emailPassword>nullnull</emailPassword>
         <themeColor>Red</themeColor>
+        <dbUsername>root</dbUsername>
+        <dbPassword>nullnull</dbPassword>
     </generalsettings></settings>

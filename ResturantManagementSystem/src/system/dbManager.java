@@ -26,7 +26,7 @@ public class dbManager {
     internalClock clock = new internalClock();
     String url = "jdbc:mysql://localhost:3306/resturantdb";
     String username = "root";
-    String password = "Mouse";
+    String password = "root";
     String driver = "com.mysql.jdbc.Driver";
     String currentUsersHomeDir = System.getProperty("user.home");
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";

@@ -158,24 +158,6 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             index5 = 0;
         }
 
-        for (int i = 0; i < n; i++) {
-            if (!newManager.getRecipeData()[i][7].equals(0)) {
-                ImageIcon icon = (new ImageIcon(recipeInfo[i][5].toString()));
-                button = new JButton(recipeInfo[i][1].toString(), icon);
-                button.setVerticalTextPosition(SwingConstants.BOTTOM);
-                button.setHorizontalTextPosition(SwingConstants.CENTER);
-                button.setPreferredSize(new Dimension(50, 50));
-                button.setMargin(new Insets(0, 0, 0, 0));
-                button.setContentAreaFilled(false);
-                button.setFocusPainted(false);
-                button.addActionListener(this);
-                specialTab.add(button);
-                ++index1;
-            }
-            emptySpaceTab6 = emptySpaceTab5 - index6;
-            index5 = 0;
-        }
-
         for (int i = 1; i < emptySpaceTab1; i++) {
             JButton emptyButton = new JButton();
             mainMealTab.add(emptyButton);
@@ -204,11 +186,6 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
             emptyButton.setVisible(false);
         }
 
-        for (int i = 1; i < emptySpaceTab6; i++) {
-            JButton emptyButton = new JButton();
-            specialTab.add(emptyButton);
-            emptyButton.setVisible(false);
-        }
     }
 
     @Override
@@ -390,7 +367,6 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         dessertTab = new javax.swing.JPanel();
         drinksTab = new javax.swing.JPanel();
         extraTab = new javax.swing.JPanel();
-        specialTab = new javax.swing.JPanel();
         jToggleButton8 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -584,10 +560,6 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         extraTab.setLayout(new java.awt.GridLayout(0, 7));
         menuPane.addTab("Extras", extraTab);
 
-        specialTab.setBackground(new java.awt.Color(255, 255, 255));
-        specialTab.setLayout(new java.awt.GridLayout(0, 7));
-        menuPane.addTab("Specials", specialTab);
-
         jToggleButton8.setBackground(new java.awt.Color(75, 75, 75));
         jToggleButton8.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton8.setText("Close Table");
@@ -693,7 +665,6 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     private javax.swing.JPanel mainMealTab;
     private javax.swing.JTabbedPane menuPane;
     private static javax.swing.JLabel nameTF;
-    private javax.swing.JPanel specialTab;
     public static javax.swing.JTable tblItems;
     public static javax.swing.JFormattedTextField textfieldTotal;
     // End of variables declaration//GEN-END:variables
