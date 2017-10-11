@@ -85,18 +85,18 @@ public class dbManager {
     public String getRecipeName(int id) {
         String name = null;
         try {
-            
+
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String query = "SELECT recipeName FROM recipe WHERE recipeID ='" + id + "' ";
             ResultSet rs = s.executeQuery(query);
-           
+
             rs = s.executeQuery(query);
 
             while (rs.next()) {
                 name = rs.getString(1);
-              
+
             }
 
             rs.close();
@@ -628,9 +628,9 @@ public class dbManager {
             Statement s = conn.createStatement();
             String query = "SELECT employeeID FROM employee WHERE Username= '" + getEmployeeUsername() + "'";
             ResultSet rs = s.executeQuery(query);
-            
-                ID = rs.getInt(1);
-            
+
+            ID = rs.getInt(1);
+
         } catch (SQLException e) {
 
         }
@@ -653,7 +653,7 @@ public class dbManager {
             rs = s.executeQuery(query);
             row = new Object[rowCount][columnCount];
             int i = 0;
-            while(rs.next()) {
+            while (rs.next()) {
                 row[i][0] = rs.getObject(1);
                 row[i][1] = rs.getObject(2);
                 row[i][2] = rs.getObject(3);
@@ -662,14 +662,15 @@ public class dbManager {
                 row[i][5] = rs.getObject(6);
                 row[i][6] = rs.getObject(7);
                 i++;
-             
+
             }
-            
+
         } catch (SQLException e) {
-            
+
         }
         return row;
     }
+
     public Object[][] getReprintReceipt(String date, String time) {
         Object[][] rowData = null;
         try {
@@ -706,8 +707,6 @@ public class dbManager {
         }
         return rowData;
     }
-    
-    
 
     //delete later
     public void showActiveEmp() {
@@ -758,6 +757,7 @@ public class dbManager {
         }
         return time;
     }
+
     public String getEmployeeUsername() {
         String Username = "";
         try {
@@ -774,7 +774,6 @@ public class dbManager {
         }
         return Username;
     }
- 
 
     public void insertEmployee(String firstName, String lastName, String empPassword, String contact, int adminRights) {
         try {
@@ -850,25 +849,23 @@ public class dbManager {
         } catch (SQLException exp) {
         }
     }
-    
-        public void insertWage(Double Wage, int ID) {
+
+    public void insertWage(Double Wage, int ID) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertWages = "INSERT INTO wage ( employeeID, wageAmount)" + "VALUES ('" + ID + "','" +Wage+ "')";
+            String insertWages = "INSERT INTO wage ( employeeID, wageAmount)" + "VALUES ('" + ID + "','" + Wage + "')";
             s.execute(insertWages);
             logs.writeLogs("ADDED", "wage");
             s.close();
             conn.close();
-            
+
             JOptionPane.showMessageDialog(null, "The Wage has been added to the Database");
-     
-            
+
         } catch (SQLException exp) {
             System.out.println(exp);
         }
     }
-
 
     public int getRecipeID(String item) {
         int ID = 0;
@@ -916,7 +913,7 @@ public class dbManager {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             String selectQuery = "SELECT specialsPrice FROM specials WHERE specialsID='" + specialID + "'";
-             ResultSet rs = s.executeQuery(selectQuery);
+            ResultSet rs = s.executeQuery(selectQuery);
             while (rs.next()) {
                 specialPrice = rs.getDouble("specialsPrice");
             }
@@ -947,12 +944,12 @@ public class dbManager {
     }
 
     public void insertReceipt(int recipeID, String cost) {
-        int receiptID = 0;
+//        int receiptID = 0;
         //String saleID = null;
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            receiptID += 1;
+//            receiptID += 1;
             //String saleIDQuery = "SELECT salesID FROM sales ORDER BY salesID DESC LIMIT 1";
 //            ResultSet rs = s.executeQuery(saleIDQuery);
 //            while (rs.next()) {
@@ -964,23 +961,22 @@ public class dbManager {
 //                    + empID + "', '"
 //                    + saleID +"')";
 //            
-            String insertQuery = "INSERT INTO receipt( recipeID, orderQuantity, salesID, date, time , cost, employeeID)"
+            String insertQuery = "INSERT INTO receipt(recipeID, orderQuantity, salesID, date, time , cost)"
                     + "VALUES ('"
                     + recipeID + "', '"
                     + "1" + "', "
                     + "(SELECT salesID FROM sales ORDER BY salesID DESC LIMIT 1), '"
                     + clock.getCurrentDate() + "', '"
                     + clock.getCurrentTimeStamp() + "', '"
-                    + cost + "'"
-                    + recipeID + "')";
+                    + cost + "')";
             s.execute(insertQuery);
             //s.execute(insertQuery1);
-            
+
             logs.writeLogs("ADDED", "receipt");
             s.close();
             conn.close();
         } catch (SQLException exp) {
-            System.out.println(exp);
+            System.out.println("this " + exp);
         }
     }
 
