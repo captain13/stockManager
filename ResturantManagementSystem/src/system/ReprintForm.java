@@ -1,5 +1,7 @@
 package system;
 
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Chad
@@ -48,7 +50,7 @@ public class ReprintForm extends javax.swing.JFrame {
                 + stars + "\n"
                 + "THANK YOU\n"
                 + "PLEASE COME AGAIN\n"
-                + spaces + "\n"
+                //+ spaces + "\n"
                 //+ "WAITER\n"
                 //+ NewOrder.getWaiter() + "\n"
                 + stars + "\n";
@@ -57,16 +59,28 @@ public class ReprintForm extends javax.swing.JFrame {
 
     public StringBuilder itemsList(Object[][] list) {
         items.setLength(0);
+        int len;
+        int spc;
         for (Object[] list1 : list) {
-            items.append(system.getRecipeName(Integer.parseInt(list1[0].toString()))).append("\n");
-            items.append(list1[2]).append("\n");
-            items.append(list1[6]).append("\n");
+            len = system.getRecipeName(Integer.parseInt(list1[0].toString())).length();
+            spc = 30 - len;
+            items.append(system.getRecipeName(Integer.parseInt(list1[0].toString()))).append(printS(spc));
+            len = list1[2].toString().length();
+            spc = 5 - len;
+            items.append(list1[2]).append(printS(spc));
+            len = list1[6].toString().length();
+            spc = 5 - len;
+            items.append(list1[6]).append(printS(spc));
             total = total + Double.parseDouble(list1[6].toString());
             items.append("\n");
         }
         return items;
     }
 
+    private String printS(int n) {
+        String spc = new String(new char[n]).replace("\0", " ");
+        return spc;
+    }
 
     public void display() {
         String dt = null;
@@ -77,7 +91,7 @@ public class ReprintForm extends javax.swing.JFrame {
         if (jComboBoxT.getSelectedItem() != null) {
             t = jComboBoxT.getSelectedItem().toString();
         }
-        
+
         header(dt, t);
         body(dt, t);
         tail();
@@ -90,8 +104,12 @@ public class ReprintForm extends javax.swing.JFrame {
     public void fillCombo() {
         Object[][] list = system.getReceiptData();
         for (Object[] list1 : list) {
-            jComboBoxDt.addItem(list1[4].toString());
-            jComboBoxT.addItem(list1[5].toString());
+            if (((DefaultComboBoxModel) jComboBoxDt.getModel()).getIndexOf(list1[4].toString()) == -1) {
+                jComboBoxDt.addItem(list1[4].toString());
+            }
+            if (((DefaultComboBoxModel) jComboBoxT.getModel()).getIndexOf(list1[5].toString()) == -1) {
+                jComboBoxT.addItem(list1[5].toString());
+            }
         }
     }
 
@@ -101,7 +119,6 @@ public class ReprintForm extends javax.swing.JFrame {
 //            jComboBoxWid.addItem(list1[0].toString());
 //        }
 //    }
-
     public void displayReceipt() {
         display();
     }

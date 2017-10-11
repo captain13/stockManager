@@ -118,7 +118,8 @@ public class receiptHandler {
             document.setMargins(2, 2, 2, 2);
             //open
             document.open();
-            writer.setSpaceCharRatio(PdfWriter.NO_SPACE_CHAR_RATIO);
+            //writer.setSpaceCharRatio(PdfWriter.NO_SPACE_CHAR_RATIO);
+            writer.setSpaceCharRatio(PdfWriter.SPACE_CHAR_RATIO_DEFAULT);
             Paragraph p = new Paragraph();
             p.setAlignment(Element.ALIGN_CENTER);
             p.setIndentationLeft(20);
