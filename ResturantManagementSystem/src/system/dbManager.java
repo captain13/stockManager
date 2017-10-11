@@ -26,7 +26,7 @@ public class dbManager {
     internalClock clock = new internalClock();
     String url = "jdbc:mysql://localhost:3306/resturantdb";
     String username = "root";
-    String password = "root";
+    String password = "Mouse";
     String driver = "com.mysql.jdbc.Driver";
     String currentUsersHomeDir = System.getProperty("user.home");
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";
@@ -620,25 +620,22 @@ public class dbManager {
         }
         return sales;
     }
-//
-//    public int getEmployeeID(String name) {
-//        int ID = 0;
-//        try {
-//            Connection conn = DriverManager.getConnection(url, username, password);
-//            Statement s = conn.createStatement();
-//            String query = "SELECT employeeID FROM employee WHERE name = '" + name + "'";
-//            ResultSet rs = s.executeQuery(query);
-//            int i = 0;
-//            while (rs.next()) {
-//                ID = rs.getInt(1);
-//                i++;
-//            }
-//
-//        } catch (SQLException e) {
-//
-//        }
-//        return ID;
-//    }
+
+    public int getEmployeeID(String Username) {
+        int ID = 0;
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
+            String query = "SELECT employeeID FROM employee WHERE Username= '" + getEmployeeUsername() + "'";
+            ResultSet rs = s.executeQuery(query);
+            
+                ID = rs.getInt(1);
+            
+        } catch (SQLException e) {
+
+        }
+        return ID;
+    }
 
     public Object[][] getReceiptData() {
         Object[][] row = null;
@@ -769,7 +766,7 @@ public class dbManager {
             String selectQuery = "SELECT employeeID FROM employee'";
             ResultSet rs = s.executeQuery(selectQuery);
             while (rs.next()) {
-                Username = rs.getString("inventoryID");
+                Username = rs.getString("employeeID");
             }
             s.close();
             conn.close();
@@ -854,15 +851,19 @@ public class dbManager {
         }
     }
     
-        public void insertWage(Double wage) {
+        public void insertWage(Double Wage, int ID) {
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO wages(inventoryID, Wage)"+"VALUES ('" + getEmployeeUsername() + "','" +wage+ "')";
-            s.execute(insertQuerySup);
+            String insertWages = "INSERT INTO wage ( employeeID, wageAmount)" + "VALUES ('" + ID + "','" +Wage+ "')";
+            s.execute(insertWages);
             logs.writeLogs("ADDED", "wage");
             s.close();
             conn.close();
+            
+            JOptionPane.showMessageDialog(null, "The Wage has been added to the Database");
+     
+            
         } catch (SQLException exp) {
             System.out.println(exp);
         }

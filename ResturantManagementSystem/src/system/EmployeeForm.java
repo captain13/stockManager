@@ -47,26 +47,22 @@ public class EmployeeForm extends javax.swing.JFrame {
 
 public Double calculateWage() {
       
-       String confirmEmpID = JOptionPane.showInputDialog("Please enter the Employee Username");
+       String confirmUsername = getUsername();
+       int ID = getID();
        
-        Double Wage = 0.0;
-       
-       
-       if(confirmEmpID.equals(getUsername()))
-               {
-       String salarySt = newManager.getHoursWorked(confirmEmpID);
+       String salarySt = newManager.getHoursWorked(confirmUsername);
   
-       String a = Character.toString(salarySt.charAt(0)) + Character.toString(salarySt.charAt(4)) + Character.toString(salarySt.charAt(5));
-       
-       Double HoursWorked = Double.parseDouble(a);
+       String hours = Character.toString(salarySt.charAt(0));
+       String minutes = Character.toString(salarySt.charAt(4)) + Character.toString(salarySt.charAt(5));
+      
+       Double HoursWorked = Double.parseDouble(hours);
+       Double minutesWorked = Double.parseDouble(minutes);
        Double rate = Double.parseDouble(JOptionPane.showInputDialog("Please enter the Rate"));
 
-        Wage = HoursWorked * rate;
-       JOptionPane.showInputDialog("The Staff Member Should get R:", Wage);
-       
-       
-       }else JOptionPane.showInputDialog("There is no such user");
-    
+       Double Wage = HoursWorked * rate + (rate/60)*minutesWorked;
+
+       JOptionPane.showMessageDialog(this,"The Staff Member Should get R:"+ Wage);
+       newManager.insertWage(Wage, ID);
        return Wage;
    }
 

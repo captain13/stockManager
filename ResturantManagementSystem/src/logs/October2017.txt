@@ -302,3 +302,13 @@
 2017-10-10 23:09:03 record ADDED to Specials table
 2017-10-10 23:09:58 record ADDED to Specials table
 >>>>>>> master
+2017-10-11 09:19:33 record ADDED to wage table
+2017-10-11 09:25:11 record ADDED to wage table
+2017-10-11 09:28:07 record ADDED to wage table
+2017-10-11 09:28:15 record ADDED to wage table
+2017-10-11 09:35:26 record ADDED to wage table
+2017-10-11 09:44:50 record ADDED to wage table
+2017-10-11 09:44:59 record ADDED to wage table
+2017-10-11 09:50:31 record ADDED to wage table
+2017-10-11 09:57:51 record ADDED to wage table
+2017-10-11 09:57:58 record ADDED to wage table

@@ -367,7 +367,7 @@ DROP TABLE IF EXISTS `wage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `wage` (
-  `wageID` int(11) NOT NULL,
+  `wageID` int(11) NOT NULL AUTO_INCREMENT,
   `employeeID` int(11) NOT NULL,
   `wageAmount` decimal(10,2) DEFAULT NULL,
   `postion` varchar(45) DEFAULT NULL,
