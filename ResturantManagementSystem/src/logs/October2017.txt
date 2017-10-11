@@ -383,3 +383,13 @@
 2017-10-11 20:08:15 record ADDED to receipt table
 2017-10-11 20:08:15 record ADDED to receipt table
 2017-10-11 20:08:15 record ADDED to receipt table
+2017-10-11 23:09:45 record UPDATED to recipe table
+2017-10-11 23:09:45 record UPDATED to recipe table
+2017-10-11 23:09:48 record ADDED to Sales table
+2017-10-11 23:09:48 record ADDED to receipt table
+2017-10-11 23:09:48 record ADDED to receipt table
+2017-10-11 23:14:46 record UPDATED to recipe table
+2017-10-11 23:14:46 record UPDATED to recipe table
+2017-10-11 23:14:50 record ADDED to Sales table
+2017-10-11 23:14:50 record ADDED to receipt table
+2017-10-11 23:14:50 record ADDED to receipt table

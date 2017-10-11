@@ -944,23 +944,9 @@ public class dbManager {
     }
 
     public void insertReceipt(int recipeID, String cost) {
-//        int receiptID = 0;
-        //String saleID = null;
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-//            receiptID += 1;
-            //String saleIDQuery = "SELECT salesID FROM sales ORDER BY salesID DESC LIMIT 1";
-//            ResultSet rs = s.executeQuery(saleIDQuery);
-//            while (rs.next()) {
-//                saleID = rs.getString("salesID");
-//            }
-//            
-//            String insertQuery1 = "INSERT INTO sales_employee(employeeID, salesID)"
-//                    + "VALUES ('"
-//                    + empID + "', '"
-//                    + saleID +"')";
-//            
             String insertQuery = "INSERT INTO receipt(recipeID, orderQuantity, salesID, date, time , cost)"
                     + "VALUES ('"
                     + recipeID + "', '"
@@ -970,8 +956,6 @@ public class dbManager {
                     + clock.getCurrentTimeStamp() + "', '"
                     + cost + "')";
             s.execute(insertQuery);
-            //s.execute(insertQuery1);
-
             logs.writeLogs("ADDED", "receipt");
             s.close();
             conn.close();
