@@ -889,16 +889,16 @@ public class dbManager {
     }
 
     public int getSpecialsID(String item) {
-        int ID = getRecipeID(item);
-        int ID2 = 0;
+        int recipeID = getRecipeID(item);
+        int specialID = 0;
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String selectQuery = "SELECT specialsID FROM recipe WHERE recipeID='" + ID + "'";
+            String selectQuery = "SELECT specialsID FROM recipe WHERE recipeID='" + recipeID + "'";
             ResultSet rs = s.executeQuery(selectQuery);
 
             while (rs.next()) {
-                ID2 = Integer.parseInt(rs.getString(1));
+                specialID = Integer.parseInt(rs.getString(1));
             }
 
             s.close();
@@ -906,33 +906,26 @@ public class dbManager {
         } catch (SQLException exp) {
             System.out.println(exp);
         }
-        return ID2;
+        return specialID;
     }
 
     public double getSpecialsPrice(String item) {
-        int ID = getRecipeID(item);
-        int ID2 = 0;
-        double ID3 = 0;
+        int specialID = getSpecialsID(item);
+        double specialPrice = 0;
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String selectQuery = "SELECT specialsID FROM recipe WHERE recipeID='" + ID + "'";
-            ResultSet rs = s.executeQuery(selectQuery);
-
+            String selectQuery = "SELECT specialsPrice FROM specials WHERE specialsID='" + specialID + "'";
+             ResultSet rs = s.executeQuery(selectQuery);
             while (rs.next()) {
-                ID2 = Integer.parseInt(rs.getString(1));
-            }
-            String selectQuery2 = "SELECT specialsPrice FROM specials WHERE specialsID='" + ID2 + "'";
-            rs = s.executeQuery(selectQuery2);
-            while (rs.next()) {
-                ID3 = rs.getDouble("specialsPrice");
+                specialPrice = rs.getDouble("specialsPrice");
             }
             s.close();
             conn.close();
         } catch (SQLException exp) {
             System.out.println(exp);
         }
-        return ID3;
+        return specialPrice;
     }
 
     public int getRecipeCost(String item) {

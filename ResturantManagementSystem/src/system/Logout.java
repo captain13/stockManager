@@ -81,14 +81,22 @@ public class Logout extends javax.swing.JFrame {
         tableLoginedUsers.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane1.setViewportView(tableLoginedUsers);
 
+        jButton1.setBackground(new java.awt.Color(53, 53, 53));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Logout");
+        jButton1.setContentAreaFilled(false);
+        jButton1.setOpaque(true);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        buttonCancel.setBackground(new java.awt.Color(53, 53, 53));
+        buttonCancel.setForeground(new java.awt.Color(255, 255, 255));
         buttonCancel.setText("Close");
+        buttonCancel.setContentAreaFilled(false);
+        buttonCancel.setOpaque(true);
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCancelActionPerformed(evt);

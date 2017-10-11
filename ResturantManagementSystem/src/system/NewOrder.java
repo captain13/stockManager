@@ -191,13 +191,11 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) {
         String buttonId = ae.getActionCommand();
-        int ID = newManager.getRecipeID(buttonId);
-        int ID2 = newManager.getSpecialsID(buttonId);
+        int recipeID = newManager.getRecipeID(buttonId);
         for (Object[] recipeInfo1 : recipeInfo) {
             if (buttonId.equals(recipeInfo1[1].toString())) {
                 boolean check = false;
-                System.out.println(newManager.getRecipeData()[ID + 1][7]);
-                if (!newManager.getRecipeData()[ID - 1][7].equals(0)&&newManager.getSpecialData()[(newManager.getSpecialsID(buttonId)-1)][4].equals(true)) {
+                if (!newManager.getRecipeData()[recipeID - 1][7].equals(0)&&newManager.getSpecialData()[(newManager.getSpecialsID(buttonId)-1)][4].equals(true)) {
                     model.addRow(new Object[]{recipeInfo1[1], "1", newManager.getSpecialsPrice(buttonId), check});
                 } else {
                     model.addRow(new Object[]{recipeInfo1[1], "1", recipeInfo1[3], check});

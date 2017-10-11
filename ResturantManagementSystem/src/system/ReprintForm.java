@@ -1,23 +1,14 @@
 package system;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 /**
  *
  * @author Chad
  */
 public class ReprintForm extends javax.swing.JFrame {
-    String url = "jdbc:mysql://localhost:3306/resturantdb";
-    String username = "root";
-    String password = "root";
-    String driver = "com.mysql.jdbc.Driver";
+
     dbManager system = new dbManager();
     reprintHandler rHandler = new reprintHandler();
-    
+
     public ReprintForm() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -47,10 +38,16 @@ public class ReprintForm extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setEnabled(false);
 
+        jButtonPrint.setBackground(new java.awt.Color(53, 53, 53));
+        jButtonPrint.setForeground(new java.awt.Color(255, 255, 255));
         jButtonPrint.setText("Print");
+        jButtonPrint.setContentAreaFilled(false);
+        jButtonPrint.setOpaque(true);
         jButtonPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPrintActionPerformed(evt);
@@ -69,7 +66,11 @@ public class ReprintForm extends javax.swing.JFrame {
             }
         });
 
+        jButtonClose.setBackground(new java.awt.Color(53, 53, 53));
+        jButtonClose.setForeground(new java.awt.Color(255, 255, 255));
         jButtonClose.setText("Close");
+        jButtonClose.setContentAreaFilled(false);
+        jButtonClose.setOpaque(true);
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCloseActionPerformed(evt);
@@ -120,7 +121,7 @@ public class ReprintForm extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,29 +141,25 @@ public class ReprintForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClose)
                     .addComponent(jButtonPrint))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxDtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDtActionPerformed
-        if (jComboBoxDt.getSelectedItem() != null && jComboBoxT.getSelectedItem() != null ) {
+        if (jComboBoxDt.getSelectedItem() != null && jComboBoxT.getSelectedItem() != null) {
             jTextAreaRef.setText("");
             displayReceipt();
         } else {
@@ -171,7 +168,7 @@ public class ReprintForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxDtActionPerformed
 
     private void jComboBoxTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTActionPerformed
-        if (jComboBoxDt.getSelectedItem() != null && jComboBoxT.getSelectedItem() != null ) {
+        if (jComboBoxDt.getSelectedItem() != null && jComboBoxT.getSelectedItem() != null) {
             jTextAreaRef.setText("");
             displayReceipt();
         } else {
@@ -190,33 +187,6 @@ public class ReprintForm extends javax.swing.JFrame {
     private void jComboBoxWidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxWidActionPerformed
         fillDateCombo();
     }//GEN-LAST:event_jComboBoxWidActionPerformed
-
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ReprintForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ReprintForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ReprintForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ReprintForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ReprintForm().setVisible(true);
-            }
-        });
-    }
     
     String head;
     String body;
@@ -226,32 +196,32 @@ public class ReprintForm extends javax.swing.JFrame {
     internalClock clock = new internalClock();
     int n = 45;
     String stars = new String(new char[n]).replace("\0", "*");
-    String spaces = new String(new char[n]).replace("\0", " "); 
-    
+    String spaces = new String(new char[n]).replace("\0", " ");
+
     public void header() {
         String dt = jComboBoxDt.getSelectedItem().toString();
         String t = jComboBoxT.getSelectedItem().toString();
-        head =  stars + "\n"
+        head = stars + "\n"
                 + "COMPANY NAME " + " " + "\n"
                 + dt + " "
                 + t + "\n"
                 + stars + "\n";
-                jTextAreaRef.append(head);
+        jTextAreaRef.append(head);
     }
 
     public void body() {
         String dt = jComboBoxDt.getSelectedItem().toString();
         String t = jComboBoxT.getSelectedItem().toString();
         body = spaces + "\n"
-                + "Items                        Qty   Price\n"            
-                + itemsList(system.getReprintReceipt(dt,t)) +"\n"
-                + "Total " + total + "\n" 
+                + "Items                        Qty   Price\n"
+                + itemsList(system.getReprintReceipt(dt, t)) + "\n"
+                + "Total " + total + "\n"
                 + "Amount........................\n";
-                jTextAreaRef.append(body);
+        jTextAreaRef.append(body);
     }
 
     public void tail() {
-        tail =  spaces + "\n"
+        tail = spaces + "\n"
                 + stars + "\n"
                 + "THANK YOU\n"
                 + "PLEASE COME AGAIN\n"
@@ -259,10 +229,10 @@ public class ReprintForm extends javax.swing.JFrame {
                 //+ "WAITER\n"
                 //+ NewOrder.getWaiter() + "\n"
                 + stars + "\n";
-                jTextAreaRef.append(tail);
+        jTextAreaRef.append(tail);
     }
-    
-    public StringBuilder itemsList(Object[][] list) {      
+
+    public StringBuilder itemsList(Object[][] list) {
         items.setLength(0);
 
         int len;
@@ -282,50 +252,50 @@ public class ReprintForm extends javax.swing.JFrame {
         }
         return items;
     }
-    
-    private String printS(int n){
+
+    private String printS(int n) {
         String spc = new String(new char[n]).replace("\0", " ");
         return spc;
     }
-    
+
     public void display() {
         header();
         body();
         tail();
     }
-    
+
     public String getPrintPreview() {
         return jTextAreaRef.getText();
     }
-    
+
     public void fillCombo() {
         Object[][] list = system.getReceiptData();
-        for (Object[] list1 :list) {
+        for (Object[] list1 : list) {
             jComboBoxDt.addItem(list1[4].toString());
             jComboBoxT.addItem(list1[5].toString());
         }
     }
-    
+
     public void fillEmpCombo() {
         Object[][] list = system.getEmployeeData();
-        for (Object[] list1 :list) {
+        for (Object[] list1 : list) {
             jComboBoxWid.addItem(list1[0].toString());
         }
     }
-    
+
     public void fillDateCombo() {
         int id = Integer.parseInt(jComboBoxWid.getSelectedItem().toString());
         Object[][] list = system.getEmpSales(id);
-        for (Object[] list1 :list) {
+        for (Object[] list1 : list) {
             jComboBoxDt.addItem(list1[0].toString());
             jComboBoxT.addItem(list1[1].toString());
         }
     }
-    
+
     public void displayReceipt() {
         display();
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonClose;
