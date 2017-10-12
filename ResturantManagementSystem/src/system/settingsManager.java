@@ -38,6 +38,8 @@ public class settingsManager {
     String email;
     String password;
     String color;
+    String usernameDB;
+    String passwordDB;
 
     public final void xmlValidition() {
         if (xmlSettings.exists()) {
@@ -67,6 +69,10 @@ public class settingsManager {
                 tableNumber.appendChild(document.createTextNode("15"));
                 generalSettings.appendChild(tableNumber);
 
+                Element keyPad = document.createElement("enableKeyPad");
+                keyPad.appendChild(document.createTextNode("0"));
+                generalSettings.appendChild(keyPad);
+
                 Element emailAddress = document.createElement("emailAddress");
                 emailAddress.appendChild(document.createTextNode("null"));
                 generalSettings.appendChild(emailAddress);
@@ -78,6 +84,14 @@ public class settingsManager {
                 Element themeColor = document.createElement("themeColor");
                 themeColor.appendChild(document.createTextNode("Blue"));
                 generalSettings.appendChild(themeColor);
+
+                Element databaseUsername = document.createElement("databaseUsername");
+                databaseUsername.appendChild(document.createTextNode("null"));
+                generalSettings.appendChild(databaseUsername);
+
+                Element databasePassword = document.createElement("databasePassword");
+                databasePassword.appendChild(document.createTextNode("null"));
+                generalSettings.appendChild(databasePassword);
 
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 Transformer transformer = transformerFactory.newTransformer();
@@ -104,6 +118,8 @@ public class settingsManager {
             email = document.getElementsByTagName("emailAddress").item(0).getTextContent();
             password = document.getElementsByTagName("emailPassword").item(0).getTextContent();
             color = document.getElementsByTagName("themeColor").item(0).getTextContent();
+            usernameDB = document.getElementsByTagName("databaseUsername").item(0).getTextContent();
+            passwordDB = document.getElementsByTagName("databasePassword").item(0).getTextContent();
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             Logger.getLogger(settingsManager.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -111,7 +127,8 @@ public class settingsManager {
         }
     }
 
-    public void updateSettings(String selectedItem, String selectedTable, String emailAddress, String emailPassword, String themeColor) {
+    public void updateSettings(String selectedItem, String selectedTable, String emailAddress,
+            String emailPassword, String themeColor, String dbUsername, String dbPassword) {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder;
         try {
@@ -145,6 +162,14 @@ public class settingsManager {
                     node.setTextContent(themeColor);
                 }
 
+                if ("databaseUsername".equals(node.getNodeName())) {
+                    node.setTextContent(dbUsername);
+                }
+
+                if ("databasePassword".equals(node.getNodeName())) {
+                    node.setTextContent(dbPassword);
+                }
+
             }
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -163,7 +188,7 @@ public class settingsManager {
     }
 
     public String getTableCount() {
-       getSettings();
+        getSettings();
         return tableCount;
     }
 
@@ -177,6 +202,14 @@ public class settingsManager {
 
     public String getThemeColor() {
         return color;
+    }
+
+    public String getDatabaseUsername() {
+        return usernameDB;
+    }
+
+    public String getDatabePassword() {
+        return passwordDB;
     }
 
 }
