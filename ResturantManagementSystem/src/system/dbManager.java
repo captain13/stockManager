@@ -25,25 +25,32 @@ public class dbManager {
     logSystem logs = new logSystem();
     internalClock clock = new internalClock();
     String url = "jdbc:mysql://localhost:3306/resturantdb";
-    String username = "root";
-    String password = "root";
+    String username;
+    String password;
     String driver = "com.mysql.jdbc.Driver";
     String currentUsersHomeDir = System.getProperty("user.home");
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";
     private String time;
 
-    public void dbValidation() {
+    public void dbValidation(String Username, String Password) {
+        connect(Username, Password);
         String url = "jdbc:mysql://localhost:3306";
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
             s.executeUpdate("CREATE SCHEMA IF NOT EXISTS `resturantDB`");
+            s.executeUpdate("CREATE DATABASE IF NOT EXISTS `resturantDB`");
             s.close();
             conn.close();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
 
         }
+    }
+
+    public void connect(String Username, String Password) {
+        username = Username;
+        password = Password;
     }
 
     public Object[][] getInventoryData() {
@@ -294,7 +301,8 @@ public class dbManager {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber,employeeHoursWorked, admin, employeePassword FROM employee";
+            String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber,employeeHoursWorked, admin, employeePassword "
+                    + "FROM employee WHERE employeeID >1 ";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();

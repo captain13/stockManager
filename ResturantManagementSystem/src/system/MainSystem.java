@@ -46,19 +46,29 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     public MainSystem() {
         initComponents();
-        system.dbValidation();
         settings.xmlValidition();
+        system.dbValidation(getUsernameDB(), getPasswordDB());
         logs.logValidation();
         clock.internalClock(lblClock, lblDate);
         network.recieveData(jTable1);
-        bookingAlert();
-        stockAlert();
-        populateInvnetoryTable();
-        populateRecipeTable();
-        populateRecipeListTable();
-        populateSupplierTable();
-        populateOrderTable();
+        setUsernameDB();
+        setPasswordDB();
         getSetting();
+        startup();
+    }
+
+    public final void startup() {
+        try {
+            bookingAlert();
+            stockAlert();
+            populateInvnetoryTable();
+            populateRecipeTable();
+            populateRecipeListTable();
+            populateSupplierTable();
+            populateOrderTable();
+        } catch (NullPointerException exp) {
+            JOptionPane.showMessageDialog(null, "No Connection to the database");
+        }
     }
 
     public final void populateInvnetoryTable() {
@@ -486,6 +496,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         comboBoxTableColor.setSelectedItem(settings.getThemeColor());
     }
 
+    private void setUsernameDB() {
+        textUsername.setText(settings.getDatabaseUsername());
+    }
+
+    private void setPasswordDB() {
+        textPassword.setText(settings.getDatabePassword());
+    }
+
     public final void setSelectedTable() {
         n = Integer.parseInt(getSelectedTable());
         tableLayout(color);
@@ -537,6 +555,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         return jPasswordField1.getText();
     }
 
+    private String getUsernameDB() {
+        return textUsername.getText();
+    }
+
+    private String getPasswordDB() {
+        return textPassword.getText();
+    }
+
     public final void bookingAlert() {
         if (system.getReservationData().length != 0) {
             for (int i = 0; i < system.getReservationData().length; i++) {
@@ -545,7 +571,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 }
             }
         } else {
-             buttonBookings.setText("Bookings");
+            buttonBookings.setText("Bookings");
         }
     }
 
@@ -600,6 +626,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jButton9.setBackground(color);
         jButton8.setBackground(color);
         jButton10.setBackground(color);
+        buttonChangeUsername.setBackground(color);
+        buttonChangePassword.setBackground(color);
     }
 
     @SuppressWarnings("unchecked")
@@ -733,6 +761,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jButton7 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         lblSettings2 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        currentEmail3 = new javax.swing.JLabel();
+        currentEmail4 = new javax.swing.JLabel();
+        textUsername = new javax.swing.JLabel();
+        textPassword = new javax.swing.JPasswordField();
+        buttonChangePassword = new javax.swing.JButton();
+        buttonChangeUsername = new javax.swing.JButton();
+        lblSettings4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(75, 75, 75));
@@ -2047,9 +2083,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(currentEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(currentEmail2, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                                .addComponent(currentEmail2, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPasswordField1)))
+                                .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2071,7 +2107,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(jButton10)
                     .addComponent(currentEmail2)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -2143,27 +2179,113 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        currentEmail3.setText("Email Password");
+
+        currentEmail4.setText("Email Address");
+
+        textUsername.setText("root");
+
+        textPassword.setText("root");
+        textPassword.setBorder(null);
+        textPassword.setEnabled(false);
+        textPassword.setOpaque(false);
+
+        buttonChangePassword.setBackground(new java.awt.Color(0, 138, 231));
+        buttonChangePassword.setForeground(new java.awt.Color(255, 255, 255));
+        buttonChangePassword.setText("Change Email Password");
+        buttonChangePassword.setContentAreaFilled(false);
+        buttonChangePassword.setOpaque(true);
+        buttonChangePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonChangePasswordActionPerformed(evt);
+            }
+        });
+
+        buttonChangeUsername.setBackground(new java.awt.Color(0, 138, 231));
+        buttonChangeUsername.setForeground(new java.awt.Color(255, 255, 255));
+        buttonChangeUsername.setText("Change Username ");
+        buttonChangeUsername.setContentAreaFilled(false);
+        buttonChangeUsername.setOpaque(true);
+        buttonChangeUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonChangeUsernameActionPerformed(evt);
+            }
+        });
+
+        lblSettings4.setText("Database Setup");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(lblSettings4)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(currentEmail4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(currentEmail3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(textPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28))
+                            .addComponent(textUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonChangeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonChangePassword))
+                        .addGap(13, 13, 13))))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(lblSettings4)
+                .addGap(51, 51, 51)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonChangeUsername)
+                    .addComponent(textUsername)
+                    .addComponent(currentEmail4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonChangePassword)
+                    .addComponent(currentEmail3)
+                    .addComponent(textPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
         Settings.setLayout(SettingsLayout);
         SettingsLayout.setHorizontalGroup(
             SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SettingsLayout.createSequentialGroup()
-                .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(SettingsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblSettings))
-                    .addGroup(SettingsLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(SettingsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SettingsLayout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(SettingsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(SettingsLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(129, Short.MAX_VALUE))
+                        .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSettings)
+                            .addGroup(SettingsLayout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         SettingsLayout.setVerticalGroup(
             SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2171,11 +2293,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addGap(30, 30, 30)
                 .addComponent(lblSettings)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(SettingsLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(SettingsLayout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
@@ -2224,7 +2350,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookingsActionPerformed
         try {
-            booking = new BookingForm(this,keypadCheck());
+            booking = new BookingForm(this, keypadCheck());
             booking.setVisible(true);
             specials.setVisible(false);
             calendarForm.setVisible(false);
@@ -2283,7 +2409,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonRecipeAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAddActionPerformed
         if (user.createAdminLogin() == true) {
-            AddDatabase database = new AddDatabase(this,keypadCheck());
+            AddDatabase database = new AddDatabase(this, keypadCheck());
             database.setVisible(true);
             AddDatabase.getTabbedPanel().setSelectedIndex(1);
             if (keypadCheck() == true) {
@@ -2301,14 +2427,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         if (user.createAdminLogin() == true) {
-            AddDatabase database = new AddDatabase(this,keypadCheck());
+            AddDatabase database = new AddDatabase(this, keypadCheck());
             database.setVisible(true);
         }
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonRecipeAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAdd1ActionPerformed
         if (user.createAdminLogin() == true) {
-            AddDatabase database = new AddDatabase(this,keypadCheck());
+            AddDatabase database = new AddDatabase(this, keypadCheck());
             database.setVisible(true);
             AddDatabase.getTabbedPanel().setSelectedIndex(2);
         }
@@ -2353,12 +2479,12 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void buttonMakeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMakeOrderActionPerformed
-        OrderForm newOrder = new OrderForm(this,keypadCheck());
+        OrderForm newOrder = new OrderForm(this, keypadCheck());
         newOrder.setVisible(true);
     }//GEN-LAST:event_buttonMakeOrderActionPerformed
 
     private void buttonEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmailActionPerformed
-        EmailForm newEmail = new EmailForm(color,keypadCheck());
+        EmailForm newEmail = new EmailForm(color, keypadCheck());
         newEmail.setVisible(true);
     }//GEN-LAST:event_buttonEmailActionPerformed
 
@@ -2368,7 +2494,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReportsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        settings.updateSettings(getSelectedResolution(), getSelectedTable(), getEmail(), getEmailPassword(), getSelectedColor());
+        settings.updateSettings(getSelectedResolution(), getSelectedTable(), getEmail(), getEmailPassword(),
+                getSelectedColor(), getUsernameDB(), getPasswordDB());
         JOptionPane.showMessageDialog(null, "Settings Saved");
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -2576,6 +2703,22 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonAlertActionPerformed
 
+    private void buttonChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChangePasswordActionPerformed
+        String Password = JOptionPane.showInputDialog(null, "Enter new Email Address");
+        if ("".equals(Password) || Password == null) {
+        } else {
+            textPassword.setText(Password);
+        }
+    }//GEN-LAST:event_buttonChangePasswordActionPerformed
+
+    private void buttonChangeUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChangeUsernameActionPerformed
+        String username = JOptionPane.showInputDialog(null, "Enter new Email Address");
+        if ("".equals(username) || username == null) {
+        } else {
+            textUsername.setText(username);
+        }
+    }//GEN-LAST:event_buttonChangeUsernameActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2615,6 +2758,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonAdd;
     private javax.swing.JToggleButton buttonAlert;
     private javax.swing.JButton buttonBookings;
+    private javax.swing.JButton buttonChangePassword;
+    private javax.swing.JButton buttonChangeUsername;
     private javax.swing.JButton buttonClose;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonEdit;
@@ -2656,6 +2801,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel currentEmail;
     private javax.swing.JLabel currentEmail1;
     private javax.swing.JLabel currentEmail2;
+    private javax.swing.JLabel currentEmail3;
+    private javax.swing.JLabel currentEmail4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
@@ -2671,6 +2818,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -2693,6 +2841,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel lblSettings1;
     private javax.swing.JLabel lblSettings2;
     private javax.swing.JLabel lblSettings3;
+    private javax.swing.JLabel lblSettings4;
     private javax.swing.JLabel lblTable;
     private javax.swing.JLabel lblVersion;
     private javax.swing.JPanel pnlInventory;
@@ -2709,6 +2858,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JTable tblInventory;
     private javax.swing.JTable tblOrderHistory;
     private javax.swing.JTable tblSupplier;
+    private javax.swing.JPasswordField textPassword;
+    private javax.swing.JLabel textUsername;
     private static javax.swing.JTextField textboxSearch;
     // End of variables declaration//GEN-END:variables
 }

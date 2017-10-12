@@ -138,9 +138,6 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="textfieldUser">
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="textfieldUserMouseClicked"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblUsername">
           <Properties>
@@ -153,9 +150,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="passwordFieldBox">
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="passwordFieldBoxMouseClicked"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

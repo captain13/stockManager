@@ -3,10 +3,11 @@
 <generalsettings>
         <resolution>Windowed Screen</resolution>
         <logo>default</logo>
-        <tableNum>20</tableNum>
-        <emailAddress>nullnull</emailAddress>
-        <emailPassword>nullnull</emailPassword>
+        <tableNum>15</tableNum>
+        <enableKeyPad>0</enableKeyPad>
+        <emailAddress>zcsastock@gmail.com</emailAddress>
+        <emailPassword>Password32</emailPassword>
         <themeColor>Red</themeColor>
-        <dbUsername>root</dbUsername>
-        <dbPassword>nullnull</dbPassword>
+        <databaseUsername>root</databaseUsername>
+        <databasePassword>root</databasePassword>
     </generalsettings></settings>

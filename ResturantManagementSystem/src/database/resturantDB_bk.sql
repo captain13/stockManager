@@ -32,7 +32,7 @@ CREATE TABLE `employee` (
   `employeeStatus` varchar(45) DEFAULT NULL,
   `admin` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`employeeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'Andrew','Schwabe','Password','076 273 1721','0hrs00',NULL,1),(2,'Zane','Smith','Password','034 233 8321','0hrs00',NULL,1),(3,'Chad','Phillips','Password','087 237 1277','0hrs00',NULL,0),(4,'Sean','Thomson','Password','072 377 1122','0hrs00',NULL,0),(5,'Itumeleng','Madisha','Password','072 377 1122','0hrs00',NULL,0);
+INSERT INTO `employee` VALUES (1,'Admin','Admin','AdPassword#$','0','0',NULL,1),(2,'Andrew','Schwabe','Password','076 273 1721','0hrs00',NULL,1),(3,'Zane','Smith','Password','034 233 8321','0hrs00',NULL,1),(4,'Chad','Phillips','Password','087 237 1277','0hrs00',NULL,0),(5,'Sean','Thomson','Password','072 377 1122','0hrs00',NULL,0),(6,'Itumeleng','Madisha','Password','072 377 1122','0hrs00',NULL,0);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +188,7 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
-INSERT INTO `recipe` VALUES (1,'Chicken Burger & Chips',75.00,10.50,'Main Meal','./src/images/_f_chickenBurger.jpg',8,0),(2,'Beef Burger & Chips',75.00,10.50,'Main Meal','./src/images/_f_beefBurger.jpg',8,0),(3,'Pork Ribs & Chips',75.00,10.50,'Main Meal','./src/images/_f_porkRibs.jpg',8,0),(4,'Chicken Wings & Chips',75.00,10.50,'Light Meal','./src/images/_f_chickenWings.jpg',8,0),(5,'Green Salad',75.00,10.50,'Light Meal','./src/images/_f_salad.jpg',8,0),(6,'Ceasar Salad',75.00,10.50,'Light Meal','./src/images/_f_caesarSalad.jpg',8,0),(7,'Coke',75.00,10.50,'Drinks','./src/images/_d_cokeLogo.jpg',8,1),(8,'Coke Light',75.00,10.50,'Drinks','./src/images/_d_cokeLightLogo.jpg',8,0),(9,'Fanta',75.00,10.50,'Drinks','./src/images/_d_fantaLogo.jpg',8,0),(10,'Sprite',75.00,10.50,'Drinks','./src/images/_d_spriteLogo.jpg',8,0),(11,'Ice Tea Peach',75.00,10.50,'Drinks','./src/images/_d_liptonLogo.jpg',8,0),(12,'Ice Tea Lemon',75.00,10.50,'Drinks','./src/images/_d_liptonLogo.jpg',8,0),(13,'Ice Cream & Chocolate Sauce',75.00,10.50,'Dessert','./src/images/_d_Choc_Icecream.jpg',8,0),(14,'Chocolate Mousse',75.00,10.50,'Dessert','./src/images/_d_Choc_Mousse.jpg',8,0),(15,'Large Chips',75.00,10.50,'Extra','./src/images/_e_chips.jpg',8,0),(16,'Small Chips',75.00,10.50,'Extra','./src/images/_e_chips.jpg',8,0),(17,'Avocardo',75.00,10.50,'Extra','./src/images/_e_avocardo.jpg',8,0),(18,'Feta',75.00,10.50,'Extra','./src/images/_e_feta.jpg',8,0),(19,'Tomato',75.00,10.50,'Extra','./src/images/_e_tomato.jpg',8,0);
+INSERT INTO `recipe` VALUES (1,'Chicken Burger & Chips',75.00,10.50,'Main Meal','./src/images/_f_chickenBurger.jpg',8,0),(2,'Beef Burger & Chips',75.00,10.50,'Main Meal','./src/images/_f_beefBurger.jpg',8,0),(3,'Pork Ribs & Chips',75.00,10.50,'Main Meal','./src/images/_f_porkRibs.jpg',8,0),(4,'Chicken Wings & Chips',75.00,10.50,'Light Meal','./src/images/_f_chickenWings.jpg',8,0),(5,'Green Salad',75.00,10.50,'Light Meal','./src/images/_f_salad.jpg',8,0),(6,'Ceasar Salad',75.00,10.50,'Light Meal','./src/images/_f_caesarSalad.jpg',8,0),(7,'Coke',75.00,10.50,'Drinks','./src/images/_d_cokeLogo.jpg',8,0),(8,'Coke Light',75.00,10.50,'Drinks','./src/images/_d_cokeLightLogo.jpg',8,0),(9,'Fanta',75.00,10.50,'Drinks','./src/images/_d_fantaLogo.jpg',8,0),(10,'Sprite',75.00,10.50,'Drinks','./src/images/_d_spriteLogo.jpg',8,0),(11,'Ice Tea Peach',75.00,10.50,'Drinks','./src/images/_d_liptonLogo.jpg',8,0),(12,'Ice Tea Lemon',75.00,10.50,'Drinks','./src/images/_d_liptonLogo.jpg',8,0),(13,'Ice Cream & Chocolate Sauce',75.00,10.50,'Dessert','./src/images/_d_Choc_Icecream.jpg',8,0),(14,'Chocolate Mousse',75.00,10.50,'Dessert','./src/images/_d_Choc_Mousse.jpg',8,0),(15,'Large Chips',75.00,10.50,'Extra','./src/images/_e_chips.jpg',8,0),(16,'Small Chips',75.00,10.50,'Extra','./src/images/_e_chips.jpg',8,0),(17,'Avocardo',75.00,10.50,'Extra','./src/images/_e_avocardo.jpg',8,0),(18,'Feta',75.00,10.50,'Extra','./src/images/_e_feta.jpg',8,0),(19,'Tomato',75.00,10.50,'Extra','./src/images/_e_tomato.jpg',8,0);
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +285,7 @@ CREATE TABLE `specials` (
   `specialsPrice` decimal(10,2) DEFAULT NULL,
   `status` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`specialsID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +294,6 @@ CREATE TABLE `specials` (
 
 LOCK TABLES `specials` WRITE;
 /*!40000 ALTER TABLE `specials` DISABLE KEYS */;
-INSERT INTO `specials` VALUES (1,10.00,1);
 /*!40000 ALTER TABLE `specials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -391,4 +390,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-11 16:53:34
+-- Dump completed on 2017-10-12 17:29:34
