@@ -30,7 +30,6 @@ public class dbManager {
     String driver = "com.mysql.jdbc.Driver";
     String currentUsersHomeDir = System.getProperty("user.home");
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";
-    private String time;
 
     public void dbValidation(String Username, String Password) {
         connect(Username, Password);
@@ -66,8 +65,6 @@ public class dbManager {
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
-            System.out.println(username);
-            System.out.println(password);
             Statement s = conn.createStatement();
             String query = "SELECT * FROM inventory ";
             ResultSet rs = s.executeQuery(query);
