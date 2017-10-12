@@ -15,7 +15,6 @@ public class ReprintForm extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         fillEmpCombo();
-        fillCombo();
     }
 
     String head;
@@ -102,14 +101,14 @@ public class ReprintForm extends javax.swing.JFrame {
         return jTextAreaRef.getText();
     }
 
-    public void fillCombo() {
-        Object[][] list = system.getReceiptData();
+    public void fillDTCombo(String empID) {
+        Object[][] list = system.getReceiptData(empID);
         for (Object[] list1 : list) {
-            if (((DefaultComboBoxModel) jComboBoxDt.getModel()).getIndexOf(list1[4].toString()) == -1) {
-                jComboBoxDt.addItem(list1[4].toString());
+            if (((DefaultComboBoxModel) jComboBoxDt.getModel()).getIndexOf(list1[0].toString()) == -1) {
+                jComboBoxDt.addItem(list1[0].toString());
             }
-            if (((DefaultComboBoxModel) jComboBoxT.getModel()).getIndexOf(list1[5].toString()) == -1) {
-                jComboBoxT.addItem(list1[5].toString());
+            if (((DefaultComboBoxModel) jComboBoxT.getModel()).getIndexOf(list1[1].toString()) == -1) {
+                jComboBoxT.addItem(list1[1].toString());
             }
         }
     }
@@ -283,7 +282,11 @@ public class ReprintForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonPrintActionPerformed
 
     private void jComboBoxWidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxWidActionPerformed
-//        fillDateCombo();
+        jTextAreaRef.setText("");
+        jComboBoxDt.setSelectedItem("");
+        jComboBoxT.setSelectedItem("");
+        fillDTCombo(jComboBoxWid.getSelectedItem().toString());
+//fillDateCombo();
     }//GEN-LAST:event_jComboBoxWidActionPerformed
 
     private void jComboBoxDtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDtActionPerformed

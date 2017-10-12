@@ -637,12 +637,12 @@ public class dbManager {
         return ID;
     }
 
-    public Object[][] getReceiptData() {
+    public Object[][] getReceiptData(String empID) {
         Object[][] row = null;
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement s = conn.createStatement();
-            String query = "SELECT * FROM receipt";// WHERE salesID = '"++"'";
+            String query = "SELECT receipt.date, receipt.time FROM ((receipt INNER JOIN sales_employee ON receipt.salesID = sales_employee.salesID) INNER JOIN employee ON sales_employee.employeeID = '" + empID + "')";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -654,13 +654,13 @@ public class dbManager {
             row = new Object[rowCount][columnCount];
             int i = 0;
             while (rs.next()) {
-                row[i][0] = rs.getObject(1);
-                row[i][1] = rs.getObject(2);
-                row[i][2] = rs.getObject(3);
-                row[i][3] = rs.getObject(4);
-                row[i][4] = rs.getObject(5);
-                row[i][5] = rs.getObject(6);
-                row[i][6] = rs.getObject(7);
+//                row[i][0] = rs.getObject(1);
+//                row[i][1] = rs.getObject(2);
+//                row[i][2] = rs.getObject(3);
+//                row[i][3] = rs.getObject(4);
+                row[i][0] = rs.getString("receipt.date");
+                row[i][1] = rs.getString("receipt.time");
+//                row[i][6] = rs.getObject(7);
                 i++;
 
             }
