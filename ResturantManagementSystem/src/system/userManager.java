@@ -44,6 +44,7 @@ public class userManager {
 
     public boolean loginAuthentication(String username, String password) {
         boolean login=false;
+        System.out.println(newManager.getEmployeeData());
         for (int j = 0; j < newManager.getEmployeeData().length; j++) {
             if (login == false) {
                 if (username.equals(newManager.getEmployeeData()[j][1])

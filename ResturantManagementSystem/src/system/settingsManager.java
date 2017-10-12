@@ -30,8 +30,7 @@ import org.xml.sax.SAXException;
 public class settingsManager {
 
     String currentUsersHomeDir = System.getProperty("user.home");
-    //String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\system\\Settings.xml";
-    String location = System.getProperty("user.home") + "\\AppData\\Roaming\\Test\\Settings.xml";
+    String location = System.getProperty("user.home") + "\\AppData\\Roaming\\ResturantManagement\\Settings.xml";
     File xmlSettings = new File(location);
     String resoultion;
     String tableCount;
@@ -48,7 +47,7 @@ public class settingsManager {
         } else {
             System.out.println("File not found");
             try {
-                new File(System.getProperty("user.home") + "\\AppData\\Roaming\\Test\\").mkdirs();
+                new File(System.getProperty("user.home") + "\\AppData\\Roaming\\ResturantManagement\\").mkdirs();
                 DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
                 Document document = docBuilder.newDocument();

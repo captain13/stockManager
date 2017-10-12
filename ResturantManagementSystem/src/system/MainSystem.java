@@ -51,8 +51,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         logs.logValidation();
         clock.internalClock(lblClock, lblDate);
         network.recieveData(jTable1);
-        setUsernameDB();
-        setPasswordDB();
         getSetting();
         startup();
     }
@@ -467,6 +465,8 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public final void getSetting() {
+        setUsernameDB();
+        setPasswordDB();
         setTableCount();
         setResolution();
         setEmail();
@@ -496,11 +496,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         comboBoxTableColor.setSelectedItem(settings.getThemeColor());
     }
 
-    private void setUsernameDB() {
+    public final void setUsernameDB() {
         textUsername.setText(settings.getDatabaseUsername());
     }
 
-    private void setPasswordDB() {
+    public final void setPasswordDB() {
         textPassword.setText(settings.getDatabePassword());
     }
 

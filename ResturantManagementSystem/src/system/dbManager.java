@@ -25,8 +25,8 @@ public class dbManager {
     logSystem logs = new logSystem();
     internalClock clock = new internalClock();
     String url = "jdbc:mysql://localhost:3306/resturantdb";
-    String username;
-    String password;
+    static  String username;
+    static  String password;
     String driver = "com.mysql.jdbc.Driver";
     String currentUsersHomeDir = System.getProperty("user.home");
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";
@@ -49,8 +49,16 @@ public class dbManager {
     }
 
     public void connect(String Username, String Password) {
-        username = Username;
-        password = Password;
+        this.username = Username;
+        this.password = Password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public Object[][] getInventoryData() {
@@ -58,6 +66,8 @@ public class dbManager {
         try {
             Class.forName(driver).newInstance();
             Connection conn = DriverManager.getConnection(url, username, password);
+            System.out.println(username);
+            System.out.println(password);
             Statement s = conn.createStatement();
             String query = "SELECT * FROM inventory ";
             ResultSet rs = s.executeQuery(query);
@@ -299,7 +309,7 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
+            Connection conn = DriverManager.getConnection(url, getUsername(), getPassword());
             Statement s = conn.createStatement();
             String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber,employeeHoursWorked, admin, employeePassword "
                     + "FROM employee WHERE employeeID >1 ";
@@ -327,6 +337,7 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
         }
         return rowData;
     }
