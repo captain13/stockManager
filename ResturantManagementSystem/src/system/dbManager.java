@@ -25,14 +25,14 @@ public class dbManager {
     logSystem logs = new logSystem();
     internalClock clock = new internalClock();
     String url = "jdbc:mysql://localhost:3306/resturantdb";
-    static  String username;
-    static  String password;
+    static String username;
+    static String password;
     String driver = "com.mysql.jdbc.Driver";
     String currentUsersHomeDir = System.getProperty("user.home");
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";
     Connection conn;
     Statement s;
-    
+
     public void dbValidation(String Username, String Password) {
         connect(Username, Password);
         String urlVal = "jdbc:mysql://localhost:3306";
@@ -67,8 +67,6 @@ public class dbManager {
         try {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url, username, password);
-            System.out.println(username);
-            System.out.println(password);
             s = conn.createStatement();
             String query = "SELECT * FROM inventory ";
             ResultSet rs = s.executeQuery(query);
@@ -1558,6 +1556,30 @@ public class dbManager {
 
         } catch (IOException | InterruptedException ex) {
             JOptionPane.showMessageDialog(null, "Error at Backuprestore" + ex.getMessage());
+        }
+    }
+
+    public void scheduleBackup() {
+        String date[] = clock.getCurrentDate().split("-");
+        int day = Integer.parseInt(date[2]);
+        if (day % 7 == 0) {
+            try {
+                String[] executeCmd = new String[]{".\\src\\database\\mysql.exe",
+                    "--user=" + username, "--password=" + password, "resturantdb",
+                    "-e", "source " + location};
+
+                Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+                int processComplete = runtimeProcess.waitFor();
+
+                if (processComplete == 0) {
+                    System.out.println("Database Successfully Restored");
+                } else {
+                    System.out.println("Restore Failed");
+                }
+
+            } catch (IOException | InterruptedException | HeadlessException ex) {
+                JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
+            }
         }
     }
 

@@ -451,3 +451,7 @@
 2017-10-12 23:53:19 record ADDED to receipt table
 2017-10-12 23:53:19 record ADDED to receipt table
 2017-10-12 23:53:19 record ADDED to receipt table
+2017-10-13 01:06:01 record ADDED to wage table
+2017-10-13 01:09:27 record ADDED to wage table
+2017-10-13 01:14:28 record ADDED to wage table
+2017-10-13 01:14:41 record ADDED to wage table

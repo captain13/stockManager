@@ -55,6 +55,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         network.recieveData(jTable1);
         getSetting();
         startup();
+        system.scheduleBackup();
     }
 
     public final void startup() {
@@ -66,7 +67,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             populateRecipeListTable();
             populateSupplierTable();
             populateOrderTable();
-        } catch (NullPointerException exp) {
+        } catch (Exception exp) {
             JOptionPane.showMessageDialog(null, "No Connection to the database");
         }
     }
