@@ -443,3 +443,11 @@
 2017-10-12 21:02:46 record UPDATED to Inventory table
 2017-10-12 21:02:46 record UPDATED to Inventory table
 2017-10-12 21:02:46 record UPDATED to Inventory table
+2017-10-12 23:36:36 record UPDATED to Employee table
+2017-10-12 23:53:14 record UPDATED to recipe table
+2017-10-12 23:53:14 record UPDATED to recipe table
+2017-10-12 23:53:14 record UPDATED to recipe table
+2017-10-12 23:53:19 record ADDED to Sales table
+2017-10-12 23:53:19 record ADDED to receipt table
+2017-10-12 23:53:19 record ADDED to receipt table
+2017-10-12 23:53:19 record ADDED to receipt table
