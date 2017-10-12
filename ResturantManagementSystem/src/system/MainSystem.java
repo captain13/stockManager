@@ -2705,7 +2705,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChangePasswordActionPerformed
         String Password = JOptionPane.showInputDialog(null, "Enter new Email Address");
-        if ("".equals(Password) || Password == null) {
+        if (Password == null) {
         } else {
             textPassword.setText(Password);
         }
