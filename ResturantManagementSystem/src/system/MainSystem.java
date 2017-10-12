@@ -1042,7 +1042,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         buttonLayout.setBackground(new java.awt.Color(0, 138, 231));
         buttonLayout.setForeground(new java.awt.Color(255, 255, 255));
-        buttonLayout.setText("Open Draw");
+        buttonLayout.setText("Open Drawer");
         buttonLayout.setContentAreaFilled(false);
         buttonLayout.setOpaque(true);
         buttonLayout.addActionListener(new java.awt.event.ActionListener() {

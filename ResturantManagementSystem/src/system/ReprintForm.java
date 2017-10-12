@@ -14,6 +14,7 @@ public class ReprintForm extends javax.swing.JFrame {
     public ReprintForm() {
         initComponents();
         this.setLocationRelativeTo(null);
+        fillEmpCombo();
         fillCombo();
     }
 
@@ -113,14 +114,11 @@ public class ReprintForm extends javax.swing.JFrame {
         }
     }
 
-//    public void fillEmpCombo() {
-//        Object[][] list = system.getEmployeeData();
-//        for (Object[] list1 : list) {
-//            jComboBoxWid.addItem(list1[0].toString());
-//        }
-//    }
-    public void displayReceipt() {
-        display();
+    public void fillEmpCombo() {
+        Object[][] list = system.getEmployeeData();
+        for (Object[] list1 : list) {
+            jComboBoxWid.addItem(list1[0].toString());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -167,7 +165,12 @@ public class ReprintForm extends javax.swing.JFrame {
         jTextAreaRef.setRows(5);
         jScrollPane1.setViewportView(jTextAreaRef);
 
-        jComboBoxDt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select" }));
+        jComboBoxDt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
+        jComboBoxDt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDtActionPerformed(evt);
+            }
+        });
 
         jButtonClose.setBackground(new java.awt.Color(53, 53, 53));
         jButtonClose.setForeground(new java.awt.Color(255, 255, 255));
@@ -265,7 +268,7 @@ public class ReprintForm extends javax.swing.JFrame {
         if (jComboBoxDt.getSelectedItem() != null || jComboBoxT.getSelectedItem() != null) {
             jTextAreaRef.setText("");
             total = 0;
-            displayReceipt();
+            display();
         } else {
             jTextAreaRef.setText("");
         }
@@ -282,6 +285,10 @@ public class ReprintForm extends javax.swing.JFrame {
     private void jComboBoxWidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxWidActionPerformed
 //        fillDateCombo();
     }//GEN-LAST:event_jComboBoxWidActionPerformed
+
+    private void jComboBoxDtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxDtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

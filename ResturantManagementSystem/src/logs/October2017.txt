@@ -408,3 +408,15 @@
 2017-10-11 23:43:00 record ADDED to Sales table
 2017-10-11 23:43:00 record ADDED to receipt table
 2017-10-11 23:43:00 record ADDED to receipt table
+2017-10-12 00:07:44 record UPDATED to recipe table
+2017-10-12 00:07:45 record UPDATED to recipe table
+2017-10-12 00:07:45 record UPDATED to recipe table
+2017-10-12 00:07:49 record ADDED to EmployeeSales table
+2017-10-12 00:07:49 record ADDED to Sales table
+2017-10-12 00:07:49 record ADDED to receipt table
+2017-10-12 00:07:49 record ADDED to receipt table
+2017-10-12 00:07:49 record ADDED to receipt table
+2017-10-12 08:21:02 record UPDATED to Employee table
+2017-10-12 08:23:32 record UPDATED to recipe table
+2017-10-12 08:23:32 record UPDATED to recipe table
+2017-10-12 08:43:01 record ADDED to Recipe table
