@@ -286,11 +286,10 @@ public class ReprintForm extends javax.swing.JFrame {
         jComboBoxDt.setSelectedItem("");
         jComboBoxT.setSelectedItem("");
         fillDTCombo(jComboBoxWid.getSelectedItem().toString());
-//fillDateCombo();
     }//GEN-LAST:event_jComboBoxWidActionPerformed
 
     private void jComboBoxDtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDtActionPerformed
-        // TODO add your handling code here:
+        jTextAreaRef.setText("");
     }//GEN-LAST:event_jComboBoxDtActionPerformed
 
 
