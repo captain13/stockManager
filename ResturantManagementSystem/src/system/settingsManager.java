@@ -32,6 +32,7 @@ public class settingsManager {
     String currentUsersHomeDir = System.getProperty("user.home");
     String location = System.getProperty("user.home") + "\\AppData\\Roaming\\ResturantManagement\\Settings.xml";
     File xmlSettings = new File(location);
+    String logo;
     String resoultion;
     String tableCount;
     String email;
@@ -57,13 +58,13 @@ public class settingsManager {
                 Element generalSettings = document.createElement("generalsettings");
                 rootElement.appendChild(generalSettings);
 
+                Element logo = document.createElement("logo");
+                logo.appendChild(document.createTextNode(""));
+                generalSettings.appendChild(logo);
+
                 Element resolution = document.createElement("resolution");
                 resolution.appendChild(document.createTextNode("Fullscreen"));
                 generalSettings.appendChild(resolution);
-
-                Element logo = document.createElement("logo");
-                logo.appendChild(document.createTextNode("default"));
-                generalSettings.appendChild(logo);
 
                 Element tableNumber = document.createElement("tableNum");
                 tableNumber.appendChild(document.createTextNode("15"));
@@ -111,6 +112,7 @@ public class settingsManager {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(xmlSettings);
             NodeList nList = document.getElementsByTagName("generalsettings");
+            logo = document.getElementsByTagName("logo").item(0).getTextContent();
             resoultion = document.getElementsByTagName("resolution").item(0).getTextContent();
             tableCount = document.getElementsByTagName("tableNum").item(0).getTextContent();
             email = document.getElementsByTagName("emailAddress").item(0).getTextContent();
@@ -125,7 +127,7 @@ public class settingsManager {
         }
     }
 
-    public void updateSettings(String selectedItem, String selectedTable, String emailAddress,
+    public void updateSettings(String image, String selectedItem, String selectedTable, String emailAddress,
             String emailPassword, String themeColor, String dbUsername, String dbPassword) {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder;
@@ -140,6 +142,10 @@ public class settingsManager {
             NodeList list = director.getChildNodes();
             for (int i = 0; i < list.getLength(); i++) {
                 Node node = list.item(i);
+
+                if ("logo".equals(node.getNodeName())) {
+                    node.setTextContent(image);
+                }
 
                 if ("resolution".equals(node.getNodeName())) {
                     node.setTextContent(selectedItem);
@@ -179,6 +185,10 @@ public class settingsManager {
         } catch (TransformerException ex) {
             Logger.getLogger(settingsManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public String getLogo() {
+        return logo;
     }
 
     public String getResolution() {

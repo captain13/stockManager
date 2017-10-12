@@ -16,6 +16,7 @@ import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -43,6 +44,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     int n;
     JButton button;
     boolean editable = false;
+    String imagePath = null;
 
     public MainSystem() {
         initComponents();
@@ -465,13 +467,64 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }
 
     public final void getSetting() {
-        setUsernameDB();
-        setPasswordDB();
-        setTableCount();
-        setResolution();
-        setEmail();
-        setEmailPassword();
-        setThemeColor();
+        try {
+            setUsernameDB();
+            setPasswordDB();
+            setTableCount();
+            setResolution();
+            setEmail();
+            setEmailPassword();
+            setThemeColor();
+            setImage();
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
+
+    public void setImage() {
+        ImageIcon icon = new ImageIcon(settings.getLogo());
+        lblImage.setIcon(icon);
+    }
+
+    public String getImage() {
+        return imagePath;
+    }
+
+    public void changeLogo() {
+        JFileChooser fileChooser;
+        if (imagePath != null && !imagePath.equals("")) {
+            fileChooser = new JFileChooser(imagePath);
+        } else {
+            fileChooser = new JFileChooser();
+        }
+
+        FileFilter imageFilter = new FileFilter() {
+            @Override
+            public String getDescription() {
+                return "image file (*.PNG)";
+            }
+
+            @Override
+            public boolean accept(File file) {
+                if (file.isDirectory()) {
+                    return true;
+                } else {
+                    return file.getName().toLowerCase().endsWith(".png");
+                }
+            }
+        };
+
+        fileChooser.setFileFilter(imageFilter);
+        fileChooser.setDialogTitle("Open Image File");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+
+        int userChoice = fileChooser.showOpenDialog(this);
+        if (userChoice == JFileChooser.APPROVE_OPTION) {
+            imagePath = fileChooser.getSelectedFile().getAbsolutePath();
+            //  imagePath = fileChooser.getSelectedFile().getParent();
+        }
+        ImageIcon icon = new ImageIcon(imagePath);
+        lblImage.setIcon(icon);
     }
 
     public final void setResolution() {
@@ -621,6 +674,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonLogs.setBackground(color);
         buttonManageSpecials.setBackground(color);
 
+        changLogoButton.setBackground(color);
         jButton4.setBackground(color);
         jButton7.setBackground(color);
         jButton9.setBackground(color);
@@ -743,11 +797,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         lblLogo = new javax.swing.JLabel();
         lblScreen = new javax.swing.JLabel();
         comboBoxSceen = new javax.swing.JComboBox<>();
-        comboBoxLogo = new javax.swing.JComboBox<>();
         comboBoxTableCount = new javax.swing.JComboBox<>();
         lblSettings1 = new javax.swing.JLabel();
         lblLogo2 = new javax.swing.JLabel();
         comboBoxTableColor = new javax.swing.JComboBox<>();
+        changLogoButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         currentEmail2 = new javax.swing.JLabel();
         currentEmail1 = new javax.swing.JLabel();
@@ -788,7 +842,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         Dashboard.setBackground(new java.awt.Color(255, 255, 255));
 
         lblImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo_White.png"))); // NOI18N
         lblImage.setToolTipText("");
 
         buttonClose.setBackground(new java.awt.Color(75, 75, 75));
@@ -1939,7 +1992,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         lblLogo1.setText("Number of Tabels");
 
-        lblLogo.setText("Set Logo");
+        lblLogo.setText("Logo");
 
         lblScreen.setText("Resolution");
 
@@ -1947,13 +2000,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         comboBoxSceen.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxSceenItemStateChanged(evt);
-            }
-        });
-
-        comboBoxLogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "Demo 1", "Demo 2" }));
-        comboBoxLogo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboBoxLogoItemStateChanged(evt);
             }
         });
 
@@ -1975,6 +2021,17 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        changLogoButton.setBackground(new java.awt.Color(0, 138, 231));
+        changLogoButton.setForeground(new java.awt.Color(255, 255, 255));
+        changLogoButton.setText("Change Logo");
+        changLogoButton.setContentAreaFilled(false);
+        changLogoButton.setOpaque(true);
+        changLogoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changLogoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -1984,22 +2041,32 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(lblSettings1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblScreen)
-                            .addComponent(lblLogo)
-                            .addComponent(lblLogo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblLogo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jCheckBox1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(13, 13, 13)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblLogo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblLogo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(lblScreen)
+                                    .addGap(41, 41, 41)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblLogo)
+                                .addGap(49, 49, 49)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(changLogoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboBoxTableColor, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(comboBoxTableCount, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(comboBoxLogo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(comboBoxSceen, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(comboBoxTableCount, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBoxSceen, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 59, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -2007,15 +2074,15 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblSettings1)
-                .addGap(27, 27, 27)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLogo)
+                    .addComponent(changLogoButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBoxSceen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblScreen))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBoxLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLogo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBoxTableCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogo1))
@@ -2025,7 +2092,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     .addComponent(lblLogo2))
                 .addGap(12, 12, 12)
                 .addComponent(jCheckBox1)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -2302,7 +2369,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -2385,27 +2452,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             changeResolution();
         }
     }//GEN-LAST:event_comboBoxSceenItemStateChanged
-
-    private void comboBoxLogoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxLogoItemStateChanged
-        String selected_item = comboBoxLogo.getSelectedItem().toString();
-        switch (selected_item) {
-
-            case "Default":
-                ImageIcon icon = new ImageIcon("./src/images/Logo_Red.png");
-                lblImage.setIcon(icon);
-                break;
-
-            case "Demo 1":
-                ImageIcon icon1 = new ImageIcon("./src/images/Logo_Bistro.png");
-                lblImage.setIcon(icon1);
-                break;
-
-            case "Demo 2":
-                ImageIcon icon2 = new ImageIcon("./src/images/Logo_Cattle_Baron.png");
-                lblImage.setIcon(icon2);
-                break;
-        }
-    }//GEN-LAST:event_comboBoxLogoItemStateChanged
 
     private void buttonRecipeAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeAddActionPerformed
         if (user.createAdminLogin() == true) {
@@ -2494,7 +2540,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonReportsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        settings.updateSettings(getSelectedResolution(), getSelectedTable(), getEmail(), getEmailPassword(),
+        settings.updateSettings(getImage(), getSelectedResolution(), getSelectedTable(), getEmail(), getEmailPassword(),
                 getSelectedColor(), getUsernameDB(), getPasswordDB());
         JOptionPane.showMessageDialog(null, "Settings Saved");
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -2719,6 +2765,10 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         }
     }//GEN-LAST:event_buttonChangeUsernameActionPerformed
 
+    private void changLogoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changLogoButtonActionPerformed
+        changeLogo();
+    }//GEN-LAST:event_changLogoButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2730,11 +2780,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
-                if ("Macintosh".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainSystem.class
@@ -2742,9 +2787,13 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         }
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new MainSystem().setVisible(true);
-        });
+        try {
+            java.awt.EventQueue.invokeLater(() -> {
+                new MainSystem().setVisible(true);
+            });
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
     }
 
 
@@ -2794,7 +2843,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonSpecials;
     private javax.swing.JButton buttonSupplierEdit;
     private javax.swing.JButton buttonTakeAway;
-    private javax.swing.JComboBox<String> comboBoxLogo;
+    private javax.swing.JButton changLogoButton;
     private javax.swing.JComboBox<String> comboBoxSceen;
     private javax.swing.JComboBox<String> comboBoxTableColor;
     private javax.swing.JComboBox<String> comboBoxTableCount;
