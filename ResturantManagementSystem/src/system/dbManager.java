@@ -30,15 +30,16 @@ public class dbManager {
     String driver = "com.mysql.jdbc.Driver";
     String currentUsersHomeDir = System.getProperty("user.home");
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";
-    private String time;
-
+    Connection conn;
+    Statement s;
+    
     public void dbValidation(String Username, String Password) {
         connect(Username, Password);
-        String url = "jdbc:mysql://localhost:3306";
+        String urlVal = "jdbc:mysql://localhost:3306";
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(urlVal, username, password);
+            s = conn.createStatement();
             s.executeUpdate("CREATE SCHEMA IF NOT EXISTS `resturantDB`");
             s.executeUpdate("CREATE DATABASE IF NOT EXISTS `resturantDB`");
             s.close();
@@ -65,10 +66,10 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(url, username, password);
             System.out.println(username);
             System.out.println(password);
-            Statement s = conn.createStatement();
+            s = conn.createStatement();
             String query = "SELECT * FROM inventory ";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
@@ -104,8 +105,8 @@ public class dbManager {
         try {
 
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT recipeName FROM recipe WHERE recipeID ='" + id + "' ";
             ResultSet rs = s.executeQuery(query);
 
@@ -128,8 +129,8 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT,recipeImageDirectory, recipeCount, specialsID FROM recipe";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
@@ -165,8 +166,8 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT inventory_recipe.recipeID, recipe.recipeName, inventory_recipe.inventoryID, "
                     + "inventory.item,inventory_recipe.qty "
                     + "FROM inventory_recipe, recipe,inventory "
@@ -203,8 +204,8 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT * FROM supplier";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
@@ -236,8 +237,8 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT stockOrderID, inventory.item, supplier.supplierName,dateOrdered, dateETA, quantity, status, totalCost "
                     + "FROM stockOrder, inventory, supplier "
                     + "WHERE inventory.inventoryID=stockorder.inventoryID "
@@ -275,8 +276,8 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT expensesID,expensesType,date, expensesAmount FROM expenses "
                     + "UNION ALL SELECT '','','TOTAL', SUM(expensesAmount) FROM expenses";
             ResultSet rs = s.executeQuery(query);
@@ -309,8 +310,8 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, getUsername(), getPassword());
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, getUsername(), getPassword());
+            s = conn.createStatement();
             String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber,employeeHoursWorked, admin, employeePassword "
                     + "FROM employee WHERE employeeID >1 ";
             ResultSet rs = s.executeQuery(query);
@@ -346,8 +347,8 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT employeeID,reservationTableNumber,reservationDate,reservationTime,"
                     + "reservationCustomer, contactNumber,"
                     + "reservationNumberPeople FROM reservation";
@@ -387,8 +388,8 @@ public class dbManager {
         String month = currentDATE[1];
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             if ("ALL".equals(type)) {
                 query = "SELECT salesID,salesDate,totalCost FROM sales "
                         + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales";
@@ -432,8 +433,8 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT sales_employee.salesID, employee.employeeFName, sales_employee.employeeID FROM sales_employee,employee WHERE employee.employeeID=sales_employee.employeeID ";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
@@ -463,8 +464,8 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
 
             String query = "SELECT recipe.specialsID, recipeName,recipeType, specialsPrice,recipeImageDirectory, status "
                     + "FROM recipe,specials "
@@ -501,8 +502,8 @@ public class dbManager {
         String ingredients[] = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT item FROM inventory ";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
@@ -533,8 +534,8 @@ public class dbManager {
         String date = clock.getCurrentDate();
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT SUM(expensesAmount) FROM expenses WHERE date='" + date + "' ";
             ResultSet rs = s.executeQuery(query);
             if (rs.next()) {
@@ -555,8 +556,8 @@ public class dbManager {
         String date = clock.getCurrentDate();
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT SUM(totalCost) FROM sales WHERE salesDate='" + date + "' ";
             ResultSet rs = s.executeQuery(query);
             if (rs.next()) {
@@ -576,8 +577,8 @@ public class dbManager {
         String itemName = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT item FROM inventory WHERE inventoryID='" + ID + "'";
             ResultSet rs = s.executeQuery(query);
             if (rs.next()) {
@@ -596,8 +597,8 @@ public class dbManager {
         String supplierName = null;
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT supplierName FROM supplier WHERE supplierID='" + ID + "'";
             ResultSet rs = s.executeQuery(query);
             if (rs.next()) {
@@ -615,8 +616,8 @@ public class dbManager {
     public Object[][] getEmpSales(int emp) {
         Object[][] sales = null;
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT receipt.date receipt.time FROM ((receipt INNER JOIN sales_employee ON receipt.salesID = sales_employee.salesID) INNER JOIN employee ON sales_employee.employeeID = '" + emp + "')";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
@@ -643,8 +644,8 @@ public class dbManager {
     public int getEmployeeID(String Username) {
         int ID = 0;
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT employeeID FROM employee WHERE Username= '" + getEmployeeUsername() + "'";
             ResultSet rs = s.executeQuery(query);
 
@@ -659,8 +660,8 @@ public class dbManager {
     public Object[][] getReceiptData(String empID) {
         Object[][] row = null;
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT receipt.date, receipt.time FROM ((receipt INNER JOIN sales_employee ON receipt.salesID = sales_employee.salesID) INNER JOIN employee ON sales_employee.employeeID = '" + empID + "')";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
@@ -693,8 +694,8 @@ public class dbManager {
     public Object[][] getReprintReceipt(String date, String time) {
         Object[][] rowData = null;
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT * FROM receipt WHERE date = '" + date + "' AND time = '" + time + "'";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
@@ -732,8 +733,8 @@ public class dbManager {
         String columnNamesEmp[] = {"First Name", "Last Name", "Active"};
         try {
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "SELECT employeeFName,employeeLName,employeeStatus FROM employee WHERE employeeStatus= 'Active' ";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
@@ -762,8 +763,8 @@ public class dbManager {
     public String getHoursWorked(String Username) {
         String time = "00hrs00";
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String querySelect = "SELECT employeeHoursWorked FROM employee WHERE employeeFName='" + Username + "'";
             ResultSet rs = s.executeQuery(querySelect);
             while (rs.next()) {
@@ -780,8 +781,8 @@ public class dbManager {
     public String getEmployeeUsername() {
         String Username = "";
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String selectQuery = "SELECT employeeID FROM employee'";
             ResultSet rs = s.executeQuery(selectQuery);
             while (rs.next()) {
@@ -796,8 +797,8 @@ public class dbManager {
 
     public void insertEmployee(String firstName, String lastName, String empPassword, String contact, int adminRights) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String insertQuery = "INSERT INTO employee (employeeFName, employeeLName, employeePassword,employeeContactNumber,employeeHoursWorked,admin )"
                     + "VALUES ('" + firstName + "', '"
                     + lastName + "', '"
@@ -816,8 +817,8 @@ public class dbManager {
 
     public void insertExpenses(String type, double amount, String date) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String insertQuery = "INSERT INTO expenses (expensesType, expensesAmount,date)"
                     + "VALUES ('" + type + "', '"
                     + amount + "','"
@@ -833,8 +834,8 @@ public class dbManager {
 
     public void insertInventory(String item, String category, int quantity, int limit, Double threshold, Double cost) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String insertQuery = "INSERT INTO inventory (item,category ,qty,itemThreshold,itemLimit, itemCost)"
                     + "VALUES ('" + item + "',"
                     + "'" + category + "',"
@@ -853,8 +854,8 @@ public class dbManager {
 
     public void insertRecipe(String recipe, double price, double vat, String imageDirectory, String category) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String insertQuery = "INSERT INTO recipe(recipeName, recipePrice, recipeVAT,recipeType, recipeImageDirectory, recipeCount)"
                     + "VALUES ('" + recipe + "','"
                     + price + "', '"
@@ -871,8 +872,8 @@ public class dbManager {
 
     public void insertWage(Double Wage, int ID) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String insertWages = "INSERT INTO wage ( employeeID, wageAmount)" + "VALUES ('" + ID + "','" + Wage + "')";
             s.execute(insertWages);
             logs.writeLogs("ADDED", "wage");
@@ -889,8 +890,8 @@ public class dbManager {
     public int getRecipeID(String item) {
         int ID = 0;
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String selectQuery = "SELECT * FROM recipe WHERE recipeName='" + item + "'";
             ResultSet rs = s.executeQuery(selectQuery);
 
@@ -908,8 +909,8 @@ public class dbManager {
         int recipeID = getRecipeID(item);
         int specialID = 0;
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String selectQuery = "SELECT specialsID FROM recipe WHERE recipeID='" + recipeID + "'";
             ResultSet rs = s.executeQuery(selectQuery);
 
@@ -929,8 +930,8 @@ public class dbManager {
         int specialID = getSpecialsID(item);
         double specialPrice = 0;
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String selectQuery = "SELECT specialsPrice FROM specials WHERE specialsID='" + specialID + "'";
             ResultSet rs = s.executeQuery(selectQuery);
             while (rs.next()) {
@@ -947,8 +948,8 @@ public class dbManager {
     public int getRecipeCost(String item) {
         int cost = 0;
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String selectQuery = "SELECT * FROM recipe WHERE recipeName='" + item + "'";
             ResultSet rs = s.executeQuery(selectQuery);
 
@@ -964,8 +965,8 @@ public class dbManager {
 
     public void insertReceipt(int recipeID, String cost) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String insertQuery = "INSERT INTO receipt(recipeID, orderQuantity, salesID, date, time , cost)"
                     + "VALUES ('"
                     + recipeID + "', '"
@@ -986,8 +987,8 @@ public class dbManager {
     public int getInvetoryID(String item) {
         int ID = 0;
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String selectQuery = "SELECT inventoryID FROM inventory WHERE item='" + item + "'";
             ResultSet rs = s.executeQuery(selectQuery);
 
@@ -1004,8 +1005,8 @@ public class dbManager {
     public double getCashTotal() {
         double cashTotal = 0;
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String selectQuery = "SELECT SUM(totalCost) FROM sales WHERE saleType='Cash' AND salesDate='" + clock.getCurrentDate() + "'";
             ResultSet rs = s.executeQuery(selectQuery);
 
@@ -1022,8 +1023,8 @@ public class dbManager {
     public double getCreditTotal() {
         double creditTotal = 0;
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String selectQuery = "SELECT SUM(totalCost) FROM sales WHERE saleType='Credit' AND salesDate='" + clock.getCurrentDate() + "'";
             ResultSet rs = s.executeQuery(selectQuery);
 
@@ -1039,8 +1040,8 @@ public class dbManager {
 
     public void insertRecipeList(String item, String qty) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String insertQuerySup = "INSERT INTO inventory_recipe(inventoryID, recipeID,qty)"
                     + "VALUES ('" + getInvetoryID(item) + "',"
                     + "(SELECT recipeID FROM recipe ORDER BY recipeID DESC LIMIT 1), '"
@@ -1056,8 +1057,8 @@ public class dbManager {
 
     public void insertSupplier(String name, String email, String number, String address) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String insertQuerySup = "INSERT INTO supplier(supplierName, supplierEmail,supplierNumber, supplierAddress)"
                     + "VALUES ('" + name + "','"
                     + email + "', '"
@@ -1073,8 +1074,8 @@ public class dbManager {
 
     public void insertReservations(String employee, String date, String time, String customerName, int tableNum, int customerNum, String contact) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String insertQuerySup = "INSERT INTO reservation(employeeID, reservationDate,"
                     + " reservationTime, reservationCustomer,reservationTableNumber,reservationNumberPeople,contactNumber)"
                     + "VALUES ('" + employee + "','"
@@ -1097,8 +1098,8 @@ public class dbManager {
 
     public void insertStockOrder(String inventoryID, String supplierID, double quantity, String date, double cost) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String insertQuerySup = "INSERT INTO stockorder(inventoryID, supplierID,dateOrdered,dateETA,quantity,status,totalCost)"
                     + "VALUES ('" + inventoryID + "','"
                     + supplierID + "', '"
@@ -1117,8 +1118,8 @@ public class dbManager {
 
     public void insertSales(double currentTotal, String user, String type) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String insertQuerySup = "INSERT INTO sales(salesDate,totalCost,saleType)"
                     + "VALUES ('" + clock.getCurrentDate() + "','"
                     + currentTotal + "','"
@@ -1141,8 +1142,8 @@ public class dbManager {
 
     public void insertEmployeeSales(String ID, String user) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String selectQuery = "SELECT employeeID FROM employee WHERE employeeFName='" + user + "'";
             ResultSet rs = s.executeQuery(selectQuery);
             String employeeID = "";
@@ -1164,8 +1165,8 @@ public class dbManager {
 
     public void insertSpecials(double specialPrice, String recipeName) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String insertQuerySup = "INSERT INTO specials(specialsPrice)"
                     + "VALUES ('" + specialPrice + "')";
             s.execute(insertQuerySup);
@@ -1186,8 +1187,8 @@ public class dbManager {
 
     public void removeInventory(int index) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "DELETE FROM inventory WHERE inventoryID='" + index + "'";
             s.execute(query);
             logs.writeLogs("DELETED", "Inventory");
@@ -1199,8 +1200,8 @@ public class dbManager {
 
     public void removeRecipe(int index) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "DELETE FROM recipe WHERE recipeID='" + index + "'";
             String query1 = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
             s.execute(query1);
@@ -1215,8 +1216,8 @@ public class dbManager {
 
     public void removeRecipeList(int index) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
             s.execute(query);
             logs.writeLogs("DELETED", "Inventory_recipe");
@@ -1228,8 +1229,8 @@ public class dbManager {
 
     public void removeRecipeList(int index, int ID) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'AND inventoryID='" + ID + "'";
             s.execute(query);
             logs.writeLogs("DELETED", "Inventory_recipe");
@@ -1241,8 +1242,8 @@ public class dbManager {
 
     public void removeSupplier(int index) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "DELETE FROM supplier WHERE supplierID='" + index + "'";
             s.execute(query);
             logs.writeLogs("DELETED", "Supplier");
@@ -1254,8 +1255,8 @@ public class dbManager {
 
     public void removeEmployee(int index) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "DELETE FROM employee WHERE employeeID='" + index + "'";
             s.execute(query);
             logs.writeLogs("DELETED", "Employee");
@@ -1267,8 +1268,8 @@ public class dbManager {
 
     public void updateSpecials(String specialsID, int status) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "UPDATE specials set status= '" + status + "' WHERE specialsID='" + specialsID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.executeUpdate();
@@ -1282,8 +1283,8 @@ public class dbManager {
 
     public void updateHours(String Username, int i) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String queryUpdate = "UPDATE employee set employeeHoursWorked='" + clock.calculateHours(i, getHoursWorked(Username))
                     + "' WHERE employeeFName='" + Username + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(queryUpdate);
@@ -1297,8 +1298,8 @@ public class dbManager {
 
     public void updateEmployeeStatusIn(String Username) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "UPDATE employee set employeeStatus= 'Active' WHERE employeeFName='" + Username + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.executeUpdate();
@@ -1310,8 +1311,8 @@ public class dbManager {
 
     public void updateEmployeeStatusOut(String Username) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "UPDATE employee set employeeStatus= 'Deactive' WHERE employeeFName='" + Username + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.executeUpdate();
@@ -1325,8 +1326,8 @@ public class dbManager {
     public void updateInventory(Object ID, Object item, Object qty, Object itemT, Object itemL) {
         try {
             //connect to db
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             //update query
             String query = "UPDATE inventory set item='" + item + "' '"
                     + "' ,qty='" + qty + "' '"
@@ -1347,8 +1348,8 @@ public class dbManager {
     public void updateRecipe(Object ID, Object name, Object price, Object vat, Object type) {
         try {
             //connect to db
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             //update query
             String query = "UPDATE recipe set recipeName='" + name + "' '"
                     + "' ,recipePrice='" + price + "' '"
@@ -1368,8 +1369,8 @@ public class dbManager {
     public void updateInventoryQty(String item, String qty, String operator) {
         int ID = getInvetoryID(item);
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "UPDATE inventory set qty=qty" + operator + "'" + qty + "' "
                     + "WHERE inventoryID='" + ID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -1384,8 +1385,8 @@ public class dbManager {
 
     public void updateRecipeList(String iventoryID, String recipeID, String qty) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String query = "UPDATE inventory_recipe set qty='" + qty + "' "
                     + "WHERE  inventoryID='" + iventoryID + "'AND recipeID='" + recipeID + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -1402,8 +1403,8 @@ public class dbManager {
     public void updateSupplier(Object ID, Object name, Object email, Object num, Object address) {
         try {
             //connect to db
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             //update query
             String query = "UPDATE supplier set supplierName='" + name + "' '"
                     + "' ,supplierEmail='" + email + "' '"
@@ -1422,8 +1423,8 @@ public class dbManager {
 
     public void updateEmployee(String user, String newPassword) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String updateQuery = "UPDATE employee SET employeePassword='" + newPassword + "' WHERE employeeFName ='" + user + "'";
             s.execute(updateQuery);
             PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
@@ -1438,8 +1439,8 @@ public class dbManager {
 
     public void updateRecipeSpecialsID(String specialsID, String recipeName) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String updateQuery = "UPDATE recipe SET specialsID='" + specialsID + "' WHERE recipeName ='" + recipeName + "'";
             s.execute(updateQuery);
             PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
@@ -1454,8 +1455,8 @@ public class dbManager {
     public void updateOrderCount(String order) {
         System.out.println("ran");
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String updateQuery = "UPDATE recipe SET recipeCount=recipeCount+1 WHERE recipeName ='" + order + "'";
             s.execute(updateQuery);
             PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
@@ -1472,8 +1473,8 @@ public class dbManager {
     public void recipeStockUpdate(JTable table, String tableNum) {
         try {
             for (int i = 0; i < table.getRowCount(); i++) {
-                Connection conn = DriverManager.getConnection(url, username, password);
-                Statement s = conn.createStatement();
+                conn = DriverManager.getConnection(url, username, password);
+                s = conn.createStatement();
                 String selectQuery = "SELECT recipeID FROM recipe WHERE recipeName='" + table.getValueAt(i, 0).toString() + "'";
                 ResultSet rs = s.executeQuery(selectQuery);
                 String ID = null;
@@ -1502,11 +1503,10 @@ public class dbManager {
     }
 
     public Object[][] checkStockLevel() {
-        Connection conn;
         Object stockLevel[][] = null;
         try {
             conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            s = conn.createStatement();
             String selectQuery = "SELECT * FROM inventory WHERE qty<(itemThreshold*itemLimit)";
             ResultSet rs = s.executeQuery(selectQuery);
             rs = s.executeQuery(selectQuery);
@@ -1531,8 +1531,8 @@ public class dbManager {
 
     public void updateConfirmOrder(String orderID) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
             String updateQuery = "UPDATE stockorder SET status='Delievered' WHERE stockOrderID ='" + orderID + "'";
             s.execute(updateQuery);
             PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);

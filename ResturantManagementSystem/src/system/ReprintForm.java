@@ -283,8 +283,8 @@ public class ReprintForm extends javax.swing.JFrame {
 
     private void jComboBoxWidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxWidActionPerformed
         jTextAreaRef.setText("");
-        jComboBoxDt.setSelectedItem("");
-        jComboBoxT.setSelectedItem("");
+        jComboBoxDt.removeAllItems();
+        jComboBoxT.removeAllItems();
         fillDTCombo(jComboBoxWid.getSelectedItem().toString());
     }//GEN-LAST:event_jComboBoxWidActionPerformed
 

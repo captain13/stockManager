@@ -118,7 +118,7 @@ public class receiptHandler {
             document.setMargins(2, 2, 2, 2);
             //open
             document.open();
-            //writer.setSpaceCharRatio(PdfWriter.NO_SPACE_CHAR_RATIO);
+            writer.setSpaceCharRatio(PdfWriter.NO_SPACE_CHAR_RATIO);
             writer.setSpaceCharRatio(PdfWriter.SPACE_CHAR_RATIO_DEFAULT);
             Paragraph p = new Paragraph();
             p.setAlignment(Element.ALIGN_CENTER);
@@ -143,5 +143,40 @@ public class receiptHandler {
             }
         }
     }
+    
+    public void writeTextToPDF(String receipt) {
+        String currentUsersHomeDir = System.getProperty("user.home");
+        String file_name = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\docs\\reprintReceiptTest.pdf";
+        Document document = new Document();
+        try {
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(new File(file_name)));
+            Rectangle one = new Rectangle(300,700);
+            document.setPageSize(one);
+            document.setMargins(2, 2, 2, 2);
+            //open
+            document.open();
+            writer.setSpaceCharRatio(PdfWriter.NO_SPACE_CHAR_RATIO);
+            writer.setSpaceCharRatio(PdfWriter.SPACE_CHAR_RATIO_DEFAULT);
+            Paragraph p = new Paragraph();
+            p.setAlignment(Element.ALIGN_CENTER);
+            p.setIndentationLeft(20);
+            p.setIndentationRight(20);
+            p.add(receipt);
+            p.setAlignment(Element.ALIGN_CENTER);
+            //adds text to doc
+            document.add(p);
+            //close
+            document.close();
+        } catch (FileNotFoundException | DocumentException e) {
+        }
 
+        //opens pdf
+        if (Desktop.isDesktopSupported()) {
+            try {
+                File myFile = new File(file_name);
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException ex) {
+            }
+        }
+    }
 }
