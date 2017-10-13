@@ -28,7 +28,8 @@ CREATE TABLE IF NOT EXISTS `resturantdb`.`employee` (
   `employeeHoursWorked` VARCHAR(45) NULL DEFAULT '0hrs00',
   `employeeStatus` VARCHAR(45) NULL DEFAULT NULL,
   `admin` TINYINT(1) NULL DEFAULT '0',
-  PRIMARY KEY (`employeeID`))
+  PRIMARY KEY (`employeeID`),
+  UNIQUE INDEX `employeeFName_UNIQUE` (`employeeFName` ASC, `employeeLName` ASC, `employeeContactNumber`ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8;

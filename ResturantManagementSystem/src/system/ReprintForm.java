@@ -23,9 +23,8 @@ public class ReprintForm extends javax.swing.JFrame {
     double total = 0;
     StringBuilder items = new StringBuilder();
     internalClock clock = new internalClock();
-    int n = 45;
-    String stars = new String(new char[n]).replace("\0", "*");
-    String spaces = new String(new char[n]).replace("\0", " ");
+    String stars = new String(new char[55]).replace("\0", "*");
+    String spaces = new String(new char[55]).replace("\0", " ");
 
     public void header(String dt, String t) {
         head = stars + "\n"
@@ -62,15 +61,18 @@ public class ReprintForm extends javax.swing.JFrame {
         int len;
         int spc;
         for (Object[] list1 : list) {
-            len = system.getRecipeName(Integer.parseInt(list1[0].toString())).length();
+            len = system.getRecipeName(Integer.parseInt(list1[1].toString())).length();
             spc = 30 - len;
-            items.append(system.getRecipeName(Integer.parseInt(list1[0].toString()))).append(printS(spc));
+            items.append(system.getRecipeName(Integer.parseInt(list1[1].toString()))).append(printS(spc));
+             
             len = list1[2].toString().length();
             spc = 5 - len;
             items.append(list1[2]).append(printS(spc));
+            
             len = list1[6].toString().length();
             spc = 5 - len;
             items.append(list1[6]).append(printS(spc));
+            
             total = total + Double.parseDouble(list1[6].toString());
             items.append("\n");
         }

@@ -22,9 +22,8 @@ public class receiptHandler {
     StringBuilder items = new StringBuilder();
     internalClock clock = new internalClock();
     dbManager newManager = new dbManager();
-    int n = 45;
-    String stars = new String(new char[n]).replace("\0", "*");
-    String spaces = new String(new char[n]).replace("\0", " "); 
+    String stars = new String(new char[70]).replace("\0", "*");
+    String spaces = new String(new char[70]).replace("\0", " "); 
 
     public void header() {
         head =  stars + "\n"
@@ -65,7 +64,7 @@ public class receiptHandler {
                     case 0:
                         {
                             int len = tblItems.getValueAt(i, n).toString().length();
-                            int spc = 30 - len;
+                            int spc = 45 - len;
                             items.append(tblItems.getValueAt(i, n).toString()).append(printS(spc));
                             break;
                         }
