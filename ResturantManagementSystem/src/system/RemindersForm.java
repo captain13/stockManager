@@ -29,12 +29,15 @@ public class RemindersForm extends javax.swing.JFrame {
     Point mouseDownCompCoords = null;
     Keyboard k = new Keyboard();
 
+
     public RemindersForm(boolean enabled) {
         initComponents();
         this.setLocationRelativeTo(null);
         readReminders();
         makePanelDraggable();
         isKeypadEnable(enabled);
+        k.setAlwaysOnTop(rootPaneCheckingEnabled);
+        k.setLocation(400, 550);
     }
     
         public final void isKeypadEnable(boolean enabled) {
@@ -214,10 +217,12 @@ public class RemindersForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        k.dispose();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        k.dispose();
         writeReminders();
     }//GEN-LAST:event_jButton2ActionPerformed
 

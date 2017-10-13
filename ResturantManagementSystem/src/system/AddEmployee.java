@@ -19,6 +19,8 @@ public class AddEmployee extends javax.swing.JFrame {
         this.newForm=newForm;
         k.setVisible(true);
         k.setBounds(700, 700, 575, 200);
+        k.setAlwaysOnTop(rootPaneCheckingEnabled);
+        k.setLocation(400, 500);
     }
 
     public String getEmpFirstName() {
@@ -60,6 +62,19 @@ public class AddEmployee extends javax.swing.JFrame {
         } else {
             return 0;
         }
+    }
+    
+    public boolean dataIntegrity() {     
+        boolean pass = false;        
+        String first = getEmpFirstName();
+        String last = getEmpLastName();
+        String password = getEmpPassword();
+        String contact = getEmpContact();
+
+        if ( first != null | last != null | password != null | contact != null ) {
+            pass = true;
+        }
+        return pass;
     }
 
     /**
@@ -272,16 +287,13 @@ public class AddEmployee extends javax.swing.JFrame {
 
     private void buttonAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAcceptActionPerformed
         super.dispose();
+        k.dispose();
     }//GEN-LAST:event_buttonAcceptActionPerformed
 
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
-        String first = getEmpFirstName();
-        String last = getEmpLastName();
-        String password = getEmpPassword();
-        String contact = getEmpContact();
-        
-        if (first != null && last != null && password != null && contact != null) {
-            newManger.insertEmployee(first, last, password, contact, getAdminRights());
+       
+        if ( dataIntegrity() == true) {
+            newManger.insertEmployee(getEmpFirstName(), getEmpLastName(), getEmpPassword(), getEmpContact(), getAdminRights());
             newForm.populateEmployeeTable();
         } 
         

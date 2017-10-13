@@ -31,6 +31,8 @@ public class BookingForm extends javax.swing.JFrame {
             k = new Keyboard();
             k.setVisible(true);
             k.setBounds(700, 700, 575, 200);
+            k.setAlwaysOnTop(rootPaneCheckingEnabled);
+            k.setLocation(400, 550);
         }
     }
 
@@ -453,14 +455,14 @@ public class BookingForm extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("View", jPanel2);
+        jTabbedPane1.addTab("View Reservation", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -496,6 +498,7 @@ public class BookingForm extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
+        k.dispose();
         this.dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
 

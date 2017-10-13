@@ -22,6 +22,8 @@ public class EmailForm extends javax.swing.JFrame {
             k = new Keyboard();
             k.setVisible(true);
             k.setBounds(700, 700, 575, 200);
+            k.setAlwaysOnTop(rootPaneCheckingEnabled);
+            k.setLocation(400, 550);
         }
     }
 
@@ -185,6 +187,7 @@ public class EmailForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        k.dispose();
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
