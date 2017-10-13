@@ -9,7 +9,7 @@ import javax.swing.DefaultComboBoxModel;
 public class ReprintForm extends javax.swing.JFrame {
 
     dbManager system = new dbManager();
-    reprintHandler rHandler = new reprintHandler();
+    receiptHandler rHandler = new receiptHandler();
 
     public ReprintForm() {
         initComponents();

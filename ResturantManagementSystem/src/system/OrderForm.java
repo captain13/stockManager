@@ -292,7 +292,9 @@ public class OrderForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        k.dispose();
+        if (system.keypadCheck()) {
+            k.dispose();
+        }
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -306,7 +308,9 @@ public class OrderForm extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Please Enter All Fields");
         }
-        k.dispose();
+        if (system.keypadCheck()) {
+            k.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void textQuantityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textQuantityMouseClicked

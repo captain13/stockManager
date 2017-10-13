@@ -498,7 +498,9 @@ public class BookingForm extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
-        k.dispose();
+        if (system.keypadCheck()) {
+            k.dispose();
+        }
         this.dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
 

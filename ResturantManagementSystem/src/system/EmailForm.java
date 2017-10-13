@@ -9,6 +9,7 @@ import java.awt.Color;
 public class EmailForm extends javax.swing.JFrame {
 
     emailClient email = new emailClient();
+    MainSystem system = new MainSystem();
     Keyboard k = new Keyboard();
 
     public EmailForm(Color color, boolean enabled) {
