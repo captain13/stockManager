@@ -2735,16 +2735,22 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         if (TabbedPanel.getSelectedIndex() == 2) {
             populateInvnetoryTable();
         }
+
         if (TabbedPanel.getSelectedIndex() == 3) {
-            if (user.createAdminLogin() == true) {
-            } else {
-                TabbedPanel.setSelectedIndex(0);
+            if (system.getAdminCount() == true) {
+                if (user.createAdminLogin() == true) {
+                } else {
+                    TabbedPanel.setSelectedIndex(0);
+                }
             }
         }
+
         if (TabbedPanel.getSelectedIndex() == 4) {
-            if (user.createAdminLogin() == true) {
-            } else {
-                TabbedPanel.setSelectedIndex(0);
+            if (system.getAdminCount() == true) {
+                if (user.createAdminLogin() == true) {
+                } else {
+                    TabbedPanel.setSelectedIndex(0);
+                }
             }
         }
     }//GEN-LAST:event_TabbedPanelStateChanged
