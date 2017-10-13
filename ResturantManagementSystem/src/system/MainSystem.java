@@ -55,6 +55,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         network.recieveData(jTable1);
         getSetting();
         startup();
+        system.scheduleBackup();
     }
 
     public final void startup() {
@@ -66,7 +67,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             populateRecipeListTable();
             populateSupplierTable();
             populateOrderTable();
-        } catch (NullPointerException exp) {
+        } catch (Exception exp) {
             JOptionPane.showMessageDialog(null, "No Connection to the database");
         }
     }
@@ -2642,7 +2643,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private void buttonSupplierEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupplierEditActionPerformed
         updateSupplier();
         populateSupplierTable();
-
     }//GEN-LAST:event_buttonSupplierEditActionPerformed
 
     private void buttonEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEventsActionPerformed
@@ -2705,20 +2705,22 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonPrintActionPerformed
 
     private void comboBoxTableColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxTableColorItemStateChanged
-        if (comboBoxTableColor.getSelectedItem() == "Black") {
-            color = new Color(72, 72, 72);
-        }
-        if (comboBoxTableColor.getSelectedItem() == "Blue") {
-            color = new Color(0, 138, 231);
-        }
-        if (comboBoxTableColor.getSelectedItem() == "Red") {
-            color = new Color(255, 46, 43);
-        }
-        if (comboBoxTableColor.getSelectedItem() == "Green") {
-            color = new Color(51, 190, 52);
-        }
-        if (comboBoxTableColor.getSelectedItem() == "Orange") {
-            color = new Color(232, 87, 17);
+        switch (comboBoxTableColor.getSelectedItem().toString()) {
+            case ("Black"):
+                color = new Color(72, 72, 72);
+                break;
+            case ("Blue"):
+                color = new Color(0, 138, 231);
+                break;
+            case ("Red"):
+                color = new Color(255, 46, 43);
+                break;
+            case ("Green"):
+                color = new Color(51, 190, 52);
+                break;
+            case ("Orange"):
+                color = new Color(232, 87, 17);
+                break;
         }
         buttonColor(color);
         tableLayout(color);

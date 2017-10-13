@@ -50,10 +50,10 @@ public Double calculateWage() {
        String confirmUsername = getUsername();
        int ID = getID();
        
-       String salarySt = newManager.getHoursWorked(confirmUsername);
+       String salarySt[] = newManager.getHoursWorked(confirmUsername).split("hrs");
   
-       String hours = Character.toString(salarySt.charAt(0));
-       String minutes = Character.toString(salarySt.charAt(4)) + Character.toString(salarySt.charAt(5));
+       String hours = salarySt[0];
+       String minutes = salarySt[1];
       
        Double HoursWorked = Double.parseDouble(hours);
        Double minutesWorked = Double.parseDouble(minutes);
@@ -61,7 +61,7 @@ public Double calculateWage() {
 
        Double Wage = HoursWorked * rate + (rate/60)*minutesWorked;
 
-       JOptionPane.showMessageDialog(this,"The Staff Member Should get R:"+ Wage);
+       JOptionPane.showMessageDialog(this,"Employee payout "+ String.format("R%.2f", Wage));
        newManager.insertWage(Wage, ID);
        return Wage;
    }
