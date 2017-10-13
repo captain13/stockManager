@@ -45,27 +45,29 @@ public class EmployeeForm extends javax.swing.JFrame {
         }
     }
 
-public Double calculateWage() {
-      
-       String confirmUsername = getUsername();
-       int ID = getID();
-       
-       String salarySt[] = newManager.getHoursWorked(confirmUsername).split("hrs");
-  
-       String hours = salarySt[0];
-       String minutes = salarySt[1];
-      
-       Double HoursWorked = Double.parseDouble(hours);
-       Double minutesWorked = Double.parseDouble(minutes);
-       Double rate = Double.parseDouble(JOptionPane.showInputDialog("Please enter the Rate"));
+    public Double calculateWage() {
+        Double Wage = 0.0;
+        Double rate;
+        String confirmUsername = getUsername();
+        int ID = getID();
 
-       Double Wage = HoursWorked * rate + (rate/60)*minutesWorked;
+        String salarySt[] = newManager.getHoursWorked(confirmUsername).split("hrs");
 
-       JOptionPane.showMessageDialog(this,"Employee payout "+ String.format("R%.2f", Wage));
-       newManager.insertWage(Wage, ID);
-       return Wage;
-   }
+        String hours = salarySt[0];
+        String minutes = salarySt[1];
 
+        Double HoursWorked = Double.parseDouble(hours);
+        Double minutesWorked = Double.parseDouble(minutes);
+        String option = JOptionPane.showInputDialog("Please enter the Rate");
+        if (option != null) {
+            rate = Double.parseDouble(option);
+            Wage = HoursWorked * rate + (rate / 60) * minutesWorked;
+            JOptionPane.showMessageDialog(this, "Employee payout " + String.format("R%.2f", Wage));
+            newManager.insertWage(Wage, ID);
+        }
+
+        return Wage;
+    }
 
     public final void setButtonColor(Color color) {
         buttonAdd.setBackground(color);

@@ -12,6 +12,7 @@ public class AddEmployee extends javax.swing.JFrame {
     Keyboard k = new Keyboard();
     /**
      * Creates new form AddEmployee
+     * @param newForm
      */
     public AddEmployee(EmployeeForm newForm) {
         initComponents();
@@ -21,11 +22,23 @@ public class AddEmployee extends javax.swing.JFrame {
     }
 
     public String getEmpFirstName() {
-        return textfieildFname.getText();
+        String name = textfieildFname.getText();
+        if (name != null) {
+            name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+        } else {
+            //Condition for null entry
+        }
+        return name;
     }
 
     public String getEmpLastName() {
-        return textfieildLname.getText();
+        String name = textfieildLname.getText();
+        if (name != null) {
+            name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+        } else {
+            //Condition for null entry
+        }
+        return name;
     }
 
     public String getEmpPassword() {
@@ -47,6 +60,19 @@ public class AddEmployee extends javax.swing.JFrame {
         } else {
             return 0;
         }
+    }
+    
+    public boolean dataIntegrity() {     
+        boolean pass = false;        
+        String first = getEmpFirstName();
+        String last = getEmpLastName();
+        String password = getEmpPassword();
+        String contact = getEmpContact();
+
+        if ( first != null | last != null | password != null | contact != null ) {
+            pass = true;
+        }
+        return pass;
     }
 
     /**
@@ -262,8 +288,12 @@ public class AddEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAcceptActionPerformed
 
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
-        newManger.insertEmployee(getEmpFirstName(), getEmpLastName(), getEmpPassword(), getEmpContact(), getAdminRights());
-        newForm.populateEmployeeTable();
+       
+        if ( dataIntegrity() == true) {
+            newManger.insertEmployee(getEmpFirstName(), getEmpLastName(), getEmpPassword(), getEmpContact(), getAdminRights());
+            newForm.populateEmployeeTable();
+        } 
+        
         this.dispose();
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
