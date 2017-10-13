@@ -777,6 +777,27 @@ public class dbManager {
         return time;
     }
 
+    public boolean getAdminCount() {
+        int count = 0;
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
+            String querySelect = "SELECT COUNT(admin) FROM employee WHERE admin=1";
+            ResultSet rs = s.executeQuery(querySelect);
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+        }
+        if (count==0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public String getEmployeeUsername() {
         String Username = "";
         try {
