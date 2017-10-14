@@ -116,6 +116,9 @@
             <Component class="javax.swing.JLabel" name="lblImage">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/Logo_White.png"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
@@ -1950,9 +1953,6 @@
                     <Property name="text" type="java.lang.String" value="Enable KeyPad"/>
                     <Property name="contentAreaFilled" type="boolean" value="false"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblLogo1">
                   <Properties>

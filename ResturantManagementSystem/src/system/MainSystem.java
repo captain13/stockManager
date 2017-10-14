@@ -843,6 +843,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         Dashboard.setBackground(new java.awt.Color(255, 255, 255));
 
         lblImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo_White.png"))); // NOI18N
         lblImage.setToolTipText("");
 
         buttonClose.setBackground(new java.awt.Color(75, 75, 75));
@@ -1990,11 +1991,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         jCheckBox1.setText("Enable KeyPad");
         jCheckBox1.setContentAreaFilled(false);
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
 
         lblLogo1.setText("Number of Tabels");
 
@@ -2793,10 +2789,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private void changLogoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changLogoButtonActionPerformed
         changeLogo();
     }//GEN-LAST:event_changLogoButtonActionPerformed
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments

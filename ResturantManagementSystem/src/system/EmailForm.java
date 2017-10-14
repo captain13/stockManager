@@ -9,7 +9,6 @@ import java.awt.Color;
 public class EmailForm extends javax.swing.JFrame {
 
     emailClient email = new emailClient();
-    MainSystem system = new MainSystem();
     Keyboard k = new Keyboard();
 
     public EmailForm(Color color, boolean enabled) {
@@ -22,9 +21,7 @@ public class EmailForm extends javax.swing.JFrame {
         if (enabled == true) {
             k = new Keyboard();
             k.setVisible(true);
-            k.setBounds(700, 700, 575, 200);
             k.setAlwaysOnTop(rootPaneCheckingEnabled);
-            k.setLocation(400, 550);
         }
     }
 
