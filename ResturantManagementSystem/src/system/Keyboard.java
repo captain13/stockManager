@@ -7,6 +7,7 @@ package system;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -17,6 +18,7 @@ import javax.swing.text.JTextComponent;
  * @author Andrew
  */
 public class Keyboard extends javax.swing.JFrame {
+
     int caps = -0;
     int x;
     int y;
@@ -28,7 +30,16 @@ public class Keyboard extends javax.swing.JFrame {
         initComponents();
         super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         draggablePanel();
-        this.setLocation(350, 530);
+        this.setLocation();
+    }
+
+    public final void setLocation() {
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().getWidth()/2);
+        int ySize = ((int) tk.getScreenSize().getHeight());
+        int height = this.getHeight()/2;
+        int width = this.getWidth()/2;
+        this.setLocation(xSize-width, xSize-height);
     }
 
     public void setTextfield(JTextComponent textField) {
@@ -1031,11 +1042,11 @@ public class Keyboard extends javax.swing.JFrame {
             getContentPane().setLayout(layout);
             layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlBoard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlBoard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             );
             layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlBoard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlBoard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             );
 
             pack();
@@ -1257,7 +1268,7 @@ public class Keyboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton58ActionPerformed
 
     private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
-        
+
     }//GEN-LAST:event_jButton33ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
@@ -1277,7 +1288,7 @@ public class Keyboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-       n("\n");
+        n("\n");
     }//GEN-LAST:event_jButton13ActionPerformed
 
 

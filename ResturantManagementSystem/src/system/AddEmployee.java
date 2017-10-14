@@ -69,9 +69,8 @@ public class AddEmployee extends javax.swing.JFrame {
         String first = getEmpFirstName();
         String last = getEmpLastName();
         String password = getEmpPassword();
-        String contact = getEmpContact();
 
-        if ( first != null | last != null | password != null | contact != null ) {
+        if ( first != null | last != null | password != null  ) {
             pass = true;
         }
         return pass;

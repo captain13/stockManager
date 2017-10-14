@@ -1989,6 +1989,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jCheckBox1.setSelected(true);
         jCheckBox1.setText("Enable KeyPad");
         jCheckBox1.setContentAreaFilled(false);
 
