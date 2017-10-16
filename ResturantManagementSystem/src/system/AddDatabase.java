@@ -29,6 +29,8 @@ public class AddDatabase extends javax.swing.JFrame {
             k = new Keyboard();
             k.setVisible(true);
             k.setBounds(700, 700, 575, 200);
+            k.setAlwaysOnTop(rootPaneCheckingEnabled);
+            k.setLocation(400, 550);
         }
     }
 
@@ -634,10 +636,12 @@ public class AddDatabase extends javax.swing.JFrame {
 
     private void buttonAccpetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccpetActionPerformed
         insert();
+        k.dispose();
         this.dispose();
     }//GEN-LAST:event_buttonAccpetActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
+        k.dispose();
         this.dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
 

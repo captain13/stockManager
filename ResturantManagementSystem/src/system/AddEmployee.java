@@ -295,7 +295,7 @@ public class AddEmployee extends javax.swing.JFrame {
             newManger.insertEmployee(getEmpFirstName(), getEmpLastName(), getEmpPassword(), getEmpContact(), getAdminRights());
             newForm.populateEmployeeTable();
         } 
-        
+        k.dispose();
         this.dispose();
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 

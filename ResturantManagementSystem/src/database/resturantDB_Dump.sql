@@ -48,7 +48,8 @@ CREATE TABLE IF NOT EXISTS `resturantdb`.`inventory` (
   `itemThreshold` DOUBLE NULL DEFAULT NULL,
   `itemLimit` INT(11) NULL DEFAULT NULL,
   `itemCost` DECIMAL(10,2) NULL,
-  PRIMARY KEY (`inventoryID`))
+  PRIMARY KEY (`inventoryID`),
+  UNIQUE INDEX `item_UNIQUE` (`item` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 9
 DEFAULT CHARACTER SET = utf8;
@@ -86,6 +87,8 @@ CREATE TABLE IF NOT EXISTS `resturantdb`.`recipe` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
+
+
 
 
 -- -----------------------------------------------------
@@ -189,7 +192,8 @@ CREATE TABLE IF NOT EXISTS `resturantdb`.`supplier` (
   `supplierEmail` VARCHAR(45) NULL DEFAULT NULL,
   `supplierNumber` VARCHAR(45) NULL DEFAULT NULL,
   `supplierAddress` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`supplierID`))
+  PRIMARY KEY (`supplierID`),
+  UNIQUE INDEX `supplierName_UNIQUE` (`supplierName` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;

@@ -791,7 +791,7 @@ public class dbManager {
             conn.close();
         } catch (SQLException exp) {
         }
-        if (count==0) {
+        if (count == 0) {
             return false;
         } else {
             return true;
@@ -869,6 +869,8 @@ public class dbManager {
             logs.writeLogs("ADDED", "Inventory");
             s.close();
             conn.close();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            JOptionPane.showMessageDialog(null, "Item already exsists");
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1090,6 +1092,8 @@ public class dbManager {
             logs.writeLogs("ADDED", "Supplier");
             s.close();
             conn.close();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            JOptionPane.showMessageDialog(null, "Supplier already exsists");
         } catch (SQLException exp) {
         }
     }
