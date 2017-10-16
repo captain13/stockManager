@@ -1309,8 +1309,8 @@ public class dbManager {
 
     public void updateHours(String Username, int i) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
+           Connection conn = DriverManager.getConnection(url, username, password);
+           Statement s = conn.createStatement();
             String queryUpdate = "UPDATE employee set employeeHoursWorked='" + clock.calculateHours(i, getHoursWorked(Username))
                     + "' WHERE employeeFName='" + Username + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(queryUpdate);
@@ -1319,6 +1319,7 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (SQLException exp) {
+            System.out.println(exp);
         }
     }
 

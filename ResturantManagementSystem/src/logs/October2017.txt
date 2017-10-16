@@ -502,3 +502,6 @@
 2017-10-13 22:32:47 record DELETED to Employee table
 2017-10-13 22:32:59 record ADDED to Employee table
 2017-10-13 23:12:39 record ADDED to Employee table
+2017-10-16 22:46:07 record UPDATED to Employee table
+2017-10-16 22:50:01 record UPDATED to Employee table
+2017-10-16 22:50:28 record UPDATED to Inventory table
