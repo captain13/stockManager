@@ -9,10 +9,12 @@ package system;
  *
  * @author Andrew
  */
-public class DayEndForm extends javax.swing.JFrame {
+public class DayEndSalesForm extends javax.swing.JFrame {
 
     dbManager newManager = new dbManager();
     double expenses;
+    double expensesWage;
+    double expensesSales;
     double sales;
     double cash;
     double credit;
@@ -20,7 +22,7 @@ public class DayEndForm extends javax.swing.JFrame {
     double income;
     double defaultExp = 0.00;
 
-    public DayEndForm() {
+    public DayEndSalesForm() {
         initComponents();
         setExpenses();
         setSales();
@@ -59,12 +61,13 @@ public class DayEndForm extends javax.swing.JFrame {
     }
 
     public final void setWages() {
-        wageField.setText(String.format("R%.2f", defaultExp));
+        expensesWage = newManager.getDayWageExpenses();
+        wageField.setText(String.format("R%.2f", expensesWage));
     }
 
     public final void setStockOrder() {
-        expenses = newManager.getDayExpenses();
-        orderField.setText(String.format("R%.2f", defaultExp));
+           expensesSales = newManager.getDaySaleExpenses();
+        orderField.setText(String.format("R%.2f", expensesSales));
     }
 
     public final void setTotal() {

@@ -549,6 +549,50 @@ public class dbManager {
         }
         return totalExpenses;
     }
+    
+        public double getDayWageExpenses() {
+        double totalExpenses = 0;
+        String date = clock.getCurrentDate();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
+            String query = "SELECT SUM(expensesAmount) FROM expenses WHERE date='" + date + "' AND expensesType='Wage'";
+            ResultSet rs = s.executeQuery(query);
+            if (rs.next()) {
+                totalExpenses = rs.getDouble(1);
+            }
+
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+        return totalExpenses;
+    }
+        
+            public double getDaySaleExpenses() {
+        double totalExpenses = 0;
+        String date = clock.getCurrentDate();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
+            String query = "SELECT SUM(expensesAmount) FROM expenses WHERE date='" + date + "' AND expensesType='Stock Order' ";
+            ResultSet rs = s.executeQuery(query);
+            if (rs.next()) {
+                totalExpenses = rs.getDouble(1);
+            }
+
+            rs.close();
+            s.close();
+            conn.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println(exc);
+        }
+        return totalExpenses;
+    }
 
     public double getDaySales() {
         double totalSales = 0;

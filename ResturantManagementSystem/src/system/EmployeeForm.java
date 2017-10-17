@@ -11,6 +11,9 @@ import javax.swing.table.DefaultTableModel;
 public class EmployeeForm extends javax.swing.JFrame {
 
     dbManager newManager = new dbManager();
+    internalClock clock=new internalClock();
+    double Wage;
+    double rate;
 
     public EmployeeForm(Color color) {
         initComponents();
@@ -46,8 +49,7 @@ public class EmployeeForm extends javax.swing.JFrame {
     }
 
     public Double calculateWage() {
-        Double Wage = 0.0;
-        Double rate;
+        Wage = 0.0;
         String confirmUsername = getUsername();
         int ID = getID();
 
@@ -293,6 +295,7 @@ public class EmployeeForm extends javax.swing.JFrame {
 
     private void buttonWageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWageActionPerformed
         calculateWage();
+        newManager.insertExpenses("Wage", Wage, clock.getCurrentDate());
     }//GEN-LAST:event_buttonWageActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -505,3 +505,13 @@
 2017-10-16 22:46:07 record UPDATED to Employee table
 2017-10-16 22:50:01 record UPDATED to Employee table
 2017-10-16 22:50:28 record UPDATED to Inventory table
+2017-10-17 19:08:31 record ADDED to Specials table
+2017-10-17 19:20:45 record ADDED to StockOrder table
+2017-10-17 19:20:45 record ADDED to Expenses table
+2017-10-17 19:22:51 record ADDED to StockOrder table
+2017-10-17 19:22:51 record ADDED to Expenses table
+2017-10-17 19:23:24 record ADDED to wage table
+2017-10-17 19:34:21 record ADDED to Expenses table
+2017-10-17 19:34:24 record DELETED to Employee table
+2017-10-17 19:34:30 record ADDED to wage table
+2017-10-17 19:34:31 record ADDED to Expenses table

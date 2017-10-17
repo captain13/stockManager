@@ -1862,7 +1862,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
         buttonLogs1.setBackground(new java.awt.Color(75, 75, 75));
         buttonLogs1.setForeground(new java.awt.Color(255, 255, 255));
-        buttonLogs1.setText("Day End Report");
+        buttonLogs1.setText("End of Day Sales");
         buttonLogs1.setContentAreaFilled(false);
         buttonLogs1.setOpaque(true);
         buttonLogs1.addActionListener(new java.awt.event.ActionListener() {
@@ -2729,7 +2729,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_comboBoxTableColorItemStateChanged
 
     private void buttonLogs1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogs1ActionPerformed
-        DayEndForm newForm = new DayEndForm();
+        DayEndSalesForm newForm = new DayEndSalesForm();
         newForm.setVisible(true);
     }//GEN-LAST:event_buttonLogs1ActionPerformed
 
