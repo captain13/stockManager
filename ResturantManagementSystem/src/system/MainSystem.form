@@ -2373,12 +2373,12 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="currentEmail3">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Email Password"/>
+                    <Property name="text" type="java.lang.String" value="Password"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="currentEmail4">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Email Address"/>
+                    <Property name="text" type="java.lang.String" value="Username"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="textUsername">

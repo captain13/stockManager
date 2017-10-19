@@ -2252,9 +2252,9 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        currentEmail3.setText("Email Password");
+        currentEmail3.setText("Password");
 
-        currentEmail4.setText("Email Address");
+        currentEmail4.setText("Username");
 
         textUsername.setText("root");
 
