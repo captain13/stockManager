@@ -1,5 +1,7 @@
 package system;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author Andrew
@@ -7,7 +9,6 @@ package system;
 public class Login extends javax.swing.JFrame {
 
     userManager newManager = new userManager();
- 
 
     public Login() {
         initComponents();
@@ -15,6 +16,12 @@ public class Login extends javax.swing.JFrame {
 
     public void disposeLogin() {
         this.dispose();
+    }
+
+    public void authenticate() {
+        String username = textfieldUser.getText();
+        String password = passwordFieldBox.getText();
+        newManager.loginAuthentication(username, password);
     }
 
     @SuppressWarnings("unchecked")
@@ -58,9 +65,21 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        textfieldUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textfieldUserKeyPressed(evt);
+            }
+        });
+
         lblUsername.setText("Username");
 
         lblPassword.setText("Password");
+
+        passwordFieldBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordFieldBoxKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -122,14 +141,24 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblLoginActionPerformed
-        String username = textfieldUser.getText();
-        String password = passwordFieldBox.getText();
-        newManager.loginAuthentication(username, password);
+        authenticate();
     }//GEN-LAST:event_lblLoginActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
+
+    private void passwordFieldBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldBoxKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            authenticate();
+        }
+    }//GEN-LAST:event_passwordFieldBoxKeyPressed
+
+    private void textfieldUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textfieldUserKeyPressed
+           if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            authenticate();
+        }
+    }//GEN-LAST:event_textfieldUserKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancel;

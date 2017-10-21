@@ -5,6 +5,7 @@
  */
 package system;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -49,6 +50,13 @@ public class LoginAdmin extends javax.swing.JDialog {
         return accept;
     }
 
+    public void authenticate() {
+        String username = textfieldUser.getText();
+        String password = passwordFieldBox.getText();
+        accept = loginAuthentication(username, password);
+        this.dispose();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,6 +99,18 @@ public class LoginAdmin extends javax.swing.JDialog {
         lblLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lblLoginActionPerformed(evt);
+            }
+        });
+
+        passwordFieldBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordFieldBoxKeyPressed(evt);
+            }
+        });
+
+        textfieldUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textfieldUserKeyPressed(evt);
             }
         });
 
@@ -166,11 +186,20 @@ public class LoginAdmin extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void lblLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblLoginActionPerformed
-        String username = textfieldUser.getText();
-        String password = passwordFieldBox.getText();
-        accept = loginAuthentication(username, password);
-        this.dispose();
+        authenticate();
     }//GEN-LAST:event_lblLoginActionPerformed
+
+    private void textfieldUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textfieldUserKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            authenticate();
+        }
+    }//GEN-LAST:event_textfieldUserKeyPressed
+
+    private void passwordFieldBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldBoxKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            authenticate();
+        }
+    }//GEN-LAST:event_passwordFieldBoxKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
