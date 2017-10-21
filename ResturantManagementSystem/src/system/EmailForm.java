@@ -7,7 +7,7 @@ import java.awt.Color;
  * @author Andrew
  */
 public class EmailForm extends javax.swing.JFrame {
-
+    dbManager newManager=new dbManager();
     emailClient email = new emailClient();
     Keyboard k = new Keyboard();
 
@@ -15,6 +15,7 @@ public class EmailForm extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         isKeypadEnable(enabled);
+        popluateEmailAddress();
     }
 
     public final void isKeypadEnable(boolean enabled) {
@@ -39,6 +40,12 @@ public class EmailForm extends javax.swing.JFrame {
 
     public final void setButtonColor(Color color) {
         sendButton.setBackground(color);
+    }
+
+    public final void popluateEmailAddress() {
+        for (int i = 0; i < newManager.getSuppleirData().length; i++) {
+              jComboBox1.addItem(newManager.getSuppleirData()[i][2].toString());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -78,7 +85,7 @@ public class EmailForm extends javax.swing.JFrame {
 
         jLabel2.setText("Subject");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "swabe@live.co.za" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select...", "swabe@live.co.za" }));
 
         jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

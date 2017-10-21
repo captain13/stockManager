@@ -533,3 +533,6 @@
 2017-10-21 14:06:41 record UPDATED to recipe table
 2017-10-21 14:06:44 record ADDED to Sales table
 2017-10-21 14:06:44 record ADDED to receipt table
+2017-10-21 14:20:12 record UPDATED to Supplier table
+2017-10-21 14:20:12 record UPDATED to Supplier table
+2017-10-21 14:20:56 record DELETED to Employee table
