@@ -55,7 +55,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         network.recieveData(jTable1);
         getSetting();
         startup();
-        system.scheduleBackup();
+//        system.scheduleBackup();
     }
 
     public final void startup() {
@@ -2490,31 +2490,43 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonRecipeAdd1ActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        if (user.createAdminLogin() == true) {
-            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                system.removeInventory(getID());
-                populateInvnetoryTable();
+        if (tblInventory.getSelectedRow() == (-1)) {
+            JOptionPane.showMessageDialog(null, "No Item Selected");
+        } else {
+            if (user.createAdminLogin() == true) {
+                int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    system.removeInventory(getID());
+                    populateInvnetoryTable();
+                }
             }
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonRecipeDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDeleteActionPerformed
-        if (user.createAdminLogin() == true) {
-            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                system.removeRecipe(getIDrecipe());
-                populateRecipeTable();
+        if (tableRecipe.getSelectedRow() == (-1)) {
+            JOptionPane.showMessageDialog(null, "No Item Selected");
+        } else {
+            if (user.createAdminLogin() == true) {
+                int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    system.removeRecipe(getIDrecipe());
+                    populateRecipeTable();
+                }
             }
         }
     }//GEN-LAST:event_buttonRecipeDeleteActionPerformed
 
     private void buttonRecipeDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete1ActionPerformed
-        if (user.createAdminLogin() == true) {
-            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                system.removeSupplier(getIDsupplier());
-                populateSupplierTable();
+        if (tblSupplier.getSelectedRow() == (-1)) {
+            JOptionPane.showMessageDialog(null, "No Item Selected");
+        } else {
+            if (user.createAdminLogin() == true) {
+                int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    system.removeSupplier(getIDsupplier());
+                    populateSupplierTable();
+                }
             }
         }
     }//GEN-LAST:event_buttonRecipeDelete1ActionPerformed
@@ -2627,10 +2639,14 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void buttonRecipeDelete2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete2ActionPerformed
-        if (user.createAdminLogin() == true) {
-            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                system.removeRecipeList(getIDrecipeListRecipe(), getIDrecipeListInventory());
+        if (tableRecipeList.getSelectedRow() == (-1)) {
+            JOptionPane.showMessageDialog(null, "No Item Selected");
+        } else {
+            if (user.createAdminLogin() == true) {
+                int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    system.removeRecipeList(getIDrecipeListRecipe(), getIDrecipeListInventory());
+                }
             }
         }
     }//GEN-LAST:event_buttonRecipeDelete2ActionPerformed
@@ -2678,6 +2694,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
 
     private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
         if (tblInventory.getSelectedRow() == (-1)) {
+            JOptionPane.showMessageDialog(null, "No Item Selected");
         } else {
             updateShrinkage();
             populateInvnetoryTable();

@@ -31,7 +31,7 @@ public class receiptHandler {
                 + clock.getCurrentTimeStamp() + " "
                 + clock.getCurrentDate() + "\n"
                 + stars + "\n";
-        System.out.println(head);
+//        System.out.println(head);
     }
 
     public void body(double total) {
@@ -40,7 +40,7 @@ public class receiptHandler {
                 + itemsList() +"\n"
                 + "Total " + total + "\n" 
                 + "Amount........................\n";
-        System.out.println(body);
+//        System.out.println(body);
     }
 
     public void tail() {
@@ -52,7 +52,7 @@ public class receiptHandler {
                 + "WAITER\n"
                 + NewOrder.getWaiter() + "\n"
                 + stars + "\n";
-        System.out.println(tail);
+//        System.out.println(tail);
     }
     
     public StringBuilder itemsList() {

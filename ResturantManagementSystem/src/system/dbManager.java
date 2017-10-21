@@ -549,8 +549,8 @@ public class dbManager {
         }
         return totalExpenses;
     }
-    
-        public double getDayWageExpenses() {
+
+    public double getDayWageExpenses() {
         double totalExpenses = 0;
         String date = clock.getCurrentDate();
         try {
@@ -571,8 +571,8 @@ public class dbManager {
         }
         return totalExpenses;
     }
-        
-            public double getDaySaleExpenses() {
+
+    public double getDaySaleExpenses() {
         double totalExpenses = 0;
         String date = clock.getCurrentDate();
         try {
@@ -1353,8 +1353,8 @@ public class dbManager {
 
     public void updateHours(String Username, int i) {
         try {
-           Connection conn = DriverManager.getConnection(url, username, password);
-           Statement s = conn.createStatement();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
             String queryUpdate = "UPDATE employee set employeeHoursWorked='" + clock.calculateHours(i, getHoursWorked(Username))
                     + "' WHERE employeeFName='" + Username + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(queryUpdate);
@@ -1528,8 +1528,8 @@ public class dbManager {
         try {
             conn = DriverManager.getConnection(url, username, password);
             s = conn.createStatement();
-            String updateQuery = "UPDATE recipe SET recipeCount=recipeCount+1 WHERE recipeName ='" + order + "'";
-            s.execute(updateQuery);
+            String updateQuery = "UPDATE recipe SET recipeCount=(recipeCount+1) WHERE recipeName ='" + order + "'";
+//            s.execute(updateQuery);
             PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
             preparedStmt.executeUpdate();
             logs.writeLogs("UPDATED", "recipe");
@@ -1632,29 +1632,27 @@ public class dbManager {
         }
     }
 
-    public void scheduleBackup() {
-        String date[] = clock.getCurrentDate().split("-");
-        int day = Integer.parseInt(date[2]);
-        if (day % 7 == 0) {
-            try {
-                String[] executeCmd = new String[]{".\\src\\database\\mysql.exe",
-                    "--user=" + username, "--password=" + password, "resturantdb",
-                    "-e", "source " + location};
-
-                Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
-                int processComplete = runtimeProcess.waitFor();
-
-                if (processComplete == 0) {
-                    System.out.println("Database Successfully Restored");
-                } else {
-                    System.out.println("Restore Failed");
-                }
-
-            } catch (IOException | InterruptedException | HeadlessException ex) {
-                JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
-            }
-        }
-    }
+//    public void scheduleBackup() {
+//        String date[] = clock.getCurrentDate().split("-");
+//        int day = Integer.parseInt(date[2]);
+//        if (day % 7 == 0) {
+//            try {
+//                String executeCmd = ".\\src\\database\\mysqldump.exe";
+//
+//                Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+//                int processComplete = runtimeProcess.waitFor();
+//
+//                if (processComplete == 0) {
+//                    System.out.println("Backup Complete");
+//                } else {
+//                    System.out.println("Restore Failed");
+//                }
+//
+//            } catch (IOException | InterruptedException | HeadlessException ex) {
+//                JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
+//            }
+//        }
+//    }
 
     public void restore() {
         try {
