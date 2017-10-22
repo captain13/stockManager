@@ -765,7 +765,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         buttonRecipeListEdit = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tableRecipeList = new javax.swing.JTable();
-        buttonRecipeDelete3 = new javax.swing.JButton();
         pnlSupplier = new javax.swing.JPanel();
         buttonRecipeAdd1 = new javax.swing.JButton();
         buttonRecipeDelete1 = new javax.swing.JButton();
@@ -1529,17 +1528,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
             tableRecipeList.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        buttonRecipeDelete3.setBackground(new java.awt.Color(75, 75, 75));
-        buttonRecipeDelete3.setForeground(new java.awt.Color(255, 255, 255));
-        buttonRecipeDelete3.setText("Print");
-        buttonRecipeDelete3.setContentAreaFilled(false);
-        buttonRecipeDelete3.setOpaque(true);
-        buttonRecipeDelete3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonRecipeDelete3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlRecipeListLayout = new javax.swing.GroupLayout(pnlRecipeList);
         pnlRecipeList.setLayout(pnlRecipeListLayout);
         pnlRecipeListLayout.setHorizontalGroup(
@@ -1548,8 +1536,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap()
                 .addGroup(pnlRecipeListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonRecipeListEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeDelete2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                    .addComponent(buttonRecipeDelete3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buttonRecipeDelete2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE))
         );
@@ -1561,9 +1548,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
                 .addComponent(buttonRecipeDelete2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonRecipeListEdit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonRecipeDelete3)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Recipe List", pnlRecipeList);
@@ -2680,10 +2665,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
         prints.printRecipe();
     }//GEN-LAST:event_buttonRecipeEdit3ActionPerformed
 
-    private void buttonRecipeDelete3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeDelete3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonRecipeDelete3ActionPerformed
-
     private void buttonRecipeEdit4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecipeEdit4ActionPerformed
         prints.printSupplier();
     }//GEN-LAST:event_buttonRecipeEdit4ActionPerformed
@@ -2870,7 +2851,6 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton buttonRecipeDelete;
     private javax.swing.JButton buttonRecipeDelete1;
     private javax.swing.JButton buttonRecipeDelete2;
-    private javax.swing.JButton buttonRecipeDelete3;
     private javax.swing.JButton buttonRecipeEdit;
     private javax.swing.JButton buttonRecipeEdit3;
     private javax.swing.JButton buttonRecipeEdit4;
