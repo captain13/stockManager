@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 public class EmployeeForm extends javax.swing.JFrame {
 
     dbManager newManager = new dbManager();
-    internalClock clock = new internalClock();
+    internalClock clock=new internalClock();
     double Wage;
     double rate;
 
@@ -288,20 +288,14 @@ public class EmployeeForm extends javax.swing.JFrame {
     private void toggleLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleLoginActionPerformed
         if (toggleLogin.isSelected()) {
             newManager.showActiveEmp();
-            toggleLogin.setText("View employee hours");
         } else {
             populateEmployeeTable();
-            toggleLogin.setText("Currently Logged in");
         }
     }//GEN-LAST:event_toggleLoginActionPerformed
 
     private void buttonWageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWageActionPerformed
-        if (tableEmp.getSelectionModel().isSelectionEmpty() == false) {
-            calculateWage();
-            newManager.insertExpenses("Wage", Wage, clock.getCurrentDate());
-        } else {
-            JOptionPane.showInputDialog("Please select an employee");
-        }
+        calculateWage();
+        newManager.insertExpenses("Wage", Wage, clock.getCurrentDate());
     }//GEN-LAST:event_buttonWageActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

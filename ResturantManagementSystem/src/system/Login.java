@@ -9,27 +9,19 @@ import java.awt.event.KeyEvent;
 public class Login extends javax.swing.JFrame {
 
     userManager newManager = new userManager();
-    Keyboard k = new Keyboard();
 
     public Login() {
         initComponents();
-        this.setAlwaysOnTop(rootPaneCheckingEnabled);
-        k.setVisible(true);
-        k.setBounds(700, 700, 575, 200);
-        k.setAlwaysOnTop(rootPaneCheckingEnabled);
-        k.setLocation(400, 500);
     }
 
     public void disposeLogin() {
         this.dispose();
-        k.dispose();
     }
 
     public void authenticate() {
         String username = textfieldUser.getText();
         String password = passwordFieldBox.getText();
         newManager.loginAuthentication(username, password);
-        k.dispose();
     }
 
     @SuppressWarnings("unchecked")
@@ -154,7 +146,6 @@ public class Login extends javax.swing.JFrame {
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         this.dispose();
-        k.dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void passwordFieldBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldBoxKeyPressed

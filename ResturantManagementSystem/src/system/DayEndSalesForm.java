@@ -40,19 +40,9 @@ public class DayEndSalesForm extends javax.swing.JFrame {
         jTextField1.setText(String.format("R%.2f", sales));
     }
 
-    public final String getSales() {
-        String salesA = jTextField1.getText();
-        return salesA;
-    }
-
     public final void setCash() {
         cash = newManager.getCashTotal();
         cashField.setText(String.format("R%.2f", cash));
-    }
-
-    public final String getCash() {
-        String cashA = cashField.getText();
-        return cashA;
     }
 
     public final void setCredit() {
@@ -60,19 +50,9 @@ public class DayEndSalesForm extends javax.swing.JFrame {
         creditField.setText(String.format("R%.2f", credit));
     }
 
-    public final String getCredit() {
-        String creditA = creditField.getText();
-        return creditA;
-    }
-
     public final void setVAT() {
         vat = sales * 0.14;
         jTextField4.setText(String.format("R%.2f", vat));
-    }
-
-    public final String getVAT() {
-        String vatA = jTextField4.getText();
-        return vatA;
     }
 
     public final void setExpenses() {
@@ -80,39 +60,19 @@ public class DayEndSalesForm extends javax.swing.JFrame {
         jTextField2.setText(String.format("R%.2f", expenses));
     }
 
-    public final String getExpenses() {
-        String expensesA = jTextField2.getText();
-        return expensesA;
-    }
-
     public final void setWages() {
         expensesWage = newManager.getDayWageExpenses();
         wageField.setText(String.format("R%.2f", expensesWage));
     }
 
-    public final String getWages() {
-        String expensesWageA = wageField.getText();
-        return expensesWageA;
-    }
-
     public final void setStockOrder() {
-        expensesSales = newManager.getDaySaleExpenses();
+           expensesSales = newManager.getDaySaleExpenses();
         orderField.setText(String.format("R%.2f", expensesSales));
-    }
-    
-    public final String getStockOrder() {
-        String expensesSalesA = orderField.getText();
-        return expensesSalesA;
     }
 
     public final void setTotal() {
         income = sales - expenses;
         jTextField3.setText(String.format("R%.2f", income));
-    }
-    
-    public final String getTotal() {
-        String incomeA = jTextField3.getText();
-        return incomeA;
     }
 
     @SuppressWarnings("unchecked")
@@ -164,11 +124,6 @@ public class DayEndSalesForm extends javax.swing.JFrame {
         jButton2.setText("Print");
         jButton2.setContentAreaFilled(false);
         jButton2.setOpaque(true);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Total Sale");
 
@@ -375,11 +330,6 @@ public class DayEndSalesForm extends javax.swing.JFrame {
     private void wageFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wageFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_wageFieldActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        printHandler print = new printHandler();
-        print.printEODreport();
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cashField;

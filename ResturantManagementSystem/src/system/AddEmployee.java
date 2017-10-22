@@ -7,19 +7,16 @@ import javax.swing.JOptionPane;
  * @author Andrew
  */
 public class AddEmployee extends javax.swing.JFrame {
-
-    dbManager newManger = new dbManager();
+    dbManager newManger=new dbManager();
     EmployeeForm newForm;
     Keyboard k = new Keyboard();
-
     /**
      * Creates new form AddEmployee
-     *
      * @param newForm
      */
     public AddEmployee(EmployeeForm newForm) {
         initComponents();
-        this.newForm = newForm;
+        this.newForm=newForm;
         k.setVisible(true);
         k.setBounds(700, 700, 575, 200);
         k.setAlwaysOnTop(rootPaneCheckingEnabled);
@@ -28,25 +25,20 @@ public class AddEmployee extends javax.swing.JFrame {
 
     public String getEmpFirstName() {
         String name = textfieildFname.getText();
-        System.out.println(name);
-        if (name == "" && name.length() < 4) {
+        if (name != null) {
             name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
         } else {
-            JOptionPane.showMessageDialog(null, "Please enter a valid Name");
-            setVisible(true);
-            return null;
+            //Condition for null entry
         }
         return name;
     }
 
     public String getEmpLastName() {
         String name = textfieildLname.getText();
-        if (name == "" && name.length() < 4) {
+        if (name != null) {
             name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
         } else {
-            JOptionPane.showMessageDialog(null, "Please enter a valid Surname");
-            setVisible(true);
-            return null;
+            //Condition for null entry
         }
         return name;
     }
@@ -55,8 +47,7 @@ public class AddEmployee extends javax.swing.JFrame {
         if (textfieildPassowrd.getText().equals(textfieildPassowrdC.getText())) {
             return textfieildPassowrd.getText();
         } else {
-            JOptionPane.showMessageDialog(null, "Password's do not Match");
-            setVisible(true);
+            JOptionPane.showMessageDialog(null, "Password does not Match");
             return null;
         }
     }
@@ -72,14 +63,14 @@ public class AddEmployee extends javax.swing.JFrame {
             return 0;
         }
     }
-
-    public boolean dataIntegrity() {
-        boolean pass = false;
+    
+    public boolean dataIntegrity() {     
+        boolean pass = false;        
         String first = getEmpFirstName();
         String last = getEmpLastName();
         String password = getEmpPassword();
 
-        if (first != null && last != null && password != null) {
+        if ( first != null | last != null | password != null  ) {
             pass = true;
         }
         return pass;
@@ -299,12 +290,13 @@ public class AddEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAcceptActionPerformed
 
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
-        if (dataIntegrity() == true) {
+       
+        if ( dataIntegrity() == true) {
             newManger.insertEmployee(getEmpFirstName(), getEmpLastName(), getEmpPassword(), getEmpContact(), getAdminRights());
             newForm.populateEmployeeTable();
-            this.dispose();
-            k.dispose();
-        }      
+        } 
+        k.dispose();
+        this.dispose();
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
     private void textfieildFnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieildFnameMouseClicked
