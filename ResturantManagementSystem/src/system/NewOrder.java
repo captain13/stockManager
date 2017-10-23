@@ -302,6 +302,8 @@ public final class NewOrder extends javax.swing.JFrame implements ActionListener
         if (!value.equals("")) {
             int row = tblItems.getSelectedRow();
             model.addRow(new Object[]{"- " + value, "", "0"});
+        } else {
+            JOptionPane.showConfirmDialog(rootPane, value);
         }
     }
 

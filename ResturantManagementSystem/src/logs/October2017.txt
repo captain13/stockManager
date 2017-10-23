@@ -536,3 +536,14 @@
 2017-10-21 14:20:12 record UPDATED to Supplier table
 2017-10-21 14:20:12 record UPDATED to Supplier table
 2017-10-21 14:20:56 record DELETED to Employee table
+<<<<<<< Updated upstream
+=======
+2017-10-22 09:43:30 record ADDED to Employee table
+2017-10-22 09:53:26 record ADDED to Employee table
+2017-10-22 10:03:10 record ADDED to Employee table
+2017-10-22 10:10:02 record DELETED to Employee table
+2017-10-22 15:09:52 record UPDATED to recipe table
+2017-10-22 15:10:28 record ADDED to EmployeeSales table
+2017-10-22 15:10:28 record ADDED to Sales table
+2017-10-22 15:10:28 record ADDED to receipt table
+>>>>>>> Stashed changes

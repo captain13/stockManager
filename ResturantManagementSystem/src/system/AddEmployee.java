@@ -7,16 +7,19 @@ import javax.swing.JOptionPane;
  * @author Andrew
  */
 public class AddEmployee extends javax.swing.JFrame {
-    dbManager newManger=new dbManager();
+
+    dbManager newManger = new dbManager();
     EmployeeForm newForm;
     Keyboard k = new Keyboard();
+
     /**
      * Creates new form AddEmployee
+     *
      * @param newForm
      */
     public AddEmployee(EmployeeForm newForm) {
         initComponents();
-        this.newForm=newForm;
+        this.newForm = newForm;
         k.setVisible(true);
         k.setBounds(700, 700, 575, 200);
         k.setAlwaysOnTop(rootPaneCheckingEnabled);
@@ -25,35 +28,57 @@ public class AddEmployee extends javax.swing.JFrame {
 
     public String getEmpFirstName() {
         String name = textfieildFname.getText();
-        if (name != null) {
+        System.out.println(name);
+        if (name != "" && name.length() < 4) {
             name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
         } else {
-            //Condition for null entry
+            JOptionPane.showMessageDialog(null, "Please enter a valid Name");
+            setVisible(true);
+            return null;
         }
         return name;
     }
 
     public String getEmpLastName() {
         String name = textfieildLname.getText();
-        if (name != null) {
+        if (name != "" && name.length() < 4) {
             name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
         } else {
-            //Condition for null entry
+            JOptionPane.showMessageDialog(null, "Please enter a valid Surname");
+            setVisible(true);
+            return null;
         }
         return name;
     }
 
     public String getEmpPassword() {
-        if (textfieildPassowrd.getText().equals(textfieildPassowrdC.getText())) {
-            return textfieildPassowrd.getText();
+        String regexStr = "^[a-z][A-Z][0-9]{8,}";
+        String pass = textfieildPassowrd.getText();
+        if (pass.equals(textfieildPassowrdC.getText())) {
+            if (pass.matches(regexStr)) {
+                return pass;
+            } else {
+                JOptionPane.showMessageDialog(null, "Password must contain atleast 1\n   -Capital letter\n   -Lower-case letter\n   -Numerical digit");
+                setVisible(true);
+                return null;
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Password does not Match");
+            JOptionPane.showMessageDialog(null, "Password's do not Match");
+            setVisible(true);
             return null;
         }
     }
 
     public String getEmpContact() {
-        return textfieildContact.getText();
+        String regexStr = "^[0-9]{10}$";
+        String num = textfieildContact.getText();
+        if (num.matches(regexStr)) {
+            return num;
+        } else {
+            JOptionPane.showMessageDialog(null, "Please enter a valid contact number");
+            setVisible(true);
+            return null;
+        }
     }
 
     public int getAdminRights() {
@@ -63,14 +88,14 @@ public class AddEmployee extends javax.swing.JFrame {
             return 0;
         }
     }
-    
-    public boolean dataIntegrity() {     
-        boolean pass = false;        
+
+    public boolean dataIntegrity() {
+        boolean pass = false;
         String first = getEmpFirstName();
         String last = getEmpLastName();
         String password = getEmpPassword();
 
-        if ( first != null | last != null | password != null  ) {
+        if (first != null && last != null && password != null) {
             pass = true;
         }
         return pass;
@@ -290,13 +315,14 @@ public class AddEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAcceptActionPerformed
 
     private void buttonAccept1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccept1ActionPerformed
-       
-        if ( dataIntegrity() == true) {
+
+        if (dataIntegrity() == true) {
             newManger.insertEmployee(getEmpFirstName(), getEmpLastName(), getEmpPassword(), getEmpContact(), getAdminRights());
             newForm.populateEmployeeTable();
-        } 
-        k.dispose();
-        this.dispose();
+            k.dispose();
+            this.dispose();
+        }
+
     }//GEN-LAST:event_buttonAccept1ActionPerformed
 
     private void textfieildFnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieildFnameMouseClicked

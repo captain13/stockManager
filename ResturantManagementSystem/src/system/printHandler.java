@@ -27,9 +27,81 @@ public class printHandler {
     String Heading;
     String name;
     dbManager db = new dbManager();
+    //DayEndSalesForm des = new DayEndSalesForm();
     String currentUsersHomeDir = System.getProperty("user.home");
     String file_name = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\docs\\Print.pdf";
 
+    public void printEODreport() {
+        Document document = new Document();
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream(new File(file_name)));
+            document.open();
+            PdfPTable table = new PdfPTable(2);
+            PdfPCell table_cell;
+
+//            table_cell = new PdfPCell(new Phrase("Total Sale"));
+//            table.addCell(table_cell);
+//            
+//            table_cell = new PdfPCell(new Phrase(des.getSales()));
+//            table.addCell(table_cell);
+//
+//            table_cell = new PdfPCell(new Phrase("Cash"));
+//            table.addCell(table_cell);
+//            
+//            table_cell = new PdfPCell(new Phrase(des.getCash()));
+//            table.addCell(table_cell);
+//            
+//            table_cell = new PdfPCell(new Phrase("Credit"));
+//            table.addCell(table_cell);
+//
+//            table_cell = new PdfPCell(new Phrase(des.getCredit()));
+//            table.addCell(table_cell);
+//
+//            table_cell = new PdfPCell(new Phrase("VAT"));
+//            table.addCell(table_cell);
+//            
+//            table_cell = new PdfPCell(new Phrase(des.getVAT()));
+//            table.addCell(table_cell);
+//
+//            table_cell = new PdfPCell(new Phrase("Total Expenses"));
+//            table.addCell(table_cell);
+//            
+//            table_cell = new PdfPCell(new Phrase(des.getExpenses()));
+//            table.addCell(table_cell);
+//            
+//            table_cell = new PdfPCell(new Phrase("Wages"));
+//            table.addCell(table_cell);
+//            
+//            table_cell = new PdfPCell(new Phrase(des.getWages()));
+//            table.addCell(table_cell);
+//                       
+//            table_cell = new PdfPCell(new Phrase("Stock Orders"));
+//            table.addCell(table_cell);
+//            
+//            table_cell = new PdfPCell(new Phrase(des.getStockOrder()));
+//            table.addCell(table_cell);
+//
+//            table_cell = new PdfPCell(new Phrase("Gross Income"));
+//            table.addCell(table_cell);
+//
+//            table_cell = new PdfPCell(new Phrase(des.getTotal()));
+//            table.addCell(table_cell);
+            
+            document.add(table);
+            document.close();
+            JOptionPane.showMessageDialog(null, "Your table has been saved to PDF");
+        } catch (FileNotFoundException | DocumentException e) {
+        }
+
+        if (Desktop.isDesktopSupported()) {
+            try {
+                File myFile = new File(file_name);
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException ex) {
+            }
+        }
+    }
+    
     public void printInventory() {
         Document document = new Document();
         try {

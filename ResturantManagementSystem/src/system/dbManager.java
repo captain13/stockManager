@@ -46,7 +46,7 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-
+            System.out.println("db Validation method" + ex) ;
         }
     }
 
@@ -94,7 +94,8 @@ public class dbManager {
             rs.close();
             s.close();
             conn.close();
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
+            System.out.println("get inventory method" + ex);
         }
         return rowData;
     }
@@ -120,6 +121,7 @@ public class dbManager {
             s.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
+            System.out.println("recipe name method" + exc);
         }
         return name;
     }

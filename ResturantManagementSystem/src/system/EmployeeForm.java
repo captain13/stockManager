@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 public class EmployeeForm extends javax.swing.JFrame {
 
     dbManager newManager = new dbManager();
-    internalClock clock=new internalClock();
+    internalClock clock = new internalClock();
     double Wage;
     double rate;
 
@@ -38,13 +38,26 @@ public class EmployeeForm extends javax.swing.JFrame {
     }
 
     public void changePassword() {
-        String password = JOptionPane.showInputDialog("Please Enter your New Password");
-        String passwordConfirm = JOptionPane.showInputDialog("Please Confirm Password");
-        if (password.equals(passwordConfirm)) {
-            newManager.updateEmployee(getUsername(), password);
-            JOptionPane.showMessageDialog(null, "Passwords Changed");
+        String regexStr = "^[a-z][A-Z][0-9]{8,}";
+        if (tableEmp.getSelectionModel().isSelectionEmpty() == false) {
+            String password = JOptionPane.showInputDialog("Please Enter your New Password");
+            if (JOptionPane.NO_OPTION != 1) {
+            if (password != null && password.matches(regexStr)) {
+                String passwordConfirm = JOptionPane.showInputDialog("Please Confirm Password");
+                if (password.equals(passwordConfirm)) {
+                    newManager.updateEmployee(getUsername(), password);
+                    JOptionPane.showMessageDialog(null, "Password's Changed");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Password's do not Match");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Please enter a valid Password");
+            }
+            } else {
+                System.out.println("click cancel");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Passwords do not Match");
+            JOptionPane.showMessageDialog(null, "Please select an Employee");
         }
     }
 
@@ -270,10 +283,14 @@ public class EmployeeForm extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            newManager.removeEmployee(getID());
-            populateEmployeeTable();
+        if (tableEmp.getSelectionModel().isSelectionEmpty() == false) {
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?", null, JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                newManager.removeEmployee(getID());
+                populateEmployeeTable();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select an employee");
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
@@ -288,14 +305,20 @@ public class EmployeeForm extends javax.swing.JFrame {
     private void toggleLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleLoginActionPerformed
         if (toggleLogin.isSelected()) {
             newManager.showActiveEmp();
+            toggleLogin.setText("View employee hours");
         } else {
             populateEmployeeTable();
+            toggleLogin.setText("Currently Logged in");
         }
     }//GEN-LAST:event_toggleLoginActionPerformed
 
     private void buttonWageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWageActionPerformed
-        calculateWage();
-        newManager.insertExpenses("Wage", Wage, clock.getCurrentDate());
+        if (tableEmp.getSelectionModel().isSelectionEmpty() == false) {
+            calculateWage();
+            newManager.insertExpenses("Wage", Wage, clock.getCurrentDate());
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select an employee");
+        }
     }//GEN-LAST:event_buttonWageActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
