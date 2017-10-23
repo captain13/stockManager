@@ -29,7 +29,7 @@ public class AddEmployee extends javax.swing.JFrame {
     public String getEmpFirstName() {
         String name = textfieildFname.getText();
         System.out.println(name);
-        if (name != "" && name.length() < 4) {
+        if (!"".equals(name) && name.length() > 3) {
             name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
         } else {
             JOptionPane.showMessageDialog(null, "Please enter a valid Name");
@@ -41,18 +41,17 @@ public class AddEmployee extends javax.swing.JFrame {
 
     public String getEmpLastName() {
         String name = textfieildLname.getText();
-        if (name != "" && name.length() < 4) {
+        if (!"".equals(name) && name.length() > 3) {
             name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
         } else {
             JOptionPane.showMessageDialog(null, "Please enter a valid Surname");
-            setVisible(true);
             return null;
         }
         return name;
     }
 
     public String getEmpPassword() {
-        String regexStr = "^[a-z][A-Z][0-9]{8,}";
+        String regexStr = "[a-zA-Z0-9]{8,}";
         String pass = textfieildPassowrd.getText();
         if (pass.equals(textfieildPassowrdC.getText())) {
             if (pass.matches(regexStr)) {
@@ -64,7 +63,6 @@ public class AddEmployee extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Password's do not Match");
-            setVisible(true);
             return null;
         }
     }
@@ -76,7 +74,6 @@ public class AddEmployee extends javax.swing.JFrame {
             return num;
         } else {
             JOptionPane.showMessageDialog(null, "Please enter a valid contact number");
-            setVisible(true);
             return null;
         }
     }
@@ -94,8 +91,9 @@ public class AddEmployee extends javax.swing.JFrame {
         String first = getEmpFirstName();
         String last = getEmpLastName();
         String password = getEmpPassword();
+        String contact = getEmpContact();
 
-        if (first != null && last != null && password != null) {
+        if (first != null && last != null && password != null && contact != null) {
             pass = true;
         }
         return pass;

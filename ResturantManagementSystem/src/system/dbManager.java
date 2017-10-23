@@ -870,7 +870,7 @@ public class dbManager {
                     + lastName + "', '"
                     + empPassword + "', '"
                     + contact + "', '"
-                    + "00:00" + "','"
+                    + "00h00" + "','"
                     + adminRights + "')";
             s.execute(insertQuery);
             logs.writeLogs("ADDED", "Employee");

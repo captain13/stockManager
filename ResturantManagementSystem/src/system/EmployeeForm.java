@@ -41,7 +41,7 @@ public class EmployeeForm extends javax.swing.JFrame {
         String regexStr = "^[a-z][A-Z][0-9]{8,}";
         if (tableEmp.getSelectionModel().isSelectionEmpty() == false) {
             String password = JOptionPane.showInputDialog("Please Enter your New Password");
-            if (JOptionPane.NO_OPTION != 1) {
+            if (JOptionPane.NO_OPTION != -1) {
             if (password != null && password.matches(regexStr)) {
                 String passwordConfirm = JOptionPane.showInputDialog("Please Confirm Password");
                 if (password.equals(passwordConfirm)) {

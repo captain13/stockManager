@@ -547,3 +547,6 @@
 2017-10-22 15:10:28 record ADDED to Sales table
 2017-10-22 15:10:28 record ADDED to receipt table
 >>>>>>> Stashed changes
+2017-10-24 01:35:44 record ADDED to Employee table
+2017-10-24 01:38:18 record ADDED to Employee table
+2017-10-24 01:39:44 record ADDED to Employee table
