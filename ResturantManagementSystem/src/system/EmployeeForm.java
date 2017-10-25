@@ -38,7 +38,7 @@ public class EmployeeForm extends javax.swing.JFrame {
     }
 
     public void changePassword() {
-        String regexStr = "^[a-z][A-Z][0-9]{8,}";
+        String regexStr = "^[a-zA-Z0-9]{8,}";
         if (tableEmp.getSelectionModel().isSelectionEmpty() == false) {
             String password = JOptionPane.showInputDialog("Please Enter your New Password");
             if (JOptionPane.NO_OPTION != -1) {

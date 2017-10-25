@@ -23,8 +23,8 @@ public class ReprintForm extends javax.swing.JFrame {
     double total = 0;
     StringBuilder items = new StringBuilder();
     internalClock clock = new internalClock();
-    String stars = new String(new char[55]).replace("\0", "*");
-    String spaces = new String(new char[55]).replace("\0", " ");
+    String stars = new String(new char[54]).replace("\0", "*");
+    String spaces = new String(new char[54]).replace("\0", " ");
 
     public void header(String dt, String t) {
         head = stars + "\n"

@@ -12,6 +12,7 @@ package system;
 public class DayEndSalesForm extends javax.swing.JFrame {
 
     dbManager newManager = new dbManager();
+    printHandler print = new printHandler();
     double expenses;
     double expensesWage;
     double expensesSales;
@@ -377,7 +378,7 @@ public class DayEndSalesForm extends javax.swing.JFrame {
     }//GEN-LAST:event_wageFieldActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        print.printEODreport(this);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

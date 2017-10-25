@@ -9,9 +9,11 @@ import java.awt.event.KeyEvent;
 public class Login extends javax.swing.JFrame {
 
     userManager newManager = new userManager();
+    Keyboard k = new Keyboard();
 
     public Login() {
         initComponents();
+        k.setVisible(rootPaneCheckingEnabled);
     }
 
     public void disposeLogin() {
@@ -22,6 +24,7 @@ public class Login extends javax.swing.JFrame {
         String username = textfieldUser.getText();
         String password = passwordFieldBox.getText();
         newManager.loginAuthentication(username, password);
+        k.dispose();
     }
 
     @SuppressWarnings("unchecked")
@@ -146,6 +149,7 @@ public class Login extends javax.swing.JFrame {
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         this.dispose();
+        k.dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void passwordFieldBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldBoxKeyPressed

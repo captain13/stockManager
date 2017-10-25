@@ -22,8 +22,8 @@ public class receiptHandler {
     StringBuilder items = new StringBuilder();
     internalClock clock = new internalClock();
     dbManager newManager = new dbManager();
-    String stars = new String(new char[70]).replace("\0", "*");
-    String spaces = new String(new char[70]).replace("\0", " "); 
+    String stars = new String(new char[54]).replace("\0", "*");
+    String spaces = new String(new char[54]).replace("\0", " "); 
 
     public void header() {
         head =  stars + "\n"
@@ -36,10 +36,11 @@ public class receiptHandler {
 
     public void body(double total) {
         body = spaces + "\n"
-                + "Items                                    Qty   Price\n"            
+                + "Items                                        Qty   Price\n"            
                 + itemsList() +"\n"
                 + "Total " + total + "\n" 
-                + "Amount........................\n";
+                + "Amount.............................................\n"
+                + "Tip................................................\n";
 //        System.out.println(body);
     }
 
