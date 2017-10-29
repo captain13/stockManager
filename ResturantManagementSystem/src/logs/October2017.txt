@@ -590,3 +590,7 @@
 2017-10-25 08:18:32 record ADDED to Expenses table
 2017-10-25 08:18:41 record UPDATED to Inventory table
 2017-10-29 14:39:41 record UPDATED to Employee table
+2017-10-29 14:58:19 record UPDATED to Employee table
+2017-10-29 14:59:04 record UPDATED to Employee table
+2017-10-29 15:01:13 record UPDATED to Employee table
+2017-10-29 15:06:02 record UPDATED to Employee table

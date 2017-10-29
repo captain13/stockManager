@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
  */
 public class userManager {
 
-    static ArrayList usernames = new ArrayList();
+    static ArrayList<String> usernames = new ArrayList();
     static Login loginSystem;
     Logout logoutSystem;
     dbManager newManager = new dbManager();
@@ -87,6 +87,10 @@ public class userManager {
     }
 
     public void logoutAll() {
+        clock.setLogoutTimeStamp();
+        for (int i = 0; i < usernames.size(); i++) {
+            newManager.updateHours(usernames.get(i), i);
+        }
         newManager.loggoutAllEmployee();
     }
 }
