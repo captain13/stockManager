@@ -313,7 +313,7 @@ public class dbManager {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url, getUsername(), getPassword());
             s = conn.createStatement();
-            String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber,employeeHoursWorked, admin, employeePassword "
+            String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber,employeeHoursWorked, admin, employeePassword, employeeStatus "
                     + "FROM employee WHERE employeeID >1 ";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
@@ -333,6 +333,7 @@ public class dbManager {
                 rowData[i][4] = rs.getObject(5);
                 rowData[i][5] = rs.getObject(6);
                 rowData[i][6] = rs.getObject(7);
+                rowData[i][7] = rs.getObject(8);
                 i++;
             }
             rs.close();
@@ -1509,6 +1510,22 @@ public class dbManager {
             System.out.println(exp);
         }
     }
+    
+      public void loggoutAllEmployee() {
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            s = conn.createStatement();
+            String updateQuery = "UPDATE employee SET employeeStatus='Deactive'";
+            s.execute(updateQuery);
+            PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
+            preparedStmt.executeUpdate();
+            s.close();
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
 
     public void updateRecipeSpecialsID(String specialsID, String recipeName) {
         try {

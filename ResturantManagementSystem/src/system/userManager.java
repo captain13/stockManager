@@ -43,29 +43,38 @@ public class userManager {
     }
 
     public boolean loginAuthentication(String username, String password) {
-        boolean login=false;
-        System.out.println(newManager.getEmployeeData());
+        boolean loggedin = false;
+        boolean login = false;
         for (int j = 0; j < newManager.getEmployeeData().length; j++) {
             if (login == false) {
                 if (username.equals(newManager.getEmployeeData()[j][1])
                         && password.equals(newManager.getEmployeeData()[j][6])) {
-                    login = true;
+                    if (newManager.getEmployeeData()[j][7].equals("Active")) {
+                        JOptionPane.showMessageDialog(null, "Already Logged In");
+                        loggedin = true;
+                    } else {
+                        login = true;
+                    }
+
                 } else {
                     login = false;
                 }
             }
         }
-        if (login == true) {
-            addUser(username);
-            clock.setLoginTimeStamp();
-            newManager.updateEmployeeStatusIn(username);
-            loginSystem.disposeLogin();
-            JOptionPane.showMessageDialog(null, "Logged In");
-            return true;
-        } else {
-            JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
-            return false;
+        if (loggedin == false) {
+            if (login == true) {
+                addUser(username);
+                clock.setLoginTimeStamp();
+                newManager.updateEmployeeStatusIn(username);
+                loginSystem.disposeLogin();
+                JOptionPane.showMessageDialog(null, "Logged In");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
+                return false;
+            }
         }
+        return login;
     }
 
     public void logout() {
@@ -75,5 +84,9 @@ public class userManager {
         newManager.updateHours(username, rowIndex);
         newManager.updateEmployeeStatusOut(username);
         usernames.remove(rowIndex);
+    }
+
+    public void logoutAll() {
+        newManager.loggoutAllEmployee();
     }
 }

@@ -2430,6 +2430,7 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_buttonBookingsActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
+        user.logoutAll();
         System.exit(0);
     }//GEN-LAST:event_buttonCloseActionPerformed
 
