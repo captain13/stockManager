@@ -49,7 +49,7 @@ public class internalClock extends Thread {
 
     public String calculateHours(int i, String previousHours) {
         String time;
-
+        System.out.println(loginTime.get(i).toString());
         int hours;
         int minutes;
         String previousHoursArray[] = previousHours.split("hrs");

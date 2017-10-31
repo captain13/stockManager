@@ -9,13 +9,10 @@ import java.awt.event.KeyEvent;
 public class Login extends javax.swing.JFrame {
 
     userManager newManager = new userManager();
-    
     Keyboard k = new Keyboard();
 
     public Login() {
         initComponents();
-        this.setAlwaysOnTop(rootPaneCheckingEnabled);
-        k.setVisible(rootPaneCheckingEnabled);
     }
 
     public void disposeLogin() {

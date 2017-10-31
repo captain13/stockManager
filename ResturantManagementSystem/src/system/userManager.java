@@ -87,9 +87,10 @@ public class userManager {
     }
 
     public void logoutAll() {
-        clock.setLogoutTimeStamp();
+        int rowIndex = 0;
         for (int i = 0; i < usernames.size(); i++) {
-            newManager.updateHours(usernames.get(i), i);
+            clock.setLogoutTimeStamp();
+            newManager.updateHours(usernames.get(i),0);
         }
         newManager.loggoutAllEmployee();
     }
