@@ -1,0 +1,8 @@
+2017-11-01 00:11:47 record UPDATED to recipe table
+2017-11-01 00:11:47 record UPDATED to recipe table
+2017-11-01 00:11:51 record ADDED to Sales table
+2017-11-01 00:11:51 record ADDED to receipt table
+2017-11-01 00:11:51 record ADDED to receipt table
+2017-11-01 00:47:52 record UPDATED to Employee table
+2017-11-01 00:47:55 record UPDATED to Employee table
+2017-11-01 00:51:54 record UPDATED to Employee table

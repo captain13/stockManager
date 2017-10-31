@@ -143,7 +143,7 @@ public class Reports extends javax.swing.JFrame {
 
         buttonEmployeePerform.setBackground(new java.awt.Color(0, 138, 231));
         buttonEmployeePerform.setForeground(new java.awt.Color(255, 255, 255));
-        buttonEmployeePerform.setText("Employee Preformance");
+        buttonEmployeePerform.setText("Employee Sales");
         buttonEmployeePerform.setContentAreaFilled(false);
         buttonEmployeePerform.setOpaque(true);
         buttonEmployeePerform.addActionListener(new java.awt.event.ActionListener() {
