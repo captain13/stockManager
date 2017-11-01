@@ -28,8 +28,7 @@ public class printHandler {
     String name;
     dbManager db = new dbManager();
     //DayEndSalesForm des = new DayEndSalesForm();
-    String currentUsersHomeDir = System.getProperty("user.home");
-    String file_name = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\docs\\Print.pdf";
+    String file_name = ".\\src\\docs\\Print.pdf";
 
     public void printEODreport(DayEndSalesForm des) {
         Document document = new Document();
@@ -41,16 +40,16 @@ public class printHandler {
 
             table_cell = new PdfPCell(new Phrase("Total Sale"));
             table.addCell(table_cell);
-            
+
             table_cell = new PdfPCell(new Phrase(des.getSales()));
             table.addCell(table_cell);
 
             table_cell = new PdfPCell(new Phrase("Cash"));
             table.addCell(table_cell);
-            
+
             table_cell = new PdfPCell(new Phrase(des.getCash()));
             table.addCell(table_cell);
-            
+
             table_cell = new PdfPCell(new Phrase("Credit"));
             table.addCell(table_cell);
 
@@ -59,25 +58,25 @@ public class printHandler {
 
             table_cell = new PdfPCell(new Phrase("VAT"));
             table.addCell(table_cell);
-            
+
             table_cell = new PdfPCell(new Phrase(des.getVAT()));
             table.addCell(table_cell);
 
             table_cell = new PdfPCell(new Phrase("Total Expenses"));
             table.addCell(table_cell);
-            
+
             table_cell = new PdfPCell(new Phrase(des.getExpenses()));
             table.addCell(table_cell);
-            
+
             table_cell = new PdfPCell(new Phrase("Wages"));
             table.addCell(table_cell);
-            
+
             table_cell = new PdfPCell(new Phrase(des.getWages()));
             table.addCell(table_cell);
-                       
+
             table_cell = new PdfPCell(new Phrase("Stock Orders"));
             table.addCell(table_cell);
-            
+
             table_cell = new PdfPCell(new Phrase(des.getStockOrder()));
             table.addCell(table_cell);
 
@@ -86,7 +85,7 @@ public class printHandler {
 
             table_cell = new PdfPCell(new Phrase(des.getTotal()));
             table.addCell(table_cell);
-            
+
             document.add(table);
             document.close();
             JOptionPane.showMessageDialog(null, "Your table has been saved to PDF");
@@ -101,7 +100,7 @@ public class printHandler {
             }
         }
     }
-    
+
     public void printInventory() {
         Document document = new Document();
         try {
@@ -241,6 +240,14 @@ public class printHandler {
                 Desktop.getDesktop().open(myFile);
             } catch (IOException ex) {
             }
+        }
+    }
+
+    public void printUserManual() {
+        try {
+            File myFile = new File("UserManual.pdf");
+            Desktop.getDesktop().open(myFile);
+        } catch (IOException ex) {
         }
     }
 }

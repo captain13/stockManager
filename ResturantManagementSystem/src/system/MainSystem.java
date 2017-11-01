@@ -2482,21 +2482,11 @@ public class MainSystem extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String file = System.getProperty("user.home") + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\docs\\Help.txt";
-        Runtime runtime = Runtime.getRuntime();
-        try {
-            Process p = runtime.exec("notepad " + file);
-        } catch (IOException ex) {
-        }
+        prints.printUserManual();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        String file = System.getProperty("user.home") + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\docs\\HelpDB.txt";
-        Runtime runtime = Runtime.getRuntime();
-        try {
-            Process p = runtime.exec("notepad " + file);
-        } catch (IOException ex) {
-        }
+        prints.printUserManual();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void comboBoxTableCountItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxTableCountItemStateChanged
