@@ -87,7 +87,6 @@ public class userManager {
     }
 
     public void logoutAll() {
-        int rowIndex = 0;
         for (int i = 0; i < usernames.size(); i++) {
             clock.setLogoutTimeStamp();
             newManager.updateHours(usernames.get(i),0);

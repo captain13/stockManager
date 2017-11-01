@@ -22,12 +22,11 @@ public class EmailForm extends javax.swing.JFrame {
         if (enabled == true) {
             k = new Keyboard();
             k.setVisible(true);
-            k.setAlwaysOnTop(rootPaneCheckingEnabled);
         }
     }
 
     public String getReciepent() {
-        return jComboBox1.getSelectedItem().toString();
+        return jComboBox1.getSelectedItem().toString().trim();
     }
 
     public String getSubject() {

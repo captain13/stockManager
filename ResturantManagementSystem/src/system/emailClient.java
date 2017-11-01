@@ -54,7 +54,7 @@ public class emailClient {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(emailAddress));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(recipientAddress));
+                    InternetAddress.parse("swabe@live.co.za"));
             message.setSubject(subject);
             message.setText(text);
 
