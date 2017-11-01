@@ -31,22 +31,18 @@ public class dbManager {
     String driver = "com.mysql.jdbc.Driver";
     String currentUsersHomeDir = System.getProperty("user.home");
     String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";
-    Connection conn;
-    Statement s;
 
     public void dbValidation(String Username, String Password) {
         connect(Username, Password);
         String urlVal = "jdbc:mysql://localhost:3306";
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(urlVal, username, password);
-            s = conn.createStatement();
-            s.executeUpdate("CREATE SCHEMA IF NOT EXISTS `resturantDB`");
-            s.executeUpdate("CREATE DATABASE IF NOT EXISTS `resturantDB`");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(urlVal, username, password); Statement s = conn.createStatement()) {
+                s.executeUpdate("CREATE SCHEMA IF NOT EXISTS `resturantDB`");
+                s.executeUpdate("CREATE DATABASE IF NOT EXISTS `resturantDB`");
+            }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            System.out.println("db Validation method" + ex) ;
+            System.out.println("db Validation method" + ex);
         }
     }
 
@@ -67,33 +63,33 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT * FROM inventory ";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            int rowCount = 0;
-            while (rs.next()) {
-                rowCount++;
-            }
-            rs = s.executeQuery(query);
-            rowData = new Object[rowCount][columnCount];
-            int i = 0;
-            while (rs.next()) {
-                rowData[i][0] = rs.getObject(1);
-                rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);
-                rowData[i][3] = rs.getObject(4);
-                rowData[i][4] = rs.getObject(5);
-                rowData[i][5] = rs.getObject(6);
-                rowData[i][6] = rs.getObject(7);
-                i++;
-            }
+            try (Connection conn = DriverManager.getConnection(url, username, password)) {
+                Statement s = conn.createStatement();
+                String query = "SELECT * FROM inventory ";
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                int rowCount = 0;
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rs = s.executeQuery(query);
+                rowData = new Object[rowCount][columnCount];
+                int i = 0;
+                while (rs.next()) {
+                    rowData[i][0] = rs.getObject(1);
+                    rowData[i][1] = rs.getObject(2);
+                    rowData[i][2] = rs.getObject(3);
+                    rowData[i][3] = rs.getObject(4);
+                    rowData[i][4] = rs.getObject(5);
+                    rowData[i][5] = rs.getObject(6);
+                    rowData[i][6] = rs.getObject(7);
+                    i++;
+                }
 
-            rs.close();
-            s.close();
-            conn.close();
+                rs.close();
+                s.close();
+            }
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
             System.out.println("get inventory method" + ex);
         }
@@ -105,21 +101,14 @@ public class dbManager {
         try {
 
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT recipeName FROM recipe WHERE recipeID ='" + id + "' ";
-            ResultSet rs = s.executeQuery(query);
-
-            rs = s.executeQuery(query);
-
-            while (rs.next()) {
-                name = rs.getString(1);
-
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT recipeName FROM recipe WHERE recipeID ='" + id + "' ";
+                try (ResultSet rs = s.executeQuery(query)) {
+                    while (rs.next()) {
+                        name = rs.getString(1);
+                    }
+                }
             }
-
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println("recipe name method" + exc);
         }
@@ -130,34 +119,32 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT,recipeImageDirectory, recipeCount, specialsID FROM recipe";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            int rowCount = 0;
-            while (rs.next()) {
-                rowCount++;
-            }
-            rs = s.executeQuery(query);
-            rowData = new Object[rowCount][columnCount];
-            int i = 0;
-            while (rs.next()) {
-                rowData[i][0] = rs.getObject(1);
-                rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);
-                rowData[i][3] = rs.getObject(4);
-                rowData[i][4] = rs.getObject(5);
-                rowData[i][5] = rs.getObject(6);
-                rowData[i][6] = rs.getObject(7);
-                rowData[i][7] = rs.getObject(8);
-                i++;
-            }
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT recipeID, recipeName,recipeType, recipePrice, recipeVAT,recipeImageDirectory, recipeCount, specialsID FROM recipe";
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                int rowCount = 0;
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rs = s.executeQuery(query);
+                rowData = new Object[rowCount][columnCount];
+                int i = 0;
+                while (rs.next()) {
+                    rowData[i][0] = rs.getObject(1);
+                    rowData[i][1] = rs.getObject(2);
+                    rowData[i][2] = rs.getObject(3);
+                    rowData[i][3] = rs.getObject(4);
+                    rowData[i][4] = rs.getObject(5);
+                    rowData[i][5] = rs.getObject(6);
+                    rowData[i][6] = rs.getObject(7);
+                    rowData[i][7] = rs.getObject(8);
+                    i++;
+                }
 
-            rs.close();
-            s.close();
-            conn.close();
+                rs.close();
+            }
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
         return rowData;
@@ -167,35 +154,33 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT inventory_recipe.recipeID, recipe.recipeName, inventory_recipe.inventoryID, "
-                    + "inventory.item,inventory_recipe.qty "
-                    + "FROM inventory_recipe, recipe,inventory "
-                    + "WHERE recipe.recipeID=inventory_recipe.recipeID "
-                    + "AND inventory.inventoryID=inventory_recipe.inventoryID ";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            int rowCount = 0;
-            while (rs.next()) {
-                rowCount++;
-            }
-            rs = s.executeQuery(query);
-            rowData = new Object[rowCount][columnCount];
-            int i = 0;
-            while (rs.next()) {
-                rowData[i][0] = rs.getObject(1);
-                rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);
-                rowData[i][3] = rs.getObject(4);
-                rowData[i][4] = rs.getObject(5);
-                i++;
-            }
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT inventory_recipe.recipeID, recipe.recipeName, inventory_recipe.inventoryID, "
+                        + "inventory.item,inventory_recipe.qty "
+                        + "FROM inventory_recipe, recipe,inventory "
+                        + "WHERE recipe.recipeID=inventory_recipe.recipeID "
+                        + "AND inventory.inventoryID=inventory_recipe.inventoryID ";
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                int rowCount = 0;
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rs = s.executeQuery(query);
+                rowData = new Object[rowCount][columnCount];
+                int i = 0;
+                while (rs.next()) {
+                    rowData[i][0] = rs.getObject(1);
+                    rowData[i][1] = rs.getObject(2);
+                    rowData[i][2] = rs.getObject(3);
+                    rowData[i][3] = rs.getObject(4);
+                    rowData[i][4] = rs.getObject(5);
+                    i++;
+                }
 
-            rs.close();
-            s.close();
-            conn.close();
+                rs.close();
+            }
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
         return rowData;
@@ -205,30 +190,28 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT * FROM supplier";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            int rowCount = 0;
-            while (rs.next()) {
-                rowCount++;
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT * FROM supplier";
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                int rowCount = 0;
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rs = s.executeQuery(query);
+                rowData = new Object[rowCount][columnCount];
+                int i = 0;
+                while (rs.next()) {
+                    rowData[i][0] = rs.getObject(1);
+                    rowData[i][1] = rs.getObject(2);
+                    rowData[i][2] = rs.getObject(3);
+                    rowData[i][3] = rs.getObject(4);
+                    rowData[i][4] = rs.getObject(5);
+                    i++;
+                }
+                rs.close();
             }
-            rs = s.executeQuery(query);
-            rowData = new Object[rowCount][columnCount];
-            int i = 0;
-            while (rs.next()) {
-                rowData[i][0] = rs.getObject(1);
-                rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);
-                rowData[i][3] = rs.getObject(4);
-                rowData[i][4] = rs.getObject(5);
-                i++;
-            }
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
         return rowData;
@@ -238,36 +221,34 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT stockOrderID, inventory.item, supplier.supplierName,dateOrdered, dateETA, quantity, status, totalCost "
-                    + "FROM stockOrder, inventory, supplier "
-                    + "WHERE inventory.inventoryID=stockorder.inventoryID "
-                    + "AND supplier.supplierID=stockorder.supplierID";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            int rowCount = 0;
-            while (rs.next()) {
-                rowCount++;
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT stockOrderID, inventory.item, supplier.supplierName,dateOrdered, dateETA, quantity, status, totalCost "
+                        + "FROM stockOrder, inventory, supplier "
+                        + "WHERE inventory.inventoryID=stockorder.inventoryID "
+                        + "AND supplier.supplierID=stockorder.supplierID";
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                int rowCount = 0;
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rs = s.executeQuery(query);
+                rowData = new Object[rowCount][columnCount];
+                int i = 0;
+                while (rs.next()) {
+                    rowData[i][0] = rs.getObject(1);
+                    rowData[i][1] = rs.getObject(2);
+                    rowData[i][2] = rs.getObject(3);
+                    rowData[i][3] = rs.getObject(4);
+                    rowData[i][4] = rs.getObject(5);
+                    rowData[i][5] = rs.getObject(6);
+                    rowData[i][6] = rs.getObject(7);
+                    rowData[i][7] = rs.getObject(8);
+                    i++;
+                }
+                rs.close();
             }
-            rs = s.executeQuery(query);
-            rowData = new Object[rowCount][columnCount];
-            int i = 0;
-            while (rs.next()) {
-                rowData[i][0] = rs.getObject(1);
-                rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);
-                rowData[i][3] = rs.getObject(4);
-                rowData[i][4] = rs.getObject(5);
-                rowData[i][5] = rs.getObject(6);
-                rowData[i][6] = rs.getObject(7);
-                rowData[i][7] = rs.getObject(8);
-                i++;
-            }
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
         return rowData;
@@ -277,30 +258,28 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT expensesID,expensesType,date, expensesAmount FROM expenses "
-                    + "UNION ALL SELECT '','','TOTAL', SUM(expensesAmount) FROM expenses";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            int rowCount = 0;
-            while (rs.next()) {
-                rowCount++;
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT expensesID,expensesType,date, expensesAmount FROM expenses "
+                        + "UNION ALL SELECT '','','TOTAL', SUM(expensesAmount) FROM expenses";
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                int rowCount = 0;
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rs = s.executeQuery(query);
+                rowData = new Object[rowCount][columnCount];
+                int i = 0;
+                while (rs.next()) {
+                    rowData[i][0] = rs.getObject(1);
+                    rowData[i][1] = rs.getObject(2);
+                    rowData[i][2] = rs.getObject(3);
+                    rowData[i][3] = rs.getString(4);
+                    i++;
+                }
+                rs.close();
             }
-            rs = s.executeQuery(query);
-            rowData = new Object[rowCount][columnCount];
-            int i = 0;
-            while (rs.next()) {
-                rowData[i][0] = rs.getObject(1);
-                rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);
-                rowData[i][3] = rs.getString(4);
-                i++;
-            }
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
@@ -311,34 +290,32 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, getUsername(), getPassword());
-            s = conn.createStatement();
-            String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber,employeeHoursWorked, admin, employeePassword, employeeStatus "
-                    + "FROM employee WHERE employeeID >1 ";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            int rowCount = 0;
-            while (rs.next()) {
-                rowCount++;
+            try (Connection conn = DriverManager.getConnection(url, getUsername(), getPassword()); Statement s = conn.createStatement()) {
+                String query = "SELECT employeeID,employeeFName,employeeLName,employeeContactNumber,employeeHoursWorked, admin, employeePassword, employeeStatus "
+                        + "FROM employee WHERE employeeID >1 ";
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                int rowCount = 0;
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rs = s.executeQuery(query);
+                rowData = new Object[rowCount][columnCount];
+                int i = 0;
+                while (rs.next()) {
+                    rowData[i][0] = rs.getObject(1);
+                    rowData[i][1] = rs.getObject(2);
+                    rowData[i][2] = rs.getObject(3);
+                    rowData[i][3] = rs.getObject(4);
+                    rowData[i][4] = rs.getObject(5);
+                    rowData[i][5] = rs.getObject(6);
+                    rowData[i][6] = rs.getObject(7);
+                    rowData[i][7] = rs.getObject(8);
+                    i++;
+                }
+                rs.close();
             }
-            rs = s.executeQuery(query);
-            rowData = new Object[rowCount][columnCount];
-            int i = 0;
-            while (rs.next()) {
-                rowData[i][0] = rs.getObject(1);
-                rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);
-                rowData[i][3] = rs.getObject(4);
-                rowData[i][4] = rs.getObject(5);
-                rowData[i][5] = rs.getObject(6);
-                rowData[i][6] = rs.getObject(7);
-                rowData[i][7] = rs.getObject(8);
-                i++;
-            }
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
@@ -349,34 +326,32 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT employeeID,reservationTableNumber,reservationDate,reservationTime,"
-                    + "reservationCustomer, contactNumber,"
-                    + "reservationNumberPeople FROM reservation";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            int rowCount = 0;
-            while (rs.next()) {
-                rowCount++;
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT employeeID,reservationTableNumber,reservationDate,reservationTime,"
+                        + "reservationCustomer, contactNumber,"
+                        + "reservationNumberPeople FROM reservation";
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                int rowCount = 0;
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rs = s.executeQuery(query);
+                rowData = new Object[rowCount][columnCount];
+                int i = 0;
+                while (rs.next()) {
+                    rowData[i][0] = rs.getObject(1);
+                    rowData[i][1] = rs.getObject(2);
+                    rowData[i][2] = rs.getObject(3);
+                    rowData[i][3] = rs.getObject(4);
+                    rowData[i][4] = rs.getObject(5);
+                    rowData[i][5] = rs.getObject(6);
+                    rowData[i][6] = rs.getObject(7);
+                    i++;
+                }
+                rs.close();
             }
-            rs = s.executeQuery(query);
-            rowData = new Object[rowCount][columnCount];
-            int i = 0;
-            while (rs.next()) {
-                rowData[i][0] = rs.getObject(1);
-                rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);
-                rowData[i][3] = rs.getObject(4);
-                rowData[i][4] = rs.getObject(5);
-                rowData[i][5] = rs.getObject(6);
-                rowData[i][6] = rs.getObject(7);
-                i++;
-            }
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
         return rowData;
@@ -390,41 +365,39 @@ public class dbManager {
         String month = currentDATE[1];
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            if ("ALL".equals(type)) {
-                query = "SELECT salesID,salesDate,totalCost FROM sales "
-                        + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales";
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                if ("ALL".equals(type)) {
+                    query = "SELECT salesID,salesDate,totalCost FROM sales "
+                            + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales";
+                }
+                if ("DAY".equals(type)) {
+                    query = "SELECT salesID,salesDate,totalCost FROM sales WHERE salesDate='" + date + "' "
+                            + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales "
+                            + "WHERE salesDate='" + date + "'";
+                }
+                if ("MONTH".equals(type)) {
+                    query = "SELECT salesID,salesDate,totalCost FROM sales WHERE MONTH(salesDate)='" + month + "' "
+                            + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales "
+                            + "WHERE MONTH(salesDate)='" + month + "'";
+                }
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                int rowCount = 0;
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rs = s.executeQuery(query);
+                rowData = new Object[rowCount][columnCount];
+                int i = 0;
+                while (rs.next()) {
+                    rowData[i][0] = rs.getObject(1);
+                    rowData[i][1] = rs.getObject(2);
+                    rowData[i][2] = rs.getObject(3);
+                    i++;
+                }
+                rs.close();
             }
-            if ("DAY".equals(type)) {
-                query = "SELECT salesID,salesDate,totalCost FROM sales WHERE salesDate='" + date + "' "
-                        + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales "
-                        + "WHERE salesDate='" + date + "'";
-            }
-            if ("MONTH".equals(type)) {
-                query = "SELECT salesID,salesDate,totalCost FROM sales WHERE MONTH(salesDate)='" + month + "' "
-                        + "UNION ALL SELECT '','TOTAL', SUM(totalCost) FROM sales "
-                        + "WHERE MONTH(salesDate)='" + month + "'";
-            }
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            int rowCount = 0;
-            while (rs.next()) {
-                rowCount++;
-            }
-            rs = s.executeQuery(query);
-            rowData = new Object[rowCount][columnCount];
-            int i = 0;
-            while (rs.next()) {
-                rowData[i][0] = rs.getObject(1);
-                rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);
-                i++;
-            }
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
@@ -435,28 +408,26 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT sales_employee.salesID, employee.employeeFName, sales_employee.employeeID FROM sales_employee,employee WHERE employee.employeeID=sales_employee.employeeID ";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            int rowCount = 0;
-            while (rs.next()) {
-                rowCount++;
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT sales_employee.salesID, employee.employeeFName, sales_employee.employeeID FROM sales_employee,employee WHERE employee.employeeID=sales_employee.employeeID ";
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                int rowCount = 0;
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rs = s.executeQuery(query);
+                rowData = new Object[rowCount][columnCount];
+                int i = 0;
+                while (rs.next()) {
+                    rowData[i][0] = rs.getObject(1);
+                    rowData[i][1] = rs.getObject(2);
+                    rowData[i][2] = rs.getObject(3);
+                    i++;
+                }
+                rs.close();
             }
-            rs = s.executeQuery(query);
-            rowData = new Object[rowCount][columnCount];
-            int i = 0;
-            while (rs.next()) {
-                rowData[i][0] = rs.getObject(1);
-                rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);
-                i++;
-            }
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
         return rowData;
@@ -466,34 +437,32 @@ public class dbManager {
         Object[][] rowData = null;
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
 
-            String query = "SELECT recipe.specialsID, recipeName,recipeType, specialsPrice,recipeImageDirectory, status "
-                    + "FROM recipe,specials "
-                    + "WHERE recipe.specialsID=specials.specialsID";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            int rowCount = 0;
-            while (rs.next()) {
-                rowCount++;
+                String query = "SELECT recipe.specialsID, recipeName,recipeType, specialsPrice,recipeImageDirectory, status "
+                        + "FROM recipe,specials "
+                        + "WHERE recipe.specialsID=specials.specialsID";
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                int rowCount = 0;
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rowData = new Object[rowCount][columnCount];
+                rs = s.executeQuery(query);
+                int i = 0;
+                while (rs.next()) {
+                    rowData[i][0] = rs.getObject(1);
+                    rowData[i][1] = rs.getObject(2);
+                    rowData[i][2] = rs.getObject(3);
+                    rowData[i][3] = rs.getObject(4);
+                    rowData[i][4] = rs.getObject(6);
+                    rowData[i][5] = rs.getObject(5);
+                    i++;
+                }
+                rs.close();
             }
-            rowData = new Object[rowCount][columnCount];
-            rs = s.executeQuery(query);
-            int i = 0;
-            while (rs.next()) {
-                rowData[i][0] = rs.getObject(1);
-                rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);
-                rowData[i][3] = rs.getObject(4);
-                rowData[i][4] = rs.getObject(6);
-                rowData[i][5] = rs.getObject(5);
-                i++;
-            }
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
@@ -504,27 +473,25 @@ public class dbManager {
         String ingredients[] = null;
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT item FROM inventory ";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            int rowCount = 0;
-            while (rs.next()) {
-                rowCount++;
-            }
-            rs = s.executeQuery(query);
-            ingredients = new String[rowCount];
-            int i = 0;
-            while (rs.next()) {
-                ingredients[i] = rs.getString("item");
-                i++;
-            }
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT item FROM inventory ";
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                int rowCount = 0;
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rs = s.executeQuery(query);
+                ingredients = new String[rowCount];
+                int i = 0;
+                while (rs.next()) {
+                    ingredients[i] = rs.getString("item");
+                    i++;
+                }
 
-            rs.close();
-            s.close();
-            conn.close();
+                rs.close();
+            }
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
@@ -536,17 +503,14 @@ public class dbManager {
         String date = clock.getCurrentDate();
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT SUM(expensesAmount) FROM expenses WHERE date='" + date + "' ";
-            ResultSet rs = s.executeQuery(query);
-            if (rs.next()) {
-                totalExpenses = rs.getDouble(1);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT SUM(expensesAmount) FROM expenses WHERE date='" + date + "' ";
+                try (ResultSet rs = s.executeQuery(query)) {
+                    if (rs.next()) {
+                        totalExpenses = rs.getDouble(1);
+                    }
+                }
             }
-
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
@@ -558,17 +522,14 @@ public class dbManager {
         String date = clock.getCurrentDate();
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT SUM(expensesAmount) FROM expenses WHERE date='" + date + "' AND expensesType='Wage'";
-            ResultSet rs = s.executeQuery(query);
-            if (rs.next()) {
-                totalExpenses = rs.getDouble(1);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT SUM(expensesAmount) FROM expenses WHERE date='" + date + "' AND expensesType='Wage'";
+                try (ResultSet rs = s.executeQuery(query)) {
+                    if (rs.next()) {
+                        totalExpenses = rs.getDouble(1);
+                    }
+                }
             }
-
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
@@ -580,17 +541,14 @@ public class dbManager {
         String date = clock.getCurrentDate();
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT SUM(expensesAmount) FROM expenses WHERE date='" + date + "' AND expensesType='Stock Order' ";
-            ResultSet rs = s.executeQuery(query);
-            if (rs.next()) {
-                totalExpenses = rs.getDouble(1);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT SUM(expensesAmount) FROM expenses WHERE date='" + date + "' AND expensesType='Stock Order' ";
+                try (ResultSet rs = s.executeQuery(query)) {
+                    if (rs.next()) {
+                        totalExpenses = rs.getDouble(1);
+                    }
+                }
             }
-
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
@@ -602,17 +560,14 @@ public class dbManager {
         String date = clock.getCurrentDate();
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT SUM(totalCost) FROM sales WHERE salesDate='" + date + "' ";
-            ResultSet rs = s.executeQuery(query);
-            if (rs.next()) {
-                totalSales = rs.getDouble(1);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT SUM(totalCost) FROM sales WHERE salesDate='" + date + "' ";
+                try (ResultSet rs = s.executeQuery(query)) {
+                    if (rs.next()) {
+                        totalSales = rs.getDouble(1);
+                    }
+                }
             }
-
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
@@ -623,16 +578,14 @@ public class dbManager {
         String itemName = null;
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT item FROM inventory WHERE inventoryID='" + ID + "'";
-            ResultSet rs = s.executeQuery(query);
-            if (rs.next()) {
-                itemName = rs.getString(1);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT item FROM inventory WHERE inventoryID='" + ID + "'";
+                try (ResultSet rs = s.executeQuery(query)) {
+                    if (rs.next()) {
+                        itemName = rs.getString(1);
+                    }
+                }
             }
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
@@ -643,16 +596,14 @@ public class dbManager {
         String supplierName = null;
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT supplierName FROM supplier WHERE supplierID='" + ID + "'";
-            ResultSet rs = s.executeQuery(query);
-            if (rs.next()) {
-                supplierName = rs.getString(1);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT supplierName FROM supplier WHERE supplierID='" + ID + "'";
+                try (ResultSet rs = s.executeQuery(query)) {
+                    if (rs.next()) {
+                        supplierName = rs.getString(1);
+                    }
+                }
             }
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
             System.out.println(exc);
         }
@@ -662,8 +613,8 @@ public class dbManager {
     public Object[][] getEmpSales(int emp) {
         Object[][] sales = null;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
             String query = "SELECT receipt.date receipt.time FROM ((receipt INNER JOIN sales_employee ON receipt.salesID = sales_employee.salesID) INNER JOIN employee ON sales_employee.employeeID = '" + emp + "')";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
@@ -690,8 +641,8 @@ public class dbManager {
     public int getEmployeeID(String Username) {
         int ID = 0;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
             String query = "SELECT employeeID FROM employee WHERE Username= '" + getEmployeeUsername() + "'";
             ResultSet rs = s.executeQuery(query);
 
@@ -706,8 +657,8 @@ public class dbManager {
     public Object[][] getReceiptData(String empID) {
         Object[][] row = null;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
             String query = "SELECT receipt.date, receipt.time FROM ((receipt INNER JOIN sales_employee ON receipt.salesID = sales_employee.salesID) INNER JOIN employee ON sales_employee.employeeID = '" + empID + "')";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
@@ -740,34 +691,32 @@ public class dbManager {
     public Object[][] getReprintReceipt(String date, String time) {
         Object[][] rowData = null;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT * FROM receipt WHERE date = '" + date + "' AND time = '" + time + "'";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            int rowCount = 0;
-            while (rs.next()) {
-                rowCount++;
-            }
-            rs = s.executeQuery(query);
-            rowData = new Object[rowCount][columnCount];
-            int i = 0;
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT * FROM receipt WHERE date = '" + date + "' AND time = '" + time + "'";
+                ResultSet rs = s.executeQuery(query);
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                int rowCount = 0;
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rs = s.executeQuery(query);
+                rowData = new Object[rowCount][columnCount];
+                int i = 0;
 
-            while (rs.next()) {
-                rowData[i][0] = rs.getObject(1);
-                rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);
-                rowData[i][3] = rs.getObject(4);
-                rowData[i][4] = rs.getObject(5);
-                rowData[i][5] = rs.getObject(6);
-                rowData[i][6] = rs.getObject(7);
+                while (rs.next()) {
+                    rowData[i][0] = rs.getObject(1);
+                    rowData[i][1] = rs.getObject(2);
+                    rowData[i][2] = rs.getObject(3);
+                    rowData[i][3] = rs.getObject(4);
+                    rowData[i][4] = rs.getObject(5);
+                    rowData[i][5] = rs.getObject(6);
+                    rowData[i][6] = rs.getObject(7);
 
-                i++;
+                    i++;
+                }
+                rs.close();
             }
-            rs.close();
-            s.close();
-            conn.close();
         } catch (SQLException exc) {
 
         }
@@ -779,29 +728,27 @@ public class dbManager {
         String columnNamesEmp[] = {"First Name", "Last Name", "Active"};
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "SELECT employeeFName,employeeLName,employeeStatus FROM employee WHERE employeeStatus= 'Active' ";
-            ResultSet rs = s.executeQuery(query);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            DefaultTableModel tableModel3 = new DefaultTableModel();
-            EmployeeForm.tableEmp.setModel(tableModel3);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "SELECT employeeFName,employeeLName,employeeStatus FROM employee WHERE employeeStatus= 'Active' ";
+                try (ResultSet rs = s.executeQuery(query)) {
+                    ResultSetMetaData metaData = rs.getMetaData();
+                    int columnCount = metaData.getColumnCount();
+                    DefaultTableModel tableModel3 = new DefaultTableModel();
+                    EmployeeForm.tableEmp.setModel(tableModel3);
 
-            for (int i = 0; i < columnCount; i++) {
-                tableModel3.addColumn(columnNamesEmp[i]);
-            }
-            Object[] row = new Object[columnCount];
+                    for (int i = 0; i < columnCount; i++) {
+                        tableModel3.addColumn(columnNamesEmp[i]);
+                    }
+                    Object[] row = new Object[columnCount];
 
-            while (rs.next()) {
-                for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
+                    while (rs.next()) {
+                        for (int i = 0; i < columnCount; i++) {
+                            row[i] = rs.getObject(i + 1);
+                        }
+                        tableModel3.addRow(row);
+                    }
                 }
-                tableModel3.addRow(row);
             }
-            rs.close();
-            s.close();
-            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException exc) {
         }
     }
@@ -809,16 +756,14 @@ public class dbManager {
     public String getHoursWorked(String Username) {
         String time = "00hrs00";
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String querySelect = "SELECT employeeHoursWorked FROM employee WHERE employeeFName='" + Username + "'";
-            ResultSet rs = s.executeQuery(querySelect);
-            while (rs.next()) {
-                time = rs.getString("employeeHoursWorked");
-            }
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String querySelect = "SELECT employeeHoursWorked FROM employee WHERE employeeFName='" + Username + "'";
+                ResultSet rs = s.executeQuery(querySelect);
+                while (rs.next()) {
+                    time = rs.getString("employeeHoursWorked");
+                }
 
-            s.close();
-            conn.close();
+            }
         } catch (SQLException exp) {
         }
         return time;
@@ -827,36 +772,28 @@ public class dbManager {
     public boolean getAdminCount() {
         int count = 0;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String querySelect = "SELECT COUNT(admin) FROM employee WHERE admin=1";
-            ResultSet rs = s.executeQuery(querySelect);
-            while (rs.next()) {
-                count = rs.getInt(1);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String querySelect = "SELECT COUNT(admin) FROM employee WHERE admin=1";
+                ResultSet rs = s.executeQuery(querySelect);
+                while (rs.next()) {
+                    count = rs.getInt(1);
+                }
             }
-            s.close();
-            conn.close();
         } catch (SQLException exp) {
         }
-        if (count == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return count != 0;
     }
 
     public String getEmployeeUsername() {
         String Username = "";
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String selectQuery = "SELECT employeeID FROM employee'";
-            ResultSet rs = s.executeQuery(selectQuery);
-            while (rs.next()) {
-                Username = rs.getString("employeeID");
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String selectQuery = "SELECT employeeID FROM employee'";
+                ResultSet rs = s.executeQuery(selectQuery);
+                while (rs.next()) {
+                    Username = rs.getString("employeeID");
+                }
             }
-            s.close();
-            conn.close();
         } catch (SQLException exp) {
         }
         return Username;
@@ -864,19 +801,17 @@ public class dbManager {
 
     public void insertEmployee(String firstName, String lastName, String empPassword, String contact, int adminRights) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String insertQuery = "INSERT INTO employee (employeeFName, employeeLName, employeePassword,employeeContactNumber,employeeHoursWorked,admin )"
-                    + "VALUES ('" + firstName + "', '"
-                    + lastName + "', '"
-                    + empPassword + "', '"
-                    + contact + "', '"
-                    + "00h00" + "','"
-                    + adminRights + "')";
-            s.execute(insertQuery);
-            logs.writeLogs("ADDED", "Employee");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String insertQuery = "INSERT INTO employee (employeeFName, employeeLName, employeePassword,employeeContactNumber,employeeHoursWorked,admin )"
+                        + "VALUES ('" + firstName + "', '"
+                        + lastName + "', '"
+                        + empPassword + "', '"
+                        + contact + "', '"
+                        + "00h00" + "','"
+                        + adminRights + "')";
+                s.execute(insertQuery);
+                logs.writeLogs("ADDED", "Employee");
+            }
         } catch (SQLIntegrityConstraintViolationException e) {
             JOptionPane.showMessageDialog(null, "Employee already exsists");
         } catch (SQLException exp) {
@@ -886,16 +821,14 @@ public class dbManager {
 
     public void insertExpenses(String type, double amount, String date) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String insertQuery = "INSERT INTO expenses (expensesType, expensesAmount,date)"
-                    + "VALUES ('" + type + "', '"
-                    + amount + "','"
-                    + date + "')";
-            s.execute(insertQuery);
-            logs.writeLogs("ADDED", "Expenses");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String insertQuery = "INSERT INTO expenses (expensesType, expensesAmount,date)"
+                        + "VALUES ('" + type + "', '"
+                        + amount + "','"
+                        + date + "')";
+                s.execute(insertQuery);
+                logs.writeLogs("ADDED", "Expenses");
+            }
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -903,19 +836,17 @@ public class dbManager {
 
     public void insertInventory(String item, String category, int quantity, int limit, Double threshold, Double cost) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String insertQuery = "INSERT INTO inventory (item,category ,qty,itemThreshold,itemLimit, itemCost)"
-                    + "VALUES ('" + item + "',"
-                    + "'" + category + "',"
-                    + "'" + quantity + "',"
-                    + "'" + threshold + "', '"
-                    + limit + "', '"
-                    + cost + "')";
-            s.execute(insertQuery);
-            logs.writeLogs("ADDED", "Inventory");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String insertQuery = "INSERT INTO inventory (item,category ,qty,itemThreshold,itemLimit, itemCost)"
+                        + "VALUES ('" + item + "',"
+                        + "'" + category + "',"
+                        + "'" + quantity + "',"
+                        + "'" + threshold + "', '"
+                        + limit + "', '"
+                        + cost + "')";
+                s.execute(insertQuery);
+                logs.writeLogs("ADDED", "Inventory");
+            }
         } catch (SQLIntegrityConstraintViolationException e) {
             JOptionPane.showMessageDialog(null, "Item already exsists");
         } catch (SQLException exp) {
@@ -925,31 +856,27 @@ public class dbManager {
 
     public void insertRecipe(String recipe, double price, double vat, String imageDirectory, String category) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String insertQuery = "INSERT INTO recipe(recipeName, recipePrice, recipeVAT,recipeType, recipeImageDirectory, recipeCount)"
-                    + "VALUES ('" + recipe + "','"
-                    + price + "', '"
-                    + vat + "', '"
-                    + category + "', '"
-                    + imageDirectory + "','0')";
-            s.execute(insertQuery);
-            logs.writeLogs("ADDED", "Recipe");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String insertQuery = "INSERT INTO recipe(recipeName, recipePrice, recipeVAT,recipeType, recipeImageDirectory, recipeCount)"
+                        + "VALUES ('" + recipe + "','"
+                        + price + "', '"
+                        + vat + "', '"
+                        + category + "', '"
+                        + imageDirectory + "','0')";
+                s.execute(insertQuery);
+                logs.writeLogs("ADDED", "Recipe");
+            }
         } catch (SQLException exp) {
         }
     }
 
     public void insertWage(Double Wage, int ID) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String insertWages = "INSERT INTO wage ( employeeID, wageAmount)" + "VALUES ('" + ID + "','" + Wage + "')";
-            s.execute(insertWages);
-            logs.writeLogs("ADDED", "wage");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String insertWages = "INSERT INTO wage ( employeeID, wageAmount)" + "VALUES ('" + ID + "','" + Wage + "')";
+                s.execute(insertWages);
+                logs.writeLogs("ADDED", "wage");
+            }
 
             JOptionPane.showMessageDialog(null, "The Wage has been added to the Database");
 
@@ -961,16 +888,14 @@ public class dbManager {
     public int getRecipeID(String item) {
         int ID = 0;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String selectQuery = "SELECT * FROM recipe WHERE recipeName='" + item + "'";
-            ResultSet rs = s.executeQuery(selectQuery);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String selectQuery = "SELECT * FROM recipe WHERE recipeName='" + item + "'";
+                ResultSet rs = s.executeQuery(selectQuery);
 
-            while (rs.next()) {
-                ID = Integer.parseInt(rs.getString("recipeID"));
+                while (rs.next()) {
+                    ID = Integer.parseInt(rs.getString("recipeID"));
+                }
             }
-            s.close();
-            conn.close();
         } catch (SQLException exp) {
         }
         return ID;
@@ -980,17 +905,15 @@ public class dbManager {
         int recipeID = getRecipeID(item);
         int specialID = 0;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String selectQuery = "SELECT specialsID FROM recipe WHERE recipeID='" + recipeID + "'";
-            ResultSet rs = s.executeQuery(selectQuery);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String selectQuery = "SELECT specialsID FROM recipe WHERE recipeID='" + recipeID + "'";
+                ResultSet rs = s.executeQuery(selectQuery);
 
-            while (rs.next()) {
-                specialID = Integer.parseInt(rs.getString(1));
+                while (rs.next()) {
+                    specialID = Integer.parseInt(rs.getString(1));
+                }
+
             }
-
-            s.close();
-            conn.close();
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1001,15 +924,13 @@ public class dbManager {
         int specialID = getSpecialsID(item);
         double specialPrice = 0;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String selectQuery = "SELECT specialsPrice FROM specials WHERE specialsID='" + specialID + "'";
-            ResultSet rs = s.executeQuery(selectQuery);
-            while (rs.next()) {
-                specialPrice = rs.getDouble("specialsPrice");
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String selectQuery = "SELECT specialsPrice FROM specials WHERE specialsID='" + specialID + "'";
+                ResultSet rs = s.executeQuery(selectQuery);
+                while (rs.next()) {
+                    specialPrice = rs.getDouble("specialsPrice");
+                }
             }
-            s.close();
-            conn.close();
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1019,16 +940,14 @@ public class dbManager {
     public int getRecipeCost(String item) {
         int cost = 0;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String selectQuery = "SELECT * FROM recipe WHERE recipeName='" + item + "'";
-            ResultSet rs = s.executeQuery(selectQuery);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String selectQuery = "SELECT * FROM recipe WHERE recipeName='" + item + "'";
+                ResultSet rs = s.executeQuery(selectQuery);
 
-            while (rs.next()) {
-                cost = Integer.parseInt(rs.getString("cost"));
+                while (rs.next()) {
+                    cost = Integer.parseInt(rs.getString("cost"));
+                }
             }
-            s.close();
-            conn.close();
         } catch (SQLException exp) {
         }
         return cost;
@@ -1036,20 +955,18 @@ public class dbManager {
 
     public void insertReceipt(int recipeID, String cost) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String insertQuery = "INSERT INTO receipt(recipeID, orderQuantity, salesID, date, time , cost)"
-                    + "VALUES ('"
-                    + recipeID + "', '"
-                    + "1" + "', "
-                    + "(SELECT salesID FROM sales ORDER BY salesID DESC LIMIT 1), '"
-                    + clock.getCurrentDate() + "', '"
-                    + clock.getCurrentTimeStamp() + "', '"
-                    + cost + "')";
-            s.execute(insertQuery);
-            logs.writeLogs("ADDED", "receipt");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String insertQuery = "INSERT INTO receipt(recipeID, orderQuantity, salesID, date, time , cost)"
+                        + "VALUES ('"
+                        + recipeID + "', '"
+                        + "1" + "', "
+                        + "(SELECT salesID FROM sales ORDER BY salesID DESC LIMIT 1), '"
+                        + clock.getCurrentDate() + "', '"
+                        + clock.getCurrentTimeStamp() + "', '"
+                        + cost + "')";
+                s.execute(insertQuery);
+                logs.writeLogs("ADDED", "receipt");
+            }
         } catch (SQLException exp) {
             System.out.println("this " + exp);
         }
@@ -1058,16 +975,14 @@ public class dbManager {
     public int getInvetoryID(String item) {
         int ID = 0;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String selectQuery = "SELECT inventoryID FROM inventory WHERE item='" + item + "'";
-            ResultSet rs = s.executeQuery(selectQuery);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String selectQuery = "SELECT inventoryID FROM inventory WHERE item='" + item + "'";
+                ResultSet rs = s.executeQuery(selectQuery);
 
-            while (rs.next()) {
-                ID = Integer.parseInt(rs.getString("inventoryID"));
+                while (rs.next()) {
+                    ID = Integer.parseInt(rs.getString("inventoryID"));
+                }
             }
-            s.close();
-            conn.close();
         } catch (SQLException exp) {
         }
         return ID;
@@ -1076,16 +991,14 @@ public class dbManager {
     public double getCashTotal() {
         double cashTotal = 0;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String selectQuery = "SELECT SUM(totalCost) FROM sales WHERE saleType='Cash' AND salesDate='" + clock.getCurrentDate() + "'";
-            ResultSet rs = s.executeQuery(selectQuery);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String selectQuery = "SELECT SUM(totalCost) FROM sales WHERE saleType='Cash' AND salesDate='" + clock.getCurrentDate() + "'";
+                ResultSet rs = s.executeQuery(selectQuery);
 
-            while (rs.next()) {
-                cashTotal = rs.getDouble(1);
+                while (rs.next()) {
+                    cashTotal = rs.getDouble(1);
+                }
             }
-            s.close();
-            conn.close();
         } catch (SQLException exp) {
         }
         return cashTotal;
@@ -1094,16 +1007,14 @@ public class dbManager {
     public double getCreditTotal() {
         double creditTotal = 0;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String selectQuery = "SELECT SUM(totalCost) FROM sales WHERE saleType='Credit' AND salesDate='" + clock.getCurrentDate() + "'";
-            ResultSet rs = s.executeQuery(selectQuery);
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String selectQuery = "SELECT SUM(totalCost) FROM sales WHERE saleType='Credit' AND salesDate='" + clock.getCurrentDate() + "'";
+                ResultSet rs = s.executeQuery(selectQuery);
 
-            while (rs.next()) {
-                creditTotal = rs.getDouble(1);
+                while (rs.next()) {
+                    creditTotal = rs.getDouble(1);
+                }
             }
-            s.close();
-            conn.close();
         } catch (SQLException exp) {
         }
         return creditTotal;
@@ -1111,16 +1022,14 @@ public class dbManager {
 
     public void insertRecipeList(String item, String qty) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO inventory_recipe(inventoryID, recipeID,qty)"
-                    + "VALUES ('" + getInvetoryID(item) + "',"
-                    + "(SELECT recipeID FROM recipe ORDER BY recipeID DESC LIMIT 1), '"
-                    + qty + "')";
-            s.execute(insertQuerySup);
-            logs.writeLogs("ADDED", "Inventory_recipe");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String insertQuerySup = "INSERT INTO inventory_recipe(inventoryID, recipeID,qty)"
+                        + "VALUES ('" + getInvetoryID(item) + "',"
+                        + "(SELECT recipeID FROM recipe ORDER BY recipeID DESC LIMIT 1), '"
+                        + qty + "')";
+                s.execute(insertQuerySup);
+                logs.writeLogs("ADDED", "Inventory_recipe");
+            }
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1128,17 +1037,15 @@ public class dbManager {
 
     public void insertSupplier(String name, String email, String number, String address) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO supplier(supplierName, supplierEmail,supplierNumber, supplierAddress)"
-                    + "VALUES ('" + name + "','"
-                    + email + "', '"
-                    + number + "', '"
-                    + address + "')";
-            s.execute(insertQuerySup);
-            logs.writeLogs("ADDED", "Supplier");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String insertQuerySup = "INSERT INTO supplier(supplierName, supplierEmail,supplierNumber, supplierAddress)"
+                        + "VALUES ('" + name + "','"
+                        + email + "', '"
+                        + number + "', '"
+                        + address + "')";
+                s.execute(insertQuerySup);
+                logs.writeLogs("ADDED", "Supplier");
+            }
         } catch (SQLIntegrityConstraintViolationException e) {
             JOptionPane.showMessageDialog(null, "Supplier already exsists");
         } catch (SQLException exp) {
@@ -1147,22 +1054,20 @@ public class dbManager {
 
     public void insertReservations(String employee, String date, String time, String customerName, int tableNum, int customerNum, String contact) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO reservation(employeeID, reservationDate,"
-                    + " reservationTime, reservationCustomer,reservationTableNumber,reservationNumberPeople,contactNumber)"
-                    + "VALUES ('" + employee + "','"
-                    + date + "','"
-                    + time + "','"
-                    + customerName + "', '"
-                    + tableNum + "', '"
-                    + customerNum + "', '"
-                    + contact + "')";
-            s.execute(insertQuerySup);
-            JOptionPane.showMessageDialog(null, "Reservation Added");
-            logs.writeLogs("ADDED", "Reservations");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String insertQuerySup = "INSERT INTO reservation(employeeID, reservationDate,"
+                        + " reservationTime, reservationCustomer,reservationTableNumber,reservationNumberPeople,contactNumber)"
+                        + "VALUES ('" + employee + "','"
+                        + date + "','"
+                        + time + "','"
+                        + customerName + "', '"
+                        + tableNum + "', '"
+                        + customerNum + "', '"
+                        + contact + "')";
+                s.execute(insertQuerySup);
+                JOptionPane.showMessageDialog(null, "Reservation Added");
+                logs.writeLogs("ADDED", "Reservations");
+            }
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1171,19 +1076,17 @@ public class dbManager {
 
     public void insertStockOrder(String inventoryID, String supplierID, double quantity, String date, double cost) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO stockorder(inventoryID, supplierID,dateOrdered,dateETA,quantity,status,totalCost)"
-                    + "VALUES ('" + inventoryID + "','"
-                    + supplierID + "', '"
-                    + clock.getCurrentDate() + "', '"
-                    + date + "', '"
-                    + quantity + "', 'Not Delievered', '"
-                    + cost + "')";
-            s.execute(insertQuerySup);
-            logs.writeLogs("ADDED", "StockOrder");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String insertQuerySup = "INSERT INTO stockorder(inventoryID, supplierID,dateOrdered,dateETA,quantity,status,totalCost)"
+                        + "VALUES ('" + inventoryID + "','"
+                        + supplierID + "', '"
+                        + clock.getCurrentDate() + "', '"
+                        + date + "', '"
+                        + quantity + "', 'Not Delievered', '"
+                        + cost + "')";
+                s.execute(insertQuerySup);
+                logs.writeLogs("ADDED", "StockOrder");
+            }
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1191,23 +1094,21 @@ public class dbManager {
 
     public void insertSales(double currentTotal, String user, String type) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO sales(salesDate,totalCost,saleType)"
-                    + "VALUES ('" + clock.getCurrentDate() + "','"
-                    + currentTotal + "','"
-                    + type + "')";
-            s.execute(insertQuerySup);
-            String selectQuery = "SELECT * FROM sales ORDER BY salesID DESC LIMIT 1";
-            ResultSet rs = s.executeQuery(selectQuery);
-            String ID = "";
-            while (rs.next()) {
-                ID = rs.getString("salesID");
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String insertQuerySup = "INSERT INTO sales(salesDate,totalCost,saleType)"
+                        + "VALUES ('" + clock.getCurrentDate() + "','"
+                        + currentTotal + "','"
+                        + type + "')";
+                s.execute(insertQuerySup);
+                String selectQuery = "SELECT * FROM sales ORDER BY salesID DESC LIMIT 1";
+                ResultSet rs = s.executeQuery(selectQuery);
+                String ID = "";
+                while (rs.next()) {
+                    ID = rs.getString("salesID");
+                }
+                insertEmployeeSales(ID, user);
+                logs.writeLogs("ADDED", "Sales");
             }
-            insertEmployeeSales(ID, user);
-            logs.writeLogs("ADDED", "Sales");
-            s.close();
-            conn.close();
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1215,22 +1116,20 @@ public class dbManager {
 
     public void insertEmployeeSales(String ID, String user) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String selectQuery = "SELECT employeeID FROM employee WHERE employeeFName='" + user + "'";
-            ResultSet rs = s.executeQuery(selectQuery);
-            String employeeID = "";
-            while (rs.next()) {
-                employeeID = rs.getString("employeeID");
-            }
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String selectQuery = "SELECT employeeID FROM employee WHERE employeeFName='" + user + "'";
+                ResultSet rs = s.executeQuery(selectQuery);
+                String employeeID = "";
+                while (rs.next()) {
+                    employeeID = rs.getString("employeeID");
+                }
 
-            String insertQuerySup = "INSERT INTO sales_employee(employeeID,salesID)"
-                    + "VALUES ('" + employeeID + "','"
-                    + ID + "')";
-            s.execute(insertQuerySup);
-            logs.writeLogs("ADDED", "EmployeeSales");
-            s.close();
-            conn.close();
+                String insertQuerySup = "INSERT INTO sales_employee(employeeID,salesID)"
+                        + "VALUES ('" + employeeID + "','"
+                        + ID + "')";
+                s.execute(insertQuerySup);
+                logs.writeLogs("ADDED", "EmployeeSales");
+            }
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1238,21 +1137,19 @@ public class dbManager {
 
     public void insertSpecials(double specialPrice, String recipeName) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String insertQuerySup = "INSERT INTO specials(specialsPrice)"
-                    + "VALUES ('" + specialPrice + "')";
-            s.execute(insertQuerySup);
-            String selectQuery = "SELECT * FROM specials ORDER BY specialsID DESC LIMIT 1";
-            ResultSet rs = s.executeQuery(selectQuery);
-            String ID = null;
-            while (rs.next()) {
-                ID = rs.getString("specialsID");
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String insertQuerySup = "INSERT INTO specials(specialsPrice)"
+                        + "VALUES ('" + specialPrice + "')";
+                s.execute(insertQuerySup);
+                String selectQuery = "SELECT * FROM specials ORDER BY specialsID DESC LIMIT 1";
+                ResultSet rs = s.executeQuery(selectQuery);
+                String ID = null;
+                while (rs.next()) {
+                    ID = rs.getString("specialsID");
+                }
+                updateRecipeSpecialsID(ID, recipeName);
+                logs.writeLogs("ADDED", "Specials");
             }
-            updateRecipeSpecialsID(ID, recipeName);
-            logs.writeLogs("ADDED", "Specials");
-            s.close();
-            conn.close();
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1260,95 +1157,81 @@ public class dbManager {
 
     public void removeInventory(int index) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "DELETE FROM inventory WHERE inventoryID='" + index + "'";
-            s.execute(query);
-            logs.writeLogs("DELETED", "Inventory");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "DELETE FROM inventory WHERE inventoryID='" + index + "'";
+                s.execute(query);
+                logs.writeLogs("DELETED", "Inventory");
+            }
         } catch (SQLException exp) {
         }
     }
 
     public void removeRecipe(int index) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "DELETE FROM recipe WHERE recipeID='" + index + "'";
-            String query1 = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
-            s.execute(query1);
-            s.execute(query);
-            removeRecipeList(index);
-            logs.writeLogs("DELETED", "Recipe");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "DELETE FROM recipe WHERE recipeID='" + index + "'";
+                String query1 = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
+                s.execute(query1);
+                s.execute(query);
+                removeRecipeList(index);
+                logs.writeLogs("DELETED", "Recipe");
+            }
         } catch (SQLException exp) {
         }
     }
 
     public void removeRecipeList(int index) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
-            s.execute(query);
-            logs.writeLogs("DELETED", "Inventory_recipe");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'";
+                s.execute(query);
+                logs.writeLogs("DELETED", "Inventory_recipe");
+            }
         } catch (SQLException exp) {
         }
     }
 
     public void removeRecipeList(int index, int ID) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'AND inventoryID='" + ID + "'";
-            s.execute(query);
-            logs.writeLogs("DELETED", "Inventory_recipe");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "DELETE FROM inventory_recipe WHERE recipeID='" + index + "'AND inventoryID='" + ID + "'";
+                s.execute(query);
+                logs.writeLogs("DELETED", "Inventory_recipe");
+            }
         } catch (SQLException exp) {
         }
     }
 
     public void removeSupplier(int index) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "DELETE FROM supplier WHERE supplierID='" + index + "'";
-            s.execute(query);
-            logs.writeLogs("DELETED", "Supplier");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "DELETE FROM supplier WHERE supplierID='" + index + "'";
+                s.execute(query);
+                logs.writeLogs("DELETED", "Supplier");
+            }
         } catch (SQLException exp) {
         }
     }
 
     public void removeEmployee(int index) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "DELETE FROM employee WHERE employeeID='" + index + "'";
-            s.execute(query);
-            logs.writeLogs("DELETED", "Employee");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "DELETE FROM employee WHERE employeeID='" + index + "'";
+                s.execute(query);
+                logs.writeLogs("DELETED", "Employee");
+            }
         } catch (SQLException exp) {
         }
     }
 
     public void updateSpecials(String specialsID, int status) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "UPDATE specials set status= '" + status + "' WHERE specialsID='" + specialsID + "'";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.executeUpdate();
-            getSpecialData();
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "UPDATE specials set status= '" + status + "' WHERE specialsID='" + specialsID + "'";
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.executeUpdate();
+                getSpecialData();
+            }
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1356,15 +1239,13 @@ public class dbManager {
 
     public void updateHours(String Username, int i) {
         try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement s = conn.createStatement();
-            String queryUpdate = "UPDATE employee set employeeHoursWorked='" + clock.calculateHours(i, getHoursWorked(Username))
-                    + "' WHERE employeeFName='" + Username + "'";
-            PreparedStatement preparedStmt = conn.prepareStatement(queryUpdate);
-            preparedStmt.executeUpdate();
-            logs.writeLogs("UPDATED", "Employee");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String queryUpdate = "UPDATE employee set employeeHoursWorked='" + clock.calculateHours(i, getHoursWorked(Username))
+                        + "' WHERE employeeFName='" + Username + "'";
+                PreparedStatement preparedStmt = conn.prepareStatement(queryUpdate);
+                preparedStmt.executeUpdate();
+                logs.writeLogs("UPDATED", "Employee");
+            }
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1372,26 +1253,22 @@ public class dbManager {
 
     public void updateEmployeeStatusIn(String Username) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "UPDATE employee set employeeStatus= 'Active' WHERE employeeFName='" + Username + "'";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.executeUpdate();
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "UPDATE employee set employeeStatus= 'Active' WHERE employeeFName='" + Username + "'";
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.executeUpdate();
+            }
         } catch (SQLException exp) {
         }
     }
 
     public void updateEmployeeStatusOut(String Username) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "UPDATE employee set employeeStatus= 'Deactive' WHERE employeeFName='" + Username + "'";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.executeUpdate();
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "UPDATE employee set employeeStatus= 'Deactive' WHERE employeeFName='" + Username + "'";
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.executeUpdate();
+            }
         } catch (SQLException exp) {
         }
     }
@@ -1399,19 +1276,17 @@ public class dbManager {
     //Updates Inventory table with "Update" button
     public void updateInventory(Object ID, Object item, Object qty, Object itemT, Object itemL) {
         try {
-            //connect to db
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            //update query
-            String query = "UPDATE inventory set item='" + item + "' '"
-                    + "' ,qty='" + qty + "' '"
-                    + "' ,itemThreshold='" + itemT + "' '"
-                    + "' ,itemLimit='" + itemL + "' WHERE inventoryID='" + ID + "'";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.executeUpdate();
-            logs.writeLogs("UPDATED", "Inventory");
-            s.close();
-            conn.close();
+            try ( //connect to db
+                    Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                //update query
+                String query = "UPDATE inventory set item='" + item + "' '"
+                        + "' ,qty='" + qty + "' '"
+                        + "' ,itemThreshold='" + itemT + "' '"
+                        + "' ,itemLimit='" + itemL + "' WHERE inventoryID='" + ID + "'";
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.executeUpdate();
+                logs.writeLogs("UPDATED", "Inventory");
+            }
         } catch (SQLException exp) {
             //prints SQL Exception
             System.out.println("Error: " + exp);
@@ -1421,19 +1296,16 @@ public class dbManager {
     //Updates recipe table with "Update" button
     public void updateRecipe(Object ID, Object name, Object price, Object vat, Object type) {
         try {
-            //connect to db
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            //update query
-            String query = "UPDATE recipe set recipeName='" + name + "' '"
-                    + "' ,recipePrice='" + price + "' '"
-                    + "' ,recipeVAT='" + vat + "' '"
-                    + "' ,recipeType='" + type + "' WHERE recipeID='" + ID + "'";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.executeUpdate();
-            logs.writeLogs("UPDATED", "Recipe");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+
+                String query = "UPDATE recipe set recipeName='" + name + "' '"
+                        + "' ,recipePrice='" + price + "' '"
+                        + "' ,recipeVAT='" + vat + "' '"
+                        + "' ,recipeType='" + type + "' WHERE recipeID='" + ID + "'";
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.executeUpdate();
+                logs.writeLogs("UPDATED", "Recipe");
+            }
         } catch (SQLException exp) {
             //prints SQL Exception
             System.out.println("Error: " + exp);
@@ -1443,15 +1315,13 @@ public class dbManager {
     public void updateInventoryQty(String item, String qty, String operator) {
         int ID = getInvetoryID(item);
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "UPDATE inventory set qty=qty" + operator + "'" + qty + "' "
-                    + "WHERE inventoryID='" + ID + "'";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.executeUpdate();
-            logs.writeLogs("UPDATED", "Inventory");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "UPDATE inventory set qty=qty" + operator + "'" + qty + "' "
+                        + "WHERE inventoryID='" + ID + "'";
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.executeUpdate();
+                logs.writeLogs("UPDATED", "Inventory");
+            }
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1459,15 +1329,13 @@ public class dbManager {
 
     public void updateRecipeList(String iventoryID, String recipeID, String qty) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String query = "UPDATE inventory_recipe set qty='" + qty + "' "
-                    + "WHERE  inventoryID='" + iventoryID + "'AND recipeID='" + recipeID + "'";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.executeUpdate();
-            logs.writeLogs("UPDATED", "Inventory_recipe");
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String query = "UPDATE inventory_recipe set qty='" + qty + "' "
+                        + "WHERE  inventoryID='" + iventoryID + "'AND recipeID='" + recipeID + "'";
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.executeUpdate();
+                logs.writeLogs("UPDATED", "Inventory_recipe");
+            }
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1476,19 +1344,17 @@ public class dbManager {
 
     public void updateSupplier(Object ID, Object name, Object email, Object num, Object address) {
         try {
-            //connect to db
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            //update query
-            String query = "UPDATE supplier set supplierName='" + name + "' '"
-                    + "' ,supplierEmail='" + email + "' '"
-                    + "' ,supplierNumber='" + num + "' '"
-                    + "' ,supplierAddress='" + address + "' WHERE supplierID='" + ID + "'";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.executeUpdate();
-            logs.writeLogs("UPDATED", "Supplier");
-            s.close();
-            conn.close();
+            try ( //connect to db
+                    Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                //update query
+                String query = "UPDATE supplier set supplierName='" + name + "' '"
+                        + "' ,supplierEmail='" + email + "' '"
+                        + "' ,supplierNumber='" + num + "' '"
+                        + "' ,supplierAddress='" + address + "' WHERE supplierID='" + ID + "'";
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.executeUpdate();
+                logs.writeLogs("UPDATED", "Supplier");
+            }
         } catch (SQLException exp) {
             //prints SQL Exception
             System.out.println("Error: " + exp);
@@ -1497,46 +1363,39 @@ public class dbManager {
 
     public void updateEmployee(String user, String newPassword) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String updateQuery = "UPDATE employee SET employeePassword='" + newPassword + "' WHERE employeeFName ='" + user + "'";
-            s.execute(updateQuery);
-            PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
-            preparedStmt.executeUpdate();
-            logs.writeLogs("UPDATED", "Employee");
-            s.close();
-            conn.close();
-        } catch (SQLException exp) {
-            System.out.println(exp);
-        }
-    }
-    
-      public void loggoutAllEmployee() {
-        try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String updateQuery = "UPDATE employee SET employeeStatus='Deactive'";
-            s.execute(updateQuery);
-            PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
-            preparedStmt.executeUpdate();
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String updateQuery = "UPDATE employee SET employeePassword='" + newPassword + "' WHERE employeeFName ='" + user + "'";
+                s.execute(updateQuery);
+                PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
+                preparedStmt.executeUpdate();
+                logs.writeLogs("UPDATED", "Employee");
+            }
         } catch (SQLException exp) {
             System.out.println(exp);
         }
     }
 
+    public void loggoutAllEmployee() {
+        try {
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String updateQuery = "UPDATE employee SET employeeStatus='Deactive'";
+                s.execute(updateQuery);
+                PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
+                preparedStmt.executeUpdate();
+            }
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
 
     public void updateRecipeSpecialsID(String specialsID, String recipeName) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String updateQuery = "UPDATE recipe SET specialsID='" + specialsID + "' WHERE recipeName ='" + recipeName + "'";
-            s.execute(updateQuery);
-            PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
-            preparedStmt.executeUpdate();
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String updateQuery = "UPDATE recipe SET specialsID='" + specialsID + "' WHERE recipeName ='" + recipeName + "'";
+                s.execute(updateQuery);
+                PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
+                preparedStmt.executeUpdate();
+            }
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1545,15 +1404,13 @@ public class dbManager {
     public void updateOrderCount(String order) {
         System.out.println("ran");
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String updateQuery = "UPDATE recipe SET recipeCount=(recipeCount+1) WHERE recipeName ='" + order + "'";
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String updateQuery = "UPDATE recipe SET recipeCount=(recipeCount+1) WHERE recipeName ='" + order + "'";
 //            s.execute(updateQuery);
-            PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
-            preparedStmt.executeUpdate();
-            logs.writeLogs("UPDATED", "recipe");
-            s.close();
-            conn.close();
+                PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
+                preparedStmt.executeUpdate();
+                logs.writeLogs("UPDATED", "recipe");
+            }
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1562,22 +1419,20 @@ public class dbManager {
 
     public void recipeStockUpdate(JTable table, String tableNum) {
         try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
             for (int i = 0; i < table.getRowCount(); i++) {
-                conn = DriverManager.getConnection(url, username, password);
-                s = conn.createStatement();
                 String selectQuery = "SELECT recipeID FROM recipe WHERE recipeName='" + table.getValueAt(i, 0).toString() + "'";
                 ResultSet rs = s.executeQuery(selectQuery);
-                String ID = null;
                 while (rs.next()) {
-                    ID = rs.getString("recipeID");
+                    String ID = rs.getString("recipeID");
                     selectQuery = "SELECT * FROM inventory_recipe WHERE recipeID= '" + ID + "'";
                     rs = s.executeQuery(selectQuery);
-                    String inventoryID = null;
-                    String qty = null;
+
                     while (rs.next()) {
-                        inventoryID = rs.getString("inventoryID");
+                        String inventoryID = rs.getString("inventoryID");
                         System.out.println(inventoryID);
-                        qty = rs.getString("qty");
+                        String qty = rs.getString("qty");
                         System.out.println(qty);
                         String query = "Update inventory set qty =  GREATEST(0,qty-'" + qty + "') WHERE inventoryID = '" + inventoryID + "'";
                         PreparedStatement preparedstmt = conn.prepareStatement(query);
@@ -1595,11 +1450,10 @@ public class dbManager {
     public Object[][] checkStockLevel() {
         Object stockLevel[][] = null;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement s = conn.createStatement();
             String selectQuery = "SELECT * FROM inventory WHERE qty<(itemThreshold*itemLimit)";
             ResultSet rs = s.executeQuery(selectQuery);
-            rs = s.executeQuery(selectQuery);
             int i = 0;
             int rowCount = 0;
             while (rs.next()) {
@@ -1621,14 +1475,12 @@ public class dbManager {
 
     public void updateConfirmOrder(String orderID) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            s = conn.createStatement();
-            String updateQuery = "UPDATE stockorder SET status='Delievered' WHERE stockOrderID ='" + orderID + "'";
-            s.execute(updateQuery);
-            PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
-            preparedStmt.executeUpdate();
-            s.close();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+                String updateQuery = "UPDATE stockorder SET status='Delievered' WHERE stockOrderID ='" + orderID + "'";
+                s.execute(updateQuery);
+                PreparedStatement preparedStmt = conn.prepareStatement(updateQuery);
+                preparedStmt.executeUpdate();
+            }
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -1651,27 +1503,27 @@ public class dbManager {
         }
     }
 
-//    public void scheduleBackup() {
-//        String date[] = clock.getCurrentDate().split("-");
-//        int day = Integer.parseInt(date[2]);
-//        if (day % 7 == 0) {
-//            try {
-//                String executeCmd = ".\\src\\database\\mysqldump.exe";
-//
-//                Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
-//                int processComplete = runtimeProcess.waitFor();
-//
-//                if (processComplete == 0) {
-//                    System.out.println("Backup Complete");
-//                } else {
-//                    System.out.println("Restore Failed");
-//                }
-//
-//            } catch (IOException | InterruptedException | HeadlessException ex) {
-//                JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
-//            }
-//        }
-//    }
+    public void scheduleBackup() {
+        String date[] = clock.getCurrentDate().split("-");
+        int day = Integer.parseInt(date[2]);
+        if (day % 7 == 0) {
+            try {
+                String executeCmd = ".\\src\\database\\mysqldump.exe";
+
+                Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+                int processComplete = runtimeProcess.waitFor();
+
+                if (processComplete == 0) {
+                    System.out.println("Backup Complete");
+                } else {
+                    System.out.println("Restore Failed");
+                }
+
+            } catch (IOException | InterruptedException | HeadlessException ex) {
+                JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
+            }
+        }
+    }
 
     public void restore() {
         try {
