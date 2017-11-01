@@ -30,25 +30,24 @@ public class dbManager {
     static String password;
     String driver = "com.mysql.jdbc.Driver";
     String currentUsersHomeDir = System.getProperty("user.home");
-    String location = currentUsersHomeDir + File.separator + "Documents\\NetBeansProjects\\stockManager\\ResturantManagementSystem\\src\\database\\resturantDB_bk.sql";
+    String location = ".\\src\\database\\resturantDB_bk.sql";
 
     public void dbValidation(String Username, String Password) {
         connect(Username, Password);
         String urlVal = "jdbc:mysql://localhost:3306";
-        try {
+        try (Connection conn = DriverManager.getConnection(urlVal, username, password); Statement s = conn.createStatement()) {
             Class.forName(driver).newInstance();
-            try (Connection conn = DriverManager.getConnection(urlVal, username, password); Statement s = conn.createStatement()) {
-                s.executeUpdate("CREATE SCHEMA IF NOT EXISTS `resturantDB`");
-                s.executeUpdate("CREATE DATABASE IF NOT EXISTS `resturantDB`");
-            }
+            s.executeUpdate("CREATE SCHEMA IF NOT EXISTS `resturantDB`;");
+            s.executeUpdate("CREATE DATABASE IF NOT EXISTS `resturantDB`;");
+            s.executeUpdate("GRANT ALL PRIVILEGES ON resturantDB.* TO 'root'@'localhost';");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             System.out.println("db Validation method" + ex);
         }
     }
 
     public void connect(String Username, String Password) {
-        this.username = Username;
-        this.password = Password;
+        dbManager.username = Username;
+        dbManager.password = Password;
     }
 
     public String getUsername() {
