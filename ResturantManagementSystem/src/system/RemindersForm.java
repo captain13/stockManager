@@ -23,28 +23,31 @@ import javax.swing.JOptionPane;
  */
 public class RemindersForm extends javax.swing.JFrame {
 
-    String fileName = ".\\src\\docs\\Reminders.txt";
+    String fileName = System.getProperty("user.home") + "\\AppData\\Roaming\\ResturantManagement\\Reminders.txt";
     internalClock clock = new internalClock();
     File file = new File(fileName);
     Point mouseDownCompCoords = null;
     Keyboard k = new Keyboard();
 
-
     public RemindersForm(boolean enabled) {
         initComponents();
         this.setLocationRelativeTo(null);
+//        reminderValidation();
         readReminders();
         makePanelDraggable();
         isKeypadEnable(enabled);
-        k.setAlwaysOnTop(rootPaneCheckingEnabled);
-        k.setLocation(400, 550);
     }
-    
-        public final void isKeypadEnable(boolean enabled) {
+
+    public final void isKeypadEnable(boolean enabled) {
         if (enabled == true) {
             k = new Keyboard();
             k.setVisible(true);
-            k.setBounds(700, 700, 575, 200);
+        }
+    }
+
+    public final void reminderValidation() {
+        if (!file.exists()) {
+            file = new File(fileName);
         }
     }
 
@@ -70,19 +73,40 @@ public class RemindersForm extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void writeReminders() {
 
-        String text = jTextArea1.getText();
-        text = text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
+    public void writeReminders() {
+        String textArea = jTextArea1.getText();
+        String lineText[] = jTextArea1.getText().split("\n");
+        if ("".equals(textArea)) {
+            System.out.println("ran");
+        } else {
+            textArea = "";
+            for (int i = 0; i < lineText.length; i++) {
+                if (!"-".equals(lineText[i].substring(0, 1))) {
+                    if (i == 0) {
+                        lineText[i] = "-" + lineText[i].substring(0, 1).toUpperCase() + lineText[i].substring(1);
+                        textArea = lineText[i];
+                    } else {
+                        lineText[i] = "-" + lineText[i].substring(0, 1).toUpperCase() + lineText[i].substring(1);
+                        textArea = textArea + "\n" + lineText[i];
+                    }
+                } else {
+                    if (i == 0) {
+                        textArea = lineText[i];
+                    } else {
+
+                        textArea = textArea + "\n" + lineText[i];
+                    }
+                }
+            }
+        }
 
         try {
             FileWriter fileWriter = new FileWriter(file, false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-            bufferedWriter.write(text);
+            bufferedWriter.write(textArea);
             JOptionPane.showMessageDialog(null, "Reminder Added");
-            bufferedWriter.newLine();
+            // bufferedWriter.newLine();
             bufferedWriter.close();
             this.dispose();
 
@@ -97,7 +121,7 @@ public class RemindersForm extends javax.swing.JFrame {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             jTextArea1.read(bufferedReader, null);
             int length = jTextArea1.getDocument().getLength();
-            jTextArea1.setCaretPosition(length - 1);
+            jTextArea1.setCaretPosition(length);
             bufferedReader.close();
 
         } catch (IOException ex) {
@@ -222,8 +246,8 @@ public class RemindersForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        k.dispose();
         writeReminders();
+        k.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextArea1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseClicked

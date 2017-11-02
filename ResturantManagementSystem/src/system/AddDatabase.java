@@ -28,7 +28,6 @@ public class AddDatabase extends javax.swing.JFrame {
         if (enabled == true) {
             k = new Keyboard();
             k.setVisible(true);
-            k.setAlwaysOnTop(rootPaneCheckingEnabled);
         }
     }
 
