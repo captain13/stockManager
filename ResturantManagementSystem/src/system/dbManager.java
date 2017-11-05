@@ -1149,6 +1149,15 @@ public class dbManager {
         }
     }
 
+    public void removeSpecials(String specialsID ) {
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            String query = "DELETE FROM specials WHERE specialsID='" + specialsID + "'";
+            s.execute(query);
+            logs.writeLogs("DELETED", "Supplier");
+        } catch (SQLException exp) {
+        }
+    }
+
     public void updateSpecials(String specialsID, int status) {
 
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {

@@ -105,6 +105,11 @@ public class SpecialsForm extends javax.swing.JFrame {
         buttonDelete.setText("Delete");
         buttonDelete.setContentAreaFilled(false);
         buttonDelete.setOpaque(true);
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(75, 75, 75));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
@@ -215,6 +220,11 @@ public class SpecialsForm extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         system.updateSpecials(getSpecialID(), getStatus());
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        system.removeSpecials(getSpecialID());
+        setTable();
+    }//GEN-LAST:event_buttonDeleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;

@@ -26,3 +26,7 @@
 2017-11-01 01:38:36 record UPDATED to Employee table
 2017-11-01 01:39:22 record UPDATED to Employee table
 2017-11-01 01:39:22 record UPDATED to Employee table
+2017-11-05 14:36:27 record ADDED to Specials table
+2017-11-05 14:36:30 record DELETED to Supplier table
+2017-11-05 14:37:54 record ADDED to Specials table
+2017-11-05 14:37:56 record DELETED to Supplier table
